@@ -11,7 +11,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Logo variant="full" color="light" className="h-10 mb-4" />
+            <Logo variant="compact" color="light" className="h-12 mb-4" />
             <p className="text-sm text-primary-foreground/80 max-w-md leading-relaxed mb-6">
               Asesoría fiscal, contable y legal en Barcelona. Transformamos la gestión en 
               impulso para tu negocio con más de 25 años de experiencia.

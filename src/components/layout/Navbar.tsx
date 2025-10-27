@@ -34,7 +34,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Logo variant="full" color="dark" className="h-8" />
+          <Logo variant="compact" color="dark" className="h-10" />
 
           {/* Desktop Nav */}
           <div className="hidden md:flex md:items-center md:gap-8">
