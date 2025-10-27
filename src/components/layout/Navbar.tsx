@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "Strategy", href: "/strategy" },
-  { name: "Sectors", href: "/sectors" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Team", href: "/team" },
-  { name: "Insights", href: "/insights" },
+  { name: "Servicios", href: "/#services" },
+  { name: "Nosotros", href: "/about" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export const Navbar = () => {
@@ -19,7 +17,6 @@ export const Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Detect scroll for blur effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -30,15 +27,15 @@ export const Navbar = () => {
 
   return (
     <nav className={cn(
-      "sticky top-0 z-50 w-full border-b border-border bg-background transition-smooth",
-      scrolled && "backdrop-blur-sm bg-background/95"
+      "sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm transition-all duration-300",
+      scrolled && "shadow-soft"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo (serif) */}
-          <Link to="/" className="flex items-center">
-            <span className="text-xl font-serif font-medium tracking-tight">
-              Ethos Ventures
+          {/* Logo */}
+          <Link to="/" className="flex items-center group">
+            <span className="text-2xl font-display font-semibold tracking-tight text-primary group-hover:text-accent transition-colors">
+              navarro
             </span>
           </Link>
 
@@ -49,24 +46,24 @@ export const Navbar = () => {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "text-sm font-medium transition-smooth relative",
+                  "text-sm font-medium transition-colors relative py-2",
                   isActive(item.href)
-                    ? "text-primary after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2px] after:bg-accent"
-                    : "text-body hover:text-primary"
+                    ? "text-accent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-accent"
+                    : "text-foreground hover:text-accent"
                 )}
               >
                 {item.name}
               </Link>
             ))}
-            <Button asChild size="sm">
-              <Link to="/contact">Contact</Link>
+            <Button asChild size="sm" className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-soft">
+              <Link to="/contact">Contacto</Link>
             </Button>
           </div>
 
           {/* Mobile toggle */}
           <button
             type="button"
-            className="md:hidden"
+            className="md:hidden text-foreground hover:text-accent transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -89,19 +86,19 @@ export const Navbar = () => {
                 to={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  "block px-4 py-3 text-base font-medium rounded transition-smooth",
+                  "block px-4 py-3 text-base font-medium rounded-lg transition-colors",
                   isActive(item.href)
-                    ? "text-primary bg-neutral-100"
-                    : "text-body hover:bg-neutral-100"
+                    ? "text-accent bg-accent/10"
+                    : "text-foreground hover:bg-muted"
                 )}
               >
                 {item.name}
               </Link>
             ))}
             <div className="px-4 pt-2">
-              <Button asChild size="sm" className="w-full">
+              <Button asChild size="sm" className="w-full bg-accent hover:bg-accent-hover text-accent-foreground">
                 <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  Contact
+                  Contacto
                 </Link>
               </Button>
             </div>

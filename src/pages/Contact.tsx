@@ -1,262 +1,261 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Overline } from "@/components/ui/typography";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Meta } from "@/components/seo/Meta";
-import { useToast } from "@/hooks/use-toast";
-import { useAnalytics } from "@/hooks/useAnalytics";
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Meta } from '@/components/seo/Meta';
+import { useToast } from '@/hooks/use-toast';
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").max(100),
-  email: z.string().email("Invalid email address").max(255),
-  company: z.string().min(2, "Company name required").max(100),
-  subject: z.string().min(1, "Please select a subject"),
-  message: z.string().min(10, "Message must be at least 10 characters").max(2000),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
-
-const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export default function Contact() {
   const { toast } = useToast();
-  const { trackCTAClick } = useAnalytics();
-
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      subject: "",
-      message: "",
-    },
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (data: ContactFormData) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSubmitting(true);
-    trackCTAClick("Contact Form Submit", "Contact Page");
 
-    try {
-      const { supabase } = await import("@/integrations/supabase/client");
-      
-      const { data: response, error } = await supabase.functions.invoke(
-        "submit-contact",
-        {
-          body: {
-            name: data.name,
-            email: data.email,
-            company: data.company,
-            subject: data.subject,
-            message: data.message,
-          },
-        }
-      );
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-      if (error) {
-        console.error("Contact form error:", error);
-        
-        if (error.message?.includes("429") || error.message?.includes("Too many")) {
-          toast({
-            title: "Too many submissions",
-            description: "Please try again later.",
-            variant: "destructive",
-          });
-          setIsSubmitting(false);
-          return;
-        }
-        
-        toast({
-          title: "Error",
-          description: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
-      }
+    toast({
+      title: 'Mensaje enviado',
+      description: 'Nos pondremos en contacto contigo en breve.',
+    });
 
-      console.log("Contact form success:", response);
-
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
-      });
-
-      form.reset();
-    } catch (error) {
-      console.error("Contact form submission error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+    });
+    setIsSubmitting(false);
   };
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: 'Teléfono',
+      value: '93 459 36 00',
+      href: 'tel:+34934593600',
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      value: 'info@nrro.es',
+      href: 'mailto:info@nrro.es',
+    },
+    {
+      icon: MapPin,
+      title: 'Dirección',
+      value: 'Carrer Ausias March número 36, 08010 Barcelona',
+      href: 'https://maps.app.goo.gl/JjwmToznoU9Vx7zu9',
+    },
+  ];
 
   return (
     <>
       <Meta
-        title="Contact"
-        description="Get in touch with the Ethos Ventures team to discuss investment opportunities"
-        canonicalUrl={`${window.location.origin}/contact`}
+        title="Contacto"
+        description="Contacta con NRRO - Navarro Tax Legal. Estamos en Barcelona para ayudarte con tu asesoría fiscal, contable y legal."
+        keywords="contacto asesoría fiscal Barcelona, contacto navarro tax legal, consulta gratuita fiscal"
       />
 
-      <div className="min-h-screen">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-2xl mx-auto">
-            <div className="mb-12">
-              <Overline className="mb-4">Contact</Overline>
-              <h1 className="mb-6">Get in Touch</h1>
-              <p className="text-lead">
-                Interested in learning more about Ethos Ventures or discussing a
-                potential partnership? We'd love to hear from you.
-              </p>
-            </div>
-
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-foreground">
-                        Name *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="John Smith"
-                          {...field}
-                          className="h-11 border-border focus:ring-accent"
-                          aria-required="true"
-                        />
-                      </FormControl>
-                      <FormMessage className="text-sm text-destructive" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-foreground">
-                        Email *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="john@example.com"
-                          {...field}
-                          className="h-11 border-border focus:ring-accent"
-                          aria-required="true"
-                        />
-                      </FormControl>
-                      <FormMessage className="text-sm text-destructive" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="company"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-foreground">
-                        Company *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Acme Corp"
-                          {...field}
-                          className="h-11 border-border focus:ring-accent"
-                          aria-required="true"
-                        />
-                      </FormControl>
-                      <FormMessage className="text-sm text-destructive" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-foreground">
-                        Subject *
-                      </FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger aria-required="true">
-                            <SelectValue placeholder="Select a topic" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="investment">Investment Opportunity</SelectItem>
-                          <SelectItem value="partnership">Partnership Inquiry</SelectItem>
-                          <SelectItem value="press">Press Inquiry</SelectItem>
-                          <SelectItem value="careers">Careers</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="text-sm text-destructive" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-foreground">
-                        Message *
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Tell us about your inquiry..."
-                          className="min-h-[150px]"
-                          {...field}
-                          aria-required="true"
-                        />
-                      </FormControl>
-                      <FormMessage className="text-sm text-destructive" />
-                    </FormItem>
-                  )}
-                />
-
-                <Button type="submit" size="lg" disabled={isSubmitting} className="w-full md:w-auto">
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
-            </Form>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-primary via-primary-hover to-accent py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl animate-fade-in">
+            <h1 className="text-5xl md:text-6xl font-serif font-bold text-primary-foreground mb-6">
+              Hablemos de tu proyecto
+            </h1>
+            <p className="text-xl text-primary-foreground/90 leading-relaxed">
+              Estamos aquí para ayudarte. Contáctanos y descubre cómo podemos impulsar tu negocio.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="animate-slide-up">
+              <Card className="shadow-medium border-border/50">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-serif">Envíanos un mensaje</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Nombre completo *</Label>
+                      <Input
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Juan Pérez"
+                        required
+                        className="border-border/50 focus:border-accent"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="juan@ejemplo.com"
+                          required
+                          className="border-border/50 focus:border-accent"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Teléfono</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+34 600 000 000"
+                          className="border-border/50 focus:border-accent"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Asunto *</Label>
+                      <Input
+                        id="subject"
+                        value={formData.subject}
+                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        placeholder="¿En qué podemos ayudarte?"
+                        required
+                        className="border-border/50 focus:border-accent"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Mensaje *</Label>
+                      <Textarea
+                        id="message"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Cuéntanos más sobre tu situación..."
+                        rows={6}
+                        required
+                        className="border-border/50 focus:border-accent resize-none"
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      disabled={isSubmitting}
+                      className="w-full bg-accent hover:bg-accent-hover text-accent-foreground shadow-soft"
+                    >
+                      {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+                      <Send className="ml-2 h-4 w-4" />
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-6 animate-fade-in">
+              <div>
+                <h2 className="text-3xl font-serif font-bold text-foreground mb-4">
+                  Información de contacto
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Estamos ubicados en el corazón de Barcelona. No dudes en visitarnos o contactarnos por cualquier medio.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {contactInfo.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <Card
+                      key={index}
+                      className="hover-lift border-border/50 hover:border-accent/50 transition-all"
+                    >
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                            <Icon className="h-6 w-6 text-accent" />
+                          </div>
+                          <div>
+                            <h3 className="font-display font-semibold text-foreground mb-1">
+                              {item.title}
+                            </h3>
+                            <a
+                              href={item.href}
+                              target={item.title === 'Dirección' ? '_blank' : undefined}
+                              rel={item.title === 'Dirección' ? 'noopener noreferrer' : undefined}
+                              className="text-muted-foreground hover:text-accent transition-colors"
+                            >
+                              {item.value}
+                            </a>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              {/* Office Hours */}
+              <Card className="border-border/50 shadow-soft">
+                <CardContent className="p-6">
+                  <h3 className="font-display font-semibold text-foreground mb-4">
+                    Horario de atención
+                  </h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Lunes - Viernes</span>
+                      <span className="font-medium text-foreground">9:00 - 18:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Sábado - Domingo</span>
+                      <span className="font-medium text-foreground">Cerrado</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Map */}
+              <Card className="border-border/50 shadow-soft overflow-hidden">
+                <CardContent className="p-0">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.253988876!2d2.173682!3d41.393119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f8f8f8f8f8%3A0x8f8f8f8f8f8f8f8!2sCarrer%20Ausias%20March%2C%2036%2C%2008010%20Barcelona!5e0!3m2!1sen!2ses!4v1234567890"
+                    width="100%"
+                    height="300"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación de NRRO"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
-};
-
-export default Contact;
+}
