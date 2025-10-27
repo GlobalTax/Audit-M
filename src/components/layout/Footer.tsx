@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,11 +11,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="inline-block mb-4">
-              <span className="text-2xl font-display font-semibold">
-                navarro
-              </span>
-            </Link>
+            <Logo variant="full" color="light" className="h-10 mb-4" />
             <p className="text-sm text-primary-foreground/80 max-w-md leading-relaxed mb-6">
               Asesoría fiscal, contable y legal en Barcelona. Transformamos la gestión en 
               impulso para tu negocio con más de 25 años de experiencia.

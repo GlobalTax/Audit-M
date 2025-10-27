@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -33,11 +34,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <span className="text-2xl font-display font-semibold tracking-tight text-primary group-hover:text-accent transition-colors">
-              navarro
-            </span>
-          </Link>
+          <Logo variant="full" color="dark" className="h-8" />
 
           {/* Desktop Nav */}
           <div className="hidden md:flex md:items-center md:gap-8">
