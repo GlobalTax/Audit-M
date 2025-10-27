@@ -8,6 +8,12 @@ import { Meta } from "@/components/seo/Meta";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { blogPosts, services } from "@/data/mockData";
 import { ArrowRight, Check } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
@@ -17,6 +23,19 @@ const Home = () => {
     { label: "Clientes Activos", value: "500+" },
     { label: "Operaciones Anuales", value: "2.000+" },
     { label: "Satisfacción", value: "98%" },
+  ];
+
+  const clientLogos = [
+    { name: "Empresa 1", src: "https://via.placeholder.com/150x60?text=Logo+1" },
+    { name: "Empresa 2", src: "https://via.placeholder.com/150x60?text=Logo+2" },
+    { name: "Empresa 3", src: "https://via.placeholder.com/150x60?text=Logo+3" },
+    { name: "Empresa 4", src: "https://via.placeholder.com/150x60?text=Logo+4" },
+    { name: "Empresa 5", src: "https://via.placeholder.com/150x60?text=Logo+5" },
+    { name: "Empresa 6", src: "https://via.placeholder.com/150x60?text=Logo+6" },
+    { name: "Empresa 7", src: "https://via.placeholder.com/150x60?text=Logo+7" },
+    { name: "Empresa 8", src: "https://via.placeholder.com/150x60?text=Logo+8" },
+    { name: "Empresa 9", src: "https://via.placeholder.com/150x60?text=Logo+9" },
+    { name: "Empresa 10", src: "https://via.placeholder.com/150x60?text=Logo+10" },
   ];
 
   const serviceLogos = services.slice(0, 4).map((s) => ({ name: s.name }));
@@ -273,6 +292,42 @@ const Home = () => {
               </div>
 
             </div>
+          </div>
+        </section>
+
+        {/* Carrusel de Logos */}
+        <section className="bg-white py-16 md:py-20 border-t border-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
+              Empresas que confían en nosotros
+            </h2>
+            
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                })
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {clientLogos.map((logo, index) => (
+                  <CarouselItem key={index} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
+                    <div className="flex items-center justify-center h-24 p-4">
+                      <img
+                        src={logo.src}
+                        alt={logo.name}
+                        className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </div>
         </section>
 
