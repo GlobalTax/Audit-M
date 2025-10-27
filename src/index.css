@@ -83,10 +83,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 190 63% 6%;
     
-    /* Primary: Dark blue from NRRO logo */
-    --primary: 190 63% 6%;
+    /* Primary: Dark blue from NRRO logo - #0C1E21 */
+    --primary: 191 48% 9%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 190 48% 9%;
+    --primary-hover: 191 48% 12%;
     
     /* Secondary: Light gray */
     --secondary: 180 7% 92%;

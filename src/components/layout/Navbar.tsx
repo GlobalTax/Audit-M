@@ -37,13 +37,13 @@ export const Navbar = () => {
 
   return (
     <nav className={cn(
-      "sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm transition-all duration-300",
+      "sticky top-0 z-50 w-full border-b border-primary-foreground/10 bg-primary backdrop-blur-sm transition-all duration-300",
       scrolled && "shadow-soft"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Logo variant="compact" color="dark" className="h-10" />
+          <Logo variant="compact" color="light" className="h-10" />
 
           {/* Desktop Nav */}
           <div className="hidden md:flex md:items-center md:gap-8">
@@ -54,8 +54,8 @@ export const Navbar = () => {
                 className={cn(
                   "text-sm font-medium transition-colors relative py-2",
                   isActive(item.href)
-                    ? "text-accent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-accent"
-                    : "text-foreground hover:text-accent"
+                    ? "text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-white"
+                    : "text-primary-foreground/80 hover:text-white"
                 )}
               >
                 {item.name}
@@ -69,7 +69,7 @@ export const Navbar = () => {
           {/* Mobile toggle */}
           <button
             type="button"
-            className="md:hidden text-foreground hover:text-accent transition-colors"
+            className="md:hidden text-primary-foreground hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -84,7 +84,7 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-primary-foreground/10 bg-primary">
           <div className="space-y-1 px-4 pb-4 pt-2">
             {navigation.map((item) => (
               <Link
@@ -94,8 +94,8 @@ export const Navbar = () => {
                 className={cn(
                   "block px-4 py-3 text-base font-medium rounded-lg transition-colors",
                   isActive(item.href)
-                    ? "text-accent bg-accent/10"
-                    : "text-foreground hover:bg-muted"
+                    ? "text-white bg-white/10"
+                    : "text-primary-foreground/80 hover:bg-white/5"
                 )}
               >
                 {item.name}
