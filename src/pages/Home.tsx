@@ -35,7 +35,7 @@ const Home = () => {
         {/* Hero Section */}
         <section className="bg-primary text-primary-foreground py-24 md:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-3xl text-left">
               <h1 className="hero-title mb-6">
                 Soluciones fiscales, contables y legales para tu empresa en Barcelona
               </h1>
@@ -44,7 +44,7 @@ const Home = () => {
                 en fiscalidad, contabilidad, derecho mercantil y gestión laboral para empresas 
                 y autónomos.
               </p>
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-4">
                 <Button
                   asChild
                   size="lg"
