@@ -77,13 +77,12 @@ const Home = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
               {/* Columna 1: Nosotros navarro con línea */}
-              <div className="relative pl-6">
-                {/* Línea vertical a la izquierda */}
-                <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-border"></div>
-                
-                <h3 className="font-mono text-sm md:text-base tracking-tight text-foreground/70">
+              <div className="relative">
+                <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3">
                   Nosotros navarro
                 </h3>
+                {/* Línea horizontal debajo del texto */}
+                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border"></div>
               </div>
               
               {/* Columna 2: Título principal */}
