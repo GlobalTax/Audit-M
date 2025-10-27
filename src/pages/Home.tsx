@@ -72,8 +72,61 @@ const Home = () => {
           </div>
         </section>
 
+        {/* About Section */}
+        <section className="bg-background py-20 md:py-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-5 gap-12 lg:gap-16">
+              {/* Título - 2 columnas */}
+              <div className="md:col-span-2">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight">
+                  Asesoramiento estratégico y legal para empresas y grupos.
+                </h2>
+              </div>
+              
+              {/* Contenido - 3 columnas */}
+              <div className="md:col-span-3 space-y-6">
+                <p className="text-lg font-medium text-foreground leading-relaxed">
+                  En navarro ofrecemos asesoramiento legal, fiscal y estratégico 
+                  especializado en empresas familiares y estructuras empresariales 
+                  consolidadas.
+                </p>
+                
+                <p className="text-body leading-relaxed">
+                  Nuestra visión parte de la comprensión profunda de los retos de 
+                  continuidad, gobernanza y crecimiento que enfrentan las compañías 
+                  familiares. Aportamos soluciones concretas para planificar el 
+                  relevo generacional, proteger el patrimonio y estructurar la 
+                  actividad con seguridad jurídica.
+                </p>
+                
+                <p className="text-body leading-relaxed">
+                  Nuestro equipo trabaja con rigor técnico, experiencia transversal 
+                  y compromiso absoluto con cada cliente.
+                </p>
+                
+                <p className="text-body leading-relaxed">
+                  Ya sea en la gestión diaria, la toma de decisiones clave o en 
+                  procesos de compraventa, acompañamos a nuestros clientes con total 
+                  confidencialidad y enfoque a largo plazo.
+                </p>
+                
+                <div className="pt-4">
+                  <Link 
+                    to="/equipo" 
+                    className="inline-flex items-center text-foreground font-medium hover:text-accent transition-colors group border-b border-foreground hover:border-accent"
+                  >
+                    Conoce nuestro equipo 
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Servicios Destacados */}
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <section className="bg-neutral-100 py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             overline="Servicios"
             title="Nuestras Áreas de Especialización"
@@ -85,10 +138,11 @@ const Home = () => {
               <Link to="/servicios">Ver Todos los Servicios</Link>
             </Button>
           </div>
+          </div>
         </section>
 
         {/* Blog Preview */}
-        <section className="bg-neutral-100 py-24">
+        <section className="bg-background py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
               overline="Blog"
