@@ -165,12 +165,11 @@
   }
   
   /* Specific weights per level */
-  h1 {
-    @apply font-normal; /* 400 */
-    font-size: 40px;
-    line-height: 44px;
-    color: hsl(var(--h1-color));
-  }
+h1 {
+  @apply font-normal; /* 400 */
+  font-size: 40px;
+  line-height: 44px;
+}
   
   @media (min-width: 640px) {
     h1 {
