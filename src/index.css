@@ -101,6 +101,9 @@
     --muted: 180 20% 97%;
     --muted-foreground: 195 3% 62%;
     
+    /* Heading colors */
+    --h1-color: 187 3% 62%; /* rgb(154, 159, 160) */
+    
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     
@@ -164,7 +167,31 @@
   
   /* Specific weights per level */
   h1 {
-    @apply font-bold; /* 700 */
+    @apply font-normal; /* 400 */
+    font-size: 40px;
+    line-height: 44px;
+    color: hsl(var(--h1-color));
+  }
+  
+  @media (min-width: 640px) {
+    h1 {
+      font-size: 56px;
+      line-height: 62px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 72px;
+      line-height: 79px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    h1 {
+      font-size: 88px;
+      line-height: 97px;
+    }
   }
 
   h2 {
