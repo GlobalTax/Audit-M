@@ -7,7 +7,7 @@ import { SectionHeader, Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { blogPosts, services } from "@/data/mockData";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
@@ -133,20 +133,146 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Servicios Destacados */}
-        <section className="bg-neutral-100 py-24">
+        {/* Servicios Relevantes */}
+        <section className="bg-white py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            overline="Servicios"
-            title="Nuestras Áreas de Especialización"
-            description="Servicios integrales en todas las áreas clave para el éxito de tu negocio"
-          />
-          <LogoGrid logos={serviceLogos} />
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" size="lg">
-              <Link to="/servicios">Ver Todos los Servicios</Link>
-            </Button>
-          </div>
+            {/* Encabezado */}
+            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
+              Nuestros Servicios Relevantes
+            </h2>
+
+            {/* Grid de 4 servicios */}
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+              
+              {/* Servicio 1: Asesoramiento Fiscal */}
+              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
+                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
+                  Asesoramiento Fiscal
+                </h3>
+                <p className="text-base text-foreground/80 mb-6 leading-relaxed">
+                  Asesoramos a empresas y socios en todas sus obligaciones fiscales, 
+                  con visión estratégica y anticipación
+                </p>
+                
+                <div className="mb-6 pb-4 border-b border-border">
+                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
+                    Servicios Fiscales
+                  </span>
+                </div>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Planificación y optimización fiscal</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Procedimiento Tributario e Inspecciones ante la diferentes Administraciones</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Asesoramiento fiscal recurrente a sociedades y sus socios</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Servicio 2: Mercantil */}
+              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
+                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
+                  Mercantil
+                </h3>
+                <p className="text-base text-foreground/80 mb-6 leading-relaxed">
+                  Asesoramiento jurídico-societario para estructuras empresariales con 
+                  visión de estabilidad y seguridad en la gestión
+                </p>
+                
+                <div className="mb-6 pb-4 border-b border-border">
+                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
+                    Servicios Mercantiles
+                  </span>
+                </div>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Recurrencia legal y mercantil</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Pactos de socios y reorganizaciones societarias</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Protocolos familiares y gobierno corporativo</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Servicio 3: Laboral & Contabilidad */}
+              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
+                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
+                  Laboral & Contabilidad
+                </h3>
+                <p className="text-base text-foreground/80 mb-6 leading-relaxed">
+                  Externalización revisión contable y servicios de asesoramiento laboral, 
+                  con enfoque de cumplimiento normativo
+                </p>
+                
+                <div className="mb-6 pb-4 border-b border-border">
+                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
+                    Sercios de Externalización
+                  </span>
+                </div>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Consolidación de grupos y reporting financiero</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Revisión de la contabilidad adaptada a normativata</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Externalización de los servicios de confección de nóminas y laboral</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Servicio 4: Operaciones M&A */}
+              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
+                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
+                  Operaciones M&A
+                </h3>
+                <p className="text-base text-foreground/80 mb-6 leading-relaxed">
+                  Acompañamos a empresarios que quieren vender o comprar una empresa. 
+                  Nuestro enfoque se basa en el servicios completo
+                </p>
+                
+                <div className="mb-6 pb-4 border-b border-border">
+                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
+                    Monitoring Services
+                  </span>
+                </div>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Valoración de empresas y asesoramiento previo</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Búsqueda de comprador o inversor con la máxima confidencialidad</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-foreground/70">
+                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                    <span>Asesoramiento en Due Diligence y negociación del contrato de compraventa</span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
           </div>
         </section>
 
