@@ -39,7 +39,7 @@ export const SynergyTable = () => {
     <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-7xl mx-auto px-4">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16"
+          className="text-4xl font-normal text-center mb-16"
           {...fadeInUp}
         >
           Cómo se complementan

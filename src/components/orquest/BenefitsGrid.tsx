@@ -34,7 +34,7 @@ export const BenefitsGrid = () => {
     <section className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16"
+          className="text-4xl font-normal text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -59,7 +59,7 @@ export const BenefitsGrid = () => {
                     <div className="mb-4">
                       <Icon className="w-10 h-10 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
+                    <h3 className="text-xl font-normal mb-3">{benefit.title}</h3>
                     <p className="text-muted-foreground">{benefit.description}</p>
                   </CardContent>
                 </Card>

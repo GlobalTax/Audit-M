@@ -14,7 +14,7 @@ export const ComparisonSection = () => {
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16"
+          className="text-4xl font-normal text-center mb-16"
           {...fadeInUp}
         >
           Qué hace cada solución
@@ -33,7 +33,7 @@ export const ComparisonSection = () => {
                 <div className="mb-6 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
                   <Brain className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Orquest</h3>
+                <h3 className="text-2xl font-normal mb-4">Orquest</h3>
                 <p className="text-lg mb-6 text-muted-foreground">
                   Planificación y optimización de plantilla
                 </p>
@@ -71,7 +71,7 @@ export const ComparisonSection = () => {
                 <div className="mb-6 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">KairosHR</h3>
+                <h3 className="text-2xl font-normal mb-4">KairosHR</h3>
                 <p className="text-lg mb-6 text-muted-foreground">
                   Gestión laboral y cumplimiento normativo
                 </p>

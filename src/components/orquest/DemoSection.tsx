@@ -10,7 +10,7 @@ export const DemoSection = ({ onRequestDemo }: DemoSectionProps) => {
     <section className="py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground">
       <div className="max-w-4xl mx-auto text-center px-4">
         <motion.h2 
-          className="text-4xl font-bold mb-6"
+          className="text-4xl font-normal mb-6"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
