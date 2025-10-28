@@ -84,12 +84,12 @@ const Home = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl text-left">
               <h1 className="hero-title mb-6">
-                Soluciones fiscales, contables y legales para tu empresa en Barcelona
+                Planifica el futuro<br />
+                Con decisiones hoy.
               </h1>
               <p className="text-lead mb-8">
-                Asesoría integral con más de 25 años de experiencia. Servicios personalizados 
-                en fiscalidad, contabilidad, derecho mercantil y gestión laboral para empresas 
-                y autónomos.
+                Asesoría fiscal, contable y legal con más de 25 años de experiencia en Barcelona. 
+                Soluciones estratégicas para empresas y autónomos que piensan a largo plazo.
               </p>
               <div className="flex gap-4">
                 <Button
