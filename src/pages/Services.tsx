@@ -49,47 +49,50 @@ const Services = () => {
       />
 
       <div className="min-h-screen">
-        {/* Hero */}
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="max-w-4xl mb-16 text-center mx-auto">
-            <Overline className="mb-6">Nuestros Servicios</Overline>
-            <h1 className="mb-6 text-5xl lg:text-6xl">
-              Soluciones Integrales para tu Empresa
-            </h1>
-            <p className="text-lead text-xl text-muted-foreground">
-              Asesoría fiscal, contable, legal y laboral personalizada para empresas y autónomos en Barcelona.
-            </p>
+        {/* Hero Section */}
+        <section className="bg-black text-white py-32 md:py-48">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="service-hero-overline mb-6">Nuestros Servicios</div>
+              <h1 className="service-hero-title mb-6">
+                Soluciones Integrales para tu Empresa
+              </h1>
+              <p className="service-hero-subtitle">
+                Asesoría fiscal, contable, legal y laboral personalizada para empresas y autónomos en Barcelona.
+              </p>
+            </div>
           </div>
+        </section>
 
-          {/* Stats */}
-          {!isLoading && services.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-3xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  25+
+        {/* Stats Section */}
+        {!isLoading && services.length > 0 && (
+          <section className="bg-muted py-16 md:py-24">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div className="text-center">
+                  <div className="stat-number mb-2">25+</div>
+                  <div className="text-body uppercase tracking-wider">Años de Experiencia</div>
                 </div>
-                <div className="text-sm text-muted-foreground">Años de Experiencia</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  500+
+                <div className="text-center">
+                  <div className="stat-number mb-2">500+</div>
+                  <div className="text-body uppercase tracking-wider">Clientes Activos</div>
                 </div>
-                <div className="text-sm text-muted-foreground">Clientes Activos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  {areas.length}
+                <div className="text-center">
+                  <div className="stat-number mb-2">{areas.length}</div>
+                  <div className="text-body uppercase tracking-wider">Áreas de Práctica</div>
                 </div>
-                <div className="text-sm text-muted-foreground">Áreas de Práctica</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  98%
+                <div className="text-center">
+                  <div className="stat-number mb-2">98%</div>
+                  <div className="text-body uppercase tracking-wider">Satisfacción</div>
                 </div>
-                <div className="text-sm text-muted-foreground">Satisfacción</div>
               </div>
             </div>
-          )}
+          </section>
+        )}
+
+        {/* Filters and Results Section */}
+        <section className="bg-white py-16 md:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Filters Row */}
           <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
@@ -167,6 +170,7 @@ const Services = () => {
               )}
             </>
           )}
+          </div>
         </section>
       </div>
     </>
