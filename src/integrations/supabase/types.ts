@@ -762,6 +762,63 @@ export type Database = {
           },
         ]
       }
+      news_articles: {
+        Row: {
+          author_avatar_url: string | null
+          author_name: string | null
+          category: string
+          content: string
+          created_at: string | null
+          excerpt: string | null
+          featured_image_url: string | null
+          id: string
+          is_featured: boolean | null
+          is_published: boolean | null
+          published_at: string | null
+          read_time: number | null
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_avatar_url?: string | null
+          author_name?: string | null
+          category: string
+          content: string
+          created_at?: string | null
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          published_at?: string | null
+          read_time?: number | null
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_avatar_url?: string | null
+          author_name?: string | null
+          category?: string
+          content?: string
+          created_at?: string | null
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          published_at?: string | null
+          read_time?: number | null
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       nominas: {
         Row: {
           anio: number | null
@@ -851,6 +908,72 @@ export type Database = {
           title?: string
           type?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      portfolio_companies: {
+        Row: {
+          country: string
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          founded_year: number | null
+          id: string
+          investment_date: string | null
+          investment_thesis: string | null
+          is_active: boolean | null
+          is_featured: boolean | null
+          logo_url: string | null
+          metrics: Json | null
+          name: string
+          sector: string
+          slug: string
+          stage: string
+          timeline: Json | null
+          updated_at: string | null
+          website_url: string | null
+        }
+        Insert: {
+          country: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          founded_year?: number | null
+          id?: string
+          investment_date?: string | null
+          investment_thesis?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          logo_url?: string | null
+          metrics?: Json | null
+          name: string
+          sector: string
+          slug: string
+          stage: string
+          timeline?: Json | null
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Update: {
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          founded_year?: number | null
+          id?: string
+          investment_date?: string | null
+          investment_thesis?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          logo_url?: string | null
+          metrics?: Json | null
+          name?: string
+          sector?: string
+          slug?: string
+          stage?: string
+          timeline?: Json | null
+          updated_at?: string | null
+          website_url?: string | null
         }
         Relationships: []
       }
@@ -1061,6 +1184,45 @@ export type Database = {
         }
         Relationships: []
       }
+      team_members: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          order_index: number | null
+          position: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          order_index?: number | null
+          position?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          order_index?: number | null
+          position?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -1127,6 +1289,21 @@ export type Database = {
       }
     }
     Functions: {
+      get_news_filter_options: {
+        Args: never
+        Returns: {
+          all_tags: string[]
+          categories: string[]
+        }[]
+      }
+      get_portfolio_filter_options: {
+        Args: never
+        Returns: {
+          countries: string[]
+          sectors: string[]
+          stages: string[]
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1135,6 +1312,71 @@ export type Database = {
         Returns: boolean
       }
       publish_scheduled_posts: { Args: never; Returns: number }
+      search_news_articles: {
+        Args: {
+          filter_category?: string
+          filter_tags?: string[]
+          limit_count?: number
+          offset_count?: number
+          search_query?: string
+        }
+        Returns: {
+          author_avatar_url: string
+          author_name: string
+          category: string
+          content: string
+          created_at: string
+          excerpt: string
+          featured_image_url: string
+          id: string
+          is_featured: boolean
+          is_published: boolean
+          published_at: string
+          read_time: number
+          relevance: number
+          slug: string
+          tags: string[]
+          title: string
+          updated_at: string
+        }[]
+      }
+      search_portfolio_companies: {
+        Args: {
+          filter_country?: string
+          filter_sector?: string
+          filter_stage?: string
+          limit_count?: number
+          offset_count?: number
+          search_query?: string
+        }
+        Returns: {
+          country: string
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          founded_year: number | null
+          id: string
+          investment_date: string | null
+          investment_thesis: string | null
+          is_active: boolean | null
+          is_featured: boolean | null
+          logo_url: string | null
+          metrics: Json | null
+          name: string
+          sector: string
+          slug: string
+          stage: string
+          timeline: Json | null
+          updated_at: string | null
+          website_url: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "portfolio_companies"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
       app_role: "admin" | "marketing" | "editor" | "viewer"

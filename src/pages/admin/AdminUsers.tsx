@@ -50,17 +50,26 @@ export const AdminUsers = () => {
   const [newUserName, setNewUserName] = useState('');
   const [newUserRole, setNewUserRole] = useState<AdminRole>('editor');
 
-  // Fetch admin users
+  // Fetch admin users from profiles
   const { data: adminUsers, isLoading } = useQuery({
     queryKey: ['admin-users'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('admin_users')
+        .from('profiles')
         .select('*')
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      return data as AdminUser[];
+      return data?.map(profile => ({
+        id: profile.id,
+        user_id: profile.id,
+        email: profile.email || '',
+        full_name: profile.email?.split('@')[0] || 'Unknown',
+        role: profile.role as AdminRole,
+        is_active: true,
+        last_login: null,
+        created_at: profile.created_at || new Date().toISOString(),
+      })) as AdminUser[];
     },
   });
 
@@ -121,10 +130,10 @@ export const AdminUsers = () => {
   // Update role mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ userId, newRole }: { userId: string; newRole: AdminRole }) => {
-      const { error } = await supabase.rpc('update_admin_user_role', {
-        p_user_id: userId,
-        p_new_role: newRole
-      });
+      const { error } = await supabase
+        .from('profiles')
+        .update({ role: newRole })
+        .eq('id', userId);
       
       if (error) throw error;
     },
@@ -144,14 +153,15 @@ export const AdminUsers = () => {
     },
   });
 
-  // Deactivate user mutation
+  // Deactivate user mutation - not implemented yet
   const deactivateUserMutation = useMutation({
     mutationFn: async (userId: string) => {
-      const { error } = await supabase.rpc('deactivate_admin_user', {
-        p_user_id: userId
+      toast({
+        title: 'Feature not implemented',
+        description: 'User deactivation requires Supabase Auth changes',
+        variant: 'destructive',
       });
-      
-      if (error) throw error;
+      throw new Error('Not implemented');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] });

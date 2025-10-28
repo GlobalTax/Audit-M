@@ -46,7 +46,7 @@ const AdminServices = () => {
 
       const { data, error } = await query;
       if (error) throw error;
-      return data as Service[];
+      return data as unknown as Service[];
     },
   });
 
@@ -95,8 +95,8 @@ const AdminServices = () => {
   };
 
   const getIconComponent = (iconName: string) => {
-    const Icon = LucideIcons[iconName as keyof typeof LucideIcons];
-    return Icon ? <Icon className="h-5 w-5" /> : null;
+    const IconComponent = (LucideIcons as any)[iconName];
+    return IconComponent ? <IconComponent className="h-5 w-5" /> : <span className="text-xs text-muted-foreground">{iconName}</span>;
   };
 
   const handleEdit = (service: Service) => {
