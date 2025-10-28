@@ -1,19 +1,47 @@
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import { useQuery } from '@tanstack/react-query';
 
 export const useAdminAuth = () => {
   const { adminUser, isAdmin } = useAuth();
 
+  // Fetch user roles from user_roles table
+  const { data: userRoles } = useQuery({
+    queryKey: ['user-roles', adminUser?.user_id],
+    queryFn: async () => {
+      if (!adminUser?.user_id) return [];
+      
+      const { data, error } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', adminUser.user_id);
+      
+      if (error) throw error;
+      return data.map(r => r.role);
+    },
+    enabled: !!adminUser?.user_id,
+  });
+
   const hasRole = (requiredRole: 'super_admin' | 'admin' | 'editor' | 'viewer') => {
-    if (!adminUser) return false;
+    if (!adminUser || !userRoles) return false;
     
-    const roleHierarchy = {
-      super_admin: 4,
-      admin: 3,
-      editor: 2,
-      viewer: 1,
+    // Map old role names to new enum values
+    const roleMapping: Record<string, string> = {
+      super_admin: 'admin',
+      admin: 'admin',
+      editor: 'moderator',
+      viewer: 'user',
     };
 
-    return roleHierarchy[adminUser.role] >= roleHierarchy[requiredRole];
+    const mappedRole = roleMapping[requiredRole];
+    
+    // Check if user has the required role
+    if (userRoles.includes(mappedRole as any)) return true;
+    
+    // Admin has all permissions
+    if (userRoles.includes('admin')) return true;
+    
+    return false;
   };
 
   const canEdit = () => {

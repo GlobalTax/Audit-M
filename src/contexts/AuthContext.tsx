@@ -31,19 +31,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchAdminUser = async (userId: string): Promise<AdminUser | null> => {
     try {
-      // Use profiles table with role check instead of admin_users
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
+      // Check if user has admin role using has_role function
+      const { data: isAdmin, error: roleError } = await supabase
+        .rpc('has_role', { 
+          _user_id: userId, 
+          _role: 'admin' 
+        });
 
-      if (!error && data && data.role === 'admin') {
+      if (roleError) throw roleError;
+
+      if (isAdmin) {
+        // Fetch user profile
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
+
+        if (profileError) throw profileError;
+
         const adminUserData: AdminUser = {
-          id: data.id,
-          user_id: data.id,
-          email: data.email || '',
-          full_name: data.email || '',
+          id: profile.id,
+          user_id: profile.id,
+          email: profile.email || '',
+          full_name: profile.email || '',
           role: 'admin',
           is_active: true,
         };

@@ -50,26 +50,47 @@ export const AdminUsers = () => {
   const [newUserName, setNewUserName] = useState('');
   const [newUserRole, setNewUserRole] = useState<AdminRole>('editor');
 
-  // Fetch admin users from profiles
+  // Fetch admin users from profiles with their roles from user_roles table
   const { data: adminUsers, isLoading } = useQuery({
     queryKey: ['admin-users'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // First get all profiles
+      const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
         .select('*')
         .order('created_at', { ascending: false });
       
-      if (error) throw error;
-      return data?.map(profile => ({
-        id: profile.id,
-        user_id: profile.id,
-        email: profile.email || '',
-        full_name: profile.email?.split('@')[0] || 'Unknown',
-        role: profile.role as AdminRole,
-        is_active: true,
-        last_login: null,
-        created_at: profile.created_at || new Date().toISOString(),
-      })) as AdminUser[];
+      if (profilesError) throw profilesError;
+
+      // Then get roles for each user
+      const usersWithRoles = await Promise.all(
+        (profiles || []).map(async (profile) => {
+          const { data: roles, error: rolesError } = await supabase
+            .from('user_roles')
+            .select('role')
+            .eq('user_id', profile.id);
+
+          if (rolesError) throw rolesError;
+
+          // Map the first role to the old format for compatibility
+          const roleValue = roles?.[0]?.role as string;
+          const role = roleValue === 'admin' ? 'admin' : 
+                      roleValue === 'moderator' ? 'editor' : 'viewer';
+
+          return {
+            id: profile.id,
+            user_id: profile.id,
+            email: profile.email || '',
+            full_name: profile.email?.split('@')[0] || 'Unknown',
+            role: role as AdminRole,
+            is_active: true,
+            last_login: null,
+            created_at: profile.created_at || new Date().toISOString(),
+          };
+        })
+      );
+
+      return usersWithRoles as AdminUser[];
     },
   });
 
@@ -130,12 +151,30 @@ export const AdminUsers = () => {
   // Update role mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ userId, newRole }: { userId: string; newRole: AdminRole }) => {
-      const { error } = await supabase
-        .from('profiles')
-        .update({ role: newRole })
-        .eq('id', userId);
-      
-      if (error) throw error;
+      // Map old role to new enum
+      const roleMapping: Record<AdminRole, string> = {
+        super_admin: 'admin',
+        admin: 'admin',
+        editor: 'moderator',
+        viewer: 'user',
+      };
+
+      const mappedRole = roleMapping[newRole];
+
+      // First, delete existing roles for this user
+      const { error: deleteError } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId);
+
+      if (deleteError) throw deleteError;
+
+      // Then insert the new role
+      const { error: insertError } = await supabase
+        .from('user_roles')
+        .insert({ user_id: userId, role: mappedRole as any });
+
+      if (insertError) throw insertError;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] });
