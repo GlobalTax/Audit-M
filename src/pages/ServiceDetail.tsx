@@ -70,6 +70,7 @@ const ServiceDetail = () => {
 
       {/* Hero Section - Black background, centered text */}
       <section 
+        data-dark="true"
         className="relative w-full flex items-center justify-center"
         style={{
           backgroundColor: '#000000',

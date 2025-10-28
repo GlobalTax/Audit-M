@@ -69,9 +69,9 @@ export const Navbar = () => {
       // Buscar el primer elemento con data-dark attribute
       for (const element of elementsBelow) {
         if (element instanceof HTMLElement) {
-          const isDark = element.getAttribute('data-dark') === 'true';
-          if (isDark !== null && element.getAttribute('data-dark')) {
-            setIsLightMode(isDark);
+          const dataDark = element.getAttribute('data-dark');
+          if (dataDark !== null) {
+            setIsLightMode(dataDark === 'true');
             return;
           }
         }
