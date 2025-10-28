@@ -71,7 +71,7 @@ export const Navbar = () => {
         if (element instanceof HTMLElement) {
           const dataDark = element.getAttribute('data-dark');
           if (dataDark !== null) {
-            setIsLightMode(dataDark === 'true');
+            setIsLightMode(dataDark !== 'true');
             return;
           }
         }
@@ -90,7 +90,7 @@ export const Navbar = () => {
               const b = parseInt(rgb[2]);
               // Calcular luminosidad
               const luminosity = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-              setIsLightMode(luminosity < 0.5); // Si es oscuro, usar modo light
+              setIsLightMode(luminosity >= 0.5); // Si es claro, usar modo light (blanco)
               return;
             }
           }
