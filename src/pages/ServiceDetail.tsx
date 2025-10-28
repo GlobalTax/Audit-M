@@ -1,10 +1,17 @@
 import { useParams, Link } from "react-router-dom";
-import { Loader2 } from "lucide-react";
+import { Loader2, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Meta } from "@/components/seo/Meta";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { services as mockServices } from "@/data/mockData";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ServiceContactForm } from "@/components/services/ServiceContactForm";
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -88,61 +95,155 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Content Section - White background */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          
-          {/* Features Section */}
-          {service.features && Array.isArray(service.features) && service.features.length > 0 && (
-            <div className="mb-16">
-              <h2 className="text-4xl font-normal mb-8">¿Qué Incluye?</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {service.features.map((feature: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0" />
-                    <span className="service-body">{feature}</span>
-                  </div>
+      {/* Cómo Trabajamos Section - 2 columns */}
+      {service.metodologia && (
+        <section className="bg-white py-16 md:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+              
+              {/* Columna Izquierda */}
+              <div>
+                <div className="section-overline mb-6">
+                  {service.metodologia.overline}
+                </div>
+                
+                {service.metodologia.titulos.map((titulo: string, idx: number) => (
+                  <h2 key={idx} className="metodologia-title mb-4">
+                    {titulo}
+                  </h2>
                 ))}
-              </div>
-            </div>
-          )}
-
-          {/* Benefits Section */}
-          {service.benefits && (
-            <div className="mb-16 py-12 px-8 bg-gray-50 rounded-lg">
-              <h2 className="text-4xl font-normal mb-6">Beneficios</h2>
-              <p className="service-body text-lg">{service.benefits}</p>
-            </div>
-          )}
-
-          {/* Typical Clients Section */}
-          {service.typical_clients && Array.isArray(service.typical_clients) && service.typical_clients.length > 0 && (
-            <div className="mb-16">
-              <h2 className="text-4xl font-normal mb-8">Ideal Para</h2>
-              <div className="flex flex-wrap gap-3">
-                {service.typical_clients.map((client: string, idx: number) => (
-                  <div 
-                    key={idx} 
-                    className="px-6 py-3 bg-black text-white rounded-full text-sm"
-                  >
-                    {client}
+                
+                {service.metodologia.contacto && (
+                  <div className="mt-8 space-y-3">
+                    <a 
+                      href={`tel:${service.metodologia.contacto.telefono}`}
+                      className="flex items-center gap-3 text-lg hover:text-primary transition-colors"
+                    >
+                      <Phone className="h-5 w-5" />
+                      {service.metodologia.contacto.telefono}
+                    </a>
+                    <a 
+                      href={`mailto:${service.metodologia.contacto.email}`}
+                      className="flex items-center gap-3 text-lg hover:text-primary transition-colors"
+                    >
+                      <Mail className="h-5 w-5" />
+                      {service.metodologia.contacto.email}
+                    </a>
                   </div>
-                ))}
+                )}
               </div>
+              
+              {/* Columna Derecha */}
+              <div>
+                <p className="service-body text-lg mb-8">
+                  {service.metodologia.introduccion}
+                </p>
+                
+                <div className="space-y-8">
+                  {service.metodologia.pilares.map((pilar: any) => (
+                    <div key={pilar.numero}>
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold">
+                          {pilar.numero}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold mb-3">
+                            {pilar.titulo}
+                          </h3>
+                          <ul className="space-y-2">
+                            {pilar.puntos.map((punto: string, idx: number) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="text-foreground/60 mt-2">—</span>
+                                <span className="service-body flex-1">{punto}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
             </div>
-          )}
-
-          {/* CTA Section */}
-          <div className="text-center py-16 px-8 bg-black text-white rounded-lg">
-            <h2 className="text-3xl font-normal mb-4">¿Necesitas este servicio?</h2>
-            <p className="service-hero-subtitle mb-8 max-w-2xl mx-auto">
-              Contáctanos y te asesoraremos de forma personalizada
-            </p>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-              <Link to="/contacto">Solicitar Información</Link>
-            </Button>
           </div>
+        </section>
+      )}
 
+      {/* Servicios Transversales Accordion */}
+      {service.servicios_transversales && service.servicios_transversales.length > 0 && (
+        <section className="bg-white py-16 md:py-24 border-t border-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+            <div className="section-overline text-center mb-4">
+              SERVICIOS PREMIUM
+            </div>
+            <h2 className="text-5xl font-normal text-center mb-12">
+              Nuestros servicios transversales
+            </h2>
+            
+            <Accordion type="single" collapsible className="w-full">
+              {service.servicios_transversales.map((item: any, idx: number) => (
+                <AccordionItem key={idx} value={`item-${idx}`}>
+                  <AccordionTrigger className="text-xl hover:no-underline">
+                    {item.titulo}
+                  </AccordionTrigger>
+                  <AccordionContent className="service-body text-base pt-2">
+                    {item.contenido}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+      )}
+
+      {/* Stats/Datos Grid */}
+      {service.stats && service.stats.length > 0 && (
+        <section className="bg-white py-16 md:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="section-overline mb-12">DATOS</div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {service.stats.map((stat: any, idx: number) => (
+                <div key={idx} className="bg-muted p-8 rounded-lg">
+                  <div className="text-xs font-medium tracking-wider text-muted-foreground mb-4">
+                    {stat.label}
+                  </div>
+                  <div className="stat-number mb-4">{stat.value}</div>
+                  <p className="service-body text-sm">{stat.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contact Form */}
+      <section className="bg-muted py-16 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+          <h2 className="text-4xl font-normal text-center mb-4">
+            ¿Necesitas más información?
+          </h2>
+          <p className="service-body text-center mb-12 text-muted-foreground">
+            Completa el formulario y te responderemos en breve
+          </p>
+          
+          <ServiceContactForm serviceName={service.name} />
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="bg-black text-white py-16 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-normal mb-4">
+            ¿Listo para optimizar tu {service.area.toLowerCase()}?
+          </h2>
+          <p className="service-hero-subtitle mb-8 max-w-2xl mx-auto">
+            Contáctanos y te asesoraremos de forma personalizada
+          </p>
+          <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+            <Link to="/contacto">Solicitar Consulta</Link>
+          </Button>
         </div>
       </section>
     </>

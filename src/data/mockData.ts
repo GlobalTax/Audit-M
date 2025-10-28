@@ -15,6 +15,29 @@ export interface Service {
     solution: string;
     result: string;
   }>;
+  metodologia?: {
+    overline: string;
+    titulos: string[];
+    contacto: {
+      telefono: string;
+      email: string;
+    };
+    introduccion: string;
+    pilares: Array<{
+      numero: number;
+      titulo: string;
+      puntos: string[];
+    }>;
+  };
+  servicios_transversales?: Array<{
+    titulo: string;
+    contenido: string;
+  }>;
+  stats?: Array<{
+    label: string;
+    value: string;
+    description: string;
+  }>;
 }
 
 export interface TeamMember {
@@ -82,6 +105,84 @@ export const services: Service[] = [
     features: ["Declaraciones trimestrales", "Planificación fiscal", "Optimización tributaria", "IVA e IRPF", "Impuesto de sociedades"],
     benefits: "Reduce tu carga fiscal hasta un 30% mediante estrategias legales de optimización. Cumple con todas tus obligaciones sin errores ni sanciones.",
     typical_clients: ["Autónomos", "PYMES", "Empresas", "Multinacionales"],
+    metodologia: {
+      overline: "CÓMO TRABAJAMOS",
+      titulos: ["Soluciones a medida.", "Excelencia en los negocios"],
+      contacto: {
+        telefono: "+34 620 27 35 52",
+        email: "s.navarro@nrro.com"
+      },
+      introduccion: "En NRRO ofrecemos un servicio integral de asesoría fiscal diseñado específicamente para las necesidades de tu negocio. Nuestro enfoque combina conocimiento técnico con una comprensión profunda de tus objetivos empresariales.",
+      pilares: [
+        {
+          numero: 1,
+          titulo: "Conocimiento profundo del negocio y sensibilidad familiar",
+          puntos: [
+            "Analizamos la estructura societaria y fiscal de tu empresa",
+            "Anticipamos riesgos y detectamos oportunidades de optimización",
+            "Asesoramiento personalizado adaptado a tu sector"
+          ]
+        },
+        {
+          numero: 2,
+          titulo: "Planificación fiscal estratégica",
+          puntos: [
+            "Diseño de estructuras fiscales eficientes",
+            "Optimización de la carga tributaria dentro del marco legal",
+            "Anticipación de cambios normativos"
+          ]
+        },
+        {
+          numero: 3,
+          titulo: "Cumplimiento y tranquilidad",
+          puntos: [
+            "Gestión de todas las obligaciones fiscales",
+            "Prevención de sanciones y recargos",
+            "Soporte en inspecciones tributarias"
+          ]
+        }
+      ]
+    },
+    servicios_transversales: [
+      {
+        titulo: "Continuidad de la empresa familiar",
+        contenido: "Asesoramiento integral en procesos de sucesión empresarial, garantizando la continuidad del negocio familiar mediante estructuras fiscales y societarias eficientes que minimicen el impacto tributario."
+      },
+      {
+        titulo: "Planificación fiscal y derecho tributario",
+        contenido: "Diseño de estrategias fiscales a medida que optimicen la carga tributaria de la empresa y sus socios, siempre dentro del marco legal vigente y anticipando cambios normativos."
+      },
+      {
+        titulo: "Operaciones societarias y M&A",
+        contenido: "Asesoramiento fiscal en operaciones de compraventa, fusiones y adquisiciones, estructurando las operaciones de forma eficiente desde el punto de vista tributario."
+      },
+      {
+        titulo: "Fiscalidad internacional",
+        contenido: "Gestión de aspectos fiscales en operaciones transfronterizas, convenios de doble imposición, precios de transferencia y planificación fiscal internacional."
+      }
+    ],
+    stats: [
+      {
+        label: "CLIENTES",
+        value: "300+",
+        description: "Más de 300 empresas familiares y grupos confían en NRRO para su asesoría fiscal."
+      },
+      {
+        label: "AHORRO MEDIO",
+        value: "25%",
+        description: "Reducción promedio de la carga fiscal de nuestros clientes mediante planificación estratégica."
+      },
+      {
+        label: "EXPERIENCIA",
+        value: "25 años",
+        description: "Más de dos décadas asesorando a empresas en materia fiscal y tributaria."
+      },
+      {
+        label: "TASA DE ÉXITO",
+        value: "98%",
+        description: "Resolución favorable en inspecciones y recursos tributarios."
+      }
+    ]
   },
   {
     id: "2",
