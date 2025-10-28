@@ -126,12 +126,14 @@ export const Navbar = () => {
     <nav 
       ref={navRef}
       className={cn(
-        "sticky top-0 z-50 w-full border-b backdrop-blur-sm transition-all duration-300",
+        "sticky top-0 z-50 w-full border-b transition-all duration-300",
         isLightMode 
           ? "bg-white/95 border-border text-foreground" 
-          : "bg-primary border-primary-foreground/10",
-        scrolled && "shadow-lg",
-        scrolled && (isLightMode ? "border-border/50" : "border-primary-foreground/20")
+          : "bg-black border-white/10",
+        scrolled 
+          ? "backdrop-blur-sm shadow-lg" 
+          : (!isLightMode ? "backdrop-blur-0 border-transparent" : "backdrop-blur-sm"),
+        scrolled && (isLightMode ? "border-border/50" : "border-white/20")
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -315,7 +317,7 @@ export const Navbar = () => {
       {mobileMenuOpen && (
         <div className={cn(
           "md:hidden border-t shadow-xl",
-          isLightMode ? "border-border bg-white" : "border-primary-foreground/10 bg-primary"
+          isLightMode ? "border-border bg-white" : "border-white/10 bg-black"
         )}>
           <div className="space-y-1 px-4 pb-6 pt-4">
             {navigation.map((item) => (
