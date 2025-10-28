@@ -50,7 +50,7 @@ const Services = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="bg-black text-white py-32 md:py-48">
+        <section data-dark="true" className="bg-black text-white py-32 md:py-48">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <div className="service-hero-overline mb-6">Nuestros Servicios</div>

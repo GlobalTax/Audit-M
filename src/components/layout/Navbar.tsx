@@ -60,6 +60,12 @@ export const Navbar = () => {
     const detectBackgroundColor = () => {
       if (!navRef.current) return;
 
+      // Forzar modo oscuro en páginas de servicios al inicio
+      if (location.pathname.startsWith('/servicios') && window.scrollY < 10) {
+        setIsLightMode(false);
+        return;
+      }
+
       const navRect = navRef.current.getBoundingClientRect();
       const elementsBelow = document.elementsFromPoint(
         navRect.left + navRect.width / 2,
@@ -102,6 +108,11 @@ export const Navbar = () => {
     };
 
     detectBackgroundColor();
+    
+    // Ejecutar después del primer pintado para asegurar detección correcta
+    requestAnimationFrame(() => detectBackgroundColor());
+    setTimeout(detectBackgroundColor, 120);
+    
     window.addEventListener('scroll', detectBackgroundColor);
     window.addEventListener('resize', detectBackgroundColor);
 
