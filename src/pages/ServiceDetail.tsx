@@ -1,10 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
-import * as LucideIcons from 'lucide-react';
-import { Card } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,7 +14,6 @@ const ServiceDetail = () => {
     queryKey: ['service', slug],
     queryFn: async () => {
       if (!slug) return null;
-      // @ts-ignore - New tables not in types yet
       const supabaseAny = supabase as any;
       const response = await supabaseAny
         .from('services')
@@ -39,36 +34,24 @@ const ServiceDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <Loader2 className="h-8 w-8 animate-spin text-white" />
       </div>
     );
   }
 
   if (!service) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="mb-4">Servicio no encontrado</h1>
-          <Button asChild>
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-center text-white">
+          <h1 className="mb-4 text-4xl">Servicio no encontrado</h1>
+          <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
             <Link to="/servicios">Volver a Servicios</Link>
           </Button>
         </div>
       </div>
     );
   }
-
-  const IconComponent = (LucideIcons as any)[service.icon_name] || LucideIcons.FileText;
-
-  const getAreaColor = (area: string) => {
-    const colors: Record<string, string> = {
-      'Fiscal': 'bg-blue-100 text-blue-800 border-blue-300',
-      'Contable': 'bg-green-100 text-green-800 border-green-300',
-      'Legal': 'bg-purple-100 text-purple-800 border-purple-300',
-      'Laboral': 'bg-orange-100 text-orange-800 border-orange-300',
-    };
-    return colors[area] || 'bg-gray-100 text-gray-800 border-gray-300';
-  };
 
   return (
     <>
@@ -78,86 +61,90 @@ const ServiceDetail = () => {
         canonicalUrl={`${window.location.origin}/servicios/${service.slug}`}
       />
 
-      <div className="min-h-screen">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Button variant="ghost" asChild className="mb-8">
-            <Link to="/servicios">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver a Servicios
-            </Link>
-          </Button>
-
-          <div className="max-w-4xl">
-            {/* Header */}
-            <div className="mb-12 pb-12 border-b border-border">
-              <div className="flex items-start gap-8 mb-8">
-                {/* Icon */}
-                <div className="w-32 h-32 bg-primary/10 rounded-lg flex items-center justify-center p-4 flex-shrink-0">
-                  <IconComponent className="h-20 w-20 text-primary" strokeWidth={1.5} />
-                </div>
-
-                <div className="flex-1">
-                  <Badge className={getAreaColor(service.area)}>{service.area}</Badge>
-                  <h1 className="mb-4 text-4xl mt-4">{service.name}</h1>
-                  <p className="text-lead text-body">{service.description}</p>
-                </div>
-              </div>
-
-              <Button asChild size="lg" className="mt-6">
-                <Link to="/contacto">Solicitar Información</Link>
-              </Button>
-            </div>
-
-            {/* Features */}
-            {service.features && Array.isArray(service.features) && service.features.length > 0 && (
-              <Card className="p-8 mb-8">
-                <h2 className="text-2xl mb-6">¿Qué Incluye Este Servicio?</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
-                      <span className="text-body">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            )}
-
-            {/* Benefits */}
-            {service.benefits && (
-              <Card className="p-8 mb-8 bg-primary/5">
-                <h2 className="text-2xl mb-4">Beneficios Clave</h2>
-                <p className="text-body text-lg">{service.benefits}</p>
-              </Card>
-            )}
-
-            {/* Typical Clients */}
-            {service.typical_clients && Array.isArray(service.typical_clients) && service.typical_clients.length > 0 && (
-              <Card className="p-8 mb-8">
-                <h2 className="text-2xl mb-6">Ideal Para</h2>
-                <div className="flex flex-wrap gap-3">
-                  {service.typical_clients.map((client, idx) => (
-                    <Badge key={idx} variant="secondary" className="text-sm px-4 py-2">
-                      {client}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
-            )}
-
-            {/* CTA */}
-            <Card className="p-8 bg-gradient-to-br from-primary/10 to-primary/5 text-center">
-              <h2 className="text-2xl mb-4">¿Listo para Empezar?</h2>
-              <p className="text-body mb-6">
-                Contáctanos y te asesoraremos sobre cómo podemos ayudarte con {service.name.toLowerCase()}.
-              </p>
-              <Button asChild size="lg">
-                <Link to="/contacto">Solicitar Consulta Gratuita</Link>
-              </Button>
-            </Card>
+      {/* Hero Section - Black background, centered text */}
+      <section 
+        className="relative w-full flex items-center justify-center"
+        style={{
+          backgroundColor: '#000000',
+          minHeight: '759px',
+          height: 'auto'
+        }}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+          {/* Overline */}
+          <div className="service-hero-overline mb-6">
+            SERVICIOS
           </div>
+          
+          {/* Title */}
+          <h1 className="service-hero-title mb-8 max-w-5xl mx-auto">
+            {service.name}
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="service-hero-subtitle max-w-3xl mx-auto">
+            {service.description}
+          </p>
         </div>
-      </div>
+      </section>
+
+      {/* Content Section - White background */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          
+          {/* Features Section */}
+          {service.features && Array.isArray(service.features) && service.features.length > 0 && (
+            <div className="mb-16">
+              <h2 className="text-4xl font-normal mb-8">¿Qué Incluye?</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {service.features.map((feature: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0" />
+                    <span className="service-body">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Benefits Section */}
+          {service.benefits && (
+            <div className="mb-16 py-12 px-8 bg-gray-50 rounded-lg">
+              <h2 className="text-4xl font-normal mb-6">Beneficios</h2>
+              <p className="service-body text-lg">{service.benefits}</p>
+            </div>
+          )}
+
+          {/* Typical Clients Section */}
+          {service.typical_clients && Array.isArray(service.typical_clients) && service.typical_clients.length > 0 && (
+            <div className="mb-16">
+              <h2 className="text-4xl font-normal mb-8">Ideal Para</h2>
+              <div className="flex flex-wrap gap-3">
+                {service.typical_clients.map((client: string, idx: number) => (
+                  <div 
+                    key={idx} 
+                    className="px-6 py-3 bg-black text-white rounded-full text-sm"
+                  >
+                    {client}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CTA Section */}
+          <div className="text-center py-16 px-8 bg-black text-white rounded-lg">
+            <h2 className="text-3xl font-normal mb-4">¿Necesitas este servicio?</h2>
+            <p className="service-hero-subtitle mb-8 max-w-2xl mx-auto">
+              Contáctanos y te asesoraremos de forma personalizada
+            </p>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+              <Link to="/contacto">Solicitar Información</Link>
+            </Button>
+          </div>
+
+        </div>
+      </section>
     </>
   );
 };
