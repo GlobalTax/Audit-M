@@ -26,6 +26,7 @@ import AdminServices from "./pages/admin/AdminServices";
 import { AdminNews } from "./pages/admin/AdminNews";
 import { AdminTeam } from "./pages/admin/AdminTeam";
 import { AdminUsers } from "./pages/admin/AdminUsers";
+import AdminContent from "./pages/admin/AdminContent";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
+              <Route path="content" element={<AdminContent />} />
               <Route path="portfolio" element={<AdminPortfolio />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="news" element={<AdminNews />} />

@@ -11,6 +11,7 @@ import {
   Home,
   Settings,
   ExternalLink,
+  FileText,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -18,11 +19,12 @@ import { Separator } from '@/components/ui/separator';
 
   const navItems = [
     { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/admin/content', icon: FileText, label: 'Gestión de Contenido' },
     { path: '/admin/portfolio', icon: Briefcase, label: 'Portfolio Companies' },
     { path: '/admin/services', icon: Settings, label: 'Services' },
     { path: '/admin/news', icon: Newspaper, label: 'News Articles' },
-    { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR' },
     { path: '/admin/team', icon: Users, label: 'Team Members' },
+    { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
   ];
 
 export const AdminSidebar = () => {
@@ -65,7 +67,11 @@ export const AdminSidebar = () => {
         <Separator className="bg-slate-700 my-4" />
 
         {navItems.map((item) => (
-          <Link key={item.path} to={item.path}>
+          <Link 
+            key={item.path} 
+            to={item.path}
+            {...((item as any).external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
             <Button
               variant="ghost"
               className={`w-full justify-start ${
