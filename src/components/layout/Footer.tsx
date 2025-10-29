@@ -1,55 +1,116 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Facebook, Mail, Phone } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
+import { Separator } from "@/components/ui/separator";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <Logo variant="compact" color="light" className="h-12 mb-4" />
-            <p className="text-sm text-primary-foreground/80 max-w-md leading-relaxed mb-6">
-              Asesoría fiscal, contable y legal en Barcelona. Transformamos la gestión en 
-              impulso para tu negocio con más de 25 años de experiencia.
-            </p>
-            <div className="space-y-2">
+      {/* Top Contact Bar */}
+      <div className="border-b border-primary-foreground/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <h3 className="text-2xl md:text-3xl font-display font-semibold">
+              Contacta con nosotros
+            </h3>
+            <div className="flex flex-wrap gap-6">
               <a
                 href="tel:+34934593600"
-                className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                className="flex items-center gap-3 text-primary-foreground/90 hover:text-accent transition-colors group"
               >
-                <Phone className="h-4 w-4" />
-                <span>93 459 36 00</span>
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Phone className="h-4 w-4" />
+                </div>
+                <span className="font-medium">934593600</span>
               </a>
               <a
                 href="mailto:info@nrro.es"
-                className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                className="flex items-center gap-3 text-primary-foreground/90 hover:text-accent transition-colors group"
               >
-                <Mail className="h-4 w-4" />
-                <span>info@nrro.es</span>
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <span className="font-medium">info@nrro.es</span>
               </a>
-              <div className="flex items-start gap-2 text-sm text-primary-foreground/80">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>Carrer Ausias March número 36<br />08010 Barcelona, España</span>
-              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          {/* Brand Column */}
+          <div className="space-y-8">
+            <Logo variant="compact" color="light" className="h-12" />
+            <p className="text-lg text-primary-foreground/80 font-light leading-relaxed">
+              Planifica el futuro, con decisiones hoy.
+            </p>
+            
+            {/* Social Media Links */}
+            <div className="flex flex-col gap-4">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors group"
+              >
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Instagram className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-mono uppercase tracking-wider">Instagram</span>
+              </a>
+              <a
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors group"
+              >
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Twitter className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-mono uppercase tracking-wider">Twitter</span>
+              </a>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors group"
+              >
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Facebook className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-mono uppercase tracking-wider">Facebook</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/navarro-tax-legal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors group"
+              >
+                <div className="rounded-full border-2 border-primary-foreground/20 p-2 group-hover:border-accent transition-colors">
+                  <Linkedin className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-mono uppercase tracking-wider">LinkedIn</span>
+              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Services Column */}
           <div>
-            <h3 className="text-sm font-display font-semibold text-primary-foreground mb-4 uppercase tracking-wider">
-              Enlaces
+            <h3 className="text-sm font-mono font-semibold text-primary-foreground mb-6 uppercase tracking-wider relative inline-block">
+              Servicios
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link 
-                  to="/#services" 
+                  to="/services/empresa-familiar" 
                   className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
                 >
-                  Servicios
+                  Empresa familiar
                 </Link>
               </li>
               <li>
@@ -62,10 +123,10 @@ export const Footer = () => {
               </li>
               <li>
                 <Link 
-                  to="/blog" 
+                  to="/#services" 
                   className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
                 >
-                  Blog
+                  Servicios
                 </Link>
               </li>
               <li>
@@ -79,45 +140,70 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Social */}
+          {/* Other Services Column */}
           <div>
-            <h3 className="text-sm font-display font-semibold text-primary-foreground mb-4 uppercase tracking-wider">
-              Síguenos
+            <h3 className="text-sm font-mono font-semibold text-primary-foreground mb-6 uppercase tracking-wider relative inline-block">
+              Otros Servicios
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
             </h3>
-            <div className="flex gap-4">
-              <a
-                href="https://www.linkedin.com/company/navarro-tax-legal/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-foreground/80 hover:text-accent transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </div>
+            <ul className="space-y-3">
+              <li>
+                <Link 
+                  to="/portfolio" 
+                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
+                >
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/blog" 
+                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/insights" 
+                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
+                >
+                  Insights
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/team" 
+                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
+                >
+                  Equipo
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Legal */}
-        <div className="mt-12 pt-8 border-t border-primary-foreground/20">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-primary-foreground/60">
-              © {currentYear} Navarro Tax Legal (NRRO). Todos los derechos reservados.
-            </p>
-            <div className="flex gap-6">
-              <Link 
-                to="/privacy" 
-                className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-              >
-                Privacidad
-              </Link>
-              <Link 
-                to="/legal" 
-                className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-              >
-                Aviso Legal
-              </Link>
-            </div>
+      {/* Legal Bottom Bar */}
+      <Separator className="bg-primary-foreground/10" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm font-mono text-primary-foreground/70">
+            © HECHO CON ❤️ BY NAVARRO TEAM
+          </p>
+          <div className="flex gap-6">
+            <Link 
+              to="/legal" 
+              className="text-sm font-mono uppercase tracking-wider text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Imprint
+            </Link>
+            <Link 
+              to="/privacy" 
+              className="text-sm font-mono uppercase tracking-wider text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Privacy
+            </Link>
           </div>
         </div>
       </div>
