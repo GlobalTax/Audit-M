@@ -12,7 +12,7 @@ export const Footer = () => {
       <div className="border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <h3 className="text-2xl md:text-3xl font-display font-semibold">
+            <h3 className="text-2xl md:text-3xl font-display font-normal">
               Contacta con nosotros
             </h3>
             <div className="flex flex-wrap gap-6">

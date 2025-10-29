@@ -200,7 +200,7 @@ export default function Contact() {
                             <Icon className="h-6 w-6 text-accent" />
                           </div>
                           <div>
-                            <h3 className="font-display font-semibold text-foreground mb-1">
+                            <h3 className="font-display font-normal text-foreground mb-1">
                               {item.title}
                             </h3>
                             <a
@@ -222,7 +222,7 @@ export default function Contact() {
               {/* Office Hours */}
               <Card className="border-border/50 shadow-soft">
                 <CardContent className="p-6">
-                  <h3 className="font-display font-semibold text-foreground mb-4">
+                  <h3 className="font-display font-normal text-foreground mb-4">
                     Horario de atención
                   </h3>
                   <div className="space-y-2 text-sm">

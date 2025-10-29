@@ -72,7 +72,7 @@ export default function Index() {
               Tu socio de confianza en asesoría fiscal y legal
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed">
-              En <span className="font-display font-semibold">navarro</span>, transformamos la gestión fiscal y contable en un impulso real para tu negocio.
+              En <span className="font-display font-normal">navarro</span>, transformamos la gestión fiscal y contable en un impulso real para tu negocio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-strong">
@@ -118,7 +118,7 @@ export default function Index() {
                     <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                       <Icon className="h-6 w-6 text-accent" />
                     </div>
-                    <h3 className="text-xl font-display font-semibold text-foreground mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="text-xl font-display font-normal text-foreground mb-3 group-hover:text-accent transition-colors">
                       {service.title}
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-4">
@@ -147,7 +147,7 @@ export default function Index() {
                 <div className="text-5xl md:text-6xl font-serif font-bold text-accent-foreground mb-3">
                   {value.number}
                 </div>
-                <p className="text-lg text-accent-foreground/90 font-display font-medium">
+                <p className="text-lg text-accent-foreground/90 font-display font-normal">
                   {value.label}
                 </p>
               </div>
@@ -193,7 +193,7 @@ export default function Index() {
                 <div className="flex items-start">
                   <Building2 className="h-5 w-5 text-accent mt-1 mr-3 flex-shrink-0" />
                   <div>
-                    <p className="font-display font-semibold text-foreground">Dirección</p>
+                    <p className="font-display font-normal text-foreground">Dirección</p>
                     <p className="text-muted-foreground">Carrer Ausias March número 36, 08010 Barcelona</p>
                   </div>
                 </div>
