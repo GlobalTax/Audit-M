@@ -157,9 +157,7 @@ const handler = async (req: Request): Promise<Response> => {
       .insert({
         name,
         email: email.toLowerCase(),
-        company: company || null,
-        restaurant_name: restaurant_name || null,
-        phone: phone || null,
+        restaurant_name: restaurant_name || company || null,
         message: message || null,
         source: 'orquest-kairoshr-landing',
         status: 'pending',

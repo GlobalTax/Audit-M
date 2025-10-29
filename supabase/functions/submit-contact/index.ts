@@ -24,15 +24,19 @@ async function sendEmailStub(to: string, subject: string, html: string): Promise
 }
 
 // Map form subjects to database service_type_enum
-function mapSubjectToServiceType(subject: string): "vender" | "comprar" | "otros" {
-  const mapping: Record<string, "vender" | "comprar" | "otros"> = {
-    'investment': 'comprar',
-    'partnership': 'otros',
-    'press': 'otros',
-    'careers': 'otros',
-    'other': 'otros',
+function mapSubjectToServiceType(subject: string): "empresa_familiar" | "tax_advisory" | "legal_advisory" | "financial_planning" | "other" {
+  const mapping: Record<string, "empresa_familiar" | "tax_advisory" | "legal_advisory" | "financial_planning" | "other"> = {
+    'family_business': 'empresa_familiar',
+    'tax': 'tax_advisory',
+    'legal': 'legal_advisory',
+    'financial': 'financial_planning',
+    'investment': 'financial_planning',
+    'partnership': 'other',
+    'press': 'other',
+    'careers': 'other',
+    'other': 'other',
   };
-  return mapping[subject] || 'otros';
+  return mapping[subject] || 'other';
 }
 
 serve(async (req: Request) => {
@@ -167,14 +171,14 @@ serve(async (req: Request) => {
     const { data: contactLead, error: insertError } = await supabase
       .from('contact_leads')
       .insert({
-        full_name: name,
+        name: name,
         email: email,
         company: company,
+        subject: subject,
+        message: message,
         service_type: serviceType,
-        referral: message,
         ip_address: ipAddress,
         user_agent: userAgent,
-        status: 'new',
       })
       .select()
       .single();
@@ -218,7 +222,6 @@ serve(async (req: Request) => {
       .from('contact_leads')
       .update({
         email_sent: true,
-        email_sent_at: new Date().toISOString(),
       })
       .eq('id', contactLead.id);
 
