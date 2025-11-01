@@ -243,11 +243,18 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
     if (article.seo_description_es) form.setValue("seo_description_es", article.seo_description_es);
     if (article.seo_description_en) form.setValue("seo_description_en", article.seo_description_en);
     
+    // Importar imagen generada si existe
+    if (article.featured_image_url) {
+      form.setValue('featured_image', article.featured_image_url);
+    }
+    
     setIsAIGenerated(true);
     setShowAIGenerator(false);
     toast({
       title: "Contenido importado",
-      description: "Puedes editarlo antes de guardar.",
+      description: article.featured_image_url 
+        ? "Artículo e imagen generados. Puedes editarlos antes de guardar."
+        : "Contenido importado. Puedes editarlo antes de guardar.",
     });
   };
 
@@ -291,10 +298,17 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
         form.setValue('tags', result.tags.join(', '));
       }
       if (!form.getValues('read_time')) form.setValue('read_time', result.read_time);
+      
+      // Auto-rellenar imagen si se generó y no hay una existente
+      if (result.featured_image_url && !form.getValues('featured_image')) {
+        form.setValue('featured_image', result.featured_image_url);
+      }
 
       toast({
         title: '✨ Autocompletado exitoso',
-        description: 'Los campos vacíos se han completado. Revisa y ajusta si es necesario.',
+        description: result.featured_image_url 
+          ? 'Los campos vacíos se han completado e imagen generada. Revisa y ajusta si es necesario.'
+          : 'Los campos vacíos se han completado. Revisa y ajusta si es necesario.',
       });
     }
   };

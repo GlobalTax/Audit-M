@@ -14,6 +14,7 @@ export interface AnalyzedContent {
   category: string;
   tags: string[];
   read_time: number;
+  featured_image_url?: string;
 }
 
 type AnalyzeState = 'idle' | 'analyzing' | 'success' | 'error';

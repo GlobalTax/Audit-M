@@ -17,6 +17,7 @@ export interface GeneratedArticle {
   seo_description_en?: string;
   read_time: number;
   generated_with_ai: boolean;
+  featured_image_url?: string;
 }
 
 export interface GenerationOptions {
