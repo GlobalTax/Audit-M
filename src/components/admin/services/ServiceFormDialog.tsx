@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
+import { MarkdownEditor } from './MarkdownEditor';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -233,7 +234,31 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                       <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                          <Textarea {...field} rows={3} />
+                          <MarkdownEditor 
+                            value={field.value} 
+                            onChange={field.onChange}
+                            height={200}
+                            placeholder="Descripción del servicio (soporta Markdown)..."
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="benefits"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Benefits (Opcional)</FormLabel>
+                        <FormControl>
+                          <MarkdownEditor 
+                            value={field.value} 
+                            onChange={field.onChange}
+                            height={200}
+                            placeholder="Beneficios del servicio (soporta Markdown)..."
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -455,7 +480,12 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                           <FormItem>
                             <FormLabel>Introducción</FormLabel>
                             <FormControl>
-                              <Textarea {...field} rows={4} placeholder="Texto introductorio..." />
+                              <MarkdownEditor 
+                                value={field.value} 
+                                onChange={field.onChange}
+                                height={250}
+                                placeholder="Texto introductorio de la metodología..."
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -527,12 +557,14 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                               />
 
                               <div className="space-y-2">
-                                <Label className="text-sm">Puntos</Label>
+                                <Label className="text-sm">Puntos (Usa saltos de línea para separar)</Label>
                                 {pilar.puntos?.map((punto, puntoIndex) => (
                                   <div key={puntoIndex} className="flex gap-2">
-                                    <Input
+                                    <Textarea
                                       {...form.register(`metodologia.pilares.${pilarIndex}.puntos.${puntoIndex}` as any)}
-                                      placeholder="Punto..."
+                                      placeholder="Punto (puedes usar varias líneas)..."
+                                      rows={3}
+                                      className="font-mono text-sm"
                                     />
                                     <Button
                                       type="button"
@@ -631,7 +663,12 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                             <FormItem>
                               <FormLabel>Contenido</FormLabel>
                               <FormControl>
-                                <Textarea {...field} rows={4} placeholder="Descripción detallada..." />
+                                <MarkdownEditor 
+                                  value={field.value} 
+                                  onChange={field.onChange}
+                                  height={250}
+                                  placeholder="Descripción detallada del servicio transversal..."
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>

@@ -5,6 +5,8 @@ import { Meta } from "@/components/seo/Meta";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { services as mockServices } from "@/data/mockData";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import {
   Accordion,
   AccordionContent,
@@ -91,9 +93,11 @@ const ServiceDetail = () => {
           </h1>
           
           {/* Subtitle */}
-          <p className="service-hero-subtitle max-w-3xl mx-auto">
-            {service.description}
-          </p>
+          <div className="service-hero-subtitle max-w-3xl mx-auto prose prose-invert prose-lg">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {service.description}
+            </ReactMarkdown>
+          </div>
         </div>
       </section>
 
@@ -122,9 +126,11 @@ const ServiceDetail = () => {
               
               {/* Columna 3: Contenido */}
               <div className="space-y-6">
-                <p className="text-lg font-medium text-foreground leading-relaxed">
-                  {service.metodologia.introduccion}
-                </p>
+                <div className="text-lg font-medium text-foreground leading-relaxed prose prose-base max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {service.metodologia.introduccion}
+                  </ReactMarkdown>
+                </div>
                 
                 {service.metodologia.pilares.map((pilar: any) => (
                   <div key={pilar.numero}>
@@ -133,9 +139,9 @@ const ServiceDetail = () => {
                     </p>
                     <div className="space-y-2">
                       {pilar.puntos.map((punto: string, idx: number) => (
-                        <p key={idx} className="text-body leading-relaxed">
+                        <div key={idx} className="text-body leading-relaxed whitespace-pre-wrap">
                           — {punto}
-                        </p>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -193,8 +199,10 @@ const ServiceDetail = () => {
                       <AccordionTrigger className="text-xl hover:no-underline">
                         {item.titulo}
                       </AccordionTrigger>
-                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed">
-                        {item.contenido}
+                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed prose prose-sm max-w-none">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {item.contenido}
+                        </ReactMarkdown>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
