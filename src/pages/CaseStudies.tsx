@@ -3,7 +3,7 @@ import { Meta } from '@/components/seo/Meta';
 import { useCaseStudies, useCaseStudyFilterOptions } from '@/hooks/useCaseStudies';
 import { CaseStudyCard } from '@/components/case-studies/CaseStudyCard';
 import { CaseStudySkeleton } from '@/components/case-studies/CaseStudySkeleton';
-import { ViewToggle } from '@/components/portfolio/ViewToggle';
+import { ViewToggle } from '@/components/ui/view-toggle';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CustomPagination } from '@/components/ui/custom-pagination';

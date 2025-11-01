@@ -79,7 +79,7 @@ const Legal = () => {
                   <ul className="list-disc pl-6 space-y-2">
                     <li>Proporcionar información corporativa sobre Navarro Tax Legal y sus servicios</li>
                     <li>Servir como canal de contacto para clientes actuales y potenciales</li>
-                    <li>Mostrar el portfolio de empresas asesoradas (con su consentimiento)</li>
+                    <li>Mostrar casos de éxito y testimonios (con el consentimiento de nuestros clientes)</li>
                     <li>Publicar contenidos informativos sobre fiscalidad, contabilidad y asesoría legal</li>
                     <li>Facilitar solicitudes de información sobre productos y servicios</li>
                   </ul>
@@ -136,7 +136,7 @@ const Legal = () => {
                     <li>Extraer bases de datos o contenidos mediante técnicas automatizadas</li>
                   </ul>
                   <p className="mt-4 text-sm">
-                    Los logos de empresas del portfolio son propiedad de sus respectivos titulares y se muestran con autorización expresa.
+                    Los logos y nombres de empresas mencionados en casos de éxito son propiedad de sus respectivos titulares y se muestran con autorización expresa.
                   </p>
                 </div>
               </div>

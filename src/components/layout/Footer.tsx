@@ -149,10 +149,10 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link 
-                  to="/portfolio" 
+                  to="/casos-de-exito" 
                   className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
                 >
-                  Portfolio
+                  Casos de Éxito
                 </Link>
               </li>
               <li>

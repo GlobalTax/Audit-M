@@ -14,8 +14,6 @@ import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Methodology from "./pages/Methodology";
 import Team from "./pages/Team";
-import Portfolio from "./pages/Portfolio";
-import PortfolioDetail from "./pages/PortfolioDetail";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Blog from "./pages/Blog";
@@ -25,7 +23,6 @@ import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
-import { AdminPortfolio } from "./pages/admin/AdminPortfolio";
 import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
 import AdminServices from "./pages/admin/AdminServices";
 import { AdminBlog } from "./pages/admin/AdminBlog";
@@ -49,8 +46,6 @@ const App = () => (
             <Route path="/servicios" element={<Layout><Services /></Layout>} />
             <Route path="/servicios/contable-laboral" element={<Navigate to="/servicios/asesoramiento-contable-laboral" replace />} />
             <Route path="/servicios/:slug" element={<Layout><ServiceDetail /></Layout>} />
-            <Route path="/portfolio" element={<Layout><Portfolio /></Layout>} />
-            <Route path="/portfolio/:id" element={<Layout><PortfolioDetail /></Layout>} />
             <Route path="/casos-de-exito" element={<Layout><CaseStudies /></Layout>} />
             <Route path="/casos-de-exito/:slug" element={<Layout><CaseStudyDetail /></Layout>} />
             <Route path="/nosotros" element={<Layout><About /></Layout>} />
@@ -75,7 +70,6 @@ const App = () => (
             >
               <Route index element={<AdminDashboard />} />
               <Route path="content" element={<AdminContent />} />
-              <Route path="portfolio" element={<AdminPortfolio />} />
               <Route path="case-studies" element={<AdminCaseStudies />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="blog" element={<AdminBlog />} />

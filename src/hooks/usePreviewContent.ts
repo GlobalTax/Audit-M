@@ -11,7 +11,7 @@ interface PreviewContentResponse {
 }
 
 export const usePreviewContent = (
-  resourceType: 'portfolio_company' | 'news_article' | 'blog_post',
+  resourceType: 'news_article' | 'blog_post',
   resourceId: string,
   previewToken?: string | null
 ) => {

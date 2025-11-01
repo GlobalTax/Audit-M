@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Servicios", href: "/servicios" },
-  { name: "Portfolio", href: "/portfolio" },
   { name: "Casos de Éxito", href: "/casos-de-exito" },
   { name: "Sobre Nosotros", href: "/nosotros" },
   { name: "Blog", href: "/blog" },
@@ -41,7 +40,7 @@ export const Navbar = () => {
 
   const isActive = (path: string) => {
     // Para rutas dinámicas, verificar si empieza con el path base
-    if (path === '/portfolio' || path === '/servicios' || path === '/blog' || path === '/casos-de-exito') {
+    if (path === '/servicios' || path === '/blog' || path === '/casos-de-exito') {
       return location.pathname.startsWith(path);
     }
     // Comparación exacta para otras rutas

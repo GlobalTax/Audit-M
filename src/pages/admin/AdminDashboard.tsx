@@ -1,20 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Briefcase, TrendingUp, LogOut as ExitIcon, Users, Newspaper } from 'lucide-react';
+import { TrendingUp, Users, Newspaper } from 'lucide-react';
 
 export const AdminDashboard = () => {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['admin-stats'],
     queryFn: async () => {
-      const [portfolio, team, news] = await Promise.all([
-        supabase.from('portfolio_companies').select('id', { count: 'exact', head: true }),
+      const [caseStudies, team, news] = await Promise.all([
+        supabase.from('case_studies').select('id', { count: 'exact', head: true }),
         supabase.from('team_members').select('id', { count: 'exact', head: true }),
         supabase.from('news_articles').select('id', { count: 'exact', head: true }),
       ]);
 
       return {
-        portfolio: portfolio.count || 0,
+        caseStudies: caseStudies.count || 0,
         team: team.count || 0,
         news: news.count || 0,
       };
@@ -23,9 +23,9 @@ export const AdminDashboard = () => {
 
   const statCards = [
     {
-      title: 'Portfolio Companies',
-      value: stats?.portfolio || 0,
-      icon: Briefcase,
+      title: 'Case Studies',
+      value: stats?.caseStudies || 0,
+      icon: TrendingUp,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
     },

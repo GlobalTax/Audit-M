@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import {
   LayoutDashboard,
-  Briefcase,
   TrendingUp,
   LogOut as ExitIcon,
   Users,
@@ -20,7 +19,7 @@ import { Separator } from '@/components/ui/separator';
   const navItems = [
     { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/admin/content', icon: FileText, label: 'Gestión de Contenido' },
-    { path: '/admin/portfolio', icon: Briefcase, label: 'Portfolio Companies' },
+    { path: '/admin/case-studies', icon: TrendingUp, label: 'Case Studies' },
     { path: '/admin/services', icon: Settings, label: 'Services' },
     { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
     { path: '/admin/team', icon: Users, label: 'Team Members' },

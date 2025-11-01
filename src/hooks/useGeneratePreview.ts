@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 interface GeneratePreviewParams {
-  resourceType: 'portfolio_company' | 'news_article';
+  resourceType: 'news_article';
   resourceId: string;
   expiresHours?: number;
 }

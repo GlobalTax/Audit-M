@@ -9,7 +9,7 @@ import { Meta } from "@/components/seo/Meta";
 import { useServicesSearch, useServicesFilterOptions } from "@/hooks/useServicesSearch";
 import { Search, Loader2 } from "lucide-react";
 import { ServiceCard } from "@/components/services/ServiceCard";
-import { ViewToggle } from "@/components/portfolio/ViewToggle";
+import { ViewToggle } from "@/components/ui/view-toggle";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";

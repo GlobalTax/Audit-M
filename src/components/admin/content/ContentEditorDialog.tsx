@@ -353,8 +353,8 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
         descripcion: 'Contáctanos hoy',
         cta_primario_texto: 'Solicitar Consulta',
         cta_primario_url: '/contacto',
-        cta_secundario_texto: 'Ver Portfolio',
-        cta_secundario_url: '/portfolio'
+        cta_secundario_texto: 'Ver Casos de Éxito',
+        cta_secundario_url: '/casos-de-exito'
       },
     };
     return templates[type] || {};
