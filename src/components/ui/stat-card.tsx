@@ -11,22 +11,25 @@ export const StatCard = ({ label, value, description, className }: StatCardProps
   return (
     <div 
       className={cn(
-        "flex flex-col gap-4 p-8 rounded-lg bg-muted/50 transition-colors hover:bg-muted/70",
+        "flex flex-col gap-4 p-8 rounded-xl",
+        "bg-muted/50 border border-border",
+        "shadow-sm hover:shadow-lg",
+        "hover:-translate-y-0.5 transition-all duration-150",
         className
       )}
     >
-      {/* Label - mono, pequeño, mayúsculas */}
-      <div className="text-xs font-mono font-medium uppercase tracking-wider text-muted-foreground">
+      {/* Label - Plus Jakarta Sans, uppercase */}
+      <div className="text-xs font-sans font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </div>
       
-      {/* Value - número grande */}
-      <div className="text-5xl md:text-6xl font-display font-bold text-foreground">
+      {/* Value - Plus Jakarta Sans, bold, responsive */}
+      <div className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-foreground leading-tight">
         {value}
       </div>
       
-      {/* Description - párrafo */}
-      <p className="text-sm text-foreground/70 leading-relaxed">
+      {/* Description - Roboto, 16px */}
+      <p className="text-base text-foreground/70 leading-relaxed">
         {description}
       </p>
     </div>

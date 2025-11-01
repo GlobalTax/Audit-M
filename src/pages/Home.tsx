@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Stat } from "@/components/ui/stat";
+import { StatCard } from "@/components/ui/stat-card";
 import { LogoGrid } from "@/components/ui/logo-grid";
 import { SectionHeader, Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
@@ -16,12 +16,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useHomeKpis } from "@/hooks/useHomeKpis";
+import { useHomeDatos } from "@/hooks/useHomeDatos";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
 
-  const { kpis, isLoading: kpisLoading } = useHomeKpis();
+  const { datos, isLoading: datosLoading } = useHomeDatos();
 
   const clientLogos = [
     { name: "Empresa 1", src: "https://via.placeholder.com/150x60?text=Logo+1" },
@@ -104,24 +104,23 @@ const Home = () => {
           </div>
         </section>
 
-        {/* KPIs */}
-        <section className="border-y border-border bg-neutral-50">
+        {/* Datos Section */}
+        <section className="border-y border-border bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24">
-            <dl className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16">
-              {kpisLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 lg:gap-10 max-w-[1200px] mx-auto">
+              {datosLoading ? (
                 <div className="col-span-full text-center text-muted-foreground">Cargando...</div>
               ) : (
-                kpis.map((kpi, index) => (
-                  <Stat 
-                    key={index} 
-                    label={kpi.label} 
-                    value={kpi.value}
-                    prefix={kpi.prefix}
-                    suffix={kpi.suffix}
+                datos.map((item, index) => (
+                  <StatCard
+                    key={index}
+                    label={item.categoria}
+                    value={item.valor}
+                    description={item.descripcion}
                   />
                 ))
               )}
-            </dl>
+            </div>
           </div>
         </section>
 
