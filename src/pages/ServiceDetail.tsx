@@ -188,7 +188,7 @@ const ServiceDetail = () => {
               
               {/* Columna 2 y 3: Título + Accordion en 2 columnas */}
               <div className="md:col-span-2 space-y-6">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
+                <h2 className="text-[48px] leading-[52.8px] font-normal tracking-normal text-black">
                   Nuestros servicios transversales
                 </h2>
                 
@@ -196,7 +196,7 @@ const ServiceDetail = () => {
                 <Accordion type="single" collapsible className="w-full">
                   {service.servicios_transversales.map((item: any, idx: number) => (
                     <AccordionItem key={idx} value={`item-${idx}`}>
-                      <AccordionTrigger className="text-xl hover:no-underline">
+                      <AccordionTrigger className="text-[24px] leading-[31.2px] font-normal tracking-normal text-black hover:no-underline">
                         {item.titulo}
                       </AccordionTrigger>
                       <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed prose prose-sm max-w-none">
