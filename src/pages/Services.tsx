@@ -13,13 +13,6 @@ import { ViewToggle } from "@/components/ui/view-toggle";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { IntroduccionSection } from "@/components/services/IntroduccionSection";
-import { AreasDestacadasSection } from "@/components/services/AreasDestacadasSection";
-import { MetodologiaSection } from "@/components/services/MetodologiaSection";
-import { CTASection } from "@/components/services/CTASection";
-import { FAQsSection } from "@/components/services/FAQsSection";
-import { CTAFinalSection } from "@/components/services/CTAFinalSection";
-import { BadgeHero } from "@/components/ui/badge-hero";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -66,148 +59,115 @@ const Services = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section data-dark="true" className="bg-black text-white py-32 md:py-48">
+        <section className="bg-background py-20 md:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-6">
-                <BadgeHero>Nuestros Servicios</BadgeHero>
-              </div>
-              <h1 className="service-hero-title mb-6">
-                Soluciones Integrales para tu Empresa
+            <div className="max-w-3xl mx-auto text-center space-y-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal">
+                Nuestros Servicios
               </h1>
-              <p className="service-hero-subtitle">
-                Asesoría fiscal, contable, legal y laboral personalizada para empresas y autónomos en Barcelona.
+              <p className="text-lg md:text-xl text-muted-foreground">
+                Soluciones integrales de asesoría fiscal, contable, legal y laboral
               </p>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        {!isLoading && services.length > 0 && (
-          <section className="bg-muted py-16 md:py-24">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                <div className="text-center">
-                  <div className="stat-number mb-2">25+</div>
-                  <div className="text-body uppercase tracking-wider">Años de Experiencia</div>
-                </div>
-                <div className="text-center">
-                  <div className="stat-number mb-2">500+</div>
-                  <div className="text-body uppercase tracking-wider">Clientes Activos</div>
-                </div>
-                <div className="text-center">
-                  <div className="stat-number mb-2">{areas.length}</div>
-                  <div className="text-body uppercase tracking-wider">Áreas de Práctica</div>
-                </div>
-                <div className="text-center">
-                  <div className="stat-number mb-2">98%</div>
-                  <div className="text-body uppercase tracking-wider">Satisfacción</div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Introducción Section */}
-        <IntroduccionSection />
-
-        {/* Áreas Destacadas Section */}
-        <AreasDestacadasSection />
-
         {/* Filters and Results Section */}
-        <section className="bg-white py-16 md:py-24">
+        <section className="bg-background pb-20 md:pb-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Filters Row */}
-          <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-            <div className="flex items-center gap-4">
-              {/* View Toggle */}
-              <ViewToggle value={viewMode} onChange={setViewMode} />
+            {/* Filters Row */}
+            <div className="max-w-7xl mx-auto mb-12">
+              <div className="flex items-center justify-between flex-wrap gap-6">
+                
+                {/* Left: View Toggle + Area Filters */}
+                <div className="flex items-center gap-6 flex-wrap">
+                  <ViewToggle value={viewMode} onChange={setViewMode} />
+                  
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <span className="text-sm font-medium text-muted-foreground">Filtrar por:</span>
+                    <BadgeFilter
+                      label="Todos"
+                      active={activeArea === null}
+                      onClick={() => {
+                        setActiveArea(null);
+                        setCurrentPage(1);
+                      }}
+                    />
+                    {areas.map((area: string) => (
+                      <BadgeFilter
+                        key={area}
+                        label={area}
+                        active={activeArea === area}
+                        onClick={() => {
+                          setActiveArea(activeArea === area ? null : area);
+                          setCurrentPage(1);
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-              {/* Area filters */}
-              <div className="flex flex-wrap gap-2 items-center">
-                <span className="text-sm font-medium text-subtle">Área:</span>
-                {areas.map((area: string) => (
-                  <BadgeFilter
-                    key={area}
-                    label={area}
-                    active={activeArea === area}
-                    onClick={() => {
-                      setActiveArea(activeArea === area ? null : area);
+                {/* Right: Search */}
+                <div className="relative w-full sm:w-80">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Buscar servicios..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
                       setCurrentPage(1);
                     }}
+                    className="pl-10"
+                    aria-label="Buscar servicios"
                   />
-                ))}
+                </div>
               </div>
             </div>
 
-            {/* Search */}
-            <div className="relative w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Buscar servicios..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="pl-10"
-                aria-label="Buscar servicios"
-              />
-            </div>
-          </div>
-
-          {/* Results */}
-          {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            </div>
-          ) : services.length === 0 ? (
-            <EmptyState
-              title="No se encontraron servicios"
-              description="Intenta ajustar los filtros o el término de búsqueda"
-            />
-          ) : (
-            <>
-              <div className={cn(
-                "mb-8",
-                viewMode === 'grid'
-                  ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-                  : "space-y-4"
-              )}>
-                {services.map((service: any) => (
-                  <ServiceCard
-                    key={service.id}
-                    service={service}
-                    variant={viewMode}
-                  />
-                ))}
-              </div>
-
-              {totalPages > 1 && (
-                <CustomPagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+            {/* Services Grid */}
+            <div className="max-w-7xl mx-auto">
+              {isLoading ? (
+                <div className="flex items-center justify-center py-20">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              ) : services.length === 0 ? (
+                <EmptyState
+                  title="No se encontraron servicios"
+                  description="Intenta ajustar los filtros o el término de búsqueda"
                 />
+              ) : (
+                <>
+                  <div className={cn(
+                    "mb-12",
+                    viewMode === 'grid'
+                      ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                      : "space-y-6"
+                  )}>
+                    {services.map((service: any) => (
+                      <ServiceCard
+                        key={service.id}
+                        service={service}
+                        variant={viewMode}
+                      />
+                    ))}
+                  </div>
+
+                  {totalPages > 1 && (
+                    <div className="flex justify-center">
+                      <CustomPagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={setCurrentPage}
+                      />
+                    </div>
+                  )}
+                </>
               )}
-            </>
-          )}
+            </div>
           </div>
         </section>
-
-        {/* Metodología Section */}
-        <MetodologiaSection />
-
-        {/* CTA Consulta Section */}
-        <CTASection />
-
-        {/* FAQs Section */}
-        <FAQsSection />
-
-        {/* CTA Final Section */}
-        <CTAFinalSection />
       </div>
     </>
   );
