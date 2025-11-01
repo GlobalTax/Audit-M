@@ -29,8 +29,7 @@ export const useServicesSearch = (params: ServicesSearchParams) => {
         query = query.eq('area', params.area);
       }
 
-      // Order by featured first, then display order
-      query = query.order('is_featured', { ascending: false });
+      // Order by display order, then creation date
       query = query.order('display_order', { ascending: true });
       query = query.order('created_at', { ascending: false });
 
