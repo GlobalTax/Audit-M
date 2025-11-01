@@ -14,7 +14,6 @@ serve(async (req: Request) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Get JWT from Authorization header
     const authHeader = req.headers.get('authorization');
@@ -25,10 +24,19 @@ serve(async (req: Request) => {
       );
     }
 
+    const token = authHeader.replace('Bearer ', '');
+
+    // Create authenticated client with user's token for RLS queries
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      global: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    });
+
     // Verify user session
-    const { data: { user }, error: userError } = await supabase.auth.getUser(
-      authHeader.replace('Bearer ', '')
-    );
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
 
     if (userError || !user) {
       console.error('[VERIFY_SESSION] Invalid session:', userError);
