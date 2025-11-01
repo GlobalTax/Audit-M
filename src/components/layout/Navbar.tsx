@@ -9,7 +9,7 @@ const navigation = [
   { name: "Servicios", href: "/servicios" },
   { name: "Sobre Nosotros", href: "/nosotros" },
   { name: "Blog", href: "/blog" },
-  { name: "Talento", href: "/equipo" },
+  { name: "Equipo", href: "/equipo" },
 ];
 
 const serviciosMenu = [
