@@ -76,10 +76,8 @@ const BlogDetail = () => {
     }
   }, [dbData?.id, previewToken]);
 
-  // Reset queries and scroll to top when slug changes
+  // Reset queries when slug changes
   useEffect(() => {
-    window.scrollTo(0, 0);
-    
     // Invalidate all blog post queries to force refetch
     queryClient.invalidateQueries({ queryKey: ["blog-post", slug] });
     queryClient.invalidateQueries({ queryKey: ["blog-post-id", slug] });
