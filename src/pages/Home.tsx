@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { StatCard } from "@/components/ui/stat-card";
 import { LogoGrid } from "@/components/ui/logo-grid";
 import { SectionHeader, Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
@@ -16,15 +15,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useHomeDatos } from "@/hooks/useHomeDatos";
 import { usePageContent } from "@/hooks/usePageContent";
 import { HeroSectionContent, AboutContent, FeaturedServicesContent, LogosContent } from "@/types/pageContent";
 import { BadgeHero } from "@/components/ui/badge-hero";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
-
-  const { datos, isLoading: datosLoading } = useHomeDatos();
   
   // Fetch dynamic content from DB
   const { data: heroData } = usePageContent('home', 'hero');
@@ -129,26 +125,6 @@ const Home = () => {
                   </Link>
                 </Button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Datos Section */}
-        <section className="border-y border-border bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 lg:gap-10 max-w-[1200px] mx-auto">
-              {datosLoading ? (
-                <div className="col-span-full text-center text-muted-foreground">Cargando...</div>
-              ) : (
-                datos.map((item, index) => (
-                  <StatCard
-                    key={index}
-                    label={item.categoria}
-                    value={item.valor}
-                    description={item.descripcion}
-                  />
-                ))
-              )}
             </div>
           </div>
         </section>
