@@ -20,6 +20,7 @@ interface ContentEditorDialogProps {
 const sectionTypes = [
   { value: 'hero', label: 'Hero Section' },
   { value: 'stats', label: 'Statistics/KPIs' },
+  { value: 'datos', label: 'Datos/Estadísticas (6 items)' },
   { value: 'about', label: 'About Section' },
   { value: 'logos', label: 'Logos Grid' },
   { value: 'values', label: 'Values/Benefits' },
@@ -40,11 +41,24 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
     { label: '', value: '' },
     { label: '', value: '' },
   ]);
+  const [datosItems, setDatosItems] = useState<Array<{
+    categoria: string;
+    valor: string;
+    descripcion: string;
+  }>>([
+    { categoria: '', valor: '', descripcion: '' },
+    { categoria: '', valor: '', descripcion: '' },
+    { categoria: '', valor: '', descripcion: '' },
+    { categoria: '', valor: '', descripcion: '' },
+    { categoria: '', valor: '', descripcion: '' },
+    { categoria: '', valor: '', descripcion: '' },
+  ]);
 
   const createMutation = useCreatePageContent();
   const updateMutation = useUpdatePageContent();
 
   const isKpisSection = sectionKey === 'kpis';
+  const isDatosSection = sectionKey === 'datos';
 
   useEffect(() => {
     if (content) {
@@ -62,6 +76,22 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
           stats[3] || { label: '', value: '' },
         ]);
       }
+      
+      if (content.section_key === 'datos' && content.content.items) {
+        const items = content.content.items as Array<{
+          categoria: string;
+          valor: string;
+          descripcion: string;
+        }>;
+        setDatosItems([
+          items[0] || { categoria: '', valor: '', descripcion: '' },
+          items[1] || { categoria: '', valor: '', descripcion: '' },
+          items[2] || { categoria: '', valor: '', descripcion: '' },
+          items[3] || { categoria: '', valor: '', descripcion: '' },
+          items[4] || { categoria: '', valor: '', descripcion: '' },
+          items[5] || { categoria: '', valor: '', descripcion: '' },
+        ]);
+      }
     } else {
       setSectionKey('');
       setDisplayOrder(0);
@@ -72,6 +102,14 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
         { label: '', value: '' },
         { label: '', value: '' },
         { label: '', value: '' },
+      ]);
+      setDatosItems([
+        { categoria: '', valor: '', descripcion: '' },
+        { categoria: '', valor: '', descripcion: '' },
+        { categoria: '', valor: '', descripcion: '' },
+        { categoria: '', valor: '', descripcion: '' },
+        { categoria: '', valor: '', descripcion: '' },
+        { categoria: '', valor: '', descripcion: '' },
       ]);
     }
     setJsonError('');
@@ -93,7 +131,21 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
     
     let parsedContent;
     
-    if (isKpisSection) {
+    if (isDatosSection) {
+      parsedContent = {
+        titulo: "Datos",
+        grid: {
+          cols_desktop: 3,
+          cols_tablet: 2,
+          cols_mobile: 1,
+          gap_desktop: 40,
+          gap_tablet: 28,
+          gap_mobile: 20,
+          max_width: 1200
+        },
+        items: datosItems.filter(d => d.categoria && d.valor)
+      };
+    } else if (isKpisSection) {
       parsedContent = { stats: kpiStats.filter(s => s.label && s.value) };
     } else {
       if (!validateJson(jsonContent)) return;
@@ -134,6 +186,16 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
     setKpiStats(newStats);
   };
 
+  const updateDatosItem = (
+    index: number,
+    field: 'categoria' | 'valor' | 'descripcion',
+    value: string
+  ) => {
+    const newItems = [...datosItems];
+    newItems[index] = { ...newItems[index], [field]: value };
+    setDatosItems(newItems);
+  };
+
   const getTemplateForSection = (type: string) => {
     const templates: Record<string, any> = {
       hero: {
@@ -150,6 +212,26 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
           { label: 'Áreas de Práctica', value: '10' },
           { label: 'Cliente Internacional', value: '40%' },
         ],
+      },
+      datos: {
+        titulo: "Datos",
+        grid: {
+          cols_desktop: 3,
+          cols_tablet: 2,
+          cols_mobile: 1,
+          gap_desktop: 40,
+          gap_tablet: 28,
+          gap_mobile: 20,
+          max_width: 1200
+        },
+        items: [
+          { categoria: "Clientes", valor: "300+", descripcion: "Más de 300 empresas familiares y grupos confían en navarro." },
+          { categoria: "Proyectos", valor: "500+", descripcion: "Operaciones de reestructuración, sucesión y M&A completadas con éxito." },
+          { categoria: "Años de experiencia", valor: "+ 25", descripcion: "Trayectoria sólida acompañando a empresas familiares en su crecimiento." },
+          { categoria: "Equipo", valor: "70+", descripcion: "Abogados y profesionales especializados en fiscal, mercantil, laboral y M&A." },
+          { categoria: "Compromiso", valor: "100%", descripcion: "Dedicación total a cada mandato, con rigor técnico y confidencialidad." },
+          { categoria: "Operaciones M&A", valor: "100+", descripcion: "Mandatos de compra y venta asesorados con un enfoque integral." }
+        ]
       },
       about: {
         overline: 'About',
@@ -250,7 +332,47 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
             </div>
           </div>
 
-          {isKpisSection ? (
+          {isDatosSection ? (
+            <div className="space-y-4">
+              <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
+                Edita las 6 tarjetas de datos que aparecen en la página principal.
+              </div>
+              
+              {[0, 1, 2, 3, 4, 5].map(index => (
+                <div key={index} className="space-y-3 p-4 border rounded-lg bg-card">
+                  <div className="font-semibold text-sm">Tarjeta {index + 1}</div>
+                  
+                  <div>
+                    <Label>Categoría</Label>
+                    <Input 
+                      value={datosItems[index]?.categoria || ''} 
+                      onChange={(e) => updateDatosItem(index, 'categoria', e.target.value)}
+                      placeholder="Ej: Clientes, Proyectos, Equipo"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label>Valor</Label>
+                    <Input 
+                      value={datosItems[index]?.valor || ''} 
+                      onChange={(e) => updateDatosItem(index, 'valor', e.target.value)}
+                      placeholder="Ej: 300+, + 25, 100%"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label>Descripción</Label>
+                    <Textarea 
+                      value={datosItems[index]?.descripcion || ''} 
+                      onChange={(e) => updateDatosItem(index, 'descripcion', e.target.value)}
+                      placeholder="Descripción breve (1-2 líneas)"
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : isKpisSection ? (
             <div className="space-y-4">
               <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
                 Edita los 4 KPIs que aparecen en la página principal. 
@@ -302,7 +424,7 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
             <Button variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
-            <Button onClick={handleSave} disabled={!isKpisSection && !!jsonError}>
+            <Button onClick={handleSave} disabled={!isKpisSection && !isDatosSection && !!jsonError}>
               Guardar
             </Button>
           </div>
