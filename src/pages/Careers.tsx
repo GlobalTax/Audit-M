@@ -1,8 +1,6 @@
 import { Meta } from "@/components/seo/Meta";
 import { BadgeHero } from "@/components/ui/badge-hero";
-import { SectionHeader } from "@/components/ui/typography";
 import { CareerApplicationForm } from "@/components/careers/CareerApplicationForm";
-import { SelectionTimeline } from "@/components/careers/SelectionTimeline";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Target,
@@ -96,16 +94,16 @@ export default function Careers() {
       />
 
       {/* Hero Section */}
-      <section className="bg-black py-32 md:py-48 text-center">
+      <section data-dark="true" className="bg-black text-white py-40 md:py-56 lg:py-72">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl text-left">
             <div className="mb-6">
               <BadgeHero>Únete al Equipo</BadgeHero>
             </div>
-            <h1 className="service-hero-title mb-8">
+            <h1 className="hero-title mb-6">
               Construye tu carrera con nosotros
             </h1>
-            <p className="service-hero-subtitle max-w-3xl mx-auto">
+            <p className="text-lead mb-8">
               Forma parte de un equipo comprometido con la excelencia y el desarrollo profesional continuo
             </p>
           </div>
@@ -113,16 +111,33 @@ export default function Careers() {
       </section>
 
       {/* Why NRRO Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            overline="Cultura y Valores"
-            title="¿Por qué trabajar en NRRO?"
-            description="Más que un trabajo, es una oportunidad para crecer profesionalmente en un entorno estimulante."
-            className="text-center"
-          />
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Columna 1: Overline */}
+            <div className="relative">
+              <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3">
+                Cultura y Valores
+              </h3>
+              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border"></div>
+            </div>
+            
+            {/* Columna 2: Título */}
+            <div>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
+                ¿Por qué trabajar en NRRO?
+              </h2>
+            </div>
+            
+            {/* Columna 3: Descripción */}
+            <div>
+              <p className="text-lg font-medium text-foreground leading-relaxed">
+                Más que un trabajo, es una oportunidad para crecer profesionalmente en un entorno estimulante.
+              </p>
+            </div>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             {benefits.map((benefit, index) => (
               <Card key={index} className="hover-lift border-accent/20">
                 <CardContent className="p-6">
@@ -141,16 +156,13 @@ export default function Careers() {
       </section>
 
       {/* Areas Section */}
-      <section className="py-16 md:py-24 bg-muted">
+      <section className="bg-neutral-50 py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            overline="Oportunidades"
-            title="Áreas donde podrías trabajar"
-            description="Buscamos talento en diferentes áreas de nuestro despacho."
-            className="text-center"
-          />
+          <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
+            Áreas donde podrías trabajar
+          </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {areas.map((area, index) => (
               <Card key={index} className="hover-lift">
                 <CardContent className="p-6 text-center">
@@ -167,60 +179,30 @@ export default function Careers() {
       </section>
 
       {/* Application Form Section */}
-      <section id="aplicar" className="py-16 md:py-24 bg-background">
+      <section id="aplicar" className="bg-white py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <SectionHeader
-              overline="Candidatura Espontánea"
-              title="Envíanos tu candidatura"
-              description="¿No has encontrado ninguna vacante específica? No te preocupes, queremos conocerte igualmente. Envíanos tu CV y te contactaremos cuando surjan oportunidades que encajen con tu perfil."
-              className="text-center"
-            />
-
-            <div className="mt-12">
-              <Card>
-                <CardContent className="p-8">
-                  <CareerApplicationForm />
-                </CardContent>
-              </Card>
+            <div className="text-center mb-12">
+              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+                Candidatura Espontánea
+              </h2>
+              <h3 className="text-2xl md:text-3xl font-normal mb-4">
+                Envíanos tu candidatura
+              </h3>
+              <p className="text-body leading-relaxed">
+                ¿No has encontrado ninguna vacante específica? No te preocupes, queremos conocerte igualmente. Envíanos tu CV y te contactaremos cuando surjan oportunidades que encajen con tu perfil.
+              </p>
             </div>
+
+            <Card>
+              <CardContent className="p-8">
+                <CareerApplicationForm />
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Selection Process Section */}
-      <section className="py-16 md:py-24 bg-muted">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            overline="Proceso de Selección"
-            title="Cómo será tu proceso"
-            description="Un proceso transparente y estructurado para conocerte mejor."
-            className="text-center"
-          />
-
-          <div className="max-w-4xl mx-auto mt-12">
-            <SelectionTimeline />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-accent text-accent-foreground">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            ¿Listo para dar el siguiente paso?
-          </h2>
-          <p className="text-lg mb-8 text-accent-foreground/90 max-w-2xl mx-auto">
-            Envía tu candidatura hoy mismo y forma parte de nuestro equipo de profesionales.
-          </p>
-          <a
-            href="#aplicar"
-            className="inline-flex items-center justify-center rounded-md bg-background text-foreground px-8 py-3 text-base font-semibold hover:opacity-90 transition-opacity"
-          >
-            Enviar mi CV
-          </a>
-        </div>
-      </section>
     </>
   );
 }
