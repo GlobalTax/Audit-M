@@ -9,6 +9,8 @@ import { usePreviewContent } from "@/hooks/usePreviewContent";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import DOMPurify from "dompurify";
+import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
+import { BlogCTASection } from "@/components/blog/BlogCTASection";
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -136,12 +138,14 @@ const BlogDetail = () => {
 
       <div className="min-h-screen">
         {post.featured_image && (
-          <div className="w-full h-[400px] overflow-hidden">
-            <img
-              src={post.featured_image}
-              alt={post.title_es}
-              className="w-full h-full object-cover"
-            />
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-5xl mx-auto h-[200px] md:h-[300px] overflow-hidden rounded-lg">
+              <img
+                src={post.featured_image}
+                alt={post.title_es}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         )}
 
@@ -154,9 +158,9 @@ const BlogDetail = () => {
           </Button>
 
           <div className="max-w-3xl mx-auto">
-            <header className="mb-12 pb-12 border-b border-border">
+          <header className="mb-12 pb-12 border-b border-border">
               {post.category && <Overline className="mb-4">{post.category}</Overline>}
-              <h1 className="mb-6">{post.title_es}</h1>
+              <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title_es}</h1>
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <time dateTime={post.published_at}>
@@ -233,6 +237,16 @@ const BlogDetail = () => {
             )}
           </div>
         </article>
+
+        {/* Artículos relacionados */}
+        <RelatedBlogPosts
+          currentPostId={post.id}
+          category={post.category || ''}
+          tags={post.tags || []}
+        />
+
+        {/* CTA de contacto */}
+        <BlogCTASection />
       </div>
     </>
   );
