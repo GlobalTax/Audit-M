@@ -175,21 +175,21 @@ export const Navbar = () => {
 
                     {/* Dropdown Content */}
                     {serviciosOpen && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 w-screen max-w-5xl">
-                        <div className="bg-white rounded-lg shadow-2xl p-8 lg:p-10">
-                          <div className="grid grid-cols-3 gap-8 lg:gap-12">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 w-screen max-w-6xl">
+                        <div className="bg-white rounded-lg shadow-2xl p-10 lg:p-12">
+                          <div className="grid grid-cols-3 gap-10 lg:gap-16">
                             
                             {/* Columna 1: SERVICIOS */}
                             <div>
                               <h3 className="font-mono font-light text-xs tracking-wide text-foreground/60 uppercase mb-4 pb-2 border-b border-border">
                                 Servicios
                               </h3>
-                              <ul className="space-y-3">
+                              <ul className="space-y-4">
                                 {serviciosMenu.map((servicio) => (
                                   <li key={servicio.href}>
                                     <Link
                                       to={servicio.href}
-                                      className="text-sm text-foreground/70 hover:text-foreground transition-colors block"
+                                      className="text-base text-foreground/70 hover:text-foreground transition-colors block"
                                       onClick={() => setServiciosOpen(false)}
                                     >
                                       {servicio.name}
@@ -204,12 +204,12 @@ export const Navbar = () => {
                               <h3 className="font-mono font-light text-xs tracking-wide text-foreground/60 uppercase mb-4 pb-2 border-b border-border">
                                 Áreas
                               </h3>
-                              <ul className="space-y-3">
+                              <ul className="space-y-4">
                                 {areasMenu.map((area) => (
                                   <li key={area.href}>
                                     <Link
                                       to={area.href}
-                                      className="text-sm text-foreground/70 hover:text-foreground transition-colors block"
+                                      className="text-base text-foreground/70 hover:text-foreground transition-colors block"
                                       onClick={() => setServiciosOpen(false)}
                                     >
                                       {area.name}
