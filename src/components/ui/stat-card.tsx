@@ -47,7 +47,7 @@ export const StatCard = ({
       </div>
       
       {/* Value con contador animado */}
-      <div className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-foreground leading-tight">
+      <div className="text-4xl md:text-5xl lg:text-6xl font-sans font-normal text-foreground leading-tight">
         {count}{suffix}
       </div>
       
