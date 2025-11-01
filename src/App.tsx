@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import OrquestKairosHR from "./pages/OrquestKairosHR";
 import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
+import Cookies from "./pages/Cookies";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/contacto" element={<Layout><Contact /></Layout>} />
             <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
             <Route path="/legal" element={<Layout><Legal /></Layout>} />
+            <Route path="/cookies" element={<Layout><Cookies /></Layout>} />
             <Route path="/talento" element={<Layout><Careers /></Layout>} />
             <Route path="/orquest-kairoshr" element={<OrquestKairosHR />} />
 

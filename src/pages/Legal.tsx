@@ -271,6 +271,13 @@ const Legal = () => {
                     <li>Tus derechos como usuario</li>
                     <li>Medidas de seguridad implementadas</li>
                   </ul>
+                  <p className="mt-4">
+                    Para más información sobre cookies, consulta nuestra{" "}
+                    <a href="/cookies" className="text-accent hover:underline font-normal">
+                      Política de Cookies
+                    </a>
+                    .
+                  </p>
                 </div>
               </div>
 

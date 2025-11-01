@@ -294,6 +294,12 @@ export const Footer = () => {
             >
               Privacy
             </Link>
+            <Link 
+              to="/cookies" 
+              className="text-sm font-mono uppercase tracking-wider text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Cookies
+            </Link>
           </div>
         </div>
       </div>

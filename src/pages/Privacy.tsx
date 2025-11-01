@@ -242,6 +242,13 @@ const Privacy = () => {
                   <p>
                     Estas cookies son necesarias para el funcionamiento del sitio y no requieren consentimiento previo según la normativa vigente.
                   </p>
+                  <p className="mt-4">
+                    Para más información sobre las cookies que utilizamos, consulta nuestra{" "}
+                    <a href="/cookies" className="text-accent hover:underline font-normal">
+                      Política de Cookies
+                    </a>
+                    .
+                  </p>
                 </div>
               </div>
 
