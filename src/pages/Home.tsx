@@ -142,28 +142,19 @@ const Home = () => {
               {/* Columna 3: Contenido */}
               <div className="space-y-6">
                 <p className="text-lg font-medium text-foreground leading-relaxed">
-                  En navarro ofrecemos asesoramiento legal, fiscal y estratégico 
-                  especializado en empresas familiares y estructuras empresariales 
-                  consolidadas.
+                  En navarro ofrecemos asesoramiento legal, fiscal y estratégico especializado en empresas familiares y estructuras empresariales consolidadas.
                 </p>
                 
                 <p className="text-body leading-relaxed">
-                  Nuestra visión parte de la comprensión profunda de los retos de 
-                  continuidad, gobernanza y crecimiento que enfrentan las compañías 
-                  familiares. Aportamos soluciones concretas para planificar el 
-                  relevo generacional, proteger el patrimonio y estructurar la 
-                  actividad con seguridad jurídica.
+                  Nuestra visión parte de la comprensión profunda de los retos de continuidad, gobernanza y crecimiento que enfrentan las compañías familiares. Aportamos soluciones concretas para planificar el relevo generacional, proteger el patrimonio y estructurar la actividad con seguridad jurídica.
                 </p>
                 
                 <p className="text-body leading-relaxed">
-                  Nuestro equipo trabaja con rigor técnico, experiencia transversal 
-                  y compromiso absoluto con cada cliente.
+                  Nuestro equipo trabaja con rigor técnico, experiencia transversal y compromiso absoluto con cada cliente.
                 </p>
                 
                 <p className="text-body leading-relaxed">
-                  Ya sea en la gestión diaria, la toma de decisiones clave o en 
-                  procesos de compraventa, acompañamos a nuestros clientes con total 
-                  confidencialidad y enfoque a largo plazo.
+                  Ya sea en la gestión diaria, la toma de decisiones clave o en procesos de compraventa, acompañamos a nuestros clientes con total confidencialidad y enfoque a largo plazo.
                 </p>
                 
                 <div className="pt-4">
