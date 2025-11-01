@@ -18,6 +18,9 @@ import Autoplay from "embla-carousel-autoplay";
 import { usePageContent } from "@/hooks/usePageContent";
 import { HeroSectionContent, AboutContent, FeaturedServicesContent, LogosContent } from "@/types/pageContent";
 import { BadgeHero } from "@/components/ui/badge-hero";
+import { useHomeDatos } from "@/hooks/useHomeDatos";
+import { StatCard } from "@/components/ui/stat-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
@@ -35,6 +38,9 @@ const Home = () => {
   const serviciosDestacados = serviciosDestacadosData?.[0]?.content as FeaturedServicesContent | undefined;
   const tecnologiaContent = tecnologiaData?.[0]?.content as LogosContent | undefined;
   const clientesContent = clientesData?.[0]?.content as LogosContent | undefined;
+  
+  // Fetch datos/stats for the home page
+  const { datos, isLoading: datosLoading } = useHomeDatos();
 
   // Fallback data
   const defaultClientLogos = [
@@ -182,6 +188,34 @@ const Home = () => {
                 )}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Datos/Stats Section */}
+        <section className="bg-neutral-50 py-20 md:py-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
+              Navarro en cifras
+            </h2>
+            
+            {datosLoading ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <Skeleton key={i} className="h-48 rounded-xl" />
+                ))}
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {datos.map((dato, index) => (
+                  <StatCard
+                    key={index}
+                    label={dato.categoria}
+                    value={dato.valor}
+                    description={dato.descripcion}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
