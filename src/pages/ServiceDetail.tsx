@@ -185,21 +185,19 @@ const ServiceDetail = () => {
                   Nuestros servicios transversales
                 </h2>
                 
-                {/* Accordion en grid de 2 columnas */}
-                <div className="grid md:grid-cols-2 gap-4">
+                {/* Accordion vertical - todos los items uno debajo del otro */}
+                <Accordion type="single" collapsible className="w-full">
                   {service.servicios_transversales.map((item: any, idx: number) => (
-                    <Accordion key={idx} type="single" collapsible className="w-full">
-                      <AccordionItem value={`item-${idx}`}>
-                        <AccordionTrigger className="text-xl hover:no-underline">
-                          {item.titulo}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed">
-                          {item.contenido}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
+                    <AccordionItem key={idx} value={`item-${idx}`}>
+                      <AccordionTrigger className="text-xl hover:no-underline">
+                        {item.titulo}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed">
+                        {item.contenido}
+                      </AccordionContent>
+                    </AccordionItem>
                   ))}
-                </div>
+                </Accordion>
               </div>
               
             </div>
