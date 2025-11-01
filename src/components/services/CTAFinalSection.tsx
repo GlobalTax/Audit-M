@@ -12,14 +12,14 @@ export const CTAFinalSection = () => {
   const content = contentData[0].content as CTAFinalContent;
 
   return (
-    <section className="py-20 md:py-32 bg-foreground text-background">
-      <div className="container">
+    <section className="bg-black text-white py-16 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight">
             {content.titulo}
           </h2>
           
-          <p className="text-xl text-background/80">
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed">
             {content.descripcion}
           </p>
           
@@ -27,7 +27,8 @@ export const CTAFinalSection = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-background text-foreground hover:bg-background/90 group"
+              variant="secondary"
+              className="group"
             >
               <Link to={content.cta_primario_url}>
                 {content.cta_primario_texto}
@@ -40,7 +41,7 @@ export const CTAFinalSection = () => {
                 asChild 
                 size="lg" 
                 variant="outline"
-                className="border-background/30 text-background hover:bg-background/10"
+                className="border-white/20 bg-white/10 text-white hover:bg-white/20"
               >
                 <Link to={content.cta_secundario_url}>
                   {content.cta_secundario_texto}
