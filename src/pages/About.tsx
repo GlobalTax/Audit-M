@@ -50,19 +50,16 @@ export default function About() {
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary-hover to-accent py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary-hover/90 to-accent/90" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+      <section className="bg-black py-32 md:py-48 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <BadgeHero variant="light">{hero.overline}</BadgeHero>
+              <BadgeHero>{hero.overline}</BadgeHero>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-6 text-primary-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-8 leading-tight">
               {hero.title}
             </h1>
-            <p className="text-xl md:text-2xl leading-relaxed mb-8 text-primary-foreground/90">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               {hero.subtitle}
             </p>
           </div>
