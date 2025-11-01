@@ -89,15 +89,6 @@ const Blog = () => {
                 {posts.map((post) => (
                   <Link key={post.id} to={`/blog/${post.slug_es}`}>
                     <Card className="h-full hover:shadow-lg transition-shadow">
-                      {post.featured_image && (
-                        <div className="h-48 overflow-hidden rounded-t-lg">
-                          <img
-                            src={post.featured_image}
-                            alt={post.title_es}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      )}
                       <CardContent className="p-6 space-y-4">
                         {post.category && (
                           <Badge variant="outline">{post.category}</Badge>

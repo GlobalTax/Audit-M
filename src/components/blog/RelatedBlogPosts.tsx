@@ -45,15 +45,6 @@ export const RelatedBlogPosts = ({ currentPostId, category, tags }: RelatedBlogP
           {relatedPosts.map((post: any) => (
             <Link key={post.id} to={`/blog/${post.slug_es}`}>
               <Card className="h-full overflow-hidden hover-lift transition-smooth group">
-                {post.featured_image && (
-                  <div className="aspect-video overflow-hidden">
-                    <img
-                      src={post.featured_image}
-                      alt={post.title_es}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
                 <CardContent className="p-6">
                   {post.category && (
                     <Badge variant="secondary" className="mb-3">
