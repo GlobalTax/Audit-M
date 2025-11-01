@@ -45,7 +45,7 @@ export const ImageUpload = ({ value, onChange, onUploadProgress, className }: Im
     reader.onloadend = () => {
       setPreview(reader.result as string);
       setUploadProgress(100);
-      onChange(null, file);
+      onChange(reader.result as string, file);
     };
     reader.readAsDataURL(file);
   }, [onChange, onUploadProgress]);

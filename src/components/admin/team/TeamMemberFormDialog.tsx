@@ -34,7 +34,7 @@ const teamMemberSchema = z.object({
   specialization: z.string().optional(),
   email: z.string().email('Invalid email format').optional().or(z.literal('')),
   linkedin: z.string().url('Invalid URL format').optional().or(z.literal('')),
-  avatar_url: z.string().optional(),
+  avatar_url: z.string().nullable().optional(),
   order_index: z.coerce.number().int().min(0),
   is_active: z.boolean(),
 });
@@ -74,7 +74,7 @@ export function TeamMemberFormDialog({ open, onClose, member, onSuccess }: TeamM
       specialization: member?.specialization || '',
       email: member?.email || '',
       linkedin: member?.linkedin || '',
-      avatar_url: member?.avatar_url || '',
+      avatar_url: member?.avatar_url ?? null,
       order_index: member?.order_index || 0,
       is_active: member?.is_active ?? true,
     },
@@ -101,7 +101,7 @@ export function TeamMemberFormDialog({ open, onClose, member, onSuccess }: TeamM
       let avatarUrl = values.avatar_url;
 
       // Handle avatar upload if there's a new file
-      if (values.avatar_url && values.avatar_url.startsWith('data:')) {
+      if (typeof values.avatar_url === 'string' && values.avatar_url.startsWith('data:')) {
         const response = await fetch(values.avatar_url);
         const blob = await response.blob();
         const file = new File([blob], 'avatar.jpg', { type: blob.type });
