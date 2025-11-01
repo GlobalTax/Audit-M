@@ -55,10 +55,33 @@ export function useRelatedBlogPosts({ currentPostId, category, tags }: RelatedPo
         }
       });
 
-      // Sort by score and return top 3
-      return Array.from(scoredPosts.values())
+      // Sort by score and get top 3
+      const relatedPosts = Array.from(scoredPosts.values())
         .sort((a, b) => b.score - a.score)
         .slice(0, 3);
+
+      // If we don't have enough related posts, fill with recent posts
+      if (relatedPosts.length < 3) {
+        const { data: recentPosts, error: recentError } = await supabase
+          .from('blog_posts')
+          .select('id, title_es, slug_es, excerpt_es, featured_image, category, published_at, read_time')
+          .eq('status', 'published')
+          .neq('id', currentPostId)
+          .order('published_at', { ascending: false })
+          .limit(3);
+
+        if (recentError) throw recentError;
+
+        // Add recent posts that aren't already in relatedPosts
+        const existingIds = new Set(relatedPosts.map(p => p.id));
+        recentPosts?.forEach(post => {
+          if (!existingIds.has(post.id) && relatedPosts.length < 3) {
+            relatedPosts.push(post);
+          }
+        });
+      }
+
+      return relatedPosts;
     },
     enabled: !!currentPostId,
   });

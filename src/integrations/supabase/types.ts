@@ -1641,6 +1641,15 @@ export type Database = {
       }
       cleanup_old_rate_limits: { Args: never; Returns: undefined }
       cleanup_old_security_events: { Args: never; Returns: undefined }
+      count_blog_posts: {
+        Args: {
+          filter_category?: string
+          filter_status?: string
+          filter_tags?: string[]
+          search_query?: string
+        }
+        Returns: number
+      }
       get_blog_filter_options: {
         Args: never
         Returns: {

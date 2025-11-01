@@ -14,7 +14,8 @@ export const useBlogSearch = (params: BlogSearchParams) => {
   return useQuery({
     queryKey: ["blog-search", params],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("search_blog_posts", {
+      // Fetch paginated posts
+      const { data: posts, error: postsError } = await supabase.rpc("search_blog_posts", {
         search_query: params.searchQuery || null,
         filter_category: params.category || null,
         filter_tags: params.tags || null,
@@ -23,8 +24,22 @@ export const useBlogSearch = (params: BlogSearchParams) => {
         offset_count: params.offset || 0,
       });
 
-      if (error) throw error;
-      return data;
+      if (postsError) throw postsError;
+
+      // Fetch total count
+      const { data: totalCount, error: countError } = await supabase.rpc("count_blog_posts", {
+        search_query: params.searchQuery || null,
+        filter_category: params.category || null,
+        filter_tags: params.tags || null,
+        filter_status: params.status || 'published',
+      });
+
+      if (countError) throw countError;
+
+      return {
+        posts: posts || [],
+        totalCount: Number(totalCount) || 0,
+      };
     },
     enabled: true,
   });

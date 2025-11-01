@@ -52,12 +52,15 @@ export const AdminBlog = () => {
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [deletePostId, setDeletePostId] = useState<string | null>(null);
 
-  const { data: posts, isLoading, refetch } = useBlogSearch({
+  const { data, isLoading, refetch } = useBlogSearch({
     searchQuery: searchQuery || undefined,
     status: statusFilter === "all" ? undefined : statusFilter,
     limit: ITEMS_PER_PAGE,
     offset: (currentPage - 1) * ITEMS_PER_PAGE,
   });
+
+  const posts = data?.posts || [];
+  const totalCount = data?.totalCount || 0;
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -135,7 +138,7 @@ export const AdminBlog = () => {
     setIsPreviewOpen(true);
   };
 
-  const totalPages = Math.ceil((posts?.length || 0) / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
     <div className="space-y-6">
@@ -191,7 +194,7 @@ export const AdminBlog = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {posts?.map((post: any) => (
+                {posts.map((post: any) => (
                   <TableRow key={post.id}>
                     <TableCell className="font-medium">{post.title_es}</TableCell>
                     <TableCell>

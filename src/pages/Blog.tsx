@@ -16,14 +16,15 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: posts, isLoading } = useBlogSearch({
+  const { data, isLoading } = useBlogSearch({
     searchQuery: searchQuery || undefined,
     status: "published",
     limit: ITEMS_PER_PAGE,
     offset: (currentPage - 1) * ITEMS_PER_PAGE,
   });
 
-  const totalPages = Math.ceil((posts?.length || 0) / ITEMS_PER_PAGE);
+  const posts = data?.posts || [];
+  const totalPages = Math.ceil((data?.totalCount || 0) / ITEMS_PER_PAGE);
 
   return (
     <>
