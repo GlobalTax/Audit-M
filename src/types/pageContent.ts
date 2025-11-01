@@ -101,3 +101,17 @@ export interface FeaturedServicesContent {
     features: string[];
   }>;
 }
+
+export interface HeroSectionContent {
+  overline?: string;
+  title: string;
+  subtitle?: string;
+  cta_primary?: {
+    text: string;
+    link: string;
+  };
+  cta_secondary?: {
+    text: string;
+    link: string;
+  };
+}

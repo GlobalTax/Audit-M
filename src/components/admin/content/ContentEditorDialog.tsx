@@ -20,8 +20,12 @@ interface ContentEditorDialogProps {
 const sectionTypes = [
   { value: 'hero', label: 'Hero Section' },
   { value: 'stats', label: 'Statistics/KPIs' },
+  { value: 'kpis', label: 'KPIs (4 items)' },
   { value: 'datos', label: 'Datos/Estadísticas (6 items)' },
   { value: 'about', label: 'About Section' },
+  { value: 'servicios_destacados', label: 'Servicios Destacados (4 cards)' },
+  { value: 'tecnologia', label: 'Tecnología/Logos' },
+  { value: 'clientes', label: 'Clientes/Logos Carrusel' },
   { value: 'logos', label: 'Logos Grid' },
   { value: 'values', label: 'Values/Benefits' },
   { value: 'process', label: 'Process Steps' },
@@ -259,6 +263,36 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
         steps: [
           { icon: 'Target', title: 'Step 1', description: 'Description' },
         ],
+      },
+      servicios_destacados: {
+        overline: 'Nuestros Servicios Relevantes',
+        services: [
+          {
+            title: 'Asesoramiento Fiscal',
+            description: 'Asesoramos a empresas y socios en todas sus obligaciones fiscales',
+            category: 'Servicios Fiscales',
+            features: [
+              'Planificación y optimización fiscal',
+              'Procedimiento Tributario',
+              'Asesoramiento fiscal recurrente'
+            ]
+          }
+        ]
+      },
+      tecnologia: {
+        overline: 'Tecnología que usamos',
+        logos: [
+          { name: 'Sage' },
+          { name: 'A3 Software' },
+          { name: 'Wolters Kluwer' },
+        ]
+      },
+      clientes: {
+        overline: 'Empresas que confían en nosotros',
+        logos: [
+          { name: 'Empresa 1', logo_url: 'https://via.placeholder.com/150x60?text=Logo+1' },
+          { name: 'Empresa 2', logo_url: 'https://via.placeholder.com/150x60?text=Logo+2' },
+        ]
       },
     };
     return templates[type] || {};

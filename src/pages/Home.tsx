@@ -17,26 +17,43 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useHomeDatos } from "@/hooks/useHomeDatos";
+import { usePageContent } from "@/hooks/usePageContent";
+import { HeroSectionContent, AboutContent, FeaturedServicesContent, LogosContent } from "@/types/pageContent";
 
 const Home = () => {
   const { trackCTAClick } = useAnalytics();
 
   const { datos, isLoading: datosLoading } = useHomeDatos();
+  
+  // Fetch dynamic content from DB
+  const { data: heroData } = usePageContent('home', 'hero');
+  const { data: aboutData } = usePageContent('home', 'about');
+  const { data: serviciosDestacadosData } = usePageContent('home', 'servicios_destacados');
+  const { data: tecnologiaData } = usePageContent('home', 'tecnologia');
+  const { data: clientesData } = usePageContent('home', 'clientes');
 
-  const clientLogos = [
-    { name: "Empresa 1", src: "https://via.placeholder.com/150x60?text=Logo+1" },
-    { name: "Empresa 2", src: "https://via.placeholder.com/150x60?text=Logo+2" },
-    { name: "Empresa 3", src: "https://via.placeholder.com/150x60?text=Logo+3" },
-    { name: "Empresa 4", src: "https://via.placeholder.com/150x60?text=Logo+4" },
-    { name: "Empresa 5", src: "https://via.placeholder.com/150x60?text=Logo+5" },
-    { name: "Empresa 6", src: "https://via.placeholder.com/150x60?text=Logo+6" },
-    { name: "Empresa 7", src: "https://via.placeholder.com/150x60?text=Logo+7" },
-    { name: "Empresa 8", src: "https://via.placeholder.com/150x60?text=Logo+8" },
-    { name: "Empresa 9", src: "https://via.placeholder.com/150x60?text=Logo+9" },
-    { name: "Empresa 10", src: "https://via.placeholder.com/150x60?text=Logo+10" },
+  // Extract content with fallbacks
+  const heroContent = heroData?.[0]?.content as HeroSectionContent | undefined;
+  const aboutContent = aboutData?.[0]?.content as AboutContent | undefined;
+  const serviciosDestacados = serviciosDestacadosData?.[0]?.content as FeaturedServicesContent | undefined;
+  const tecnologiaContent = tecnologiaData?.[0]?.content as LogosContent | undefined;
+  const clientesContent = clientesData?.[0]?.content as LogosContent | undefined;
+
+  // Fallback data
+  const defaultClientLogos = [
+    { name: "Empresa 1", logo_url: "https://via.placeholder.com/150x60?text=Logo+1" },
+    { name: "Empresa 2", logo_url: "https://via.placeholder.com/150x60?text=Logo+2" },
+    { name: "Empresa 3", logo_url: "https://via.placeholder.com/150x60?text=Logo+3" },
+    { name: "Empresa 4", logo_url: "https://via.placeholder.com/150x60?text=Logo+4" },
+    { name: "Empresa 5", logo_url: "https://via.placeholder.com/150x60?text=Logo+5" },
+    { name: "Empresa 6", logo_url: "https://via.placeholder.com/150x60?text=Logo+6" },
+    { name: "Empresa 7", logo_url: "https://via.placeholder.com/150x60?text=Logo+7" },
+    { name: "Empresa 8", logo_url: "https://via.placeholder.com/150x60?text=Logo+8" },
+    { name: "Empresa 9", logo_url: "https://via.placeholder.com/150x60?text=Logo+9" },
+    { name: "Empresa 10", logo_url: "https://via.placeholder.com/150x60?text=Logo+10" },
   ];
 
-  const technologyLogos = [
+  const defaultTechnologyLogos = [
     { name: "Sage" },
     { name: "A3 Software" },
     { name: "Wolters Kluwer" },
@@ -46,6 +63,9 @@ const Home = () => {
     { name: "Lexnet" },
     { name: "Sede Electrónica AEAT" },
   ];
+
+  const clientLogos = clientesContent?.logos || defaultClientLogos;
+  const technologyLogos = tecnologiaContent?.logos || defaultTechnologyLogos;
 
   const { data: services } = useQuery({
     queryKey: ['featured-services'],
@@ -79,13 +99,14 @@ const Home = () => {
       <section data-dark="true" className="bg-black text-white py-40 md:py-56 lg:py-72">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl text-left">
-              <h1 className="hero-title mb-6">
-                Planifica el futuro<br />
-                Con decisiones hoy.
-              </h1>
+              <h1 
+                className="hero-title mb-6"
+                dangerouslySetInnerHTML={{ 
+                  __html: heroContent?.title || "Planifica el futuro<br />Con decisiones hoy." 
+                }}
+              />
               <p className="text-lead mb-8">
-                Asesoramos a grupos de empresas y empresas familiares en sus decisiones clave: 
-                fiscalidad, sucesión, estructura societaria y compraventa de empresas.
+                {heroContent?.subtitle || "Asesoramos a grupos de empresas y empresas familiares en sus decisiones clave: fiscalidad, sucesión, estructura societaria y compraventa de empresas."}
               </p>
               <div className="flex gap-4">
                 <Button
@@ -94,10 +115,14 @@ const Home = () => {
                   variant="secondary"
                   onClick={() => trackCTAClick("Ver Servicios", "Hero")}
                 >
-                  <Link to="/servicios">Nuestros Servicios</Link>
+                  <Link to={heroContent?.cta_primary?.link || "/servicios"}>
+                    {heroContent?.cta_primary?.text || "Nuestros Servicios"}
+                  </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/10 text-white hover:bg-white/20">
-                  <Link to="/contacto">Contactar</Link>
+                  <Link to={heroContent?.cta_secondary?.link || "/contacto"}>
+                    {heroContent?.cta_secondary?.text || "Contactar"}
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -128,10 +153,10 @@ const Home = () => {
         <section className="bg-background py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              {/* Columna 1: Nosotros navarro con línea */}
+              {/* Columna 1: Overline con línea */}
               <div className="relative">
                 <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3">
-                  Nosotros navarro
+                  {aboutContent?.overline || "Nosotros navarro"}
                 </h3>
                 {/* Línea horizontal debajo del texto */}
                 <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border"></div>
@@ -140,37 +165,41 @@ const Home = () => {
               {/* Columna 2: Título principal */}
               <div>
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
-                  Asesoramiento estratégico y legal para empresas y grupos.
+                  {aboutContent?.title || "Asesoramiento estratégico y legal para empresas y grupos."}
                 </h2>
               </div>
               
               {/* Columna 3: Contenido */}
               <div className="space-y-6">
-                <p className="text-lg font-medium text-foreground leading-relaxed">
-                  En navarro ofrecemos asesoramiento legal, fiscal y estratégico especializado en empresas familiares y estructuras empresariales consolidadas.
-                </p>
-                
-                <p className="text-body leading-relaxed">
-                  Nuestra visión parte de la comprensión profunda de los retos de continuidad, gobernanza y crecimiento que enfrentan las compañías familiares. Aportamos soluciones concretas para planificar el relevo generacional, proteger el patrimonio y estructurar la actividad con seguridad jurídica.
-                </p>
-                
-                <p className="text-body leading-relaxed">
-                  Nuestro equipo trabaja con rigor técnico, experiencia transversal y compromiso absoluto con cada cliente.
-                </p>
-                
-                <p className="text-body leading-relaxed">
-                  Ya sea en la gestión diaria, la toma de decisiones clave o en procesos de compraventa, acompañamos a nuestros clientes con total confidencialidad y enfoque a largo plazo.
-                </p>
-                
-                <div className="pt-4">
-                  <Link 
-                    to="/equipo" 
-                    className="inline-flex items-center text-foreground font-medium hover:text-accent transition-colors group border-b border-foreground hover:border-accent"
+                {aboutContent?.paragraphs?.map((paragraph, index) => (
+                  <p 
+                    key={index} 
+                    className={index === 0 ? "text-lg font-medium text-foreground leading-relaxed" : "text-body leading-relaxed"}
                   >
-                    Conoce nuestro equipo 
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
+                    {paragraph}
+                  </p>
+                )) || (
+                  <>
+                    <p className="text-lg font-medium text-foreground leading-relaxed">
+                      En navarro ofrecemos asesoramiento legal, fiscal y estratégico especializado en empresas familiares y estructuras empresariales consolidadas.
+                    </p>
+                    <p className="text-body leading-relaxed">
+                      Nuestra visión parte de la comprensión profunda de los retos de continuidad, gobernanza y crecimiento que enfrentan las compañías familiares.
+                    </p>
+                  </>
+                )}
+                
+                {aboutContent?.cta && (
+                  <div className="pt-4">
+                    <Link 
+                      to={aboutContent.cta.link} 
+                      className="inline-flex items-center text-foreground font-medium hover:text-accent transition-colors group border-b border-foreground hover:border-accent"
+                    >
+                      {aboutContent.cta.text}
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -180,141 +209,39 @@ const Home = () => {
         <section className="bg-white py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {/* Encabezado */}
-            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
-              Nuestros Servicios Relevantes
-            </h2>
+            {serviciosDestacados?.overline && (
+              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
+                {serviciosDestacados.overline}
+              </h2>
+            )}
 
-            {/* Grid de 4 servicios */}
+            {/* Grid de servicios */}
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-              
-              {/* Servicio 1: Asesoramiento Fiscal */}
-              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
-                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
-                  Asesoramiento Fiscal
-                </h3>
-                <p className="service-body mb-6">
-                  Asesoramos a empresas y socios en todas sus obligaciones fiscales, 
-                  con visión estratégica y anticipación
-                </p>
-                
-                <div className="mb-6 pb-4 border-b border-border">
-                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
-                    Servicios Fiscales
-                  </span>
+              {serviciosDestacados?.services?.map((service, index) => (
+                <div key={index} className="bg-neutral-50 rounded-lg p-8 lg:p-10">
+                  <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="service-body mb-6">
+                    {service.description}
+                  </p>
+                  
+                  <div className="mb-6 pb-4 border-b border-border">
+                    <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
+                      {service.category}
+                    </span>
+                  </div>
+                  
+                  <ul className="space-y-3">
+                    {service.features.map((feature, fIndex) => (
+                      <li key={fIndex} className="flex items-start gap-3 text-sm text-foreground/70">
+                        <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Planificación y optimización fiscal</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Procedimiento Tributario e Inspecciones ante la diferentes Administraciones</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Asesoramiento fiscal recurrente a sociedades y sus socios</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Servicio 2: Mercantil */}
-              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
-                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
-                  Mercantil
-                </h3>
-                <p className="service-body mb-6">
-                  Asesoramiento jurídico-societario para estructuras empresariales con 
-                  visión de estabilidad y seguridad en la gestión
-                </p>
-                
-                <div className="mb-6 pb-4 border-b border-border">
-                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
-                    Servicios Mercantiles
-                  </span>
-                </div>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Recurrencia legal y mercantil</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Pactos de socios y reorganizaciones societarias</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Protocolos familiares y gobierno corporativo</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Servicio 3: Laboral & Contabilidad */}
-              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
-                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
-                  Laboral & Contabilidad
-                </h3>
-                <p className="service-body mb-6">
-                  Externalización revisión contable y servicios de asesoramiento laboral, 
-                  con enfoque de cumplimiento normativo
-                </p>
-                
-                <div className="mb-6 pb-4 border-b border-border">
-                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
-                    Sercios de Externalización
-                  </span>
-                </div>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Consolidación de grupos y reporting financiero</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Revisión de la contabilidad adaptada a normativata</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Externalización de los servicios de confección de nóminas y laboral</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Servicio 4: Operaciones M&A */}
-              <div className="bg-neutral-50 rounded-lg p-8 lg:p-10">
-                <h3 className="text-3xl lg:text-4xl font-normal mb-4 leading-tight">
-                  Operaciones M&A
-                </h3>
-                <p className="service-body mb-6">
-                  Acompañamos a empresarios que quieren vender o comprar una empresa. 
-                  Nuestro enfoque se basa en el servicios completo
-                </p>
-                
-                <div className="mb-6 pb-4 border-b border-border">
-                  <span className="font-mono font-light text-xs tracking-wide uppercase text-foreground/60">
-                    Monitoring Services
-                  </span>
-                </div>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Valoración de empresas y asesoramiento previo</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Búsqueda de comprador o inversor con la máxima confidencialidad</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-5 w-5 flex-shrink-0 text-foreground/40 mt-0.5" />
-                    <span>Asesoramiento en Due Diligence y negociación del contrato de compraventa</span>
-                  </li>
-                </ul>
-              </div>
-
+              ))}
             </div>
           </div>
         </section>
@@ -322,9 +249,11 @@ const Home = () => {
         {/* Tecnología que usamos */}
         <section className="bg-neutral-50 py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
-              Tecnología que usamos
-            </h2>
+            {tecnologiaContent?.overline && (
+              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
+                {tecnologiaContent.overline}
+              </h2>
+            )}
             
             <LogoGrid logos={technologyLogos} />
           </div>
@@ -333,9 +262,11 @@ const Home = () => {
         {/* Carrusel de Logos */}
         <section className="bg-white py-16 md:py-20 border-t border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
-              Empresas que confían en nosotros
-            </h2>
+            {clientesContent?.overline && (
+              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
+                {clientesContent.overline}
+              </h2>
+            )}
             
             <Carousel
               opts={{
@@ -354,7 +285,7 @@ const Home = () => {
                   <CarouselItem key={index} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
                     <div className="flex items-center justify-center h-24 p-4">
                       <img
-                        src={logo.src}
+                        src={logo.logo_url || `https://via.placeholder.com/150x60?text=${logo.name}`}
                         alt={logo.name}
                         className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
                       />
