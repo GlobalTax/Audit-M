@@ -1,11 +1,19 @@
 import { Meta } from "@/components/seo/Meta";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { TeamMemberCard } from "@/components/team/TeamMemberCard";
-import { useTeamMembers } from "@/hooks/useTeamMembers";
+import { useTeamSearch, useTeamFilterOptions } from "@/hooks/useTeamSearch";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BadgeFilter } from "@/components/ui/badge-filter";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Loader2, Users } from "lucide-react";
+import { useState } from "react";
 
 const Team = () => {
-  const { data: members, isLoading } = useTeamMembers();
+  const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
+  const { data: members, isLoading } = useTeamSearch({ 
+    specialization: activeSpecialization || undefined 
+  });
+  const { data: specializations = [] } = useTeamFilterOptions();
 
   return (
     <>
@@ -34,14 +42,36 @@ const Team = () => {
           </div>
         </section>
 
+        {/* Filters */}
+        {specializations.length > 0 && (
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 mb-12">
+            <div className="bg-background rounded-lg shadow-strong p-6">
+              <div className="flex flex-wrap gap-2 items-center justify-center">
+                <span className="text-sm font-medium text-muted-foreground">Filtrar por área:</span>
+                <BadgeFilter
+                  label="Todos"
+                  active={activeSpecialization === null}
+                  onClick={() => setActiveSpecialization(null)}
+                />
+                {specializations.map((spec) => (
+                  <BadgeFilter
+                    key={spec}
+                    label={spec}
+                    active={activeSpecialization === spec}
+                    onClick={() => setActiveSpecialization(activeSpecialization === spec ? null : spec)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Team Grid */}
         <section className="bg-white py-16 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {isLoading ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {[1, 2, 3].map((i) => (
-                  <Skeleton key={i} className="h-96 rounded-lg" />
-                ))}
+              <div className="flex items-center justify-center py-16">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : members && members.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -59,11 +89,15 @@ const Team = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground">
-                  No hay miembros del equipo disponibles en este momento.
-                </p>
-              </div>
+              <EmptyState
+                icon={Users}
+                title="No hay miembros en esta área"
+                description={
+                  activeSpecialization
+                    ? `No se encontraron miembros del equipo en el área de ${activeSpecialization}.`
+                    : "No hay miembros del equipo disponibles en este momento."
+                }
+              />
             )}
           </div>
         </section>
