@@ -17,6 +17,7 @@ import Team from "./pages/Team";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Blog from "./pages/Blog";
+import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 import OrquestKairosHR from "./pages/OrquestKairosHR";
 import Privacy from "./pages/Privacy";
@@ -31,6 +32,7 @@ import { AdminTeam } from "./pages/admin/AdminTeam";
 import { AdminUsers } from "./pages/admin/AdminUsers";
 import AdminContent from "./pages/admin/AdminContent";
 import { AdminSettings } from "./pages/admin/AdminSettings";
+import AdminCandidatos from "./pages/admin/AdminCandidatos";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,7 @@ const App = () => (
             <Route path="/contacto" element={<Layout><Contact /></Layout>} />
             <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
             <Route path="/legal" element={<Layout><Legal /></Layout>} />
+            <Route path="/talento" element={<Layout><Careers /></Layout>} />
             <Route path="/orquest-kairoshr" element={<OrquestKairosHR />} />
 
             {/* Admin routes */}
@@ -76,6 +79,7 @@ const App = () => (
               <Route path="services" element={<AdminServices />} />
               <Route path="blog" element={<AdminBlog />} />
               <Route path="team" element={<AdminTeam />} />
+              <Route path="candidatos" element={<AdminCandidatos />} />
               <Route
                 path="users" 
                 element={

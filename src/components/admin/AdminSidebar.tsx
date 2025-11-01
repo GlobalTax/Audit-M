@@ -11,6 +11,7 @@ import {
   Settings,
   ExternalLink,
   FileText,
+  Briefcase,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +25,7 @@ import { Separator } from '@/components/ui/separator';
     { path: '/admin/services', icon: Settings, label: 'Services' },
     { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
     { path: '/admin/team', icon: Users, label: 'Team Members' },
+    { path: '/admin/candidatos', icon: Briefcase, label: 'Candidatos' },
     { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
   ];
 

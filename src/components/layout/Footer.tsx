@@ -195,6 +195,14 @@ export const Footer = () => {
                   Equipo
                 </Link>
               </li>
+              <li>
+                <Link 
+                  to="/talento" 
+                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
+                >
+                  Trabaja con nosotros
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
