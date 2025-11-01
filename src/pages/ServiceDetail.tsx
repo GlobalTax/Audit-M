@@ -165,29 +165,44 @@ const ServiceDetail = () => {
         </section>
       )}
 
-      {/* Servicios Transversales Accordion */}
+      {/* Servicios Transversales Section - 3 columns */}
       {service.servicios_transversales && service.servicios_transversales.length > 0 && (
         <section className="bg-white py-16 md:py-24 border-t border-border">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <div className="section-overline text-center mb-4">
-              SERVICIOS PREMIUM
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              
+              {/* Columna 1: Overline con línea */}
+              <div className="relative">
+                <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3">
+                  SERVICIOS PREMIUM A FAMILIAS
+                </h3>
+                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border"></div>
+              </div>
+              
+              {/* Columna 2: Título */}
+              <div>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
+                  Nuestros servicios transversales
+                </h2>
+              </div>
+              
+              {/* Columna 3: Accordion */}
+              <div>
+                <Accordion type="single" collapsible className="w-full">
+                  {service.servicios_transversales.map((item: any, idx: number) => (
+                    <AccordionItem key={idx} value={`item-${idx}`}>
+                      <AccordionTrigger className="text-xl hover:no-underline">
+                        {item.titulo}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed">
+                        {item.contenido}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+              
             </div>
-            <h2 className="text-5xl font-normal text-center mb-12">
-              Nuestros servicios transversales
-            </h2>
-            
-            <Accordion type="single" collapsible className="w-full">
-              {service.servicios_transversales.map((item: any, idx: number) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
-                  <AccordionTrigger className="text-xl hover:no-underline">
-                    {item.titulo}
-                  </AccordionTrigger>
-                  <AccordionContent className="service-body text-base pt-2">
-                    {item.contenido}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
           </div>
         </section>
       )}
