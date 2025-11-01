@@ -5,7 +5,7 @@ const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml']
 
 export async function uploadCompanyLogo(
   file: File,
-  companySlug: string
+  bucketName: string
 ): Promise<string> {
   // Validate file size
   if (file.size > MAX_FILE_SIZE) {
@@ -19,12 +19,12 @@ export async function uploadCompanyLogo(
 
   // Generate unique filename
   const fileExt = file.name.split('.').pop();
-  const fileName = `${companySlug}-${Date.now()}.${fileExt}`;
+  const fileName = `${bucketName}-${Date.now()}.${fileExt}`;
   const filePath = `${fileName}`;
 
   // Upload to Supabase Storage
   const { error: uploadError } = await supabase.storage
-    .from('company-logos')
+    .from(bucketName)
     .upload(filePath, file, {
       cacheControl: '3600',
       upsert: false,
@@ -36,7 +36,7 @@ export async function uploadCompanyLogo(
 
   // Get public URL
   const { data } = supabase.storage
-    .from('company-logos')
+    .from(bucketName)
     .getPublicUrl(filePath);
 
   return data.publicUrl;
@@ -46,13 +46,16 @@ export async function deleteCompanyLogo(logoUrl: string): Promise<void> {
   if (!logoUrl) return;
 
   try {
-    // Extract filename from URL
+    // Extract bucket name and filename from URL
     const urlParts = logoUrl.split('/');
     const fileName = urlParts[urlParts.length - 1];
+    // Extract bucket from URL: .../storage/v1/object/public/{bucket}/{file}
+    const bucketIndex = urlParts.findIndex(part => part === 'public') + 1;
+    const bucketName = urlParts[bucketIndex] || 'client-logos';
 
     // Delete from storage
     const { error } = await supabase.storage
-      .from('company-logos')
+      .from(bucketName)
       .remove([fileName]);
 
     if (error) {
@@ -68,7 +71,7 @@ export async function deleteCompanyLogo(logoUrl: string): Promise<void> {
 export async function replaceCompanyLogo(
   oldLogoUrl: string | null,
   newFile: File,
-  companySlug: string
+  bucketName: string
 ): Promise<string> {
   // Delete old logo if exists
   if (oldLogoUrl) {
@@ -80,5 +83,5 @@ export async function replaceCompanyLogo(
   }
 
   // Upload new logo
-  return uploadCompanyLogo(newFile, companySlug);
+  return uploadCompanyLogo(newFile, bucketName);
 }
