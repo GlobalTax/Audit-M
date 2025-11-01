@@ -53,10 +53,16 @@ serve(async (req: Request) => {
     }
 
     const roles = userRoles?.map(r => r.role) || [];
-    const hasPanelAccess = roles.some(r => ['admin', 'editor', 'marketing', 'hr_viewer'].includes(r));
+    console.log('[VERIFY_SESSION] User roles:', roles, 'for user:', user.id);
+    
+    const allowedRoles = ['admin', 'editor', 'marketing', 'hr_manager', 'hr_viewer'];
+    console.log('[VERIFY_SESSION] Allowed roles:', allowedRoles);
+    
+    const hasPanelAccess = roles.some(r => allowedRoles.includes(r));
+    console.log('[VERIFY_SESSION] Has panel access:', hasPanelAccess);
 
     if (!hasPanelAccess) {
-      console.warn('[VERIFY_SESSION] User has no panel access:', user.id);
+      console.warn('[VERIFY_SESSION] User has no panel access:', user.id, 'roles:', roles);
       return new Response(
         JSON.stringify({ error: 'Access denied' }),
         { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

@@ -142,7 +142,11 @@ serve(async (req: Request) => {
     }
 
     const roles = userRoles?.map(r => r.role) || [];
-    const hasPanelAccess = roles.some(r => ['admin', 'editor', 'marketing'].includes(r));
+    console.log('[ADMIN_AUTH] User roles:', roles);
+    
+    // Check if user has admin panel access
+    const allowedRoles = ['admin', 'editor', 'marketing', 'hr_manager', 'hr_viewer'];
+    const hasPanelAccess = roles.some(r => allowedRoles.includes(r));
 
     if (!hasPanelAccess) {
       console.warn('[ADMIN_AUTH] User has no panel access:', { email, userId: authData.user.id });
