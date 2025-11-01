@@ -26,6 +26,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, Plus, Search, Eye } from 'lucide-react';
 import { toast } from 'sonner';
+import { CaseStudyFormDialog } from '@/components/admin/case-studies/CaseStudyFormDialog';
+import { CaseStudyPreviewModal } from '@/components/admin/case-studies/CaseStudyPreviewModal';
 
 export function AdminCaseStudies() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -226,8 +228,23 @@ export function AdminCaseStudies() {
         </Table>
       </div>
 
-      {/* TODO: Add CaseStudyFormDialog */}
-      {/* TODO: Add CaseStudyPreviewModal */}
+      <CaseStudyFormDialog
+        open={isFormOpen}
+        onClose={() => {
+          setIsFormOpen(false);
+          setSelectedCaseStudy(null);
+        }}
+        caseStudy={selectedCaseStudy}
+      />
+
+      <CaseStudyPreviewModal
+        open={isPreviewOpen}
+        onClose={() => {
+          setIsPreviewOpen(false);
+          setSelectedCaseStudy(null);
+        }}
+        caseStudy={selectedCaseStudy}
+      />
 
       <AlertDialog open={!!caseStudyToDelete} onOpenChange={() => setCaseStudyToDelete(null)}>
         <AlertDialogContent>
