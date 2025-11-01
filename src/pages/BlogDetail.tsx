@@ -6,7 +6,7 @@ import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
 import { PreviewBanner } from "@/components/ui/preview-banner";
 import { usePreviewContent } from "@/hooks/usePreviewContent";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import DOMPurify from "dompurify";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
@@ -16,6 +16,7 @@ const BlogDetail = () => {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get("preview");
+  const queryClient = useQueryClient();
 
   // Get article ID from slug for preview mode
   const { data: articleId, isLoading: isIdLoading } = useQuery({
@@ -74,6 +75,15 @@ const BlogDetail = () => {
       incrementViewMutation.mutate(dbData.id);
     }
   }, [dbData?.id, previewToken]);
+
+  // Reset queries and scroll to top when slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    // Invalidate all blog post queries to force refetch
+    queryClient.invalidateQueries({ queryKey: ["blog-post", slug] });
+    queryClient.invalidateQueries({ queryKey: ["blog-post-id", slug] });
+  }, [slug, queryClient]);
 
   const isLoading = previewToken ? isIdLoading || isPreviewLoading : isDbLoading;
   const post = previewToken ? previewData?.data : dbData;
