@@ -1488,6 +1488,22 @@ export type Database = {
       }
       cleanup_old_rate_limits: { Args: never; Returns: undefined }
       cleanup_old_security_events: { Args: never; Returns: undefined }
+      get_blog_filter_options: {
+        Args: never
+        Returns: {
+          all_tags: string[]
+          categories: string[]
+        }[]
+      }
+      get_blog_stats: {
+        Args: never
+        Returns: {
+          total_drafts: number
+          total_published: number
+          total_scheduled: number
+          total_views: number
+        }[]
+      }
       get_news_filter_options: {
         Args: never
         Returns: {
@@ -1510,8 +1526,37 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_blog_view_count: {
+        Args: { post_id: string }
+        Returns: undefined
+      }
       publish_scheduled_posts: { Args: never; Returns: number }
       run_maintenance_tasks: { Args: never; Returns: undefined }
+      search_blog_posts: {
+        Args: {
+          filter_category?: string
+          filter_status?: string
+          filter_tags?: string[]
+          lang?: string
+          limit_count?: number
+          offset_count?: number
+          search_query?: string
+        }
+        Returns: {
+          category: string
+          excerpt_es: string
+          featured_image: string
+          id: string
+          published_at: string
+          read_time: number
+          relevance: number
+          slug_es: string
+          status: string
+          tags: string[]
+          title_es: string
+          view_count: number
+        }[]
+      }
       search_news_articles: {
         Args: {
           filter_category?: string

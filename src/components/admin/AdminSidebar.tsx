@@ -22,7 +22,7 @@ import { Separator } from '@/components/ui/separator';
     { path: '/admin/content', icon: FileText, label: 'Gestión de Contenido' },
     { path: '/admin/portfolio', icon: Briefcase, label: 'Portfolio Companies' },
     { path: '/admin/services', icon: Settings, label: 'Services' },
-    { path: '/admin/news', icon: Newspaper, label: 'News Articles' },
+    { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
     { path: '/admin/team', icon: Users, label: 'Team Members' },
     { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
   ];

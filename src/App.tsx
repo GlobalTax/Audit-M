@@ -25,7 +25,8 @@ import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminPortfolio } from "./pages/admin/AdminPortfolio";
 import AdminServices from "./pages/admin/AdminServices";
-import { AdminNews } from "./pages/admin/AdminNews";
+import { AdminBlog } from "./pages/admin/AdminBlog";
+import BlogDetail from "./pages/BlogDetail";
 import { AdminTeam } from "./pages/admin/AdminTeam";
 import { AdminUsers } from "./pages/admin/AdminUsers";
 import AdminContent from "./pages/admin/AdminContent";
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/portfolio/:id" element={<Layout><PortfolioDetail /></Layout>} />
             <Route path="/nosotros" element={<Layout><About /></Layout>} />
             <Route path="/blog" element={<Layout><Blog /></Layout>} />
+            <Route path="/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
             <Route path="/equipo" element={<Layout><Team /></Layout>} />
             <Route path="/metodologia" element={<Layout><Methodology /></Layout>} />
             <Route path="/contacto" element={<Layout><Contact /></Layout>} />
@@ -69,7 +71,7 @@ const App = () => (
               <Route path="content" element={<AdminContent />} />
               <Route path="portfolio" element={<AdminPortfolio />} />
               <Route path="services" element={<AdminServices />} />
-              <Route path="news" element={<AdminNews />} />
+              <Route path="blog" element={<AdminBlog />} />
               <Route path="team" element={<AdminTeam />} />
               <Route 
                 path="users" 

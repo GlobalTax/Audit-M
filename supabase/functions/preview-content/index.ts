@@ -7,7 +7,7 @@ const corsHeaders = {
 
 interface PreviewRequest {
   token: string;
-  type: 'portfolio_company' | 'news_article';
+  type: 'portfolio_company' | 'news_article' | 'blog_post';
   id: string;
 }
 
@@ -77,6 +77,15 @@ Deno.serve(async (req) => {
     } else if (type === 'news_article') {
       const result = await supabase
         .from('news_articles')
+        .select('*')
+        .eq('id', id)
+        .single();
+      
+      data = result.data;
+      error = result.error;
+    } else if (type === 'blog_post') {
+      const result = await supabase
+        .from('blog_posts')
         .select('*')
         .eq('id', id)
         .single();
