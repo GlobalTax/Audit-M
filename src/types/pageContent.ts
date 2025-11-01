@@ -115,3 +115,64 @@ export interface HeroSectionContent {
     link: string;
   };
 }
+
+// Services page content types
+export interface IntroduccionServiciosContent {
+  overline: string;
+  titulo: string;
+  descripcion: string;
+  puntos: string[];
+}
+
+export interface AreaDestacada {
+  nombre: string;
+  icono: string;
+  descripcion: string;
+  servicios_ejemplo: string[];
+}
+
+export interface AreasDestacadasContent {
+  overline: string;
+  titulo: string;
+  areas: AreaDestacada[];
+}
+
+export interface PasoMetodologia {
+  numero: string;
+  titulo: string;
+  descripcion: string;
+}
+
+export interface MetodologiaServiciosContent {
+  overline: string;
+  titulo: string;
+  descripcion: string;
+  pasos: PasoMetodologia[];
+}
+
+export interface CTAContent {
+  titulo: string;
+  descripcion: string;
+  cta_texto: string;
+  cta_url: string;
+}
+
+export interface FAQ {
+  pregunta: string;
+  respuesta: string;
+}
+
+export interface FAQsContent {
+  overline: string;
+  titulo: string;
+  preguntas: FAQ[];
+}
+
+export interface CTAFinalContent {
+  titulo: string;
+  descripcion: string;
+  cta_primario_texto: string;
+  cta_primario_url: string;
+  cta_secundario_texto?: string;
+  cta_secundario_url?: string;
+}

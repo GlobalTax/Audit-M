@@ -13,6 +13,12 @@ import { ViewToggle } from "@/components/portfolio/ViewToggle";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { IntroduccionSection } from "@/components/services/IntroduccionSection";
+import { AreasDestacadasSection } from "@/components/services/AreasDestacadasSection";
+import { MetodologiaSection } from "@/components/services/MetodologiaSection";
+import { CTASection } from "@/components/services/CTASection";
+import { FAQsSection } from "@/components/services/FAQsSection";
+import { CTAFinalSection } from "@/components/services/CTAFinalSection";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -89,6 +95,12 @@ const Services = () => {
             </div>
           </section>
         )}
+
+        {/* Introducción Section */}
+        <IntroduccionSection />
+
+        {/* Áreas Destacadas Section */}
+        <AreasDestacadasSection />
 
         {/* Filters and Results Section */}
         <section className="bg-white py-16 md:py-24">
@@ -172,6 +184,18 @@ const Services = () => {
           )}
           </div>
         </section>
+
+        {/* Metodología Section */}
+        <MetodologiaSection />
+
+        {/* CTA Consulta Section */}
+        <CTASection />
+
+        {/* FAQs Section */}
+        <FAQsSection />
+
+        {/* CTA Final Section */}
+        <CTAFinalSection />
       </div>
     </>
   );

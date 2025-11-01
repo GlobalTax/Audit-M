@@ -24,6 +24,12 @@ const sectionTypes = [
   { value: 'datos', label: 'Datos/Estadísticas (6 items)' },
   { value: 'about', label: 'About Section' },
   { value: 'servicios_destacados', label: 'Servicios Destacados (4 cards)' },
+  { value: 'introduccion', label: 'Introducción Servicios' },
+  { value: 'areas_destacadas', label: 'Áreas Destacadas' },
+  { value: 'metodologia', label: 'Metodología' },
+  { value: 'cta_consulta', label: 'CTA Consulta' },
+  { value: 'faqs', label: 'FAQs' },
+  { value: 'cta_final', label: 'CTA Final' },
   { value: 'tecnologia', label: 'Tecnología/Logos' },
   { value: 'clientes', label: 'Clientes/Logos Carrusel' },
   { value: 'logos', label: 'Logos Grid' },
@@ -293,6 +299,62 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
           { name: 'Empresa 1', logo_url: 'https://via.placeholder.com/150x60?text=Logo+1' },
           { name: 'Empresa 2', logo_url: 'https://via.placeholder.com/150x60?text=Logo+2' },
         ]
+      },
+      introduccion: {
+        overline: 'NUESTRO ENFOQUE',
+        titulo: 'Soluciones integrales adaptadas a tu negocio',
+        descripcion: 'Descripción del enfoque y valores',
+        puntos: [
+          'Equipo multidisciplinar',
+          'Atención personalizada',
+          'Tecnología avanzada',
+          'Compromiso con la excelencia'
+        ]
+      },
+      areas_destacadas: {
+        overline: 'NUESTRAS ÁREAS',
+        titulo: 'Cuatro pilares de excelencia',
+        areas: [
+          {
+            nombre: 'Fiscal',
+            icono: 'Receipt',
+            descripcion: 'Optimización fiscal y planificación tributaria',
+            servicios_ejemplo: ['Impuesto de Sociedades', 'IVA', 'IRPF']
+          }
+        ]
+      },
+      metodologia: {
+        overline: 'CÓMO TRABAJAMOS',
+        titulo: 'Nuestro proceso',
+        descripcion: 'Un método probado que garantiza resultados',
+        pasos: [
+          { numero: '01', titulo: 'Análisis', descripcion: 'Estudiamos tu situación' },
+          { numero: '02', titulo: 'Estrategia', descripcion: 'Diseñamos un plan' }
+        ]
+      },
+      cta_consulta: {
+        titulo: '¿Tienes dudas?',
+        descripcion: 'Agenda una consulta gratuita',
+        cta_texto: 'Agendar Consulta',
+        cta_url: '/contacto'
+      },
+      faqs: {
+        overline: 'PREGUNTAS FRECUENTES',
+        titulo: 'Resolvemos tus dudas',
+        preguntas: [
+          {
+            pregunta: '¿Qué servicios incluye la asesoría?',
+            respuesta: 'Incluye gestión fiscal, contable, laboral y legal.'
+          }
+        ]
+      },
+      cta_final: {
+        titulo: '¿Listo para optimizar tu negocio?',
+        descripcion: 'Contáctanos hoy',
+        cta_primario_texto: 'Solicitar Consulta',
+        cta_primario_url: '/contacto',
+        cta_secundario_texto: 'Ver Portfolio',
+        cta_secundario_url: '/portfolio'
       },
     };
     return templates[type] || {};
