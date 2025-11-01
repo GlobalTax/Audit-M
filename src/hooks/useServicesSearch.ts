@@ -16,7 +16,7 @@ export const useServicesSearch = (params: ServicesSearchParams) => {
       const supabaseAny = supabase as any;
       let query = supabaseAny
         .from('services')
-        .select('*')
+        .select('*', { count: 'exact' })
         .eq('is_active', true);
 
       // Apply search filter
@@ -29,6 +29,11 @@ export const useServicesSearch = (params: ServicesSearchParams) => {
         query = query.eq('area', params.area);
       }
 
+      // Order by featured first, then display order
+      query = query.order('is_featured', { ascending: false });
+      query = query.order('display_order', { ascending: true });
+      query = query.order('created_at', { ascending: false });
+
       // Apply pagination
       if (params.limit) {
         query = query.limit(params.limit);
@@ -37,15 +42,14 @@ export const useServicesSearch = (params: ServicesSearchParams) => {
         query = query.range(params.offset, params.offset + (params.limit || 20) - 1);
       }
 
-      // Order by featured first, then display order
-      query = query.order('is_featured', { ascending: false });
-      query = query.order('display_order', { ascending: true });
-      query = query.order('created_at', { ascending: false });
-
-      const { data, error } = await query;
+      const { data, error, count } = await query;
 
       if (error) throw error;
-      return data || [];
+      
+      return {
+        services: data || [],
+        totalCount: count || 0
+      };
     },
     enabled: true,
   });

@@ -41,11 +41,20 @@ const Services = () => {
   });
 
   // Use database data
-  const services = dbServices || [];
+  const services = dbServices?.services || [];
+  const totalCount = dbServices?.totalCount || 0;
   const areas = filterOptions?.areas || ['Fiscal', 'Contable', 'Legal', 'Laboral'];
 
   const isLoading = isLoadingOptions || isLoadingServices;
-  const totalPages = Math.max(1, Math.ceil(services.length / ITEMS_PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
+
+  console.log('Services Debug:', {
+    servicesCount: services.length,
+    totalCount,
+    totalPages,
+    currentPage,
+    isLoading
+  });
 
   return (
     <>
