@@ -592,4 +592,132 @@ h1 {
   .w-md-editor-preview {
     background-color: hsl(var(--background)) !important;
   }
+
+  /* Typography utilities for blog content */
+  .text-lead {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75;
+    font-weight: 400;
+    color: hsl(var(--foreground) / 0.9);
+  }
+
+  .text-body {
+    font-size: 1rem; /* 16px */
+    line-height: 1.75;
+    font-weight: 400;
+    color: hsl(var(--foreground));
+  }
+
+  @media (min-width: 768px) {
+    .text-lead {
+      font-size: 1.375rem; /* 22px */
+    }
+  }
+
+  /* Blog article content - limit heading sizes */
+  .prose-article h1,
+  .prose-article h2,
+  .prose-article h3,
+  .prose-article h4,
+  .prose-article h5,
+  .prose-article h6 {
+    font-family: 'General Sans', sans-serif;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  .prose-article h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 1.25;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-article h2 {
+    font-size: 1.75rem; /* 28px */
+    line-height: 1.3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-article h3 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.4;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-article h4 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-article h5,
+  .prose-article h6 {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.6;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Responsive: reduce en móviles */
+  @media (max-width: 768px) {
+    .prose-article h1 {
+      font-size: 1.75rem; /* 28px */
+    }
+    
+    .prose-article h2 {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    .prose-article h3 {
+      font-size: 1.25rem; /* 20px */
+    }
+    
+    .prose-article h4,
+    .prose-article h5,
+    .prose-article h6 {
+      font-size: 1.125rem; /* 18px */
+    }
+  }
+
+  .prose-article p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+  }
+
+  .prose-article ul,
+  .prose-article ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .prose-article li {
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+  }
+
+  .prose-article strong {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  .prose-article a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .prose-article a:hover {
+    color: hsl(var(--primary-hover));
+  }
+
+  .prose-article img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
 }

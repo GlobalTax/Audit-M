@@ -139,7 +139,7 @@ const BlogDetail = () => {
       <div className="min-h-screen">
         {post.featured_image && (
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="max-w-5xl mx-auto h-[200px] md:h-[300px] overflow-hidden rounded-lg">
+            <div className="max-w-4xl mx-auto aspect-video overflow-hidden rounded-lg">
               <img
                 src={post.featured_image}
                 alt={post.title_es}
