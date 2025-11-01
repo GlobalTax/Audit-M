@@ -220,18 +220,17 @@ const Home = () => {
                 ))}
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {datos.map((dato, index) => (
-                  <StatCard
-                    key={index}
-                    label={dato.categoria}
-                    value={dato.valor}
-                    description={dato.descripcion}
-                    icon={dato.icon}
-                    delay={index * 100}
-                  />
-                ))}
-              </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {datos.map((dato, index) => (
+                <StatCard
+                  key={index}
+                  label={dato.categoria}
+                  value={dato.valor}
+                  description={dato.descripcion}
+                  delay={index * 100}
+                />
+              ))}
+            </div>
             )}
           </div>
         </section>

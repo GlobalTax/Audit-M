@@ -1,13 +1,11 @@
 import { cn } from "@/lib/utils";
 import { useCountUp } from "@/hooks/useCountUp";
-import { LucideIcon } from "lucide-react";
 
 interface StatCardProps {
   label: string;
   value: string;
   description: string;
   className?: string;
-  icon?: LucideIcon;
   delay?: number;
 }
 
@@ -16,7 +14,6 @@ export const StatCard = ({
   value, 
   description, 
   className,
-  icon: Icon,
   delay = 0
 }: StatCardProps) => {
   // Extraer número del valor (ej: "300+" -> 300)
@@ -44,13 +41,6 @@ export const StatCard = ({
         animationFillMode: 'forwards'
       }}
     >
-      {/* Icon opcional */}
-      {Icon && (
-        <div className="flex items-center justify-between">
-          <Icon className="h-8 w-8 text-accent/60" />
-        </div>
-      )}
-      
       {/* Label */}
       <div className="text-xs font-sans font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
