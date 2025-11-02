@@ -47,7 +47,7 @@ const Team = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 mb-12">
             <div className="bg-background rounded-lg shadow-strong p-6">
               <div className="flex flex-wrap gap-2 items-center justify-center">
-                <span className="text-sm font-medium text-muted-foreground">Filtrar por área:</span>
+                <span className="text-sm font-normal text-muted-foreground">Filtrar por área:</span>
                 <BadgeFilter
                   label="Todos"
                   active={activeSpecialization === null}

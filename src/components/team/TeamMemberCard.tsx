@@ -32,7 +32,7 @@ export const TeamMemberCard = ({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-            <span className="text-6xl font-bold text-muted-foreground/20">
+            <span className="text-6xl font-normal text-muted-foreground/20">
               {name?.charAt(0) ?? 'N'}
             </span>
           </div>
@@ -41,7 +41,7 @@ export const TeamMemberCard = ({
 
       {/* Content */}
       <CardContent className="p-6">
-        <h3 className="text-xl font-medium text-foreground mb-1">
+        <h3 className="text-xl font-normal text-foreground mb-1">
           {name}
         </h3>
         <p className="section-overline mb-1">{position}</p>
