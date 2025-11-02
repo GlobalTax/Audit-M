@@ -78,11 +78,17 @@ export const TechnologyShowcase = () => {
             transition={{ duration: 0.3 }}
             onClick={() => setSelectedTech(featuredItems[0])}
           >
-            <img
-              src={featuredItems[0].mockup_url}
-              alt={featuredItems[0].name}
-              className="w-full h-full object-cover"
-            />
+            {featuredItems[0].mockup_url ? (
+              <img
+                src={featuredItems[0].mockup_url}
+                alt={featuredItems[0].name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-muted flex items-center justify-center">
+                <p className="text-muted-foreground text-lg">Sin imagen</p>
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-white/80 text-sm font-mono uppercase tracking-wider mb-2">
@@ -118,11 +124,17 @@ export const TechnologyShowcase = () => {
                 </h3>
               </div>
               <div className="w-full h-20 rounded-lg overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity">
-                <img
-                  src={item.mockup_url}
-                  alt={item.name}
-                  className="w-full h-full object-cover object-top"
-                />
+                {item.mockup_url ? (
+                  <img
+                    src={item.mockup_url}
+                    alt={item.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-muted flex items-center justify-center">
+                    <p className="text-muted-foreground text-xs">Sin imagen</p>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -136,11 +148,17 @@ export const TechnologyShowcase = () => {
             transition={{ duration: 0.3 }}
             onClick={() => setSelectedTech(featuredItems[1])}
           >
-            <img
-              src={featuredItems[1].mockup_url}
-              alt={featuredItems[1].name}
-              className="w-full h-full object-cover"
-            />
+            {featuredItems[1].mockup_url ? (
+              <img
+                src={featuredItems[1].mockup_url}
+                alt={featuredItems[1].name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-muted flex items-center justify-center">
+                <p className="text-muted-foreground text-lg">Sin imagen</p>
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-white/80 text-sm font-mono uppercase tracking-wider mb-2">
@@ -176,11 +194,17 @@ export const TechnologyShowcase = () => {
                 </h3>
               </div>
               <div className="w-full h-16 rounded-lg overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity">
-                <img
-                  src={item.mockup_url}
-                  alt={item.name}
-                  className="w-full h-full object-cover object-top"
-                />
+                {item.mockup_url ? (
+                  <img
+                    src={item.mockup_url}
+                    alt={item.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-muted flex items-center justify-center">
+                    <p className="text-muted-foreground text-xs">Sin imagen</p>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -192,11 +216,17 @@ export const TechnologyShowcase = () => {
         <DialogContent className="max-w-5xl p-0 overflow-hidden bg-background">
           {selectedTech && (
             <div className="relative">
-              <img
-                src={selectedTech.mockup_url}
-                alt={selectedTech.name}
-                className="w-full h-auto"
-              />
+              {selectedTech.mockup_url ? (
+                <img
+                  src={selectedTech.mockup_url}
+                  alt={selectedTech.name}
+                  className="w-full h-auto"
+                />
+              ) : (
+                <div className="w-full h-96 bg-muted flex items-center justify-center">
+                  <p className="text-muted-foreground text-2xl">Sin imagen disponible</p>
+                </div>
+              )}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/95 to-transparent p-8">
                 <p className="text-white/80 text-sm font-mono uppercase tracking-wider mb-2">
                   {selectedTech.category}

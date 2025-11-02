@@ -96,7 +96,10 @@ export const TechnologyFormDialog = ({
           </div>
 
           <div className="space-y-2">
-            <Label>Mockup de interfaz *</Label>
+            <Label>Mockup de interfaz (opcional)</Label>
+            <p className="text-sm text-muted-foreground">
+              Si no subes una imagen, se mostrará un placeholder genérico
+            </p>
             <ImageUpload
               value={formData.mockup_url}
               onChange={(url) => setFormData({ ...formData, mockup_url: url })}
