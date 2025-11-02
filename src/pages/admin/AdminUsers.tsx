@@ -94,36 +94,50 @@ export const AdminUsers = () => {
     },
   });
 
-  // Create admin user mutation
+  // Create admin user mutation - Simplified version
   const createAdminMutation = useMutation({
     mutationFn: async (userData: { email: string; full_name: string; role: AdminRole }) => {
-      const { data: { session } } = await supabase.auth.getSession();
+      // Generate unique ID for new user
+      const newUserId = crypto.randomUUID();
       
-      const response = await fetch(
-        'https://fwhqtzkkvnjkazhaficj.supabase.co/functions/v1/create-admin-user',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${session?.access_token}`,
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aHF0emtrdm5qa2F6aGFmaWNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4Mjc5NTMsImV4cCI6MjA2NTQwMzk1M30.Qhb3pRgx3HIoLSjeIulRHorgzw-eqL3WwXhpncHMF7I',
-          },
-          body: JSON.stringify({
-            email: userData.email,
-            full_name: userData.full_name,
-            role: userData.role,
-            send_invite: false
-          }),
-        }
-      );
+      // 1. Insert into profiles
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: newUserId,
+          email: userData.email,
+          created_at: new Date().toISOString(),
+        });
 
-      const result = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to create user');
+      if (profileError) throw new Error('Error al crear perfil: ' + profileError.message);
+
+      // 2. Map role to database enum
+      const roleMapping: Record<AdminRole, string> = {
+        super_admin: 'admin',
+        admin: 'admin',
+        editor: 'moderator',
+        viewer: 'user',
+      };
+
+      // 3. Insert role
+      const { error: roleError } = await supabase
+        .from('user_roles')
+        .insert({
+          user_id: newUserId,
+          role: roleMapping[userData.role] as any,
+        });
+
+      if (roleError) {
+        // Rollback: delete profile if role assignment fails
+        await supabase.from('profiles').delete().eq('id', newUserId);
+        throw new Error('Error al asignar rol: ' + roleError.message);
       }
-      
-      return result;
+
+      return { 
+        user_id: newUserId, 
+        email: userData.email,
+        full_name: userData.full_name 
+      };
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] });
@@ -134,14 +148,12 @@ export const AdminUsers = () => {
       
       toast({
         title: 'Usuario creado',
-        description: data.user.temporary_password 
-          ? `Password temporal: ${data.user.temporary_password}` 
-          : 'Usuario creado exitosamente',
+        description: `Usuario ${data.email} registrado. El usuario debe completar su registro en /admin/login para establecer su contraseña.`,
       });
     },
     onError: (error: any) => {
       toast({
-        title: 'Error',
+        title: 'Error al crear usuario',
         description: error.message,
         variant: 'destructive',
       });
@@ -264,7 +276,7 @@ export const AdminUsers = () => {
             <DialogHeader>
               <DialogTitle>Crear Nuevo Usuario Admin</DialogTitle>
               <DialogDescription>
-                Crea un nuevo usuario administrador. Se generará una contraseña temporal.
+                Registra un nuevo usuario. El usuario deberá completar su registro en /admin/login.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
