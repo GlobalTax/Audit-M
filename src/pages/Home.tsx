@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { LogoGrid } from "@/components/ui/logo-grid";
 import { SectionHeader, Overline } from "@/components/ui/typography";
+import { TechnologyShowcase } from "@/components/home/TechnologyShowcase";
 import { Meta } from "@/components/seo/Meta";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useQuery } from "@tanstack/react-query";
@@ -57,19 +57,7 @@ const Home = () => {
     { name: "Empresa 10", logo_url: "https://via.placeholder.com/150x60?text=Logo+10" },
   ];
 
-  const defaultTechnologyLogos = [
-    { name: "Sage" },
-    { name: "A3 Software" },
-    { name: "Wolters Kluwer" },
-    { name: "Microsoft 365" },
-    { name: "DocuSign" },
-    { name: "Dropbox Business" },
-    { name: "Lexnet" },
-    { name: "Sede Electrónica AEAT" },
-  ];
-
   const clientLogos = clientesContent?.logos || defaultClientLogos;
-  const technologyLogos = tecnologiaContent?.logos || defaultTechnologyLogos;
 
   const { data: services } = useQuery({
     queryKey: ['featured-services'],
@@ -293,7 +281,7 @@ const Home = () => {
               </h2>
             )}
             
-            <LogoGrid logos={technologyLogos} />
+            <TechnologyShowcase />
           </div>
         </section>
 
