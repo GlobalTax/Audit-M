@@ -1,15 +1,12 @@
 import { Meta } from '@/components/seo/Meta';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Target, TrendingUp, Award, Loader2, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles } from 'lucide-react';
+import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles } from 'lucide-react';
 import { BadgeHero } from '@/components/ui/badge-hero';
-import { useTeamMembers } from '@/hooks/useTeamMembers';
 import { usePageContent } from '@/hooks/usePageContent';
-import { TeamMemberCard } from '@/components/team/TeamMemberCard';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 export default function About() {
-  const { data: teamMembers, isLoading: teamLoading } = useTeamMembers();
   const { data: heroContent } = usePageContent('about', 'hero');
   
   const hero = heroContent?.[0]?.content || {
@@ -306,52 +303,30 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-mono text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">Fundador</h2>
           
-          <div className="max-w-3xl mx-auto text-center mb-12">
+
+          <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal mb-6">
               Samuel L. Navarro
             </h3>
+            <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8">
+              En navarro trabajas directamente conmigo. 25 años de experiencia al servicio de tu empresa, 
+              con la cercanía y el compromiso que solo un profesional independiente puede ofrecer.
+            </p>
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-              En navarro trabajas directamente conmigo. 25 años de experiencia al servicio de tu empresa, con la cercanía y el compromiso que solo un profesional independiente puede ofrecer.
+              Cuento con una red consolidada de más de 60 colaboradores especializados en todas las áreas: 
+              laboral, contable, jurídica, auditoría. La agilidad de un profesional independiente con la 
+              capacidad de un gran equipo.
             </p>
           </div>
 
-          {teamLoading ? (
-            <div className="flex justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-            </div>
-          ) : teamMembers && teamMembers.length > 0 ? (
-            <div className="max-w-2xl mx-auto">
-              {teamMembers.map((member) => (
-                <TeamMemberCard
-                  key={member.id}
-                  name={member.name}
-                  position={member.position}
-                  bio={member.bio}
-                  specialization={member.specialization}
-                  linkedin={member.linkedin}
-                  email={member.email}
-                  avatarUrl={member.avatar_url}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="max-w-2xl mx-auto bg-muted rounded-lg p-8 shadow-sm">
-              <p className="text-center text-muted-foreground mb-4">
-                Perfil profesional en construcción.
-              </p>
-              <p className="text-center text-sm text-muted-foreground">
-                Mientras tanto, puedes contactarme directamente para cualquier consulta.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-normal text-foreground mb-4">
-              Red de colaboradores especializados
-            </h3>
-            <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-2xl mx-auto">
-              Para proyectos que requieren capacidades multidisciplinares, cuento con una red consolidada de más de 60 profesionales especializados en fiscalidad, laboral, contabilidad, auditoría, derecho mercantil y más. La agilidad de trabajar conmigo, la capacidad de un gran equipo.
-            </p>
+          {/* CTA para ver el equipo completo */}
+          <div className="max-w-3xl mx-auto text-center mt-12">
+            <Link to="/equipo">
+              <Button variant="outline" size="lg" className="group">
+                Conoce al equipo completo
+                <Users className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
