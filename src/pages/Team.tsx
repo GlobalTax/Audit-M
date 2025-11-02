@@ -74,7 +74,7 @@ const Team = () => {
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : members && members.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {members.map((member) => (
                   <TeamMemberCard
                     key={member.id}
