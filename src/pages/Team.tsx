@@ -1,19 +1,23 @@
 import { Meta } from "@/components/seo/Meta";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { TeamMemberCard } from "@/components/team/TeamMemberCard";
-import { useTeamSearch, useTeamFilterOptions } from "@/hooks/useTeamSearch";
+import { useTeamSearch, useTeamFilterOptions, useTeamPositionOptions } from "@/hooks/useTeamSearch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BadgeFilter } from "@/components/ui/badge-filter";
 import { EmptyState } from "@/components/ui/empty-state";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Users } from "lucide-react";
 import { useState } from "react";
 
 const Team = () => {
   const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
+  const [activePosition, setActivePosition] = useState<string | null>(null);
   const { data: members, isLoading } = useTeamSearch({ 
-    specialization: activeSpecialization || undefined 
+    specialization: activeSpecialization || undefined,
+    position: activePosition || undefined
   });
   const { data: specializations = [] } = useTeamFilterOptions();
+  const { data: positions = [] } = useTeamPositionOptions();
 
   return (
     <>
@@ -43,25 +47,55 @@ const Team = () => {
         </section>
 
         {/* Filters */}
-        {specializations.length > 0 && (
+        {(positions.length > 0 || specializations.length > 0) && (
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 mb-12">
             <div className="bg-background rounded-lg shadow-strong p-6">
-              <div className="flex flex-wrap gap-2 items-center justify-center">
-                <span className="text-sm font-normal text-muted-foreground">Filtrar por área:</span>
-                <BadgeFilter
-                  label="Todos"
-                  active={activeSpecialization === null}
-                  onClick={() => setActiveSpecialization(null)}
-                />
-                {specializations.map((spec) => (
-                  <BadgeFilter
-                    key={spec}
-                    label={spec}
-                    active={activeSpecialization === spec}
-                    onClick={() => setActiveSpecialization(activeSpecialization === spec ? null : spec)}
-                  />
-                ))}
-              </div>
+              {/* Desplegable de categorías */}
+              {positions.length > 0 && (
+                <div className="mb-6">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Filtrar por categoría:
+                  </label>
+                  <Select
+                    value={activePosition || "all"}
+                    onValueChange={(value) => setActivePosition(value === "all" ? null : value)}
+                  >
+                    <SelectTrigger className="w-full sm:w-64">
+                      <SelectValue placeholder="Todas las categorías" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      <SelectItem value="all">Todas las categorías</SelectItem>
+                      {positions.map((position) => (
+                        <SelectItem key={position} value={position}>
+                          {position}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {/* Badges de especialización */}
+              {specializations.length > 0 && (
+                <div>
+                  <div className="flex flex-wrap gap-2 items-center justify-center">
+                    <span className="text-sm font-normal text-muted-foreground">Filtrar por área:</span>
+                    <BadgeFilter
+                      label="Todos"
+                      active={activeSpecialization === null}
+                      onClick={() => setActiveSpecialization(null)}
+                    />
+                    {specializations.map((spec) => (
+                      <BadgeFilter
+                        key={spec}
+                        label={spec}
+                        active={activeSpecialization === spec}
+                        onClick={() => setActiveSpecialization(activeSpecialization === spec ? null : spec)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
