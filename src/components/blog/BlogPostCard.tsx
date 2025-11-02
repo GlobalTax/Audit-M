@@ -40,7 +40,7 @@ export const BlogPostCard = ({
           )}
 
           {/* Title */}
-          <h3 className="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-accent transition-colors">
+          <h3 className="text-xl font-display font-normal mb-3 line-clamp-2 group-hover:text-accent transition-colors">
             {title}
           </h3>
 
