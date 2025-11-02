@@ -198,7 +198,7 @@ const ServiceDetail = () => {
                       <AccordionTrigger className="text-[24px] leading-[31.2px] font-normal tracking-normal text-black hover:no-underline">
                         {item.titulo}
                       </AccordionTrigger>
-                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed prose prose-sm max-w-none">
+                      <AccordionContent className="text-base pt-2 text-foreground/80 leading-relaxed prose max-w-none">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                           {item.contenido}
                         </ReactMarkdown>
