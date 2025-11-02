@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -36,7 +36,12 @@ const careerFormSchema = z.object({
 
 type CareerFormData = z.infer<typeof careerFormSchema>;
 
-export const CareerApplicationForm = () => {
+interface CareerApplicationFormProps {
+  prefilledPosition?: string;
+  jobPositionId?: string;
+}
+
+export const CareerApplicationForm = ({ prefilledPosition, jobPositionId }: CareerApplicationFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -48,7 +53,17 @@ export const CareerApplicationForm = () => {
     setValue,
   } = useForm<CareerFormData>({
     resolver: zodResolver(careerFormSchema),
+    defaultValues: {
+      puesto_solicitado: prefilledPosition || "",
+    },
   });
+
+  // Prerellenar el campo cuando cambie la posición seleccionada
+  useEffect(() => {
+    if (prefilledPosition) {
+      setValue("puesto_solicitado", prefilledPosition);
+    }
+  }, [prefilledPosition, setValue]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -114,6 +129,7 @@ export const CareerApplicationForm = () => {
         cv_url: publicUrl,
         estado: "nuevo",
         fuente: "web",
+        job_position_id: jobPositionId || null,
       });
 
       if (insertError) {

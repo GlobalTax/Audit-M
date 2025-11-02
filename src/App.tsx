@@ -35,6 +35,7 @@ import { AdminUsers } from "./pages/admin/AdminUsers";
 import AdminContent from "./pages/admin/AdminContent";
 import { AdminSettings } from "./pages/admin/AdminSettings";
 import AdminCandidatos from "./pages/admin/AdminCandidatos";
+import AdminJobPositions from "./pages/admin/AdminJobPositions";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +84,7 @@ const App = () => (
               <Route path="services" element={<AdminServices />} />
               <Route path="blog" element={<AdminBlog />} />
               <Route path="team" element={<AdminTeam />} />
+              <Route path="job-positions" element={<AdminJobPositions />} />
               <Route path="candidatos" element={<AdminCandidatos />} />
               <Route
                 path="users" 

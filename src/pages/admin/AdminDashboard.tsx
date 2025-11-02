@@ -1,22 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, Users, Newspaper } from 'lucide-react';
+import { TrendingUp, Users, Newspaper, Briefcase } from 'lucide-react';
 
 export const AdminDashboard = () => {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['admin-stats'],
     queryFn: async () => {
-      const [caseStudies, team, news] = await Promise.all([
+      const [caseStudies, team, news, jobs] = await Promise.all([
         supabase.from('case_studies').select('id', { count: 'exact', head: true }),
         supabase.from('team_members').select('id', { count: 'exact', head: true }),
         supabase.from('news_articles').select('id', { count: 'exact', head: true }),
+        supabase.from('job_positions').select('id', { count: 'exact', head: true }).eq('status', 'published'),
       ]);
 
       return {
         caseStudies: caseStudies.count || 0,
         team: team.count || 0,
         news: news.count || 0,
+        openJobs: jobs.count || 0,
       };
     },
   });
@@ -42,6 +44,13 @@ export const AdminDashboard = () => {
       icon: Newspaper,
       color: 'text-cyan-600',
       bgColor: 'bg-cyan-50',
+    },
+    {
+      title: 'Open Positions',
+      value: stats?.openJobs || 0,
+      icon: Briefcase,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50',
     },
   ];
 

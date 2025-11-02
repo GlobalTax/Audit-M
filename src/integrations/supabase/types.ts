@@ -184,6 +184,7 @@ export type Database = {
           fuente: string | null
           id: string
           idiomas: string[] | null
+          job_position_id: string | null
           linkedin_url: string | null
           nivel_estudios: string | null
           nombre: string
@@ -210,6 +211,7 @@ export type Database = {
           fuente?: string | null
           id?: string
           idiomas?: string[] | null
+          job_position_id?: string | null
           linkedin_url?: string | null
           nivel_estudios?: string | null
           nombre: string
@@ -236,6 +238,7 @@ export type Database = {
           fuente?: string | null
           id?: string
           idiomas?: string[] | null
+          job_position_id?: string | null
           linkedin_url?: string | null
           nivel_estudios?: string | null
           nombre?: string
@@ -261,6 +264,13 @@ export type Database = {
             columns: ["empleado_id"]
             isOneToOne: false
             referencedRelation: "empleados"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "candidatos_job_position_id_fkey"
+            columns: ["job_position_id"]
+            isOneToOne: false
+            referencedRelation: "job_positions"
             referencedColumns: ["id"]
           },
         ]
@@ -767,6 +777,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      job_positions: {
+        Row: {
+          contract_type: string
+          created_at: string | null
+          created_by: string | null
+          department: string
+          description: string
+          display_order: number | null
+          id: string
+          is_featured: boolean | null
+          location: string
+          published_at: string | null
+          requirements: string[]
+          responsibilities: string[]
+          salary_range: string | null
+          slug: string
+          status: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at: string | null
+          updated_by: string | null
+          working_hours: string
+        }
+        Insert: {
+          contract_type: string
+          created_at?: string | null
+          created_by?: string | null
+          department: string
+          description: string
+          display_order?: number | null
+          id?: string
+          is_featured?: boolean | null
+          location: string
+          published_at?: string | null
+          requirements?: string[]
+          responsibilities?: string[]
+          salary_range?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at?: string | null
+          updated_by?: string | null
+          working_hours: string
+        }
+        Update: {
+          contract_type?: string
+          created_at?: string | null
+          created_by?: string | null
+          department?: string
+          description?: string
+          display_order?: number | null
+          id?: string
+          is_featured?: boolean | null
+          location?: string
+          published_at?: string | null
+          requirements?: string[]
+          responsibilities?: string[]
+          salary_range?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["job_status"]
+          title?: string
+          updated_at?: string | null
+          updated_by?: string | null
+          working_hours?: string
+        }
+        Relationships: []
       }
       media_files: {
         Row: {
@@ -1845,6 +1921,7 @@ export type Database = {
         | "hr_viewer"
       case_study_status: "draft" | "review" | "published" | "archived"
       event_severity: "info" | "warn" | "high" | "critical"
+      job_status: "draft" | "published" | "closed"
       security_event_type:
         | "LOGIN_SUCCESS"
         | "LOGIN_FAILED"
@@ -1999,6 +2076,7 @@ export const Constants = {
       ],
       case_study_status: ["draft", "review", "published", "archived"],
       event_severity: ["info", "warn", "high", "critical"],
+      job_status: ["draft", "published", "closed"],
       security_event_type: [
         "LOGIN_SUCCESS",
         "LOGIN_FAILED",

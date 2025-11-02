@@ -1,6 +1,9 @@
 import { Meta } from "@/components/seo/Meta";
 import { CareerApplicationForm } from "@/components/careers/CareerApplicationForm";
+import { OpenPositionsSection } from "@/components/careers/OpenPositionsSection";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState, useRef } from "react";
+import { JobPosition } from "@/types/jobPosition";
 import {
   Target,
   Users,
@@ -83,6 +86,17 @@ const areas = [
 ];
 
 export default function Careers() {
+  const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
+  const formRef = useRef<HTMLElement>(null);
+
+  const handleApplyToPosition = (position: JobPosition) => {
+    setSelectedPosition(position);
+    // Scroll suave al formulario
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   return (
     <>
       <Meta
@@ -174,8 +188,11 @@ export default function Careers() {
         </div>
       </section>
 
+      {/* Open Positions Section */}
+      <OpenPositionsSection onApply={handleApplyToPosition} />
+
       {/* Application Form Section */}
-      <section id="aplicar" className="bg-white py-20 md:py-28">
+      <section ref={formRef} id="aplicar" className="bg-white py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -192,7 +209,10 @@ export default function Careers() {
 
             <Card>
               <CardContent className="p-8">
-                <CareerApplicationForm />
+                <CareerApplicationForm 
+                  prefilledPosition={selectedPosition?.title}
+                  jobPositionId={selectedPosition?.id}
+                />
               </CardContent>
             </Card>
           </div>
