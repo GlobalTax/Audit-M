@@ -1,4 +1,6 @@
 import { usePageContent } from './usePageContent';
+import { useLanguage } from './useLanguage';
+import { pageContentFallbacks } from '@/i18n/pageContentFallbacks';
 
 interface DatoItem {
   categoria: string;
@@ -40,11 +42,12 @@ const DEFAULT_DATOS: DatoItem[] = [
 ];
 
 export const useHomeDatos = () => {
+  const { language } = useLanguage();
   const { data: contentData, isLoading } = usePageContent('home', 'datos');
   
   const datos: DatoItem[] = contentData && contentData.length > 0
     ? (contentData[0].content as any).items
-    : DEFAULT_DATOS;
+    : (pageContentFallbacks[language]?.home?.datos?.items as DatoItem[] || DEFAULT_DATOS);
   
   return { datos, isLoading };
 };

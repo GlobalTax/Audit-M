@@ -60,6 +60,40 @@ export const pageContentFallbacks: PageContentFallbacks = {
       },
       clientes: {
         overline: "Confían en nosotros"
+      },
+      datos: {
+        items: [
+          {
+            categoria: "Clientes",
+            valor: "300+",
+            descripcion: "Más de 300 empresas familiares y grupos confían en navarro."
+          },
+          {
+            categoria: "Proyectos",
+            valor: "500+",
+            descripcion: "Operaciones de reestructuración, sucesión y M&A completadas con éxito."
+          },
+          {
+            categoria: "Años de experiencia",
+            valor: "25+",
+            descripcion: "Trayectoria sólida acompañando a empresas familiares en su crecimiento."
+          },
+          {
+            categoria: "Equipo",
+            valor: "70+",
+            descripcion: "Abogados y profesionales especializados en fiscal, mercantil, laboral y M&A."
+          },
+          {
+            categoria: "Compromiso",
+            valor: "100%",
+            descripcion: "Dedicación total a cada mandato, con rigor técnico y confidencialidad."
+          },
+          {
+            categoria: "Operaciones M&A",
+            valor: "100+",
+            descripcion: "Mandatos de compra y venta asesorados con un enfoque integral."
+          }
+        ]
       }
     },
     about: {
@@ -329,6 +363,40 @@ export const pageContentFallbacks: PageContentFallbacks = {
       },
       clientes: {
         overline: "Confien en nosaltres"
+      },
+      datos: {
+        items: [
+          {
+            categoria: "Clients",
+            valor: "300+",
+            descripcion: "Més de 300 empreses familiars i grups confien en navarro."
+          },
+          {
+            categoria: "Projectes",
+            valor: "500+",
+            descripcion: "Operacions de reestructuració, successió i M&A completades amb èxit."
+          },
+          {
+            categoria: "Anys d'experiència",
+            valor: "25+",
+            descripcion: "Trajectòria sòlida acompanyant empreses familiars en el seu creixement."
+          },
+          {
+            categoria: "Equip",
+            valor: "70+",
+            descripcion: "Advocats i professionals especialitzats en fiscal, mercantil, laboral i M&A."
+          },
+          {
+            categoria: "Compromís",
+            valor: "100%",
+            descripcion: "Dedicació total a cada mandat, amb rigor tècnic i confidencialitat."
+          },
+          {
+            categoria: "Operacions M&A",
+            valor: "100+",
+            descripcion: "Mandats de compra i venda assessorats amb un enfocament integral."
+          }
+        ]
       }
     },
     about: {
@@ -598,6 +666,40 @@ export const pageContentFallbacks: PageContentFallbacks = {
       },
       clientes: {
         overline: "They trust us"
+      },
+      datos: {
+        items: [
+          {
+            categoria: "Clients",
+            valor: "300+",
+            descripcion: "Over 300 family businesses and corporate groups trust navarro."
+          },
+          {
+            categoria: "Projects",
+            valor: "500+",
+            descripcion: "Restructuring, succession, and M&A operations successfully completed."
+          },
+          {
+            categoria: "Years of experience",
+            valor: "25+",
+            descripcion: "Solid track record accompanying family businesses in their growth."
+          },
+          {
+            categoria: "Team",
+            valor: "70+",
+            descripcion: "Lawyers and professionals specialized in tax, commercial, labor, and M&A."
+          },
+          {
+            categoria: "Commitment",
+            valor: "100%",
+            descripcion: "Total dedication to each mandate, with technical rigor and confidentiality."
+          },
+          {
+            categoria: "M&A Operations",
+            valor: "100+",
+            descripcion: "Purchase and sale mandates advised with a comprehensive approach."
+          }
+        ]
       }
     },
     about: {

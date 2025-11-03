@@ -28,6 +28,26 @@ export const usePageContent = (pageKey?: string, sectionKey?: string) => {
       
       if (error) throw error;
       
+      // If no data in DB, use fallbacks directly
+      if (!data || data.length === 0) {
+        if (pageKey && sectionKey) {
+          const fallback = pageContentFallbacks[language]?.[pageKey]?.[sectionKey];
+          if (fallback) {
+            return [{
+              id: `fallback-${pageKey}-${sectionKey}`,
+              page_key: pageKey,
+              section_key: sectionKey,
+              content: fallback,
+              display_order: 0,
+              is_active: true,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            }] as PageContent[];
+          }
+        }
+        return [];
+      }
+      
       // Extract localized content with fallback support
       return data?.map(item => {
         let localizedContent = getLocalizedPageContent(item.content, language);
