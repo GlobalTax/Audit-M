@@ -70,6 +70,18 @@ export const translations = {
       defaultTitle: 'NRRO | Asesoría Fiscal, Legal, Laboral y Contable',
       defaultDescription: 'Soluciones integrales en asesoría fiscal, legal, laboral y contable para empresas. Expertos en fiscalidad, mercantil y derecho laboral.',
     },
+    home: {
+      hero: {
+        badge: 'ASESORAMIENTO INTEGRAL',
+      },
+      stats: {
+        title: 'Navarro en cifras',
+      },
+      blog: {
+        title: 'Últimas publicaciones',
+        viewAll: 'Ver Todos los Artículos',
+      },
+    },
   },
   ca: {
     nav: {
@@ -142,6 +154,18 @@ export const translations = {
       defaultTitle: 'NRRO | Assessoria Fiscal, Legal, Laboral i Comptable',
       defaultDescription: 'Solucions integrals en assessoria fiscal, legal, laboral i comptable per a empreses. Experts en fiscalitat, mercantil i dret laboral.',
     },
+    home: {
+      hero: {
+        badge: 'ASSESSORAMENT INTEGRAL',
+      },
+      stats: {
+        title: 'Navarro en xifres',
+      },
+      blog: {
+        title: 'Últimes publicacions',
+        viewAll: 'Veure Tots els Articles',
+      },
+    },
   },
   en: {
     nav: {
@@ -213,6 +237,18 @@ export const translations = {
     seo: {
       defaultTitle: 'NRRO | Tax, Legal, Labor & Accounting Advisory',
       defaultDescription: 'Comprehensive tax, legal, labor and accounting advisory solutions for businesses. Experts in taxation, corporate and labor law.',
+    },
+    home: {
+      hero: {
+        badge: 'COMPREHENSIVE ADVISORY',
+      },
+      stats: {
+        title: 'Navarro in numbers',
+      },
+      blog: {
+        title: 'Latest publications',
+        viewAll: 'View All Articles',
+      },
     },
   },
 };

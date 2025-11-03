@@ -1,10 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { PageContent, PageContentInsert, PageContentUpdate } from '@/types/pageContent';
+import { useLanguage } from './useLanguage';
+import { getLocalizedPageContent } from '@/i18n/utils';
 
 export const usePageContent = (pageKey?: string, sectionKey?: string) => {
+  const { language } = useLanguage();
+  
   return useQuery({
-    queryKey: ['page-content', pageKey, sectionKey],
+    queryKey: ['page-content', pageKey, sectionKey, language],
     queryFn: async () => {
       let query = supabase
         .from('page_content')
@@ -22,7 +26,12 @@ export const usePageContent = (pageKey?: string, sectionKey?: string) => {
       const { data, error } = await query.order('display_order');
       
       if (error) throw error;
-      return data as PageContent[];
+      
+      // Extract localized content
+      return data?.map(item => ({
+        ...item,
+        content: getLocalizedPageContent(item.content, language) || item.content
+      })) as PageContent[];
     },
     enabled: !!pageKey,
   });
