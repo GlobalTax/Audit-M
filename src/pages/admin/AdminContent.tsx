@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useAllPageContent } from '@/hooks/usePageContent';
+import { useAllPageContent, useDeletePageContent } from '@/hooks/usePageContent';
 import { FileText, Plus, Edit, Trash2, Building2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ContentEditorDialog } from '@/components/admin/content/ContentEditorDialog';
 import { PageContent } from '@/types/pageContent';
 import { LogosManager } from '@/components/admin/LogosManager';
+import { toast } from 'sonner';
 
 const pages = [
   { key: 'home', label: 'Home', icon: '🏠', description: 'Incluye KPIs, Hero, Sobre Nosotros' },
@@ -19,6 +20,7 @@ const pages = [
 
 export default function AdminContent() {
   const { data: allContent, isLoading } = useAllPageContent();
+  const deleteMutation = useDeletePageContent();
   const [selectedPage, setSelectedPage] = useState('home');
   const [editingContent, setEditingContent] = useState<PageContent | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -172,9 +174,15 @@ export default function AdminContent() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    onClick={() => {
+                                    onClick={async () => {
                                       if (confirm('¿Seguro que quieres eliminar esta sección?')) {
-                                        // TODO: implement delete
+                                        try {
+                                          await deleteMutation.mutateAsync(content.id);
+                                          toast.success('Sección eliminada correctamente');
+                                        } catch (error) {
+                                          toast.error('Error al eliminar la sección');
+                                          console.error(error);
+                                        }
                                       }
                                     }}
                                   >
