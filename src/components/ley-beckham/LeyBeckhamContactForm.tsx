@@ -46,7 +46,7 @@ type FormValues = z.infer<typeof formSchema>;
 export const LeyBeckhamContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const { trackEvent } = useAnalytics();
+  const { trackFormSubmit } = useAnalytics();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -97,9 +97,10 @@ Fuente: Landing Ley Beckham (Google Ads)
 
       if (error) throw error;
 
-      trackEvent("form_submitted", {
-        form_name: "ley-beckham-contact",
+      trackFormSubmit("ley_beckham_contact", {
+        form_location: "ley-beckham-landing",
         landing_source: "google-ads-ley-beckham",
+        conversion_label: "ley_beckham_lead",
       });
 
       toast({

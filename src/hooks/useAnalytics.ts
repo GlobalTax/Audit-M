@@ -1,14 +1,17 @@
-// Analytics event tracking hook (stub implementation)
+// Analytics event tracking hook with GTM integration
 
 export const useAnalytics = () => {
   const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-    // Stub implementation - in production, this would send to analytics service
+    // Console log for development
     console.log("[Analytics]", eventName, properties);
     
-    // Example integration points:
-    // - Google Analytics: gtag('event', eventName, properties)
-    // - Segment: analytics.track(eventName, properties)
-    // - Mixpanel: mixpanel.track(eventName, properties)
+    // Push to GTM dataLayer
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: eventName,
+        ...properties,
+      });
+    }
   };
 
   const trackCTAClick = (ctaName: string, location: string) => {
@@ -20,8 +23,17 @@ export const useAnalytics = () => {
   };
 
   const trackPageView = (pageName: string) => {
-    trackEvent("page_viewed", {
+    trackEvent("page_view", {
       page_name: pageName,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  const trackFormSubmit = (formName: string, formData?: Record<string, any>) => {
+    trackEvent("form_submit", {
+      form_name: formName,
+      ...formData,
       timestamp: new Date().toISOString(),
     });
   };
@@ -30,5 +42,6 @@ export const useAnalytics = () => {
     trackEvent,
     trackCTAClick,
     trackPageView,
+    trackFormSubmit,
   };
 };
