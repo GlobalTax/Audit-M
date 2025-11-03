@@ -2,7 +2,6 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowLeft, Clock, Loader2 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { useLanguage } from "@/hooks/useLanguage";
 import { Button } from "@/components/ui/button";
 import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
@@ -17,19 +16,18 @@ import { BlogCTASection } from "@/components/blog/BlogCTASection";
 const BlogDetail = () => {
   const { slug } = useParams();
   const { trackPageView } = useAnalytics();
-  const { language, t, getLocalizedPath } = useLanguage();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get("preview");
   const queryClient = useQueryClient();
 
   // Get article ID from slug for preview mode
   const { data: articleId, isLoading: isIdLoading } = useQuery({
-    queryKey: ["blog-post-id", slug, language],
+    queryKey: ["blog-post-id", slug],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("id")
-        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
+        .eq("slug_es", slug)
         .single();
 
       if (error) throw error;
@@ -51,29 +49,18 @@ const BlogDetail = () => {
 
   // Published content
   const { data: dbData, isLoading: isDbLoading } = useQuery({
-    queryKey: ["blog-post", slug, language],
+    queryKey: ["blog-post", slug],
     queryFn: async () => {
       if (!slug) return null;
       const response = await supabase
         .from("blog_posts")
         .select("*")
-        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
+        .eq("slug_es", slug)
         .eq("status", "published")
         .single();
 
       if (response.error) throw response.error;
-      
-      // Map localized fields
-      const data = response.data;
-      return {
-        ...data,
-        title: data[`title_${language}`] || data.title_es,
-        slug: data[`slug_${language}`] || data.slug_es,
-        excerpt: data[`excerpt_${language}`] || data.excerpt_es,
-        content: data[`content_${language}`] || data.content_es,
-        seo_title: data[`seo_title_${language}`] || data.seo_title_es,
-        seo_description: data[`seo_description_${language}`] || data.seo_description_es,
-      };
+      return response.data;
     },
     enabled: !previewToken && !!slug,
   });
@@ -93,7 +80,6 @@ const BlogDetail = () => {
 
   // Reset queries when slug changes
   useEffect(() => {
-    // Invalidate all blog post queries to force refetch
     queryClient.invalidateQueries({ queryKey: ["blog-post", slug] });
     queryClient.invalidateQueries({ queryKey: ["blog-post-id", slug] });
   }, [slug, queryClient]);
@@ -121,14 +107,14 @@ const BlogDetail = () => {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-2xl font-bold mb-4">{t('blogDetail.previewNotAvailable')}</h1>
+          <h1 className="text-2xl font-bold mb-4">Vista previa no disponible</h1>
           <p className="text-muted-foreground mb-8">
-            {t('blogDetail.previewExpired')}
+            Esta vista previa ha expirado o no es válida
           </p>
           <Button asChild>
-            <Link to={getLocalizedPath('blog')}>
+            <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('blog.backButton')}
+              Volver al Blog
             </Link>
           </Button>
         </div>
@@ -140,11 +126,11 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">{t('blogDetail.notFound')}</h1>
+          <h1 className="text-2xl font-bold mb-4">Artículo no encontrado</h1>
           <Button asChild>
-            <Link to={getLocalizedPath('blog')}>
+            <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('blog.backButton')}
+              Volver al Blog
             </Link>
           </Button>
         </div>

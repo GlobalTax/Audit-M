@@ -8,12 +8,10 @@ import { DemoFormModal } from "@/components/orquest/DemoFormModal";
 import { OrquestFooter } from "@/components/orquest/OrquestFooter";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useState } from "react";
-import { useLanguage } from "@/hooks/useLanguage";
 
 const OrquestKairosHR = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { trackEvent } = useAnalytics();
-  const { t } = useLanguage();
 
   const handleViewDemo = () => {
     trackEvent("view_demo_combined", { source: "hero_cta" });
@@ -31,9 +29,9 @@ const OrquestKairosHR = () => {
   return (
     <>
       <Meta
-        title={t('orquest.meta.title')}
-        description={t('orquest.meta.description')}
-        keywords={t('orquest.meta.keywords')}
+        title="Orquest + KairosHR - Solución Integral de Gestión Laboral"
+        description="La combinación perfecta de Orquest para optimización de turnos y KairosHR para gestión de recursos humanos"
+        keywords="orquest, kairoshr, gestión laboral, optimización turnos, recursos humanos, software restaurantes"
       />
       
       <div className="min-h-screen flex flex-col">

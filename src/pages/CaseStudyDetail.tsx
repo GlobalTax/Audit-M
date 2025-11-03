@@ -3,8 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Meta } from '@/components/seo/Meta';
 import { CaseStudy } from '@/types/caseStudy';
-import { useLanguage } from '@/hooks/useLanguage';
-import { getLocalizedField } from '@/i18n/utils';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CaseStudyMetricCard } from '@/components/case-studies/CaseStudyMetricCard';
@@ -18,15 +16,14 @@ import DOMPurify from 'dompurify';
 
 export default function CaseStudyDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { language, t, getLocalizedPath } = useLanguage();
 
   const { data: caseStudy, isLoading } = useQuery({
-    queryKey: ['case-study', slug, language],
+    queryKey: ['case-study', slug],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('case_studies')
         .select('*')
-        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
+        .eq('slug_es', slug)
         .eq('status', 'published')
         .single();
 
@@ -37,20 +34,19 @@ export default function CaseStudyDetail() {
         case_study_id: data.id
       });
 
-      // Map localized fields
       return {
         ...data,
-        title: getLocalizedField(data, 'title', language) || data.title_es,
-        slug: getLocalizedField(data, 'slug', language) || data.slug_es,
-        hero_title: getLocalizedField(data, 'hero_title', language) || data.hero_title_es,
-        hero_subtitle: getLocalizedField(data, 'hero_subtitle', language) || data.hero_subtitle_es,
-        challenge: getLocalizedField(data, 'challenge', language) || data.challenge_es,
-        solution: getLocalizedField(data, 'solution', language) || data.solution_es,
-        results_summary: getLocalizedField(data, 'results_summary', language) || data.results_summary_es,
-        detailed_content: getLocalizedField(data, 'detailed_content', language) || data.detailed_content_es,
-        testimonial_text: getLocalizedField(data, 'testimonial_text', language) || data.testimonial_text_es,
-        meta_title: getLocalizedField(data, 'meta_title', language) || data.meta_title_es,
-        meta_description: getLocalizedField(data, 'meta_description', language) || data.meta_description_es,
+        title: data.title_es,
+        slug: data.slug_es,
+        hero_title: data.hero_title_es,
+        hero_subtitle: data.hero_subtitle_es,
+        challenge: data.challenge_es,
+        solution: data.solution_es,
+        results_summary: data.results_summary_es,
+        detailed_content: data.detailed_content_es,
+        testimonial_text: data.testimonial_text_es,
+        meta_title: data.meta_title_es,
+        meta_description: data.meta_description_es,
         metrics: (data.metrics as any) || [],
         timeline: (data.timeline as any) || [],
         gallery: (data.gallery as any) || [],
@@ -78,9 +74,9 @@ export default function CaseStudyDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-normal mb-4">{t('caseStudyDetail.notFound')}</h1>
-          <Link to={getLocalizedPath('caseStudies')}>
-            <Button variant="outline">{t('caseStudyDetail.backButton')}</Button>
+          <h1 className="text-3xl font-normal mb-4">Caso de estudio no encontrado</h1>
+          <Link to="/casos-de-exito">
+            <Button variant="outline">Volver</Button>
           </Link>
         </div>
       </div>

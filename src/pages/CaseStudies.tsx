@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Meta } from '@/components/seo/Meta';
 import { useCaseStudies, useCaseStudyFilterOptions } from '@/hooks/useCaseStudies';
-import { useLanguage } from '@/hooks/useLanguage';
 import { CaseStudyCard } from '@/components/case-studies/CaseStudyCard';
 import { CaseStudySkeleton } from '@/components/case-studies/CaseStudySkeleton';
 import { ViewToggle } from '@/components/ui/view-toggle';
@@ -17,7 +16,6 @@ import { BadgeHero } from '@/components/ui/badge-hero';
 const ITEMS_PER_PAGE = 12;
 
 export default function CaseStudies() {
-  const { t, getLocalizedPath } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -53,8 +51,8 @@ export default function CaseStudies() {
   return (
     <>
       <Meta
-        title={t('caseStudies.meta.title')}
-        description={t('caseStudies.meta.description')}
+        title="Casos de Éxito - NRRO"
+        description="Descubre cómo ayudamos a nuestros clientes a alcanzar sus objetivos empresariales"
       />
 
       {/* Hero Section */}

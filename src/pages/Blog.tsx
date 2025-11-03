@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Meta } from "@/components/seo/Meta";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { useLanguage } from "@/hooks/useLanguage";
 import { Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,7 +14,6 @@ const ITEMS_PER_PAGE = 9;
 
 const Blog = () => {
   const { trackPageView, trackEvent } = useAnalytics();
-  const { t, getLocalizedPath } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -47,8 +45,8 @@ const Blog = () => {
   return (
     <>
       <Meta
-        title={t('blog.meta.title')}
-        description={t('blog.meta.description')}
+        title="Blog - NRRO"
+        description="Análisis, noticias y artículos sobre fiscalidad, contabilidad y asesoría empresarial"
         keywords="blog jurídico, análisis legal, noticias fiscales, derecho mercantil"
       />
 
@@ -57,13 +55,13 @@ const Blog = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <BadgeHero>{t('blog.hero.badge')}</BadgeHero>
+              <BadgeHero>Insights</BadgeHero>
             </div>
             <h1 className="service-hero-title mb-8">
-              {t('blog.hero.title')}
+              Blog
             </h1>
             <p className="service-hero-subtitle max-w-3xl mx-auto">
-              {t('blog.hero.subtitle')}
+              Análisis, noticias y artículos sobre fiscalidad, contabilidad y asesoría empresarial
             </p>
           </div>
         </div>
@@ -77,7 +75,7 @@ const Blog = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder={t('blog.search')}
+                placeholder="Buscar artículos..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -104,7 +102,7 @@ const Blog = () => {
           ) : posts && posts.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post) => (
+                 {posts.map((post) => (
                   <div 
                     key={post.id}
                     onClick={() => trackEvent("blog_card_click", { 
@@ -114,10 +112,10 @@ const Blog = () => {
                     })}
                   >
                     <BlogPostCard
-                      slug={post.slug}
+                      slug={post.slug_es}
                       category={post.category}
-                      title={post.title}
-                      excerpt={post.excerpt}
+                      title={post.title_es}
+                      excerpt={post.excerpt_es}
                       authorName={post.author_name}
                       authorSpecialization={post.author_specialization}
                       publishedAt={post.published_at}
@@ -140,7 +138,7 @@ const Blog = () => {
           ) : (
             <div className="text-center py-16">
               <p className="text-muted-foreground text-lg">
-                {t('blog.empty')}
+                No se encontraron artículos
               </p>
             </div>
           )}

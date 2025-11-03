@@ -2,7 +2,6 @@ import React from 'react';
 import { Meta } from "@/components/seo/Meta";
 import { CareerApplicationForm } from "@/components/careers/CareerApplicationForm";
 import { OpenPositionsSection } from "@/components/careers/OpenPositionsSection";
-import { useLanguage } from "@/hooks/useLanguage";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useRef, useEffect } from "react";
 import { JobPosition } from "@/types/jobPosition";
@@ -90,7 +89,6 @@ const areas = [
 
 export default function Careers() {
   const { trackPageView, trackEvent } = useAnalytics();
-  const { t, getLocalizedPath } = useLanguage();
   const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
   const formRef = useRef<HTMLElement>(null);
   
@@ -118,10 +116,10 @@ export default function Careers() {
   return (
     <>
       <Meta
-        title={t('careers.meta.title')}
-        description={t('careers.meta.description')}
+        title="Trabaja con Nosotros - NRRO"
+        description="Únete al equipo de NRRO. Oportunidades de carrera en asesoría fiscal, contable, legal y laboral en Barcelona"
         keywords="trabajar nrro, empleo asesoría fiscal barcelona, carrera profesional contable, ofertas trabajo fiscal barcelona, trabajar asesoría laboral"
-        canonicalUrl={`${window.location.origin}${getLocalizedPath('careers')}`}
+        canonicalUrl={`${window.location.origin}/carreras`}
       />
 
       {/* Hero Section */}
@@ -129,10 +127,10 @@ export default function Careers() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-8 leading-tight">
-              {t('careers.hero.title')}
+              Trabaja con Nosotros
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              {t('careers.hero.subtitle')}
+              Únete a un equipo de profesionales apasionados por la excelencia
             </p>
           </div>
         </div>

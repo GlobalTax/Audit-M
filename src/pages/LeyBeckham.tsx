@@ -13,11 +13,9 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Users } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useEffect } from "react";
-import { useLanguage } from "@/hooks/useLanguage";
 
 const LeyBeckham = () => {
   const { trackPageView } = useAnalytics();
-  const { t } = useLanguage();
 
   useEffect(() => {
     trackPageView("ley-beckham-landing");
@@ -26,9 +24,9 @@ const LeyBeckham = () => {
   return (
     <>
       <Meta
-        title={t('leyBeckham.meta.title')}
-        description={t('leyBeckham.meta.description')}
-        keywords={t('leyBeckham.meta.keywords')}
+        title="Ley Beckham - Asesoría Fiscal para Profesionales Internacionales"
+        description="Tributa al 24% durante 6 años. Asesoramiento experto en la Ley Beckham para profesionales que se trasladan a España."
+        keywords="ley beckham, régimen especial trabajadores desplazados, tributación 24%, fiscalidad internacional españa, asesoría beckham"
       />
 
       <div className="min-h-screen">
