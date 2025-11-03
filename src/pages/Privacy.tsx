@@ -351,7 +351,7 @@ const Privacy = () => {
               {/* Contacto */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  {t('privacy.sections.contact')}
+                  15. Contacto
                 </h2>
                 <div className="space-y-3 text-muted-foreground">
                   <p>
