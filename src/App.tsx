@@ -10,6 +10,7 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { LanguageSync } from "@/components/layout/LanguageSync";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -54,6 +55,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <LanguageSync />
             <Routes>
               {/* Redirect root to Spanish */}
               <Route path="/" element={<Navigate to="/es" replace />} />
