@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export const FiscalComparison = () => {
+  const { t } = useLanguage();
   const comparisons = [
     {
       income: "60.000 €",
@@ -64,13 +66,13 @@ export const FiscalComparison = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Ahorro Fiscal
+            {t('leyBeckham.fiscalComparison.overline')}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            Comparativa: IRPF General vs. Ley Beckham
+            {t('leyBeckham.fiscalComparison.title')}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Descubre cuánto puedes ahorrar según tu nivel de ingresos
+            {t('leyBeckham.fiscalComparison.description')}
           </p>
         </div>
 
@@ -80,20 +82,20 @@ export const FiscalComparison = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-normal">Ingresos Anuales</TableHead>
+                    <TableHead className="font-normal">{t('leyBeckham.fiscalComparison.tableHeaders.income')}</TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>IRPF General</span>
+                        <span>{t('leyBeckham.fiscalComparison.tableHeaders.irpfGeneral')}</span>
                         <TrendingUp className="w-4 h-4 text-destructive" />
                       </div>
                     </TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>Ley Beckham</span>
+                        <span>{t('leyBeckham.fiscalComparison.tableHeaders.beckham')}</span>
                         <TrendingDown className="w-4 h-4 text-primary" />
                       </div>
                     </TableHead>
-                    <TableHead className="text-center font-normal">Ahorro Anual</TableHead>
+                    <TableHead className="text-center font-normal">{t('leyBeckham.fiscalComparison.tableHeaders.savings')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -136,13 +138,12 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-destructive" />
-                  IRPF General (Régimen Ordinario)
+                  {t('leyBeckham.fiscalComparison.irpfCard.title')}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Tipos progresivos del 19% al 47%</li>
-                  <li>• Tributación sobre renta mundial</li>
-                  <li>• Obligaciones declarativas complejas</li>
-                  <li>• Impuesto sobre el Patrimonio aplicable</li>
+                  {[0, 1, 2, 3].map((i) => (
+                    <li key={i}>• {t(`leyBeckham.fiscalComparison.irpfCard.items.${i}`)}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -151,21 +152,19 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingDown className="w-5 h-5 text-primary" />
-                  Ley Beckham (Régimen Especial)
+                  {t('leyBeckham.fiscalComparison.beckhamCard.title')}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Tipo fijo del 24% hasta 600.000€</li>
-                  <li>• Solo rentas de fuente española</li>
-                  <li>• Simplificación administrativa</li>
-                  <li>• Exención de Impuesto sobre el Patrimonio</li>
+                  {[0, 1, 2, 3].map((i) => (
+                    <li key={i}>• {t(`leyBeckham.fiscalComparison.beckhamCard.items.${i}`)}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
           </div>
 
           <p className="text-sm text-muted-foreground text-center mt-6">
-            * Cálculos aproximados para rentas del trabajo en 2024. No incluyen deducciones autonómicas ni otras variables individuales.
-            Consulta tu caso específico con nuestros expertos.
+            {t('leyBeckham.fiscalComparison.disclaimer')}
           </p>
         </div>
       </div>
