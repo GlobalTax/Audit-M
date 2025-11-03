@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { PageContent, PageContentInsert, PageContentUpdate } from '@/types/pageContent';
 import { useLanguage } from './useLanguage';
 import { getLocalizedPageContent } from '@/i18n/utils';
+import { pageContentFallbacks } from '@/i18n/pageContentFallbacks';
 
 export const usePageContent = (pageKey?: string, sectionKey?: string) => {
   const { language } = useLanguage();
@@ -27,11 +28,21 @@ export const usePageContent = (pageKey?: string, sectionKey?: string) => {
       
       if (error) throw error;
       
-      // Extract localized content
-      return data?.map(item => ({
-        ...item,
-        content: getLocalizedPageContent(item.content, language) || item.content
-      })) as PageContent[];
+      // Extract localized content with fallback support
+      return data?.map(item => {
+        let localizedContent = getLocalizedPageContent(item.content, language);
+        
+        // If no localized content in DB, use static fallback
+        if (!localizedContent && item.page_key && item.section_key) {
+          const fallback = pageContentFallbacks[language]?.[item.page_key]?.[item.section_key];
+          localizedContent = fallback || null;
+        }
+        
+        return {
+          ...item,
+          content: localizedContent || item.content
+        };
+      }) as PageContent[];
     },
     enabled: !!pageKey,
   });
