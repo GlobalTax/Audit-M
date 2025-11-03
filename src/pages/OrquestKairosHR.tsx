@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Meta } from "@/components/seo/Meta";
 import { HeroSection } from "@/components/orquest/HeroSection";
 import { ComparisonSection } from "@/components/orquest/ComparisonSection";
@@ -8,10 +7,13 @@ import { DemoSection } from "@/components/orquest/DemoSection";
 import { DemoFormModal } from "@/components/orquest/DemoFormModal";
 import { OrquestFooter } from "@/components/orquest/OrquestFooter";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const OrquestKairosHR = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { trackEvent } = useAnalytics();
+  const { t } = useLanguage();
 
   const handleViewDemo = () => {
     trackEvent("view_demo_combined", { source: "hero_cta" });
@@ -29,9 +31,9 @@ const OrquestKairosHR = () => {
   return (
     <>
       <Meta
-        title="Orquest + KairosHR: Solución integral para McDonald's"
-        description="La combinación perfecta para franquiciados McDonald's: planificación inteligente con Orquest y gestión laboral certificada con KairosHR."
-        keywords="Orquest, KairosHR, McDonald's, planificación laboral, gestión de personal, firma digital, control de presencia, franquicias"
+        title={t('orquest.meta.title')}
+        description={t('orquest.meta.description')}
+        keywords={t('orquest.meta.keywords')}
       />
       
       <div className="min-h-screen flex flex-col">

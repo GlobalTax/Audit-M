@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Users } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useEffect } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const LeyBeckham = () => {
   const { trackPageView } = useAnalytics();
+  const { t } = useLanguage();
 
   useEffect(() => {
     trackPageView("ley-beckham-landing");
@@ -24,10 +26,9 @@ const LeyBeckham = () => {
   return (
     <>
       <Meta
-        title="Ley Beckham 2025 | Régimen Impatriados España"
-        description="Reduce tu IRPF hasta un 76% con la Ley Beckham. Especialistas en régimen especial de impatriados. Consulta gratuita. +25 años de experiencia."
-        keywords="ley beckham, régimen impatriados españa, fiscal impatriados, artículo 93 irpf, tributación impatriados, beckham law spain"
-        canonicalUrl="https://nrro.es/ley-beckham"
+        title={t('leyBeckham.meta.title')}
+        description={t('leyBeckham.meta.description')}
+        keywords={t('leyBeckham.meta.keywords')}
       />
 
       <div className="min-h-screen">

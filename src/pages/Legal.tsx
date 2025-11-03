@@ -1,13 +1,17 @@
 import { Meta } from "@/components/seo/Meta";
+import { useLanguage } from "@/hooks/useLanguage";
+import { Link } from "react-router-dom";
 
 const Legal = () => {
+  const { t, language, getLocalizedPath } = useLanguage();
+  
   return (
     <>
       <Meta
-        title="Aviso Legal y Términos de Uso"
-        description="Términos y condiciones de uso del sitio web de NRRO (Navarro, Legal Y Tributario S.L.P.). Información legal completa."
-        keywords="aviso legal navarro, términos uso nrro, condiciones sitio web asesoría fiscal"
-        canonicalUrl="https://nrro.es/legal"
+        title={t('legal.meta.title')}
+        description={t('legal.meta.description')}
+        keywords={t('legal.meta.keywords')}
+        canonicalUrl={window.location.origin + getLocalizedPath('legal')}
       />
 
       {/* Hero Section */}
@@ -15,10 +19,10 @@ const Legal = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground mb-6">
-              Aviso Legal y Términos de Uso
+              {t('legal.hero.title')}
             </h1>
             <p className="text-xl text-muted-foreground">
-              Información legal sobre el uso de nuestro sitio web y nuestros servicios
+              {t('legal.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -31,14 +35,23 @@ const Legal = () => {
             <div className="space-y-12">
               
               {/* Last Updated */}
-            <div className="text-sm text-muted-foreground">
-              <p>Última actualización: 1 de noviembre de 2025</p>
-            </div>
+              <div className="text-sm text-muted-foreground">
+                <p>{t('legal.lastUpdated')}</p>
+              </div>
+              
+              {/* Disclaimer for CA/EN */}
+              {language !== 'es' && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+                  <p className="text-sm text-yellow-800">
+                    {t('legal.disclaimer')}
+                  </p>
+                </div>
+              )}
 
               {/* Identificación */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  1. Identificación del Titular
+                  {t('legal.sections.identification')}
                 </h2>
                 <div className="space-y-3 text-muted-foreground">
                   <p>
@@ -79,7 +92,7 @@ const Legal = () => {
               {/* Objeto del sitio */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  2. Objeto del Sitio Web
+                  {t('legal.sections.purpose')}
                 </h2>
                 <div className="space-y-3 text-muted-foreground">
                   <p>

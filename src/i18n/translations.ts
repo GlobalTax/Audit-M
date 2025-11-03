@@ -1,3 +1,5 @@
+import { fase5Translations } from './translations-fase5';
+
 export const translations = {
   es: {
     nav: {
@@ -287,6 +289,9 @@ export const translations = {
         weekendTime: 'Cerrado',
       },
     },
+    
+    // Fase 5 translations
+    ...fase5Translations.es,
   },
   ca: {
     nav: {
@@ -576,6 +581,56 @@ export const translations = {
         weekendTime: 'Tancat',
       },
     },
+    
+    // Fase 5 translations
+    ...fase5Translations.ca,
+  },
+  en: {
+    nav: {
+      home: 'Home',
+      services: 'Services',
+      about: 'About',
+      team: 'Team',
+      caseStudies: 'Case Studies',
+      blog: 'Blog',
+      insights: 'Insights',
+      careers: 'Careers',
+      contact: 'Contact',
+      methodology: 'Methodology',
+      strategy: 'Strategy',
+      legal: 'Legal Notice',
+      privacy: 'Privacy Policy',
+      cookies: 'Cookies Policy',
+    },
+    contact: {
+      title: 'Contact',
+      subtitle: 'Get in touch with us',
+      form: {
+        name: 'Name',
+        email: 'Email',
+        phone: 'Phone',
+        company: 'Company',
+        message: 'Message',
+        service: 'Service of Interest',
+        submit: 'Send message',
+      },
+      info: {
+        title: 'Contact information',
+        phone: 'Phone',
+        email: 'Email',
+        address: 'Address',
+      },
+      hours: {
+        title: 'Office hours',
+        weekdays: 'Monday - Friday',
+        weekdaysTime: '9:00 - 18:00',
+        weekend: 'Saturday - Sunday',
+        weekendTime: 'Closed',
+      },
+    },
+    
+    // Fase 5 translations
+    ...fase5Translations.en,
   },
 };
 
