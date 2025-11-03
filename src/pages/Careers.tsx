@@ -1,6 +1,7 @@
 import { Meta } from "@/components/seo/Meta";
 import { CareerApplicationForm } from "@/components/careers/CareerApplicationForm";
 import { OpenPositionsSection } from "@/components/careers/OpenPositionsSection";
+import { useLanguage } from "@/hooks/useLanguage";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useRef, useEffect } from "react";
 import { JobPosition } from "@/types/jobPosition";
@@ -88,6 +89,7 @@ const areas = [
 
 export default function Careers() {
   const { trackPageView, trackEvent } = useAnalytics();
+  const { t, getLocalizedPath } = useLanguage();
   const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
   const formRef = useRef<HTMLElement>(null);
   

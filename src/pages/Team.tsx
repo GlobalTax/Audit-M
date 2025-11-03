@@ -1,6 +1,7 @@
 import { Meta } from "@/components/seo/Meta";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { TeamMemberCard } from "@/components/team/TeamMemberCard";
+import { useLanguage } from "@/hooks/useLanguage";
 import { useTeamSearch, useTeamFilterOptions, useTeamPositionOptions } from "@/hooks/useTeamSearch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BadgeFilter } from "@/components/ui/badge-filter";
@@ -10,6 +11,7 @@ import { Loader2, Users } from "lucide-react";
 import { useState } from "react";
 
 const Team = () => {
+  const { t, getLocalizedPath } = useLanguage();
   const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
   const [activePosition, setActivePosition] = useState<string | null>(null);
   const { data: members, isLoading } = useTeamSearch({ 
@@ -22,9 +24,9 @@ const Team = () => {
   return (
     <>
       <Meta
-        title="Equipo - NRRO Asesores"
-        description="Conoce al equipo de profesionales de NRRO - expertos comprometidos con el éxito de nuestros clientes"
-        canonicalUrl={`${window.location.origin}/equipo`}
+        title={t('team.meta.title')}
+        description={t('team.meta.description')}
+        canonicalUrl={`${window.location.origin}${getLocalizedPath('team')}`}
       />
 
       <div className="min-h-screen">

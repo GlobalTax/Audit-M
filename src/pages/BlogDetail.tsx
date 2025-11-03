@@ -2,6 +2,7 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowLeft, Clock, Loader2 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/hooks/useLanguage";
 import { Button } from "@/components/ui/button";
 import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
@@ -16,18 +17,19 @@ import { BlogCTASection } from "@/components/blog/BlogCTASection";
 const BlogDetail = () => {
   const { slug } = useParams();
   const { trackPageView } = useAnalytics();
+  const { language, t, getLocalizedPath } = useLanguage();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get("preview");
   const queryClient = useQueryClient();
 
   // Get article ID from slug for preview mode
   const { data: articleId, isLoading: isIdLoading } = useQuery({
-    queryKey: ["blog-post-id", slug],
+    queryKey: ["blog-post-id", slug, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("id")
-        .eq("slug_es", slug)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .single();
 
       if (error) throw error;
@@ -49,18 +51,29 @@ const BlogDetail = () => {
 
   // Published content
   const { data: dbData, isLoading: isDbLoading } = useQuery({
-    queryKey: ["blog-post", slug],
+    queryKey: ["blog-post", slug, language],
     queryFn: async () => {
       if (!slug) return null;
       const response = await supabase
         .from("blog_posts")
         .select("*")
-        .eq("slug_es", slug)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .eq("status", "published")
         .single();
 
       if (response.error) throw response.error;
-      return response.data;
+      
+      // Map localized fields
+      const data = response.data;
+      return {
+        ...data,
+        title: data[`title_${language}`] || data.title_es,
+        slug: data[`slug_${language}`] || data.slug_es,
+        excerpt: data[`excerpt_${language}`] || data.excerpt_es,
+        content: data[`content_${language}`] || data.content_es,
+        seo_title: data[`seo_title_${language}`] || data.seo_title_es,
+        seo_description: data[`seo_description_${language}`] || data.seo_description_es,
+      };
     },
     enabled: !previewToken && !!slug,
   });
@@ -108,14 +121,14 @@ const BlogDetail = () => {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-2xl font-bold mb-4">Vista Previa No Disponible</h1>
+          <h1 className="text-2xl font-bold mb-4">{t('blogDetail.previewNotAvailable')}</h1>
           <p className="text-muted-foreground mb-8">
-            El token de vista previa es inválido o ha expirado.
+            {t('blogDetail.previewExpired')}
           </p>
           <Button asChild>
-            <Link to="/blog">
+            <Link to={getLocalizedPath('blog')}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver al Blog
+              {t('blog.backButton')}
             </Link>
           </Button>
         </div>
@@ -127,11 +140,11 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Artículo no encontrado</h1>
+          <h1 className="text-2xl font-bold mb-4">{t('blogDetail.notFound')}</h1>
           <Button asChild>
-            <Link to="/blog">
+            <Link to={getLocalizedPath('blog')}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver al Blog
+              {t('blog.backButton')}
             </Link>
           </Button>
         </div>
