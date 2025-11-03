@@ -73,7 +73,7 @@ const App = () => (
               <Route path="/es/privacidad" element={<Layout><Privacy /></Layout>} />
               <Route path="/es/aviso-legal" element={<Layout><Legal /></Layout>} />
               <Route path="/es/cookies" element={<Layout><Cookies /></Layout>} />
-              <Route path="/es/trabaja-con-nosotros" element={<Layout><Careers /></Layout>} />
+              <Route path="/es/talento" element={<Layout><Careers /></Layout>} />
               <Route path="/es/ley-beckham" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
               
               {/* Catalan routes */}
@@ -91,7 +91,7 @@ const App = () => (
               <Route path="/ca/privacitat" element={<Layout><Privacy /></Layout>} />
               <Route path="/ca/avis-legal" element={<Layout><Legal /></Layout>} />
               <Route path="/ca/cookies" element={<Layout><Cookies /></Layout>} />
-              <Route path="/ca/treballa-amb-nosaltres" element={<Layout><Careers /></Layout>} />
+              <Route path="/ca/talent" element={<Layout><Careers /></Layout>} />
               
               {/* English routes */}
               <Route path="/en" element={<Layout><Home /></Layout>} />
@@ -108,7 +108,7 @@ const App = () => (
               <Route path="/en/privacy" element={<Layout><Privacy /></Layout>} />
               <Route path="/en/legal-notice" element={<Layout><Legal /></Layout>} />
               <Route path="/en/cookies" element={<Layout><Cookies /></Layout>} />
-              <Route path="/en/careers" element={<Layout><Careers /></Layout>} />
+              <Route path="/en/talent" element={<Layout><Careers /></Layout>} />
               
               {/* Legacy routes - redirect to Spanish */}
               <Route path="/servicios" element={<Navigate to="/es/servicios" replace />} />
@@ -118,7 +118,7 @@ const App = () => (
               <Route path="/blog" element={<Navigate to="/es/blog" replace />} />
               <Route path="/equipo" element={<Navigate to="/es/equipo" replace />} />
               <Route path="/contacto" element={<Navigate to="/es/contacto" replace />} />
-              <Route path="/talento" element={<Navigate to="/es/trabaja-con-nosotros" replace />} />
+              <Route path="/talento" element={<Navigate to="/es/talento" replace />} />
               
               {/* Special landings (no language prefix) */}
               <Route path="/ley-beckham" element={<LandingLayout><LeyBeckham /></LandingLayout>} />

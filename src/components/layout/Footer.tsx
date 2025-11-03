@@ -252,7 +252,7 @@ export const Footer = () => {
                   to={getLocalizedPath('careers')}
                   className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
                 >
-                  Trabaja con nosotros
+                  {t('nav.careers')}
                 </Link>
               </li>
               <li>

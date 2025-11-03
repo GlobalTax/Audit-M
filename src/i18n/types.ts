@@ -44,9 +44,9 @@ export const routeTranslations: RouteTranslations = {
     en: 'insights',
   },
   careers: {
-    es: 'trabaja-con-nosotros',
-    ca: 'treballa-amb-nosaltres',
-    en: 'careers',
+    es: 'talento',
+    ca: 'talent',
+    en: 'talent',
   },
   contact: {
     es: 'contacto',
