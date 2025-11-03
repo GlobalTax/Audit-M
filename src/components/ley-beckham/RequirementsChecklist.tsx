@@ -1,4 +1,3 @@
-import { SectionHeader } from "@/components/ui/typography";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, AlertCircle } from "lucide-react";
 
@@ -32,18 +31,23 @@ export const RequirementsChecklist = () => {
   ];
 
   return (
-    <section id="requisitos" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Eligibilidad"
-          title="Requisitos para Acogerse a la Ley Beckham"
-          description="Verifica si cumples con los criterios para beneficiarte de este régimen fiscal especial"
-          className="text-center"
-        />
+    <section id="requisitos" className="py-20 md:py-28 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Eligibilidad
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Requisitos para Acogerse a la Ley Beckham
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Verifica si cumples con los criterios para beneficiarte de este régimen fiscal especial
+          </p>
+        </div>
 
         <div className="max-w-4xl mx-auto space-y-4">
           {requirements.map((req, index) => (
-            <Card key={index} className="hover-lift border-l-4 border-l-primary">
+            <Card key={index} className="border-l-4 border-l-primary bg-card border border-border/50">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 mt-1">
@@ -78,7 +82,7 @@ export const RequirementsChecklist = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <Card className="max-w-2xl mx-auto bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+          <Card className="max-w-2xl mx-auto bg-neutral-50 border border-border/50">
             <CardContent className="p-6">
               <p className="text-lead mb-4">
                 <strong>¿No estás seguro si cumples los requisitos?</strong>

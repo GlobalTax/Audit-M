@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { SectionHeader } from "@/components/ui/typography";
 import { TrendingDown, Calendar, Globe, ShieldCheck } from "lucide-react";
 
 export const BenefitsGrid = () => {
@@ -7,38 +6,39 @@ export const BenefitsGrid = () => {
     {
       icon: TrendingDown,
       title: "Tributación del 24%",
-      description: "Tipo fijo sobre rendimientos del trabajo hasta 600.000€/año, frente al IRPF progresivo que puede llegar hasta el 47%",
-      highlight: "Ahorra hasta un 76%"
+      description: "Tipo fijo sobre rendimientos del trabajo hasta 600.000€/año, frente al IRPF progresivo que puede llegar hasta el 47%"
     },
     {
       icon: Calendar,
       title: "Hasta 6 Años",
-      description: "El régimen especial se aplica durante el año de llegada más los 5 ejercicios fiscales siguientes",
-      highlight: "Máxima duración"
+      description: "El régimen especial se aplica durante el año de llegada más los 5 ejercicios fiscales siguientes"
     },
     {
       icon: Globe,
       title: "Trabajo Internacional",
-      description: "Compatible con teletrabajo y proyectos internacionales, ideal para profesionales digitales y ejecutivos globales",
-      highlight: "Total flexibilidad"
+      description: "Compatible con teletrabajo y proyectos internacionales, ideal para profesionales digitales y ejecutivos globales"
     },
     {
       icon: ShieldCheck,
       title: "Exenciones Adicionales",
-      description: "Dividendos, intereses y ganancias patrimoniales del extranjero exentos hasta ciertos límites. Optimización fiscal integral",
-      highlight: "Más beneficios"
+      description: "Dividendos, intereses y ganancias patrimoniales del extranjero exentos hasta ciertos límites. Optimización fiscal integral"
     }
   ];
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Ventajas Fiscales"
-          title="Beneficios Clave de la Ley Beckham"
-          description="Un régimen fiscal diseñado para atraer talento internacional a España"
-          className="text-center"
-        />
+    <section className="py-20 md:py-28 bg-neutral-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Ventajas Fiscales
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Beneficios Clave de la Ley Beckham
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Un régimen fiscal diseñado para atraer talento internacional a España
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {benefits.map((benefit, index) => {
@@ -46,16 +46,11 @@ export const BenefitsGrid = () => {
             return (
               <Card 
                 key={index} 
-                className="hover-lift border-primary/20 bg-gradient-to-br from-card to-muted/20"
+                className="bg-card border border-border/50"
               >
                 <CardContent className="p-6 space-y-4">
-                  <div className="flex items-start justify-between">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">
-                      {benefit.highlight}
-                    </span>
+                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-accent" />
                   </div>
                   
                   <div>

@@ -1,4 +1,3 @@
-import { SectionHeader } from "@/components/ui/typography";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, FileText, Send, Clock, ThumbsUp } from "lucide-react";
 
@@ -42,19 +41,24 @@ export const ProcessTimeline = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Proceso Simple y Transparente"
-          title="Cómo Solicitamos la Ley Beckham por Ti"
-          description="Te acompañamos en cada paso del proceso, desde el análisis inicial hasta la aprobación"
-          className="text-center"
-        />
+    <section className="py-20 md:py-28 bg-neutral-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Proceso Simple y Transparente
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Cómo Solicitamos la Ley Beckham por Ti
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Te acompañamos en cada paso del proceso, desde el análisis inicial hasta la aprobación
+          </p>
+        </div>
 
         <div className="max-w-5xl mx-auto">
           <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
+            {/* Timeline line - simplificada */}
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-border" />
 
             <div className="space-y-12">
               {steps.map((step, index) => {
@@ -70,7 +74,7 @@ export const ProcessTimeline = () => {
                   >
                     {/* Content Card */}
                     <div className={`flex-1 ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
-                      <Card className="hover-lift">
+                      <Card className="bg-card border border-border/50">
                         <CardContent className="p-6">
                           <div className={`flex items-start gap-4 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
                             <div className="lg:hidden w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -103,8 +107,8 @@ export const ProcessTimeline = () => {
                     </div>
 
                     {/* Center Icon (desktop only) */}
-                    <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg border-4 border-background z-10">
-                      <Icon className="w-8 h-8 text-white" />
+                    <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center border-4 border-background z-10">
+                      <Icon className="w-8 h-8 text-accent" />
                     </div>
 
                     {/* Spacer for alternating layout */}
@@ -116,7 +120,7 @@ export const ProcessTimeline = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <Card className="max-w-2xl mx-auto bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+            <Card className="max-w-2xl mx-auto bg-card border border-border/50">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-4">
                   Solicita tu Consulta Gratuita Hoy

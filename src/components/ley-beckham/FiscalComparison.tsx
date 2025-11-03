@@ -1,4 +1,3 @@
-import { SectionHeader } from "@/components/ui/typography";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -61,14 +60,19 @@ export const FiscalComparison = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Ahorro Fiscal"
-          title="Comparativa: IRPF General vs. Ley Beckham"
-          description="Descubre cuánto puedes ahorrar según tu nivel de ingresos"
-          className="text-center"
-        />
+    <section className="py-20 md:py-28 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Ahorro Fiscal
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Comparativa: IRPF General vs. Ley Beckham
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Descubre cuánto puedes ahorrar según tu nivel de ingresos
+          </p>
+        </div>
 
         <div className="max-w-6xl mx-auto">
           <Card>
@@ -128,7 +132,7 @@ export const FiscalComparison = () => {
           </Card>
 
           <div className="mt-8 grid md:grid-cols-2 gap-6">
-            <Card className="bg-gradient-to-br from-destructive/5 to-destructive/10 border-destructive/20">
+            <Card className="bg-neutral-50 border border-border/50">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-destructive" />
@@ -143,7 +147,7 @@ export const FiscalComparison = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+            <Card className="bg-neutral-50 border border-border/50">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                   <TrendingDown className="w-5 h-5 text-primary" />

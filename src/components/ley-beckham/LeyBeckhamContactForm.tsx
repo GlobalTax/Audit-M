@@ -121,17 +121,22 @@ Fuente: Landing Ley Beckham (Google Ads)
   };
 
   return (
-    <section id="contacto" className="py-20 bg-gradient-to-b from-background to-muted/20">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Consulta Gratuita"
-          title="Solicita tu Análisis de Elegibilidad"
-          description="Completa el formulario y te contactaremos en menos de 24 horas para evaluar tu caso sin compromiso"
-          className="text-center"
-        />
+    <section id="contacto" className="py-20 md:py-28 bg-neutral-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Consulta Gratuita
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Solicita tu Análisis de Elegibilidad
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Completa el formulario y te contactaremos en menos de 24 horas para evaluar tu caso sin compromiso
+          </p>
+        </div>
 
         <div className="max-w-3xl mx-auto">
-          <Card className="border-primary/20 shadow-xl">
+          <Card className="bg-card border border-border/50">
             <CardContent className="p-8">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -1,4 +1,3 @@
-import { SectionHeader } from "@/components/ui/typography";
 import {
   Accordion,
   AccordionContent,
@@ -43,14 +42,19 @@ export const FAQSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          overline="Resolvemos tus Dudas"
-          title="Preguntas Frecuentes sobre la Ley Beckham"
-          description="Todo lo que necesitas saber sobre el régimen especial de impatriados"
-          className="text-center"
-        />
+    <section className="py-20 md:py-28 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            Resolvemos tus Dudas
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+            Preguntas Frecuentes sobre la Ley Beckham
+          </h2>
+          <p className="text-body max-w-2xl mx-auto">
+            Todo lo que necesitas saber sobre el régimen especial de impatriados
+          </p>
+        </div>
 
         <div className="max-w-4xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
