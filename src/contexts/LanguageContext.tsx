@@ -13,13 +13,19 @@ const STORAGE_KEY = 'preferred-language';
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    // Primero intentar leer de localStorage
+    // 1. Prioridad: Detectar idioma de la URL inicial
+    const initialPathLang = window.location.pathname.split('/')[1] as Language;
+    if (['es', 'ca', 'en'].includes(initialPathLang)) {
+      return initialPathLang;
+    }
+    
+    // 2. Intentar leer de localStorage
     const stored = localStorage.getItem(STORAGE_KEY) as Language;
     if (stored && ['es', 'ca', 'en'].includes(stored)) {
       return stored;
     }
     
-    // Detectar idioma del navegador
+    // 3. Detectar idioma del navegador
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith('ca')) return 'ca';
     if (browserLang.startsWith('en')) return 'en';
