@@ -629,7 +629,8 @@ h1 {
     font-size: 1.25rem; /* 20px */
     line-height: 1.75;
     font-weight: 400;
-    color: hsl(var(--foreground) / 0.9);
+    color: inherit;
+    opacity: 0.9;
   }
 
   .text-body {
