@@ -19,6 +19,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
+import LeyBeckham from "./pages/LeyBeckham";
 import NotFound from "./pages/NotFound";
 import OrquestKairosHR from "./pages/OrquestKairosHR";
 import Privacy from "./pages/Privacy";
@@ -68,6 +69,7 @@ const App = () => (
             <Route path="/legal" element={<Layout><Legal /></Layout>} />
             <Route path="/cookies" element={<Layout><Cookies /></Layout>} />
             <Route path="/talento" element={<Layout><Careers /></Layout>} />
+            <Route path="/ley-beckham" element={<Layout><LeyBeckham /></Layout>} />
             <Route path="/orquest-kairoshr" element={<OrquestKairosHR />} />
 
             {/* Admin routes */}
