@@ -1,31 +1,34 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const RequirementsChecklist = () => {
+  const { t } = useLanguage();
+  
   const requirements = [
     {
-      title: "No haber sido residente fiscal en España",
-      description: "No haber sido residente fiscal en España en los 10 años anteriores al traslado. Este es el requisito más crítico y debe verificarse cuidadosamente.",
+      title: t("requirements.item1.title"),
+      description: t("requirements.item1.description"),
       isKey: true
     },
     {
-      title: "Traslado por motivos laborales",
-      description: "Debes trasladarte a España para trabajar por cuenta ajena, ser administrador de una empresa, o realizar una actividad empresarial.",
+      title: t("requirements.item2.title"),
+      description: t("requirements.item2.description"),
       isKey: false
     },
     {
-      title: "Contrato de trabajo o nombramiento",
-      description: "Necesitas un contrato laboral con una empresa española o un nombramiento como administrador. Los autónomos que facturen principalmente a España no suelen calificar.",
+      title: t("requirements.item3.title"),
+      description: t("requirements.item3.description"),
       isKey: true
     },
     {
-      title: "Solicitud dentro del plazo",
-      description: "Debes presentar la solicitud dentro de los 6 meses siguientes al inicio de la actividad laboral en España o al cambio de residencia fiscal.",
+      title: t("requirements.item4.title"),
+      description: t("requirements.item4.description"),
       isKey: true
     },
     {
-      title: "Mantener las condiciones",
-      description: "Durante el periodo del régimen especial, debes mantener tu residencia fiscal en España y no perder el vínculo laboral que motivó el traslado.",
+      title: t("requirements.item5.title"),
+      description: t("requirements.item5.description"),
       isKey: false
     }
   ];
@@ -35,13 +38,13 @@ export const RequirementsChecklist = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Requisitos
+            {t("requirements.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            ¿Cumples los Requisitos para la Ley Beckham?
+            {t("requirements.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Verifica si puedes acogerte al régimen especial de tributación
+            {t("requirements.subtitle")}
           </p>
         </div>
 
@@ -69,7 +72,7 @@ export const RequirementsChecklist = () => {
                       </h3>
                       {req.isKey && (
                         <span className="text-xs font-normal text-primary bg-primary/10 px-2 py-1 rounded-full whitespace-nowrap">
-                          Requisito Clave
+                          {t("requirements.keyLabel")}
                         </span>
                       )}
                     </div>
@@ -87,16 +90,16 @@ export const RequirementsChecklist = () => {
           <Card className="max-w-2xl mx-auto bg-neutral-50 border border-border/50">
             <CardContent className="p-6">
               <p className="text-lead mb-4">
-                ¿No estás seguro de cumplir los requisitos?
+                {t("requirements.cta.title")}
               </p>
               <p className="text-muted-foreground mb-6">
-                Cada caso es único. Solicita una consulta gratuita y analizaremos tu situación específica.
+                {t("requirements.cta.description")}
               </p>
               <a
                 href="#contact-form"
                 className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft h-10 px-6"
               >
-                Consulta Gratuita
+                {t("requirements.cta.button")}
               </a>
             </CardContent>
           </Card>

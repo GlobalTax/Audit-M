@@ -1,42 +1,45 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, FileText, Send, Clock, ThumbsUp } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const ProcessTimeline = () => {
+  const { t } = useLanguage();
+  
   const steps = [
     {
       icon: CheckCircle,
-      title: "Análisis de Elegibilidad",
-      description: "Evaluamos tu situación personal y profesional para confirmar que cumples todos los requisitos del régimen especial",
-      duration: "1-2 días",
-      details: ["Revisión de historial fiscal", "Análisis contractual", "Evaluación de residencia"]
+      title: t("process.step1.title"),
+      description: t("process.step1.description"),
+      duration: t("process.step1.duration"),
+      details: [t("process.step1.detail1"), t("process.step1.detail2"), t("process.step1.detail3")]
     },
     {
       icon: FileText,
-      title: "Preparación de Documentación",
-      description: "Recopilamos y preparamos toda la documentación necesaria para la solicitud ante la Agencia Tributaria",
-      duration: "3-5 días",
-      details: ["Contrato de trabajo", "Certificados fiscales", "Modelo 149", "Documentación complementaria"]
+      title: t("process.step2.title"),
+      description: t("process.step2.description"),
+      duration: t("process.step2.duration"),
+      details: [t("process.step2.detail1"), t("process.step2.detail2"), t("process.step2.detail3"), t("process.step2.detail4")]
     },
     {
       icon: Send,
-      title: "Presentación Modelo 149",
-      description: "Presentamos telemáticamente tu solicitud ante la AEAT con toda la documentación justificativa",
-      duration: "1 día",
-      details: ["Presentación telemática", "Acuse de recibo", "Seguimiento del expediente"]
+      title: t("process.step3.title"),
+      description: t("process.step3.description"),
+      duration: t("process.step3.duration"),
+      details: [t("process.step3.detail1"), t("process.step3.detail2"), t("process.step3.detail3")]
     },
     {
       icon: Clock,
-      title: "Seguimiento y Resolución",
-      description: "Realizamos el seguimiento del expediente y gestionamos cualquier requerimiento de la Agencia Tributaria",
-      duration: "1-3 meses",
-      details: ["Seguimiento continuo", "Atención a requerimientos", "Comunicación con AEAT"]
+      title: t("process.step4.title"),
+      description: t("process.step4.description"),
+      duration: t("process.step4.duration"),
+      details: [t("process.step4.detail1"), t("process.step4.detail2"), t("process.step4.detail3")]
     },
     {
       icon: ThumbsUp,
-      title: "Aprobación y Optimización",
-      description: "Una vez aprobado, te asesoramos en la optimización fiscal continua durante los 6 años del régimen",
-      duration: "Continuo",
-      details: ["Planificación fiscal", "Declaraciones anuales", "Asesoramiento continuo"]
+      title: t("process.step5.title"),
+      description: t("process.step5.description"),
+      duration: t("process.step5.duration"),
+      details: [t("process.step5.detail1"), t("process.step5.detail2"), t("process.step5.detail3")]
     }
   ];
 
@@ -45,13 +48,13 @@ export const ProcessTimeline = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Proceso Simple y Transparente
+            {t("process.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            Cómo Solicitamos la Ley Beckham por Ti
+            {t("process.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Te acompañamos en cada paso del proceso, desde el análisis inicial hasta la aprobación
+            {t("process.subtitle")}
           </p>
         </div>
 
@@ -84,7 +87,7 @@ export const ProcessTimeline = () => {
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-2">
                                 <span className="text-sm font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">
-                                  Paso {index + 1}
+                                  {t("process.step")} {index + 1}
                                 </span>
                                 <span className="text-xs text-muted-foreground">⏱️ {step.duration}</span>
                               </div>
@@ -123,16 +126,16 @@ export const ProcessTimeline = () => {
             <Card className="max-w-2xl mx-auto bg-card border border-border/50">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-4">
-                  Solicita tu Consulta Gratuita Hoy
+                  {t("process.cta.title")}
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Nuestro equipo de expertos analizará tu caso sin compromiso y te indicará exactamente los pasos a seguir para beneficiarte de la Ley Beckham.
+                  {t("process.cta.description")}
                 </p>
                 <a
                   href="#contacto"
                   className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft h-10 px-6"
                 >
-                  Comenzar Mi Solicitud
+                  {t("process.cta.button")}
                 </a>
               </CardContent>
             </Card>

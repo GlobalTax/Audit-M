@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const FiscalComparison = () => {
+  const { t } = useLanguage();
   const comparisons = [
     {
       income: "60.000 €",
@@ -64,13 +66,13 @@ export const FiscalComparison = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Comparativa Fiscal
+            {t("comparison.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            ¿Cuánto Puedes Ahorrar con la Ley Beckham?
+            {t("comparison.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Compara la tributación estándar del IRPF con la Ley Beckham según tu nivel de ingresos
+            {t("comparison.subtitle")}
           </p>
         </div>
 
@@ -80,20 +82,20 @@ export const FiscalComparison = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-normal">Ingresos Anuales</TableHead>
+                    <TableHead className="font-normal">{t("comparison.table.income")}</TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>IRPF General</span>
+                        <span>{t("comparison.table.irpf")}</span>
                         <TrendingUp className="w-4 h-4 text-destructive" />
                       </div>
                     </TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>Ley Beckham</span>
+                        <span>{t("comparison.table.beckham")}</span>
                         <TrendingDown className="w-4 h-4 text-primary" />
                       </div>
                     </TableHead>
-                    <TableHead className="text-center font-normal">Ahorro</TableHead>
+                    <TableHead className="text-center font-normal">{t("comparison.table.savings")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -136,13 +138,13 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-destructive" />
-                  IRPF General
+                  {t("comparison.irpf.title")}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Tramos progresivos del 19% al 47%</li>
-                  <li>• Tributación sobre rentas mundiales</li>
-                  <li>• Obligaciones de declaración completas</li>
-                  <li>• Régimen estándar de residentes</li>
+                  <li>• {t("comparison.irpf.point1")}</li>
+                  <li>• {t("comparison.irpf.point2")}</li>
+                  <li>• {t("comparison.irpf.point3")}</li>
+                  <li>• {t("comparison.irpf.point4")}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -151,20 +153,20 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingDown className="w-5 h-5 text-primary" />
-                  Régimen Beckham
+                  {t("comparison.beckham.title")}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Tipo fijo del 24% (simplificado)</li>
-                  <li>• Solo rentas españolas hasta 600K€</li>
-                  <li>• Menos obligaciones formales</li>
-                  <li>• Vigencia hasta 6 años</li>
+                  <li>• {t("comparison.beckham.point1")}</li>
+                  <li>• {t("comparison.beckham.point2")}</li>
+                  <li>• {t("comparison.beckham.point3")}</li>
+                  <li>• {t("comparison.beckham.point4")}</li>
                 </ul>
               </CardContent>
             </Card>
           </div>
 
           <p className="text-sm text-muted-foreground text-center mt-6">
-            * Cálculos aproximados. La tributación real puede variar según circunstancias personales.
+            {t("comparison.disclaimer")}
           </p>
         </div>
       </div>

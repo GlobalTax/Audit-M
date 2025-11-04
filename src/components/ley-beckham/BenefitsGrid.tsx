@@ -1,27 +1,30 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { TrendingDown, Calendar, Globe, ShieldCheck } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const BenefitsGrid = () => {
+  const { t } = useLanguage();
+  
   const benefits = [
     {
       icon: TrendingDown,
-      title: "Tipo Impositivo Reducido",
-      description: "Tributación fija del 24% sobre los rendimientos del trabajo hasta 600.000€ anuales, en lugar del IRPF progresivo que puede llegar al 47%."
+      title: t("benefits.tax.title"),
+      description: t("benefits.tax.description")
     },
     {
       icon: Calendar,
-      title: "Hasta 6 Años de Beneficios",
-      description: "Mantén el régimen especial durante el año de cambio de residencia y los 5 años siguientes, con posibilidad de prórroga bajo ciertas condiciones."
+      title: t("benefits.duration.title"),
+      description: t("benefits.duration.description")
     },
     {
       icon: Globe,
-      title: "Tributación Mundial Limitada",
-      description: "Solo tributas por rentas obtenidas en España. Las rentas del extranjero solo se gravan si exceden 600.000€ anuales."
+      title: t("benefits.worldwide.title"),
+      description: t("benefits.worldwide.description")
     },
     {
       icon: ShieldCheck,
-      title: "Seguridad y Legalidad",
-      description: "Régimen legal completamente respaldado por la Agencia Tributaria y utilizado por miles de profesionales cada año."
+      title: t("benefits.security.title"),
+      description: t("benefits.security.description")
     }
   ];
 
@@ -30,13 +33,13 @@ export const BenefitsGrid = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Ventajas Fiscales
+            {t("benefits.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            Beneficios Clave de la Ley Beckham
+            {t("benefits.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Optimiza tu carga fiscal al máximo con este régimen especial
+            {t("benefits.subtitle")}
           </p>
         </div>
 
