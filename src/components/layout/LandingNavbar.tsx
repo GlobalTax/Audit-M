@@ -1,10 +1,8 @@
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/ui/language-selector";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export const LandingNavbar = () => {
-  const { t } = useLanguage();
   
   const scrollToForm = () => {
     const formElement = document.getElementById('contact-form');
@@ -27,7 +25,7 @@ export const LandingNavbar = () => {
               onClick={scrollToForm}
               className="font-medium"
             >
-              {t("nav.contact")}
+              Contacto
             </Button>
           </div>
         </div>

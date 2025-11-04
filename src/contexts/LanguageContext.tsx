@@ -34,9 +34,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 const translations: Record<Language, Record<string, string>> = {
   es: {
-    // Navbar
-    "nav.contact": "Contacto",
-    
     // Hero
     "hero.badge": "Régimen Especial",
     "hero.title": "Optimiza tu Fiscalidad con la Ley Beckham",
@@ -49,9 +46,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.stat.years": "años",
   },
   en: {
-    // Navbar
-    "nav.contact": "Contact",
-    
     // Hero
     "hero.badge": "Special Regime",
     "hero.title": "Optimize Your Taxes with Beckham Law",
