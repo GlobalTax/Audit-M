@@ -127,7 +127,7 @@ const Home = () => {
 
       <div className="min-h-screen">
       {/* Hero Section */}
-      <section data-dark="true" className="bg-black text-white pt-48 pb-32 md:pt-56 md:pb-40 lg:pt-64 lg:pb-48">
+      <section data-dark="true" className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl text-left">
               <div className="mb-6">
