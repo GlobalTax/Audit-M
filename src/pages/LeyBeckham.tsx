@@ -12,10 +12,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Users } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 
 const LeyBeckham = () => {
   const { trackPageView } = useAnalytics();
+  const { t } = useLanguage();
 
   useEffect(() => {
     trackPageView("ley-beckham-landing");
@@ -24,9 +26,9 @@ const LeyBeckham = () => {
   return (
     <>
       <Meta
-        title="Ley Beckham - Asesoría Fiscal para Profesionales Internacionales"
-        description="Tributa al 24% durante 6 años. Asesoramiento experto en la Ley Beckham para profesionales que se trasladan a España."
-        keywords="ley beckham, régimen especial trabajadores desplazados, tributación 24%, fiscalidad internacional españa, asesoría beckham"
+        title={t("seo.title")}
+        description={t("seo.description")}
+        keywords={t("seo.keywords")}
       />
 
       <div className="min-h-screen">
@@ -39,25 +41,25 @@ const LeyBeckham = () => {
             <div className="grid lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
               <div className="lg:col-span-3">
                 <p className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3 border-b border-border/50">
-                  Régimen Especial
+                  {t("whatIs.eyebrow")}
                 </p>
               </div>
 
               <div className="lg:col-span-4">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
-                  ¿Qué es la Ley Beckham?
+                  {t("whatIs.title")}
                 </h2>
               </div>
 
               <div className="lg:col-span-5 space-y-4">
                 <p className="text-lg font-medium">
-                  La Ley Beckham es el nombre popular del régimen especial de tributación para trabajadores desplazados a España, regulado en el artículo 93 de la Ley del IRPF.
+                  {t("whatIs.p1")}
                 </p>
                 <p className="text-body">
-                  Este régimen permite a profesionales extranjeros que se trasladan a España tributar como no residentes fiscales, con un tipo fijo del 24% sobre sus rendimientos del trabajo, en lugar del IRPF progresivo que puede llegar hasta el 47%.
+                  {t("whatIs.p2")}
                 </p>
                 <p className="text-body">
-                  Establecido en 2005 tras la llegada del futbolista David Beckham al Real Madrid, este régimen busca atraer talento internacional a España ofreciendo importantes ventajas fiscales durante un periodo de hasta 6 años.
+                  {t("whatIs.p3")}
                 </p>
               </div>
             </div>
@@ -71,47 +73,47 @@ const LeyBeckham = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
               <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-                ¿Para quién?
+                {t("profiles.eyebrow")}
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-                Perfiles que se Benefician de la Ley Beckham
+                {t("profiles.title")}
               </h2>
               <p className="text-body max-w-2xl mx-auto">
-                Este régimen fiscal especial está diseñado para diversos profesionales internacionales
+                {t("profiles.subtitle")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {[
                 {
-                  title: "Ejecutivos y Directivos",
-                  description: "C-level, directores generales, altos cargos en empresas multinacionales",
-                  badge: "Alta Demanda"
+                  title: t("profiles.executives.title"),
+                  description: t("profiles.executives.description"),
+                  badge: t("profiles.executives.badge")
                 },
                 {
-                  title: "Profesionales Tech",
-                  description: "Ingenieros, developers, CTOs, product managers, data scientists",
-                  badge: "Sector Tech"
+                  title: t("profiles.tech.title"),
+                  description: t("profiles.tech.description"),
+                  badge: t("profiles.tech.badge")
                 },
                 {
-                  title: "Sector Financiero",
-                  description: "Banqueros, traders, analistas financieros, consultores de inversión",
-                  badge: "Finanzas"
+                  title: t("profiles.financial.title"),
+                  description: t("profiles.financial.description"),
+                  badge: t("profiles.financial.badge")
                 },
                 {
-                  title: "Consultores",
-                  description: "Consultores estratégicos, auditores, expertos en transformación digital",
-                  badge: "Consulting"
+                  title: t("profiles.consultants.title"),
+                  description: t("profiles.consultants.description"),
+                  badge: t("profiles.consultants.badge")
                 },
                 {
-                  title: "Emprendedores",
-                  description: "Fundadores de startups, inversores, business angels relocalizándose",
-                  badge: "Startups"
+                  title: t("profiles.entrepreneurs.title"),
+                  description: t("profiles.entrepreneurs.description"),
+                  badge: t("profiles.entrepreneurs.badge")
                 },
                 {
-                  title: "Investigadores",
-                  description: "Profesores universitarios, investigadores científicos, expertos académicos",
-                  badge: "Academia"
+                  title: t("profiles.researchers.title"),
+                  description: t("profiles.researchers.description"),
+                  badge: t("profiles.researchers.badge")
                 }
               ].map((profile, index) => (
                 <Card key={index} className="bg-card border border-border/50">
@@ -139,39 +141,39 @@ const LeyBeckham = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
               <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-                Expertos en Fiscalidad Internacional
+                {t("whyUs.eyebrow")}
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-                Por Qué Confiar en NRRO
+                {t("whyUs.title")}
               </h2>
               <p className="text-body max-w-2xl mx-auto">
-                Más de 25 años de experiencia ayudando a profesionales internacionales
+                {t("whyUs.subtitle")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
               <StatCard
-                label="Años de Experiencia"
-                value="25+"
-                description="Liderando la fiscalidad internacional en España"
+                label={t("whyUs.stat1.label")}
+                value={t("whyUs.stat1.value")}
+                description={t("whyUs.stat1.description")}
                 delay={0}
               />
               <StatCard
-                label="Tasa de Éxito"
-                value="98%"
-                description="Solicitudes aprobadas por la Agencia Tributaria"
+                label={t("whyUs.stat2.label")}
+                value={t("whyUs.stat2.value")}
+                description={t("whyUs.stat2.description")}
                 delay={100}
               />
               <StatCard
-                label="Clientes Asesorados"
-                value="500+"
-                description="Profesionales de más de 40 países"
+                label={t("whyUs.stat3.label")}
+                value={t("whyUs.stat3.value")}
+                description={t("whyUs.stat3.description")}
                 delay={200}
               />
               <StatCard
-                label="Confidencialidad"
-                value="100%"
-                description="Garantía total de privacidad y seguridad"
+                label={t("whyUs.stat4.label")}
+                value={t("whyUs.stat4.value")}
+                description={t("whyUs.stat4.description")}
                 delay={300}
               />
             </div>
@@ -190,10 +192,10 @@ const LeyBeckham = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-                No Pierdas la Oportunidad de Optimizar tu Fiscalidad
+                {t("finalCta.title")}
               </h2>
               <p className="text-lead mb-8">
-                Los plazos para acogerse a la Ley Beckham son limitados. Solicita tu consulta gratuita hoy y descubre cuánto puedes ahorrar.
+                {t("finalCta.subtitle")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -205,11 +207,11 @@ const LeyBeckham = () => {
                     document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
-                  Solicitar Consulta Gratuita
+                  {t("finalCta.button")}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground mt-6">
-                Respuesta en menos de 24 horas • 100% Confidencial • Sin compromiso
+                {t("finalCta.footer")}
               </p>
             </div>
           </div>

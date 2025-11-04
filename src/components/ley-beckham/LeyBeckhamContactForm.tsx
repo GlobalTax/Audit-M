@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "@/components/ui/typography";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,25 +29,26 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, Send, Shield } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
-const formSchema = z.object({
-  name: z.string().trim().min(2, "El nombre debe tener al menos 2 caracteres").max(100),
-  email: z.string().trim().email("Email inválido").max(255),
-  phone: z.string().trim().min(9, "Teléfono inválido").max(20),
-  country: z.string().trim().min(2, "Selecciona tu país de origen").max(100),
-  jobSituation: z.string().min(1, "Selecciona tu situación laboral"),
-  transferDate: z.string().min(1, "Indica tu fecha estimada de traslado"),
-  message: z.string().trim().max(2000).optional(),
-  privacy: z.boolean().refine((val) => val === true, {
-    message: "Debes aceptar la política de privacidad",
-  }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export const LeyBeckhamContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { trackFormSubmit } = useAnalytics();
+  const { t } = useLanguage();
+
+  const formSchema = z.object({
+    name: z.string().trim().min(2, t("form.validation.name")).max(100),
+    email: z.string().trim().email(t("form.validation.email")).max(255),
+    phone: z.string().trim().min(9, t("form.validation.phone")).max(20),
+    country: z.string().trim().min(2, t("form.validation.country")).max(100),
+    jobSituation: z.string().min(1, t("form.validation.jobSituation")),
+    transferDate: z.string().min(1, t("form.validation.transferDate")),
+    message: z.string().trim().max(2000).optional(),
+    privacy: z.boolean().refine((val) => val === true, {
+      message: t("form.validation.privacy"),
+    }),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -116,8 +118,8 @@ export const LeyBeckhamContactForm = () => {
       });
 
       toast({
-        title: "¡Solicitud enviada con éxito!",
-        description: "Nos pondremos en contacto contigo en menos de 24 horas para analizar tu caso.",
+        title: t("form.success.title"),
+        description: t("form.success.description"),
       });
 
       form.reset();
@@ -125,8 +127,8 @@ export const LeyBeckhamContactForm = () => {
       console.error("Error al enviar formulario:", error);
       toast({
         variant: "destructive",
-        title: "Error al enviar",
-        description: "Ha ocurrido un error. Por favor, inténtalo de nuevo o contacta por teléfono.",
+        title: t("form.error.title"),
+        description: t("form.error.description"),
       });
     } finally {
       setIsSubmitting(false);
@@ -138,13 +140,13 @@ export const LeyBeckhamContactForm = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Consulta Gratuita
+            {t("form.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            Solicita tu Análisis de Elegibilidad
+            {t("form.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            Completa el formulario y te contactaremos en menos de 24 horas para evaluar tu caso sin compromiso
+            {t("form.subtitle")}
           </p>
         </div>
 
@@ -159,9 +161,9 @@ export const LeyBeckhamContactForm = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nombre completo *</FormLabel>
+                          <FormLabel>{t("form.name")} *</FormLabel>
                           <FormControl>
-                            <Input placeholder="Tu nombre" {...field} />
+                            <Input placeholder={t("form.name")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -173,9 +175,9 @@ export const LeyBeckhamContactForm = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email *</FormLabel>
+                          <FormLabel>{t("form.email")} *</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="tu@email.com" {...field} />
+                            <Input type="email" placeholder={t("form.email")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -189,9 +191,9 @@ export const LeyBeckhamContactForm = () => {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Teléfono *</FormLabel>
+                          <FormLabel>{t("form.phone")} *</FormLabel>
                           <FormControl>
-                            <Input type="tel" placeholder="+34 600 000 000" {...field} />
+                            <Input type="tel" placeholder={t("form.phone")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -203,9 +205,9 @@ export const LeyBeckhamContactForm = () => {
                       name="country"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>País de origen *</FormLabel>
+                          <FormLabel>{t("form.country")} *</FormLabel>
                           <FormControl>
-                            <Input placeholder="Ej: Reino Unido, Francia..." {...field} />
+                            <Input placeholder={t("form.country.placeholder")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -219,20 +221,20 @@ export const LeyBeckhamContactForm = () => {
                       name="jobSituation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Situación laboral *</FormLabel>
+                          <FormLabel>{t("form.jobSituation")} *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Selecciona..." />
+                                <SelectValue placeholder={t("form.jobSituation.select")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="contrato-espana">Contrato de trabajo en España</SelectItem>
-                              <SelectItem value="directivo">Directivo/Administrador</SelectItem>
-                              <SelectItem value="autonomo">Autónomo</SelectItem>
-                              <SelectItem value="emprendedor">Emprendedor/Fundador</SelectItem>
-                              <SelectItem value="traslado-interno">Traslado interno empresa</SelectItem>
-                              <SelectItem value="otro">Otro</SelectItem>
+                              <SelectItem value="contrato-espana">{t("form.jobSituation.contract")}</SelectItem>
+                              <SelectItem value="directivo">{t("form.jobSituation.executive")}</SelectItem>
+                              <SelectItem value="autonomo">{t("form.jobSituation.freelancer")}</SelectItem>
+                              <SelectItem value="emprendedor">{t("form.jobSituation.entrepreneur")}</SelectItem>
+                              <SelectItem value="traslado-interno">{t("form.jobSituation.transfer")}</SelectItem>
+                              <SelectItem value="otro">{t("form.jobSituation.other")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -245,19 +247,19 @@ export const LeyBeckhamContactForm = () => {
                       name="transferDate"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Fecha estimada de traslado *</FormLabel>
+                          <FormLabel>{t("form.transferDate")} *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Selecciona..." />
+                                <SelectValue placeholder={t("form.jobSituation.select")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="ya-estoy">Ya estoy en España (menos de 6 meses)</SelectItem>
-                              <SelectItem value="1-3-meses">En 1-3 meses</SelectItem>
-                              <SelectItem value="3-6-meses">En 3-6 meses</SelectItem>
-                              <SelectItem value="6-12-meses">En 6-12 meses</SelectItem>
-                              <SelectItem value="mas-12-meses">Más de 12 meses</SelectItem>
+                              <SelectItem value="ya-estoy">{t("form.transferDate.already")}</SelectItem>
+                              <SelectItem value="1-3-meses">{t("form.transferDate.1-3")}</SelectItem>
+                              <SelectItem value="3-6-meses">{t("form.transferDate.3-6")}</SelectItem>
+                              <SelectItem value="6-12-meses">{t("form.transferDate.6-12")}</SelectItem>
+                              <SelectItem value="mas-12-meses">{t("form.transferDate.12+")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -271,10 +273,10 @@ export const LeyBeckhamContactForm = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Mensaje o consulta (opcional)</FormLabel>
+                        <FormLabel>{t("form.message")}</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Cuéntanos más sobre tu situación..."
+                            placeholder={t("form.message.placeholder")}
                             className="min-h-[120px]"
                             {...field}
                           />
@@ -294,11 +296,11 @@ export const LeyBeckhamContactForm = () => {
                         </FormControl>
                         <div className="space-y-1 leading-none">
                           <FormLabel className="text-sm font-normal cursor-pointer">
-                            Acepto la{" "}
+                            {t("form.privacy")}{" "}
                             <a href="/privacy" className="text-primary underline" target="_blank">
-                              política de privacidad
+                              {t("form.privacy.link")}
                             </a>{" "}
-                            y el tratamiento de mis datos personales *
+                            {t("form.privacy.text")} *
                           </FormLabel>
                           <FormMessage />
                         </div>
@@ -311,12 +313,12 @@ export const LeyBeckhamContactForm = () => {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Enviando...
+                          {t("form.button.sending")}
                         </>
                       ) : (
                         <>
                           <Send className="mr-2 h-5 w-5" />
-                          Solicitar Consulta Gratuita sobre Ley Beckham
+                          {t("form.button")}
                         </>
                       )}
                     </Button>
@@ -324,12 +326,12 @@ export const LeyBeckhamContactForm = () => {
                     <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4 text-primary" />
-                        <span>100% Confidencial</span>
+                        <span>{t("form.confidential")}</span>
                       </div>
                       <span>•</span>
-                      <span>Respuesta en 24h</span>
+                      <span>{t("form.response")}</span>
                       <span>•</span>
-                      <span>Sin compromiso</span>
+                      <span>{t("form.noCommitment")}</span>
                     </div>
                   </div>
                 </form>
@@ -338,9 +340,9 @@ export const LeyBeckhamContactForm = () => {
           </Card>
 
           <p className="text-center text-sm text-muted-foreground mt-6">
-            Este formulario es específico para consultas sobre la Ley Beckham. Para otros servicios,{" "}
+            {t("form.footer")}{" "}
             <a href="/contact" className="text-primary underline">
-              visita nuestra página de contacto
+              {t("form.footer.link")}
             </a>
             .
           </p>
