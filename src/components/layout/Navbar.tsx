@@ -207,17 +207,16 @@ export const Navbar = () => {
                                   <div className="w-12 h-12 rounded-full bg-neutral-200 flex-shrink-0 overflow-hidden">
                                     <picture>
                                       <source 
-                                        srcSet="https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/render/image/public/media-library/team-avatars/0.79906963015602.png?width=96&height=96&format=webp&quality=80"
+                                        srcSet="https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/render/image/public/media-library/team-avatars/0.79906963015602.png?width=96&height=96&format=webp&quality=90"
                                         type="image/webp"
                                       />
                                       <img 
                                         src="https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/object/public/media-library/team-avatars/0.79906963015602.png" 
                                         alt="Gemma Zalacain"
                                         className="w-full h-full object-cover"
-                                        loading="lazy"
                                         decoding="async"
-                                        width="48"
-                                        height="48"
+                                        width="96"
+                                        height="96"
                                       />
                                     </picture>
                                   </div>
