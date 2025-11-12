@@ -239,14 +239,6 @@ export const Footer = () => {
               </li>
               <li>
                 <Link 
-                  to="/noticias"
-                  className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
-                >
-                  Noticias
-                </Link>
-              </li>
-              <li>
-                <Link 
                   to="/equipo"
                   className="text-sm text-primary-foreground/80 hover:text-accent hover:underline transition-colors"
                 >

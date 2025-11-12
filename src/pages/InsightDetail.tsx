@@ -75,14 +75,14 @@ const InsightDetail = () => {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-2xl font-bold mb-4">Vista previa no disponible</h1>
+          <h1 className="text-2xl font-bold mb-4">Preview Not Available</h1>
           <p className="text-muted-foreground mb-8">
-            El token de vista previa es inválido o ha expirado.
+            The preview token is invalid or has expired.
           </p>
           <Button asChild>
-            <Link to="/noticias">
+            <Link to="/insights">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver a Noticias
+              Back to Insights
             </Link>
           </Button>
         </div>
@@ -94,9 +94,9 @@ const InsightDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="mb-4">Noticia no encontrada</h1>
+          <h1 className="mb-4">Article not found</h1>
           <Button asChild>
-            <Link to="/noticias">Volver a Noticias</Link>
+            <Link to="/insights">Back to Insights</Link>
           </Button>
         </div>
       </div>
@@ -112,17 +112,17 @@ const InsightDetail = () => {
         />
       )}
       <Meta 
-        title={`${insight.title} | Noticias`}
+        title={insight.title}
         description={insight.excerpt || ''}
-        canonicalUrl={`${window.location.origin}/noticias/${insight.slug}`}
+        canonicalUrl={`${window.location.origin}/insights/${insight.slug}`}
       />
 
       <div className="min-h-screen">
         <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Button variant="ghost" asChild className="mb-8">
-            <Link to="/noticias">
+            <Link to="/insights">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver a Noticias
+              Back to Insights
             </Link>
           </Button>
 
