@@ -71,13 +71,6 @@ export const SelectionTimeline = () => {
         ))}
       </ol>
 
-      {/* Success indicator */}
-      <div className="mt-8 flex items-center justify-center">
-        <div className="flex items-center gap-3 text-accent">
-          <CheckCircle2 className="h-6 w-6" />
-          <span className="font-semibold">¡Bienvenido a NRRO!</span>
-        </div>
-      </div>
     </div>
   );
 };
