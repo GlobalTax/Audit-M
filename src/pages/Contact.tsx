@@ -187,7 +187,7 @@ export default function Contact() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Mensaje</Label>
+                      <Label htmlFor="message">Mensaje (mínimo 10 caracteres)</Label>
                       <Textarea
                         id="message"
                         value={formData.message}
@@ -195,8 +195,12 @@ export default function Contact() {
                         placeholder="Cuéntanos más sobre tu consulta..."
                         rows={6}
                         required
+                        minLength={10}
                         className="border-border/50 focus:border-accent resize-none"
                       />
+                      {formData.message.length > 0 && formData.message.length < 10 && (
+                        <p className="text-sm text-destructive">El mensaje debe tener al menos 10 caracteres</p>
+                      )}
                     </div>
 
                     <Button 
