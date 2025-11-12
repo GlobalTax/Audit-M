@@ -69,7 +69,7 @@ export default function Terms() {
             
             {/* Last Update */}
             <div className="text-sm text-foreground border-l-4 border-accent pl-4">
-              <p><strong>Última actualización:</strong> 12 de enero de 2025</p>
+              <p><strong>Última actualización:</strong> 12 de noviembre de 2025</p>
             </div>
 
             {/* Section 1: Entidades Prestadoras */}
