@@ -19,7 +19,7 @@ const Cookies = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground mb-6">
               Política de Cookies
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-foreground">
               Información sobre las cookies que utilizamos
             </p>
           </div>
@@ -33,8 +33,98 @@ const Cookies = () => {
             <div className="space-y-12">
               
               {/* Last Updated */}
-              <div className="text-sm text-muted-foreground">
-                <p>Última actualización: 25 de enero de 2025</p>
+              <div className="text-sm text-foreground">
+                <p>Última actualización: 12 de enero de 2025</p>
+              </div>
+              
+              {/* Responsable de la Política de Cookies */}
+              <div className="space-y-4">
+                <h2 className="text-2xl font-display font-normal text-foreground">
+                  1. Responsable de la Política de Cookies
+                </h2>
+                <div className="space-y-3 text-foreground">
+                  <p>
+                    Las cookies utilizadas en este sitio web son gestionadas por las siguientes entidades del Grupo Empresarial Navarro:
+                  </p>
+
+                  {/* Grupo Navarro - Cabecera */}
+                  <div className="bg-muted/30 p-4 rounded-lg border border-border/50 mb-4">
+                    <p className="text-lg font-semibold text-foreground mb-2">
+                      Grupo Empresarial Navarro
+                    </p>
+                    <p className="text-sm text-foreground">
+                      Responsables conjuntos de la gestión de cookies:
+                    </p>
+                  </div>
+
+                  {/* Empresa 1: Navarro Legal Y Tributario */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro, Legal Y Tributario S.L.P.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B67261552</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada Profesional</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Asesoría legal, fiscal y tributaria</li>
+                      <li><strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 2: Capittal Transacciones */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Capittal Transacciones S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B02721918</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Originación e intermediación de operaciones</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 3: Navarro Empresarial */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro Empresarial S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B58068800</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Asesoría fiscal, laboral y contable recurrente</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 4: SPV Corporate Advisors */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      SPV Corporate Advisors S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B09652017</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Sociedad holding de participaciones empresariales</li>
+                    </ul>
+                  </div>
+
+                  {/* Datos de contacto comunes */}
+                  <div className="bg-accent/5 p-4 rounded-lg border border-accent/20 mt-6">
+                    <h4 className="font-semibold text-foreground mb-3">Datos de contacto del grupo</h4>
+                    <ul className="list-none space-y-2">
+                      <li>
+                        <strong className="text-foreground">Domicilio social (todas las empresas):</strong> Carrer Ausias March número 36, 08010 Barcelona, España
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Email de contacto:</strong>{" "}
+                        <a href="mailto:info@nrro.es" className="text-accent hover:underline">
+                          info@nrro.es
+                        </a>
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Teléfono:</strong> 934593600
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               
               {/* ¿Qué son las cookies? */}
@@ -42,7 +132,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   ¿Qué son las cookies?
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo al visitarlos. Permiten recordar información sobre tu visita, lo que puede mejorar tu experiencia en el sitio.
                   </p>
@@ -71,7 +161,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Tipos de cookies que utilizamos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     En este sitio web utilizamos los siguientes tipos de cookies:
                   </p>
@@ -94,7 +184,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Finalidad de las cookies
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Las cookies que utilizamos tienen las siguientes finalidades:
                   </p>
@@ -117,7 +207,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Base legal
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     La base legal para el uso de cookies técnicas es nuestro interés legítimo en garantizar el correcto funcionamiento del sitio web.
                   </p>
@@ -132,7 +222,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Cómo gestionar las cookies
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Puedes gestionar las cookies a través de la configuración de tu navegador. Puedes permitir, bloquear o eliminar las cookies instaladas en tu dispositivo.
                   </p>
@@ -169,7 +259,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Cookies de terceros
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Este sitio web puede utilizar cookies de terceros para mejorar la experiencia del usuario y ofrecer contenido personalizado.
                   </p>
@@ -187,7 +277,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Actualizaciones de la política
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Es posible que actualicemos esta Política de Cookies de vez en cuando. Te recomendamos que la revises periódicamente para estar al tanto de los cambios.
                   </p>
@@ -202,7 +292,7 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Más información
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Si tienes alguna pregunta sobre esta Política de Cookies, puedes ponerte en contacto con nosotros a través de los medios indicados a continuación.
                   </p>
@@ -214,9 +304,12 @@ const Cookies = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   Contacto
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Puedes ponerte en contacto con nosotros a través de los siguientes medios:
+                    Para cualquier consulta sobre esta Política de Cookies, puedes contactar con cualquiera de las entidades del Grupo Empresarial Navarro indicadas en la sección 1 de esta política.
+                  </p>
+                  <p>
+                    También puedes dirigirte a nuestros datos de contacto generales:
                   </p>
                   <ul className="list-none space-y-2">
                     <li>
@@ -229,7 +322,7 @@ const Cookies = () => {
                       <strong className="text-foreground">Teléfono:</strong> 934593600
                     </li>
                     <li>
-                      <strong className="text-foreground">Dirección:</strong> Carrer Ausias March número 36, 08010 Barcelona
+                      <strong className="text-foreground">Dirección:</strong> Carrer Ausias March número 36, 08010 Barcelona, España
                     </li>
                   </ul>
                 </div>
