@@ -71,7 +71,7 @@ const App = () => (
             <Route path="/privacidad" element={<Layout><Privacy /></Layout>} />
             <Route path="/aviso-legal" element={<Layout><Legal /></Layout>} />
             <Route path="/cookies" element={<Layout><Cookies /></Layout>} />
-            <Route path="/talento" element={<Layout><Careers /></Layout>} />
+            <Route path="/carreras" element={<Layout><Careers /></Layout>} />
             
             {/* Special landings */}
             <Route path="/ley-beckham" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
