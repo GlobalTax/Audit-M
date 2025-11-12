@@ -11,6 +11,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
 import { ArrowRight, Check } from "lucide-react";
+import { BentoServicesGrid } from "@/components/home/BentoServicesGrid";
+import { TrustIndicators } from "@/components/home/TrustIndicators";
+import { HomeFAQSection } from "@/components/home/HomeFAQSection";
+import { OfficeSection } from "@/components/home/OfficeSection";
+import { StickyCTA } from "@/components/home/StickyCTA";
+import { HeroScrollIndicator } from "@/components/home/HeroScrollIndicator";
+import { useLazyLoad } from "@/hooks/useLazyLoad";
+import { motion } from "framer-motion";
 import {
   Carousel,
   CarouselContent,
@@ -127,11 +135,16 @@ const Home = () => {
 
       <div className="min-h-screen">
       {/* Hero Section */}
-      <section data-dark="true" className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48">
+      <section data-dark="true" className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl text-left">
+            <motion.div 
+              className="max-w-3xl text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="mb-6">
-                <BadgeHero>Navarro</BadgeHero>
+                <BadgeHero className="badge-breathe">Navarro</BadgeHero>
               </div>
               <h1 
                 className="hero-title mb-6"
@@ -172,9 +185,13 @@ const Home = () => {
                   </Link>
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </div>
+          <HeroScrollIndicator />
         </section>
+
+        {/* Trust Indicators Bar */}
+        <TrustIndicators />
 
         {/* About Section */}
         <section className="bg-background py-20 md:py-28">
@@ -261,29 +278,16 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Servicios Relevantes */}
+        {/* Servicios con Bento Grid */}
         <section className="bg-white py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Encabezado */}
             {serviciosDestacados?.overline && (
               <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
                 {serviciosDestacados.overline}
               </h2>
             )}
 
-            {/* Grid de servicios */}
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              {serviciosDestacados?.services?.map((service, index) => (
-                <FeaturedServiceCard
-                  key={index}
-                  title={service.title}
-                  description={service.description}
-                  category={service.category}
-                  features={service.features}
-                  slug={(service as any).slug}
-                />
-              ))}
-            </div>
+            <BentoServicesGrid services={serviciosDestacados?.services} />
           </div>
         </section>
 
@@ -299,6 +303,9 @@ const Home = () => {
             <TechnologyShowcase />
           </div>
         </section>
+
+        {/* Office Section con Mapa */}
+        <OfficeSection />
 
         {/* Carrusel de Logos */}
         <section className="bg-white py-16 md:py-20 border-t border-border">
@@ -337,6 +344,9 @@ const Home = () => {
             </Carousel>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <HomeFAQSection />
 
         {/* Blog Preview */}
         <section className="bg-background py-24">
@@ -381,6 +391,9 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* Sticky CTA Mobile */}
+        <StickyCTA />
       </div>
     </>
   );
