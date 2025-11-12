@@ -34,6 +34,8 @@ import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
 import AdminServices from "./pages/admin/AdminServices";
 import { AdminBlog } from "./pages/admin/AdminBlog";
 import BlogDetail from "./pages/BlogDetail";
+import Insights from "./pages/Insights";
+import InsightDetail from "./pages/InsightDetail";
 import { AdminTeam } from "./pages/admin/AdminTeam";
 import { AdminUsers } from "./pages/admin/AdminUsers";
 import AdminContent from "./pages/admin/AdminContent";
@@ -44,6 +46,7 @@ import AdminContactLeads from "./pages/admin/AdminContactLeads";
 import AdminLeyBeckhamLeads from "./pages/admin/AdminLeyBeckhamLeads";
 import AdminDemoRequests from "./pages/admin/AdminDemoRequests";
 import AdminTechnology from "./pages/admin/AdminTechnology";
+import { AdminNews } from "./pages/admin/AdminNews";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +69,8 @@ const App = () => (
             <Route path="/nosotros" element={<Layout><About /></Layout>} />
             <Route path="/blog" element={<Layout><Blog /></Layout>} />
             <Route path="/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
+            <Route path="/noticias" element={<Layout><Insights /></Layout>} />
+            <Route path="/noticias/:slug" element={<Layout><InsightDetail /></Layout>} />
             <Route path="/equipo" element={<Layout><Team /></Layout>} />
             <Route path="/metodologia" element={<Layout><Methodology /></Layout>} />
             <Route path="/contacto" element={<Layout><Contact /></Layout>} />
@@ -95,6 +100,7 @@ const App = () => (
               <Route path="case-studies" element={<AdminCaseStudies />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="blog" element={<AdminBlog />} />
+              <Route path="news" element={<AdminNews />} />
               <Route path="team" element={<AdminTeam />} />
               <Route path="job-positions" element={<AdminJobPositions />} />
               <Route path="candidatos" element={<AdminCandidatos />} />
