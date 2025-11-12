@@ -285,7 +285,7 @@ export default function Contact() {
               <Card className="border-border/50 shadow-soft overflow-hidden">
                 <CardContent className="p-0">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.253988876!2d2.173682!3d41.393119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f8f8f8f8f8%3A0x8f8f8f8f8f8f8f8!2sCarrer%20Ausias%20March%2C%2036%2C%2008010%20Barcelona!5e0!3m2!1sen!2ses!4v1234567890"
+                    src="https://maps.google.com/maps?q=Carrer+Ausias+March+36,+08010+Barcelona&t=&z=15&ie=UTF8&iwloc=&output=embed"
                     width="100%"
                     height="300"
                     style={{ border: 0 }}
