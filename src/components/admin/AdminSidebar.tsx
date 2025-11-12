@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
+import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
 import {
   LayoutDashboard,
   TrendingUp,
@@ -38,6 +39,7 @@ import { Separator } from '@/components/ui/separator';
 export const AdminSidebar = () => {
   const location = useLocation();
   const { adminUser, canManageUsers } = useAdminAuth();
+  const unreadLeads = useUnreadContactLeads();
 
   const isActive = (path: string) => {
     if (path === '/admin') {
@@ -82,14 +84,22 @@ export const AdminSidebar = () => {
           >
             <Button
               variant="ghost"
-              className={`w-full justify-start ${
+              className={`w-full justify-start gap-2 ${
                 isActive(item.path)
                   ? 'bg-slate-800 text-white'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800'
               }`}
             >
-              <item.icon className="mr-3 h-4 w-4" />
-              {item.label}
+              <item.icon className="h-4 w-4" />
+              <span className="flex-1 text-left">{item.label}</span>
+              {item.path === '/admin/contact-leads' && unreadLeads > 0 && (
+                <Badge 
+                  variant="destructive" 
+                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs"
+                >
+                  {unreadLeads > 99 ? '99+' : unreadLeads}
+                </Badge>
+              )}
             </Button>
           </Link>
         ))}

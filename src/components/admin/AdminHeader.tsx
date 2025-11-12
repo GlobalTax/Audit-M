@@ -9,13 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Bell } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
 
 export const AdminHeader = () => {
   const { adminUser, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const unreadLeads = useUnreadContactLeads();
 
   const handleSignOut = async () => {
     try {
@@ -42,6 +44,20 @@ export const AdminHeader = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="relative"
+            onClick={() => navigate('/admin/contact-leads')}
+          >
+            <Bell className="h-5 w-5" />
+            {unreadLeads > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-medium text-destructive-foreground">
+                {unreadLeads > 9 ? '9+' : unreadLeads}
+              </span>
+            )}
+          </Button>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="gap-2">

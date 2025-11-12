@@ -1,8 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { AdminSidebar } from './AdminSidebar';
 import { AdminHeader } from './AdminHeader';
+import { useContactLeadsRealtime } from '@/hooks/useContactLeadsRealtime';
 
 export const AdminLayout = () => {
+  // Activar suscripción a notificaciones en tiempo real
+  useContactLeadsRealtime();
+  
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />
