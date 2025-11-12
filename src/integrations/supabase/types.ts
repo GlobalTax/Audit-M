@@ -643,6 +643,9 @@ export type Database = {
           ip_address: string | null
           message: string
           name: string
+          responded_at: string | null
+          responded_by: string | null
+          response_notes: string | null
           service_type: Database["public"]["Enums"]["service_type"] | null
           subject: string
           updated_at: string | null
@@ -657,6 +660,9 @@ export type Database = {
           ip_address?: string | null
           message: string
           name: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
           service_type?: Database["public"]["Enums"]["service_type"] | null
           subject: string
           updated_at?: string | null
@@ -671,6 +677,9 @@ export type Database = {
           ip_address?: string | null
           message?: string
           name?: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
           service_type?: Database["public"]["Enums"]["service_type"] | null
           subject?: string
           updated_at?: string | null

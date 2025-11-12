@@ -1,11 +1,20 @@
 import { useState } from "react";
-import { useContactLeads, useUpdateContactLead, useDeleteContactLead } from "@/hooks/useContactLeads";
+import { useContactLeads, useUpdateContactLead, useDeleteContactLead, ContactLead } from "@/hooks/useContactLeads";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Mail, ExternalLink } from "lucide-react";
+import { Trash2, Mail, ExternalLink, Eye, Download } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { ContactLeadDetailModal } from "@/components/admin/contact-leads/ContactLeadDetailModal";
+import { ContactLeadFilters, ContactLeadFiltersState } from "@/components/admin/contact-leads/ContactLeadFilters";
+import { exportContactLeadsToCSV, exportContactLeadsToExcel } from "@/lib/exportContactLeads";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -27,13 +36,51 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AdminContactLeads() {
-  const { data: leads, isLoading } = useContactLeads();
+  const [filters, setFilters] = useState<ContactLeadFiltersState>({
+    search: "",
+    status: "all",
+    serviceType: "all",
+    dateFrom: "",
+    dateTo: "",
+  });
+  
+  const { data: leads, isLoading } = useContactLeads(filters);
   const updateLead = useUpdateContactLead();
   const deleteLead = useDeleteContactLead();
+  
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [selectedLead, setSelectedLead] = useState<ContactLead | null>(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  const handleToggleEmailSent = (id: string, currentStatus: boolean) => {
-    updateLead.mutate({ id, email_sent: !currentStatus });
+  const handleClearFilters = () => {
+    setFilters({
+      search: "",
+      status: "all",
+      serviceType: "all",
+      dateFrom: "",
+      dateTo: "",
+    });
+  };
+
+  const handleExportCSV = () => {
+    if (leads) {
+      exportContactLeadsToCSV(leads);
+    }
+  };
+
+  const handleExportExcel = () => {
+    if (leads) {
+      exportContactLeadsToExcel(leads);
+    }
+  };
+
+  const handleUpdateStatus = (id: string, emailSent: boolean, responseNotes?: string) => {
+    updateLead.mutate({ id, email_sent: emailSent, response_notes: responseNotes });
+  };
+
+  const handleViewDetail = (lead: ContactLead) => {
+    setSelectedLead(lead);
+    setIsDetailModalOpen(true);
   };
 
   const handleDelete = () => {
@@ -81,7 +128,29 @@ export default function AdminContactLeads() {
             Gestiona los mensajes de contacto recibidos
           </p>
         </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm">
+              <Download className="h-4 w-4 mr-2" />
+              Exportar
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={handleExportCSV}>
+              Exportar a CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleExportExcel}>
+              Exportar a Excel
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
+
+      <ContactLeadFilters
+        filters={filters}
+        onFiltersChange={setFilters}
+        onClearFilters={handleClearFilters}
+      />
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3">
@@ -133,15 +202,19 @@ export default function AdminContactLeads() {
                     <TableHead>Fecha</TableHead>
                     <TableHead>Nombre</TableHead>
                     <TableHead>Email</TableHead>
+                    <TableHead>Empresa</TableHead>
                     <TableHead>Asunto</TableHead>
-                    <TableHead>Mensaje</TableHead>
                     <TableHead>Estado</TableHead>
                     <TableHead className="text-right">Acciones</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {leads.map((lead) => (
-                    <TableRow key={lead.id}>
+                    <TableRow 
+                      key={lead.id}
+                      className="cursor-pointer hover:bg-muted/50"
+                      onClick={() => handleViewDetail(lead)}
+                    >
                       <TableCell className="whitespace-nowrap">
                         {format(new Date(lead.created_at), "dd MMM yyyy HH:mm", {
                           locale: es,
@@ -152,17 +225,16 @@ export default function AdminContactLeads() {
                         <a
                           href={`mailto:${lead.email}`}
                           className="text-blue-600 hover:underline flex items-center gap-1"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           {lead.email}
                           <ExternalLink className="h-3 w-3" />
                         </a>
                       </TableCell>
-                      <TableCell className="max-w-xs truncate">{lead.subject}</TableCell>
-                      <TableCell className="max-w-md">
-                        <p className="line-clamp-2 text-sm text-muted-foreground">
-                          {lead.message}
-                        </p>
+                      <TableCell className="text-sm text-muted-foreground">
+                        {lead.company || "-"}
                       </TableCell>
+                      <TableCell className="max-w-xs truncate">{lead.subject}</TableCell>
                       <TableCell>
                         <Badge variant={lead.email_sent ? "default" : "secondary"}>
                           {lead.email_sent ? "Respondido" : "Pendiente"}
@@ -173,16 +245,20 @@ export default function AdminContactLeads() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() =>
-                              handleToggleEmailSent(lead.id, lead.email_sent)
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleViewDetail(lead);
+                            }}
                           >
-                            <Mail className="h-4 w-4" />
+                            <Eye className="h-4 w-4" />
                           </Button>
                           <Button
                             variant="destructive"
                             size="sm"
-                            onClick={() => setDeleteId(lead.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDeleteId(lead.id);
+                            }}
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -196,6 +272,17 @@ export default function AdminContactLeads() {
           )}
         </CardContent>
       </Card>
+
+      <ContactLeadDetailModal
+        lead={selectedLead}
+        open={isDetailModalOpen}
+        onOpenChange={setIsDetailModalOpen}
+        onUpdateStatus={handleUpdateStatus}
+        onDelete={(id) => {
+          deleteLead.mutate(id);
+          setIsDetailModalOpen(false);
+        }}
+      />
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
