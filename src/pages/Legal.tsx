@@ -19,7 +19,7 @@ const Legal = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground mb-6">
               Aviso Legal
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-foreground">
               Términos y condiciones de uso
             </p>
           </div>
@@ -33,8 +33,8 @@ const Legal = () => {
             <div className="space-y-12">
               
               {/* Last Updated */}
-              <div className="text-sm text-muted-foreground">
-                <p>Última actualización: 12 de noviembre de 2025</p>
+              <div className="text-sm text-foreground">
+                <p>Última actualización: 12 de enero de 2025</p>
               </div>
               
               {/* Identificación */}
@@ -42,39 +42,88 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   1. Identificación del Titular
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), se informa de los siguientes datos:
+                    En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), se informa de los siguientes datos del grupo empresarial:
                   </p>
-              <ul className="list-none space-y-2">
-                <li>
-                  <strong className="text-foreground">Denominación social:</strong> Navarro, Legal Y Tributario S.L.P.
-                </li>
-                <li>
-                  <strong className="text-foreground">CIF:</strong> B67261552
-                </li>
-                <li>
-                  <strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada Profesional
-                </li>
-                <li>
-                  <strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro
-                </li>
-                <li>
-                  <strong className="text-foreground">Grupo empresarial:</strong> Grupo Navarro
-                </li>
-                <li>
-                  <strong className="text-foreground">Domicilio social:</strong> Carrer Ausias March número 36, 08010 Barcelona, España
-                </li>
-                <li>
-                  <strong className="text-foreground">Email de contacto:</strong>{" "}
-                  <a href="mailto:info@nrro.es" className="text-accent hover:underline">
-                    info@nrro.es
-                  </a>
-                </li>
-                <li>
-                  <strong className="text-foreground">Teléfono:</strong> 934593600
-                </li>
-              </ul>
+
+                  {/* Grupo Navarro - Cabecera */}
+                  <div className="bg-muted/30 p-4 rounded-lg border border-border/50 mb-4">
+                    <p className="text-lg font-semibold text-foreground mb-2">
+                      Grupo Empresarial Navarro
+                    </p>
+                    <p className="text-sm text-foreground">
+                      Este sitio web es operado conjuntamente por las siguientes entidades del grupo:
+                    </p>
+                  </div>
+
+                  {/* Empresa 1: Navarro Legal Y Tributario */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro, Legal Y Tributario S.L.P.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B67261552</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada Profesional</li>
+                      <li><strong className="text-foreground">Actividad principal:</strong> Asesoría legal, fiscal y tributaria</li>
+                      <li><strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 2: Capittal Transacciones */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Capittal Transacciones S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B02721918</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad principal:</strong> Originación e intermediación de operaciones</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 3: Navarro Empresarial */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro Empresarial S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B58068800</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad principal:</strong> Asesoría fiscal, laboral y contable recurrente</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 4: SPV Corporate Advisors */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      SPV Corporate Advisors S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B09652017</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad principal:</strong> Sociedad holding de participaciones empresariales</li>
+                    </ul>
+                  </div>
+
+                  {/* Datos comunes del grupo */}
+                  <div className="bg-accent/5 p-4 rounded-lg border border-accent/20 mt-6">
+                    <h4 className="font-semibold text-foreground mb-3">Datos de contacto del grupo</h4>
+                    <ul className="list-none space-y-2">
+                      <li>
+                        <strong className="text-foreground">Domicilio social (todas las empresas):</strong> Carrer Ausias March número 36, 08010 Barcelona, España
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Email de contacto:</strong>{" "}
+                        <a href="mailto:info@nrro.es" className="text-accent hover:underline">
+                          info@nrro.es
+                        </a>
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Teléfono:</strong> 934593600
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -83,7 +132,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   2. Objeto del Sitio Web
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Este sitio web tiene como finalidad:
                   </p>
@@ -105,7 +154,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   3. Condiciones de Uso
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     El acceso y uso de este sitio web implica la aceptación de estas condiciones. El usuario se compromete a:
                   </p>
@@ -128,7 +177,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   4. Propiedad Intelectual e Industrial
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Todos los contenidos de este sitio web (textos, imágenes, logos, diseño gráfico, código fuente, estructura) son propiedad de Navarro, Legal Y Tributario S.L.P. (NRRO) o sus licenciantes y están protegidos por:
                   </p>
@@ -157,7 +206,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   5. Limitación de Responsabilidad
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     NRRO no se responsabiliza de:
                   </p>
@@ -186,7 +235,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   6. Exactitud de la Información
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Nos esforzamos por mantener la información actualizada y precisa. Sin embargo:
                   </p>
@@ -206,9 +255,9 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   7. Enlaces a Sitios Externos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Este sitio web puede contener enlaces a sitios de terceros (proveedores, partners, redes sociales). 
+                    Este sitio web puede contener enlaces a sitios de terceros (proveedores, partners, redes sociales).
                   </p>
                   <p>
                     NRRO:
@@ -229,7 +278,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   8. Modificaciones
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     NRRO se reserva el derecho a:
                   </p>
@@ -250,7 +299,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   9. Legislación Aplicable y Jurisdicción
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Este Aviso Legal se rige por la legislación española vigente.
                   </p>
@@ -268,7 +317,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   10. Protección de Datos Personales
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     El tratamiento de datos personales se rige por nuestra{" "}
                     <a href="/privacy" className="text-accent hover:underline font-normal">
@@ -297,7 +346,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   11. Política de Envío y Recepción de Currículums
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     NRRO recibe y gestiona currículums vitae (CV) para procesos de selección de personal. El envío de un currículum a través de cualquiera de nuestros canales oficiales constituye el consentimiento expreso del candidato para el tratamiento de sus datos personales con las finalidades descritas en esta política.
                   </p>
@@ -480,7 +529,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   12. Comunicaciones Electrónicas
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Al utilizar nuestros formularios de contacto:
                   </p>
@@ -500,7 +549,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   13. Servicios Profesionales
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Este Aviso Legal aplica exclusivamente al <strong className="text-foreground">uso del sitio web</strong>.
                   </p>
@@ -524,7 +573,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   14. Resolución de Conflictos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     En caso de controversia, intentaremos resolverla de forma amistosa mediante negociación directa.
                   </p>
@@ -549,7 +598,7 @@ const Legal = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   15. Contacto
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Para cualquier cuestión relacionada con este Aviso Legal, puedes contactarnos:
                   </p>
