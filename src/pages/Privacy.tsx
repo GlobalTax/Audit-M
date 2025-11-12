@@ -19,7 +19,7 @@ const Privacy = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground mb-6">
               Política de Privacidad
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-foreground">
               Protección de tus datos personales
             </p>
           </div>
@@ -33,8 +33,8 @@ const Privacy = () => {
             <div className="space-y-12">
               
               {/* Last Updated */}
-            <div className="text-sm text-muted-foreground">
-              <p>Última actualización: 25 de enero de 2025</p>
+            <div className="text-sm text-foreground">
+              <p>Última actualización: 12 de enero de 2025</p>
             </div>
 
               {/* Responsable del tratamiento */}
@@ -42,28 +42,97 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   1. Responsable del Tratamiento de Datos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Denominación social:</strong> Navarro, Legal Y Tributario S.L.P.
-              </p>
-              <p>
-                <strong className="text-foreground">CIF:</strong> B67261552
-              </p>
-              <p>
-                <strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro
-              </p>
-              <p>
-                <strong className="text-foreground">Domicilio:</strong> Carrer Ausias March número 36, 08010 Barcelona
-              </p>
-              <p>
-                <strong className="text-foreground">Email de contacto:</strong>{" "}
-                <a href="mailto:info@nrro.es" className="text-accent hover:underline">
-                  info@nrro.es
-                </a>
-              </p>
-              <p>
-                <strong className="text-foreground">Teléfono:</strong> 934593600
-              </p>
+                <div className="space-y-3 text-foreground">
+                  <p>
+                    En cumplimiento del Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos (LOPDGDD), 
+                    los responsables del tratamiento de tus datos personales son las siguientes entidades del Grupo Empresarial Navarro:
+                  </p>
+
+                  {/* Grupo Navarro - Cabecera */}
+                  <div className="bg-muted/30 p-4 rounded-lg border border-border/50 mb-4">
+                    <p className="text-lg font-semibold text-foreground mb-2">
+                      Grupo Empresarial Navarro
+                    </p>
+                    <p className="text-sm text-foreground">
+                      Responsables conjuntos del tratamiento de datos:
+                    </p>
+                  </div>
+
+                  {/* Empresa 1: Navarro Legal Y Tributario */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro, Legal Y Tributario S.L.P.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B67261552</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada Profesional</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Asesoría legal, fiscal y tributaria</li>
+                      <li><strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 2: Capittal Transacciones */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Capittal Transacciones S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B02721918</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Originación e intermediación de operaciones</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 3: Navarro Empresarial */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      Navarro Empresarial S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B58068800</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Asesoría fiscal, laboral y contable recurrente</li>
+                    </ul>
+                  </div>
+
+                  {/* Empresa 4: SPV Corporate Advisors */}
+                  <div className="border-l-4 border-accent pl-4 mb-6">
+                    <h3 className="font-semibold text-foreground mb-2">
+                      SPV Corporate Advisors S.L.
+                    </h3>
+                    <ul className="list-none space-y-1 text-sm">
+                      <li><strong className="text-foreground">CIF:</strong> B09652017</li>
+                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
+                      <li><strong className="text-foreground">Actividad:</strong> Sociedad holding de participaciones empresariales</li>
+                    </ul>
+                  </div>
+
+                  {/* Datos de contacto comunes - Destacado con fondo */}
+                  <div className="bg-accent/5 p-4 rounded-lg border border-accent/20 mt-6">
+                    <h4 className="font-semibold text-foreground mb-3">Datos de contacto del grupo</h4>
+                    <ul className="list-none space-y-2">
+                      <li>
+                        <strong className="text-foreground">Domicilio social (todas las empresas):</strong> Carrer Ausias March número 36, 08010 Barcelona, España
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Email de contacto:</strong>{" "}
+                        <a href="mailto:info@nrro.es" className="text-accent hover:underline">
+                          info@nrro.es
+                        </a>
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Teléfono:</strong> 934593600
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Nota legal sobre responsabilidad conjunta */}
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                    <p className="text-sm text-foreground">
+                      <strong className="text-foreground">Nota:</strong> Las entidades del grupo pueden compartir datos personales entre sí cuando sea necesario para la prestación de servicios integrales. 
+                      Todos los tratamientos se realizan conforme a las bases legales establecidas en el RGPD y la LOPDGDD.
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -72,7 +141,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   2. Datos que Recopilamos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>A través de nuestro sitio web, podemos recopilar los siguientes tipos de datos:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
@@ -96,7 +165,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   3. Finalidad del Tratamiento
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>Tratamos tus datos personales para las siguientes finalidades:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>Responder a tus consultas y solicitudes de información</li>
@@ -113,7 +182,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   4. Base Legal del Tratamiento
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>El tratamiento de tus datos personales se basa en:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
@@ -137,9 +206,9 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   5. Destinatarios de los Datos
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Tus datos personales <strong className="text-foreground">NO se ceden a terceros</strong> salvo obligación legal. 
+                    Tus datos personales <strong className="text-foreground">NO se ceden a terceros</strong> salvo obligación legal.
                     Los únicos destinatarios son:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
@@ -158,7 +227,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   6. Plazo de Conservación
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>Conservamos tus datos personales durante:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
@@ -179,7 +248,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   7. Derechos del Usuario
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>Tienes derecho a:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
@@ -219,7 +288,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   8. Medidas de Seguridad
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>Implementamos medidas técnicas y organizativas para proteger tus datos:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>Cifrado SSL/TLS en todas las comunicaciones</li>
@@ -237,7 +306,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   9. Política de Cookies
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Nuestro sitio web <strong className="text-foreground">NO utiliza cookies publicitarias ni de terceros</strong> para rastreo comercial.
                   </p>
@@ -265,9 +334,9 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   10. Enlaces a Sitios de Terceros
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Nuestro sitio web puede contener enlaces a redes sociales (LinkedIn, Instagram, Twitter, Facebook) y otros sitios de terceros. 
+                    Nuestro sitio web puede contener enlaces a redes sociales (LinkedIn, Instagram, Twitter, Facebook) y otros sitios de terceros.
                   </p>
                   <p>
                     No nos responsabilizamos de las políticas de privacidad de estos sitios externos. 
@@ -281,9 +350,9 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   11. Política sobre Menores
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Nuestros servicios están dirigidos exclusivamente a empresas y profesionales. 
+                    Nuestros servicios están dirigidos exclusivamente a empresas y profesionales.
                     No recopilamos intencionadamente datos de menores de 14 años.
                   </p>
                   <p>
@@ -297,9 +366,9 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   12. Transferencias Internacionales
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
-                    Todos nuestros servidores y proveedores de servicios están ubicados en la Unión Europea. 
+                    Todos nuestros servidores y proveedores de servicios están ubicados en la Unión Europea.
                     <strong className="text-foreground"> No realizamos transferencias internacionales de datos</strong> fuera del Espacio Económico Europeo.
                   </p>
                 </div>
@@ -310,7 +379,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   13. Modificaciones de la Política
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Nos reservamos el derecho a actualizar esta Política de Privacidad en cualquier momento para adaptarla a cambios normativos o mejoras en nuestros servicios.
                   </p>
@@ -325,7 +394,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   14. Derecho a Presentar Reclamación
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Si consideras que no hemos tratado tus datos correctamente, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD):
                   </p>
@@ -353,7 +422,7 @@ const Privacy = () => {
                 <h2 className="text-2xl font-display font-normal text-foreground">
                   15. Contacto
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
+                <div className="space-y-3 text-foreground">
                   <p>
                     Para cualquier cuestión relacionada con esta Política de Privacidad o el tratamiento de tus datos personales, puedes contactarnos en:
                   </p>
