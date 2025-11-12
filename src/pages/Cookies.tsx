@@ -1,6 +1,6 @@
 import { Meta } from "@/components/seo/Meta";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
-import { legalBreadcrumbs } from "@/lib/seoUtils";
+import { legalBreadcrumbs, legalVersions } from "@/lib/seoUtils";
 import { Link } from "react-router-dom";
 import {
   Breadcrumb,
@@ -70,7 +70,7 @@ const Cookies = () => {
               
               {/* Last Updated */}
               <div className="text-sm text-foreground">
-                <p>Última actualización: 12 de noviembre de 2025</p>
+                <p>Última actualización: {legalVersions.lastUpdate}</p>
               </div>
               
               {/* Responsable de la Política de Cookies */}

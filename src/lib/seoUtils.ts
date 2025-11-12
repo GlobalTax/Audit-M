@@ -5,6 +5,12 @@ export const getBreadcrumbUrl = (path: string) => {
   return path.startsWith('/') ? `${base}${path}` : `${base}/${path}`;
 };
 
+// Versiones y fechas de actualización centralizadas para páginas legales
+export const legalVersions = {
+  lastUpdate: "12 de noviembre de 2025",
+  lastUpdateISO: "2025-11-12",
+};
+
 // Breadcrumbs predefinidos para páginas legales
 export const legalBreadcrumbs = {
   legal: [

@@ -1,6 +1,6 @@
 import { Meta } from "@/components/seo/Meta";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
-import { legalBreadcrumbs } from "@/lib/seoUtils";
+import { legalBreadcrumbs, legalVersions } from "@/lib/seoUtils";
 import { Scale, FileText, TrendingUp, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -69,7 +69,7 @@ export default function Terms() {
             
             {/* Last Update */}
             <div className="text-sm text-foreground border-l-4 border-accent pl-4">
-              <p><strong>Última actualización:</strong> 12 de noviembre de 2025</p>
+              <p><strong>Última actualización:</strong> {legalVersions.lastUpdate}</p>
             </div>
 
             {/* Section 1: Entidades Prestadoras */}
