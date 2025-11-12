@@ -205,11 +205,11 @@ export const Navbar = () => {
                               <div className="space-y-4">
                                 <div className="flex items-start gap-3">
                                   <div className="w-12 h-12 rounded-full bg-neutral-200 flex-shrink-0 overflow-hidden">
-                                    <img 
-                                      src="/placeholder.svg" 
-                                      alt="Gemma"
-                                      className="w-full h-full object-cover"
-                                    />
+                <img 
+                  src="https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/object/public/media-library/team-avatars/0.79906963015602.png" 
+                  alt="Gemma Zalacain"
+                  className="w-full h-full object-cover"
+                />
                                   </div>
                                   <div>
                                     <p className="font-medium text-foreground text-sm">Gemma</p>
