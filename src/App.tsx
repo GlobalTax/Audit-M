@@ -101,8 +101,9 @@ const App = () => {
           <Route path="/condiciones-contratacion" element={<Layout><Terms /></Layout>} />
             <Route path="/carreras" element={<Layout><Careers /></Layout>} />
             
-            {/* Catalan routes */}
-            <Route path="/ca/serveis" element={<Layout><Services /></Layout>} />
+        {/* Catalan routes */}
+        <Route path="/ca" element={<Layout><Home /></Layout>} />
+        <Route path="/ca/serveis" element={<Layout><Services /></Layout>} />
             <Route path="/ca/serveis/:slug" element={<Layout><ServiceDetail /></Layout>} />
             <Route path="/ca/casos-exit" element={<Layout><CaseStudies /></Layout>} />
             <Route path="/ca/casos-exit/:slug" element={<Layout><CaseStudyDetail /></Layout>} />
@@ -120,8 +121,9 @@ const App = () => {
             <Route path="/ca/condicions-contractacio" element={<Layout><Terms /></Layout>} />
             <Route path="/ca/carreres" element={<Layout><Careers /></Layout>} />
 
-            {/* English routes */}
-            <Route path="/en/services" element={<Layout><Services /></Layout>} />
+        {/* English routes */}
+        <Route path="/en" element={<Layout><Home /></Layout>} />
+        <Route path="/en/services" element={<Layout><Services /></Layout>} />
             <Route path="/en/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
             <Route path="/en/case-studies" element={<Layout><CaseStudies /></Layout>} />
             <Route path="/en/case-studies/:slug" element={<Layout><CaseStudyDetail /></Layout>} />

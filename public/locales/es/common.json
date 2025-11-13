@@ -106,6 +106,13 @@
       "weekendValue": "Cerrado"
     }
   },
+  "notFound": {
+    "title": "404 - Página no encontrada",
+    "description": "La página que buscas no existe",
+    "heading": "Página no encontrada",
+    "message": "La página que buscas no existe o ha sido movida",
+    "backHome": "Volver al inicio"
+  },
   "about": {
     "meta": {
       "title": "Sobre Nosotros - NRRO",

@@ -106,6 +106,13 @@
       "weekendValue": "Tancat"
     }
   },
+  "notFound": {
+    "title": "404 - Pàgina no trobada",
+    "description": "La pàgina que cerques no existeix",
+    "heading": "Pàgina no trobada",
+    "message": "La pàgina que cerques no existeix o ha estat moguda",
+    "backHome": "Tornar a l'inici"
+  },
   "about": {
     "meta": {
       "title": "Sobre Nosaltres - NRRO",

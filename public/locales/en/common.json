@@ -106,6 +106,13 @@
       "weekendValue": "Closed"
     }
   },
+  "notFound": {
+    "title": "404 - Page not found",
+    "description": "The page you are looking for does not exist",
+    "heading": "Page not found",
+    "message": "The page you are looking for does not exist or has been moved",
+    "backHome": "Back to home"
+  },
   "about": {
     "meta": {
       "title": "About Us - NRRO",
