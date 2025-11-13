@@ -1,4 +1,5 @@
 import { Linkedin, Instagram, Twitter, Facebook, Mail, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Logo } from "@/components/ui/logo";
 import { Separator } from "@/components/ui/separator";
 import { LanguageLink } from "@/components/ui/language-link";
@@ -8,13 +9,13 @@ import { useServicesSearch } from '@/hooks/useServicesSearch';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const currentYear = new Date().getFullYear();
   const { settings } = useSiteSettingsMap();
   const { getServicePath } = useLocalizedPath();
   
   // Obtener servicios dinámicos de la BD
-  const { data: servicesData } = useServicesSearch({ limit: 11 });
+  const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
   const services = servicesData?.services || [];
 
   // Valores por defecto (fallback)
@@ -134,13 +135,13 @@ export const Footer = () => {
             </h4>
             <nav className="flex flex-col gap-3">
               {serviciosItems.map((service) => (
-                <LanguageLink
+                <Link
                   key={service.id}
                   to={getServicePath(service.slug_es, service.slug_ca, service.slug_en)}
                   className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
                 >
                   {service.name}
-                </LanguageLink>
+                </Link>
               ))}
             </nav>
           </div>
@@ -152,13 +153,13 @@ export const Footer = () => {
             </h4>
             <nav className="flex flex-col gap-3">
               {areasItems.map((service) => (
-                <LanguageLink
+                <Link
                   key={service.id}
                   to={getServicePath(service.slug_es, service.slug_ca, service.slug_en)}
                   className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
                 >
                   {service.name}
-                </LanguageLink>
+                </Link>
               ))}
             </nav>
           </div>

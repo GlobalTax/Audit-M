@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
@@ -11,7 +11,7 @@ import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { getLocalizedPath, getServicePath } = useLocalizedPath();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +21,7 @@ export const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
   
   // Obtener servicios dinámicos de la BD
-  const { data: servicesData } = useServicesSearch({ limit: 11 });
+  const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
   const services = servicesData?.services || [];
 
   // Separar servicios y áreas
@@ -168,13 +168,13 @@ export const Navbar = () => {
                             </h3>
                             <div className="space-y-2">
                               {serviciosMenu.map((service) => (
-                                <LanguageLink
+                                <Link
                                   key={service.href}
                                   to={service.href}
                                   className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
                                 >
                                   {service.name}
-                                </LanguageLink>
+                                </Link>
                               ))}
                             </div>
                           </div>
@@ -184,13 +184,13 @@ export const Navbar = () => {
                             </h3>
                             <div className="space-y-2">
                               {areasMenu.map((area) => (
-                                <LanguageLink
+                                <Link
                                   key={area.href}
                                   to={area.href}
                                   className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
                                 >
                                   {area.name}
-                                </LanguageLink>
+                                </Link>
                               ))}
                             </div>
                           </div>
