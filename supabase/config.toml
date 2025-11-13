@@ -41,3 +41,21 @@ verify_jwt = false
 
 [functions.translate-news-to-catalan]
 verify_jwt = false
+
+[functions.translate-blog-to-catalan]
+verify_jwt = false
+
+[functions.translate-services-to-english]
+verify_jwt = false
+
+[functions.translate-blog-to-english]
+verify_jwt = false
+
+[functions.translate-case-studies-to-english]
+verify_jwt = false
+
+[functions.translate-news-to-english]
+verify_jwt = false
+
+[functions.process-ley-beckham-lead]
+verify_jwt = false
