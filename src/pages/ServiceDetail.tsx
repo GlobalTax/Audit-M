@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Loader2, Phone, Mail } from "lucide-react";
 
@@ -19,11 +19,14 @@ import {
 } from "@/components/ui/accordion";
 import { ServiceContactForm } from "@/components/services/ServiceContactForm";
 import { StatCard } from "@/components/ui/stat-card";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 const ServiceDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { trackPageView } = useAnalytics();
   const { language } = useLanguage();
+  const { getServicePath } = useLocalizedPath();
 
   // Fetch from database
   const { data: dbService, isLoading } = useQuery({
@@ -61,6 +64,24 @@ const ServiceDetail = () => {
   const mockService = mockServices.find(s => s.slug === slug);
   const service: any = dbService || mockService;
   
+  // Normalize URL to correct language path
+  useEffect(() => {
+    if (dbService) {
+      const correctPath = getServicePath(
+        dbService.slug_es,
+        dbService.slug_ca,
+        dbService.slug_en
+      );
+      
+      const currentPath = window.location.pathname;
+      
+      if (currentPath !== correctPath) {
+        console.log(`🔄 Normalizing URL from ${currentPath} to ${correctPath}`);
+        navigate(correctPath, { replace: true });
+      }
+    }
+  }, [dbService, language, navigate, getServicePath]);
+
   // Track page view when service is loaded
   useEffect(() => {
     if (service) {
