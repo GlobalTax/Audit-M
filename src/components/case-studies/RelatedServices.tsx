@@ -16,12 +16,20 @@ export const RelatedServices = ({ serviceIds }: RelatedServicesProps) => {
       
       const { data, error } = await supabase
         .from('services')
-        .select('id, name, slug, description, icon_name')
+        .select('id, name_es, name_ca, name_en, slug_es, slug_ca, slug_en, description_es, description_ca, description_en, icon_name')
         .in('id', serviceIds)
         .eq('is_active', true);
       
       if (error) throw error;
-      return data;
+      
+      // Map to use spanish as default, fallback to other languages
+      return data?.map(service => ({
+        id: service.id,
+        name: service.name_es || service.name_ca || service.name_en,
+        slug: service.slug_es || service.slug_ca || service.slug_en,
+        description: service.description_es || service.description_ca || service.description_en,
+        icon_name: service.icon_name,
+      })) || [];
     },
     enabled: serviceIds && serviceIds.length > 0,
   });

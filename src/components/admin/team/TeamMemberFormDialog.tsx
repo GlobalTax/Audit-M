@@ -158,9 +158,15 @@ export function TeamMemberFormDialog({ open, onClose, member, onSuccess }: TeamM
 
       const memberData = {
         name: values.name,
-        position: values.position,
-        bio: values.bio || null,
-        specialization: values.specialization || null,
+        position_es: values.position, // Guardar en columna _es
+        position_ca: values.position, // Por ahora duplicar, traducir después
+        position_en: values.position,
+        bio_es: values.bio || null,
+        bio_ca: values.bio || null,
+        bio_en: values.bio || null,
+        specialization_es: values.specialization || null,
+        specialization_ca: values.specialization || null,
+        specialization_en: values.specialization || null,
         email: values.email || null,
         linkedin: values.linkedin || null,
         avatar_url: avatarUrl || null,

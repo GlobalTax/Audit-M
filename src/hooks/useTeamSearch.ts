@@ -7,47 +7,60 @@ interface TeamSearchParams {
   position?: string;
 }
 
-export function useTeamSearch(params: TeamSearchParams = {}) {
+export function useTeamSearch(params: TeamSearchParams = {}, language: string = 'es') {
   return useQuery({
-    queryKey: ['team-members-search', params.specialization, params.position],
+    queryKey: ['team-members-search', params.specialization, params.position, language],
     queryFn: async () => {
       let query = supabase
         .from('team_members')
         .select('*')
         .eq('is_active', true)
-        .order('order_index');
+        .order('order_index') as any;
 
       if (params.specialization) {
-        query = query.eq('specialization', params.specialization);
+        query = query.eq(`specialization_${language}`, params.specialization);
       }
 
       if (params.position) {
-        query = query.eq('position', params.position);
+        query = query.eq(`position_${language}`, params.position);
       }
 
       const { data, error } = await query;
 
       if (error) throw error;
-      return data as TeamMember[];
+      
+      // Map to TeamMember with language-specific fields
+      return (data || []).map((member: any) => ({
+        id: member.id,
+        name: member.name,
+        position: member[`position_${language}`] || member.position_es,
+        bio: member[`bio_${language}`] || member.bio_es,
+        specialization: member[`specialization_${language}`] || member.specialization_es,
+        linkedin: member.linkedin,
+        email: member.email,
+        avatar_url: member.avatar_url,
+        order_index: member.order_index,
+        is_active: member.is_active,
+      })) as TeamMember[];
     },
   });
 }
 
-export function useTeamFilterOptions() {
+export function useTeamFilterOptions(language: string = 'es') {
   return useQuery({
-    queryKey: ['team-specializations'],
+    queryKey: ['team-specializations', language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('team_members')
-        .select('specialization')
+        .select(`specialization_${language}`)
         .eq('is_active', true)
-        .not('specialization', 'is', null);
+        .not(`specialization_${language}`, 'is', null) as any;
 
       if (error) throw error;
 
       // Get unique specializations
       const uniqueSpecializations = Array.from(
-        new Set(data.map(item => item.specialization).filter(Boolean))
+        new Set(data.map((item: any) => item[`specialization_${language}`]).filter(Boolean))
       ).sort();
 
       return uniqueSpecializations as string[];
@@ -56,21 +69,21 @@ export function useTeamFilterOptions() {
   });
 }
 
-export function useTeamPositionOptions() {
+export function useTeamPositionOptions(language: string = 'es') {
   return useQuery({
-    queryKey: ['team-positions'],
+    queryKey: ['team-positions', language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('team_members')
-        .select('position')
+        .select(`position_${language}`)
         .eq('is_active', true)
-        .not('position', 'is', null);
+        .not(`position_${language}`, 'is', null) as any;
 
       if (error) throw error;
 
       // Get unique positions and order them logically
       const uniquePositions = Array.from(
-        new Set(data.map(item => item.position).filter(Boolean))
+        new Set(data.map((item: any) => item[`position_${language}`]).filter(Boolean))
       );
 
       const orderMap: Record<string, number> = {
@@ -81,7 +94,9 @@ export function useTeamPositionOptions() {
       };
 
       return uniquePositions.sort((a, b) => {
-        return (orderMap[a] || 999) - (orderMap[b] || 999);
+        const aVal = orderMap[a as string] || 999;
+        const bVal = orderMap[b as string] || 999;
+        return aVal - bVal;
       }) as string[];
     },
     staleTime: 5 * 60 * 1000,

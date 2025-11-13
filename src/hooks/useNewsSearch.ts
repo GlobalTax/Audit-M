@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface NewsSearchParams {
   searchQuery?: string;
@@ -23,23 +24,66 @@ interface NewsArticle {
   read_time: number;
   is_featured: boolean;
   published_at: string;
-  relevance: number;
 }
 
 export const useNewsSearch = (params: NewsSearchParams) => {
+  const { language } = useLanguage();
+  
   return useQuery({
-    queryKey: ["news-search", params],
+    queryKey: ["news-search", params, language],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("search_news_articles", {
-        search_query: params.searchQuery || null,
-        filter_category: params.category || null,
-        filter_tags: params.tags || null,
-        limit_count: params.limit || 10,
-        offset_count: params.offset || 0,
-      });
+      let query = supabase
+        .from('news_articles')
+        .select('*')
+        .eq('is_published', true)
+        .order('is_featured', { ascending: false })
+        .order('published_at', { ascending: false });
 
+      // Apply search filter
+      if (params.searchQuery) {
+        const titleCol = `title_${language}`;
+        const excerptCol = `excerpt_${language}`;
+        const contentCol = `content_${language}`;
+        query = query.or(`${titleCol}.ilike.%${params.searchQuery}%,${excerptCol}.ilike.%${params.searchQuery}%,${contentCol}.ilike.%${params.searchQuery}%`);
+      }
+
+      // Apply category filter
+      if (params.category) {
+        query = query.eq('category', params.category);
+      }
+
+      // Apply tags filter
+      if (params.tags && params.tags.length > 0) {
+        query = query.contains('tags', params.tags);
+      }
+
+      // Apply pagination
+      if (params.limit) {
+        query = query.limit(params.limit);
+      }
+      if (params.offset) {
+        query = query.range(params.offset, params.offset + (params.limit || 10) - 1);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
-      return data as NewsArticle[];
+
+      // Map to NewsArticle with correct language fields
+      return (data || []).map((article: any) => ({
+        id: article.id,
+        title: article[`title_${language}`] || article.title_es,
+        slug: article[`slug_${language}`] || article.slug_es,
+        excerpt: article[`excerpt_${language}`] || article.excerpt_es,
+        content: article[`content_${language}`] || article.content_es,
+        featured_image_url: article.featured_image_url,
+        author_name: article.author_name,
+        author_avatar_url: article.author_avatar_url,
+        category: article.category,
+        tags: article.tags,
+        read_time: article.read_time,
+        is_featured: article.is_featured,
+        published_at: article.published_at,
+      })) as NewsArticle[];
     },
     enabled: true,
   });

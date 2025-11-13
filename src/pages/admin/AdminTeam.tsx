@@ -50,7 +50,29 @@ export const AdminTeam = () => {
         .order('order_index', { ascending: true });
       
       if (error) throw error;
-      return data as TeamMember[];
+      
+      // Map data to include all language fields for admin
+      return data?.map((member: any) => ({
+        id: member.id,
+        name: member.name,
+        position: member.position_es || member.position_ca || member.position_en, // Display field (fallback)
+        position_es: member.position_es,
+        position_ca: member.position_ca,
+        position_en: member.position_en,
+        bio: member.bio_es || member.bio_ca || member.bio_en,
+        bio_es: member.bio_es,
+        bio_ca: member.bio_ca,
+        bio_en: member.bio_en,
+        specialization: member.specialization_es || member.specialization_ca || member.specialization_en,
+        specialization_es: member.specialization_es,
+        specialization_ca: member.specialization_ca,
+        specialization_en: member.specialization_en,
+        email: member.email,
+        linkedin: member.linkedin,
+        avatar_url: member.avatar_url,
+        order_index: member.order_index,
+        is_active: member.is_active,
+      })) || [];
     },
   });
 

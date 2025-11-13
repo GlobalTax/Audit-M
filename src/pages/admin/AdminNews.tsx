@@ -74,7 +74,7 @@ export const AdminNews = () => {
           <TableBody>
             {articles?.map((article) => (
               <TableRow key={article.id}>
-                <TableCell className="font-medium">{article.title}</TableCell>
+                <TableCell className="font-medium">{article.title_es || article.title_ca || article.title_en}</TableCell>
                 <TableCell>
                   <Badge variant="outline">{article.category}</Badge>
                 </TableCell>

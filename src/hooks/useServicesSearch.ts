@@ -8,27 +8,27 @@ interface ServicesSearchParams {
   offset?: number;
 }
 
-export const useServicesSearch = (params: ServicesSearchParams) => {
+export const useServicesSearch = (params: ServicesSearchParams, language: string = 'es') => {
   return useQuery({
-    queryKey: ["services-search", params],
+    queryKey: ["services-search", params, language],
     queryFn: async () => {
-      // @ts-ignore - New tables not in types yet
-      const supabaseAny = supabase as any;
-      let query = supabaseAny
+      let query = supabase
         .from('services')
         .select('*', { count: 'exact' })
-        .eq('is_active', true);
+        .eq('is_active', true) as any;
 
-      // Apply search filter
+      // Apply search filter with language-specific columns
       if (params.searchQuery) {
+        const nameCol = `name_${language}`;
+        const descCol = `description_${language}`;
         query = query.or(
-          `name_es.ilike.%${params.searchQuery}%,description_es.ilike.%${params.searchQuery}%`
+          `${nameCol}.ilike.%${params.searchQuery}%,${descCol}.ilike.%${params.searchQuery}%`
         );
       }
 
-      // Apply area filter
+      // Apply area filter with language-specific column
       if (params.area) {
-        query = query.eq('area', params.area);
+        query = query.eq(`area_${language}`, params.area);
       }
 
       // Order by display order, then creation date
@@ -47,8 +47,17 @@ export const useServicesSearch = (params: ServicesSearchParams) => {
 
       if (error) throw error;
       
+      // Map data to include language-specific fields
+      const services = (data || []).map((service: any) => ({
+        ...service,
+        name: service[`name_${language}`] || service.name_es,
+        description: service[`description_${language}`] || service.description_es,
+        slug: service[`slug_${language}`] || service.slug_es,
+        area: service[`area_${language}`] || service.area_es,
+      }));
+      
       return {
-        services: data || [],
+        services,
         totalCount: count || 0
       };
     },

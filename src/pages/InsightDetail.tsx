@@ -22,8 +22,9 @@ const InsightDetail = () => {
       const { data, error } = await supabase
         .from('news_articles')
         .select('id')
-        .eq('slug', slug)
-        .single();
+        .eq('slug_es', slug)
+        .or(`slug_ca.eq.${slug},slug_en.eq.${slug}`)
+        .single() as any;
       
       if (error) throw error;
       return data?.id;
@@ -45,13 +46,21 @@ const InsightDetail = () => {
       if (!slug) return null;
       const response = await supabase
         .from('news_articles')
-        .select('id, title, slug, excerpt, content, featured_image_url, author_name, author_avatar_url, category, tags, read_time, is_featured, published_at, created_at')
-        .eq('slug', slug)
+        .select('id, title_es, title_ca, title_en, slug_es, slug_ca, slug_en, excerpt_es, excerpt_ca, excerpt_en, content_es, content_ca, content_en, featured_image_url, author_name, author_avatar_url, category, tags, read_time, is_featured, published_at, created_at')
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .eq('is_published', true)
-        .single();
+        .single() as any;
       
       if (response.error) throw response.error;
-      return response.data;
+      
+      // Map to use spanish as default
+      return {
+        ...response.data,
+        title: response.data.title_es || response.data.title_ca || response.data.title_en,
+        slug: response.data.slug_es || response.data.slug_ca || response.data.slug_en,
+        excerpt: response.data.excerpt_es || response.data.excerpt_ca || response.data.excerpt_en,
+        content: response.data.content_es || response.data.content_ca || response.data.content_en,
+      };
     },
     enabled: !previewToken && !!slug,
   });

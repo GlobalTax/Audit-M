@@ -26,11 +26,11 @@ export interface ServiceStat {
 
 export interface Service {
   id: string;
-  name: string;
-  slug: string;
-  description: string;
+  name: string; // Mapped from name_es/ca/en
+  slug: string; // Mapped from slug_es/ca/en
+  description: string; // Mapped from description_es/ca/en
   icon_name: string;
-  area: 'Fiscal' | 'Contable' | 'Legal' | 'Laboral';
+  area: 'Fiscal' | 'Contable' | 'Legal' | 'Laboral'; // Mapped from area_es/ca/en
   features: string[];
   benefits?: string;
   typical_clients: string[];
@@ -47,6 +47,20 @@ export interface Service {
   updated_by?: string;
   meta_title?: string;
   meta_description?: string;
+  
+  // Raw DB fields (for admin)
+  name_es?: string;
+  name_ca?: string;
+  name_en?: string;
+  slug_es?: string;
+  slug_ca?: string;
+  slug_en?: string;
+  description_es?: string;
+  description_ca?: string;
+  description_en?: string;
+  area_es?: string;
+  area_ca?: string;
+  area_en?: string;
 }
 
 export interface ServiceFormData extends Omit<Service, 'id' | 'created_at' | 'updated_at' | 'created_by' | 'updated_by'> {}

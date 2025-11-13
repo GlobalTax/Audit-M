@@ -1403,54 +1403,78 @@ export type Database = {
           author_avatar_url: string | null
           author_name: string | null
           category: string
-          content: string
+          content_ca: string | null
+          content_en: string | null
+          content_es: string
           created_at: string | null
-          excerpt: string | null
+          excerpt_ca: string | null
+          excerpt_en: string | null
+          excerpt_es: string | null
           featured_image_url: string | null
           id: string
           is_featured: boolean | null
           is_published: boolean | null
           published_at: string | null
           read_time: number | null
-          slug: string
+          slug_ca: string | null
+          slug_en: string | null
+          slug_es: string
           tags: string[] | null
-          title: string
+          title_ca: string | null
+          title_en: string | null
+          title_es: string
           updated_at: string | null
         }
         Insert: {
           author_avatar_url?: string | null
           author_name?: string | null
           category: string
-          content: string
+          content_ca?: string | null
+          content_en?: string | null
+          content_es: string
           created_at?: string | null
-          excerpt?: string | null
+          excerpt_ca?: string | null
+          excerpt_en?: string | null
+          excerpt_es?: string | null
           featured_image_url?: string | null
           id?: string
           is_featured?: boolean | null
           is_published?: boolean | null
           published_at?: string | null
           read_time?: number | null
-          slug: string
+          slug_ca?: string | null
+          slug_en?: string | null
+          slug_es: string
           tags?: string[] | null
-          title: string
+          title_ca?: string | null
+          title_en?: string | null
+          title_es: string
           updated_at?: string | null
         }
         Update: {
           author_avatar_url?: string | null
           author_name?: string | null
           category?: string
-          content?: string
+          content_ca?: string | null
+          content_en?: string | null
+          content_es?: string
           created_at?: string | null
-          excerpt?: string | null
+          excerpt_ca?: string | null
+          excerpt_en?: string | null
+          excerpt_es?: string | null
           featured_image_url?: string | null
           id?: string
           is_featured?: boolean | null
           is_published?: boolean | null
           published_at?: string | null
           read_time?: number | null
-          slug?: string
+          slug_ca?: string | null
+          slug_en?: string | null
+          slug_es?: string
           tags?: string[] | null
-          title?: string
+          title_ca?: string | null
+          title_en?: string | null
+          title_es?: string
           updated_at?: string | null
         }
         Relationships: []
@@ -1554,6 +1578,7 @@ export type Database = {
           display_order: number | null
           id: string
           is_active: boolean | null
+          language: string
           page_key: string
           section_key: string
           updated_at: string | null
@@ -1565,6 +1590,7 @@ export type Database = {
           display_order?: number | null
           id?: string
           is_active?: boolean | null
+          language?: string
           page_key: string
           section_key: string
           updated_at?: string | null
@@ -1576,6 +1602,7 @@ export type Database = {
           display_order?: number | null
           id?: string
           is_active?: boolean | null
+          language?: string
           page_key?: string
           section_key?: string
           updated_at?: string | null
@@ -1822,17 +1849,18 @@ export type Database = {
       }
       services: {
         Row: {
-          area: string
+          area_ca: string | null
+          area_en: string | null
+          area_es: string
           benefits: string | null
           benefits_ca: string | null
           benefits_en: string | null
           benefits_es: string | null
           created_at: string | null
           created_by: string | null
-          description: string
           description_ca: string | null
           description_en: string | null
-          description_es: string | null
+          description_es: string
           display_order: number | null
           features: string[]
           features_ca: string[] | null
@@ -1850,15 +1878,13 @@ export type Database = {
           meta_title_en: string | null
           meta_title_es: string | null
           metodologia: Json | null
-          name: string
           name_ca: string | null
           name_en: string | null
-          name_es: string | null
+          name_es: string
           servicios_transversales: Json | null
-          slug: string
           slug_ca: string | null
           slug_en: string | null
-          slug_es: string | null
+          slug_es: string
           stats: Json | null
           typical_clients: string[]
           typical_clients_ca: string[] | null
@@ -1868,17 +1894,18 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
-          area: string
+          area_ca?: string | null
+          area_en?: string | null
+          area_es: string
           benefits?: string | null
           benefits_ca?: string | null
           benefits_en?: string | null
           benefits_es?: string | null
           created_at?: string | null
           created_by?: string | null
-          description: string
           description_ca?: string | null
           description_en?: string | null
-          description_es?: string | null
+          description_es: string
           display_order?: number | null
           features?: string[]
           features_ca?: string[] | null
@@ -1896,15 +1923,13 @@ export type Database = {
           meta_title_en?: string | null
           meta_title_es?: string | null
           metodologia?: Json | null
-          name: string
           name_ca?: string | null
           name_en?: string | null
-          name_es?: string | null
+          name_es: string
           servicios_transversales?: Json | null
-          slug: string
           slug_ca?: string | null
           slug_en?: string | null
-          slug_es?: string | null
+          slug_es: string
           stats?: Json | null
           typical_clients?: string[]
           typical_clients_ca?: string[] | null
@@ -1914,17 +1939,18 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
-          area?: string
+          area_ca?: string | null
+          area_en?: string | null
+          area_es?: string
           benefits?: string | null
           benefits_ca?: string | null
           benefits_en?: string | null
           benefits_es?: string | null
           created_at?: string | null
           created_by?: string | null
-          description?: string
           description_ca?: string | null
           description_en?: string | null
-          description_es?: string | null
+          description_es?: string
           display_order?: number | null
           features?: string[]
           features_ca?: string[] | null
@@ -1942,15 +1968,13 @@ export type Database = {
           meta_title_en?: string | null
           meta_title_es?: string | null
           metodologia?: Json | null
-          name?: string
           name_ca?: string | null
           name_en?: string | null
-          name_es?: string | null
+          name_es?: string
           servicios_transversales?: Json | null
-          slug?: string
           slug_ca?: string | null
           slug_en?: string | null
-          slug_es?: string | null
+          slug_es?: string
           stats?: Json | null
           typical_clients?: string[]
           typical_clients_ca?: string[] | null
@@ -2027,7 +2051,6 @@ export type Database = {
       team_members: {
         Row: {
           avatar_url: string | null
-          bio: string | null
           bio_ca: string | null
           bio_en: string | null
           bio_es: string | null
@@ -2038,11 +2061,9 @@ export type Database = {
           linkedin: string | null
           name: string
           order_index: number | null
-          position: string | null
           position_ca: string | null
           position_en: string | null
-          position_es: string | null
-          specialization: string | null
+          position_es: string
           specialization_ca: string | null
           specialization_en: string | null
           specialization_es: string | null
@@ -2050,7 +2071,6 @@ export type Database = {
         }
         Insert: {
           avatar_url?: string | null
-          bio?: string | null
           bio_ca?: string | null
           bio_en?: string | null
           bio_es?: string | null
@@ -2061,11 +2081,9 @@ export type Database = {
           linkedin?: string | null
           name: string
           order_index?: number | null
-          position?: string | null
           position_ca?: string | null
           position_en?: string | null
-          position_es?: string | null
-          specialization?: string | null
+          position_es: string
           specialization_ca?: string | null
           specialization_en?: string | null
           specialization_es?: string | null
@@ -2073,7 +2091,6 @@ export type Database = {
         }
         Update: {
           avatar_url?: string | null
-          bio?: string | null
           bio_ca?: string | null
           bio_en?: string | null
           bio_es?: string | null
@@ -2084,11 +2101,9 @@ export type Database = {
           linkedin?: string | null
           name?: string
           order_index?: number | null
-          position?: string | null
           position_ca?: string | null
           position_en?: string | null
-          position_es?: string | null
-          specialization?: string | null
+          position_es?: string
           specialization_ca?: string | null
           specialization_en?: string | null
           specialization_es?: string | null

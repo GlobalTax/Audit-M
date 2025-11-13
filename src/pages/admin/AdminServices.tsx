@@ -34,19 +34,27 @@ const AdminServices = () => {
         .from('services')
         .select('*')
         .order('display_order', { ascending: true })
-        .order('name', { ascending: true });
+        .order('name_es', { ascending: true }) as any;
 
       if (searchQuery) {
-        query = query.or(`name.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`);
+        query = query.or(`name_es.ilike.%${searchQuery}%,description_es.ilike.%${searchQuery}%`);
       }
 
       if (areaFilter && areaFilter !== 'all') {
-        query = query.eq('area', areaFilter);
+        query = query.eq('area_es', areaFilter);
       }
 
       const { data, error } = await query;
       if (error) throw error;
-      return data as unknown as Service[];
+      
+      // Map to Service interface with language fields
+      return (data || []).map((service: any) => ({
+        ...service,
+        name: service.name_es,
+        description: service.description_es,
+        slug: service.slug_es,
+        area: service.area_es,
+      })) as Service[];
     },
   });
 

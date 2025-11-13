@@ -137,7 +137,26 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
     mutationFn: async (data: ServiceFormData) => {
       // Cast JSONB fields explicitly
       const dbData = {
-        ...data,
+        name_es: data.name,
+        name_ca: data.name, // Por ahora duplicar, traducir después
+        name_en: data.name,
+        slug_es: data.slug,
+        slug_ca: data.slug,
+        slug_en: data.slug,
+        description_es: data.description,
+        description_ca: data.description,
+        description_en: data.description,
+        icon_name: data.icon_name,
+        area_es: data.area,
+        area_ca: data.area,
+        area_en: data.area,
+        features: data.features,
+        benefits: data.benefits,
+        typical_clients: data.typical_clients,
+        is_active: data.is_active,
+        display_order: data.display_order,
+        meta_title: data.meta_title,
+        meta_description: data.meta_description,
         metodologia: data.metodologia as any,
         servicios_transversales: data.servicios_transversales as any,
         stats: data.stats as any,
