@@ -151,6 +151,77 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
     }
   }, [service, open, form]);
 
+  const autoTranslateService = async (serviceId: string, originalData: { name: string; description: string; area: string }) => {
+    try {
+      toast.info('Generando traducciones automáticas (CA + EN)...', { duration: 3000 });
+
+      // Traducir a catalán
+      const { data: dataCa, error: errorCa } = await supabase.functions.invoke('translate-content', {
+        body: { 
+          text: { 
+            name: originalData.name, 
+            description: originalData.description, 
+            area: originalData.area 
+          },
+          targetLang: 'ca',
+          sourceLang: 'es'
+        }
+      });
+
+      if (errorCa) {
+        console.error('Error translating to CA:', errorCa);
+        toast.warning('Traducción a catalán falló, pero el servicio fue creado');
+      }
+
+      // Traducir a inglés
+      const { data: dataEn, error: errorEn } = await supabase.functions.invoke('translate-content', {
+        body: { 
+          text: { 
+            name: originalData.name, 
+            description: originalData.description, 
+            area: originalData.area 
+          },
+          targetLang: 'en',
+          sourceLang: 'es'
+        }
+      });
+
+      if (errorEn) {
+        console.error('Error translating to EN:', errorEn);
+        toast.warning('Traducción a inglés falló, pero el servicio fue creado');
+      }
+
+      // Actualizar el servicio con las traducciones
+      if (dataCa && dataEn) {
+        const { error: updateError } = await supabase
+          .from('services')
+          .update({
+            name_ca: dataCa.translatedText.name,
+            description_ca: dataCa.translatedText.description,
+            area_ca: dataCa.translatedText.area,
+            slug_ca: generateSlug(dataCa.translatedText.name),
+            name_en: dataEn.translatedText.name,
+            description_en: dataEn.translatedText.description,
+            area_en: dataEn.translatedText.area,
+            slug_en: generateSlug(dataEn.translatedText.name),
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', serviceId);
+
+        if (updateError) {
+          console.error('Error updating translations:', updateError);
+          toast.warning('Error al guardar traducciones');
+        } else {
+          toast.success('✅ Traducciones generadas automáticamente (CA + EN)');
+          queryClient.invalidateQueries({ queryKey: ['admin-services'] });
+        }
+      }
+    } catch (error) {
+      console.error('Auto-translation error:', error);
+      toast.error('Error en traducción automática, pero el servicio fue creado en español');
+    }
+  };
+
   const mutation = useMutation({
     mutationFn: async (data: ServiceFormData) => {
       // Cast JSONB fields explicitly
@@ -186,14 +257,26 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
           .update({ ...dbData, updated_at: new Date().toISOString() })
           .eq('id', service.id);
         if (error) throw error;
+        return { isNew: false, serviceId: service.id, originalData: { name: data.name, description: data.description, area: data.area } };
       } else {
-        const { error } = await supabase.from('services').insert([dbData]);
+        const { data: newService, error } = await supabase
+          .from('services')
+          .insert([dbData])
+          .select('id')
+          .single();
         if (error) throw error;
+        return { isNew: true, serviceId: newService.id, originalData: { name: data.name, description: data.description, area: data.area } };
       }
     },
-    onSuccess: () => {
+    onSuccess: async (result) => {
       queryClient.invalidateQueries({ queryKey: ['admin-services'] });
       toast.success(isEditing ? 'Service updated successfully' : 'Service created successfully');
+      
+      // Traducción automática solo para servicios nuevos
+      if (result.isNew) {
+        await autoTranslateService(result.serviceId, result.originalData);
+      }
+      
       onClose();
     },
     onError: (error: Error) => {
@@ -264,7 +347,18 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Edit Service' : 'Create New Service'}</DialogTitle>
+          <DialogTitle className="flex items-center gap-3">
+            {isEditing ? 'Edit Service' : 'Create New Service'}
+            {service && (
+              <div className="flex gap-2">
+                {service.name_ca && <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded">✓ CA</span>}
+                {service.name_en && <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded">✓ EN</span>}
+                {(!service.name_ca || !service.name_en) && (
+                  <span className="text-xs px-2 py-1 bg-amber-100 text-amber-700 rounded">Solo ES</span>
+                )}
+              </div>
+            )}
+          </DialogTitle>
         </DialogHeader>
 
         <ScrollArea className="max-h-[calc(90vh-180px)]">
