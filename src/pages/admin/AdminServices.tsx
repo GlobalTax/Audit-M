@@ -13,6 +13,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { ServiceFormDialog } from '@/components/admin/services/ServiceFormDialog';
 import { ServicePreviewModal } from '@/components/admin/services/ServicePreviewModal';
 import { TranslateServicesToCatalan } from '@/components/admin/services/TranslateServicesToCatalan';
+import { TranslateServicesToEnglish } from '@/components/admin/services/TranslateServicesToEnglish';
 import { Plus, Pencil, Trash2, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import * as LucideIcons from 'lucide-react';
@@ -139,7 +140,10 @@ const AdminServices = () => {
         </Button>
       </div>
 
-      <TranslateServicesToCatalan />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <TranslateServicesToCatalan />
+          <TranslateServicesToEnglish />
+        </div>
 
       {/* Filters */}
       <Card className="p-6">

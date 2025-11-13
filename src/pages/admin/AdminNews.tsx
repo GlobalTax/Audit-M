@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { TranslateNewsToCatalan } from '@/components/admin/news/TranslateNewsToCatalan';
+import { TranslateNewsToEnglish } from '@/components/admin/news/TranslateNewsToEnglish';
 
 export const AdminNews = () => {
   const { toast } = useToast();
@@ -62,7 +63,10 @@ export const AdminNews = () => {
         <h1 className="text-3xl font-bold">News Articles</h1>
       </div>
 
-      <TranslateNewsToCatalan />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <TranslateNewsToCatalan />
+        <TranslateNewsToEnglish />
+      </div>
 
       <Card className="p-6">
         <Table>

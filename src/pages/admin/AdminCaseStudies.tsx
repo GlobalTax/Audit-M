@@ -29,6 +29,7 @@ import { toast } from 'sonner';
 import { CaseStudyFormDialog } from '@/components/admin/case-studies/CaseStudyFormDialog';
 import { CaseStudyPreviewModal } from '@/components/admin/case-studies/CaseStudyPreviewModal';
 import { TranslateCaseStudiesToCatalan } from '@/components/admin/case-studies/TranslateCaseStudiesToCatalan';
+import { TranslateCaseStudiesToEnglish } from '@/components/admin/case-studies/TranslateCaseStudiesToEnglish';
 
 export function AdminCaseStudies() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -138,7 +139,10 @@ export function AdminCaseStudies() {
         </Button>
       </div>
 
-      <TranslateCaseStudiesToCatalan />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <TranslateCaseStudiesToCatalan />
+          <TranslateCaseStudiesToEnglish />
+        </div>
 
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-sm">
