@@ -48,25 +48,27 @@ import AdminTechnology from "./pages/admin/AdminTechnology";
 
 const queryClient = new QueryClient();
 
-const LanguageRedirect = () => {
-  const location = useLocation();
-  const { setLanguage } = useLanguage();
+const App = () => {
+  // Componente interno para manejar redirecciones de idioma
+  const LanguageRedirect = () => {
+    const location = useLocation();
+    const { setLanguage } = useLanguage();
 
-  useEffect(() => {
-    // Detectar el idioma de la URL actual y sincronizar
-    if (location.pathname.startsWith('/ca/')) {
-      setLanguage('ca');
-    } else if (location.pathname.startsWith('/en/')) {
-      setLanguage('en');
-    } else {
-      setLanguage('es');
-    }
-  }, [location.pathname, setLanguage]);
+    useEffect(() => {
+      // Detectar el idioma de la URL actual y sincronizar
+      if (location.pathname.startsWith('/ca/')) {
+        setLanguage('ca');
+      } else if (location.pathname.startsWith('/en/')) {
+        setLanguage('en');
+      } else {
+        setLanguage('es');
+      }
+    }, [location.pathname, setLanguage]);
 
-  return null;
-};
+    return null;
+  };
 
-const App = () => (
+  return (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <LanguageProvider>
@@ -173,6 +175,7 @@ const App = () => (
       </LanguageProvider>
     </AuthProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
