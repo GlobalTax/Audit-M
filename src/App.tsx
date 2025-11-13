@@ -29,6 +29,8 @@ import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
 import Cookies from "./pages/Cookies";
 import Terms from "./pages/Terms";
+import Strategy from "./pages/Strategy";
+import Sectors from "./pages/Sectors";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
@@ -90,6 +92,8 @@ const App = () => {
             <Route path="/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
             <Route path="/equipo" element={<Layout><Team /></Layout>} />
             <Route path="/metodologia" element={<Layout><Methodology /></Layout>} />
+            <Route path="/estrategia" element={<Layout><Strategy /></Layout>} />
+            <Route path="/sectores" element={<Layout><Sectors /></Layout>} />
             <Route path="/contacto" element={<Layout><Contact /></Layout>} />
           <Route path="/privacidad" element={<Layout><Privacy /></Layout>} />
           <Route path="/aviso-legal" element={<Layout><Legal /></Layout>} />
@@ -107,6 +111,8 @@ const App = () => {
             <Route path="/ca/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
             <Route path="/ca/equip" element={<Layout><Team /></Layout>} />
             <Route path="/ca/metodologia" element={<Layout><Methodology /></Layout>} />
+            <Route path="/ca/estrategia" element={<Layout><Strategy /></Layout>} />
+            <Route path="/ca/sectors" element={<Layout><Sectors /></Layout>} />
             <Route path="/ca/contacte" element={<Layout><Contact /></Layout>} />
             <Route path="/ca/privacitat" element={<Layout><Privacy /></Layout>} />
             <Route path="/ca/avis-legal" element={<Layout><Legal /></Layout>} />
@@ -124,6 +130,8 @@ const App = () => {
             <Route path="/en/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
             <Route path="/en/team" element={<Layout><Team /></Layout>} />
             <Route path="/en/methodology" element={<Layout><Methodology /></Layout>} />
+            <Route path="/en/strategy" element={<Layout><Strategy /></Layout>} />
+            <Route path="/en/sectors" element={<Layout><Sectors /></Layout>} />
             <Route path="/en/contact" element={<Layout><Contact /></Layout>} />
             <Route path="/en/privacy" element={<Layout><Privacy /></Layout>} />
             <Route path="/en/legal-notice" element={<Layout><Legal /></Layout>} />

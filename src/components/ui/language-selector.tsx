@@ -40,7 +40,7 @@ export const LanguageSelector = ({ variant = "light" }: LanguageSelectorProps) =
     '/privacidad': { es: '/privacidad', ca: '/privacitat', en: '/privacy' },
     '/aviso-legal': { es: '/aviso-legal', ca: '/avis-legal', en: '/legal-notice' },
     '/cookies': { es: '/cookies', ca: '/cookies', en: '/cookies' },
-    '/condiciones-contratacion': { es: '/condiciones-contratacion', ca: '/condicions-contractacio', en: '/terms-conditions' },
+    '/condiciones-contratacion': { es: '/condiciones-contratacion', ca: '/condicions-contractacio', en: '/terms' },
   };
 
   const handleLanguageChange = (newLang: 'es' | 'ca' | 'en') => {
