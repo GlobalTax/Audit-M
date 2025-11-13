@@ -26,10 +26,43 @@ export default function AdminContent() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const getPageContent = (pageKey: string) => {
-    return allContent?.filter(c => c.page_key === pageKey) || [];
+    const content = allContent?.filter(c => c.page_key === pageKey) || [];
+    
+    // Group by section_key to avoid showing duplicates (one per language)
+    const groupedSections = content.reduce((acc, item) => {
+      const key = item.section_key;
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(item);
+      return acc;
+    }, {} as Record<string, PageContent[]>);
+
+    // Return one representative per section with language info
+    return Object.entries(groupedSections).map(([sectionKey, versions]) => {
+      const esVersion = versions.find(v => (v as any).language === 'es') || versions[0];
+      return {
+        ...esVersion,
+        languageVersions: versions,
+      };
+    });
   };
 
-  const handleEdit = (content: PageContent) => {
+  const hasLanguage = (versions: PageContent[], lang: string) => {
+    return versions.some(v => (v as any).language === lang);
+  };
+
+  const getLanguagesBadge = (versions: PageContent[]) => {
+    const languages = ['es', 'ca', 'en'];
+    const hasAll = languages.every(lang => hasLanguage(versions, lang));
+    const hasEs = hasLanguage(versions, 'es');
+
+    if (hasAll) return { variant: 'default' as const, text: '✅ 3 idiomas', color: 'success' };
+    if (hasEs) return { variant: 'secondary' as const, text: '⚠️ Solo ES', color: 'warning' };
+    return { variant: 'destructive' as const, text: '❌ Sin ES', color: 'error' };
+  };
+
+  const handleEdit = (content: PageContent & { languageVersions?: PageContent[] }) => {
     setEditingContent(content);
     setIsEditorOpen(true);
   };
@@ -44,8 +77,22 @@ export default function AdminContent() {
       display_order: 0,
       created_at: '',
       updated_at: '',
-    });
+    } as any);
     setIsEditorOpen(true);
+  };
+
+  const handleDelete = async (versions: PageContent[]) => {
+    if (!confirm('¿Seguro que quieres eliminar esta sección en TODOS los idiomas?')) return;
+    
+    try {
+      for (const version of versions) {
+        await deleteMutation.mutateAsync(version.id);
+      }
+      toast.success('Sección eliminada en todos los idiomas');
+    } catch (error) {
+      toast.error('Error al eliminar la sección');
+      console.error(error);
+    }
   };
 
   return (
@@ -144,7 +191,7 @@ export default function AdminContent() {
                       <div className="space-y-4">
                         {getPageContent(page.key)
                           .sort((a, b) => a.display_order - b.display_order)
-                          .map((content) => (
+                          .map((content: any) => (
                             <Card key={content.id}>
                               <CardContent className="flex items-center justify-between p-4">
                                 <div className="flex-1">
@@ -158,6 +205,14 @@ export default function AdminContent() {
                                     <Badge variant="outline">
                                       Orden: {content.display_order}
                                     </Badge>
+                                    <Badge variant={getLanguagesBadge(content.languageVersions).variant}>
+                                      {getLanguagesBadge(content.languageVersions).text}
+                                    </Badge>
+                                    <div className="flex gap-1">
+                                      {hasLanguage(content.languageVersions, 'es') && <Badge variant="outline" className="text-xs">ES</Badge>}
+                                      {hasLanguage(content.languageVersions, 'ca') && <Badge variant="outline" className="text-xs">CA</Badge>}
+                                      {hasLanguage(content.languageVersions, 'en') && <Badge variant="outline" className="text-xs">EN</Badge>}
+                                    </div>
                                   </div>
                                   <p className="text-sm text-muted-foreground">
                                     {content.content.title || content.content.overline || 'Sin título'}
@@ -174,17 +229,7 @@ export default function AdminContent() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    onClick={async () => {
-                                      if (confirm('¿Seguro que quieres eliminar esta sección?')) {
-                                        try {
-                                          await deleteMutation.mutateAsync(content.id);
-                                          toast.success('Sección eliminada correctamente');
-                                        } catch (error) {
-                                          toast.error('Error al eliminar la sección');
-                                          console.error(error);
-                                        }
-                                      }
-                                    }}
+                                    onClick={() => handleDelete(content.languageVersions)}
                                   >
                                     <Trash2 className="w-4 h-4" />
                                   </Button>

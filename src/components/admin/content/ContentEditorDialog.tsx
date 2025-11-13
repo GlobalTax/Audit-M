@@ -9,6 +9,10 @@ import { PageContent } from '@/types/pageContent';
 import { useCreatePageContent, useUpdatePageContent } from '@/hooks/usePageContent';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Copy, CheckCircle2, AlertCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ContentEditorDialogProps {
   open: boolean;
@@ -43,30 +47,26 @@ const sectionTypes = [
   { value: 'custom', label: 'Custom Section' },
 ];
 
+type Language = 'es' | 'ca' | 'en';
+
+interface ContentByLanguage {
+  es: { json: string; kpis: Array<{ label: string; value: string }>; datos: Array<{ categoria: string; valor: string; descripcion: string }>; id?: string };
+  ca: { json: string; kpis: Array<{ label: string; value: string }>; datos: Array<{ categoria: string; valor: string; descripcion: string }>; id?: string };
+  en: { json: string; kpis: Array<{ label: string; value: string }>; datos: Array<{ categoria: string; valor: string; descripcion: string }>; id?: string };
+}
+
 export function ContentEditorDialog({ open, onOpenChange, content, onSave }: ContentEditorDialogProps) {
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>('es');
   const [sectionKey, setSectionKey] = useState('');
   const [displayOrder, setDisplayOrder] = useState(0);
   const [isActive, setIsActive] = useState(true);
-  const [jsonContent, setJsonContent] = useState('{}');
   const [jsonError, setJsonError] = useState('');
-  const [kpiStats, setKpiStats] = useState<Array<{ label: string; value: string }>>([
-    { label: '', value: '' },
-    { label: '', value: '' },
-    { label: '', value: '' },
-    { label: '', value: '' },
-  ]);
-  const [datosItems, setDatosItems] = useState<Array<{
-    categoria: string;
-    valor: string;
-    descripcion: string;
-  }>>([
-    { categoria: '', valor: '', descripcion: '' },
-    { categoria: '', valor: '', descripcion: '' },
-    { categoria: '', valor: '', descripcion: '' },
-    { categoria: '', valor: '', descripcion: '' },
-    { categoria: '', valor: '', descripcion: '' },
-    { categoria: '', valor: '', descripcion: '' },
-  ]);
+  
+  const [contentByLanguage, setContentByLanguage] = useState<ContentByLanguage>({
+    es: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+    ca: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+    en: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+  });
 
   const createMutation = useCreatePageContent();
   const updateMutation = useUpdatePageContent();
@@ -74,60 +74,65 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
   const isKpisSection = sectionKey === 'kpis';
   const isDatosSection = sectionKey === 'datos';
 
+  const currentContent = contentByLanguage[selectedLanguage];
+  const hasSpanishContent = contentByLanguage.es.json !== '{}' || contentByLanguage.es.kpis.some(k => k.label || k.value);
+  
+  const getLanguageStatus = (lang: Language) => {
+    const content = contentByLanguage[lang];
+    if (isKpisSection) return content.kpis.some(k => k.label || k.value);
+    if (isDatosSection) return content.datos.some(d => d.categoria || d.valor);
+    return content.json !== '{}';
+  };
+
   useEffect(() => {
-    if (content) {
-      setSectionKey(content.section_key);
-      setDisplayOrder(content.display_order);
-      setIsActive(content.is_active);
-      setJsonContent(JSON.stringify(content.content, null, 2));
-      
-      if (content.section_key === 'kpis' && content.content.stats) {
-        const stats = content.content.stats as Array<{ label: string; value: string }>;
-        setKpiStats([
-          stats[0] || { label: '', value: '' },
-          stats[1] || { label: '', value: '' },
-          stats[2] || { label: '', value: '' },
-          stats[3] || { label: '', value: '' },
-        ]);
+    const loadContent = async () => {
+      if (content && open) {
+        setSectionKey(content.section_key);
+        setDisplayOrder(content.display_order);
+        setIsActive(content.is_active);
+
+        const { data: allVersions } = await supabase
+          .from('page_content')
+          .select('*')
+          .eq('page_key', content.page_key)
+          .eq('section_key', content.section_key);
+
+        const newContentByLanguage: ContentByLanguage = {
+          es: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+          ca: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+          en: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+        };
+
+        allVersions?.forEach((version) => {
+          const lang = version.language as Language;
+          const versionContent = version.content as any;
+          newContentByLanguage[lang].id = version.id;
+
+          if (content.section_key === 'kpis' && versionContent?.stats) {
+            newContentByLanguage[lang].kpis = Array(4).fill(null).map((_, i) => versionContent.stats[i] || { label: '', value: '' });
+          } else if (content.section_key === 'datos' && versionContent?.items) {
+            newContentByLanguage[lang].datos = Array(6).fill(null).map((_, i) => versionContent.items[i] || { categoria: '', valor: '', descripcion: '' });
+          } else {
+            newContentByLanguage[lang].json = JSON.stringify(version.content, null, 2);
+          }
+        });
+
+        setContentByLanguage(newContentByLanguage);
+      } else {
+        setSectionKey('');
+        setDisplayOrder(0);
+        setIsActive(true);
+        setContentByLanguage({
+          es: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+          ca: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+          en: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
+        });
       }
-      
-      if (content.section_key === 'datos' && content.content.items) {
-        const items = content.content.items as Array<{
-          categoria: string;
-          valor: string;
-          descripcion: string;
-        }>;
-        setDatosItems([
-          items[0] || { categoria: '', valor: '', descripcion: '' },
-          items[1] || { categoria: '', valor: '', descripcion: '' },
-          items[2] || { categoria: '', valor: '', descripcion: '' },
-          items[3] || { categoria: '', valor: '', descripcion: '' },
-          items[4] || { categoria: '', valor: '', descripcion: '' },
-          items[5] || { categoria: '', valor: '', descripcion: '' },
-        ]);
-      }
-    } else {
-      setSectionKey('');
-      setDisplayOrder(0);
-      setIsActive(true);
-      setJsonContent('{}');
-      setKpiStats([
-        { label: '', value: '' },
-        { label: '', value: '' },
-        { label: '', value: '' },
-        { label: '', value: '' },
-      ]);
-      setDatosItems([
-        { categoria: '', valor: '', descripcion: '' },
-        { categoria: '', valor: '', descripcion: '' },
-        { categoria: '', valor: '', descripcion: '' },
-        { categoria: '', valor: '', descripcion: '' },
-        { categoria: '', valor: '', descripcion: '' },
-        { categoria: '', valor: '', descripcion: '' },
-      ]);
-    }
-    setJsonError('');
-  }, [content]);
+      setJsonError('');
+    };
+
+    loadContent();
+  }, [content, open]);
 
   const validateJson = (text: string) => {
     try {
@@ -142,277 +147,114 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
 
   const handleSave = async () => {
     if (!content) return;
-    
-    let parsedContent;
-    
-    if (isDatosSection) {
-      parsedContent = {
-        titulo: "Datos",
-        grid: {
-          cols_desktop: 3,
-          cols_tablet: 2,
-          cols_mobile: 1,
-          gap_desktop: 40,
-          gap_tablet: 28,
-          gap_mobile: 20,
-          max_width: 1200
-        },
-        items: datosItems.filter(d => d.categoria && d.valor)
-      };
-    } else if (isKpisSection) {
-      parsedContent = { stats: kpiStats.filter(s => s.label && s.value) };
-    } else {
-      if (!validateJson(jsonContent)) return;
-      parsedContent = JSON.parse(jsonContent);
+
+    if (!getLanguageStatus('es')) {
+      toast.error('El contenido en español es obligatorio');
+      return;
     }
 
     try {
-      if (content.id) {
-        await updateMutation.mutateAsync({
-          id: content.id,
-          content: {
+      for (const lang of ['es', 'ca', 'en'] as Language[]) {
+        const langContent = contentByLanguage[lang];
+        let parsedContent;
+
+        if (isDatosSection) {
+          parsedContent = {
+            titulo: "Datos",
+            grid: { cols_desktop: 3, cols_tablet: 2, cols_mobile: 1, gap_desktop: 40, gap_tablet: 28, gap_mobile: 20, max_width: 1200 },
+            items: langContent.datos.filter(d => d.categoria && d.valor)
+          };
+        } else if (isKpisSection) {
+          parsedContent = { stats: langContent.kpis.filter(s => s.label && s.value) };
+        } else {
+          if (!validateJson(langContent.json)) {
+            if (lang === 'es') return;
+            continue;
+          }
+          parsedContent = JSON.parse(langContent.json);
+        }
+
+        if (langContent.id) {
+          await updateMutation.mutateAsync({
+            id: langContent.id,
+            content: { section_key: sectionKey, content: parsedContent, is_active: isActive, display_order: displayOrder },
+          });
+        } else {
+          await supabase.from('page_content').insert({
+            page_key: content.page_key,
             section_key: sectionKey,
             content: parsedContent,
             is_active: isActive,
             display_order: displayOrder,
-          },
-        });
-        toast.success('Contenido actualizado correctamente');
-      } else {
-        await createMutation.mutateAsync({
-          page_key: content.page_key,
-          section_key: sectionKey,
-          content: parsedContent,
-          is_active: isActive,
-          display_order: displayOrder,
-        });
-        toast.success('Contenido creado correctamente');
+            language: lang,
+          });
+        }
       }
+
+      toast.success('Contenido guardado en todos los idiomas');
       onSave();
     } catch (error) {
       toast.error('Error al guardar: ' + (error as Error).message);
     }
   };
 
+  const copyFromSpanish = () => {
+    if (!hasSpanishContent) {
+      toast.error('No hay contenido en español para copiar');
+      return;
+    }
+
+    if (currentContent.json !== '{}' && selectedLanguage !== 'es') {
+      if (!confirm(`¿Sobrescribir el contenido existente en ${selectedLanguage.toUpperCase()}?`)) return;
+    }
+
+    setContentByLanguage(prev => ({
+      ...prev,
+      [selectedLanguage]: { ...prev.es, id: prev[selectedLanguage].id }
+    }));
+
+    toast.success(`Contenido copiado desde español. Recuerda traducirlo antes de guardar.`);
+  };
+
+  const updateCurrentLanguageContent = (field: 'json' | 'kpis' | 'datos', value: any) => {
+    setContentByLanguage(prev => ({
+      ...prev,
+      [selectedLanguage]: { ...prev[selectedLanguage], [field]: value }
+    }));
+  };
+
   const updateKpiStat = (index: number, field: 'label' | 'value', value: string) => {
-    const newStats = [...kpiStats];
+    const newStats = [...currentContent.kpis];
     newStats[index] = { ...newStats[index], [field]: value };
-    setKpiStats(newStats);
+    updateCurrentLanguageContent('kpis', newStats);
   };
 
-  const updateDatosItem = (
-    index: number,
-    field: 'categoria' | 'valor' | 'descripcion',
-    value: string
-  ) => {
-    const newItems = [...datosItems];
+  const updateDatosItem = (index: number, field: 'categoria' | 'valor' | 'descripcion', value: string) => {
+    const newItems = [...currentContent.datos];
     newItems[index] = { ...newItems[index], [field]: value };
-    setDatosItems(newItems);
-  };
-
-  const getTemplateForSection = (type: string) => {
-    const templates: Record<string, any> = {
-      hero: {
-        overline: 'Overline text',
-        title: 'Main Title',
-        subtitle: 'Subtitle text',
-        cta_primary: { text: 'Primary Button', link: '/link' },
-        cta_secondary: { text: 'Secondary Button', link: '/link' },
-      },
-      kpis: {
-        stats: [
-          { label: 'Abogados y profesionales', value: '+70' },
-          { label: 'Clientes Recurrentes', value: '87%' },
-          { label: 'Áreas de Práctica', value: '10' },
-          { label: 'Cliente Internacional', value: '40%' },
-        ],
-      },
-      datos: {
-        titulo: "Datos",
-        grid: {
-          cols_desktop: 3,
-          cols_tablet: 2,
-          cols_mobile: 1,
-          gap_desktop: 40,
-          gap_tablet: 28,
-          gap_mobile: 20,
-          max_width: 1200
-        },
-        items: [
-          { categoria: "Clientes", valor: "300+", descripcion: "Más de 300 empresas familiares y grupos confían en navarro." },
-          { categoria: "Proyectos", valor: "500+", descripcion: "Operaciones de reestructuración, sucesión y M&A completadas con éxito." },
-          { categoria: "Años de experiencia", valor: "+ 25", descripcion: "Trayectoria sólida acompañando a empresas familiares en su crecimiento." },
-          { categoria: "Equipo", valor: "70+", descripcion: "Abogados y profesionales especializados en fiscal, mercantil, laboral y M&A." },
-          { categoria: "Compromiso", valor: "100%", descripcion: "Dedicación total a cada mandato, con rigor técnico y confidencialidad." },
-          { categoria: "Operaciones M&A", valor: "100+", descripcion: "Mandatos de compra y venta asesorados con un enfoque integral." }
-        ]
-      },
-      about: {
-        overline: 'About',
-        title: 'Title',
-        paragraphs: ['Paragraph 1', 'Paragraph 2'],
-        cta: { text: 'Learn More', link: '/link' },
-      },
-      logos: {
-        overline: 'Partners',
-        title: 'Our Partners',
-        logos: [
-          { name: 'Company 1', logo_url: 'https://...', website_url: 'https://...' },
-        ],
-      },
-      values: {
-        overline: 'Values',
-        title: 'Our Values',
-        values: [
-          { icon: 'Users', title: 'Value 1', description: 'Description' },
-        ],
-      },
-      process: {
-        overline: 'Process',
-        title: 'How We Work',
-        steps: [
-          { icon: 'Target', title: 'Step 1', description: 'Description' },
-        ],
-      },
-      servicios_destacados: {
-        overline: 'Nuestros Servicios Relevantes',
-        services: [
-          {
-            title: 'Asesoramiento Fiscal',
-            description: 'Asesoramos a empresas y socios en todas sus obligaciones fiscales',
-            category: 'Servicios Fiscales',
-            features: [
-              'Planificación y optimización fiscal',
-              'Procedimiento Tributario',
-              'Asesoramiento fiscal recurrente'
-            ]
-          }
-        ]
-      },
-      tecnologia: {
-        overline: 'Tecnología que usamos',
-        logos: [
-          { name: 'Sage' },
-          { name: 'A3 Software' },
-          { name: 'Wolters Kluwer' },
-        ]
-      },
-      clientes: {
-        overline: 'Empresas que confían en nosotros',
-        logos: [
-          { name: 'Empresa 1', logo_url: 'https://via.placeholder.com/150x60?text=Logo+1' },
-          { name: 'Empresa 2', logo_url: 'https://via.placeholder.com/150x60?text=Logo+2' },
-        ]
-      },
-      introduccion: {
-        overline: 'NUESTRO ENFOQUE',
-        titulo: 'Soluciones integrales adaptadas a tu negocio',
-        descripcion: 'Descripción del enfoque y valores',
-        puntos: [
-          'Equipo multidisciplinar',
-          'Atención personalizada',
-          'Tecnología avanzada',
-          'Compromiso con la excelencia'
-        ]
-      },
-      areas_destacadas: {
-        overline: 'NUESTRAS ÁREAS',
-        titulo: 'Cuatro pilares de excelencia',
-        areas: [
-          {
-            nombre: 'Fiscal',
-            icono: 'Receipt',
-            descripcion: 'Optimización fiscal y planificación tributaria',
-            servicios_ejemplo: ['Impuesto de Sociedades', 'IVA', 'IRPF']
-          }
-        ]
-      },
-      metodologia: {
-        overline: 'CÓMO TRABAJAMOS',
-        titulo: 'Nuestro proceso',
-        descripcion: 'Un método probado que garantiza resultados',
-        pasos: [
-          { numero: '01', titulo: 'Análisis', descripcion: 'Estudiamos tu situación' },
-          { numero: '02', titulo: 'Estrategia', descripcion: 'Diseñamos un plan' }
-        ]
-      },
-      cta_consulta: {
-        titulo: '¿Tienes dudas?',
-        descripcion: 'Agenda una consulta gratuita',
-        cta_texto: 'Agendar Consulta',
-        cta_url: '/contacto'
-      },
-      faqs: {
-        overline: 'PREGUNTAS FRECUENTES',
-        titulo: 'Resolvemos tus dudas',
-        preguntas: [
-          {
-            pregunta: '¿Qué servicios incluye la asesoría?',
-            respuesta: 'Incluye gestión fiscal, contable, laboral y legal.'
-          }
-        ]
-      },
-      cta_final: {
-        titulo: '¿Listo para optimizar tu negocio?',
-        descripcion: 'Contáctanos hoy',
-        cta_primario_texto: 'Solicitar Consulta',
-        cta_primario_url: '/contacto',
-        cta_secundario_texto: 'Ver Casos de Éxito',
-        cta_secundario_url: '/casos-de-exito'
-      },
-      story: {
-        overline: 'Mi trayectoria',
-        titulo: '25 años construyendo relaciones de confianza',
-        parrafos: [
-          'Primer párrafo de la historia...',
-          'Segundo párrafo...',
-          'Tercer párrafo...'
-        ],
-        destacado: 'Frase destacada final'
-      },
-      timeline: {
-        overline: 'Trayectoria',
-        hitos: [
-          { periodo: '2000-2016', titulo: 'Garrigues', descripcion: 'Descripción', icon: 'Briefcase' },
-          { periodo: '16 años', titulo: 'Especialización', descripcion: 'Descripción', icon: 'TrendingUp' }
-        ]
-      },
-      diferenciacion: {
-        overline: 'Diferenciación',
-        cards: [
-          { icon: 'Award', titulo: 'Título 1', descripcion: 'Descripción 1' },
-          { icon: 'Users', titulo: 'Título 2', descripcion: 'Descripción 2' }
-        ]
-      },
-      founder: {
-        overline: 'Fundador',
-        nombre: 'Samuel L. Navarro',
-        parrafos: [
-          'Primer párrafo sobre el fundador...',
-          'Segundo párrafo...'
-        ],
-        cta_texto: 'Conoce al equipo completo',
-        cta_url: '/equipo'
-      }
-    };
-    return templates[type] || {};
+    updateCurrentLanguageContent('datos', newItems);
   };
 
   const handleTemplateLoad = (type: string) => {
-    const template = getTemplateForSection(type);
-    setJsonContent(JSON.stringify(template, null, 2));
     setSectionKey(type);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>
-            {content?.id ? 'Editar Sección' : 'Nueva Sección'}
+          <DialogTitle className="flex items-center justify-between">
+            <span>{content?.id ? 'Editar Sección Multiidioma' : 'Nueva Sección Multiidioma'}</span>
+            <div className="flex gap-2">
+              {(['es', 'ca', 'en'] as Language[]).map(lang => (
+                <Badge key={lang} variant={getLanguageStatus(lang) ? 'default' : 'secondary'}>
+                  {lang.toUpperCase()} {getLanguageStatus(lang) ? <CheckCircle2 className="w-3 h-3 ml-1" /> : <AlertCircle className="w-3 h-3 ml-1" />}
+                </Badge>
+              ))}
+            </div>
           </DialogTitle>
           <DialogDescription>
-            {content?.page_key && `Página: ${content.page_key}`}
+            {content?.page_key && `Página: ${content.page_key} | ES obligatorio, CA/EN opcionales`}
           </DialogDescription>
         </DialogHeader>
 
@@ -466,100 +308,137 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
             </div>
           </div>
 
-          {isDatosSection ? (
-            <div className="space-y-4">
-              <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
-                Edita las 6 tarjetas de datos que aparecen en la página principal.
-              </div>
-              
-              {[0, 1, 2, 3, 4, 5].map(index => (
-                <div key={index} className="space-y-3 p-4 border rounded-lg bg-card">
-                  <div className="font-semibold text-sm">Tarjeta {index + 1}</div>
-                  
-                  <div>
-                    <Label>Categoría</Label>
-                    <Input 
-                      value={datosItems[index]?.categoria || ''} 
-                      onChange={(e) => updateDatosItem(index, 'categoria', e.target.value)}
-                      placeholder="Ej: Clientes, Proyectos, Equipo"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label>Valor</Label>
-                    <Input 
-                      value={datosItems[index]?.valor || ''} 
-                      onChange={(e) => updateDatosItem(index, 'valor', e.target.value)}
-                      placeholder="Ej: 300+, + 25, 100%"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label>Descripción</Label>
-                    <Textarea 
-                      value={datosItems[index]?.descripcion || ''} 
-                      onChange={(e) => updateDatosItem(index, 'descripcion', e.target.value)}
-                      placeholder="Descripción breve (1-2 líneas)"
-                      rows={2}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : isKpisSection ? (
-            <div className="space-y-4">
-              <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
-                Edita los 4 KPIs que aparecen en la página principal. 
-                Usa "+" al inicio o "%" al final en el valor si es necesario (ej: "+70", "87%")
-              </div>
-              
-              {[0, 1, 2, 3].map(index => (
-                <div key={index} className="grid grid-cols-2 gap-4 p-4 border rounded-lg bg-card">
-                  <div>
-                    <Label>Etiqueta {index + 1}</Label>
-                    <Input 
-                      value={kpiStats[index]?.label || ''} 
-                      onChange={(e) => updateKpiStat(index, 'label', e.target.value)}
-                      placeholder="Ej: Abogados y profesionales"
-                    />
-                  </div>
-                  <div>
-                    <Label>Valor {index + 1}</Label>
-                    <Input 
-                      value={kpiStats[index]?.value || ''} 
-                      onChange={(e) => updateKpiStat(index, 'value', e.target.value)}
-                      placeholder="Ej: +70, 87%, 10"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div>
-              <Label htmlFor="content-json">Contenido (JSON)</Label>
-              <Textarea
-                id="content-json"
-                value={jsonContent}
-                onChange={(e) => {
-                  setJsonContent(e.target.value);
-                  validateJson(e.target.value);
-                }}
-                rows={20}
-                className="font-mono text-sm"
-                placeholder='{"title": "Example", "description": "..."}'
-              />
-              {jsonError && (
-                <p className="text-sm text-destructive mt-2">{jsonError}</p>
+          <Tabs value={selectedLanguage} onValueChange={(v) => setSelectedLanguage(v as Language)} className="w-full">
+            <div className="flex items-center justify-between mb-4">
+              <TabsList>
+                <TabsTrigger value="es">🇪🇸 Español {!getLanguageStatus('es') && <span className="ml-1 text-destructive">*</span>}</TabsTrigger>
+                <TabsTrigger value="ca">🇪🇸 Català</TabsTrigger>
+                <TabsTrigger value="en">🇬🇧 English</TabsTrigger>
+              </TabsList>
+              {selectedLanguage !== 'es' && hasSpanishContent && (
+                <Button variant="outline" size="sm" onClick={copyFromSpanish}>
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copiar desde Español
+                </Button>
               )}
             </div>
-          )}
 
-          <div className="flex justify-end gap-2">
+            {(['es', 'ca', 'en'] as Language[]).map(lang => (
+              <TabsContent key={lang} value={lang} className="space-y-4">
+                {isDatosSection ? (
+                  <div className="space-y-4">
+                    <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
+                      Edita las 6 tarjetas de datos en {lang.toUpperCase()}
+                    </div>
+                    
+                    {[0, 1, 2, 3, 4, 5].map(index => (
+                      <div key={index} className="space-y-3 p-4 border rounded-lg bg-card">
+                        <div className="font-semibold text-sm">Tarjeta {index + 1}</div>
+                        
+                        <div>
+                          <Label>Categoría</Label>
+                          <Input 
+                            value={contentByLanguage[lang].datos[index]?.categoria || ''} 
+                            onChange={(e) => {
+                              setSelectedLanguage(lang);
+                              updateDatosItem(index, 'categoria', e.target.value);
+                            }}
+                            placeholder="Ej: Clientes, Proyectos, Equipo"
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label>Valor</Label>
+                          <Input 
+                            value={contentByLanguage[lang].datos[index]?.valor || ''}
+                            onChange={(e) => {
+                              setSelectedLanguage(lang);
+                              updateDatosItem(index, 'valor', e.target.value);
+                            }}
+                            placeholder="Ej: 300+, 70+, 100%"
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label>Descripción</Label>
+                          <Textarea 
+                            value={contentByLanguage[lang].datos[index]?.descripcion || ''}
+                            onChange={(e) => {
+                              setSelectedLanguage(lang);
+                              updateDatosItem(index, 'descripcion', e.target.value);
+                            }}
+                            placeholder="Descripción de la métrica"
+                            rows={2}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : isKpisSection ? (
+                  <div className="space-y-4">
+                    <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
+                      Edita los 4 KPIs que aparecen en la página en {lang.toUpperCase()}
+                    </div>
+                    
+                    {[0, 1, 2, 3].map(index => (
+                      <div key={index} className="space-y-2 p-4 border rounded-lg bg-card">
+                        <div className="font-semibold text-sm">KPI {index + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label>Valor</Label>
+                            <Input
+                              value={contentByLanguage[lang].kpis[index]?.value || ''}
+                              onChange={(e) => {
+                                setSelectedLanguage(lang);
+                                updateKpiStat(index, 'value', e.target.value);
+                              }}
+                              placeholder="Ej: +70, 87%, 10"
+                            />
+                          </div>
+                          <div>
+                            <Label>Etiqueta</Label>
+                            <Input
+                              value={contentByLanguage[lang].kpis[index]?.label || ''}
+                              onChange={(e) => {
+                                setSelectedLanguage(lang);
+                                updateKpiStat(index, 'label', e.target.value);
+                              }}
+                              placeholder="Ej: Abogados, Clientes"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Label>Contenido JSON ({lang.toUpperCase()})</Label>
+                    <Textarea
+                      value={contentByLanguage[lang].json}
+                      onChange={(e) => {
+                        setSelectedLanguage(lang);
+                        updateCurrentLanguageContent('json', e.target.value);
+                        validateJson(e.target.value);
+                      }}
+                      placeholder="{ ... }"
+                      className="font-mono text-sm"
+                      rows={20}
+                    />
+                    {jsonError && selectedLanguage === lang && (
+                      <p className="text-sm text-destructive">{jsonError}</p>
+                    )}
+                  </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
+
+          <div className="flex justify-end gap-2 pt-4 border-t">
             <Button variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
             <Button onClick={handleSave} disabled={!isKpisSection && !isDatosSection && !!jsonError}>
-              Guardar
+              Guardar en todos los idiomas
             </Button>
           </div>
         </div>
