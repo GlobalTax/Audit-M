@@ -17,8 +17,9 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Plus, X } from 'lucide-react';
+import { Plus, X, Languages } from 'lucide-react';
 import { toast } from 'sonner';
+import { useState } from 'react';
 
 const serviceSchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters'),
@@ -56,6 +57,14 @@ const serviceSchema = z.object({
   display_order: z.coerce.number().int().min(0),
   meta_title: z.string().optional(),
   meta_description: z.string().optional(),
+  name_ca: z.string().optional(),
+  name_en: z.string().optional(),
+  slug_ca: z.string().optional(),
+  slug_en: z.string().optional(),
+  description_ca: z.string().optional(),
+  description_en: z.string().optional(),
+  area_ca: z.string().optional(),
+  area_en: z.string().optional(),
 });
 
 interface ServiceFormDialogProps {
@@ -67,6 +76,7 @@ interface ServiceFormDialogProps {
 export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogProps) => {
   const queryClient = useQueryClient();
   const isEditing = !!service;
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const form = useForm<ServiceFormData>({
     resolver: zodResolver(serviceSchema),
@@ -127,6 +137,14 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
         display_order: service.display_order,
         meta_title: service.meta_title || '',
         meta_description: service.meta_description || '',
+        name_ca: service.name_ca || '',
+        name_en: service.name_en || '',
+        slug_ca: service.slug_ca || '',
+        slug_en: service.slug_en || '',
+        description_ca: service.description_ca || '',
+        description_en: service.description_en || '',
+        area_ca: service.area_ca || '',
+        area_en: service.area_en || '',
       });
     } else if (!open) {
       form.reset();
@@ -138,18 +156,18 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
       // Cast JSONB fields explicitly
       const dbData = {
         name_es: data.name,
-        name_ca: data.name, // Por ahora duplicar, traducir después
-        name_en: data.name,
+        name_ca: data.name_ca || data.name,
+        name_en: data.name_en || data.name,
         slug_es: data.slug,
-        slug_ca: data.slug,
-        slug_en: data.slug,
+        slug_ca: data.slug_ca || data.slug,
+        slug_en: data.slug_en || data.slug,
         description_es: data.description,
-        description_ca: data.description,
-        description_en: data.description,
+        description_ca: data.description_ca || data.description,
+        description_en: data.description_en || data.description,
         icon_name: data.icon_name,
         area_es: data.area,
-        area_ca: data.area,
-        area_en: data.area,
+        area_ca: data.area_ca || data.area,
+        area_en: data.area_en || data.area,
         features: data.features,
         benefits: data.benefits,
         typical_clients: data.typical_clients,
@@ -187,14 +205,58 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
     mutation.mutate(data);
   };
 
-  const generateSlug = () => {
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
+  const handleGenerateSlug = () => {
     const name = form.getValues('name');
     if (name) {
-      const slug = name
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-      form.setValue('slug', slug);
+      form.setValue('slug', generateSlug(name));
+    }
+  };
+
+  const translateToLanguage = async (targetLang: 'ca' | 'en') => {
+    setIsTranslating(true);
+    try {
+      const name = form.getValues('name');
+      const description = form.getValues('description');
+      const area = form.getValues('area');
+
+      if (!name || !description || !area) {
+        toast.error('Completa name, description y area en español primero');
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('translate-content', {
+        body: { 
+          text: { name, description, area },
+          targetLang,
+          sourceLang: 'es'
+        }
+      });
+
+      if (error) throw error;
+
+      const translated = data.translatedText;
+      const langSuffix = `_${targetLang}`;
+      
+      form.setValue(`name${langSuffix}` as any, translated.name);
+      form.setValue(`description${langSuffix}` as any, translated.description);
+      form.setValue(`area${langSuffix}` as any, translated.area);
+      form.setValue(`slug${langSuffix}` as any, generateSlug(translated.name));
+
+      toast.success(`Traducción a ${targetLang === 'ca' ? 'catalán' : 'inglés'} completada`);
+    } catch (error) {
+      console.error('Translation error:', error);
+      toast.error(`Error al traducir: ${error.message}`);
+    } finally {
+      setIsTranslating(false);
     }
   };
 
@@ -209,8 +271,9 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pr-4">
               <Tabs defaultValue="basic">
-                <TabsList className="grid w-full grid-cols-5">
+                <TabsList className="grid w-full grid-cols-6">
                   <TabsTrigger value="basic">Básico</TabsTrigger>
+                  <TabsTrigger value="traducciones">Traducciones</TabsTrigger>
                   <TabsTrigger value="metodologia">Metodología</TabsTrigger>
                   <TabsTrigger value="transversales">Transversales</TabsTrigger>
                   <TabsTrigger value="stats">Stats</TabsTrigger>
@@ -223,9 +286,9 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>Name (Español)</FormLabel>
                         <FormControl>
-                          <Input {...field} onBlur={generateSlug} />
+                          <Input {...field} onBlur={handleGenerateSlug} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -415,6 +478,164 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
                         </FormItem>
                       )}
                     />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="traducciones" className="space-y-6">
+                  <div className="space-y-8">
+                    {/* Sección Catalán */}
+                    <Card className="p-6 border-2">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-semibold flex items-center gap-2">
+                            🇪🇸 Versión Catalán
+                          </h3>
+                          <Button
+                            type="button"
+                            variant="default"
+                            size="sm"
+                            onClick={() => translateToLanguage('ca')}
+                            disabled={isTranslating}
+                          >
+                            <Languages className="h-4 w-4 mr-2" />
+                            {isTranslating ? 'Traduciendo...' : 'Traducir automáticamente'}
+                          </Button>
+                        </div>
+
+                        <FormField
+                          control={form.control}
+                          name="name_ca"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Nom (Català)</FormLabel>
+                              <FormControl>
+                                <Input {...field} placeholder="Nom del servei en català" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="slug_ca"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Slug (Català) - readonly</FormLabel>
+                              <FormControl>
+                                <Input {...field} disabled className="bg-muted" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="description_ca"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Descripció (Català)</FormLabel>
+                              <FormControl>
+                                <Textarea {...field} rows={4} placeholder="Descripció del servei en català" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="area_ca"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Àrea (Català)</FormLabel>
+                              <FormControl>
+                                <Input {...field} placeholder="Fiscal, Comptable, Legal, Laboral" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </Card>
+
+                    {/* Sección Inglés */}
+                    <Card className="p-6 border-2">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-semibold flex items-center gap-2">
+                            🇬🇧 English Version
+                          </h3>
+                          <Button
+                            type="button"
+                            variant="default"
+                            size="sm"
+                            onClick={() => translateToLanguage('en')}
+                            disabled={isTranslating}
+                          >
+                            <Languages className="h-4 w-4 mr-2" />
+                            {isTranslating ? 'Translating...' : 'Translate automatically'}
+                          </Button>
+                        </div>
+
+                        <FormField
+                          control={form.control}
+                          name="name_en"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Name (English)</FormLabel>
+                              <FormControl>
+                                <Input {...field} placeholder="Service name in English" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="slug_en"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Slug (English) - readonly</FormLabel>
+                              <FormControl>
+                                <Input {...field} disabled className="bg-muted" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="description_en"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Description (English)</FormLabel>
+                              <FormControl>
+                                <Textarea {...field} rows={4} placeholder="Service description in English" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="area_en"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Area (English)</FormLabel>
+                              <FormControl>
+                                <Input {...field} placeholder="Tax, Accounting, Legal, Labor" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </Card>
                   </div>
                 </TabsContent>
 

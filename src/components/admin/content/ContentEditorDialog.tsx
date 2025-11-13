@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Copy, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Copy, CheckCircle2, AlertCircle, Languages } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface ContentEditorDialogProps {
@@ -61,6 +61,7 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
   const [displayOrder, setDisplayOrder] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [jsonError, setJsonError] = useState('');
+  const [isTranslating, setIsTranslating] = useState(false);
   
   const [contentByLanguage, setContentByLanguage] = useState<ContentByLanguage>({
     es: { json: '{}', kpis: Array(4).fill(null).map(() => ({ label: '', value: '' })), datos: Array(6).fill(null).map(() => ({ categoria: '', valor: '', descripcion: '' })) },
@@ -216,6 +217,84 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
     toast.success(`Contenido copiado desde español. Recuerda traducirlo antes de guardar.`);
   };
 
+  const translateFromSpanish = async () => {
+    if (!hasSpanishContent) {
+      toast.error('No hay contenido en español para traducir');
+      return;
+    }
+
+    if (selectedLanguage === 'es') {
+      toast.error('Ya estás en la versión española');
+      return;
+    }
+
+    if (currentContent.json !== '{}' && !confirm(`¿Sobrescribir el contenido existente en ${selectedLanguage.toUpperCase()}?`)) {
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      let textToTranslate: any;
+
+      if (isKpisSection) {
+        textToTranslate = contentByLanguage.es.kpis.map(k => ({ label: k.label, value: k.value }));
+      } else if (isDatosSection) {
+        textToTranslate = contentByLanguage.es.datos.map(d => ({ 
+          categoria: d.categoria, 
+          valor: d.valor, 
+          descripcion: d.descripcion 
+        }));
+      } else {
+        textToTranslate = JSON.parse(contentByLanguage.es.json);
+      }
+
+      const { data, error } = await supabase.functions.invoke('translate-content', {
+        body: { 
+          text: textToTranslate,
+          targetLang: selectedLanguage,
+          sourceLang: 'es'
+        }
+      });
+
+      if (error) throw error;
+
+      const translated = data.translatedText;
+
+      if (isKpisSection) {
+        setContentByLanguage(prev => ({
+          ...prev,
+          [selectedLanguage]: { 
+            ...prev[selectedLanguage], 
+            kpis: Array.isArray(translated) ? translated : prev[selectedLanguage].kpis 
+          }
+        }));
+      } else if (isDatosSection) {
+        setContentByLanguage(prev => ({
+          ...prev,
+          [selectedLanguage]: { 
+            ...prev[selectedLanguage], 
+            datos: Array.isArray(translated) ? translated : prev[selectedLanguage].datos 
+          }
+        }));
+      } else {
+        setContentByLanguage(prev => ({
+          ...prev,
+          [selectedLanguage]: { 
+            ...prev[selectedLanguage], 
+            json: JSON.stringify(translated, null, 2) 
+          }
+        }));
+      }
+
+      toast.success(`Traducción a ${selectedLanguage === 'ca' ? 'catalán' : 'inglés'} completada`);
+    } catch (error) {
+      console.error('Translation error:', error);
+      toast.error(`Error al traducir: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
   const updateCurrentLanguageContent = (field: 'json' | 'kpis' | 'datos', value: any) => {
     setContentByLanguage(prev => ({
       ...prev,
@@ -316,10 +395,21 @@ export function ContentEditorDialog({ open, onOpenChange, content, onSave }: Con
                 <TabsTrigger value="en">🇬🇧 English</TabsTrigger>
               </TabsList>
               {selectedLanguage !== 'es' && hasSpanishContent && (
-                <Button variant="outline" size="sm" onClick={copyFromSpanish}>
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copiar desde Español
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={copyFromSpanish}>
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copiar desde Español
+                  </Button>
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    onClick={translateFromSpanish}
+                    disabled={isTranslating}
+                  >
+                    <Languages className="w-4 h-4 mr-2" />
+                    {isTranslating ? 'Traduciendo...' : 'Traducir desde Español'}
+                  </Button>
+                </div>
               )}
             </div>
 
