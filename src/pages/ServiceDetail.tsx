@@ -5,6 +5,7 @@ import { Loader2, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Meta } from "@/components/seo/Meta";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { services as mockServices } from "@/data/mockData";
@@ -22,34 +23,35 @@ import { StatCard } from "@/components/ui/stat-card";
 const ServiceDetail = () => {
   const { slug } = useParams();
   const { trackPageView } = useAnalytics();
+  const { language } = useLanguage();
 
   // Fetch from database
   const { data: dbService, isLoading } = useQuery({
-    queryKey: ['service', slug],
+    queryKey: ['service', slug, language],
     queryFn: async () => {
       if (!slug) return null;
       const supabaseAny = supabase as any;
       const response = await supabaseAny
         .from('services')
         .select('*')
-        .eq('slug_es', slug)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .eq('is_active', true)
         .single();
       
       if (response.error) throw response.error;
       
-      // Map localized fields
+      // Map localized fields with fallback to Spanish
       const data = response.data;
       return {
         ...data,
-        name: data.name_es,
-        slug: data.slug_es,
-        description: data.description_es,
-        features: data.features_es || [],
-        typical_clients: data.typical_clients_es || [],
-        benefits: data.benefits_es,
-        meta_title: data.meta_title_es,
-        meta_description: data.meta_description_es,
+        name: data[`name_${language}`] || data.name_es,
+        slug: data[`slug_${language}`] || data.slug_es,
+        description: data[`description_${language}`] || data.description_es,
+        features: data[`features_${language}`] || data.features_es || [],
+        typical_clients: data[`typical_clients_${language}`] || data.typical_clients_es || [],
+        benefits: data[`benefits_${language}`] || data.benefits_es,
+        meta_title: data[`meta_title_${language}`] || data.meta_title_es,
+        meta_description: data[`meta_description_${language}`] || data.meta_description_es,
       };
     },
     enabled: !!slug,

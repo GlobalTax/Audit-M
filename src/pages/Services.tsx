@@ -20,7 +20,7 @@ import { supabase } from "@/integrations/supabase/client";
 const ITEMS_PER_PAGE = 12;
 
 const Services = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { trackPageView, trackEvent } = useAnalytics();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeArea, setActiveArea] = useState<string | null>(null);
@@ -58,7 +58,7 @@ const Services = () => {
     area: activeArea || undefined,
     limit: ITEMS_PER_PAGE,
     offset: (currentPage - 1) * ITEMS_PER_PAGE,
-  });
+  }, language);
 
   // Use database data
   const services = dbServices?.services || [];

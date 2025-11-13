@@ -6,9 +6,9 @@ import { toast } from "sonner";
 export const useJobPositions = (filters?: {
   status?: 'draft' | 'published' | 'closed';
   department?: string;
-}) => {
+}, language: string = 'es') => {
   return useQuery({
-    queryKey: ["job-positions", filters],
+    queryKey: ["job-positions", filters, language],
     queryFn: async () => {
       let query = supabase
         .from("job_positions")
@@ -28,7 +28,13 @@ export const useJobPositions = (filters?: {
       const { data, error } = await query;
 
       if (error) throw error;
-      return data as JobPosition[];
+      
+      // Map with fallback to Spanish
+      return (data || []).map((job: any) => ({
+        ...job,
+        title: job[`title_${language}`] || job.title_es || job.title,
+        description: job[`description_${language}`] || job.description_es || job.description,
+      })) as JobPosition[];
     },
   });
 };

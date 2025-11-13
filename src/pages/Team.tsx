@@ -12,15 +12,15 @@ import { Loader2, Users } from "lucide-react";
 import { useState } from "react";
 
 const Team = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
   const [activePosition, setActivePosition] = useState<string | null>(null);
   const { data: members, isLoading } = useTeamSearch({ 
     specialization: activeSpecialization || undefined,
     position: activePosition || undefined
-  });
-  const { data: specializations = [] } = useTeamFilterOptions();
-  const { data: positions = [] } = useTeamPositionOptions();
+  }, language);
+  const { data: specializations = [] } = useTeamFilterOptions(language);
+  const { data: positions = [] } = useTeamPositionOptions(language);
 
   return (
     <>

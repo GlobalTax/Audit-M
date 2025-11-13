@@ -10,15 +10,15 @@ import { useAnalytics } from '@/hooks/useAnalytics';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { trackPageView, trackCTAClick } = useAnalytics();
-  const { data: heroContent } = usePageContent('about', 'hero');
-  const { data: storyContent } = usePageContent('about', 'story');
-  const { data: timelineContent } = usePageContent('about', 'timeline');
-  const { data: valuesContent } = usePageContent('about', 'values');
-  const { data: diferenciacionContent } = usePageContent('about', 'diferenciacion');
-  const { data: statsContent } = usePageContent('about', 'stats');
-  const { data: founderContent } = usePageContent('about', 'founder');
+  const { data: heroContent } = usePageContent('about', 'hero', language);
+  const { data: storyContent } = usePageContent('about', 'story', language);
+  const { data: timelineContent } = usePageContent('about', 'timeline', language);
+  const { data: valuesContent } = usePageContent('about', 'values', language);
+  const { data: diferenciacionContent } = usePageContent('about', 'diferenciacion', language);
+  const { data: statsContent } = usePageContent('about', 'stats', language);
+  const { data: founderContent } = usePageContent('about', 'founder', language);
   
   // Track page view
   useEffect(() => {

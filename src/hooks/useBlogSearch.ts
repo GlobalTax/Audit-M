@@ -10,9 +10,9 @@ interface BlogSearchParams {
   offset?: number;
 }
 
-export const useBlogSearch = (params: BlogSearchParams) => {
+export const useBlogSearch = (params: BlogSearchParams, language: string = 'es') => {
   return useQuery({
-    queryKey: ["blog-search", params],
+    queryKey: ["blog-search", params, language],
     queryFn: async () => {
       // Fetch paginated posts
       const { data: posts, error: postsError } = await supabase.rpc("search_blog_posts", {

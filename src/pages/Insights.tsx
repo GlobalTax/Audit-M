@@ -10,10 +10,12 @@ import { Meta } from "@/components/seo/Meta";
 import { useNewsSearch, useNewsFilterOptions } from "@/hooks/useNewsSearch";
 import { insights } from "@/data/mockData";
 import { ArrowRight, Search, Loader2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
 const Insights = () => {
+  const { language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);

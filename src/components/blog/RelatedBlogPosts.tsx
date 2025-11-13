@@ -6,9 +6,10 @@ interface RelatedBlogPostsProps {
   currentPostId: string;
   category: string;
   tags: string[];
+  language?: string;
 }
 
-export const RelatedBlogPosts = ({ currentPostId, category, tags }: RelatedBlogPostsProps) => {
+export const RelatedBlogPosts = ({ currentPostId, category, tags, language = 'es' }: RelatedBlogPostsProps) => {
   const { data: relatedPosts, isLoading } = useRelatedBlogPosts({
     currentPostId,
     category,
@@ -42,10 +43,10 @@ export const RelatedBlogPosts = ({ currentPostId, category, tags }: RelatedBlogP
           {relatedPosts.map((post: any) => (
             <BlogPostCard
               key={post.id}
-              slug={post.slug_es}
+              slug={post[`slug_${language}`] || post.slug_es}
               category={post.category}
-              title={post.title_es}
-              excerpt={post.excerpt_es}
+              title={post[`title_${language}`] || post.title_es}
+              excerpt={post[`excerpt_${language}`] || post.excerpt_es}
               authorName={post.author_name}
               authorSpecialization={post.author_specialization}
               publishedAt={post.published_at}

@@ -9,21 +9,22 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { insights } from "@/data/mockData";
 import DOMPurify from "dompurify";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const InsightDetail = () => {
   const { slug } = useParams();
+  const { language } = useLanguage();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get('preview');
 
   // First get the article ID from slug
   const { data: articleId, isLoading: isIdLoading } = useQuery({
-    queryKey: ['article-id', slug],
+    queryKey: ['article-id', slug, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('news_articles')
         .select('id')
-        .eq('slug_es', slug)
-        .or(`slug_ca.eq.${slug},slug_en.eq.${slug}`)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .single() as any;
       
       if (error) throw error;
@@ -41,7 +42,7 @@ const InsightDetail = () => {
 
   // Fetch from database for published content
   const { data: dbData, isLoading: isDbLoading } = useQuery({
-    queryKey: ['news-article', slug],
+    queryKey: ['news-article', slug, language],
     queryFn: async () => {
       if (!slug) return null;
       const response = await supabase
@@ -53,13 +54,14 @@ const InsightDetail = () => {
       
       if (response.error) throw response.error;
       
-      // Map to use spanish as default
+      // Map with fallback to Spanish
+      const data = response.data;
       return {
-        ...response.data,
-        title: response.data.title_es || response.data.title_ca || response.data.title_en,
-        slug: response.data.slug_es || response.data.slug_ca || response.data.slug_en,
-        excerpt: response.data.excerpt_es || response.data.excerpt_ca || response.data.excerpt_en,
-        content: response.data.content_es || response.data.content_ca || response.data.content_en,
+        ...data,
+        title: data[`title_${language}`] || data.title_es,
+        slug: data[`slug_${language}`] || data.slug_es,
+        excerpt: data[`excerpt_${language}`] || data.excerpt_es,
+        content: data[`content_${language}`] || data.content_es,
       };
     },
     enabled: !previewToken && !!slug,

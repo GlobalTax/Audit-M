@@ -2,6 +2,7 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowLeft, Clock, Loader2 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
@@ -16,18 +17,19 @@ import { BlogCTASection } from "@/components/blog/BlogCTASection";
 const BlogDetail = () => {
   const { slug } = useParams();
   const { trackPageView } = useAnalytics();
+  const { language } = useLanguage();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get("preview");
   const queryClient = useQueryClient();
 
   // Get article ID from slug for preview mode
   const { data: articleId, isLoading: isIdLoading } = useQuery({
-    queryKey: ["blog-post-id", slug],
+    queryKey: ["blog-post-id", slug, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("id")
-        .eq("slug_es", slug)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .single();
 
       if (error) throw error;
@@ -49,18 +51,29 @@ const BlogDetail = () => {
 
   // Published content
   const { data: dbData, isLoading: isDbLoading } = useQuery({
-    queryKey: ["blog-post", slug],
+    queryKey: ["blog-post", slug, language],
     queryFn: async () => {
       if (!slug) return null;
       const response = await supabase
         .from("blog_posts")
         .select("*")
-        .eq("slug_es", slug)
+        .or(`slug_es.eq.${slug},slug_ca.eq.${slug},slug_en.eq.${slug}`)
         .eq("status", "published")
         .single();
 
       if (response.error) throw response.error;
-      return response.data;
+      
+      // Map with fallback to Spanish
+      const post = response.data;
+      return {
+        ...post,
+        title: post[`title_${language}`] || post.title_es,
+        slug: post[`slug_${language}`] || post.slug_es,
+        excerpt: post[`excerpt_${language}`] || post.excerpt_es,
+        content: post[`content_${language}`] || post.content_es,
+        seo_title: post[`seo_title_${language}`] || post.seo_title_es,
+        seo_description: post[`seo_description_${language}`] || post.seo_description_es,
+      };
     },
     enabled: !previewToken && !!slug,
   });
@@ -78,11 +91,11 @@ const BlogDetail = () => {
     }
   }, [dbData?.id, previewToken]);
 
-  // Reset queries when slug changes
+  // Reset queries when slug or language changes
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["blog-post", slug] });
-    queryClient.invalidateQueries({ queryKey: ["blog-post-id", slug] });
-  }, [slug, queryClient]);
+    queryClient.invalidateQueries({ queryKey: ["blog-post", slug, language] });
+    queryClient.invalidateQueries({ queryKey: ["blog-post-id", slug, language] });
+  }, [slug, language, queryClient]);
 
   const isLoading = previewToken ? isIdLoading || isPreviewLoading : isDbLoading;
   const post = previewToken ? previewData?.data : dbData;
@@ -147,9 +160,9 @@ const BlogDetail = () => {
         />
       )}
       <Meta
-        title={post.seo_title_es || post.title_es}
-        description={post.seo_description_es || post.excerpt_es || ""}
-        canonicalUrl={`${window.location.origin}/blog/${post.slug_es}`}
+        title={post.seo_title || post.title}
+        description={post.seo_description || post.excerpt || ""}
+        canonicalUrl={`${window.location.origin}/blog/${post.slug}`}
       />
 
       <div className="min-h-screen">
@@ -164,7 +177,7 @@ const BlogDetail = () => {
           <div className="max-w-3xl mx-auto">
           <header className="mb-12 pb-12 border-b border-border">
               {post.category && <Overline className="mb-4">{post.category}</Overline>}
-              <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title_es}</h1>
+              <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title}</h1>
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <time dateTime={post.published_at}>
@@ -187,14 +200,14 @@ const BlogDetail = () => {
             </header>
 
             <div className="prose-article">
-              {post.excerpt_es && (
-                <p className="text-lead mb-8">{post.excerpt_es}</p>
+              {post.excerpt && (
+                <p className="text-lead mb-8">{post.excerpt}</p>
               )}
-              {post.content_es && (
+              {post.content && (
                 <div
                   className="text-body space-y-6"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(post.content_es, {
+                    __html: DOMPurify.sanitize(post.content, {
                       ALLOWED_TAGS: [
                         "p",
                         "br",
@@ -247,6 +260,7 @@ const BlogDetail = () => {
           currentPostId={post.id}
           category={post.category || ''}
           tags={post.tags || []}
+          language={language}
         />
 
         {/* CTA de contacto */}

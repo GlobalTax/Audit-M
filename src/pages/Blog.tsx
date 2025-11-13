@@ -14,7 +14,7 @@ import { BlogPostCard } from "@/components/blog/BlogPostCard";
 const ITEMS_PER_PAGE = 9;
 
 const Blog = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { trackPageView, trackEvent } = useAnalytics();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -108,16 +108,16 @@ const Blog = () => {
                   <div 
                     key={post.id}
                     onClick={() => trackEvent("blog_card_click", { 
-                      post_title: post.title_es, 
-                      post_slug: post.slug_es,
+                      post_title: post[`title_${language}`] || post.title_es, 
+                      post_slug: post[`slug_${language}`] || post.slug_es,
                       category: post.category 
                     })}
                   >
                     <BlogPostCard
-                      slug={post.slug_es}
+                      slug={post[`slug_${language}`] || post.slug_es}
                       category={post.category}
-                      title={post.title_es}
-                      excerpt={post.excerpt_es}
+                      title={post[`title_${language}`] || post.title_es}
+                      excerpt={post[`excerpt_${language}`] || post.excerpt_es}
                       authorName={post.author_name}
                       authorSpecialization={post.author_specialization}
                       publishedAt={post.published_at}

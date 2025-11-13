@@ -9,11 +9,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 interface OpenPositionsSectionProps {
   onApply: (position: JobPosition) => void;
+  language?: string;
 }
 
-export const OpenPositionsSection = ({ onApply }: OpenPositionsSectionProps) => {
-  const { t } = useLanguage();
-  const { data: positions, isLoading } = useJobPositions({ status: 'published' });
+export const OpenPositionsSection = ({ onApply, language: propLanguage }: OpenPositionsSectionProps) => {
+  const { t, language: contextLanguage } = useLanguage();
+  const language = propLanguage || contextLanguage;
+  const { data: positions, isLoading } = useJobPositions({ status: 'published' }, language);
   const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   

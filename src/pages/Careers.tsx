@@ -13,7 +13,7 @@ import { JobPosition } from "@/types/jobPosition";
 import { BadgeHero } from "@/components/ui/badge-hero";
 
 const Careers = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { trackPageView } = useAnalytics();
   const formRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -213,7 +213,7 @@ const Careers = () => {
         </section>
 
         {/* Open Positions Section */}
-        <OpenPositionsSection onApply={handleApplyToPosition} />
+        <OpenPositionsSection onApply={handleApplyToPosition} language={language} />
 
         {/* FAQ Section */}
         <CareersFAQSection />

@@ -28,7 +28,7 @@ import DOMPurify from "dompurify";
 
 const Home = () => {
   const { trackCTAClick, trackPageView } = useAnalytics();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // Track page view
   useEffect(() => {
@@ -36,11 +36,11 @@ const Home = () => {
   }, []);
   
   // Fetch dynamic content from DB
-  const { data: heroData } = usePageContent('home', 'hero');
-  const { data: aboutData } = usePageContent('home', 'about');
-  const { data: serviciosDestacadosData } = usePageContent('home', 'servicios_destacados');
-  const { data: tecnologiaData } = usePageContent('home', 'tecnologia');
-  const { data: clientesData } = usePageContent('home', 'clientes');
+  const { data: heroData } = usePageContent('home', 'hero', language);
+  const { data: aboutData } = usePageContent('home', 'about', language);
+  const { data: serviciosDestacadosData } = usePageContent('home', 'servicios_destacados', language);
+  const { data: tecnologiaData } = usePageContent('home', 'tecnologia', language);
+  const { data: clientesData } = usePageContent('home', 'clientes', language);
 
   // Extract content with fallbacks
   const heroContent = heroData?.[0]?.content as HeroSectionContent | undefined;
@@ -50,7 +50,7 @@ const Home = () => {
   const clientesContent = clientesData?.[0]?.content as LogosContent | undefined;
   
   // Fetch datos/stats for the home page
-  const { datos, isLoading: datosLoading } = useHomeDatos();
+  const { datos, isLoading: datosLoading } = useHomeDatos(language);
 
   // Fallback data
   const defaultClientLogos = [
@@ -69,22 +69,22 @@ const Home = () => {
   const clientLogos = clientesContent?.logos || defaultClientLogos;
 
   const { data: services } = useQuery({
-    queryKey: ['featured-services'],
+    queryKey: ['featured-services', language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('services')
-        .select(`id, name_es, slug_es`)
+        .select(`id, name_${language}, slug_${language}, name_es, slug_es`)
         .eq('is_active', true)
         .order('display_order', { ascending: true })
         .limit(4);
       
       if (error) throw error;
       
-      // Map to consistent format
+      // Map to consistent format with fallback to Spanish
       return data?.map((s: any) => ({
         id: s.id,
-        name: s.name_es,
-        slug: s.slug_es,
+        name: s[`name_${language}`] || s.name_es,
+        slug: s[`slug_${language}`] || s.slug_es,
       })) || [];
     },
   });
@@ -93,23 +93,23 @@ const Home = () => {
   
   // Fetch featured blog posts from Supabase
   const { data: featuredPosts = [], isLoading: postsLoading } = useQuery({
-    queryKey: ['featured-blog-posts'],
+    queryKey: ['featured-blog-posts', language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('blog_posts')
-        .select(`id, title_es, slug_es, excerpt_es, category, author_name, author_specialization, read_time, published_at`)
+        .select(`id, title_${language}, slug_${language}, excerpt_${language}, title_es, slug_es, excerpt_es, category, author_name, author_specialization, read_time, published_at`)
         .eq('status', 'published')
         .order('published_at', { ascending: false })
         .limit(3);
       
       if (error) throw error;
       
-      // Map to consistent format
+      // Map to consistent format with fallback to Spanish
       return data?.map((post: any) => ({
         id: post.id,
-        title: post.title_es,
-        slug: post.slug_es,
-        excerpt: post.excerpt_es,
+        title: post[`title_${language}`] || post.title_es,
+        slug: post[`slug_${language}`] || post.slug_es,
+        excerpt: post[`excerpt_${language}`] || post.excerpt_es,
         category: post.category,
         author_name: post.author_name,
         author_specialization: post.author_specialization,

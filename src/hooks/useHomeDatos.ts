@@ -39,8 +39,8 @@ const DEFAULT_DATOS: DatoItem[] = [
   }
 ];
 
-export const useHomeDatos = () => {
-  const { data: contentData, isLoading } = usePageContent('home', 'datos');
+export const useHomeDatos = (language: string = 'es') => {
+  const { data: contentData, isLoading } = usePageContent('home', 'datos', language);
   
   const datos: DatoItem[] = contentData && contentData.length > 0
     ? (contentData[0].content as any).items

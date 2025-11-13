@@ -15,8 +15,8 @@ const DEFAULT_KPIS: KPI[] = [
   { label: "Cliente Internacional", value: "40", suffix: "%" },
 ];
 
-export const useHomeKpis = () => {
-  const { data: contentData, isLoading } = usePageContent('home', 'kpis');
+export const useHomeKpis = (language: string = 'es') => {
+  const { data: contentData, isLoading } = usePageContent('home', 'kpis', language);
   
   const kpis: KPI[] = contentData && contentData.length > 0
     ? (contentData[0].content as StatsContent).stats.map(stat => {
