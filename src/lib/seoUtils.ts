@@ -33,3 +33,44 @@ export const legalBreadcrumbs = {
     { name: "Condiciones de Contratación", url: getBreadcrumbUrl("/condiciones-contratacion") }
   ]
 };
+
+// Breadcrumbs predefinidos para páginas principales
+export const mainBreadcrumbs = {
+  services: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Servicios", url: getBreadcrumbUrl("/servicios") }
+  ],
+  blog: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Blog", url: getBreadcrumbUrl("/blog") }
+  ],
+  caseStudies: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Casos de Éxito", url: getBreadcrumbUrl("/casos-exito") }
+  ],
+  team: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Equipo", url: getBreadcrumbUrl("/equipo") }
+  ],
+  about: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Nosotros", url: getBreadcrumbUrl("/nosotros") }
+  ],
+  leyBeckham: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Servicios", url: getBreadcrumbUrl("/servicios") },
+    { name: "Ley Beckham", url: getBreadcrumbUrl("/ley-beckham") }
+  ],
+  careers: [
+    { name: "Inicio", url: getBreadcrumbUrl("/") },
+    { name: "Únete al Equipo", url: getBreadcrumbUrl("/careers") }
+  ]
+};
+
+// Helper para crear breadcrumbs dinámicos (para páginas de detalle)
+export const createDynamicBreadcrumb = (
+  parentPath: { name: string; url: string }[],
+  currentName: string
+) => {
+  return [...parentPath, { name: currentName, url: window.location.href }];
+};

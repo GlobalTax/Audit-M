@@ -3,6 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Meta } from '@/components/seo/Meta';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from '@/components/ui/breadcrumb';
 import { CaseStudy } from '@/types/caseStudy';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -16,6 +25,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import DOMPurify from 'dompurify';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { mainBreadcrumbs, createDynamicBreadcrumb } from '@/lib/seoUtils';
 
 export default function CaseStudyDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -66,6 +76,11 @@ export default function CaseStudyDetail() {
     },
     enabled: !!slug,
   });
+  
+  // Breadcrumb items
+  const breadcrumbItems = caseStudy 
+    ? createDynamicBreadcrumb(mainBreadcrumbs.caseStudies, caseStudy.hero_title || caseStudy.title)
+    : mainBreadcrumbs.caseStudies;
 
   // Normalizar URL cuando se carga el case study
   useEffect(() => {
@@ -128,6 +143,7 @@ export default function CaseStudyDetail() {
         description={caseStudy.meta_description || caseStudy.hero_subtitle || caseStudy.results_summary}
         ogImage={ogImageUrl}
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="relative bg-black text-white">
@@ -205,6 +221,31 @@ export default function CaseStudyDetail() {
           </div>
         </div>
       </section>
+
+      {/* Breadcrumb Navigation */}
+      <div className="bg-muted/30 border-b border-border/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Inicio</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/casos-exito">Casos de Éxito</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{caseStudy?.hero_title || caseStudy?.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
 
       {/* Challenge Section */}
       {caseStudy.challenge && (

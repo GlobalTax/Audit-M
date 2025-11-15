@@ -4,6 +4,15 @@ import { Loader2, Phone, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useScrollDepth } from "@/hooks/useScrollDepth";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,6 +30,7 @@ import {
 import { ServiceContactForm } from "@/components/services/ServiceContactForm";
 import { StatCard } from "@/components/ui/stat-card";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -68,6 +78,11 @@ const ServiceDetail = () => {
   // Fallback to mock data
   const mockService = mockServices.find(s => s.slug === slug);
   const service: any = dbService || mockService;
+  
+  // Breadcrumb items
+  const breadcrumbItems = service 
+    ? createDynamicBreadcrumb(mainBreadcrumbs.services, service.name)
+    : mainBreadcrumbs.services;
   
   // Normalize URL to correct language path
   useEffect(() => {
@@ -128,6 +143,7 @@ const ServiceDetail = () => {
         ogImage={ogImageUrl}
         canonicalUrl={`${window.location.origin}/servicios/${service.slug}`}
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section - Black background, centered text */}
       <section 
@@ -158,6 +174,32 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Breadcrumb Navigation */}
+      <div className="bg-muted/30 border-b border-border/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Inicio</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/servicios">Servicios</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{service?.name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+
       {/* Cómo Trabajamos Section - 3 columns */}
       {service.metodologia && (
         <section className="bg-white py-16 md:py-24">

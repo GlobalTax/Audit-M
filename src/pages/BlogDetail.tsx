@@ -8,6 +8,15 @@ import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { Button } from "@/components/ui/button";
 import { Overline } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 import { PreviewBanner } from "@/components/ui/preview-banner";
 import { usePreviewContent } from "@/hooks/usePreviewContent";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -15,6 +24,7 @@ import { supabase } from "@/integrations/supabase/client";
 import DOMPurify from "dompurify";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { BlogCTASection } from "@/components/blog/BlogCTASection";
+import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -134,6 +144,11 @@ const BlogDetail = () => {
   const post = previewToken ? previewData?.data : dbData;
   const isPreviewMode = !!previewToken && !!previewData;
   
+  // Breadcrumb items
+  const breadcrumbItems = post 
+    ? createDynamicBreadcrumb(mainBreadcrumbs.blog, post.title)
+    : mainBreadcrumbs.blog;
+  
   // Track page view when post is loaded
   useEffect(() => {
     if (post && !previewToken) {
@@ -205,6 +220,32 @@ const BlogDetail = () => {
         ogImage={ogImageUrl}
         canonicalUrl={`${window.location.origin}/blog/${post.slug}`}
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
+      {/* Breadcrumb Navigation */}
+      <div className="bg-muted/30 border-b border-border/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Inicio</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/blog">Blog</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{post?.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
 
       <div className="min-h-screen">
         <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
