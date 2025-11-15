@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCompanySetupLeads, useCompanySetupStats, useUpdateCompanySetupLead, useDeleteCompanySetupLead, type LeadFilters } from '@/hooks/useCompanySetupLeads';
-import { Calculator, Zap, Rocket, AlertCircle, Trash2 } from 'lucide-react';
+import { Calculator, Zap, Rocket, AlertCircle, Trash2, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 
@@ -37,6 +37,67 @@ export const AdminCompanySetupLeads = () => {
         <h1 className="text-3xl font-bold">Company Setup Leads</h1>
         <p className="text-muted-foreground">A/B testing performance tracker</p>
       </div>
+
+      {/* Quick Links to Landing Pages */}
+      <Card className="bg-muted/30">
+        <CardHeader>
+          <CardTitle className="text-sm flex items-center gap-2">
+            <ExternalLink className="h-4 w-4" />
+            Landing Pages - Quick Access
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-4 gap-3">
+            <Button
+              variant="outline"
+              className="justify-start"
+              asChild
+            >
+              <a href="/en/company-setup-calculator" target="_blank" rel="noopener noreferrer">
+                <Calculator className="mr-2 h-4 w-4" />
+                Calculator
+                <ExternalLink className="ml-auto h-3 w-3" />
+              </a>
+            </Button>
+            
+            <Button
+              variant="outline"
+              className="justify-start"
+              asChild
+            >
+              <a href="/en/nie-spain-foreigners" target="_blank" rel="noopener noreferrer">
+                <AlertCircle className="mr-2 h-4 w-4" />
+                NIE Service
+                <ExternalLink className="ml-auto h-3 w-3" />
+              </a>
+            </Button>
+            
+            <Button
+              variant="outline"
+              className="justify-start"
+              asChild
+            >
+              <a href="/en/startup-company-setup-spain" target="_blank" rel="noopener noreferrer">
+                <Rocket className="mr-2 h-4 w-4" />
+                Tech Startup
+                <ExternalLink className="ml-auto h-3 w-3" />
+              </a>
+            </Button>
+            
+            <Button
+              variant="outline"
+              className="justify-start"
+              asChild
+            >
+              <a href="/en/fast-company-registration-spain" target="_blank" rel="noopener noreferrer">
+                <Zap className="mr-2 h-4 w-4" />
+                Express
+                <ExternalLink className="ml-auto h-3 w-3" />
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stats */}
       {stats && (
