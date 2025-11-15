@@ -30,14 +30,27 @@ export const useJobPositions = (filters?: {
       if (error) throw error;
       
       // Map with fallback to Spanish
-      return (data || []).map((job: any) => ({
-        ...job,
-        title: job[`title_${language}`] || job.title_es || job.title,
-        slug: job[`slug_${language}`] || job.slug_es || job.slug,
-        description: job[`description_${language}`] || job.description_es || job.description,
-        requirements: job[`requirements_${language}`] || job.requirements_es || job.requirements || [],
-        responsibilities: job[`responsibilities_${language}`] || job.responsibilities_es || job.responsibilities || [],
-      })) as JobPosition[];
+      return (data || []).map((job: any) => {
+        const mapped = {
+          ...job,
+          title: job[`title_${language}`] || job.title_es || job.title,
+          slug: job[`slug_${language}`] || job.slug_es || job.slug,
+          description: job[`description_${language}`] || job.description_es || job.description,
+          requirements: job[`requirements_${language}`] || job.requirements_es || job.requirements || [],
+          responsibilities: job[`responsibilities_${language}`] || job.responsibilities_es || job.responsibilities || [],
+        };
+        
+        console.log('useJobPositions - Mapped job:', {
+          id: mapped.id,
+          title: mapped.title,
+          slug: mapped.slug,
+          hasDescription: !!mapped.description,
+          department: mapped.department,
+          location: mapped.location
+        });
+        
+        return mapped;
+      }) as JobPosition[];
     },
   });
 };
