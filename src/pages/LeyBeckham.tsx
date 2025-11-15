@@ -1,4 +1,5 @@
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { HeroSection } from "@/components/ley-beckham/HeroSection";
 import { BenefitsGrid } from "@/components/ley-beckham/BenefitsGrid";
 import { RequirementsChecklist } from "@/components/ley-beckham/RequirementsChecklist";
@@ -10,10 +11,19 @@ import { StatCard } from "@/components/ui/stat-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 import { CheckCircle, Users } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const LeyBeckham = () => {
   const { trackPageView } = useAnalytics();
@@ -30,9 +40,33 @@ const LeyBeckham = () => {
         description={t("seo.description")}
         keywords={t("seo.keywords")}
       />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "https://navarrotax.legal/" },
+        { name: "Ley Beckham", url: "https://navarrotax.legal/ley-beckham" }
+      ]} />
 
       <div className="min-h-screen">
         <HeroSection />
+        
+        {/* Breadcrumb Navigation */}
+        <div className="bg-muted/30 border-b border-border/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Inicio</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Ley Beckham</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </div>
+
         <BenefitsGrid />
 
         {/* ¿Qué es la Ley Beckham? */}

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Users, Lightbulb, Target, Heart, TrendingUp, Code, Scale, Calculator, Building2, UserCheck, Briefcase } from "lucide-react";
@@ -11,6 +12,15 @@ import { CareerApplicationForm } from "@/components/careers/CareerApplicationFor
 import { JobPositionModal } from "@/components/careers/JobPositionModal";
 import { JobPosition } from "@/types/jobPosition";
 import { BadgeHero } from "@/components/ui/badge-hero";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import { Link } from "react-router-dom";
 
 const Careers = () => {
   const { t, language } = useLanguage();
@@ -103,6 +113,10 @@ const Careers = () => {
         description={t('careers.meta.description')}
         canonicalUrl={`${window.location.origin}/carreras`}
       />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "https://navarrotax.legal/" },
+        { name: "Únete al Equipo", url: "https://navarrotax.legal/carreras" }
+      ]} />
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -121,6 +135,25 @@ const Careers = () => {
             </div>
           </div>
         </section>
+
+        {/* Breadcrumb Navigation */}
+        <div className="bg-muted/30 border-b border-border/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Inicio</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Únete al Equipo</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </div>
 
         {/* Culture & Values Section */}
         <section className="bg-background py-20 md:py-28">
