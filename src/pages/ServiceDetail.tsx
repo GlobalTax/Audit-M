@@ -32,6 +32,7 @@ import { ServiceContactForm } from "@/components/services/ServiceContactForm";
 import { StatCard } from "@/components/ui/stat-card";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
+import { RelatedServices } from "@/components/services/RelatedServices";
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -342,6 +343,14 @@ const ServiceDetail = () => {
             </div>
           </div>
         </section>
+      )}
+
+      {/* Related Services */}
+      {service.id && (
+        <RelatedServices 
+          currentServiceId={service.id} 
+          category={service.category}
+        />
       )}
 
       {/* Contact Form */}
