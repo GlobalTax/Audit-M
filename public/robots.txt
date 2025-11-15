@@ -13,5 +13,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-# Sitemap servido desde Supabase Storage CDN
-Sitemap: https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/object/public/public-files/sitemap.xml
+# Sitemap
+Sitemap: https://nrro.es/sitemap.xml

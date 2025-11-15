@@ -48,6 +48,7 @@ import AdminLeyBeckhamLeads from "./pages/admin/AdminLeyBeckhamLeads";
 import AdminDemoRequests from "./pages/admin/AdminDemoRequests";
 import AdminTechnology from "./pages/admin/AdminTechnology";
 import AdminSitemap from "./pages/admin/AdminSitemap";
+import SitemapXML from "./pages/SitemapXML";
 
 const queryClient = new QueryClient();
 
@@ -179,6 +180,9 @@ const App = () => {
                 } 
               />
             </Route>
+
+            {/* Sitemap XML */}
+            <Route path="/sitemap.xml" element={<SitemapXML />} />
 
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
