@@ -152,7 +152,9 @@
     "card": {
       "learnMore": "Learn more",
       "moreInfo": "More information"
-    }
+    },
+    "relatedServices": "Related services",
+    "mightInterest": "You might also be interested in"
   },
   "blog": {
     "meta": {
