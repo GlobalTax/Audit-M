@@ -129,6 +129,16 @@ export const LandingFormDialog = ({ open, onOpenChange, landing }: LandingFormDi
             
             {/* General Tab */}
             <TabsContent value="general" className="space-y-4">
+              {/* Indicador de idioma */}
+              {formData.title_es && !formData.title_en && !formData.title_ca && (
+                <div className="bg-muted/50 border border-border rounded-lg p-3 mb-4">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium">Idioma:</span> Esta landing está configurada solo en <span className="font-medium text-foreground">Español</span>. 
+                    Los campos base se usan como fallback.
+                  </p>
+                </div>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="title">Título*</Label>
                 <Input
@@ -202,6 +212,16 @@ export const LandingFormDialog = ({ open, onOpenChange, landing }: LandingFormDi
             
             {/* SEO Tab */}
             <TabsContent value="seo" className="space-y-4">
+              {/* Indicador de idioma */}
+              {formData.meta_title_es && !formData.meta_title_en && !formData.meta_title_ca && (
+                <div className="bg-muted/50 border border-border rounded-lg p-3 mb-4">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium">SEO en Español:</span> Esta landing solo tiene meta tags en español. 
+                    Los campos base se usan para motores de búsqueda.
+                  </p>
+                </div>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="meta_title">Meta Title</Label>
                 <Input

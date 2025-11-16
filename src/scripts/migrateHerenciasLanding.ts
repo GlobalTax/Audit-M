@@ -13,6 +13,7 @@ export async function migrateHerenciasLanding() {
     console.log('🚀 Iniciando migración de landing de herencias...');
 
     const landingData = {
+      // Solo español - Landing específica para Barcelona/Cataluña
       slug: 'abogados-herencias-barcelona',
       slug_es: 'abogados-herencias-barcelona',
       title: 'Abogados de Herencias en Barcelona | Expertos en Sucesiones Cataluña',
