@@ -1,42 +1,42 @@
 import { Building2, Users, Award, Clock } from 'lucide-react';
 
-export const TrustBar = () => {
-  const stats = [
-    {
-      icon: Building2,
-      value: '500+',
-      label: 'Companies Registered',
-    },
-    {
-      icon: Clock,
-      value: '25',
-      label: 'Years Experience',
-    },
-    {
-      icon: Users,
-      value: '50+',
-      label: 'Countries Served',
-    },
-    {
-      icon: Award,
-      value: '99%',
-      label: 'Success Rate',
-    },
-  ];
+interface TrustBarProps {
+  heading?: string;
+  subtitle?: string;
+  stats?: Array<{
+    value: string;
+    label: string;
+  }>;
+}
+
+export const TrustBar = ({ 
+  heading = 'Trusted by 500+ companies since 1998',
+  subtitle = '🏛️ Navarro Tax Legal • Barcelona Bar Association • Tax Advisors Registry',
+  stats = [
+    { value: '500+', label: 'Companies Registered' },
+    { value: '25', label: 'Years Experience' },
+    { value: '50+', label: 'Countries Served' },
+    { value: '99%', label: 'Success Rate' },
+  ]
+}: TrustBarProps) => {
+  const statsWithIcons = stats.map((stat, index) => ({
+    ...stat,
+    icon: [Building2, Clock, Users, Award][index] || Building2,
+  }));
 
   return (
-    <div className="border-y border-border bg-muted/30 py-8">
+    <div className="border-y border-border bg-background py-8">
       <div className="container">
         <div className="text-center mb-6">
           <p className="text-sm font-semibold text-muted-foreground mb-2">
-            Trusted by 500+ companies since 1998
+            {heading}
           </p>
           <div className="text-xs text-muted-foreground">
-            🏛️ Navarro Tax Legal • Barcelona Bar Association • Tax Advisors Registry
+            {subtitle}
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat, index) => {
+          {statsWithIcons.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center">

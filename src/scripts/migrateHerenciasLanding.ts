@@ -54,7 +54,16 @@ export async function migrateHerenciasLanding() {
         {
           type: 'trust-bar',
           id: 'trust-bar',
-          props: {}
+          props: {
+            heading: 'Más de 500 empresas confían en nosotros desde 1998',
+            subtitle: '🏛️ Navarro Tax Legal • Ilustre Colegio de Abogados de Barcelona • Registro de Asesores Fiscales',
+            stats: [
+              { value: '500+', label: 'Empresas Registradas' },
+              { value: '25', label: 'Años de Experiencia' },
+              { value: '50+', label: 'Países Atendidos' },
+              { value: '99%', label: 'Tasa de Éxito' }
+            ]
+          }
         },
         {
           type: 'value-props',
