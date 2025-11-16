@@ -13,7 +13,7 @@ interface FAQSectionProps {
 
 export const FAQSection = ({ title, subtitle, faqs }: FAQSectionProps) => {
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-16 bg-background">
       <div className="container">
         <h2 className="text-3xl font-normal text-center mb-4 text-foreground">
           {title}

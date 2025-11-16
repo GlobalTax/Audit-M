@@ -15,7 +15,7 @@ export const CalculatorCTASection = ({
   ctaUrl = '#calculadora',
 }: CalculatorCTASectionProps) => {
   return (
-    <section id="calculadora" className="py-16 bg-primary/5">
+    <section id="calculadora" className="py-16 bg-background">
       <div className="container">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6 flex justify-center">
