@@ -115,47 +115,47 @@ const LeyBeckham = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
               <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-                {t("profiles.eyebrow")}
+                {t("leyBeckham.profiles.eyebrow")}
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-                {t("profiles.title")}
+                {t("leyBeckham.profiles.title")}
               </h2>
               <p className="text-body max-w-2xl mx-auto">
-                {t("profiles.subtitle")}
+                {t("leyBeckham.profiles.subtitle")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {[
                 {
-                  title: t("profiles.executives.title"),
-                  description: t("profiles.executives.description"),
-                  badge: t("profiles.executives.badge")
+                  title: t("leyBeckham.profiles.executives.title"),
+                  description: t("leyBeckham.profiles.executives.description"),
+                  badge: t("leyBeckham.profiles.executives.badge")
                 },
                 {
-                  title: t("profiles.tech.title"),
-                  description: t("profiles.tech.description"),
-                  badge: t("profiles.tech.badge")
+                  title: t("leyBeckham.profiles.tech.title"),
+                  description: t("leyBeckham.profiles.tech.description"),
+                  badge: t("leyBeckham.profiles.tech.badge")
                 },
                 {
-                  title: t("profiles.financial.title"),
-                  description: t("profiles.financial.description"),
-                  badge: t("profiles.financial.badge")
+                  title: t("leyBeckham.profiles.financial.title"),
+                  description: t("leyBeckham.profiles.financial.description"),
+                  badge: t("leyBeckham.profiles.financial.badge")
                 },
                 {
-                  title: t("profiles.consultants.title"),
-                  description: t("profiles.consultants.description"),
-                  badge: t("profiles.consultants.badge")
+                  title: t("leyBeckham.profiles.consultants.title"),
+                  description: t("leyBeckham.profiles.consultants.description"),
+                  badge: t("leyBeckham.profiles.consultants.badge")
                 },
                 {
-                  title: t("profiles.entrepreneurs.title"),
-                  description: t("profiles.entrepreneurs.description"),
-                  badge: t("profiles.entrepreneurs.badge")
+                  title: t("leyBeckham.profiles.entrepreneurs.title"),
+                  description: t("leyBeckham.profiles.entrepreneurs.description"),
+                  badge: t("leyBeckham.profiles.entrepreneurs.badge")
                 },
                 {
-                  title: t("profiles.researchers.title"),
-                  description: t("profiles.researchers.description"),
-                  badge: t("profiles.researchers.badge")
+                  title: t("leyBeckham.profiles.researchers.title"),
+                  description: t("leyBeckham.profiles.researchers.description"),
+                  badge: t("leyBeckham.profiles.researchers.badge")
                 }
               ].map((profile, index) => (
                 <Card key={index} className="bg-card border border-border/50">

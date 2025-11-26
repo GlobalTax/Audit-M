@@ -408,6 +408,7 @@
         "title": "Solicitud en plazo",
         "description": "Debes presentar la solicitud dentro de los 6 meses siguientes al inicio de tu actividad laboral en España"
       },
+      "keyLabel": "Requisito clave",
       "req6": {
         "title": "No realizar actividades a través de Establecimiento Permanente",
         "description": "Si eres empresario o profesional, no puedes realizar tu actividad a través de un establecimiento permanente que ya estuviese en España antes de tu traslado"
@@ -464,6 +465,7 @@
       "eyebrow": "Comparativa",
       "title": "Ahorro fiscal real con la Ley Beckham",
       "subtitle": "Compara cuánto pagarías con el IRPF general frente al régimen Beckham",
+      "disclaimer": "Cálculos aproximados basados en legislación vigente. Consulta tu caso particular.",
       "table": {
         "income": "Ingresos anuales",
         "generalTax": "IRPF General",
@@ -492,6 +494,7 @@
       "eyebrow": "Proceso",
       "title": "Cómo te ayudamos a aplicar la Ley Beckham",
       "subtitle": "Proceso completo de asesoramiento y tramitación",
+      "step": "Paso",
       "step1": {
         "title": "Análisis de viabilidad",
         "description": "Evaluamos tu caso personal y verificamos el cumplimiento de todos los requisitos",

@@ -8,38 +8,38 @@ export const ProcessTimeline = () => {
   const steps = [
     {
       icon: CheckCircle,
-      title: t("process.step1.title"),
-      description: t("process.step1.description"),
-      duration: t("process.step1.duration"),
-      details: [t("process.step1.detail1"), t("process.step1.detail2"), t("process.step1.detail3")]
+      title: t("leyBeckham.process.step1.title"),
+      description: t("leyBeckham.process.step1.description"),
+      duration: t("leyBeckham.process.step1.duration"),
+      details: [t("leyBeckham.process.step1.point1"), t("leyBeckham.process.step1.point2"), t("leyBeckham.process.step1.point3")]
     },
     {
       icon: FileText,
-      title: t("process.step2.title"),
-      description: t("process.step2.description"),
-      duration: t("process.step2.duration"),
-      details: [t("process.step2.detail1"), t("process.step2.detail2"), t("process.step2.detail3"), t("process.step2.detail4")]
+      title: t("leyBeckham.process.step2.title"),
+      description: t("leyBeckham.process.step2.description"),
+      duration: t("leyBeckham.process.step2.duration"),
+      details: [t("leyBeckham.process.step2.point1"), t("leyBeckham.process.step2.point2"), t("leyBeckham.process.step2.point3"), t("leyBeckham.process.step2.point4")]
     },
     {
       icon: Send,
-      title: t("process.step3.title"),
-      description: t("process.step3.description"),
-      duration: t("process.step3.duration"),
-      details: [t("process.step3.detail1"), t("process.step3.detail2"), t("process.step3.detail3")]
+      title: t("leyBeckham.process.step3.title"),
+      description: t("leyBeckham.process.step3.description"),
+      duration: t("leyBeckham.process.step3.duration"),
+      details: [t("leyBeckham.process.step3.point1"), t("leyBeckham.process.step3.point2"), t("leyBeckham.process.step3.point3")]
     },
     {
       icon: Clock,
-      title: t("process.step4.title"),
-      description: t("process.step4.description"),
-      duration: t("process.step4.duration"),
-      details: [t("process.step4.detail1"), t("process.step4.detail2"), t("process.step4.detail3")]
+      title: t("leyBeckham.process.step4.title"),
+      description: t("leyBeckham.process.step4.description"),
+      duration: t("leyBeckham.process.step4.duration"),
+      details: [t("leyBeckham.process.step4.point1"), t("leyBeckham.process.step4.point2"), t("leyBeckham.process.step4.point3")]
     },
     {
       icon: ThumbsUp,
-      title: t("process.step5.title"),
-      description: t("process.step5.description"),
-      duration: t("process.step5.duration"),
-      details: [t("process.step5.detail1"), t("process.step5.detail2"), t("process.step5.detail3")]
+      title: t("leyBeckham.process.step5.title"),
+      description: t("leyBeckham.process.step5.description"),
+      duration: t("leyBeckham.process.step5.duration"),
+      details: [t("leyBeckham.process.step5.point1"), t("leyBeckham.process.step5.point2"), t("leyBeckham.process.step5.point3")]
     }
   ];
 
@@ -48,13 +48,13 @@ export const ProcessTimeline = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            {t("process.eyebrow")}
+            {t("leyBeckham.process.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            {t("process.title")}
+            {t("leyBeckham.process.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            {t("process.subtitle")}
+            {t("leyBeckham.process.subtitle")}
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export const ProcessTimeline = () => {
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-2">
                                 <span className="text-sm font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">
-                                  {t("process.step")} {index + 1}
+                                  {t("leyBeckham.process.step")} {index + 1}
                                 </span>
                                 <span className="text-xs text-muted-foreground">⏱️ {step.duration}</span>
                               </div>
@@ -126,16 +126,16 @@ export const ProcessTimeline = () => {
             <Card className="max-w-2xl mx-auto bg-card border border-border/50">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-4">
-                  {t("process.cta.title")}
+                  {t("leyBeckham.process.cta.title")}
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  {t("process.cta.description")}
+                  {t("leyBeckham.process.cta.description")}
                 </p>
                 <a
                   href="#contacto"
                   className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft h-10 px-6"
                 >
-                  {t("process.cta.button")}
+                  {t("leyBeckham.process.cta.button")}
                 </a>
               </CardContent>
             </Card>

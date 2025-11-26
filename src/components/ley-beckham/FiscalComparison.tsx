@@ -66,13 +66,13 @@ export const FiscalComparison = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            {t("comparison.eyebrow")}
+            {t("leyBeckham.comparison.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            {t("comparison.title")}
+            {t("leyBeckham.comparison.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            {t("comparison.subtitle")}
+            {t("leyBeckham.comparison.subtitle")}
           </p>
         </div>
 
@@ -82,20 +82,20 @@ export const FiscalComparison = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-normal">{t("comparison.table.income")}</TableHead>
+                    <TableHead className="font-normal">{t("leyBeckham.comparison.table.income")}</TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>{t("comparison.table.irpf")}</span>
+                        <span>{t("leyBeckham.comparison.table.generalTax")}</span>
                         <TrendingUp className="w-4 h-4 text-destructive" />
                       </div>
                     </TableHead>
                     <TableHead className="text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span>{t("comparison.table.beckham")}</span>
+                        <span>{t("leyBeckham.comparison.table.beckhamTax")}</span>
                         <TrendingDown className="w-4 h-4 text-primary" />
                       </div>
                     </TableHead>
-                    <TableHead className="text-center font-normal">{t("comparison.table.savings")}</TableHead>
+                    <TableHead className="text-center font-normal">{t("leyBeckham.comparison.table.savings")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -138,13 +138,13 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-destructive" />
-                  {t("comparison.irpf.title")}
+                  {t("leyBeckham.comparison.irpf.title")}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• {t("comparison.irpf.point1")}</li>
-                  <li>• {t("comparison.irpf.point2")}</li>
-                  <li>• {t("comparison.irpf.point3")}</li>
-                  <li>• {t("comparison.irpf.point4")}</li>
+                  <li>• {t("leyBeckham.comparison.irpf.point1")}</li>
+                  <li>• {t("leyBeckham.comparison.irpf.point2")}</li>
+                  <li>• {t("leyBeckham.comparison.irpf.point3")}</li>
+                  <li>• {t("leyBeckham.comparison.irpf.point4")}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -153,20 +153,20 @@ export const FiscalComparison = () => {
               <CardContent className="p-6">
                 <h3 className="text-lg font-normal mb-3 flex items-center gap-2">
                   <TrendingDown className="w-5 h-5 text-primary" />
-                  {t("comparison.beckham.title")}
+                  {t("leyBeckham.comparison.beckham.title")}
                 </h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• {t("comparison.beckham.point1")}</li>
-                  <li>• {t("comparison.beckham.point2")}</li>
-                  <li>• {t("comparison.beckham.point3")}</li>
-                  <li>• {t("comparison.beckham.point4")}</li>
+                  <li>• {t("leyBeckham.comparison.beckham.point1")}</li>
+                  <li>• {t("leyBeckham.comparison.beckham.point2")}</li>
+                  <li>• {t("leyBeckham.comparison.beckham.point3")}</li>
+                  <li>• {t("leyBeckham.comparison.beckham.point4")}</li>
                 </ul>
               </CardContent>
             </Card>
           </div>
 
           <p className="text-sm text-muted-foreground text-center mt-6">
-            {t("comparison.disclaimer")}
+            {t("leyBeckham.comparison.disclaimer")}
           </p>
         </div>
       </div>
