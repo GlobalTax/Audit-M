@@ -34,7 +34,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 interface CompanySetupFormProps {
-  landingVariant: 'calculator' | 'nie-hell' | 'tech-startup' | 'express' | 'herencias-barcelona';
+  landingVariant: 'calculator' | 'nie-hell' | 'tech-startup' | 'express' | 'herencias-barcelona' | 'company-setup-spain';
   conversionType?: string;
   calculatorData?: any;
   onSuccess?: () => void;
