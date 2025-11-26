@@ -36,15 +36,15 @@ export const LeyBeckhamContactForm = () => {
   const { t } = useLanguage();
 
   const formSchema = z.object({
-    name: z.string().trim().min(2, t("form.validation.name")).max(100),
-    email: z.string().trim().email(t("form.validation.email")).max(255),
-    phone: z.string().trim().min(9, t("form.validation.phone")).max(20),
-    country: z.string().trim().min(2, t("form.validation.country")).max(100),
-    jobSituation: z.string().min(1, t("form.validation.jobSituation")),
-    transferDate: z.string().min(1, t("form.validation.transferDate")),
+    name: z.string().trim().min(2, t("leyBeckham.form.validation.name")).max(100),
+    email: z.string().trim().email(t("leyBeckham.form.validation.email")).max(255),
+    phone: z.string().trim().min(9, t("leyBeckham.form.validation.phone")).max(20),
+    country: z.string().trim().min(2, t("leyBeckham.form.validation.country")).max(100),
+    jobSituation: z.string().min(1, t("leyBeckham.form.validation.jobSituation")),
+    transferDate: z.string().min(1, t("leyBeckham.form.validation.transferDate")),
     message: z.string().trim().max(2000).optional(),
     privacy: z.boolean().refine((val) => val === true, {
-      message: t("form.validation.privacy"),
+      message: t("leyBeckham.form.validation.privacy"),
     }),
   });
 
@@ -118,8 +118,8 @@ export const LeyBeckhamContactForm = () => {
       });
 
       toast({
-        title: t("form.success.title"),
-        description: t("form.success.description"),
+        title: t("leyBeckham.form.success.title"),
+        description: t("leyBeckham.form.success.description"),
       });
 
       form.reset();
@@ -127,8 +127,8 @@ export const LeyBeckhamContactForm = () => {
       console.error("Error al enviar formulario:", error);
       toast({
         variant: "destructive",
-        title: t("form.error.title"),
-        description: t("form.error.description"),
+        title: t("leyBeckham.form.error.title"),
+        description: t("leyBeckham.form.error.description"),
       });
     } finally {
       setIsSubmitting(false);
@@ -140,13 +140,13 @@ export const LeyBeckhamContactForm = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            {t("form.eyebrow")}
+            {t("leyBeckham.form.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            {t("form.title")}
+            {t("leyBeckham.form.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            {t("form.subtitle")}
+            {t("leyBeckham.form.subtitle")}
           </p>
         </div>
 
@@ -161,9 +161,9 @@ export const LeyBeckhamContactForm = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.name")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.name")} *</FormLabel>
                           <FormControl>
-                            <Input placeholder={t("form.name")} {...field} />
+                            <Input placeholder={t("leyBeckham.form.name")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -175,9 +175,9 @@ export const LeyBeckhamContactForm = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.email")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.email")} *</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder={t("form.email")} {...field} />
+                            <Input type="email" placeholder={t("leyBeckham.form.email")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -191,9 +191,9 @@ export const LeyBeckhamContactForm = () => {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.phone")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.phone")} *</FormLabel>
                           <FormControl>
-                            <Input type="tel" placeholder={t("form.phone")} {...field} />
+                            <Input type="tel" placeholder={t("leyBeckham.form.phone")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -205,9 +205,9 @@ export const LeyBeckhamContactForm = () => {
                       name="country"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.country")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.country")} *</FormLabel>
                           <FormControl>
-                            <Input placeholder={t("form.country.placeholder")} {...field} />
+                            <Input placeholder={t("leyBeckham.form.countryPlaceholder")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -221,20 +221,20 @@ export const LeyBeckhamContactForm = () => {
                       name="jobSituation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.jobSituation")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.jobSituation")} *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder={t("form.jobSituation.select")} />
+                                <SelectValue placeholder={t("leyBeckham.form.selectPlaceholder")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="contrato-espana">{t("form.jobSituation.contract")}</SelectItem>
-                              <SelectItem value="directivo">{t("form.jobSituation.executive")}</SelectItem>
-                              <SelectItem value="autonomo">{t("form.jobSituation.freelancer")}</SelectItem>
-                              <SelectItem value="emprendedor">{t("form.jobSituation.entrepreneur")}</SelectItem>
-                              <SelectItem value="traslado-interno">{t("form.jobSituation.transfer")}</SelectItem>
-                              <SelectItem value="otro">{t("form.jobSituation.other")}</SelectItem>
+                              <SelectItem value="contrato-espana">{t("leyBeckham.form.jobOptions.employee")}</SelectItem>
+                              <SelectItem value="directivo">{t("leyBeckham.form.jobOptions.executive")}</SelectItem>
+                              <SelectItem value="autonomo">{t("leyBeckham.form.jobOptions.freelancer")}</SelectItem>
+                              <SelectItem value="emprendedor">{t("leyBeckham.form.jobOptions.entrepreneur")}</SelectItem>
+                              <SelectItem value="traslado-interno">{t("leyBeckham.form.jobOptions.transfer")}</SelectItem>
+                              <SelectItem value="otro">{t("leyBeckham.form.jobOptions.other")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -247,19 +247,19 @@ export const LeyBeckhamContactForm = () => {
                       name="transferDate"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.transferDate")} *</FormLabel>
+                          <FormLabel>{t("leyBeckham.form.transferDate")} *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder={t("form.jobSituation.select")} />
+                                <SelectValue placeholder={t("leyBeckham.form.selectPlaceholder")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="ya-estoy">{t("form.transferDate.already")}</SelectItem>
-                              <SelectItem value="1-3-meses">{t("form.transferDate.1-3")}</SelectItem>
-                              <SelectItem value="3-6-meses">{t("form.transferDate.3-6")}</SelectItem>
-                              <SelectItem value="6-12-meses">{t("form.transferDate.6-12")}</SelectItem>
-                              <SelectItem value="mas-12-meses">{t("form.transferDate.12+")}</SelectItem>
+                              <SelectItem value="ya-estoy">{t("leyBeckham.form.transferOptions.immediate")}</SelectItem>
+                              <SelectItem value="1-3-meses">{t("leyBeckham.form.transferOptions.1-3")}</SelectItem>
+                              <SelectItem value="3-6-meses">{t("leyBeckham.form.transferOptions.3-6")}</SelectItem>
+                              <SelectItem value="6-12-meses">{t("leyBeckham.form.transferOptions.6-12")}</SelectItem>
+                              <SelectItem value="mas-12-meses">{t("leyBeckham.form.transferOptions.12+")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -273,10 +273,10 @@ export const LeyBeckhamContactForm = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("form.message")}</FormLabel>
+                        <FormLabel>{t("leyBeckham.form.message")}</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder={t("form.message.placeholder")}
+                            placeholder={t("leyBeckham.form.messagePlaceholder")}
                             className="min-h-[120px]"
                             {...field}
                           />
@@ -296,11 +296,11 @@ export const LeyBeckhamContactForm = () => {
                         </FormControl>
                         <div className="space-y-1 leading-none">
                           <FormLabel className="text-sm font-normal cursor-pointer">
-                            {t("form.privacy")}{" "}
+                            {t("leyBeckham.form.privacy")}{" "}
                             <a href="/privacy" className="text-primary underline" target="_blank">
-                              {t("form.privacy.link")}
+                              {t("leyBeckham.form.privacyLink")}
                             </a>{" "}
-                            {t("form.privacy.text")} *
+                            {t("leyBeckham.form.privacyText")} *
                           </FormLabel>
                           <FormMessage />
                         </div>
@@ -313,12 +313,12 @@ export const LeyBeckhamContactForm = () => {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          {t("form.button.sending")}
+                          {t("leyBeckham.form.submitting")}
                         </>
                       ) : (
                         <>
                           <Send className="mr-2 h-5 w-5" />
-                          {t("form.button")}
+                          {t("leyBeckham.form.submit")}
                         </>
                       )}
                     </Button>
@@ -326,12 +326,12 @@ export const LeyBeckhamContactForm = () => {
                     <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4 text-primary" />
-                        <span>{t("form.confidential")}</span>
+                        <span>{t("leyBeckham.form.confidential")}</span>
                       </div>
                       <span>•</span>
-                      <span>{t("form.response")}</span>
+                      <span>{t("leyBeckham.form.response")}</span>
                       <span>•</span>
-                      <span>{t("form.noCommitment")}</span>
+                      <span>{t("leyBeckham.form.noCommitment")}</span>
                     </div>
                   </div>
                 </form>
@@ -340,9 +340,9 @@ export const LeyBeckhamContactForm = () => {
           </Card>
 
           <p className="text-center text-sm text-muted-foreground mt-6">
-            {t("form.footer")}{" "}
+            {t("leyBeckham.form.footer")}{" "}
             <a href="/contact" className="text-primary underline">
-              {t("form.footer.link")}
+              {t("leyBeckham.form.footerLink")}
             </a>
             .
           </p>

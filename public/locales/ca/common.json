@@ -408,6 +408,7 @@
         "title": "Sol·licitud en termini",
         "description": "Has de presentar la sol·licitud dins dels 6 mesos següents a l'inici de la teva activitat laboral a Espanya"
       },
+      "keyLabel": "Requisit clau",
       "req6": {
         "title": "No realitzar activitats a través d'Establiment Permanent",
         "description": "Si ets empresari o professional, no pots realitzar la teva activitat a través d'un establiment permanent que ja estigués a Espanya abans del teu trasllat"
@@ -464,6 +465,7 @@
       "eyebrow": "Comparativa",
       "title": "Estalvi fiscal real amb la Llei Beckham",
       "subtitle": "Compara quant pagaries amb l'IRPF general front al règim Beckham",
+      "disclaimer": "Càlculs aproximats basats en legislació vigent. Consulta el teu cas particular.",
       "table": {
         "income": "Ingressos anuals",
         "generalTax": "IRPF General",
@@ -492,6 +494,7 @@
       "eyebrow": "Procés",
       "title": "Com t'ajudem a aplicar la Llei Beckham",
       "subtitle": "Procés complet d'assessorament i tramitació",
+      "step": "Pas",
       "step1": {
         "title": "Anàlisi de viabilitat",
         "description": "Avaluem el teu cas personal i verifiquem el compliment de tots els requisits",

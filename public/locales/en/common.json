@@ -408,6 +408,7 @@
         "title": "Application within deadline",
         "description": "You must submit the application within 6 months following the start of your work activity in Spain"
       },
+      "keyLabel": "Key requirement",
       "req6": {
         "title": "Not conducting activities through a Permanent Establishment",
         "description": "If you're a business owner or professional, you can't conduct your activity through a permanent establishment that was already in Spain before your transfer"
@@ -464,6 +465,7 @@
       "eyebrow": "Comparison",
       "title": "Real tax savings with the Beckham Law",
       "subtitle": "Compare how much you'd pay with general income tax versus the Beckham regime",
+      "disclaimer": "Approximate calculations based on current legislation. Consult your specific case.",
       "table": {
         "income": "Annual income",
         "generalTax": "General Income Tax",
@@ -492,6 +494,7 @@
       "eyebrow": "Process",
       "title": "How we help you apply for the Beckham Law",
       "subtitle": "Complete advisory and processing service",
+      "step": "Step",
       "step1": {
         "title": "Feasibility analysis",
         "description": "We evaluate your personal case and verify compliance with all requirements",

@@ -7,28 +7,28 @@ export const RequirementsChecklist = () => {
   
   const requirements = [
     {
-      title: t("requirements.item1.title"),
-      description: t("requirements.item1.description"),
+      title: t("leyBeckham.requirements.req1.title"),
+      description: t("leyBeckham.requirements.req1.description"),
       isKey: true
     },
     {
-      title: t("requirements.item2.title"),
-      description: t("requirements.item2.description"),
+      title: t("leyBeckham.requirements.req2.title"),
+      description: t("leyBeckham.requirements.req2.description"),
       isKey: false
     },
     {
-      title: t("requirements.item3.title"),
-      description: t("requirements.item3.description"),
+      title: t("leyBeckham.requirements.req3.title"),
+      description: t("leyBeckham.requirements.req3.description"),
       isKey: true
     },
     {
-      title: t("requirements.item4.title"),
-      description: t("requirements.item4.description"),
+      title: t("leyBeckham.requirements.req4.title"),
+      description: t("leyBeckham.requirements.req4.description"),
       isKey: true
     },
     {
-      title: t("requirements.item5.title"),
-      description: t("requirements.item5.description"),
+      title: t("leyBeckham.requirements.req5.title"),
+      description: t("leyBeckham.requirements.req5.description"),
       isKey: false
     }
   ];
@@ -38,13 +38,13 @@ export const RequirementsChecklist = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            {t("requirements.eyebrow")}
+            {t("leyBeckham.requirements.eyebrow")}
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-            {t("requirements.title")}
+            {t("leyBeckham.requirements.title")}
           </h2>
           <p className="text-body max-w-2xl mx-auto">
-            {t("requirements.subtitle")}
+            {t("leyBeckham.requirements.subtitle")}
           </p>
         </div>
 
@@ -90,16 +90,16 @@ export const RequirementsChecklist = () => {
           <Card className="max-w-2xl mx-auto bg-neutral-50 border border-border/50">
             <CardContent className="p-6">
               <p className="text-lead mb-4">
-                {t("requirements.cta.title")}
+                {t("leyBeckham.requirements.cta.text")}
               </p>
               <p className="text-muted-foreground mb-6">
-                {t("requirements.cta.description")}
+                {t("leyBeckham.requirements.cta.description")}
               </p>
               <a
                 href="#contact-form"
                 className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft h-10 px-6"
               >
-                {t("requirements.cta.button")}
+                {t("leyBeckham.requirements.cta.button")}
               </a>
             </CardContent>
           </Card>
