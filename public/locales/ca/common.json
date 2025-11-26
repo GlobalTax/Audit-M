@@ -1059,5 +1059,58 @@
       "button": "Sol·licitar consulta gratuïta",
       "footer": "Consulta inicial sense compromís • Resposta en 24-48h • Assessorament personalitzat"
     }
+  },
+  "index": {
+    "meta": {
+      "title": "Navarro Tax Legal | Assessoria Fiscal i Legal per Empreses Familiars",
+      "description": "Assessorament estratègic, fiscal i legal especialitzat en empreses familiars i grups empresarials a Barcelona i Madrid."
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Planifica el futur",
+      "title": "Amb decisions avui.",
+      "subtitle": "Assessorem grups d'empreses i empreses familiars en les seves decisions clau: fiscalitat, successió, estructura societària i compravenda d'empreses.",
+      "cta_primary": "Els Nostres Serveis",
+      "cta_secondary": "Contactar"
+    },
+    "about": {
+      "overline": "Nosaltres navarro",
+      "title": "Assessorament estratègic i legal per empreses i grups.",
+      "paragraph1": "A navarro oferim assessorament legal, fiscal i estratègic especialitzat en empreses familiars i estructures empresarials consolidades.",
+      "paragraph2": "La nostra visió parteix de la comprensió profunda dels reptes de continuïtat, governança i creixement que enfronten les companyies familiars. Aportem solucions concretes per planificar el relleu generacional, protegir el patrimoni i estructurar l'activitat amb seguretat jurídica.",
+      "paragraph3": "El nostre equip treballa amb rigor tècnic, experiència transversal i compromís absolut amb cada client.",
+      "paragraph4": "Ja sigui en la gestió diària, la presa de decisions clau o en processos de compravenda, acompanyem els nostres clients amb total confidencialitat i enfocament a llarg termini.",
+      "cta": "Coneix el nostre equip"
+    },
+    "stats": {
+      "overline": "Dades clau"
+    },
+    "technology": {
+      "overline": "Tecnologia que utilitzem"
+    },
+    "clients": {
+      "overline": "Empreses que confien en nosaltres"
+    },
+    "blog": {
+      "overline": "Les nostres publicacions",
+      "cta": "Veure tots els articles"
+    }
+  },
+  "footer": {
+    "contact": "Contacte",
+    "tagline": "Assessorament estratègic i legal per empreses familiars i grups empresarials.",
+    "services": "Serveis",
+    "areas": "Àrees",
+    "company": "Empresa",
+    "about": "Nosaltres",
+    "team": "Equip",
+    "blog": "Blog",
+    "careers": "Carreres",
+    "rights": "Tots els drets reservats.",
+    "legal": "Avís Legal",
+    "privacy": "Privacitat",
+    "cookies": "Cookies",
+    "terms": "Termes"
   }
 }

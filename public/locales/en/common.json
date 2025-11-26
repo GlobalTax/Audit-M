@@ -1059,5 +1059,58 @@
       "button": "Request free consultation",
       "footer": "Initial consultation with no commitment • Response in 24-48h • Personalized advisory"
     }
+  },
+  "index": {
+    "meta": {
+      "title": "Navarro Tax Legal | Tax and Legal Advisory for Family Businesses",
+      "description": "Strategic, tax and legal consulting specialized in family businesses and corporate groups in Barcelona and Madrid."
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Plan the future",
+      "title": "With decisions today.",
+      "subtitle": "We advise corporate groups and family businesses on their key decisions: taxation, succession, corporate structure and M&A.",
+      "cta_primary": "Our Services",
+      "cta_secondary": "Contact"
+    },
+    "about": {
+      "overline": "About navarro",
+      "title": "Strategic and legal consulting for businesses and groups.",
+      "paragraph1": "At navarro we offer legal, tax and strategic consulting specialized in family businesses and consolidated corporate structures.",
+      "paragraph2": "Our vision is based on a deep understanding of the continuity, governance and growth challenges faced by family companies. We provide concrete solutions to plan generational succession, protect assets and structure activities with legal certainty.",
+      "paragraph3": "Our team works with technical rigor, cross-functional experience and absolute commitment to each client.",
+      "paragraph4": "Whether in daily management, key decision-making or M&A processes, we accompany our clients with total confidentiality and a long-term approach.",
+      "cta": "Meet our team"
+    },
+    "stats": {
+      "overline": "Key data"
+    },
+    "technology": {
+      "overline": "Technology we use"
+    },
+    "clients": {
+      "overline": "Companies that trust us"
+    },
+    "blog": {
+      "overline": "Our publications",
+      "cta": "View all articles"
+    }
+  },
+  "footer": {
+    "contact": "Contact",
+    "tagline": "Strategic and legal consulting for family businesses and corporate groups.",
+    "services": "Services",
+    "areas": "Areas",
+    "company": "Company",
+    "about": "About Us",
+    "team": "Team",
+    "blog": "Blog",
+    "careers": "Careers",
+    "rights": "All rights reserved.",
+    "legal": "Legal Notice",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "terms": "Terms"
   }
 }
