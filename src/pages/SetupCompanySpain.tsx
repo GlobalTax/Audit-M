@@ -37,7 +37,7 @@ export const SetupCompanySpain = () => {
   const trustBarStats = [
     { value: '70+', label: 'Professionals' },
     { value: '87%', label: 'Recurring Clients' },
-    { value: '3', label: 'Office Locations' },
+    { value: '2', label: 'Office Locations' },
     { value: '100%', label: 'Confidentiality' }
   ];
 
@@ -114,9 +114,9 @@ export const SetupCompanySpain = () => {
     },
     {
       icon: Globe,
-      value: '3',
+      value: '2',
       label: 'Office Locations',
-      description: 'Barcelona, Madrid, Menorca'
+      description: 'Barcelona, Madrid'
     },
     {
       icon: Building2,
