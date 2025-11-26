@@ -4,6 +4,7 @@ import { TrustBarSection } from '@/components/landing-sections/TrustBarSection';
 import { ProblemStatementSection } from '@/components/landing-sections/ProblemStatementSection';
 import { ServicesGridSection } from '@/components/landing-sections/ServicesGridSection';
 import { WhyChooseUsSection } from '@/components/landing-sections/WhyChooseUsSection';
+import { ClientLogosCarouselSection } from '@/components/landing-sections/ClientLogosCarouselSection';
 import { ProcessStepsSection } from '@/components/landing-sections/ProcessStepsSection';
 import { TestimonialsSection } from '@/components/landing-sections/TestimonialsSection';
 import { FAQSection } from '@/components/landing-sections/FAQSection';
@@ -252,6 +253,7 @@ export const SetupCompanySpain = () => {
         subtitle="Trusted advisors for international companies and family businesses"
         credentials={whyNavarroCredentials}
       />
+      <ClientLogosCarouselSection />
       <ProcessStepsSection
         title="Our Process"
         subtitle="A structured approach from consultation to post-incorporation support"
