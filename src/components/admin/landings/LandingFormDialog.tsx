@@ -13,6 +13,7 @@ import { LandingPage, useCreateLandingPage, useUpdateLandingPage } from '@/hooks
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { generateUTM, generateQRCode, incrementVersion, generateSlug } from '@/lib/landingUtils';
 import { toast } from 'sonner';
+import { LandingPromptGenerator } from './LandingPromptGenerator';
 
 const CATEGORIES = [
   'Tax',
@@ -175,11 +176,12 @@ export const LandingFormDialog = ({ open, onOpenChange, landing }: LandingFormDi
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <Tabs defaultValue="general" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="general">General</TabsTrigger>
               <TabsTrigger value="seo">SEO</TabsTrigger>
               <TabsTrigger value="marketing">Marketing</TabsTrigger>
               <TabsTrigger value="sections">Secciones</TabsTrigger>
+              <TabsTrigger value="prompt">Prompt AI</TabsTrigger>
               <TabsTrigger value="config">Config</TabsTrigger>
             </TabsList>
             
@@ -569,6 +571,26 @@ export const LandingFormDialog = ({ open, onOpenChange, landing }: LandingFormDi
                   Variante para el formulario de leads
                 </p>
               </div>
+            </TabsContent>
+
+            {/* Prompt AI Tab */}
+            <TabsContent value="prompt" className="space-y-4">
+              <LandingPromptGenerator 
+                initialData={{
+                  title: formData.title,
+                  targetAudience: '',
+                  category: formData.category,
+                  keywords: formData.keywords || [],
+                  requiredCTAs: formData.primary_cta_text ? [formData.primary_cta_text] : [],
+                  notes: formData.notes || '',
+                }}
+                onSaveToNotes={(prompt) => {
+                  const currentNotes = formData.notes || '';
+                  const separator = currentNotes ? '\n\n---\n\n' : '';
+                  const newNotes = `${currentNotes}${separator}GENERATED PROMPT:\n\n${prompt}`;
+                  handleChange('notes', newNotes);
+                }}
+              />
             </TabsContent>
           </Tabs>
           
