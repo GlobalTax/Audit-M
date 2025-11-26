@@ -3,7 +3,7 @@ import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetup
 interface ContactFormSectionProps {
   title?: string;
   subtitle?: string;
-  landingVariant?: 'calculator' | 'nie-hell' | 'tech-startup' | 'express' | 'herencias-barcelona';
+  landingVariant?: 'calculator' | 'nie-hell' | 'tech-startup' | 'express' | 'herencias-barcelona' | 'company-setup-spain';
 }
 
 export const ContactFormSection = ({
