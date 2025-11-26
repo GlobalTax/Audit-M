@@ -1031,5 +1031,58 @@
       "button": "Solicitar consulta gratuita",
       "footer": "Consulta inicial sin compromiso • Respuesta en 24-48h • Asesoramiento personalizado"
     }
+  },
+  "index": {
+    "meta": {
+      "title": "Navarro Tax Legal | Asesoría Fiscal y Legal para Empresas Familiares",
+      "description": "Asesoramiento estratégico, fiscal y legal especializado en empresas familiares y grupos empresariales en Barcelona y Madrid."
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Planifica el futuro",
+      "title": "Con decisiones hoy.",
+      "subtitle": "Asesoramos a grupos de empresas y empresas familiares en sus decisiones clave: fiscalidad, sucesión, estructura societaria y compraventa de empresas.",
+      "cta_primary": "Nuestros Servicios",
+      "cta_secondary": "Contactar"
+    },
+    "about": {
+      "overline": "Nosotros navarro",
+      "title": "Asesoramiento estratégico y legal para empresas y grupos.",
+      "paragraph1": "En navarro ofrecemos asesoramiento legal, fiscal y estratégico especializado en empresas familiares y estructuras empresariales consolidadas.",
+      "paragraph2": "Nuestra visión parte de la comprensión profunda de los retos de continuidad, gobernanza y crecimiento que enfrentan las compañías familiares. Aportamos soluciones concretas para planificar el relevo generacional, proteger el patrimonio y estructurar la actividad con seguridad jurídica.",
+      "paragraph3": "Nuestro equipo trabaja con rigor técnico, experiencia transversal y compromiso absoluto con cada cliente.",
+      "paragraph4": "Ya sea en la gestión diaria, la toma de decisiones clave o en procesos de compraventa, acompañamos a nuestros clientes con total confidencialidad y enfoque a largo plazo.",
+      "cta": "Conoce nuestro equipo"
+    },
+    "stats": {
+      "overline": "Datos clave"
+    },
+    "technology": {
+      "overline": "Tecnología que usamos"
+    },
+    "clients": {
+      "overline": "Empresas que confían en nosotros"
+    },
+    "blog": {
+      "overline": "Nuestras publicaciones",
+      "cta": "Ver todos los artículos"
+    }
+  },
+  "footer": {
+    "contact": "Contacto",
+    "tagline": "Asesoramiento estratégico y legal para empresas familiares y grupos empresariales.",
+    "services": "Servicios",
+    "areas": "Áreas",
+    "company": "Empresa",
+    "about": "Nosotros",
+    "team": "Equipo",
+    "blog": "Blog",
+    "careers": "Carreras",
+    "rights": "Todos los derechos reservados.",
+    "legal": "Aviso Legal",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "terms": "Términos"
   }
 }
