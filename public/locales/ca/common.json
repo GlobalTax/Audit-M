@@ -8,6 +8,9 @@
     "contact": "Contacte",
     "areas": "Àrees"
   },
+  "breadcrumb": {
+    "home": "Inici"
+  },
   "services": {
     "familyBusiness": "Empresa Familiar",
     "mergersAcquisitions": "Compravenda d'empreses",
@@ -24,7 +27,56 @@
     "whatElse": "Què més podem fer per tu",
     "keyData": "Dades clau",
     "letsChat": "Parlem?",
-    "howWeWork": "COM TREBALLEM"
+    "howWeWork": "COM TREBALLEM",
+    "notFound": {
+      "title": "Servei no trobat",
+      "backLink": "Tornar a Serveis"
+    },
+    "contactSubtitle": "Explica'ns què necessites i et respondrem"
+  },
+  "serviceForm": {
+    "name": {
+      "label": "Nom *",
+      "placeholder": "El teu nom"
+    },
+    "email": {
+      "label": "Email *",
+      "placeholder": "tu@email.com"
+    },
+    "phone": {
+      "label": "Telèfon",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Empresa",
+      "placeholder": "Nom de la teva empresa"
+    },
+    "message": {
+      "label": "Missatge *",
+      "placeholder": "Explica'ns com podem ajudar-te..."
+    },
+    "privacy": {
+      "label": "Accepto la política de privacitat i el tractament de les meves dades *"
+    },
+    "defaultMessage": "Estic interessat en el servei:",
+    "button": {
+      "submit": "Enviar Consulta",
+      "sending": "Enviant..."
+    },
+    "validation": {
+      "nameMin": "El nom ha de tenir almenys 2 caràcters",
+      "emailInvalid": "Email invàlid",
+      "messageMin": "El missatge ha de tenir almenys 10 caràcters",
+      "privacyRequired": "Has d'acceptar la política de privacitat"
+    },
+    "success": {
+      "title": "Missatge enviat",
+      "description": "Ens posarem en contacte amb tu aviat."
+    },
+    "error": {
+      "title": "Error en enviar",
+      "description": "Si us plau, torna-ho a provar més tard."
+    }
   },
   "footer": {
     "tagline": "Planifica el futur, amb decisions avui.",

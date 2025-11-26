@@ -123,9 +123,9 @@ const ServiceDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center text-white">
-          <h1 className="mb-4 text-4xl">Servicio no encontrado</h1>
+          <h1 className="mb-4 text-4xl">{t('services.notFound.title')}</h1>
           <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
-            <Link to="/servicios">Volver a Servicios</Link>
+            <Link to="/servicios">{t('services.notFound.backLink')}</Link>
           </Button>
         </div>
       </div>
@@ -166,7 +166,7 @@ const ServiceDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
           {/* Overline */}
           <div className="service-hero-overline mb-6">
-            Servicios
+            {t('nav.services')}
           </div>
           
           {/* Title */}
@@ -190,13 +190,13 @@ const ServiceDetail = () => {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/">Inicio</Link>
+                  <Link to="/">{t('breadcrumb.home')}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/servicios">Servicios</Link>
+                  <Link to="/servicios">{t('nav.services')}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -360,7 +360,7 @@ const ServiceDetail = () => {
             {t('services.letsChat')}
           </h2>
           <p className="service-body text-center mb-12 text-muted-foreground">
-            Cuéntanos qué necesitas y te responderemos
+            {t('services.contactSubtitle')}
           </p>
           
           <ServiceContactForm serviceName={service.name} />

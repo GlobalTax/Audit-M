@@ -8,6 +8,9 @@
     "contact": "Contacto",
     "areas": "Áreas"
   },
+  "breadcrumb": {
+    "home": "Inicio"
+  },
   "services": {
     "familyBusiness": "Empresa Familiar",
     "mergersAcquisitions": "Compraventa de empresas",
@@ -24,7 +27,56 @@
     "whatElse": "Qué más podemos hacer por ti",
     "keyData": "Datos clave",
     "letsChat": "¿Hablamos?",
-    "howWeWork": "CÓMO TRABAJAMOS"
+    "howWeWork": "CÓMO TRABAJAMOS",
+    "notFound": {
+      "title": "Servicio no encontrado",
+      "backLink": "Volver a Servicios"
+    },
+    "contactSubtitle": "Cuéntanos qué necesitas y te responderemos"
+  },
+  "serviceForm": {
+    "name": {
+      "label": "Nombre *",
+      "placeholder": "Tu nombre"
+    },
+    "email": {
+      "label": "Email *",
+      "placeholder": "tu@email.com"
+    },
+    "phone": {
+      "label": "Teléfono",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Empresa",
+      "placeholder": "Nombre de tu empresa"
+    },
+    "message": {
+      "label": "Mensaje *",
+      "placeholder": "Cuéntanos cómo podemos ayudarte..."
+    },
+    "privacy": {
+      "label": "Acepto la política de privacidad y el tratamiento de mis datos *"
+    },
+    "defaultMessage": "Estoy interesado en el servicio:",
+    "button": {
+      "submit": "Enviar Consulta",
+      "sending": "Enviando..."
+    },
+    "validation": {
+      "nameMin": "El nombre debe tener al menos 2 caracteres",
+      "emailInvalid": "Email inválido",
+      "messageMin": "El mensaje debe tener al menos 10 caracteres",
+      "privacyRequired": "Debes aceptar la política de privacidad"
+    },
+    "success": {
+      "title": "Mensaje enviado",
+      "description": "Nos pondremos en contacto contigo pronto."
+    },
+    "error": {
+      "title": "Error al enviar",
+      "description": "Por favor, inténtalo de nuevo más tarde."
+    }
   },
   "footer": {
     "tagline": "Planifica el futuro, con decisiones hoy.",
