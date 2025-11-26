@@ -8,6 +8,9 @@
     "contact": "Contact",
     "areas": "Areas"
   },
+  "breadcrumb": {
+    "home": "Home"
+  },
   "services": {
     "familyBusiness": "Family Business",
     "mergersAcquisitions": "Mergers & Acquisitions",
@@ -24,7 +27,56 @@
     "whatElse": "What else can we do for you",
     "keyData": "Key data",
     "letsChat": "Let's talk?",
-    "howWeWork": "HOW WE WORK"
+    "howWeWork": "HOW WE WORK",
+    "notFound": {
+      "title": "Service not found",
+      "backLink": "Back to Services"
+    },
+    "contactSubtitle": "Tell us what you need and we'll get back to you"
+  },
+  "serviceForm": {
+    "name": {
+      "label": "Name *",
+      "placeholder": "Your name"
+    },
+    "email": {
+      "label": "Email *",
+      "placeholder": "you@email.com"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Company",
+      "placeholder": "Your company name"
+    },
+    "message": {
+      "label": "Message *",
+      "placeholder": "Tell us how we can help you..."
+    },
+    "privacy": {
+      "label": "I accept the privacy policy and the processing of my data *"
+    },
+    "defaultMessage": "I'm interested in the service:",
+    "button": {
+      "submit": "Send Inquiry",
+      "sending": "Sending..."
+    },
+    "validation": {
+      "nameMin": "Name must be at least 2 characters",
+      "emailInvalid": "Invalid email",
+      "messageMin": "Message must be at least 10 characters",
+      "privacyRequired": "You must accept the privacy policy"
+    },
+    "success": {
+      "title": "Message sent",
+      "description": "We'll get in touch with you soon."
+    },
+    "error": {
+      "title": "Error sending",
+      "description": "Please try again later."
+    }
   },
   "footer": {
     "tagline": "Plan the future, with decisions today.",

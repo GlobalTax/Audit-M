@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,13 +20,14 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const formSchema = z.object({
-  name: z.string().trim().min(2, "El nombre debe tener al menos 2 caracteres").max(100),
-  email: z.string().trim().email("Email inválido").max(255),
+// Schema will be created with translations inside the component
+const createFormSchema = (t: (key: string) => string) => z.object({
+  name: z.string().trim().min(2, t('serviceForm.validation.nameMin')).max(100),
+  email: z.string().trim().email(t('serviceForm.validation.emailInvalid')).max(255),
   phone: z.string().trim().optional(),
   company: z.string().trim().max(100).optional(),
-  message: z.string().trim().min(10, "El mensaje debe tener al menos 10 caracteres").max(1000),
-  privacy: z.boolean().refine(val => val === true, "Debes aceptar la política de privacidad"),
+  message: z.string().trim().min(10, t('serviceForm.validation.messageMin')).max(1000),
+  privacy: z.boolean().refine(val => val === true, t('serviceForm.validation.privacyRequired')),
 });
 
 interface ServiceContactFormProps {
@@ -34,7 +36,10 @@ interface ServiceContactFormProps {
 
 export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => {
   const { trackFormSubmit } = useAnalytics();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = createFormSchema(t);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,7 +48,7 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
       email: "",
       phone: "",
       company: "",
-      message: `Estoy interesado en el servicio: ${serviceName}`,
+      message: `${t('serviceForm.defaultMessage')} ${serviceName}`,
       privacy: false,
     },
   });
@@ -71,8 +76,8 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
         has_company: !!values.company,
       });
       
-      toast.success("Mensaje enviado", {
-        description: "Nos pondremos en contacto contigo pronto.",
+      toast.success(t('serviceForm.success.title'), {
+        description: t('serviceForm.success.description'),
       });
       
       form.reset({
@@ -80,13 +85,13 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
         email: "",
         phone: "",
         company: "",
-        message: `Estoy interesado en el servicio: ${serviceName}`,
+        message: `${t('serviceForm.defaultMessage')} ${serviceName}`,
         privacy: false,
       });
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast.error("Error al enviar", {
-        description: "Por favor, inténtalo de nuevo más tarde.",
+      toast.error(t('serviceForm.error.title'), {
+        description: t('serviceForm.error.description'),
       });
     } finally {
       setIsSubmitting(false);
@@ -102,9 +107,9 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre *</FormLabel>
+                <FormLabel>{t('serviceForm.name.label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tu nombre" {...field} />
+                  <Input placeholder={t('serviceForm.name.placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,9 +121,9 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel>{t('serviceForm.email.label')}</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="tu@email.com" {...field} />
+                  <Input type="email" placeholder={t('serviceForm.email.placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -132,9 +137,9 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Teléfono</FormLabel>
+                <FormLabel>{t('serviceForm.phone.label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="+34 600 000 000" {...field} />
+                  <Input placeholder={t('serviceForm.phone.placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -146,9 +151,9 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
             name="company"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Empresa</FormLabel>
+                <FormLabel>{t('serviceForm.company.label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nombre de tu empresa" {...field} />
+                  <Input placeholder={t('serviceForm.company.placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -161,10 +166,10 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mensaje *</FormLabel>
+              <FormLabel>{t('serviceForm.message.label')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Cuéntanos cómo podemos ayudarte..."
+                  placeholder={t('serviceForm.message.placeholder')}
                   className="min-h-[120px] resize-none"
                   {...field}
                 />
@@ -187,7 +192,7 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-sm font-normal">
-                  Acepto la política de privacidad y el tratamiento de mis datos *
+                  {t('serviceForm.privacy.label')}
                 </FormLabel>
                 <FormMessage />
               </div>
@@ -204,10 +209,10 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Enviando...
+              {t('serviceForm.button.sending')}
             </>
           ) : (
-            "Enviar Consulta"
+            t('serviceForm.button.submit')
           )}
         </Button>
       </form>
