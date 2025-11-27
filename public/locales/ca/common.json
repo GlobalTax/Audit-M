@@ -1079,6 +1079,50 @@
       "servicesButton": "Veure serveis"
     }
   },
+  "serviceForm": {
+    "name": {
+      "label": "Nom complet",
+      "placeholder": "El teu nom"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "tu@email.com"
+    },
+    "phone": {
+      "label": "Telèfon (opcional)",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Empresa (opcional)",
+      "placeholder": "Nom de la teva empresa"
+    },
+    "message": {
+      "label": "Missatge",
+      "placeholder": "Explica'ns com podem ajudar-te..."
+    },
+    "defaultMessage": "M'interessa obtenir més informació sobre",
+    "privacy": {
+      "label": "Accepto la política de privacitat i el tractament de les meves dades personals"
+    },
+    "button": {
+      "submit": "Enviar consulta",
+      "sending": "Enviant..."
+    },
+    "validation": {
+      "nameMin": "El nom ha de tenir almenys 2 caràcters",
+      "emailInvalid": "Si us plau, introdueix un email vàlid",
+      "messageMin": "El missatge ha de tenir almenys 10 caràcters",
+      "privacyRequired": "Has d'acceptar la política de privacitat"
+    },
+    "success": {
+      "title": "Missatge enviat!",
+      "description": "Ens posarem en contacte amb tu el més aviat possible"
+    },
+    "error": {
+      "title": "Error en enviar",
+      "description": "S'ha produït un error. Si us plau, torna-ho a provar"
+    }
+  },
   "home": {
     "hero": {
       "badge": "Planifica el futur",
