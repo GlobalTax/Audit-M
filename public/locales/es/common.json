@@ -1051,6 +1051,50 @@
       "servicesButton": "Ver servicios"
     }
   },
+  "serviceForm": {
+    "name": {
+      "label": "Nombre completo",
+      "placeholder": "Tu nombre"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "tu@email.com"
+    },
+    "phone": {
+      "label": "Teléfono (opcional)",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Empresa (opcional)",
+      "placeholder": "Nombre de tu empresa"
+    },
+    "message": {
+      "label": "Mensaje",
+      "placeholder": "Cuéntanos cómo podemos ayudarte..."
+    },
+    "defaultMessage": "Me interesa obtener más información sobre",
+    "privacy": {
+      "label": "Acepto la política de privacidad y el tratamiento de mis datos personales"
+    },
+    "button": {
+      "submit": "Enviar consulta",
+      "sending": "Enviando..."
+    },
+    "validation": {
+      "nameMin": "El nombre debe tener al menos 2 caracteres",
+      "emailInvalid": "Por favor, introduce un email válido",
+      "messageMin": "El mensaje debe tener al menos 10 caracteres",
+      "privacyRequired": "Debes aceptar la política de privacidad"
+    },
+    "success": {
+      "title": "¡Mensaje enviado!",
+      "description": "Nos pondremos en contacto contigo lo antes posible"
+    },
+    "error": {
+      "title": "Error al enviar",
+      "description": "Ha ocurrido un error. Por favor, inténtalo de nuevo"
+    }
+  },
   "home": {
     "hero": {
       "badge": "Planifica el futuro",
