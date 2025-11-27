@@ -1,17 +1,15 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Edit, Eye, Copy, Archive, BarChart3, ExternalLink } from 'lucide-react';
+import { Eye, ExternalLink } from 'lucide-react';
 import { LandingPage } from '@/hooks/useLandingPages';
-import { useDeleteLandingPage } from '@/hooks/useLandingPages';
+import { Link } from 'react-router-dom';
 
 interface LandingCardProps {
   landing: LandingPage;
-  onEdit: (landing: LandingPage) => void;
 }
 
-export const LandingCard = ({ landing, onEdit }: LandingCardProps) => {
-  const deleteMutation = useDeleteLandingPage();
+export const LandingCard = ({ landing }: LandingCardProps) => {
   
   const getStatusColor = (status?: string | null) => {
     switch (status) {
@@ -80,12 +78,14 @@ export const LandingCard = ({ landing, onEdit }: LandingCardProps) => {
           variant="outline" 
           size="sm" 
           className="flex-1"
-          onClick={() => onEdit(landing)}
+          asChild
         >
-          <Edit className="h-4 w-4 mr-1" />
-          Editar
+          <Link to={`/admin/landings/${landing.id}`}>
+            <Eye className="h-4 w-4 mr-1" />
+            Gestionar
+          </Link>
         </Button>
-        {landing.status === 'published' && (
+        {landing.status === 'published' && landing.is_active && (
           <Button 
             variant="outline" 
             size="sm"
