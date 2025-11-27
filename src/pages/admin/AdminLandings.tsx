@@ -14,21 +14,12 @@ export default function AdminLandings() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingLanding, setEditingLanding] = useState<any>(null);
   const [isMigrating, setIsMigrating] = useState(false);
   
   const { data: landings, isLoading, refetch } = useLandingPages({
     status: statusFilter,
     search: searchQuery,
   });
-  
-  const handleEdit = (landing: any) => {
-    setEditingLanding(landing);
-  };
-  
-  const handleCloseEdit = () => {
-    setEditingLanding(null);
-  };
 
   const handleMigrateHerencias = async () => {
     try {
@@ -124,7 +115,6 @@ export default function AdminLandings() {
             <LandingCard 
               key={landing.id} 
               landing={landing}
-              onEdit={handleEdit}
             />
           ))}
         </div>
@@ -153,15 +143,6 @@ export default function AdminLandings() {
         open={isCreateOpen}
         onOpenChange={setIsCreateOpen}
       />
-      
-      {/* Edit Dialog */}
-      {editingLanding && (
-        <LandingFormDialog 
-          open={!!editingLanding}
-          onOpenChange={(open) => !open && handleCloseEdit()}
-          landing={editingLanding}
-        />
-      )}
     </div>
   );
 }
