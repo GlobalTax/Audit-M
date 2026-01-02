@@ -24,6 +24,7 @@ import {
   CheckCircle
 } from "lucide-react";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
+import { InternationalServicesFAQ } from "@/components/international/InternationalServicesFAQ";
 
 const services = [
   {
@@ -336,6 +337,9 @@ const InternationalServices = () => {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <InternationalServicesFAQ />
 
         {/* Global CTA Section */}
         <section className="py-20 md:py-28 bg-primary">
