@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { CaseStudy } from "@/types/caseStudy";
+import { SITE_SOURCE } from "@/config/site";
 
 interface CaseStudiesParams {
   searchQuery?: string;

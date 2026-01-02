@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { SITE_SOURCE } from "@/config/site";
 
 export interface ContactLead {
   id: string;
@@ -34,7 +35,8 @@ export const useContactLeads = (filters?: ContactLeadFilters) => {
     queryFn: async () => {
       let query = supabase
         .from("contact_leads")
-        .select("*");
+        .select("*")
+        .eq("source_site", SITE_SOURCE);
 
       // Apply filters
       if (filters?.search) {

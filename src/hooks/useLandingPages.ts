@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { shouldCreateVersion, generateChangeSummary } from './useLandingVersions';
+import { SITE_SOURCE } from '@/config/site';
 
 export interface LandingPage {
   id: string;
@@ -68,6 +69,7 @@ export const useLandingPages = (filters: LandingFilters = {}) => {
       let query = supabase
         .from('landing_pages')
         .select('*')
+        .eq('source_site', SITE_SOURCE)
         .order('created_at', { ascending: false });
       
       if (filters.status && filters.status !== 'all') {
@@ -113,7 +115,7 @@ export const useCreateLandingPage = () => {
     mutationFn: async (landing: Partial<LandingPage>) => {
       const { data, error } = await supabase
         .from('landing_pages')
-        .insert([landing as any])
+        .insert([{ ...landing, source_site: SITE_SOURCE } as any])
         .select()
         .single();
       

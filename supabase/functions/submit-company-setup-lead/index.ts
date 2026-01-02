@@ -71,6 +71,10 @@ serve(async (req) => {
     else if (leadScore >= 65) priority = 'high';
     else if (leadScore < 40) priority = 'low';
 
+    // Determine source_site based on origin header
+    const origin = req.headers.get('origin') || req.headers.get('referer') || '';
+    const sourceSite = origin.includes('int.nrro.es') ? 'int' : 'es';
+
     // Insert lead
     const { data: lead, error: insertError } = await supabase
       .from('company_setup_leads')
@@ -81,6 +85,7 @@ serve(async (req) => {
         landing_page_url: body.landing_page_url || req.headers.get('referer'),
         ip_address: req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip'),
         user_agent: req.headers.get('user-agent'),
+        source_site: sourceSite,
       })
       .select()
       .single();

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { SITE_SOURCE } from "@/config/site";
 
 export interface Candidato {
   id: string;
@@ -30,6 +31,7 @@ export const useCandidatos = (filters?: {
       let query = supabase
         .from("candidatos")
         .select("*")
+        .eq("source_site", SITE_SOURCE)
         .order("created_at", { ascending: false });
 
       if (filters?.estado) {
@@ -107,7 +109,7 @@ export const useCandidatoStats = () => {
   return useQuery({
     queryKey: ["candidatos-stats"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("candidatos").select("estado");
+      const { data, error } = await supabase.from("candidatos").select("estado").eq("source_site", SITE_SOURCE);
 
       if (error) throw error;
 

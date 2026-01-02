@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { SITE_SOURCE } from "@/config/site";
 
 export interface LeyBeckhamLead {
   id: string;
@@ -71,6 +72,7 @@ export const useLeyBeckhamLeads = (filters?: {
       let query = supabase
         .from("ley_beckham_leads")
         .select("*")
+        .eq("source_site", SITE_SOURCE)
         .order("created_at", { ascending: false });
 
       if (filters?.status && filters.status !== 'all') {

@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { JobPosition } from "@/types/jobPosition";
 import { toast } from "sonner";
+import { SITE_SOURCE } from "@/config/site";
 
 export const useJobPositions = (filters?: {
   status?: 'draft' | 'published' | 'closed';
@@ -13,6 +14,7 @@ export const useJobPositions = (filters?: {
       let query = supabase
         .from("job_positions")
         .select("*")
+        .eq("source_site", SITE_SOURCE)
         .order("is_featured", { ascending: false })
         .order("display_order", { ascending: true })
         .order("published_at", { ascending: false });
@@ -88,7 +90,7 @@ export const useCreateJobPosition = () => {
     mutationFn: async (jobPosition: any) => {
       const { data, error } = await supabase
         .from("job_positions")
-        .insert([jobPosition])
+        .insert([{ ...jobPosition, source_site: SITE_SOURCE }])
         .select()
         .single();
 
@@ -164,7 +166,8 @@ export const useJobPositionStats = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("job_positions")
-        .select("status");
+        .select("status")
+        .eq("source_site", SITE_SOURCE);
 
       if (error) throw error;
 
