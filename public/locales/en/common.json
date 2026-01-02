@@ -1125,19 +1125,20 @@
   },
   "home": {
     "hero": {
-      "badge": "Plan the future",
-      "title": "With decisions today.",
-      "subtitle": "We advise corporate groups and family businesses on their key decisions: taxation, succession, corporate structure and M&A.",
-      "cta_primary": "Our Services",
-      "cta_secondary": "Contact"
+      "badge": "Global Advisory Excellence",
+      "title": "Your Strategic Partner for<br/>International Business in Spain",
+      "subtitle": "Comprehensive legal, tax, accounting and labour advisory for multinational companies, foreign investors, and businesses expanding across borders.",
+      "tagline": "Trusted by 500+ international companies since 1998. Barcelona-based, globally connected.",
+      "cta_primary": "Request International Consultation",
+      "cta_secondary": "Explore Global Services"
     },
     "about": {
-      "overline": "About navarro",
-      "title": "Strategic and legal consulting for businesses and groups.",
-      "paragraph1": "At navarro we offer legal, tax and strategic consulting specialized in family businesses and consolidated corporate structures.",
-      "paragraph2": "Our vision is based on a deep understanding of the continuity, governance and growth challenges faced by family companies. We provide concrete solutions to plan generational succession, protect assets and structure activities with legal certainty.",
-      "paragraph3": "Our team works with technical rigor, cross-functional experience and absolute commitment to each client.",
-      "paragraph4": "Whether in daily management, key decision-making or M&A processes, we accompany our clients with total confidentiality and a long-term approach.",
+      "overline": "About Navarro International",
+      "title": "Strategic advisory for global business operations.",
+      "paragraph1": "At Navarro, we provide integrated legal, tax, accounting and labour advisory services for international companies operating in Spain and Spanish businesses expanding globally.",
+      "paragraph2": "With over 25 years of cross-border experience, we understand the complexities of multi-jurisdictional compliance, international tax planning, and global workforce management.",
+      "paragraph3": "Our team delivers strategic solutions that minimize risk and maximize business outcomes for clients across every continent.",
+      "paragraph4": "Whether entering Spain, restructuring international operations, or navigating cross-border compliance, we accompany our clients with total confidentiality and a long-term approach.",
       "cta": "Meet our team"
     },
     "stats": {
