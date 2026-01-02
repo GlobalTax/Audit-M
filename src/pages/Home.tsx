@@ -126,9 +126,10 @@ const Home = () => {
   return (
     <>
       <Meta
-        title={t("index.meta.title")}
-        description={t("index.meta.description")}
-        canonicalUrl={window.location.href}
+        title="Global Advisory for International Business"
+        description="Strategic legal, tax, accounting and labour advisory for multinational companies and foreign investors. Barcelona-based, globally trusted."
+        keywords="international business advisory, global tax planning, multinational corporate services, foreign investment Spain"
+        canonicalUrl="/"
       />
 
       <div className="min-h-screen">

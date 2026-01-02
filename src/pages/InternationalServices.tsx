@@ -37,7 +37,9 @@ const services = [
       "End-to-end audit preparation and regulatory filing support"
     ],
     cta: "Learn more",
-    slug: "international-accounting-management"
+    slug: "international-accounting-management",
+    metaTitle: "International Accounting Services",
+    metaDescription: "Global accounting management with IFRS compliance, multi-entity consolidation and real-time reporting for multinational operations."
   },
   {
     id: "international-tax",
@@ -50,7 +52,9 @@ const services = [
       "Proactive compliance monitoring and risk mitigation"
     ],
     cta: "Learn more",
-    slug: "international-tax-management"
+    slug: "international-tax-management",
+    metaTitle: "International Tax Advisory Services",
+    metaDescription: "Cross-border tax planning and compliance for multinationals. Optimize your global tax position with expert advisory."
   },
   {
     id: "international-payroll",
@@ -63,7 +67,9 @@ const services = [
       "Labour cost analysis and workforce planning support"
     ],
     cta: "Learn more",
-    slug: "international-payroll-management"
+    slug: "international-payroll-management",
+    metaTitle: "International Payroll Services",
+    metaDescription: "Multi-country payroll and workforce compliance for global teams. Accurate, timely and fully compliant across jurisdictions."
   },
   {
     id: "corporate-legal",
@@ -76,7 +82,9 @@ const services = [
       "Ongoing corporate governance and compliance support"
     ],
     cta: "Learn more",
-    slug: "corporate-legal-services"
+    slug: "corporate-legal-services",
+    metaTitle: "Corporate Legal Services for Business",
+    metaDescription: "Entity formation, governance and contracts for international companies. Expert legal advisory for cross-border operations."
   },
   {
     id: "treasury-management",
@@ -89,7 +97,9 @@ const services = [
       "Intercompany funding and working capital advisory"
     ],
     cta: "Learn more",
-    slug: "treasury-management"
+    slug: "treasury-management",
+    metaTitle: "Treasury & Cash Management Advisory",
+    metaDescription: "Optimize global liquidity and manage FX risk. Expert treasury advisory for multinational cash flow management."
   },
   {
     id: "transfer-pricing",
@@ -102,7 +112,9 @@ const services = [
       "Advance pricing agreements and dispute resolution support"
     ],
     cta: "Learn more",
-    slug: "transfer-pricing"
+    slug: "transfer-pricing",
+    metaTitle: "Transfer Pricing Compliance Services",
+    metaDescription: "Intercompany pricing compliance and documentation. Defensible transfer pricing policies for multinational groups."
   },
   {
     id: "local-presence",
@@ -115,7 +127,9 @@ const services = [
       "Corporate secretarial and board meeting support"
     ],
     cta: "Learn more",
-    slug: "local-presence-governance-support"
+    slug: "local-presence-governance-support",
+    metaTitle: "Local Presence & Governance in Spain",
+    metaDescription: "Registered office, local directors and governance support. Establish compliant presence in Spain for foreign companies."
   }
 ];
 
@@ -128,9 +142,10 @@ const InternationalServices = () => {
   return (
     <>
       <Meta
-        title="International Services | Global Legal, Tax & Advisory | NRRO"
-        description="Comprehensive international legal, tax, accounting and labour advisory services for multinational companies and foreign investors expanding into Spain."
-        canonicalUrl={`${window.location.origin}/international-services`}
+        title="International Services | Global Advisory"
+        description="End-to-end legal, tax, accounting and payroll services for businesses expanding across borders. Trusted by multinationals in 50+ jurisdictions."
+        keywords="international business services, global tax advisory, multinational payroll, cross-border compliance"
+        canonicalUrl="/international-services"
       />
       <BreadcrumbSchema items={breadcrumbItems} />
 
