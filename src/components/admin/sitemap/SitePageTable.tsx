@@ -30,6 +30,7 @@ import {
 import { SitePage } from "@/hooks/useSitePages";
 import { SeoBadge } from "./SeoBadge";
 import { format } from "date-fns";
+import { normalizeUrl, getPathFromUrl } from "@/lib/urlUtils";
 import { es } from "date-fns/locale";
 
 interface SitePageTableProps {
@@ -103,7 +104,7 @@ export const SitePageTable = ({
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
   const handleCopyUrl = (url: string) => {
-    const fullUrl = `https://nrro.es${url}`;
+    const fullUrl = normalizeUrl(url);
     navigator.clipboard.writeText(fullUrl);
     setCopiedUrl(url);
     setTimeout(() => setCopiedUrl(null), 2000);
@@ -195,7 +196,7 @@ export const SitePageTable = ({
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <code className="text-xs bg-muted px-2 py-1 rounded">
-                        {page.url}
+                        {getPathFromUrl(page.url)}
                       </code>
                       <Button
                         variant="ghost"
@@ -215,7 +216,7 @@ export const SitePageTable = ({
                         asChild
                         className="h-6 w-6 p-0"
                       >
-                        <a href={`https://nrro.es${page.url}`} target="_blank" rel="noopener noreferrer">
+                        <a href={normalizeUrl(page.url)} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="h-3 w-3" />
                         </a>
                       </Button>
