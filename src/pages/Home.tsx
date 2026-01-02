@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
+import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
 import { ArrowRight, Check, Globe } from "lucide-react";
 import {
   Carousel,
@@ -272,6 +273,9 @@ const Home = () => {
             )}
           </div>
         </section>
+
+        {/* International Networks Section */}
+        <InternationalNetworksSection />
 
         {/* Servicios Relevantes */}
         <section className="bg-white py-20 md:py-28">
