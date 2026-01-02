@@ -274,9 +274,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* International Networks Section */}
-        <InternationalNetworksSection />
-
         {/* Servicios Relevantes */}
         <section className="bg-white py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -350,9 +347,12 @@ const Home = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-            </Carousel>
+          </Carousel>
           </div>
         </section>
+
+        {/* International Networks Section */}
+        <InternationalNetworksSection />
 
         {/* Blog Preview */}
         <section className="bg-background py-24">
