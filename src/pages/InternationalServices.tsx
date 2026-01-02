@@ -26,6 +26,7 @@ import {
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 import { InternationalServicesFAQ } from "@/components/international/InternationalServicesFAQ";
 import { HowWeWorkSection } from "@/components/international/HowWeWorkSection";
+import { InternationalTrustBar } from "@/components/international/InternationalTrustBar";
 
 const services = [
   {
@@ -189,6 +190,9 @@ const InternationalServices = () => {
             </div>
           </div>
         </section>
+
+        {/* Trust Bar Section */}
+        <InternationalTrustBar />
 
         {/* USP Section */}
         <section className="py-16 md:py-20 bg-muted/30 border-b border-border/50">
