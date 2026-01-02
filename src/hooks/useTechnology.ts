@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { SITE_SOURCE } from '@/config/site';
 
 export interface TechItem {
   name: string;
@@ -19,13 +20,14 @@ interface TechnologyContent {
 
 export const useTechnology = () => {
   return useQuery({
-    queryKey: ['technology-content'],
+    queryKey: ['technology-content', SITE_SOURCE],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('page_content')
         .select('*')
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
+        .eq('source_site', SITE_SOURCE)
         .single();
 
       if (error) throw error;
@@ -46,6 +48,7 @@ export const useUpdateTechnology = () => {
         .select('*')
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
+        .eq('source_site', SITE_SOURCE)
         .single();
 
       if (fetchError) throw fetchError;
