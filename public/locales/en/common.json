@@ -1170,5 +1170,44 @@
     "privacy": "Privacy",
     "cookies": "Cookies",
     "terms": "Terms"
+  },
+  "internationalServices": {
+    "meta": {
+      "title": "International Services | Global Legal, Tax & Advisory | NRRO",
+      "description": "Comprehensive international legal, tax, accounting and labour advisory services for multinational companies and foreign investors expanding into Spain."
+    },
+    "hero": {
+      "badge": "Global Advisory Excellence",
+      "title": "International Services",
+      "subtitle": "End-to-end legal, tax, accounting and labour solutions for multinational companies operating across borders.",
+      "tagline": "Barcelona headquarters. Global reach. Local expertise in 50+ jurisdictions."
+    },
+    "intro": {
+      "title": "What Are International Services?",
+      "paragraph1": "For multinational companies and foreign investors, navigating cross-border operations requires more than local expertise — it demands a partner who understands the complexities of international compliance, tax optimization, and workforce management across jurisdictions.",
+      "paragraph2": "Our International Services division provides integrated advisory solutions that help you establish, operate, and grow your business in Spain while maintaining compliance with global standards."
+    },
+    "services": {
+      "accountingTitle": "International Accounting Management",
+      "accountingDesc": "Consolidation, reporting, and compliance with international accounting standards for multinational operations.",
+      "taxTitle": "International Tax Management",
+      "taxDesc": "Strategic tax planning and compliance to optimize your global tax position while minimizing risk.",
+      "payrollTitle": "International Payroll Management",
+      "payrollDesc": "Efficient payroll processing aligned with local labour legislation across multiple jurisdictions.",
+      "legalTitle": "Corporate Legal Services",
+      "legalDesc": "Entity formation, legal advisory, and ongoing compliance support for international companies.",
+      "treasuryTitle": "Treasury Management",
+      "treasuryDesc": "Monitoring and managing international cash flows to optimize liquidity and minimize financial risk.",
+      "transferPricingTitle": "Transfer Pricing",
+      "transferPricingDesc": "Ensuring compliance with intercompany transaction regulations across all jurisdictions.",
+      "governanceTitle": "Local Presence & Governance Support",
+      "governanceDesc": "International domiciliation and provision of local directors for compliant market presence."
+    },
+    "cta": {
+      "title": "Ready to Expand Your Global Operations?",
+      "subtitle": "Our international advisory team is ready to help you navigate cross-border complexities with confidence.",
+      "primary": "Request International Consultation",
+      "secondary": "Explore All Services"
+    }
   }
 }
