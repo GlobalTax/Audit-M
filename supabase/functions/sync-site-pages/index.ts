@@ -67,15 +67,21 @@ Deno.serve(async (req) => {
       if (urlPath.startsWith('/en/')) language = 'en';
       else if (urlPath.startsWith('/ca/')) language = 'ca';
 
-      // Detectar tipo de página
-      let pageType = 'static';
-      if (urlPath.includes('/servicios/') || urlPath.includes('/services/')) pageType = 'service';
+      // Detectar tipo de página (usando valores válidos del enum page_type)
+      let pageType = 'other';
+      if (urlPath === '/' || urlPath === '/en/' || urlPath === '/ca/') pageType = 'home';
+      else if (urlPath.includes('/servicios/') || urlPath.includes('/services/')) pageType = 'service';
       else if (urlPath.includes('/blog/')) pageType = 'blog';
       else if (urlPath.includes('/casos-estudio/') || urlPath.includes('/case-studies/')) pageType = 'case_study';
-      else if (urlPath.includes('/trabaja-con-nosotros/') || urlPath.includes('/careers/')) pageType = 'job';
+      else if (urlPath.includes('/trabaja-con-nosotros/') || urlPath.includes('/careers/')) pageType = 'careers';
+      else if (urlPath.includes('/empleo/') || urlPath.includes('/jobs/')) pageType = 'job_position';
       else if (urlPath.includes('/constituir-empresa/') || 
                 urlPath.includes('/ley-beckham/') ||
-                urlPath.includes('/herencias-barcelona/')) pageType = 'landing';
+                urlPath.includes('/herencias-barcelona/') ||
+                urlPath.includes('/nie-service/')) pageType = 'landing';
+      else if (urlPath.includes('/sobre-nosotros/') || urlPath.includes('/about/') || urlPath.includes('/equipo/') || urlPath.includes('/team/')) pageType = 'about';
+      else if (urlPath.includes('/contacto/') || urlPath.includes('/contact/')) pageType = 'contact';
+      else if (urlPath.includes('/legal/') || urlPath.includes('/privacidad/') || urlPath.includes('/privacy/') || urlPath.includes('/cookies/') || urlPath.includes('/terminos/') || urlPath.includes('/terms/')) pageType = 'legal';
 
       sitemapUrls.push({ url: urlPath, language, pageType });
     }
