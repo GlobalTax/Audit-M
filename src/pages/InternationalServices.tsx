@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 import { InternationalServicesFAQ } from "@/components/international/InternationalServicesFAQ";
+import { HowWeWorkSection } from "@/components/international/HowWeWorkSection";
 
 const services = [
   {
@@ -317,6 +318,9 @@ const InternationalServices = () => {
             </div>
           </div>
         </section>
+
+        {/* How We Work Section */}
+        <HowWeWorkSection />
 
         {/* Services Grid */}
         <section className="py-16 md:py-24 bg-muted/30">
