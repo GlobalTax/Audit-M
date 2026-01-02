@@ -326,48 +326,58 @@ const InternationalServices = () => {
         <section className="py-16 md:py-24 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-              <div className="grid gap-8 md:gap-10">
-                {services.map((service, index) => (
+              {/* Section Header */}
+              <div className="text-center mb-12 md:mb-16">
+                <span className="font-mono text-xs md:text-sm tracking-wide uppercase text-muted-foreground mb-3 block">
+                  Our Services
+                </span>
+                <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
+                  Comprehensive International Advisory Solutions
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Expert guidance across legal, tax, accounting, and labour disciplines — designed for multinational operations and cross-border success.
+                </p>
+              </div>
+
+              {/* Services Grid - 2 columns on desktop, 1 on mobile */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                {services.map((service) => (
                   <div 
                     key={service.id}
-                    className="bg-background rounded-xl p-8 md:p-10 shadow-soft border border-border/50 hover:shadow-medium transition-all duration-300"
+                    className="bg-background rounded-xl p-6 md:p-8 shadow-soft border border-border/50 hover:shadow-medium transition-all duration-300 flex flex-col h-full"
                   >
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:gap-10">
-                      {/* Icon & Title */}
-                      <div className="flex-shrink-0 mb-6 lg:mb-0">
-                        <div className="w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center mb-4">
-                          <service.icon className="w-7 h-7 text-primary" />
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-normal text-foreground">
-                          {service.title}
-                        </h3>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1">
-                        <p className="text-lg text-muted-foreground mb-6">
-                          {service.description}
-                        </p>
-
-                        {/* Benefits */}
-                        <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                          {service.benefits.map((benefit, i) => (
-                            <div key={i} className="flex items-start gap-3">
-                              <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground/80">{benefit}</span>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* CTA */}
-                        <Button asChild variant="outline" className="group">
-                          <Link to={`/services/${service.slug}`}>
-                            {service.cta}
-                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                          </Link>
-                        </Button>
-                      </div>
+                    {/* Icon */}
+                    <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center mb-4">
+                      <service.icon className="w-6 h-6 text-primary" />
                     </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3">
+                      {service.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-muted-foreground mb-5 leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    {/* Benefits */}
+                    <div className="space-y-2 mb-6 flex-1">
+                      {service.benefits.map((benefit, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-1" />
+                          <span className="text-sm text-foreground/80">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTA */}
+                    <Button asChild variant="outline" className="group w-full sm:w-auto mt-auto">
+                      <Link to={`/services/${service.slug}`}>
+                        {service.cta}
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
                   </div>
                 ))}
               </div>
