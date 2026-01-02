@@ -93,7 +93,7 @@ export const InternationalServicesFAQ = () => {
             Have more questions about our international services?
           </p>
           <Button onClick={scrollToContact} size="lg">
-            Contact Our International Team
+            Still Have Questions? Let's Talk
           </Button>
         </div>
       </div>

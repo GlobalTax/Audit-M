@@ -37,7 +37,7 @@ const services = [
       "Real-time management reporting and performance dashboards",
       "End-to-end audit preparation and regulatory filing support"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "international-accounting-management",
     metaTitle: "International Accounting Services",
     metaDescription: "Global accounting management with IFRS compliance, multi-entity consolidation and real-time reporting for multinational operations."
@@ -52,7 +52,7 @@ const services = [
       "Cross-border tax structuring and M&A due diligence",
       "Proactive compliance monitoring and risk mitigation"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "international-tax-management",
     metaTitle: "International Tax Advisory Services",
     metaDescription: "Cross-border tax planning and compliance for multinationals. Optimize your global tax position with expert advisory."
@@ -67,7 +67,7 @@ const services = [
       "Expatriate compensation and benefits management",
       "Labour cost analysis and workforce planning support"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "international-payroll-management",
     metaTitle: "International Payroll Services",
     metaDescription: "Multi-country payroll and workforce compliance for global teams. Accurate, timely and fully compliant across jurisdictions."
@@ -82,7 +82,7 @@ const services = [
       "Commercial contract drafting, review, and negotiation",
       "Ongoing corporate governance and compliance support"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "corporate-legal-services",
     metaTitle: "Corporate Legal Services for Business",
     metaDescription: "Entity formation, governance and contracts for international companies. Expert legal advisory for cross-border operations."
@@ -97,7 +97,7 @@ const services = [
       "Foreign exchange risk management strategies",
       "Intercompany funding and working capital advisory"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "treasury-management",
     metaTitle: "Treasury & Cash Management Advisory",
     metaDescription: "Optimize global liquidity and manage FX risk. Expert treasury advisory for multinational cash flow management."
@@ -112,7 +112,7 @@ const services = [
       "Benchmarking studies and contemporaneous documentation",
       "Advance pricing agreements and dispute resolution support"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "transfer-pricing",
     metaTitle: "Transfer Pricing Compliance Services",
     metaDescription: "Intercompany pricing compliance and documentation. Defensible transfer pricing policies for multinational groups."
@@ -127,7 +127,7 @@ const services = [
       "Nominee and local director appointments",
       "Corporate secretarial and board meeting support"
     ],
-    cta: "Learn more",
+    cta: "Explore This Service",
     slug: "local-presence-governance-support",
     metaTitle: "Local Presence & Governance in Spain",
     metaDescription: "Registered office, local directors and governance support. Establish compliant presence in Spain for foreign companies."
@@ -175,14 +175,14 @@ const InternationalServices = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary" className="font-medium">
                   <Link to="/contact">
-                    Request a Consultation
+                    Schedule an International Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  <Link to="/contact">
-                    Contact Our International Team
-                  </Link>
+                  <a href="#contact">
+                    Download Services Brochure
+                  </a>
                 </Button>
               </div>
             </div>
@@ -346,7 +346,7 @@ const InternationalServices = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-6">
-                Ready to Expand Your Global Operations?
+                Ready to Simplify Your International Compliance?
               </h2>
               
               <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -356,15 +356,15 @@ const InternationalServices = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary" className="text-primary">
                   <Link to="/contact">
-                    Request International Consultation
+                    Start Your Global Compliance Plan
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
                 
                 <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                  <Link to="/services">
-                    Explore All Services
-                  </Link>
+                  <a href="#contact">
+                    Download Our International Brochure
+                  </a>
                 </Button>
               </div>
             </div>
