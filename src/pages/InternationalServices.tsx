@@ -200,11 +200,25 @@ const InternationalServices = () => {
                   <Globe className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">
-                  Global Compliance Expertise
+                  Multi-Jurisdictional Expertise
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Navigate regulatory requirements with confidence. Our advisors ensure full compliance across multiple jurisdictions, keeping your operations aligned with local and international standards.
+                  Operate confidently across borders with a team that understands the regulatory, legal, and fiscal nuances of each market you enter.
                 </p>
+                <ul className="mt-4 space-y-2 text-left">
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Advisors with hands-on experience in 50+ jurisdictions worldwide</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Deep knowledge of local regulations, tax codes, and compliance requirements</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Seamless coordination across countries for unified operations</span>
+                  </li>
+                </ul>
               </div>
 
               {/* USP 2 */}
@@ -213,11 +227,25 @@ const InternationalServices = () => {
                   <Building2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">
-                  Multi-Jurisdiction Operations Support
+                  Outcome-Focused Strategic Planning
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Establish and manage entities across borders seamlessly. From incorporation to ongoing governance, we provide end-to-end support for your international structure.
+                  Every recommendation we make is designed to deliver measurable business results — from cost savings to risk reduction and accelerated growth.
                 </p>
+                <ul className="mt-4 space-y-2 text-left">
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Tax optimization strategies that reduce your global effective tax rate</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Proactive risk mitigation to avoid penalties and operational disruptions</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Scalable solutions that evolve with your international expansion</span>
+                  </li>
+                </ul>
               </div>
 
               {/* USP 3 */}
@@ -226,11 +254,25 @@ const InternationalServices = () => {
                   <CheckCircle className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">
-                  Outcome-Driven Advisory
+                  Integrated Legal, Tax, Accounting & Labour Support
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Every recommendation is focused on measurable business results — reducing risk, optimizing costs, and enabling sustainable growth across markets.
+                  Work with a single partner who aligns all disciplines — eliminating silos, reducing complexity, and ensuring consistent advice across your organization.
                 </p>
+                <ul className="mt-4 space-y-2 text-left">
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>One team coordinating legal, fiscal, accounting, and HR matters</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Consistent policies and documentation across all your entities</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span>Faster decision-making with streamlined communication and reporting</span>
+                  </li>
+                </ul>
               </div>
 
             </div>
