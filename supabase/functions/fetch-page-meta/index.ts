@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
       .from('site_pages')
       .select('id, url')
       .or('meta_title.is.null,meta_description.is.null')
-      .eq('status', 'active')
+      .eq('status', 'published')
       .limit(50); // Procesar máximo 50 páginas por ejecución
 
     if (fetchError) {
