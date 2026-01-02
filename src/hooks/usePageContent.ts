@@ -1,16 +1,18 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { PageContent, PageContentInsert, PageContentUpdate } from '@/types/pageContent';
+import { SITE_SOURCE } from '@/config/site';
 
 export const usePageContent = (pageKey?: string, sectionKey?: string, language: string = 'es') => {
   return useQuery({
-    queryKey: ['page-content', pageKey, sectionKey, language],
+    queryKey: ['page-content', pageKey, sectionKey, language, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from('page_content')
         .select('*')
         .eq('is_active', true)
-        .eq('language', language);
+        .eq('language', language)
+        .eq('source_site', SITE_SOURCE);
       
       if (pageKey) {
         query = query.eq('page_key', pageKey);
@@ -31,11 +33,12 @@ export const usePageContent = (pageKey?: string, sectionKey?: string, language: 
 
 export const useAllPageContent = () => {
   return useQuery({
-    queryKey: ['page-content', 'all'],
+    queryKey: ['page-content', 'all', SITE_SOURCE],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('page_content')
         .select('*')
+        .eq('source_site', SITE_SOURCE)
         .order('page_key')
         .order('display_order');
       
