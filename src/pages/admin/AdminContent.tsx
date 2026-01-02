@@ -3,11 +3,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAllPageContent, useDeletePageContent } from '@/hooks/usePageContent';
-import { FileText, Plus, Edit, Trash2, Building2 } from 'lucide-react';
+import { FileText, Plus, Edit, Trash2, Building2, Globe } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ContentEditorDialog } from '@/components/admin/content/ContentEditorDialog';
 import { PageContent } from '@/types/pageContent';
 import { LogosManager } from '@/components/admin/LogosManager';
+import { NetworksManager } from '@/components/admin/NetworksManager';
 import { toast } from 'sonner';
 
 const pages = [
@@ -126,14 +127,18 @@ export default function AdminContent() {
               return (
                 <TabsContent key={page.key} value={page.key} className="space-y-4">
                   <Tabs defaultValue="clientes" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2">
+                    <TabsList className="grid w-full grid-cols-3">
                       <TabsTrigger value="clientes">
                         <Building2 className="w-4 h-4 mr-2" />
-                        Clientes (Carrusel)
+                        Clientes
                       </TabsTrigger>
                       <TabsTrigger value="tecnologia">
                         <Building2 className="w-4 h-4 mr-2" />
-                        Tecnología (Grid)
+                        Tecnología
+                      </TabsTrigger>
+                      <TabsTrigger value="redes">
+                        <Globe className="w-4 h-4 mr-2" />
+                        Redes Int.
                       </TabsTrigger>
                     </TabsList>
 
@@ -150,6 +155,13 @@ export default function AdminContent() {
                         sectionKey="tecnologia"
                         title="Logos de Tecnología"
                         description="Gestiona los logos que aparecen en la grid de tecnologías"
+                      />
+                    </TabsContent>
+
+                    <TabsContent value="redes" className="mt-6">
+                      <NetworksManager
+                        title="Redes Internacionales"
+                        description="Gestiona los logos y datos de las redes internacionales (Home)"
                       />
                     </TabsContent>
                   </Tabs>
