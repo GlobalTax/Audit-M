@@ -4,6 +4,7 @@ import logoFull from "@/assets/logos/navarro-tax-legal.svg";
 import logoFullWhite from "@/assets/logos/navarro-tax-legal-white.svg";
 import logoCompact from "@/assets/logos/navarro.svg";
 import logoCompactWhite from "@/assets/logos/navarro-white.svg";
+import logoInternationalWhite from "@/assets/logos/navarro-international-white.png";
 
 interface LogoProps {
   variant?: "full" | "compact";
@@ -24,6 +25,18 @@ const InternationalLogo = ({
   const textColor = color === "light" ? "text-white" : "text-foreground";
   const taglineColor = color === "light" ? "text-white/70" : "text-muted-foreground";
 
+  // Use actual logo for light color (white logo on dark backgrounds)
+  if (color === "light") {
+    return (
+      <img
+        src={logoInternationalWhite}
+        alt="Navarro International"
+        className="h-full w-auto max-h-12"
+      />
+    );
+  }
+
+  // Fallback to text for dark color until we have the dark logo
   if (variant === "compact") {
     return (
       <span className={cn("text-2xl font-bold tracking-tight", textColor)}>
