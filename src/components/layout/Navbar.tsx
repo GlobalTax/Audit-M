@@ -137,6 +137,7 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center">
             <Logo
               variant="compact"
+              brand="international"
               color={scrolled || (isLightMode && !mobileMenuOpen) ? "dark" : "light"}
               className="h-10"
               asLink={false}
