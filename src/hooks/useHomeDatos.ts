@@ -8,34 +8,34 @@ interface DatoItem {
 
 const DEFAULT_DATOS: DatoItem[] = [
   {
-    categoria: "Clientes",
+    categoria: "Clients",
     valor: "300+",
-    descripcion: "Más de 300 empresas familiares y grupos confían en navarro."
+    descripcion: "Over 300 family businesses and corporate groups trust Navarro."
   },
   {
-    categoria: "Proyectos",
+    categoria: "Projects",
     valor: "500+",
-    descripcion: "Operaciones de reestructuración, sucesión y M&A completadas con éxito."
+    descripcion: "Restructuring, succession, and M&A operations successfully completed."
   },
   {
-    categoria: "Años de experiencia",
+    categoria: "Years of Experience",
     valor: "25+",
-    descripcion: "Trayectoria sólida acompañando a empresas familiares en su crecimiento."
+    descripcion: "A solid track record supporting family businesses in their growth."
   },
   {
-    categoria: "Equipo",
+    categoria: "Team",
     valor: "70+",
-    descripcion: "Abogados y profesionales especializados en fiscal, mercantil, laboral y M&A."
+    descripcion: "Attorneys and professionals specializing in tax, corporate, labour, and M&A."
   },
   {
-    categoria: "Compromiso",
+    categoria: "Commitment",
     valor: "100%",
-    descripcion: "Dedicación total a cada mandato, con rigor técnico y confidencialidad."
+    descripcion: "Full dedication to every engagement, with technical rigor and confidentiality."
   },
   {
-    categoria: "Operaciones M&A",
+    categoria: "M&A Transactions",
     valor: "100+",
-    descripcion: "Mandatos de compra y venta asesorados con un enfoque integral."
+    descripcion: "Buy-side and sell-side mandates advised with an integrated approach."
   }
 ];
 
