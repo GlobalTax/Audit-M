@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
-import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 interface BlogPostCardProps {
   slug: string;
@@ -34,8 +31,8 @@ export const BlogPostCard = memo(({
   readTime,
   className = "",
 }: BlogPostCardProps) => {
-  const { getBlogPath } = useLocalizedPath();
-  const blogPath = getBlogPath(slug_es, slug_en);
+  // Use English slug if available, fallback to Spanish, then generic slug
+  const blogPath = `/blog/${slug_en || slug_es || slug}`;
   
   return (
     <Link to={blogPath}>
@@ -87,7 +84,6 @@ export const BlogPostCard = memo(({
     </Link>
   );
 }, (prevProps, nextProps) => {
-  // Only re-render if slug or key content changes
   return prevProps.slug === nextProps.slug && 
          prevProps.title === nextProps.title &&
          prevProps.publishedAt === nextProps.publishedAt;

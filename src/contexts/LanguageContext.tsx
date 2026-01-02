@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 import '@/i18n/config';
 
-type Language = 'es' | 'ca' | 'en';
+type Language = 'en';
 
 type LanguageContextType = {
   language: Language;
-  setLanguage: (lang: Language) => void;
   t: (key: string, options?: any) => string;
 };
 
@@ -23,7 +22,6 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const { i18n, t: i18nT, ready } = useTranslation();
-  const language = i18n.language as Language;
 
   // Show loading state while i18next initializes
   if (!ready) {
@@ -34,27 +32,21 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  // Memoize setLanguage to prevent unnecessary re-renders
-  const setLanguage = useCallback((lang: Language) => {
-    i18n.changeLanguage(lang);
-  }, [i18n]);
-
-  // Memoize translation function to prevent unnecessary re-renders
+  // Memoize translation function
   const t = useCallback((key: string, options?: any): string => {
     return i18nT(key, options) as string;
   }, [i18nT]);
 
-  // Memoize context value to prevent unnecessary re-renders
+  // Memoize context value
   const contextValue = useMemo(() => ({
-    language,
-    setLanguage,
+    language: 'en' as Language,
     t
-  }), [language, setLanguage, t]);
+  }), [t]);
 
   // Set html lang attribute
   useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+    document.documentElement.lang = 'en';
+  }, []);
 
   return (
     <LanguageContext.Provider value={contextValue}>

@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/accordion";
 import { ServiceContactForm } from "@/components/services/ServiceContactForm";
 import { StatCard } from "@/components/ui/stat-card";
-import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
 import { RelatedServices } from "@/components/services/RelatedServices";
 
@@ -40,7 +39,6 @@ const ServiceDetail = () => {
   const { trackPageView, trackContactClick } = useAnalytics();
   useScrollDepth();
   const { language, t } = useLanguage();
-  const { getServicePath } = useLocalizedPath();
 
   // Fetch from database
   const { data: dbService, isLoading } = useQuery({
@@ -86,23 +84,6 @@ const ServiceDetail = () => {
     ? createDynamicBreadcrumb(mainBreadcrumbs.services, service.name)
     : mainBreadcrumbs.services;
   
-  // Normalize URL to correct language path
-  useEffect(() => {
-    if (dbService) {
-      const correctPath = getServicePath(
-        dbService.slug_es,
-        dbService.slug_ca,
-        dbService.slug_en
-      );
-      
-      const currentPath = window.location.pathname;
-      
-      if (currentPath !== correctPath) {
-        console.log(`🔄 Normalizing URL from ${currentPath} to ${correctPath}`);
-        navigate(correctPath, { replace: true });
-      }
-    }
-  }, [dbService, language, navigate, getServicePath]);
 
   // Track page view when service is loaded
   useEffect(() => {

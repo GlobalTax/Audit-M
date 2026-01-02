@@ -1,11 +1,10 @@
 import { Linkedin, Instagram, Twitter, Facebook, Mail, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Logo } from "@/components/ui/logo";
 import { Separator } from "@/components/ui/separator";
-import { LanguageLink } from "@/components/ui/language-link";
 import { useSiteSettingsMap } from '@/hooks/useSiteSettings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useServicesSearch } from '@/hooks/useServicesSearch';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 export const Footer = () => {
@@ -13,13 +12,12 @@ export const Footer = () => {
   const { trackContactClick } = useAnalytics();
   const currentYear = new Date().getFullYear();
   const { settings } = useSiteSettingsMap();
-  const { getServicePath } = useLocalizedPath();
   
-  // Obtener servicios dinámicos de la BD
+  // Fetch dynamic services from DB
   const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
   const services = servicesData?.services || [];
 
-  // Valores por defecto (fallback)
+  // Default values (fallback)
   const socialLinks = {
     instagram: settings.social_instagram || 'https://www.instagram.com',
     twitter: settings.social_twitter || 'https://www.twitter.com',
@@ -33,7 +31,7 @@ export const Footer = () => {
     email: settings.contact_email || 'info@nrro.es',
   };
 
-  // Separar servicios y áreas
+  // Separate services and areas
   const serviciosItems = services.slice(0, 5);
   const areasItems = services.slice(5, 11);
 
@@ -131,38 +129,38 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Servicios Column */}
+          {/* Services Column */}
           <div className="space-y-6">
             <h4 className="text-xl font-display font-normal text-primary-foreground">
               {t("footer.services")}
             </h4>
             <nav className="flex flex-col gap-3">
               {serviciosItems.map((service) => (
-                <LanguageLink
+                <Link
                   key={service.id}
-                  to={getServicePath(service.slug_es, service.slug_ca, service.slug_en)}
+                  to={`/services/${service.slug_en || service.slug_es}`}
                   className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
                 >
                   {service.name}
-                </LanguageLink>
+                </Link>
               ))}
             </nav>
           </div>
 
-          {/* Áreas Column */}
+          {/* Areas Column */}
           <div className="space-y-6">
             <h4 className="text-xl font-display font-normal text-primary-foreground">
               {t("footer.areas")}
             </h4>
             <nav className="flex flex-col gap-3">
               {areasItems.map((service) => (
-                <LanguageLink
+                <Link
                   key={service.id}
-                  to={getServicePath(service.slug_es, service.slug_ca, service.slug_en)}
+                  to={`/services/${service.slug_en || service.slug_es}`}
                   className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
                 >
                   {service.name}
-                </LanguageLink>
+                </Link>
               ))}
             </nav>
           </div>
@@ -173,36 +171,36 @@ export const Footer = () => {
               {t("footer.company")}
             </h4>
             <nav className="flex flex-col gap-3">
-              <LanguageLink
-                to="/nosotros"
+              <Link
+                to="/about"
                 className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
               >
                 {t("footer.about")}
-              </LanguageLink>
-              <LanguageLink
-                to="/equipo"
+              </Link>
+              <Link
+                to="/team"
                 className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
               >
                 {t("footer.team")}
-              </LanguageLink>
-              <LanguageLink
+              </Link>
+              <Link
                 to="/blog"
                 className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
               >
                 {t("footer.blog")}
-              </LanguageLink>
-              <LanguageLink
-                to="/carreras"
+              </Link>
+              <Link
+                to="/careers"
                 className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
               >
                 {t("footer.careers")}
-              </LanguageLink>
-              <LanguageLink
-                to="/contacto"
+              </Link>
+              <Link
+                to="/contact"
                 className="text-primary-foreground/80 hover:text-accent transition-colors text-base font-light"
               >
                 {t("footer.contact")}
-              </LanguageLink>
+              </Link>
             </nav>
           </div>
         </div>
@@ -216,30 +214,30 @@ export const Footer = () => {
             © {currentYear} Navarro Tax Legal. {t("footer.rights")}
           </p>
           <div className="flex flex-wrap gap-6">
-            <LanguageLink
-              to="/aviso-legal"
+            <Link
+              to="/legal-notice"
               className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
             >
               {t("footer.legal")}
-            </LanguageLink>
-            <LanguageLink
-              to="/privacidad"
+            </Link>
+            <Link
+              to="/privacy"
               className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
             >
               {t("footer.privacy")}
-            </LanguageLink>
-            <LanguageLink
+            </Link>
+            <Link
               to="/cookies"
               className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
             >
               {t("footer.cookies")}
-            </LanguageLink>
-                  <LanguageLink
-                    to="/condiciones-contratacion"
-                    className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
-                  >
-                    {t("footer.terms")}
-                  </LanguageLink>
+            </Link>
+            <Link
+              to="/terms"
+              className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
+            >
+              {t("footer.terms")}
+            </Link>
           </div>
         </div>
       </div>

@@ -5,9 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import * as LucideIcons from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 interface ServiceCardProps {
   service: {
@@ -27,23 +25,22 @@ interface ServiceCardProps {
 
 const getAreaColor = (area: string) => {
   const colors: Record<string, string> = {
-    'Fiscal': 'bg-blue-100 text-blue-800 border-blue-300',
-    'Contable': 'bg-green-100 text-green-800 border-green-300',
+    'Tax': 'bg-blue-100 text-blue-800 border-blue-300',
+    'Accounting': 'bg-green-100 text-green-800 border-green-300',
     'Legal': 'bg-purple-100 text-purple-800 border-purple-300',
-    'Laboral': 'bg-orange-100 text-orange-800 border-orange-300',
+    'Labor': 'bg-orange-100 text-orange-800 border-orange-300',
   };
   return colors[area] || 'bg-gray-100 text-gray-800 border-gray-300';
 };
 
 export const ServiceCard = memo(({ service, variant = 'grid' }: ServiceCardProps) => {
   const { t } = useLanguage();
-  const { getServicePath } = useLocalizedPath();
   
   // Get the icon dynamically from lucide-react
   const IconComponent = (LucideIcons as any)[service.icon_name] || LucideIcons.FileText;
   
-  // Generate localized path
-  const servicePath = getServicePath(service.slug_es, service.slug_ca, service.slug_en);
+  // Generate path using English slug, fallback to Spanish
+  const servicePath = `/services/${service.slug_en || service.slug_es || service.slug}`;
 
   if (variant === 'list') {
     return (
@@ -61,7 +58,7 @@ export const ServiceCard = memo(({ service, variant = 'grid' }: ServiceCardProps
               </div>
               <Link to={servicePath}>
                 <Button variant="outline" size="sm">
-                  {t('services.card.moreInfo')}
+                  {t('services.card.moreInfo') || 'More info'}
                 </Button>
               </Link>
             </div>
@@ -104,13 +101,12 @@ export const ServiceCard = memo(({ service, variant = 'grid' }: ServiceCardProps
           to={servicePath}
           className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-hover transition-colors"
         >
-          {t('services.card.learnMore')} <ArrowRight className="ml-1 h-4 w-4" />
+          {t('services.card.learnMore') || 'Learn more'} <ArrowRight className="ml-1 h-4 w-4" />
         </Link>
       </div>
     </Card>
   );
 }, (prevProps, nextProps) => {
-  // Only re-render if service id or variant changes
   return prevProps.service.id === nextProps.service.id && 
          prevProps.variant === nextProps.variant;
 });

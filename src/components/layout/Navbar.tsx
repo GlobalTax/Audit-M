@@ -3,16 +3,12 @@ import { useLocation, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-import { LanguageSelector } from "@/components/ui/language-selector";
-import { LanguageLink } from "@/components/ui/language-link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useServicesSearch } from "@/hooks/useServicesSearch";
-import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
   const { t, language } = useLanguage();
-  const { getLocalizedPath, getServicePath } = useLocalizedPath();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [serviciosOpen, setServiciosOpen] = useState(false);
@@ -20,32 +16,31 @@ export const Navbar = () => {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   
-  // Obtener servicios dinámicos de la BD
+  // Fetch dynamic services from DB
   const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
   const services = servicesData?.services || [];
 
-  // Separar servicios y áreas
+  // Separate services and areas
   const serviciosMenu = services.slice(0, 5).map(service => ({
     name: service.name,
-    href: getServicePath(service.slug_es, service.slug_ca, service.slug_en)
+    href: `/services/${service.slug_en || service.slug_es}`
   }));
 
   const areasMenu = services.slice(5, 11).map(service => ({
     name: service.name,
-    href: getServicePath(service.slug_es, service.slug_ca, service.slug_en)
+    href: `/services/${service.slug_en || service.slug_es}`
   }));
 
   const navigation = [
-    { name: t("nav.services"), href: "/servicios" },
-    { name: t("nav.about"), href: "/nosotros" },
+    { name: t("nav.services"), href: "/services" },
+    { name: t("nav.about"), href: "/about" },
     { name: t("nav.blog"), href: "/blog" },
-    { name: t("nav.team"), href: "/equipo" },
-    { name: t("nav.careers"), href: "/carreras" },
+    { name: t("nav.team"), href: "/team" },
+    { name: t("nav.careers"), href: "/careers" },
   ];
 
   const isActive = (path: string) => {
-    const localizedPath = getLocalizedPath(path);
-    return location.pathname === localizedPath || location.pathname.startsWith(localizedPath + '/');
+    return location.pathname === path || location.pathname.startsWith(path + '/');
   };
 
   useEffect(() => {
@@ -60,7 +55,7 @@ export const Navbar = () => {
     const detectBackgroundColor = () => {
       if (!navRef.current) return;
 
-      if (location.pathname.startsWith('/servicios') && window.scrollY < 10) {
+      if (location.pathname.startsWith('/services') && window.scrollY < 10) {
         setIsLightMode(false);
         return;
       }
@@ -112,7 +107,7 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [location]);
 
-  // Cerrar dropdown de servicios al hacer clic fuera
+  // Close services dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (serviciosOpen && !(event.target as Element).closest('.servicios-dropdown')) {
@@ -139,14 +134,14 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <LanguageLink to="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <Logo
               variant="compact"
               color={scrolled || (isLightMode && !mobileMenuOpen) ? "dark" : "light"}
               className="h-10"
               asLink={false}
             />
-          </LanguageLink>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -182,14 +177,14 @@ export const Navbar = () => {
                             </h3>
                             <div className="space-y-2">
                               {serviciosMenu.map((service) => (
-                                <LanguageLink
+                                <Link
                                   key={service.href}
                                   to={service.href}
                                   onClick={() => setServiciosOpen(false)}
                                   className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
                                 >
                                   {service.name}
-                                </LanguageLink>
+                                </Link>
                               ))}
                             </div>
                           </div>
@@ -199,14 +194,14 @@ export const Navbar = () => {
                             </h3>
                             <div className="space-y-2">
                               {areasMenu.map((area) => (
-                                <LanguageLink
+                                <Link
                                   key={area.href}
                                   to={area.href}
                                   onClick={() => setServiciosOpen(false)}
                                   className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
                                 >
                                   {area.name}
-                                </LanguageLink>
+                                </Link>
                               ))}
                             </div>
                           </div>
@@ -218,7 +213,7 @@ export const Navbar = () => {
               }
 
               return (
-                <LanguageLink
+                <Link
                   key={item.name}
                   to={item.href}
                   className={cn(
@@ -232,25 +227,22 @@ export const Navbar = () => {
                   )}
                 >
                   {item.name}
-                </LanguageLink>
+                </Link>
               );
             })}
 
-            <LanguageSelector variant={scrolled || isLightMode ? "light" : "dark"} />
-
-            <LanguageLink to="/contacto">
+            <Link to="/contact">
               <Button 
                 variant={scrolled || isLightMode ? "default" : "secondary"}
                 className="font-medium"
               >
                 {t("nav.contact")}
               </Button>
-            </LanguageLink>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-4 lg:hidden">
-            <LanguageSelector variant={scrolled || isLightMode ? "light" : "dark"} />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={cn(
@@ -273,26 +265,26 @@ export const Navbar = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden py-6 border-t border-border animate-in slide-in-from-top-2">
             <div className="flex flex-col gap-4">
-            {navigation.map((item) => (
-              <LanguageLink
-                key={item.name}
-                to={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "font-display text-base px-4 py-2 transition-colors",
-                  isActive(item.href)
-                    ? "text-accent bg-accent/10 font-semibold"
-                    : "text-foreground hover:text-accent hover:bg-accent/5"
-                )}
-              >
-                {item.name}
-              </LanguageLink>
-            ))}
-              <LanguageLink to="/contacto" onClick={() => setMobileMenuOpen(false)}>
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "font-display text-base px-4 py-2 transition-colors",
+                    isActive(item.href)
+                      ? "text-accent bg-accent/10 font-semibold"
+                      : "text-foreground hover:text-accent hover:bg-accent/5"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="default" className="w-full">
                   {t("nav.contact")}
                 </Button>
-              </LanguageLink>
+              </Link>
             </div>
           </div>
         )}

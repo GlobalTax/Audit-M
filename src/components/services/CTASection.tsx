@@ -1,8 +1,8 @@
 import { memo } from "react";
+import { Link } from "react-router-dom";
 import { usePageContent } from "@/hooks/usePageContent";
 import { CTAContent } from "@/types/pageContent";
 import { Button } from "@/components/ui/button";
-import { LanguageLink } from "@/components/ui/language-link";
 import { ArrowRight } from "lucide-react";
 
 interface CTASectionProps {
@@ -30,10 +30,10 @@ export const CTASection = memo(({ sectionKey = "cta_consulta" }: CTASectionProps
           
           <div className="pt-4">
             <Button asChild size="lg" className="group">
-              <LanguageLink to={content.cta_url}>
+              <Link to="/contact">
                 {content.cta_texto}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </LanguageLink>
+              </Link>
             </Button>
           </div>
         </div>

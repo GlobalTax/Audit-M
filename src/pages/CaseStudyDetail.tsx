@@ -1,6 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Meta } from '@/components/seo/Meta';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -24,14 +23,12 @@ import { ArrowLeft, Calendar, Building2, Users } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import DOMPurify from 'dompurify';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { mainBreadcrumbs, createDynamicBreadcrumb } from '@/lib/seoUtils';
 
 export default function CaseStudyDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { language, t } = useLanguage();
   const navigate = useNavigate();
-  const { getCaseStudyPath } = useLocalizedPath();
 
   const { data: caseStudy, isLoading } = useQuery({
     queryKey: ['case-study', slug, language],
@@ -82,23 +79,6 @@ export default function CaseStudyDetail() {
     ? createDynamicBreadcrumb(mainBreadcrumbs.caseStudies, caseStudy.hero_title || caseStudy.title)
     : mainBreadcrumbs.caseStudies;
 
-  // Normalizar URL cuando se carga el case study
-  useEffect(() => {
-    if (caseStudy) {
-      const correctPath = getCaseStudyPath(
-        caseStudy.slug_es,
-        caseStudy.slug_ca,
-        caseStudy.slug_en
-      );
-      
-      const currentPath = window.location.pathname;
-      
-      if (currentPath !== correctPath) {
-        console.log(`🔄 Normalizing case study URL from ${currentPath} to ${correctPath}`);
-        navigate(correctPath, { replace: true });
-      }
-    }
-  }, [caseStudy, language, navigate, getCaseStudyPath]);
 
   if (isLoading) {
     return (

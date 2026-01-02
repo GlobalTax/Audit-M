@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAlternateUrls } from "@/hooks/useAlternateUrls";
 import { BASE_DOMAIN } from "@/lib/seoUtils";
 
 interface MetaProps {
@@ -9,7 +8,6 @@ interface MetaProps {
   keywords?: string;
   ogImage?: string;
   canonicalUrl?: string;
-  // Optional slugs for dynamic pages (services, blog, case studies)
   slugs?: {
     es?: string;
     ca?: string;
@@ -26,11 +24,10 @@ export const Meta = ({
   slugs,
 }: MetaProps) => {
   const { language } = useLanguage();
-  const alternateUrls = useAlternateUrls(slugs);
   
   useEffect(() => {
     // Update html lang attribute
-    document.documentElement.lang = language;
+    document.documentElement.lang = 'en';
     
     // Update title
     document.title = `${title} | NRRO`;
@@ -42,7 +39,7 @@ export const Meta = ({
       { property: "og:description", content: description },
       { property: "og:image", content: ogImage },
       { property: "og:type", content: "website" },
-      { property: "og:locale", content: language === "es" ? "es_ES" : language === "ca" ? "ca_ES" : "en_US" },
+      { property: "og:locale", content: "en_US" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: `${title} | NRRO` },
       { name: "twitter:description", content: description },
@@ -67,30 +64,13 @@ export const Meta = ({
       element.setAttribute("content", content);
     });
 
-    // Add hreflang tags for SEO with proper alternate URLs
-    const hreflangTags = [
-      { lang: "es", href: alternateUrls.es },
-      { lang: "ca", href: alternateUrls.ca },
-      { lang: "en", href: alternateUrls.en },
-      { lang: "x-default", href: alternateUrls.es },
-    ];
-
-    // Remove existing hreflang tags
+    // Remove existing hreflang tags (not needed for single language)
     document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
-
-    // Add new hreflang tags
-    hreflangTags.forEach(({ lang, href }) => {
-      const link = document.createElement("link");
-      link.rel = "alternate";
-      link.hreflang = lang;
-      link.href = href;
-      document.head.appendChild(link);
-    });
 
     // Update canonical
     const fullCanonicalUrl = canonicalUrl 
       ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${BASE_DOMAIN}${canonicalUrl}`)
-      : alternateUrls[language as 'es' | 'ca' | 'en'];
+      : `${BASE_DOMAIN}${window.location.pathname}`;
       
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonical) {
