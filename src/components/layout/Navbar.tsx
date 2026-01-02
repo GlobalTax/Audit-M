@@ -139,7 +139,7 @@ export const Navbar = () => {
               variant="compact"
               brand="international"
               color={scrolled || (isLightMode && !mobileMenuOpen) ? "dark" : "light"}
-              className="h-10"
+              className="h-14"
               asLink={false}
             />
           </Link>

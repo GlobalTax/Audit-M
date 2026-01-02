@@ -31,7 +31,7 @@ const InternationalLogo = ({
       <img
         src={logoInternationalWhite}
         alt="Navarro International"
-        className="h-full w-auto max-h-12"
+        className="h-full w-auto"
       />
     );
   }
