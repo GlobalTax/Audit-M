@@ -136,10 +136,10 @@ export const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <Logo
-              variant="compact"
+              variant="full"
               brand="international"
               color={scrolled || (isLightMode && !mobileMenuOpen) ? "dark" : "light"}
-              className="h-14"
+              className="h-12"
               asLink={false}
             />
           </Link>
