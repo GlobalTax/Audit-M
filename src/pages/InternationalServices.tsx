@@ -144,16 +144,78 @@ const InternationalServices = () => {
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-tight">
-                International Services
+                Your Strategic Partner for<br />International Business
               </h1>
               
               <p className="text-xl md:text-2xl text-white/80 mb-4 leading-relaxed max-w-3xl mx-auto">
-                End-to-end legal, tax, accounting and labour solutions for multinational companies operating across borders.
+                Integrated legal, tax, accounting and labour advisory for multinational companies, foreign investors, and businesses expanding across borders.
               </p>
               
-              <p className="text-base text-white/60">
-                Barcelona headquarters. Global reach. Local expertise in 50+ jurisdictions.
+              <p className="text-base text-white/60 mb-10">
+                Barcelona headquarters. Global expertise. Trusted in 50+ jurisdictions.
               </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" variant="secondary" className="font-medium">
+                  <Link to="/contact">
+                    Request a Consultation
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Link to="/contact">
+                    Contact Our International Team
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* USP Section */}
+        <section className="py-16 md:py-20 bg-muted/30 border-b border-border/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              
+              {/* USP 1 */}
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
+                  <Globe className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  Global Compliance Expertise
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Navigate regulatory requirements with confidence. Our advisors ensure full compliance across multiple jurisdictions, keeping your operations aligned with local and international standards.
+                </p>
+              </div>
+
+              {/* USP 2 */}
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  Multi-Jurisdiction Operations Support
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Establish and manage entities across borders seamlessly. From incorporation to ongoing governance, we provide end-to-end support for your international structure.
+                </p>
+              </div>
+
+              {/* USP 3 */}
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
+                  <CheckCircle className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  Outcome-Driven Advisory
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Every recommendation is focused on measurable business results — reducing risk, optimizing costs, and enabling sustainable growth across markets.
+                </p>
+              </div>
+
             </div>
           </div>
         </section>
