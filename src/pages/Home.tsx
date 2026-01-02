@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Globe } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -152,17 +152,21 @@ const Home = () => {
                   )
                 }}
               />
-              <p className="text-lead mb-8">
+              <p className="text-lead mb-4">
                 {heroContent?.subtitle || t("home.hero.subtitle")}
               </p>
-              <div className="flex gap-4">
+              <p className="text-sm text-white/50 mb-8">
+                {t("home.hero.tagline")}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   asChild
                   size="lg"
                   variant="secondary"
-                  onClick={() => trackCTAClick("Ver Servicios", "Hero")}
+                  onClick={() => trackCTAClick("Request International Consultation", "Hero")}
                 >
-                  <Link to={heroContent?.cta_primary?.link || "/servicios"}>
+                  <Link to="/contact">
+                    <Globe className="mr-2 h-5 w-5" />
                     {heroContent?.cta_primary?.text || t("home.hero.cta_primary")}
                   </Link>
                 </Button>
@@ -171,10 +175,11 @@ const Home = () => {
                   size="lg" 
                   variant="outline" 
                   className="border-white/20 bg-white/10 text-white hover:bg-white/20"
-                  onClick={() => trackCTAClick("Contactar", "home_hero")}
+                  onClick={() => trackCTAClick("Explore Global Services", "home_hero")}
                 >
-                  <Link to={heroContent?.cta_secondary?.link || "/contacto"}>
+                  <Link to="/services">
                     {heroContent?.cta_secondary?.text || t("home.hero.cta_secondary")}
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               </div>
