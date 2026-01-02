@@ -47,8 +47,11 @@ export const AdminHeader = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center justify-between">
+    <header className="bg-slate-50 border-b border-slate-200 px-6 py-4">
+      {/* Subtle gold accent line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+      
+      <div className="flex items-center justify-between relative">
         <div className="flex-1">
           {/* Breadcrumbs can be added here later */}
         </div>
@@ -57,12 +60,12 @@ export const AdminHeader = () => {
           <Button 
             variant="ghost" 
             size="sm" 
-            className="relative"
+            className="relative hover:bg-slate-200/50"
             onClick={() => navigate('/admin/contact-leads')}
           >
-            <Bell className="h-5 w-5" />
+            <Bell className="h-5 w-5 text-slate-600" />
             {unreadLeads > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-medium text-destructive-foreground">
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-[10px] font-medium text-slate-950">
                 {unreadLeads > 9 ? '9+' : unreadLeads}
               </span>
             )}
@@ -70,9 +73,9 @@ export const AdminHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="gap-2">
-                <User className="h-4 w-4" />
-                <span>{adminUser?.full_name}</span>
+              <Button variant="ghost" size="sm" className="gap-2 hover:bg-slate-200/50">
+                <User className="h-4 w-4 text-slate-600" />
+                <span className="text-slate-700">{adminUser?.full_name}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -92,7 +95,7 @@ export const AdminHeader = () => {
                       <BellOff className="h-4 w-4" />
                     )}
                     <Label htmlFor="browser-notifications" className="cursor-pointer">
-                      Notificaciones Push
+                      Push Notifications
                     </Label>
                   </div>
                   <Switch
@@ -101,12 +104,12 @@ export const AdminHeader = () => {
                     onCheckedChange={async () => {
                       const result = await toggleNotifications();
                       if (result) {
-                        sonnerToast.success('Notificaciones activadas', {
-                          description: 'Recibirás alertas incluso con el panel cerrado',
+                        sonnerToast.success('Notifications enabled', {
+                          description: 'You will receive alerts even when the panel is closed',
                         });
                       } else if (permission === 'denied') {
-                        sonnerToast.error('Permisos denegados', {
-                          description: 'Habilita las notificaciones en la configuración del navegador',
+                        sonnerToast.error('Permission denied', {
+                          description: 'Enable notifications in your browser settings',
                         });
                       }
                     }}

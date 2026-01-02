@@ -7,11 +7,12 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, AlertTriangle, Clock } from 'lucide-react';
+import { Globe, AlertTriangle, Clock } from 'lucide-react';
 import { z } from 'zod';
+
 const loginSchema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 export const AdminLogin = () => {
@@ -53,7 +54,7 @@ export const AdminLogin = () => {
     e.preventDefault();
     setErrors({});
 
-    // Validación con Zod
+    // Zod validation
     const result = loginSchema.safeParse({ email, password });
     if (!result.success) {
       const fieldErrors: any = {};
@@ -71,14 +72,14 @@ export const AdminLogin = () => {
     try {
       await signIn(email, password);
       toast({
-        title: 'Acceso exitoso',
-        description: 'Bienvenido al panel de administración',
+        title: 'Access granted',
+        description: 'Welcome to the administration portal',
       });
       navigate('/admin');
     } catch (error: any) {
       console.error('Login error:', error);
       
-      // Actualizar intentos restantes y lockout
+      // Update remaining attempts and lockout
       if (error.remainingAttempts !== undefined) {
         setRemainingAttempts(error.remainingAttempts);
       }
@@ -87,18 +88,18 @@ export const AdminLogin = () => {
         setLockoutUntil(error.lockoutUntil);
       }
 
-      let errorMessage = 'Credenciales inválidas';
+      let errorMessage = 'Invalid credentials';
       
       if (error.message?.includes('Too many')) {
-        errorMessage = 'Demasiados intentos fallidos. Intenta de nuevo más tarde.';
+        errorMessage = 'Too many failed attempts. Please try again later.';
       } else if (error.message?.includes('Access denied')) {
-        errorMessage = 'Acceso denegado: No eres un usuario administrador.';
+        errorMessage = 'Access denied: You are not an administrator.';
       } else if (error.message?.includes('Account disabled')) {
-        errorMessage = 'Tu cuenta ha sido desactivada. Contacta al administrador.';
+        errorMessage = 'Your account has been disabled. Contact an administrator.';
       }
       
       toast({
-        title: 'Error de autenticación',
+        title: 'Authentication error',
         description: errorMessage,
         variant: 'destructive',
       });
@@ -113,32 +114,42 @@ export const AdminLogin = () => {
     : 0;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-muted/50">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl" />
+      </div>
+      
+      <Card className="w-full max-w-md relative border-t-4 border-t-amber-500 shadow-2xl">
+        <CardHeader className="text-center pb-2">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <Shield className="h-8 w-8 text-primary" />
+            <div className="p-4 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-2xl border border-amber-500/20">
+              <Globe className="h-10 w-10 text-amber-500" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Admin Panel</CardTitle>
-          <CardDescription>Accede con tus credenciales</CardDescription>
+          <CardTitle className="text-2xl font-bold tracking-tight">
+            Navarro International
+          </CardTitle>
+          <CardDescription className="text-sm tracking-wide">
+            Global Administration Portal
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {isLockedOut && (
             <Alert variant="destructive" className="mb-4">
               <Clock className="h-4 w-4" />
               <AlertDescription>
-                Demasiados intentos fallidos. Por favor espera {lockoutMinutes} minutos antes de intentar de nuevo.
+                Too many failed attempts. Please wait {lockoutMinutes} minutes before trying again.
               </AlertDescription>
             </Alert>
           )}
           
           {remainingAttempts !== null && remainingAttempts < 3 && remainingAttempts > 0 && !isLockedOut && (
-            <Alert variant="default" className="mb-4">
-              <AlertTriangle className="h-4 w-4" />
-              <AlertDescription>
-                Te quedan {remainingAttempts} intentos antes de que tu cuenta sea bloqueada temporalmente.
+            <Alert variant="default" className="mb-4 border-amber-500/50 bg-amber-50">
+              <AlertTriangle className="h-4 w-4 text-amber-600" />
+              <AlertDescription className="text-amber-800">
+                You have {remainingAttempts} attempts remaining before your account is temporarily locked.
               </AlertDescription>
             </Alert>
           )}
@@ -149,7 +160,7 @@ export const AdminLogin = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@example.com"
+                placeholder="admin@company.com"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -157,13 +168,14 @@ export const AdminLogin = () => {
                 }}
                 required
                 disabled={isLoading || isLockedOut}
+                className="focus-visible:ring-amber-500/50"
               />
               {errors.email && (
                 <p className="text-sm text-destructive">{errors.email}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Contraseña</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -174,13 +186,18 @@ export const AdminLogin = () => {
                 }}
                 required
                 disabled={isLoading || isLockedOut}
+                className="focus-visible:ring-amber-500/50"
               />
               {errors.password && (
                 <p className="text-sm text-destructive">{errors.password}</p>
               )}
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading || isLockedOut}>
-              {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            <Button 
+              type="submit" 
+              className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-medium" 
+              disabled={isLoading || isLockedOut}
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
         </CardContent>

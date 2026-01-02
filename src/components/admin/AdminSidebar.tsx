@@ -4,7 +4,6 @@ import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
 import {
   LayoutDashboard,
   TrendingUp,
-  LogOut as ExitIcon,
   Users,
   Newspaper,
   UserCog,
@@ -18,31 +17,33 @@ import {
   Building2,
   Presentation,
   BarChart3,
+  Globe,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Logo } from '@/components/ui/logo';
 
-  const navItems = [
-    { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-    { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
-    { path: '/admin/content', icon: FileText, label: 'Gestión de Contenido' },
-    { path: '/admin/landing-dashboard', icon: BarChart3, label: 'Landing Dashboard' },
-    { path: '/admin/landings', icon: Presentation, label: 'Landing Control Center' },
-    { path: '/admin/case-studies', icon: TrendingUp, label: 'Case Studies' },
-    { path: '/admin/services', icon: Settings, label: 'Services' },
-    { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
-    { path: '/admin/team', icon: Users, label: 'Team Members' },
-    { path: '/admin/job-positions', icon: Briefcase, label: 'Vacantes' },
-    { path: '/admin/candidatos', icon: Briefcase, label: 'Candidatos' },
-  { path: '/admin/contact-leads', icon: Users, label: 'Leads de Contacto' },
+const navItems = [
+  { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
+  { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
+  { path: '/admin/content', icon: FileText, label: 'Content Management' },
+  { path: '/admin/landing-dashboard', icon: BarChart3, label: 'Landing Dashboard' },
+  { path: '/admin/landings', icon: Presentation, label: 'Landing Control Center' },
+  { path: '/admin/case-studies', icon: TrendingUp, label: 'Case Studies' },
+  { path: '/admin/services', icon: Settings, label: 'Services' },
+  { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
+  { path: '/admin/team', icon: Users, label: 'Team Members' },
+  { path: '/admin/job-positions', icon: Briefcase, label: 'Job Positions' },
+  { path: '/admin/candidatos', icon: Briefcase, label: 'Candidates' },
+  { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
   { path: '/admin/company-setup-leads', icon: Building2, label: 'Company Setup Leads' },
-  { path: '/admin/ley-beckham-leads', icon: Users, label: 'Ley Beckham' },
-    { path: '/admin/demo-requests', icon: Users, label: 'Demo Requests' },
-    { path: '/admin/technology', icon: Monitor, label: 'Tecnología' },
-    { path: '/admin/sitemap', icon: Map, label: 'Mapa del Sitio' },
-    { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
-  ];
+  { path: '/admin/ley-beckham-leads', icon: Users, label: 'Beckham Law' },
+  { path: '/admin/demo-requests', icon: Users, label: 'Demo Requests' },
+  { path: '/admin/technology', icon: Monitor, label: 'Technology' },
+  { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
+  { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
+];
 
 export const AdminSidebar = () => {
   const location = useLocation();
@@ -57,32 +58,45 @@ export const AdminSidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-slate-900 text-white min-h-screen flex flex-col">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold">Admin Panel</h1>
+    <aside className="w-64 bg-slate-950 text-white min-h-screen flex flex-col">
+      {/* Header with International Branding */}
+      <div className="p-6 border-b border-amber-500/20">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="p-2 bg-amber-500/10 rounded-lg">
+            <Globe className="h-6 w-6 text-amber-500" />
+          </div>
+          <Logo brand="international" variant="compact" color="light" asLink={false} className="h-8" />
+        </div>
+        <p className="text-[10px] text-amber-500/80 tracking-[0.2em] uppercase font-medium">
+          Admin Portal
+        </p>
         {adminUser && (
-          <div className="mt-2">
-            <Badge variant="secondary" className="text-xs">
+          <div className="mt-3">
+            <Badge 
+              variant="outline" 
+              className="text-[10px] border-amber-500/30 text-amber-400 bg-amber-500/10"
+            >
               {adminUser.role.replace('_', ' ').toUpperCase()}
             </Badge>
           </div>
         )}
       </div>
 
-      <Separator className="bg-slate-700" />
+      {/* Decorative gold line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
 
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         <Link to="/">
           <Button
             variant="ghost"
-            className="w-full justify-start text-slate-300 hover:text-white hover:bg-slate-800"
+            className="w-full justify-start text-slate-400 hover:text-white hover:bg-slate-800/50"
           >
             <Home className="mr-3 h-4 w-4" />
             Back to Site
           </Button>
         </Link>
 
-        <Separator className="bg-slate-700 my-4" />
+        <Separator className="bg-slate-800 my-3" />
 
         {navItems.map((item) => (
           <Link 
@@ -92,18 +106,17 @@ export const AdminSidebar = () => {
           >
             <Button
               variant="ghost"
-              className={`w-full justify-start gap-2 ${
+              className={`w-full justify-start gap-2 transition-all ${
                 isActive(item.path)
-                  ? 'bg-slate-800 text-white'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  ? 'bg-slate-800 text-white border-l-2 border-amber-500 rounded-l-none'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
             >
-              <item.icon className="h-4 w-4" />
-              <span className="flex-1 text-left">{item.label}</span>
+              <item.icon className={`h-4 w-4 ${isActive(item.path) ? 'text-amber-500' : ''}`} />
+              <span className="flex-1 text-left text-sm">{item.label}</span>
               {item.path === '/admin/contact-leads' && unreadLeads > 0 && (
                 <Badge 
-                  variant="destructive" 
-                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs"
+                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs bg-amber-500 text-slate-950 hover:bg-amber-400"
                 >
                   {unreadLeads > 99 ? '99+' : unreadLeads}
                 </Badge>
@@ -114,17 +127,17 @@ export const AdminSidebar = () => {
 
         {canManageUsers() && (
           <>
-            <Separator className="bg-slate-700 my-4" />
+            <Separator className="bg-slate-800 my-3" />
             <Link to="/admin/users">
               <Button
                 variant="ghost"
                 className={`w-full justify-start ${
                   isActive('/admin/users')
-                    ? 'bg-slate-800 text-white'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    ? 'bg-slate-800 text-white border-l-2 border-amber-500 rounded-l-none'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                 }`}
               >
-                <UserCog className="mr-3 h-4 w-4" />
+                <UserCog className={`mr-3 h-4 w-4 ${isActive('/admin/users') ? 'text-amber-500' : ''}`} />
                 Admin Users
               </Button>
             </Link>
@@ -132,11 +145,12 @@ export const AdminSidebar = () => {
         )}
       </nav>
 
-      <div className="p-4">
+      {/* User info footer */}
+      <div className="p-4 border-t border-slate-800">
         {adminUser && (
-          <div className="text-sm text-slate-400 mb-2">
-            <p className="truncate">{adminUser.full_name}</p>
-            <p className="text-xs truncate">{adminUser.email}</p>
+          <div className="text-sm">
+            <p className="truncate text-slate-300 font-medium">{adminUser.full_name}</p>
+            <p className="text-xs truncate text-slate-500">{adminUser.email}</p>
           </div>
         )}
       </div>
