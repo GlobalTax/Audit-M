@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
 import { usePageContent } from "@/hooks/usePageContent";
 import { CTAFinalContent } from "@/types/pageContent";
 import { Button } from "@/components/ui/button";
-import { LanguageLink } from "@/components/ui/language-link";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const CTAFinalSection = () => {
+  const { t } = useLanguage();
   const { data: contentData } = usePageContent("services", "cta_final");
   
   if (!contentData || contentData.length === 0) return null;
@@ -30,10 +32,10 @@ export const CTAFinalSection = () => {
               variant="secondary"
               className="group"
             >
-              <LanguageLink to={content.cta_primario_url}>
+              <Link to="/contact">
                 {content.cta_primario_texto}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </LanguageLink>
+              </Link>
             </Button>
             
             {content.cta_secundario_texto && content.cta_secundario_url && (
@@ -43,9 +45,9 @@ export const CTAFinalSection = () => {
                 variant="outline"
                 className="border-white/20 bg-white/10 text-white hover:bg-white/20"
               >
-                <LanguageLink to={content.cta_secundario_url}>
+                <Link to="/services">
                   {content.cta_secundario_texto}
-                </LanguageLink>
+                </Link>
               </Button>
             )}
           </div>

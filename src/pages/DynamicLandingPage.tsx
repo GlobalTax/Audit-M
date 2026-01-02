@@ -51,12 +51,9 @@ export const DynamicLandingPage = () => {
     return <Navigate to="/404" replace />;
   }
 
-  // Get localized content
+  // Get English content (single language)
   const getLocalizedField = (baseField: any, esField: any, caField: any, enField: any) => {
-    if (language === 'ca' && caField) return caField;
-    if (language === 'en' && enField) return enField;
-    if (esField) return esField;
-    return baseField;
+    return enField || esField || baseField;
   };
 
   const title = getLocalizedField(

@@ -76,8 +76,6 @@ export * from "./dropdown-menu";
 export * from "./empty-state";
 export * from "./hover-card";
 export * from "./image";
-export * from "./language-link";
-export * from "./language-selector";
 export * from "./logo";
 export * from "./logo-grid";
 export * from "./menubar";

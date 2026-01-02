@@ -4,7 +4,7 @@ import { CaseStudy } from '@/types/caseStudy';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;
@@ -12,12 +12,10 @@ interface CaseStudyCardProps {
 }
 
 export const CaseStudyCard = memo(({ caseStudy, variant = 'grid' }: CaseStudyCardProps) => {
-  const { getCaseStudyPath } = useLocalizedPath();
-  const caseStudyPath = getCaseStudyPath(
-    (caseStudy as any).slug_es,
-    (caseStudy as any).slug_ca,
-    (caseStudy as any).slug_en
-  );
+  const { t } = useLanguage();
+  
+  // Use English slug if available, fallback to Spanish
+  const caseStudyPath = `/case-studies/${(caseStudy as any).slug_en || (caseStudy as any).slug_es || caseStudy.slug}`;
   
   if (variant === 'list') {
     return (
@@ -67,7 +65,7 @@ export const CaseStudyCard = memo(({ caseStudy, variant = 'grid' }: CaseStudyCar
               )}
             </div>
             <div className="flex items-center gap-2 text-sm text-accent hover:text-accent-hover transition-colors">
-              <span>Ver caso de éxito</span>
+              <span>{t('caseStudies.viewCase') || 'View case study'}</span>
               <ArrowRight className="h-4 w-4" />
             </div>
           </div>
@@ -121,7 +119,7 @@ export const CaseStudyCard = memo(({ caseStudy, variant = 'grid' }: CaseStudyCar
             </div>
           )}
           <div className="flex items-center gap-2 text-sm text-accent group-hover:text-accent-hover transition-colors">
-            <span>Leer más</span>
+            <span>{t('caseStudies.readMore') || 'Read more'}</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
@@ -129,7 +127,6 @@ export const CaseStudyCard = memo(({ caseStudy, variant = 'grid' }: CaseStudyCar
     </Card>
   );
 }, (prevProps, nextProps) => {
-  // Only re-render if case study id or variant changes
   return prevProps.caseStudy.id === nextProps.caseStudy.id && 
          prevProps.variant === nextProps.variant;
 });

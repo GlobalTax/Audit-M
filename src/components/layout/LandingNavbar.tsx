@@ -1,6 +1,5 @@
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
-import { LanguageSelector } from "@/components/ui/language-selector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const LandingNavbar = () => {
@@ -21,13 +20,12 @@ export const LandingNavbar = () => {
           <Logo variant="compact" color="light" className="h-10" />
 
           <div className="flex items-center gap-4">
-            <LanguageSelector />
             <Button 
               variant="secondary" 
               onClick={scrollToForm}
               className="font-medium"
             >
-              Contacto
+              {t("nav.contact")}
             </Button>
           </div>
         </div>
