@@ -94,7 +94,7 @@ export const Logo = ({
 
   if (!asLink) {
     return (
-      <div className={cn("inline-block", className)}>
+      <div className={cn("inline-flex items-center", className)}>
         {logoContent}
       </div>
     );
