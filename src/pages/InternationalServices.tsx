@@ -23,6 +23,7 @@ import {
   Globe,
   CheckCircle
 } from "lucide-react";
+import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 
 const services = [
   {
@@ -308,6 +309,15 @@ const InternationalServices = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section id="contact" className="py-16 md:py-24 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto">
+              <InternationalServicesContactForm />
             </div>
           </div>
         </section>
