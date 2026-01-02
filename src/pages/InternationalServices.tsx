@@ -29,98 +29,91 @@ const services = [
     id: "international-accounting",
     icon: Calculator,
     title: "International Accounting Management",
-    description: "Consolidation, reporting, and compliance with international accounting standards for multinational operations.",
+    description: "Streamline your global financial operations with consolidated reporting and full compliance with international accounting standards across all jurisdictions.",
     benefits: [
-      "Multi-jurisdictional financial consolidation",
-      "IFRS and local GAAP compliance",
-      "Real-time reporting dashboards",
-      "Audit preparation and support"
+      "Multi-entity financial consolidation under IFRS and local GAAP",
+      "Real-time management reporting and performance dashboards",
+      "End-to-end audit preparation and regulatory filing support"
     ],
-    cta: "Explore Accounting Services",
+    cta: "Learn more",
     slug: "international-accounting-management"
   },
   {
     id: "international-tax",
     icon: FileText,
     title: "International Tax Management",
-    description: "Strategic tax planning and compliance to optimize your global tax position while minimizing risk.",
+    description: "Optimize your global tax position through strategic planning and rigorous compliance, minimizing exposure while maximizing efficiency across borders.",
     benefits: [
-      "Double taxation agreement optimization",
-      "International tax structuring",
-      "Transfer pricing documentation",
-      "Tax due diligence for cross-border transactions"
+      "Double taxation treaty analysis and optimization",
+      "Cross-border tax structuring and M&A due diligence",
+      "Proactive compliance monitoring and risk mitigation"
     ],
-    cta: "Explore Tax Services",
+    cta: "Learn more",
     slug: "international-tax-management"
   },
   {
     id: "international-payroll",
     icon: Users,
     title: "International Payroll Management",
-    description: "Efficient payroll processing aligned with local labour legislation across multiple jurisdictions.",
+    description: "Deliver accurate, timely payroll across multiple countries with full alignment to local labour laws and social security requirements.",
     benefits: [
-      "Multi-country payroll administration",
-      "Social security and benefits compliance",
-      "Expatriate payroll management",
-      "Labour cost optimization"
+      "Multi-country payroll processing and administration",
+      "Expatriate compensation and benefits management",
+      "Labour cost analysis and workforce planning support"
     ],
-    cta: "Explore Payroll Services",
+    cta: "Learn more",
     slug: "international-payroll-management"
   },
   {
     id: "corporate-legal",
     icon: Scale,
     title: "Corporate Legal Services",
-    description: "Entity formation, legal advisory, and ongoing compliance support for international companies.",
+    description: "Establish and maintain your international presence with expert legal advisory on entity formation, governance, and ongoing regulatory compliance.",
     benefits: [
-      "Company incorporation and structuring",
-      "Corporate governance advisory",
-      "Commercial contract drafting and review",
-      "Regulatory compliance monitoring"
+      "Company incorporation and corporate structuring",
+      "Commercial contract drafting, review, and negotiation",
+      "Ongoing corporate governance and compliance support"
     ],
-    cta: "Explore Legal Services",
+    cta: "Learn more",
     slug: "corporate-legal-services"
   },
   {
     id: "treasury-management",
     icon: Wallet,
     title: "Treasury Management",
-    description: "Monitoring and managing international cash flows to optimize liquidity and minimize financial risk.",
+    description: "Maximize liquidity and minimize financial risk through expert monitoring and management of your international cash flows and funding structures.",
     benefits: [
-      "Cross-border cash flow optimization",
-      "FX risk management",
-      "Intercompany funding structures",
-      "Working capital advisory"
+      "Cross-border cash flow optimization and forecasting",
+      "Foreign exchange risk management strategies",
+      "Intercompany funding and working capital advisory"
     ],
-    cta: "Explore Treasury Services",
+    cta: "Learn more",
     slug: "treasury-management"
   },
   {
     id: "transfer-pricing",
     icon: ArrowRightLeft,
     title: "Transfer Pricing",
-    description: "Ensuring compliance with intercompany transaction regulations across all jurisdictions.",
+    description: "Ensure full compliance with intercompany pricing regulations across all jurisdictions, backed by robust documentation and defensible policies.",
     benefits: [
-      "Transfer pricing policy development",
-      "Documentation and benchmarking studies",
-      "Advance pricing agreements (APAs)",
-      "Tax authority dispute resolution"
+      "Transfer pricing policy design and implementation",
+      "Benchmarking studies and contemporaneous documentation",
+      "Advance pricing agreements and dispute resolution support"
     ],
-    cta: "Explore Transfer Pricing",
+    cta: "Learn more",
     slug: "transfer-pricing"
   },
   {
     id: "local-presence",
     icon: Building2,
     title: "Local Presence & Governance Support",
-    description: "International domiciliation and provision of local directors for compliant market presence.",
+    description: "Establish a compliant local presence in Spain through professional domiciliation services and experienced local director appointments.",
     benefits: [
-      "Registered office services",
-      "Nominee and local director services",
-      "Corporate secretary services",
-      "Board meeting and AGM support"
+      "Registered office and business address services",
+      "Nominee and local director appointments",
+      "Corporate secretarial and board meeting support"
     ],
-    cta: "Explore Governance Services",
+    cta: "Learn more",
     slug: "local-presence-governance-support"
   }
 ];
