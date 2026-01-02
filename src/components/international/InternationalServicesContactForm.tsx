@@ -326,7 +326,7 @@ export function InternationalServicesContactForm() {
               </>
             ) : (
               <>
-                Submit Enquiry
+                Request Consultation
                 <Send className="ml-2 h-4 w-4" />
               </>
             )}
