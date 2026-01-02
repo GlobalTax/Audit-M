@@ -106,10 +106,10 @@ export default function Contact() {
   return (
     <>
       <Meta
-        title={t("contact.meta.title")}
-        description={t("contact.meta.description")}
-        keywords={t("contact.meta.keywords")}
-        canonicalUrl={`${window.location.origin}/contacto`}
+        title="Contact Our International Team"
+        description="Get in touch with our global advisory team in Barcelona. Request a consultation for legal, tax, accounting or payroll services."
+        keywords="contact international advisory, global business consultation, Barcelona legal tax services"
+        canonicalUrl="/contact"
       />
 
       {/* Hero Section */}
