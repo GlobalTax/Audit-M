@@ -1209,5 +1209,45 @@
       "primary": "Request International Consultation",
       "secondary": "Explore All Services"
     }
+  },
+  "contact": {
+    "hero": {
+      "badge": "Contact",
+      "title": "Contact Our International Team",
+      "subtitle": "Ready to discuss your global business needs? Our team in Barcelona is here to help you navigate international legal, tax, and accounting challenges."
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "John Smith",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+34 600 000 000",
+      "subject": "Subject",
+      "subjectPlaceholder": "How can we help you?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project or question...",
+      "messageError": "Message must be at least 10 characters",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "successTitle": "Message Sent",
+      "successDescription": "Thank you for contacting us. We'll get back to you shortly.",
+      "errorTitle": "Error",
+      "errorDescription": "Something went wrong. Please try again."
+    },
+    "info": {
+      "title": "Get in Touch",
+      "subtitle": "Our global advisory team is ready to assist with your international business needs.",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "addressValue": "Via Augusta, 59-61, 08006 Barcelona",
+      "hours": "Office Hours",
+      "weekdays": "Monday - Friday",
+      "weekdaysValue": "9:00 - 18:00",
+      "weekend": "Saturday - Sunday",
+      "weekendValue": "Closed"
+    }
   }
 }
