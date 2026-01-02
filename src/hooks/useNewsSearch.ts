@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SITE_SOURCE } from "@/config/site";
 
 interface NewsSearchParams {
   searchQuery?: string;
@@ -36,6 +37,7 @@ export const useNewsSearch = (params: NewsSearchParams) => {
         .from('news_articles')
         .select('*')
         .eq('is_published', true)
+        .eq('source_site', SITE_SOURCE)
         .order('is_featured', { ascending: false })
         .order('published_at', { ascending: false });
 

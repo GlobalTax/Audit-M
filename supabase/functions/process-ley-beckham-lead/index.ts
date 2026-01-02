@@ -413,6 +413,10 @@ const handler = async (req: Request): Promise<Response> => {
     const eligibilityScore = calculateEligibilityScore(contactData);
     const priority = calculatePriority(contactData.estimatedMoveDate);
 
+    // Determine source_site based on origin header
+    const origin = req.headers.get('origin') || req.headers.get('referer') || '';
+    const sourceSite = origin.includes('int.nrro.es') ? 'int' : 'es';
+
     // Insert into ley_beckham_leads table
     const { data: lead, error: leadError } = await supabaseClient
       .from("ley_beckham_leads")
@@ -431,6 +435,7 @@ const handler = async (req: Request): Promise<Response> => {
         eligibility_score: eligibilityScore,
         ip_address: contactData.ipAddress,
         user_agent: contactData.userAgent,
+        source_site: sourceSite,
       })
       .select()
       .single();

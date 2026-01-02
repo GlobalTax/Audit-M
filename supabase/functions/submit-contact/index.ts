@@ -283,6 +283,10 @@ serve(async (req: Request) => {
     // Map subject to service_type
     const serviceType = mapSubjectToServiceType(subject);
 
+    // Determine source_site based on origin header
+    const origin = req.headers.get('origin') || req.headers.get('referer') || '';
+    const sourceSite = origin.includes('int.nrro.es') ? 'int' : 'es';
+
     // Insert into contact_leads table
     const { data: contactLead, error: insertError } = await supabase
       .from('contact_leads')
@@ -295,6 +299,7 @@ serve(async (req: Request) => {
         service_type: serviceType,
         ip_address: ipAddress,
         user_agent: userAgent,
+        source_site: sourceSite,
       })
       .select()
       .single();

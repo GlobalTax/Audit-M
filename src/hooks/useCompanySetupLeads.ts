@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { SITE_SOURCE } from '@/config/site';
 
 export interface CompanySetupLead {
   id: string;
@@ -56,6 +57,7 @@ export const useCompanySetupLeads = (filters?: LeadFilters) => {
       let query = supabase
         .from('company_setup_leads')
         .select('*')
+        .eq('source_site', SITE_SOURCE)
         .order('created_at', { ascending: false });
       
       if (filters?.landing_variant && filters.landing_variant !== 'all') {
@@ -140,7 +142,8 @@ export const useCompanySetupStats = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('company_setup_leads')
-        .select('landing_variant, status, priority, lead_score, created_at');
+        .select('landing_variant, status, priority, lead_score, created_at')
+        .eq('source_site', SITE_SOURCE);
       
       if (error) throw error;
       

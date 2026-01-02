@@ -357,6 +357,10 @@ serve(async (req: Request) => {
       );
     }
 
+    // Determine source_site based on origin header
+    const origin = req.headers.get('origin') || req.headers.get('referer') || '';
+    const sourceSite = origin.includes('int.nrro.es') ? 'int' : 'es';
+
     // Insert candidate into database
     const { data: candidate, error: insertError } = await supabase
       .from('candidatos')
@@ -372,6 +376,7 @@ serve(async (req: Request) => {
         estado: 'nuevo',
         fuente: 'web',
         job_position_id: candidateData.job_position_id || null,
+        source_site: sourceSite,
       })
       .select()
       .single();
