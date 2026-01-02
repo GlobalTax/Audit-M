@@ -9,12 +9,10 @@ import {
   UserCog,
   Home,
   Settings,
-  ExternalLink,
   FileText,
   Briefcase,
   Monitor,
   Map,
-  Building2,
   Presentation,
   BarChart3,
   Globe,
@@ -35,14 +33,9 @@ const navItems = [
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
   { path: '/admin/team', icon: Users, label: 'Team Members' },
   { path: '/admin/job-positions', icon: Briefcase, label: 'Job Positions' },
-  { path: '/admin/candidatos', icon: Briefcase, label: 'Candidates' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
-  { path: '/admin/company-setup-leads', icon: Building2, label: 'Company Setup Leads' },
-  { path: '/admin/ley-beckham-leads', icon: Users, label: 'Beckham Law' },
-  { path: '/admin/demo-requests', icon: Users, label: 'Demo Requests' },
   { path: '/admin/technology', icon: Monitor, label: 'Technology' },
   { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
-  { path: '/orquest-kairoshr', icon: ExternalLink, label: 'Orquest + KairosHR', external: true },
 ];
 
 export const AdminSidebar = () => {
