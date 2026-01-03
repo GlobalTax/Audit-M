@@ -294,6 +294,8 @@ const Home = () => {
                   category={service.category}
                   features={service.features}
                   slug={(service as any).slug}
+                  slug_en={(service as any).slug_en}
+                  slug_es={(service as any).slug_es}
                 />
               ))}
             </div>
