@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { SITE_SOURCE, SiteSource } from "@/config/site";
 
 interface ServicesSearchParams {
   searchQuery?: string;
@@ -9,14 +8,9 @@ interface ServicesSearchParams {
   offset?: number;
 }
 
-// Helper to add source_site filter
-const addSourceFilter = (query: any, source: SiteSource) => {
-  return query.eq('source_site', source);
-};
-
 export const useServicesSearch = (params: ServicesSearchParams, language: string = 'es') => {
   return useQuery({
-    queryKey: ["services-search", params, language, SITE_SOURCE],
+    queryKey: ["services-search", params, language],
     retry: 1,
     queryFn: async () => {
       // Build base query with explicit any typing to avoid deep instantiation
@@ -24,9 +18,6 @@ export const useServicesSearch = (params: ServicesSearchParams, language: string
         .from('services')
         .select('*', { count: 'exact' })
         .eq('is_active', true);
-      
-      // Add source_site filter
-      query = addSourceFilter(query, SITE_SOURCE);
 
       // Apply search filter with language-specific columns and fallback
       if (params.searchQuery) {
@@ -88,15 +79,13 @@ export const useServicesSearch = (params: ServicesSearchParams, language: string
 
 export const useServicesFilterOptions = (language: string = 'es') => {
   return useQuery({
-    queryKey: ["services-filter-options", language, SITE_SOURCE],
+    queryKey: ["services-filter-options", language],
     queryFn: async () => {
       const areaCol = `area_${language}`;
-      let query: any = supabase
+      const query: any = supabase
         .from('services')
         .select(`${areaCol}, area_es`)
         .eq('is_active', true);
-      
-      query = addSourceFilter(query, SITE_SOURCE);
       
       const { data, error } = await query;
       
