@@ -190,7 +190,7 @@ const ServiceDetail = () => {
       </div>
 
       {/* Cómo Trabajamos Section - 3 columns */}
-      {service.metodologia && (
+      {service.metodologia && service.metodologia.overline && service.metodologia.titulos && (
         <section className="bg-white py-16 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
@@ -205,7 +205,7 @@ const ServiceDetail = () => {
               
               {/* Columna 2: Títulos */}
               <div>
-                {service.metodologia.titulos.map((titulo: string, idx: number) => (
+                {service.metodologia.titulos?.map((titulo: string, idx: number) => (
                   <h2 key={idx} className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
                     {titulo}
                   </h2>
@@ -214,19 +214,21 @@ const ServiceDetail = () => {
               
               {/* Columna 3: Contenido */}
               <div className="space-y-6">
-                <div className="text-lg font-medium text-foreground leading-relaxed prose prose-base max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {service.metodologia.introduccion}
-                  </ReactMarkdown>
-                </div>
+                {service.metodologia.introduccion && (
+                  <div className="text-lg font-medium text-foreground leading-relaxed prose prose-base max-w-none">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {service.metodologia.introduccion}
+                    </ReactMarkdown>
+                  </div>
+                )}
                 
-                {service.metodologia.pilares.map((pilar: any) => (
+                {service.metodologia.pilares?.map((pilar: any) => (
                   <div key={pilar.numero}>
                     <p className="text-lg font-semibold text-foreground mb-2">
                       {pilar.titulo}
                     </p>
                     <div className="space-y-2">
-                      {pilar.puntos.map((punto: string, idx: number) => (
+                      {pilar.puntos?.map((punto: string, idx: number) => (
                         <div key={idx} className="text-body leading-relaxed whitespace-pre-wrap">
                           — {punto}
                         </div>
