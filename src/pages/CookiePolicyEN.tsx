@@ -9,7 +9,7 @@ const CookiePolicyEN = () => {
     // Load Cookiebot declaration script
     const script = document.createElement("script");
     script.id = "CookieDeclaration";
-    script.src = "https://consent.cookiebot.com/YOUR_COOKIEBOT_ID/cd.js";
+    script.src = "https://consent.cookiebot.com/c5f326c2-c1a3-48af-89ee-2113cd3c0399/cd.js";
     script.type = "text/javascript";
     script.async = true;
     
