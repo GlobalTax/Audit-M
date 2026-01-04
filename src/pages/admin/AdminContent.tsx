@@ -12,11 +12,11 @@ import { NetworksManager } from '@/components/admin/NetworksManager';
 import { toast } from 'sonner';
 
 const pages = [
-  { key: 'home', label: 'Home', icon: '🏠', description: 'Incluye KPIs, Hero, Sobre Nosotros' },
+  { key: 'home', label: 'Home', icon: '🏠', description: 'Includes KPIs, Hero, About Us' },
   { key: 'about', label: 'About', icon: '👥' },
   { key: 'methodology', label: 'Methodology', icon: '📋' },
   { key: 'strategy', label: 'Strategy', icon: '🎯' },
-  { key: 'logos', label: 'Logos', icon: '🏢', description: 'Gestiona los logos de clientes y tecnología' },
+  { key: 'logos', label: 'Logos', icon: '🏢', description: 'Manage client and technology logos' },
 ];
 
 export default function AdminContent() {
@@ -58,9 +58,9 @@ export default function AdminContent() {
     const hasAll = languages.every(lang => hasLanguage(versions, lang));
     const hasEs = hasLanguage(versions, 'es');
 
-    if (hasAll) return { variant: 'default' as const, text: '✅ 3 idiomas', color: 'success' };
-    if (hasEs) return { variant: 'secondary' as const, text: '⚠️ Solo ES', color: 'warning' };
-    return { variant: 'destructive' as const, text: '❌ Sin ES', color: 'error' };
+    if (hasAll) return { variant: 'default' as const, text: '✅ 3 languages', color: 'success' };
+    if (hasEs) return { variant: 'secondary' as const, text: '⚠️ ES only', color: 'warning' };
+    return { variant: 'destructive' as const, text: '❌ No ES', color: 'error' };
   };
 
   const handleEdit = (content: PageContent & { languageVersions?: PageContent[] }) => {
@@ -83,15 +83,15 @@ export default function AdminContent() {
   };
 
   const handleDelete = async (versions: PageContent[]) => {
-    if (!confirm('¿Seguro que quieres eliminar esta sección en TODOS los idiomas?')) return;
+    if (!confirm('Are you sure you want to delete this section in ALL languages?')) return;
     
     try {
       for (const version of versions) {
         await deleteMutation.mutateAsync(version.id);
       }
-      toast.success('Sección eliminada en todos los idiomas');
+      toast.success('Section deleted in all languages');
     } catch (error) {
-      toast.error('Error al eliminar la sección');
+      toast.error('Error deleting section');
       console.error(error);
     }
   };
@@ -100,14 +100,14 @@ export default function AdminContent() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Gestión de Contenido</h1>
+            <h1 className="text-3xl font-bold">Content Management</h1>
             <p className="text-muted-foreground mt-2">
-              Edita el contenido de todas las páginas del sitio web
+              Edit the content of all website pages
             </p>
           </div>
           <Button onClick={() => handleCreate(selectedPage)}>
             <Plus className="w-4 h-4 mr-2" />
-            Nueva Sección
+            New Section
           </Button>
         </div>
 
@@ -130,38 +130,38 @@ export default function AdminContent() {
                     <TabsList className="grid w-full grid-cols-3">
                       <TabsTrigger value="clientes">
                         <Building2 className="w-4 h-4 mr-2" />
-                        Clientes
+                        Clients
                       </TabsTrigger>
                       <TabsTrigger value="tecnologia">
                         <Building2 className="w-4 h-4 mr-2" />
-                        Tecnología
+                        Technology
                       </TabsTrigger>
                       <TabsTrigger value="redes">
                         <Globe className="w-4 h-4 mr-2" />
-                        Redes Int.
+                        Networks
                       </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="clientes" className="mt-6">
                       <LogosManager
                         sectionKey="clientes"
-                        title="Logos de Clientes"
-                        description="Gestiona los logos que aparecen en el carrusel de clientes"
+                        title="Client Logos"
+                        description="Manage logos that appear in the client carousel"
                       />
                     </TabsContent>
 
                     <TabsContent value="tecnologia" className="mt-6">
                       <LogosManager
                         sectionKey="tecnologia"
-                        title="Logos de Tecnología"
-                        description="Gestiona los logos que aparecen en la grid de tecnologías"
+                        title="Technology Logos"
+                        description="Manage logos that appear in the technology grid"
                       />
                     </TabsContent>
 
                     <TabsContent value="redes" className="mt-6">
                       <NetworksManager
-                        title="Redes Internacionales"
-                        description="Gestiona los logos y datos de las redes internacionales (Home)"
+                        title="International Networks"
+                        description="Manage international network logos and data (Home)"
                       />
                     </TabsContent>
                   </Tabs>
@@ -174,21 +174,21 @@ export default function AdminContent() {
               <TabsContent key={page.key} value={page.key} className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Secciones de {page.label}</CardTitle>
+                    <CardTitle>{page.label} Sections</CardTitle>
                     <CardDescription>
-                      Gestiona las diferentes secciones de la página {page.label}
+                      Manage the different sections of the {page.label} page
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     {isLoading ? (
                       <div className="text-center py-8 text-muted-foreground">
-                        Cargando contenido...
+                        Loading content...
                       </div>
                     ) : getPageContent(page.key).length === 0 ? (
                       <div className="text-center py-8">
                         <FileText className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
                         <p className="text-muted-foreground">
-                          No hay secciones creadas para esta página
+                          No sections created for this page
                         </p>
                         <Button 
                           onClick={() => handleCreate(page.key)} 
@@ -196,7 +196,7 @@ export default function AdminContent() {
                           variant="outline"
                         >
                           <Plus className="w-4 h-4 mr-2" />
-                          Crear Primera Sección
+                          Create First Section
                         </Button>
                       </div>
                     ) : (
@@ -212,10 +212,10 @@ export default function AdminContent() {
                                       {content.section_key}
                                     </h3>
                                     <Badge variant={content.is_active ? 'default' : 'secondary'}>
-                                      {content.is_active ? 'Activo' : 'Inactivo'}
+                                      {content.is_active ? 'Active' : 'Inactive'}
                                     </Badge>
                                     <Badge variant="outline">
-                                      Orden: {content.display_order}
+                                      Order: {content.display_order}
                                     </Badge>
                                     <Badge variant={getLanguagesBadge(content.languageVersions).variant}>
                                       {getLanguagesBadge(content.languageVersions).text}
@@ -227,7 +227,7 @@ export default function AdminContent() {
                                     </div>
                                   </div>
                                   <p className="text-sm text-muted-foreground">
-                                    {content.content.title || content.content.overline || 'Sin título'}
+                                    {content.content.title || content.content.overline || 'No title'}
                                   </p>
                                 </div>
                                 <div className="flex gap-2">

@@ -51,13 +51,13 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
 
       toast.success(
         editingIndex !== null 
-          ? "Logo actualizado exitosamente" 
-          : "Logo añadido exitosamente"
+          ? "Logo updated successfully" 
+          : "Logo added successfully"
       );
       setEditingIndex(null);
     } catch (error) {
       console.error("Error saving logo:", error);
-      toast.error("Error al guardar el logo");
+      toast.error("Error saving logo");
     }
   };
 
@@ -80,10 +80,10 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
           },
         },
       });
-      toast.success("Orden actualizado");
+      toast.success("Order updated");
     } catch (error) {
       console.error("Error updating order:", error);
-      toast.error("Error al actualizar el orden");
+      toast.error("Error updating order");
     }
   };
 
@@ -102,12 +102,12 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
           },
         },
       });
-      toast.success("Logo eliminado exitosamente");
+      toast.success("Logo deleted successfully");
       setDeletingIndex(null);
       setDeleteDialogOpen(false);
     } catch (error) {
       console.error("Error deleting logo:", error);
-      toast.error("Error al eliminar el logo");
+      toast.error("Error deleting logo");
     }
   };
 
@@ -129,7 +129,7 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-muted-foreground">Cargando logos...</div>
+        <div className="text-muted-foreground">Loading logos...</div>
       </div>
     );
   }
@@ -143,14 +143,14 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
         </div>
         <Button onClick={handleCreate}>
           <Plus className="h-4 w-4 mr-2" />
-          Añadir Logo
+          Add Logo
         </Button>
       </div>
 
       {logos.length === 0 ? (
         <Card className="p-8 text-center">
           <p className="text-muted-foreground">
-            No hay logos configurados. Haz clic en "Añadir Logo" para comenzar.
+            No logos configured. Click "Add Logo" to get started.
           </p>
         </Card>
       ) : (
@@ -169,7 +169,7 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
                 <div className="flex-1 min-w-0">
                   <h4 className="font-medium truncate">{logo.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    Orden: {index + 1} | Activo
+                    Order: {index + 1} | Active
                   </p>
                   {logo.website_url && (
                     <a 
@@ -233,15 +233,15 @@ export const LogosManager = ({ sectionKey, title, description }: LogosManagerPro
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Eliminar logo?</AlertDialogTitle>
+            <AlertDialogTitle>Delete logo?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción no se puede deshacer. El logo será eliminado permanentemente.
+              This action cannot be undone. The logo will be permanently deleted.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              Eliminar
+              Delete
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
