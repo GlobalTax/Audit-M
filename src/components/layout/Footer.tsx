@@ -227,7 +227,7 @@ export const Footer = () => {
               {t("footer.privacy")}
             </Link>
             <Link
-              to="/cookies"
+              to="/cookie-policy"
               className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
             >
               {t("footer.cookies")}
@@ -238,6 +238,16 @@ export const Footer = () => {
             >
               {t("footer.terms")}
             </Link>
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.Cookiebot) {
+                  window.Cookiebot.renew();
+                }
+              }}
+              className="text-sm text-primary-foreground/60 hover:text-accent transition-colors font-light"
+            >
+              Manage Cookies
+            </button>
           </div>
         </div>
       </div>

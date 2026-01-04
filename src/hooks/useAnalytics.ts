@@ -177,6 +177,26 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track cookie consent changes for global.nrro.es
+   * Fires GA4 event: cookie_consent_update_global_nrro
+   */
+  const trackConsentChange = (params: {
+    consentType: 'accept_all' | 'reject_nonessential' | 'custom';
+    analyticsConsent: boolean;
+    marketingConsent: boolean;
+    preferencesConsent: boolean;
+  }) => {
+    trackEvent('cookie_consent_change_global_nrro', {
+      consent_type: params.consentType,
+      analytics_consent: params.analyticsConsent,
+      marketing_consent: params.marketingConsent,
+      preferences_consent: params.preferencesConsent,
+      page_location: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -190,5 +210,6 @@ export const useAnalytics = () => {
     trackInternationalCTAClick,
     trackTestimonialInteraction,
     trackBenefitClick,
+    trackConsentChange,
   };
 };
