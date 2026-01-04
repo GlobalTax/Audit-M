@@ -159,7 +159,7 @@ const InternationalServices = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="bg-primary py-24 md:py-32 lg:py-40">
+        <section className="bg-black py-24 md:py-32 lg:py-40">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="outline" className="mb-6 border-white/20 text-white/90 bg-white/5">
