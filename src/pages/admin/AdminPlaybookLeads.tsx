@@ -205,6 +205,25 @@ const AdminPlaybookLeads = () => {
             </div>
 
             <Select
+              value={filters.playbookName || "all"}
+              onValueChange={(value) =>
+                setFilters((f) => ({
+                  ...f,
+                  playbookName: value === "all" ? undefined : value,
+                }))
+              }
+            >
+              <SelectTrigger className="w-[200px]">
+                <SelectValue placeholder="Lead Magnet" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Lead Magnets</SelectItem>
+                <SelectItem value="spain-company-setup">Setup Playbook</SelectItem>
+                <SelectItem value="spain-document-checklist">Document Checklist</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select
               value={filters.timeline || "all"}
               onValueChange={(value) =>
                 setFilters((f) => ({
@@ -260,9 +279,9 @@ const AdminPlaybookLeads = () => {
                 <TableRow>
                   <TableHead>Name</TableHead>
                   <TableHead>Company</TableHead>
+                  <TableHead>Lead Magnet</TableHead>
                   <TableHead>Country</TableHead>
                   <TableHead>Timeline</TableHead>
-                  <TableHead>Source</TableHead>
                   <TableHead>Date</TableHead>
                   <TableHead className="w-[80px]">Actions</TableHead>
                 </TableRow>
@@ -284,6 +303,19 @@ const AdminPlaybookLeads = () => {
                       </div>
                     </TableCell>
                     <TableCell>{lead.company_name}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          lead.playbook_name === "spain-document-checklist"
+                            ? "outline"
+                            : "secondary"
+                        }
+                      >
+                        {lead.playbook_name === "spain-document-checklist"
+                          ? "Document Checklist"
+                          : "Setup Playbook"}
+                      </Badge>
+                    </TableCell>
                     <TableCell>{lead.country}</TableCell>
                     <TableCell>
                       {lead.timeline ? (
@@ -298,16 +330,6 @@ const AdminPlaybookLeads = () => {
                         </Badge>
                       ) : (
                         <span className="text-muted-foreground">-</span>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {lead.utm_source ? (
-                        <span className="text-sm">
-                          {lead.utm_source}
-                          {lead.utm_campaign && ` / ${lead.utm_campaign}`}
-                        </span>
-                      ) : (
-                        <span className="text-muted-foreground">Direct</span>
                       )}
                     </TableCell>
                     <TableCell>
