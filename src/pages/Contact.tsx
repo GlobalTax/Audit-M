@@ -303,8 +303,8 @@ export default function Contact() {
                 <CardContent className="p-0">
                   <LazyLocationMap
                     address={t("contact.info.addressValue")}
-                    lat={41.3931}
-                    lng={2.1737}
+                    lat={41.3925}
+                    lng={2.1715}
                   />
                 </CardContent>
               </Card>
