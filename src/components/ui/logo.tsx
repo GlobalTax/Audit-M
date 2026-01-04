@@ -40,7 +40,7 @@ const InternationalLogo = ({
     <img
       src={logoSrc}
       alt="Navarro International"
-      className={cn("h-10 md:h-12 w-auto object-contain", className)}
+      className={cn("h-12 md:h-14 w-auto object-contain", className)}
     />
   );
 };
