@@ -18,14 +18,14 @@ interface LogoProps {
 
 const InternationalLogo = ({ 
   variant, 
-  color 
+  color,
+  className
 }: { 
   variant: "full" | "compact"; 
   color: "dark" | "light";
+  className?: string;
 }) => {
   const textColor = color === "light" ? "text-white" : "text-foreground";
-
-  // Use actual logos
   const logoSrc = color === "light" ? logoInternationalWhite : logoInternationalDark;
 
   if (variant === "compact") {
@@ -40,7 +40,7 @@ const InternationalLogo = ({
     <img
       src={logoSrc}
       alt="Navarro International"
-      className="w-48 md:w-56 h-auto object-contain"
+      className={cn("h-10 md:h-12 w-auto object-contain", className)}
     />
   );
 };
@@ -65,7 +65,7 @@ export const Logo = ({
   const ariaLabel = isInternational ? "Navarro International - Home" : "Navarro Tax Legal - Inicio";
 
   const logoContent = isInternational ? (
-    <InternationalLogo variant={variant} color={color} />
+    <InternationalLogo variant={variant} color={color} className={className} />
   ) : (
     <img
       src={getLogoSrc()}
