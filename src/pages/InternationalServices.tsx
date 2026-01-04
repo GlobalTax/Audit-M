@@ -27,6 +27,7 @@ import { InternationalServicesContactForm } from "@/components/international/Int
 import { InternationalServicesFAQ } from "@/components/international/InternationalServicesFAQ";
 import { HowWeWorkSection } from "@/components/international/HowWeWorkSection";
 import { InternationalTrustBar } from "@/components/international/InternationalTrustBar";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const services = [
   {
@@ -137,6 +138,8 @@ const services = [
 ];
 
 const InternationalServices = () => {
+  const { trackInternationalCTAClick } = useAnalytics();
+  
   const breadcrumbItems = [
     { name: "Home", url: "/" },
     { name: "International Services", url: "/international-services" }
@@ -175,13 +178,35 @@ const InternationalServices = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" variant="secondary" className="font-medium">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  variant="secondary" 
+                  className="font-medium"
+                  onClick={() => trackInternationalCTAClick({
+                    eventName: 'cta_contact_global_nrro',
+                    ctaText: 'Schedule an International Consultation',
+                    ctaPosition: 'hero',
+                    destinationUrl: '/contact'
+                  })}
+                >
                   <Link to="/contact">
                     Schedule an International Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white/30 text-white hover:bg-white/10"
+                  onClick={() => trackInternationalCTAClick({
+                    eventName: 'cta_download_brochure_global_nrro',
+                    ctaText: 'Download Services Brochure',
+                    ctaPosition: 'hero',
+                    destinationUrl: '#contact'
+                  })}
+                >
                   <a href="#contact">
                     Download Services Brochure
                   </a>
@@ -376,7 +401,18 @@ const InternationalServices = () => {
                     </div>
 
                     {/* CTA */}
-                    <Button asChild variant="outline" className="group w-full sm:w-auto mt-auto">
+                    <Button 
+                      asChild 
+                      variant="outline" 
+                      className="group w-full sm:w-auto mt-auto"
+                      onClick={() => trackInternationalCTAClick({
+                        eventName: 'cta_learn_more_global_nrro',
+                        ctaText: service.cta,
+                        ctaPosition: 'service_card',
+                        serviceType: service.id,
+                        destinationUrl: `/services/${service.slug}`
+                      })}
+                    >
                       <Link to={`/services/${service.slug}`}>
                         {service.cta}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -414,14 +450,36 @@ const InternationalServices = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" variant="secondary" className="text-primary">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  variant="secondary" 
+                  className="text-primary"
+                  onClick={() => trackInternationalCTAClick({
+                    eventName: 'cta_contact_global_nrro',
+                    ctaText: 'Start Your Global Compliance Plan',
+                    ctaPosition: 'footer_cta',
+                    destinationUrl: '/contact'
+                  })}
+                >
                   <Link to="/contact">
                     Start Your Global Compliance Plan
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
                 
-                <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white/20 text-white hover:bg-white/10"
+                  onClick={() => trackInternationalCTAClick({
+                    eventName: 'cta_download_brochure_global_nrro',
+                    ctaText: 'Download Our International Brochure',
+                    ctaPosition: 'footer_cta',
+                    destinationUrl: '#contact'
+                  })}
+                >
                   <a href="#contact">
                     Download Our International Brochure
                   </a>
