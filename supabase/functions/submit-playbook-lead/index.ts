@@ -22,6 +22,105 @@ interface PlaybookLeadRequest {
   utm_term?: string;
 }
 
+interface AssetConfig {
+  downloadUrl: string;
+  emailSubject: string;
+  assetTitle: string;
+  assetDescription: string;
+  whatsInside: string[];
+}
+
+function getAssetConfig(playbookName: string): AssetConfig {
+  const configs: Record<string, AssetConfig> = {
+    "spain-company-setup": {
+      downloadUrl: "https://global.nrro.es/downloads/spain-company-setup-playbook.pdf",
+      emailSubject: "Your Spain Company Setup Playbook is Ready",
+      assetTitle: "Spain Company Setup Playbook",
+      assetDescription: "We're excited to support your expansion into the Spanish market.",
+      whatsInside: [
+        "12-step company setup roadmap",
+        "Complete document checklist (25+ items)",
+        "Week-by-week timeline breakdown",
+        "Compliance framework and obligations",
+        "12 costly mistakes to avoid"
+      ]
+    },
+    "spain-document-checklist": {
+      downloadUrl: "https://global.nrro.es/downloads/spain-document-checklist.pdf",
+      emailSubject: "Your Spain Document Checklist is Ready",
+      assetTitle: "Spain Company Setup Document Checklist",
+      assetDescription: "Your complete document preparation guide is ready for download.",
+      whatsInside: [
+        "40+ document items by category",
+        "Entity-specific requirements (SL, SA, Branch)",
+        "NIE application instructions",
+        "Apostille & legalization guide",
+        "Document validity periods"
+      ]
+    }
+  };
+
+  return configs[playbookName] || configs["spain-company-setup"];
+}
+
+function generateEmailHtml(fullName: string, config: AssetConfig): string {
+  const whatsInsideHtml = config.whatsInside.map(item => `<li>${item}</li>`).join("\n");
+  
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #1a1a1a; margin-bottom: 10px;">Your Download is Ready!</h1>
+      </div>
+      
+      <p>Dear ${fullName},</p>
+      
+      <p>Thank you for downloading the <strong>${config.assetTitle}</strong>. ${config.assetDescription}</p>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${config.downloadUrl}" 
+           style="display: inline-block; background-color: #0066cc; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600;">
+          Download Now
+        </a>
+      </div>
+      
+      <h3 style="color: #1a1a1a; margin-top: 30px;">What's Inside:</h3>
+      <ul style="padding-left: 20px;">
+        ${whatsInsideHtml}
+      </ul>
+      
+      <h3 style="color: #1a1a1a; margin-top: 30px;">Ready for Personalized Guidance?</h3>
+      <p>Our international advisory team has helped 500+ companies establish their presence in Spain. If you'd like to discuss your specific requirements:</p>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="https://global.nrro.es/contact" 
+           style="display: inline-block; background-color: transparent; color: #0066cc; padding: 12px 24px; text-decoration: none; border: 2px solid #0066cc; border-radius: 6px; font-weight: 600;">
+          Schedule a Consultation
+        </a>
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+      
+      <p style="color: #666; font-size: 14px;">
+        Best regards,<br>
+        <strong>NRRO International Advisory Team</strong><br>
+        <a href="https://global.nrro.es" style="color: #0066cc;">global.nrro.es</a>
+      </p>
+      
+      <p style="color: #999; font-size: 12px; margin-top: 30px;">
+        You're receiving this email because you requested the ${config.assetTitle}. 
+        If you didn't request this, please ignore this email.
+      </p>
+    </body>
+    </html>
+  `;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -91,75 +190,19 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Lead saved successfully:", lead.id);
 
-    // Send confirmation email with playbook link
+    // Send confirmation email with download link
     if (resendApiKey) {
       try {
         const resend = new Resend(resendApiKey);
 
-        // Playbook download URL (you'll need to replace this with actual PDF URL)
-        const playbookUrl = "https://global.nrro.es/downloads/spain-company-setup-playbook.pdf";
+        // Get asset-specific configuration
+        const assetConfig = getAssetConfig(body.playbookName);
 
         const { error: emailError } = await resend.emails.send({
           from: "NRRO International <noreply@nrro.es>",
           to: [body.email],
-          subject: "Your Spain Company Setup Playbook is Ready",
-          html: `
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
-            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: #1a1a1a; margin-bottom: 10px;">Your Playbook is Ready!</h1>
-              </div>
-              
-              <p>Dear ${body.fullName},</p>
-              
-              <p>Thank you for downloading the <strong>Spain Company Setup Playbook</strong>. We're excited to support your expansion into the Spanish market.</p>
-              
-              <div style="text-align: center; margin: 30px 0;">
-                <a href="${playbookUrl}" 
-                   style="display: inline-block; background-color: #0066cc; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600;">
-                  Download Your Playbook
-                </a>
-              </div>
-              
-              <h3 style="color: #1a1a1a; margin-top: 30px;">What's Inside:</h3>
-              <ul style="padding-left: 20px;">
-                <li>12-step company setup roadmap</li>
-                <li>Complete document checklist (25+ items)</li>
-                <li>Week-by-week timeline breakdown</li>
-                <li>Compliance framework and obligations</li>
-                <li>12 costly mistakes to avoid</li>
-              </ul>
-              
-              <h3 style="color: #1a1a1a; margin-top: 30px;">Ready for Personalized Guidance?</h3>
-              <p>Our international advisory team has helped 500+ companies establish their presence in Spain. If you'd like to discuss your specific requirements:</p>
-              
-              <div style="text-align: center; margin: 20px 0;">
-                <a href="https://global.nrro.es/contact" 
-                   style="display: inline-block; background-color: transparent; color: #0066cc; padding: 12px 24px; text-decoration: none; border: 2px solid #0066cc; border-radius: 6px; font-weight: 600;">
-                  Schedule a Consultation
-                </a>
-              </div>
-              
-              <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-              
-              <p style="color: #666; font-size: 14px;">
-                Best regards,<br>
-                <strong>NRRO International Advisory Team</strong><br>
-                <a href="https://global.nrro.es" style="color: #0066cc;">global.nrro.es</a>
-              </p>
-              
-              <p style="color: #999; font-size: 12px; margin-top: 30px;">
-                You're receiving this email because you requested the Spain Company Setup Playbook. 
-                If you didn't request this, please ignore this email.
-              </p>
-            </body>
-            </html>
-          `,
+          subject: assetConfig.emailSubject,
+          html: generateEmailHtml(body.fullName, assetConfig),
         });
 
         if (emailError) {
