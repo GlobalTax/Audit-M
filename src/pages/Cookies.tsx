@@ -1,6 +1,5 @@
 import { Meta } from "@/components/seo/Meta";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
-import { legalBreadcrumbs, legalVersions } from "@/lib/seoUtils";
 import { Link } from "react-router-dom";
 import {
   Breadcrumb,
@@ -12,26 +11,33 @@ import {
 } from "@/components/ui/breadcrumb";
 
 const Cookies = () => {
+  const lastUpdate = "January 2025";
   
+  const breadcrumbItems = [
+    { name: "Home", url: "/" },
+    { name: "Legal Notice", url: "/legal-notice" },
+    { name: "Cookie Policy", url: "/cookie-policy" },
+  ];
+
   return (
     <>
       <Meta
-        title="Política de Cookies"
-        description="Información sobre las cookies que utilizamos en nuestro sitio web"
-        keywords="política cookies, privacidad, RGPD, protección datos"
-        canonicalUrl={`${window.location.origin}/cookies`}
+        title="Cookie Policy | Navarro International"
+        description="Learn about how Navarro International uses cookies and similar technologies on our website."
+        keywords="cookie policy, cookies, privacy, GDPR, data protection"
+        canonicalUrl="/cookie-policy"
       />
-      <BreadcrumbSchema items={legalBreadcrumbs.cookies} />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-background py-20 md:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground mb-6">
-              Política de Cookies
+              Cookie Policy
             </h1>
-            <p className="text-xl text-foreground">
-              Información sobre las cookies que utilizamos
+            <p className="text-xl text-muted-foreground">
+              Information about the cookies we use
             </p>
           </div>
         </div>
@@ -44,18 +50,18 @@ const Cookies = () => {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/">Inicio</Link>
+                  <Link to="/">Home</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/aviso-legal">Legal</Link>
+                  <Link to="/legal-notice">Legal</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Política de Cookies</BreadcrumbPage>
+                <BreadcrumbPage>Cookie Policy</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -69,220 +75,169 @@ const Cookies = () => {
             <div className="space-y-12">
               
               {/* Last Updated */}
-              <div className="text-sm text-foreground">
-                <p>Última actualización: {legalVersions.lastUpdate}</p>
+              <div className="text-sm text-muted-foreground">
+                <p>Last updated: {lastUpdate}</p>
               </div>
               
-              {/* Responsable de la Política de Cookies */}
+              {/* Cookie Controller */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  1. Responsable de la Política de Cookies
+                  1. Cookie Controller
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Las cookies utilizadas en este sitio web son gestionadas por las siguientes entidades del Grupo Empresarial Navarro:
+                    The cookies used on this website are managed by the following entities of the Navarro Business Group:
                   </p>
 
-                  {/* Grupo Navarro - Cabecera */}
                   <div className="bg-muted/30 p-4 rounded-lg border border-border/50 mb-4">
                     <p className="text-lg font-semibold text-foreground mb-2">
-                      Grupo Empresarial Navarro
+                      Navarro Business Group
                     </p>
-                    <p className="text-sm text-foreground">
-                      Responsables conjuntos de la gestión de cookies:
+                    <p className="text-sm text-muted-foreground">
+                      Joint cookie management responsibility
                     </p>
                   </div>
 
-                  {/* Empresa 1: Navarro Legal Y Tributario */}
-                  <div className="border-l-4 border-accent pl-4 mb-6">
-                    <h3 className="font-semibold text-foreground mb-2">
-                      Navarro, Legal Y Tributario S.L.P.
-                    </h3>
-                    <ul className="list-none space-y-1 text-sm">
-                      <li><strong className="text-foreground">CIF:</strong> B67261552</li>
-                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada Profesional</li>
-                      <li><strong className="text-foreground">Actividad:</strong> Asesoría legal, fiscal y tributaria</li>
-                      <li><strong className="text-foreground">Nombre comercial:</strong> NRRO / Navarro</li>
-                    </ul>
-                  </div>
-
-                  {/* Empresa 2: Capittal Transacciones */}
-                  <div className="border-l-4 border-accent pl-4 mb-6">
-                    <h3 className="font-semibold text-foreground mb-2">
-                      Capittal Transacciones S.L.
-                    </h3>
-                    <ul className="list-none space-y-1 text-sm">
-                      <li><strong className="text-foreground">CIF:</strong> B02721918</li>
-                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
-                      <li><strong className="text-foreground">Actividad:</strong> Originación e intermediación de operaciones</li>
-                    </ul>
-                  </div>
-
-                  {/* Empresa 3: Navarro Empresarial */}
-                  <div className="border-l-4 border-accent pl-4 mb-6">
-                    <h3 className="font-semibold text-foreground mb-2">
-                      Navarro Empresarial S.L.
-                    </h3>
-                    <ul className="list-none space-y-1 text-sm">
-                      <li><strong className="text-foreground">CIF:</strong> B58068800</li>
-                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
-                      <li><strong className="text-foreground">Actividad:</strong> Asesoría fiscal, laboral y contable recurrente</li>
-                    </ul>
-                  </div>
-
-                  {/* Empresa 4: SPV Corporate Advisors */}
-                  <div className="border-l-4 border-accent pl-4 mb-6">
-                    <h3 className="font-semibold text-foreground mb-2">
-                      SPV Corporate Advisors S.L.
-                    </h3>
-                    <ul className="list-none space-y-1 text-sm">
-                      <li><strong className="text-foreground">CIF:</strong> B09652017</li>
-                      <li><strong className="text-foreground">Forma jurídica:</strong> Sociedad Limitada</li>
-                      <li><strong className="text-foreground">Actividad:</strong> Sociedad holding de participaciones empresariales</li>
-                    </ul>
-                  </div>
-
-                  {/* Datos de contacto comunes */}
                   <div className="bg-accent/5 p-4 rounded-lg border border-accent/20 mt-6">
-                    <h4 className="font-semibold text-foreground mb-3">Datos de contacto del grupo</h4>
+                    <h4 className="font-semibold text-foreground mb-3">Contact Information</h4>
                     <ul className="list-none space-y-2">
                       <li>
-                        <strong className="text-foreground">Domicilio social (todas las empresas):</strong> Carrer Ausias March número 36, 08010 Barcelona, España
+                        <strong className="text-foreground">Address:</strong> Ausias March 36 Principal, 08010 Barcelona, Spain
                       </li>
                       <li>
-                        <strong className="text-foreground">Email de contacto:</strong>{" "}
+                        <strong className="text-foreground">Email:</strong>{" "}
                         <a href="mailto:info@nrro.es" className="text-accent hover:underline">
                           info@nrro.es
                         </a>
                       </li>
                       <li>
-                        <strong className="text-foreground">Teléfono:</strong> 934593600
+                        <strong className="text-foreground">Phone:</strong> +34 934 593 600
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
               
-              {/* ¿Qué son las cookies? */}
+              {/* What are cookies? */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  ¿Qué son las cookies?
+                  2. What Are Cookies?
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo al visitarlos. Permiten recordar información sobre tu visita, lo que puede mejorar tu experiencia en el sitio.
+                    Cookies are small text files that websites store on your device when you visit them. They allow the site to remember information about your visit, which can improve your experience.
                   </p>
                   <p>
-                    Las cookies pueden ser de diferentes tipos:
+                    Cookies can be of different types:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
-                      <strong className="text-foreground">Cookies de sesión:</strong> se eliminan al cerrar el navegador.
+                      <strong className="text-foreground">Session Cookies:</strong> Deleted when you close your browser.
                     </li>
                     <li>
-                      <strong className="text-foreground">Cookies persistentes:</strong> permanecen en tu dispositivo durante un tiempo determinado.
+                      <strong className="text-foreground">Persistent Cookies:</strong> Remain on your device for a specified period.
                     </li>
                     <li>
-                      <strong className="text-foreground">Cookies propias:</strong> son gestionadas por el sitio web que visitas.
+                      <strong className="text-foreground">First-Party Cookies:</strong> Managed by the website you are visiting.
                     </li>
                     <li>
-                      <strong className="text-foreground">Cookies de terceros:</strong> son gestionadas por un tercero, como un proveedor de servicios.
+                      <strong className="text-foreground">Third-Party Cookies:</strong> Managed by a third party, such as a service provider.
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* Cookies que utilizamos */}
+              {/* Types of cookies we use */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Tipos de cookies que utilizamos
+                  3. Types of Cookies We Use
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    En este sitio web utilizamos los siguientes tipos de cookies:
+                    On this website, we use the following types of cookies:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
-                      <strong className="text-foreground">Cookies técnicas:</strong> Son esenciales para el funcionamiento del sitio web y te permiten navegar por él y utilizar sus funciones.
+                      <strong className="text-foreground">Essential Cookies:</strong> These are necessary for the website to function and allow you to navigate and use its features.
                     </li>
                     <li>
-                      <strong className="text-foreground">Cookies de análisis:</strong> Nos permiten analizar cómo utilizas el sitio web para poder mejorarlo.
+                      <strong className="text-foreground">Analytics Cookies:</strong> These help us understand how you use the website so we can improve it.
                     </li>
                     <li>
-                      <strong className="text-foreground">Cookies de preferencias:</strong> Permiten recordar tus preferencias (por ejemplo, el idioma) para ofrecerte una experiencia más personalizada.
+                      <strong className="text-foreground">Preference Cookies:</strong> These remember your preferences (such as language) to provide a more personalized experience.
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* Finalidad */}
+              {/* Purpose */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Finalidad de las cookies
+                  4. Purpose of Cookies
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Las cookies que utilizamos tienen las siguientes finalidades:
+                    The cookies we use serve the following purposes:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
-                      <strong className="text-foreground">Técnicas:</strong> garantizar el correcto funcionamiento del sitio web.
+                      <strong className="text-foreground">Essential:</strong> Ensure the proper functioning of the website.
                     </li>
                     <li>
-                      <strong className="text-foreground">Análisis:</strong> analizar cómo utilizas el sitio web para poder mejorarlo.
+                      <strong className="text-foreground">Analytics:</strong> Analyze how you use the website to improve it.
                     </li>
                     <li>
-                      <strong className="text-foreground">Preferencias:</strong> recordar tus preferencias (por ejemplo, el idioma) para ofrecerte una experiencia más personalizada.
+                      <strong className="text-foreground">Preferences:</strong> Remember your preferences to provide a more personalized experience.
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* Base legal */}
+              {/* Legal Basis */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Base legal
+                  5. Legal Basis
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    La base legal para el uso de cookies técnicas es nuestro interés legítimo en garantizar el correcto funcionamiento del sitio web.
+                    The legal basis for the use of essential cookies is our legitimate interest in ensuring the proper functioning of the website.
                   </p>
                   <p>
-                    La base legal para el uso de cookies de análisis y preferencias es tu consentimiento, que puedes retirar en cualquier momento.
+                    The legal basis for the use of analytics and preference cookies is your consent, which you can withdraw at any time.
                   </p>
                 </div>
               </div>
 
-              {/* Gestión */}
+              {/* How to Manage Cookies */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Cómo gestionar las cookies
+                  6. How to Manage Cookies
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Puedes gestionar las cookies a través de la configuración de tu navegador. Puedes permitir, bloquear o eliminar las cookies instaladas en tu dispositivo.
+                    You can manage cookies through your browser settings. You can allow, block, or delete cookies installed on your device.
                   </p>
                   <p>
-                    Para más información sobre cómo gestionar las cookies, consulta la documentación de tu navegador:
+                    For more information on how to manage cookies, consult your browser's documentation:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
-                      <a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                         Google Chrome
                       </a>
                     </li>
                     <li>
-                      <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                         Mozilla Firefox
                       </a>
                     </li>
                     <li>
-                      <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      <a href="https://support.microsoft.com/en-us/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                         Microsoft Edge
                       </a>
                     </li>
                     <li>
-                      <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      <a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                         Apple Safari
                       </a>
                     </li>
@@ -290,62 +245,47 @@ const Cookies = () => {
                 </div>
               </div>
 
-              {/* Cookies de terceros */}
+              {/* Third-Party Cookies */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Cookies de terceros
+                  7. Third-Party Cookies
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Este sitio web puede utilizar cookies de terceros para mejorar la experiencia del usuario y ofrecer contenido personalizado.
+                    This website may use third-party cookies to enhance user experience and provide personalized content.
                   </p>
                   <p>
-                    Estas cookies son gestionadas por terceros y están sujetas a sus propias políticas de privacidad.
+                    These cookies are managed by third parties and are subject to their own privacy policies.
                   </p>
                   <p>
-                    Puedes consultar las políticas de privacidad de los terceros que utilizamos en este sitio web en sus respectivos sitios web.
+                    You can review the privacy policies of the third parties we use on their respective websites.
                   </p>
                 </div>
               </div>
 
-              {/* Actualizaciones */}
+              {/* Policy Updates */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Actualizaciones de la política
+                  8. Policy Updates
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Es posible que actualicemos esta Política de Cookies de vez en cuando. Te recomendamos que la revises periódicamente para estar al tanto de los cambios.
+                    We may update this Cookie Policy from time to time. We recommend that you review it periodically to stay informed of any changes.
                   </p>
                   <p>
-                    La fecha de la última actualización se indica al principio de esta página.
+                    The date of the last update is indicated at the top of this page.
                   </p>
                 </div>
               </div>
 
-              {/* Más información */}
+              {/* Contact */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-display font-normal text-foreground">
-                  Más información
+                  9. Contact Information
                 </h2>
                 <div className="space-y-3 text-foreground">
                   <p>
-                    Si tienes alguna pregunta sobre esta Política de Cookies, puedes ponerte en contacto con nosotros a través de los medios indicados a continuación.
-                  </p>
-                </div>
-              </div>
-
-              {/* Contacto */}
-              <div className="space-y-4">
-                <h2 className="text-2xl font-display font-normal text-foreground">
-                  Contacto
-                </h2>
-                <div className="space-y-3 text-foreground">
-                  <p>
-                    Para cualquier consulta sobre esta Política de Cookies, puedes contactar con cualquiera de las entidades del Grupo Empresarial Navarro indicadas en la sección 1 de esta política.
-                  </p>
-                  <p>
-                    También puedes dirigirte a nuestros datos de contacto generales:
+                    If you have any questions about this Cookie Policy, please contact us:
                   </p>
                   <ul className="list-none space-y-2">
                     <li>
@@ -355,10 +295,10 @@ const Cookies = () => {
                       </a>
                     </li>
                     <li>
-                      <strong className="text-foreground">Teléfono:</strong> 934593600
+                      <strong className="text-foreground">Phone:</strong> +34 934 593 600
                     </li>
                     <li>
-                      <strong className="text-foreground">Dirección:</strong> Carrer Ausias March número 36, 08010 Barcelona, España
+                      <strong className="text-foreground">Address:</strong> Ausias March 36 Principal, 08010 Barcelona, Spain
                     </li>
                   </ul>
                 </div>
