@@ -157,6 +157,26 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track benefit block clicks on global.nrro.es
+   * Fires GA4 events with pattern: benefit_click_{topic}_global_nrro
+   */
+  const trackBenefitClick = (params: {
+    eventName: string;
+    benefitTitle: string;
+    benefitIndex: number;
+    destinationUrl: string;
+  }) => {
+    trackEvent(params.eventName, {
+      benefit_title: params.benefitTitle,
+      benefit_index: params.benefitIndex,
+      destination_url: params.destinationUrl,
+      page_location: typeof window !== 'undefined' ? window.location.pathname : '',
+      page_title: typeof window !== 'undefined' ? document.title : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -169,5 +189,6 @@ export const useAnalytics = () => {
     trackFAQInteraction,
     trackInternationalCTAClick,
     trackTestimonialInteraction,
+    trackBenefitClick,
   };
 };

@@ -28,6 +28,7 @@ import { InternationalServicesFAQ } from "@/components/international/Internation
 import { HowWeWorkSection } from "@/components/international/HowWeWorkSection";
 import { InternationalTrustBar } from "@/components/international/InternationalTrustBar";
 import { InternationalTestimonials } from "@/components/international/InternationalTestimonials";
+import { InternationalBenefitsSection } from "@/components/international/InternationalBenefitsSection";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 const services = [
@@ -348,6 +349,9 @@ const InternationalServices = () => {
             </div>
           </div>
         </section>
+
+        {/* Benefits Section */}
+        <InternationalBenefitsSection />
 
         {/* How We Work Section */}
         <HowWeWorkSection />
