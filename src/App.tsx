@@ -61,6 +61,7 @@ import SetUpInSpain from "./pages/SetUpInSpain";
 import LegalStructuresSpain from "./pages/LegalStructuresSpain";
 import SpainCompanySetupPlaybook from "./pages/SpainCompanySetupPlaybook";
 import SpainDocumentChecklist from "./pages/SpainDocumentChecklist";
+import SpainReadinessQuiz from "./pages/SpainReadinessQuiz";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -115,6 +116,7 @@ const App = () => {
                 <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
                 <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
                 <Route path="/spain-document-checklist" element={<Layout><SpainDocumentChecklist /></Layout>} />
+                <Route path="/spain-readiness-quiz" element={<Layout><SpainReadinessQuiz /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
