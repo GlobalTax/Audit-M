@@ -70,6 +70,19 @@ function getAssetConfig(playbookName: string): AssetConfig {
         "Suggested next steps",
         "Resources to accelerate your setup"
       ]
+    },
+    "spain-setup-calculator": {
+      downloadUrl: "https://global.nrro.es/downloads/spain-setup-calculator-report.pdf",
+      emailSubject: "Your Spain Setup Cost & Timeline Report",
+      assetTitle: "Personalized Spain Setup Cost & Timeline Report",
+      assetDescription: "Thank you for using our calculator. Your customized report with detailed cost and timeline estimates is attached.",
+      whatsInside: [
+        "Personalized cost breakdown",
+        "Week-by-week timeline milestones",
+        "Entity-specific requirements",
+        "Next steps checklist",
+        "Advisory team contact details"
+      ]
     }
   };
 

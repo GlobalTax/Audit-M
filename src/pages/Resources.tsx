@@ -58,7 +58,7 @@ const spainSetupResources = [
     type: "Tool",
     icon: Calculator,
     href: "/spain-setup-calculator",
-    badge: "Coming Soon",
+    badge: "New",
   },
 ];
 
