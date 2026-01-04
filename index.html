@@ -13,26 +13,24 @@
     <!-- Cookiebot Consent Management - Must load BEFORE GTM -->
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="c5f326c2-c1a3-48af-89ee-2113cd3c0399" data-blockingmode="auto" type="text/javascript"></script>
     
-    <!-- GTM Consent Mode v2 - Default consent state (denied until user consents) -->
-    <script>
+    <!-- GTM Consent Mode v2 - Cookiebot Official Configuration -->
+    <script data-cookieconsent="ignore">
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      
-      // Set default consent state to denied (GDPR-compliant)
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'functionality_storage': 'denied',
-        'personalization_storage': 'denied',
-        'security_storage': 'granted',
-        'wait_for_update': 500
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", {
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
       });
-      
-      // Enable URL passthrough for cookieless measurement
-      gtag('set', 'url_passthrough', true);
-      gtag('set', 'ads_data_redaction', true);
+      gtag("set", "ads_data_redaction", true);
+      gtag("set", "url_passthrough", false);
     </script>
     
     <!-- Cookiebot Consent Update Listener -->
