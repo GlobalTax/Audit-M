@@ -13,7 +13,7 @@ import { Meta } from '@/components/seo/Meta';
 import { useToast } from '@/hooks/use-toast';
 import { BadgeHero } from '@/components/ui/badge-hero';
 import { supabase } from '@/integrations/supabase/client';
-import { LocationMap } from '@/components/map/LocationMap';
+import { LazyLocationMap } from '@/components/map/LazyLocationMap';
 
 export default function Contact() {
   const { trackPageView, trackFormSubmit, trackCTAClick, trackContactClick } = useAnalytics();
@@ -301,7 +301,7 @@ export default function Contact() {
               {/* Map */}
               <Card className="border-border/50 shadow-soft overflow-hidden">
                 <CardContent className="p-0">
-                  <LocationMap
+                  <LazyLocationMap
                     address={t("contact.info.addressValue")}
                     lat={41.3931}
                     lng={2.1737}
