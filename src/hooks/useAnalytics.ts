@@ -135,6 +135,28 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track testimonial interactions for global.nrro.es
+   * Fires GA4 events with pattern: testimonial_{action}_global_nrro
+   */
+  const trackTestimonialInteraction = (params: {
+    eventName: string;
+    testimonialAuthor: string;
+    testimonialIndex: number;
+    companyType: string;
+    interactionType: 'view' | 'click' | 'expand' | 'collapse';
+  }) => {
+    trackEvent(params.eventName, {
+      testimonial_author: params.testimonialAuthor,
+      testimonial_index: params.testimonialIndex,
+      company_type: params.companyType,
+      interaction_type: params.interactionType,
+      page_location: typeof window !== 'undefined' ? window.location.pathname : '',
+      page_title: typeof window !== 'undefined' ? document.title : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -146,5 +168,6 @@ export const useAnalytics = () => {
     trackGlobalContactFormSubmission,
     trackFAQInteraction,
     trackInternationalCTAClick,
+    trackTestimonialInteraction,
   };
 };
