@@ -59,9 +59,11 @@ import { ExpressCompanySetup } from "./pages/ExpressCompanySetup";
 import { SetupCompanySpain } from "./pages/SetupCompanySpain";
 import SetUpInSpain from "./pages/SetUpInSpain";
 import LegalStructuresSpain from "./pages/LegalStructuresSpain";
+import SpainCompanySetupPlaybook from "./pages/SpainCompanySetupPlaybook";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
+import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 
 const queryClient = new QueryClient();
 
@@ -110,6 +112,7 @@ const App = () => {
                 <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
                 <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
                 <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
+                <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
@@ -137,6 +140,7 @@ const App = () => {
                   <Route path="ley-beckham-leads" element={<AdminLeyBeckhamLeads />} />
                   <Route path="demo-requests" element={<AdminDemoRequests />} />
                   <Route path="company-setup-leads" element={<AdminCompanySetupLeads />} />
+                  <Route path="playbook-leads" element={<AdminPlaybookLeads />} />
                   <Route path="technology" element={<AdminTechnology />} />
                   <Route path="sitemap" element={<AdminSitemap />} />
                   <Route

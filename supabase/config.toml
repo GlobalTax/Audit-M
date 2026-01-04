@@ -1,4 +1,4 @@
-project_id = "fwhqtzkkvnjkazhaficj"
+project_id = "zntotcpagkunvkwpubqu"
 
 [functions.regenerate-sitemap]
 verify_jwt = false
@@ -73,4 +73,7 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.submit-career-application]
+verify_jwt = false
+
+[functions.submit-playbook-lead]
 verify_jwt = false
