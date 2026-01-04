@@ -113,6 +113,28 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track CTA clicks on int.nrro.es international services pages
+   * Fires GA4 events with pattern: cta_{action}_global_nrro
+   */
+  const trackInternationalCTAClick = (params: {
+    eventName: string;
+    ctaText: string;
+    ctaPosition: 'hero' | 'service_card' | 'footer_cta' | 'inline';
+    serviceType?: string;
+    destinationUrl?: string;
+  }) => {
+    trackEvent(params.eventName, {
+      cta_text: params.ctaText,
+      cta_position: params.ctaPosition,
+      service_type: params.serviceType || null,
+      destination_url: params.destinationUrl || null,
+      page_location: typeof window !== 'undefined' ? window.location.pathname : '',
+      page_title: typeof window !== 'undefined' ? document.title : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -123,5 +145,6 @@ export const useAnalytics = () => {
     trackScrollDepth,
     trackGlobalContactFormSubmission,
     trackFAQInteraction,
+    trackInternationalCTAClick,
   };
 };
