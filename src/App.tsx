@@ -118,7 +118,7 @@ const App = () => {
                 <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
                 <Route path="/spain-document-checklist" element={<Layout><SpainDocumentChecklist /></Layout>} />
                 <Route path="/spain-readiness-quiz" element={<Layout><SpainReadinessQuiz /></Layout>} />
-                <Route path="/spain-setup-calculator" element={<SpainSetupCalculator />} />
+                <Route path="/spain-setup-calculator" element={<Layout><SpainSetupCalculator /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

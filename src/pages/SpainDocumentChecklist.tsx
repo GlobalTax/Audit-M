@@ -2,7 +2,7 @@ import { Meta } from "@/components/seo/Meta";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { BadgeHero } from "@/components/ui/badge-hero";
 import { ChecklistDownloadForm } from "@/components/checklist/ChecklistDownloadForm";
 import { 
   FileCheck, 
@@ -48,37 +48,37 @@ const SpainDocumentChecklist = () => {
       <FAQSchema faqs={faqs} />
 
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-b from-background to-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="space-y-6">
-              <Badge variant="secondary" className="gap-2">
-                <Download className="w-3 h-3" />
-                Free Download - Editable Template
-              </Badge>
+              <BadgeHero>
+                <Download className="w-3 h-3 mr-1" />
+                Free Download — Editable Template
+              </BadgeHero>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+              <h1 className="hero-title">
                 Spain Company Setup{" "}
                 <span className="text-primary">Document Checklist</span>
               </h1>
               
-              <p className="text-xl text-muted-foreground max-w-xl">
+              <p className="text-lead text-white/70 max-w-xl">
                 Never miss a required document. Our comprehensive checklist covers every document 
                 you'll need—organized by category, with legalization and NIE requirements explained.
               </p>
 
               {/* Trust Points */}
               <div className="flex flex-wrap gap-4 pt-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   <span>40+ Document Items</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   <span>Entity-Specific Notes</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   <span>Foreigner Instructions</span>
                 </div>
@@ -97,16 +97,16 @@ const SpainDocumentChecklist = () => {
 
             {/* Right Column - Form */}
             <div className="hidden lg:block" id="download-form">
-              <Card className="border-2 shadow-xl">
+              <Card className="border-white/10 shadow-xl bg-white/5 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <div className="text-center mb-6">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                       <FileCheck className="w-6 h-6 text-primary" />
                     </div>
-                    <h2 className="text-2xl font-bold text-foreground">
+                    <h2 className="text-2xl font-bold text-white">
                       Download Your Free Checklist
                     </h2>
-                    <p className="text-muted-foreground mt-2">
+                    <p className="text-white/70 mt-2">
                       Get instant access via email
                     </p>
                   </div>
@@ -119,8 +119,8 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               What You'll Get
@@ -180,8 +180,8 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Stats */}
             <div className="grid grid-cols-2 gap-6">
@@ -229,8 +229,8 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* Mobile Form Section */}
-      <section className="lg:hidden py-16 bg-background" id="download-form-mobile">
-        <div className="container mx-auto px-4">
+      <section className="lg:hidden py-20 bg-background" id="download-form-mobile">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="border-2 shadow-xl max-w-md mx-auto">
             <CardContent className="p-8">
               <div className="text-center mb-6">
@@ -251,8 +251,8 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-3xl">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">
             Frequently Asked Questions
           </h2>
@@ -271,9 +271,9 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* Alternative CTA */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+      <section className="py-20 md:py-28 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Need Professional Document Preparation?
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -298,8 +298,8 @@ const SpainDocumentChecklist = () => {
       </section>
 
       {/* Trust Footer */}
-      <section className="py-8 bg-muted/30 border-t">
-        <div className="container mx-auto px-4">
+      <section className="py-8 bg-neutral-50 border-t">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4" />

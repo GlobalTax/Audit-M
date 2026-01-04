@@ -2,7 +2,7 @@ import { Meta } from "@/components/seo/Meta";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { PlaybookDownloadForm } from "@/components/playbook/PlaybookDownloadForm";
-import { Badge } from "@/components/ui/badge";
+import { BadgeHero } from "@/components/ui/badge-hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -87,22 +87,22 @@ const SpainCompanySetupPlaybook = () => {
       <FAQSchema faqs={faqItems} />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-background via-background to-muted/30 py-20 lg:py-28">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Content */}
             <div className="space-y-6">
-              <Badge variant="outline" className="border-primary/30 text-primary">
+              <BadgeHero>
                 <Download className="w-3 h-3 mr-1" />
                 Free Download — 18 Pages
-              </Badge>
+              </BadgeHero>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+              <h1 className="hero-title">
                 Spain Company Setup{" "}
                 <span className="text-primary">Playbook</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+              <p className="text-lead text-white/70 max-w-xl">
                 Your complete guide to establishing a business presence in Spain. 
                 Step-by-step checklists, timelines, compliance requirements, and 
                 expert insights from 30+ years of experience.
@@ -110,15 +110,15 @@ const SpainCompanySetupPlaybook = () => {
               
               {/* Trust Points */}
               <div className="flex flex-wrap gap-4 pt-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <Building2 className="w-4 h-4 text-primary" />
                   <span>500+ Companies Established</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <Users className="w-4 h-4 text-primary" />
                   <span>30+ Years Experience</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <Calendar className="w-4 h-4 text-primary" />
                   <span>Updated for 2025</span>
                 </div>
@@ -127,13 +127,13 @@ const SpainCompanySetupPlaybook = () => {
             
             {/* Right Column - Form */}
             <div className="lg:pl-8">
-              <Card className="border-border/50 shadow-xl bg-card/80 backdrop-blur-sm">
+              <Card className="border-white/10 shadow-xl bg-white/5 backdrop-blur-sm">
                 <CardContent className="p-6 lg:p-8">
                   <div className="space-y-4 mb-6">
-                    <h2 className="text-2xl font-semibold text-foreground">
+                    <h2 className="text-2xl font-semibold text-white">
                       Download Your Free Playbook
                     </h2>
-                    <p className="text-muted-foreground">
+                    <p className="text-white/70">
                       Get instant access to your comprehensive Spain company setup guide.
                     </p>
                   </div>
@@ -146,10 +146,12 @@ const SpainCompanySetupPlaybook = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">What's Inside</Badge>
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
+              What's Inside
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Everything You Need to Succeed
             </h2>
@@ -180,8 +182,8 @@ const SpainCompanySetupPlaybook = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-16 lg:py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
@@ -227,11 +229,13 @@ const SpainCompanySetupPlaybook = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <Badge variant="secondary" className="mb-4">FAQ</Badge>
+              <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
+                FAQ
+              </span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                 Common Questions
               </h2>
@@ -256,8 +260,8 @@ const SpainCompanySetupPlaybook = () => {
       </section>
 
       {/* Alternative CTA Section */}
-      <section className="py-16 lg:py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Prefer to Speak with an Expert?
@@ -294,10 +298,12 @@ const SpainCompanySetupPlaybook = () => {
       </section>
 
       {/* Related Resources */}
-      <section className="py-16 lg:py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">Related Resources</Badge>
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
+              Related Resources
+            </span>
             <h2 className="text-3xl font-bold text-foreground">
               Continue Your Research
             </h2>

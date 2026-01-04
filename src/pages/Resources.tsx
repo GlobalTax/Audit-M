@@ -8,6 +8,7 @@ import { NewsletterSignup } from "@/components/resources/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { BadgeHero } from "@/components/ui/badge-hero";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { 
@@ -84,58 +85,56 @@ const Resources = () => {
       />
 
       {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground py-20 lg:py-28">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent/30" />
-        
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="badge-hero mb-6 inline-block">Knowledge Hub</span>
+            <BadgeHero>Knowledge Hub</BadgeHero>
             
-            <h1 className="hero-title mb-6">
+            <h1 className="hero-title mt-6 mb-6">
               Resources for Global Business Success
             </h1>
             
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl">
+            <p className="text-lead text-white/70 max-w-2xl">
               Expert insights, practical templates, and strategic guides to navigate international tax, accounting, payroll, and legal compliance.
             </p>
           </div>
 
           {/* Quick stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-12 border-t border-primary-foreground/20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-12 border-t border-white/20">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                 <FileText className="h-5 w-5" />
               </div>
               <div>
                 <div className="text-2xl font-semibold">White Papers</div>
-                <div className="text-sm text-primary-foreground/70">In-depth analysis</div>
+                <div className="text-sm text-white/60">In-depth analysis</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                 <Globe className="h-5 w-5" />
               </div>
               <div>
                 <div className="text-2xl font-semibold">Country Guides</div>
-                <div className="text-sm text-primary-foreground/70">Local expertise</div>
+                <div className="text-sm text-white/60">Local expertise</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                 <BookOpen className="h-5 w-5" />
               </div>
               <div>
                 <div className="text-2xl font-semibold">Templates</div>
-                <div className="text-sm text-primary-foreground/70">Ready to use</div>
+                <div className="text-sm text-white/60">Ready to use</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                 <Video className="h-5 w-5" />
               </div>
               <div>
                 <div className="text-2xl font-semibold">Webinars</div>
-                <div className="text-sm text-primary-foreground/70">Expert sessions</div>
+                <div className="text-sm text-white/60">Expert sessions</div>
               </div>
             </div>
           </div>
@@ -143,10 +142,12 @@ const Resources = () => {
       </section>
 
       {/* Spain Setup Resources Section */}
-      <section className="py-16 bg-muted/30 border-b">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-neutral-50 border-b">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">Spain Expansion</Badge>
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
+              Spain Expansion
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Spain Company Setup Resources
             </h2>
@@ -206,8 +207,8 @@ const Resources = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Filters */}
           <div className="mb-12">
             <ResourceFilters filters={filters} onFiltersChange={setFilters} />
