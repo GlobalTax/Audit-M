@@ -58,20 +58,20 @@ export const LogoFormDialog = ({
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            {mode === "create" ? "Añadir Nuevo Logo" : "Editar Logo"}
+            {mode === "create" ? "Add New Logo" : "Edit Logo"}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">
-              Nombre de la empresa <span className="text-destructive">*</span>
+              Company name <span className="text-destructive">*</span>
             </Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Ej: Microsoft"
+              placeholder="e.g. Microsoft"
               required
             />
           </div>
@@ -87,13 +87,13 @@ export const LogoFormDialog = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="website_url">URL del sitio web (opcional)</Label>
+            <Label htmlFor="website_url">Website URL (optional)</Label>
             <Input
               id="website_url"
               type="url"
               value={formData.website_url || ""}
               onChange={(e) => setFormData({ ...formData, website_url: e.target.value })}
-              placeholder="https://www.ejemplo.com"
+              placeholder="https://www.example.com"
             />
           </div>
 
@@ -103,10 +103,10 @@ export const LogoFormDialog = ({
               variant="outline"
               onClick={() => onOpenChange(false)}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={!isValid}>
-              {mode === "create" ? "Añadir Logo" : "Guardar Cambios"}
+              {mode === "create" ? "Add Logo" : "Save Changes"}
             </Button>
           </div>
         </form>

@@ -25,10 +25,10 @@ export const LogoUpload = ({
   const validateFile = (file: File): string | null => {
     const validTypes = ["image/jpeg", "image/png", "image/svg+xml", "image/webp"];
     if (!validTypes.includes(file.type)) {
-      return "Solo se permiten imágenes JPG, PNG, SVG o WebP";
+      return "Only JPG, PNG, SVG or WebP images allowed";
     }
     if (file.size > 2 * 1024 * 1024) {
-      return "El archivo debe ser menor a 2MB";
+      return "File must be less than 2MB";
     }
     return null;
   };
@@ -62,10 +62,10 @@ export const LogoUpload = ({
       setUploadProgress(100);
       onUploadProgress?.(100);
       onChange(publicUrl);
-      toast.success("Logo subido exitosamente");
+      toast.success("Logo uploaded successfully");
     } catch (error: any) {
       console.error("Error uploading logo:", error);
-      toast.error(error.message || "Error al subir el logo");
+      toast.error(error.message || "Error uploading logo");
     } finally {
       setIsUploading(false);
     }
@@ -111,10 +111,10 @@ export const LogoUpload = ({
       if (error) throw error;
 
       onChange("");
-      toast.success("Logo eliminado");
+      toast.success("Logo removed");
     } catch (error: any) {
       console.error("Error removing logo:", error);
-      toast.error("Error al eliminar el logo");
+      toast.error("Error removing logo");
     }
   };
 
@@ -139,7 +139,7 @@ export const LogoUpload = ({
               />
             </div>
             <div className="flex-1">
-              <p className="text-sm text-muted-foreground">Logo cargado</p>
+              <p className="text-sm text-muted-foreground">Logo uploaded</p>
             </div>
             <Button
               type="button"
@@ -170,17 +170,17 @@ export const LogoUpload = ({
               <>
                 <Upload className="h-8 w-8 text-primary animate-pulse" />
                 <p className="text-sm text-muted-foreground">
-                  Subiendo... {uploadProgress}%
+                  Uploading... {uploadProgress}%
                 </p>
               </>
             ) : (
               <>
                 <ImageIcon className="h-8 w-8 text-muted-foreground" />
                 <p className="text-sm font-medium">
-                  Arrastra un logo aquí o haz clic
+                  Drag a logo here or click to upload
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  JPG, PNG, SVG o WebP (máx. 2MB)
+                  JPG, PNG, SVG or WebP (max. 2MB)
                 </p>
               </>
             )}
