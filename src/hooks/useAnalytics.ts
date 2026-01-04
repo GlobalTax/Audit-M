@@ -93,6 +93,26 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track FAQ interaction for global.nrro.es
+   * Fires GA4 event with pattern: faq_expand_{topic}_global_nrro
+   */
+  const trackFAQInteraction = (params: {
+    eventName: string;
+    faqQuestion: string;
+    faqIndex: number;
+    faqCategory: string;
+  }) => {
+    trackEvent(params.eventName, {
+      faq_question: params.faqQuestion,
+      faq_index: params.faqIndex,
+      faq_category: params.faqCategory,
+      page_location: typeof window !== 'undefined' ? window.location.pathname : '',
+      page_title: typeof window !== 'undefined' ? document.title : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -102,5 +122,6 @@ export const useAnalytics = () => {
     trackDownload,
     trackScrollDepth,
     trackGlobalContactFormSubmission,
+    trackFAQInteraction,
   };
 };
