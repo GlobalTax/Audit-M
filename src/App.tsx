@@ -58,6 +58,7 @@ import { ExpressCompanySetup } from "./pages/ExpressCompanySetup";
 import { SetupCompanySpain } from "./pages/SetupCompanySpain";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
+import CookiePolicyEN from "./pages/CookiePolicyEN";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +90,7 @@ const App = () => {
                 <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
                 <Route path="/legal-notice" element={<Layout><Legal /></Layout>} />
                 <Route path="/cookies" element={<Layout><Cookies /></Layout>} />
+                <Route path="/cookie-policy" element={<Layout><CookiePolicyEN /></Layout>} />
                 <Route path="/terms" element={<Layout><Terms /></Layout>} />
                 <Route path="/careers" element={<Layout><Careers /></Layout>} />
                 <Route path="/international-services" element={<Layout><InternationalServices /></Layout>} />
