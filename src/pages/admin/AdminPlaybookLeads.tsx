@@ -220,6 +220,7 @@ const AdminPlaybookLeads = () => {
                 <SelectItem value="all">All Lead Magnets</SelectItem>
                 <SelectItem value="spain-company-setup">Setup Playbook</SelectItem>
                 <SelectItem value="spain-document-checklist">Document Checklist</SelectItem>
+                <SelectItem value="spain-readiness-quiz">Readiness Quiz</SelectItem>
               </SelectContent>
             </Select>
 
@@ -306,12 +307,16 @@ const AdminPlaybookLeads = () => {
                     <TableCell>
                       <Badge
                         variant={
-                          lead.playbook_name === "spain-document-checklist"
+                          lead.playbook_name === "spain-readiness-quiz"
+                            ? "default"
+                            : lead.playbook_name === "spain-document-checklist"
                             ? "outline"
                             : "secondary"
                         }
                       >
-                        {lead.playbook_name === "spain-document-checklist"
+                        {lead.playbook_name === "spain-readiness-quiz"
+                          ? "Readiness Quiz"
+                          : lead.playbook_name === "spain-document-checklist"
                           ? "Document Checklist"
                           : "Setup Playbook"}
                       </Badge>

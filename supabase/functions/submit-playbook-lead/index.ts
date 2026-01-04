@@ -57,6 +57,19 @@ function getAssetConfig(playbookName: string): AssetConfig {
         "Apostille & legalization guide",
         "Document validity periods"
       ]
+    },
+    "spain-readiness-quiz": {
+      downloadUrl: "https://global.nrro.es/spain-readiness-quiz",
+      emailSubject: "Your Spain Business Setup Readiness Results",
+      assetTitle: "Spain Business Setup Readiness Assessment",
+      assetDescription: "Thank you for completing our readiness assessment. Here's a summary of your results.",
+      whatsInside: [
+        "Your personalized readiness score",
+        "Key findings based on your answers",
+        "Tailored recommendations",
+        "Suggested next steps",
+        "Resources to accelerate your setup"
+      ]
     }
   };
 
