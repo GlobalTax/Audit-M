@@ -164,19 +164,19 @@ const InternationalServices = () => {
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="outline" className="mb-6 border-white/20 text-white/90 bg-white/5">
                 <Globe className="w-3.5 h-3.5 mr-1.5" />
-                Global Advisory Excellence
+                Global Business Advisory
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-tight">
-                Your Strategic Partner for<br />International Business
+                Navigate Global Markets<br />with Confidence
               </h1>
               
               <p className="text-xl md:text-2xl text-white/80 mb-4 leading-relaxed max-w-3xl mx-auto">
-                Integrated legal, tax, accounting and labour advisory for multinational companies, foreign investors, and businesses expanding across borders.
+                Integrated legal, tax, accounting, and payroll solutions for multinational companies and foreign investors operating across borders. Reduce risk, ensure compliance, and accelerate growth.
               </p>
               
               <p className="text-base text-white/60 mb-10">
-                Barcelona headquarters. Global expertise. Trusted in 50+ jurisdictions.
+                Headquartered in Barcelona. Trusted across 50+ jurisdictions worldwide.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -186,14 +186,14 @@ const InternationalServices = () => {
                   variant="secondary" 
                   className="font-medium"
                   onClick={() => trackInternationalCTAClick({
-                    eventName: 'cta_contact_global_nrro',
-                    ctaText: 'Schedule an International Consultation',
+                    eventName: 'hero_primary_cta_global_nrro',
+                    ctaText: 'Schedule a Global Consultation',
                     ctaPosition: 'hero',
                     destinationUrl: '/contact'
                   })}
                 >
                   <Link to="/contact">
-                    Schedule an International Consultation
+                    Schedule a Global Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -203,14 +203,14 @@ const InternationalServices = () => {
                   variant="outline" 
                   className="border-white/30 text-white hover:bg-white/10"
                   onClick={() => trackInternationalCTAClick({
-                    eventName: 'cta_download_brochure_global_nrro',
-                    ctaText: 'Download Services Brochure',
+                    eventName: 'hero_secondary_cta_global_nrro',
+                    ctaText: 'Explore Our Services',
                     ctaPosition: 'hero',
-                    destinationUrl: '#contact'
+                    destinationUrl: '#services'
                   })}
                 >
-                  <a href="#contact">
-                    Download Services Brochure
+                  <a href="#services">
+                    Explore Our Services
                   </a>
                 </Button>
               </div>
