@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { Meta } from "@/components/seo/Meta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { BadgeHero } from "@/components/ui/badge-hero";
 import { SetupCalculatorForm } from "@/components/calculator/SetupCalculatorForm";
 import { CalculatorResults } from "@/components/calculator/CalculatorResults";
 import { CalculatorLeadForm } from "@/components/calculator/CalculatorLeadForm";
-import { Layout } from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { 
@@ -72,7 +71,7 @@ export default function SpainSetupCalculator() {
   };
 
   return (
-    <Layout>
+    <>
       <Meta
         title="Spain Setup Cost & Timeline Calculator | NRRO International"
         description="Estimate your Spain company setup costs and timeline. Get instant estimates for SL, SA, branch, or subsidiary formation based on your specific requirements."
@@ -81,28 +80,26 @@ export default function SpainSetupCalculator() {
       />
 
       {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground py-16 lg:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent/30" />
-        
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6">
+            <BadgeHero>
               <Calculator className="w-3 h-3 mr-1" />
               Free Estimation Tool
-            </Badge>
+            </BadgeHero>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h1 className="hero-title mt-6 mb-6">
               Spain Setup Cost & Timeline Calculator
             </h1>
             
-            <p className="text-lg md:text-xl text-primary-foreground/80 mb-8">
+            <p className="text-lead text-white/70 mb-8">
               Get instant estimates for your Spanish company formation. Select your 
               entity type, residency status, and staffing plans to see projected 
               costs and timelines.
             </p>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4" />
                 <span>500+ companies incorporated</span>
@@ -121,8 +118,8 @@ export default function SpainSetupCalculator() {
       </section>
 
       {/* Calculator Section */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {!results ? (
               <>
@@ -219,15 +216,15 @@ export default function SpainSetupCalculator() {
       </section>
 
       {/* Related Resources */}
-      <section className="py-16 bg-muted/30 border-t">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-neutral-50 border-t">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
               Related Resources
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              Continue Your Spain Expansion Planning
             </h2>
-            <p className="text-muted-foreground">
-              Continue your Spain expansion planning with these resources.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -284,6 +281,6 @@ export default function SpainSetupCalculator() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
