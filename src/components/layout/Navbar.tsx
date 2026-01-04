@@ -33,6 +33,7 @@ export const Navbar = () => {
 
   const navigation = [
     { name: t("nav.services"), href: "/services" },
+    { name: "Resources", href: "/resources" },
     { name: t("nav.about"), href: "/about" },
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.team"), href: "/team" },

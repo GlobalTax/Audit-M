@@ -30,6 +30,7 @@ import Terms from "./pages/Terms";
 import Strategy from "./pages/Strategy";
 import Sectors from "./pages/Sectors";
 import InternationalServices from "./pages/InternationalServices";
+import Resources from "./pages/Resources";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
@@ -94,6 +95,7 @@ const App = () => {
                 <Route path="/terms" element={<Layout><Terms /></Layout>} />
                 <Route path="/careers" element={<Layout><Careers /></Layout>} />
                 <Route path="/international-services" element={<Layout><InternationalServices /></Layout>} />
+                <Route path="/resources" element={<Layout><Resources /></Layout>} />
 
                 {/* Special landings for internationals */}
                 <Route path="/beckham-law" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
