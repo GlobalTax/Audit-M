@@ -75,6 +75,24 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track global contact form submission for int.nrro.es
+   * Fires GA4 event: contact_form_submission_global_nrro
+   */
+  const trackGlobalContactFormSubmission = (formData: {
+    serviceInterest: string;
+    countryRegion: string;
+  }) => {
+    trackEvent('contact_form_submission_global_nrro', {
+      form_name: 'global_contact_form',
+      service_interest: formData.serviceInterest,
+      country_region: formData.countryRegion,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      page_title: typeof window !== 'undefined' ? document.title : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -83,5 +101,6 @@ export const useAnalytics = () => {
     trackContactClick,
     trackDownload,
     trackScrollDepth,
+    trackGlobalContactFormSubmission,
   };
 };
