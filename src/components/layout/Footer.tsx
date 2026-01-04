@@ -75,7 +75,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="space-y-8">
-            <Logo variant="full" brand="international" color="light" className="h-auto w-48 md:w-56" />
+            <Logo variant="full" brand="international" color="light" />
             <p className="text-lg text-white/80 font-light leading-relaxed">
               {t("footer.tagline")}
             </p>
