@@ -6,9 +6,61 @@ import { ResourceFilters } from "@/components/resources/ResourceFilters";
 import { FeaturedResources } from "@/components/resources/FeaturedResources";
 import { NewsletterSignup } from "@/components/resources/NewsletterSignup";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, FileText, Globe, Video } from "lucide-react";
+import { 
+  ArrowRight, 
+  BookOpen, 
+  FileText, 
+  Globe, 
+  Video, 
+  Download, 
+  ClipboardCheck, 
+  BarChart3, 
+  Calculator 
+} from "lucide-react";
+
+// Spain Setup Resources - Static featured items
+const spainSetupResources = [
+  {
+    id: "playbook",
+    title: "Spain Company Setup Playbook",
+    description: "Complete 12-step guide with timelines, checklists, and compliance requirements for establishing your business in Spain.",
+    type: "Guide",
+    icon: BookOpen,
+    href: "/spain-company-setup-playbook",
+    badge: "Most Popular",
+  },
+  {
+    id: "checklist",
+    title: "Document Checklist Template",
+    description: "40+ document checklist with NIE instructions, apostille requirements, and entity-specific guidance.",
+    type: "Template",
+    icon: ClipboardCheck,
+    href: "/spain-document-checklist",
+    badge: "Free Download",
+  },
+  {
+    id: "quiz",
+    title: "Business Setup Readiness Score",
+    description: "10-question assessment to evaluate your readiness and get personalized recommendations.",
+    type: "Assessment",
+    icon: BarChart3,
+    href: "/spain-readiness-quiz",
+    badge: "Interactive",
+  },
+  {
+    id: "calculator",
+    title: "Cost & Timeline Calculator",
+    description: "Estimate setup costs and timeline based on your entity type, residency, and staffing plans.",
+    type: "Tool",
+    icon: Calculator,
+    href: "/spain-setup-calculator",
+    badge: "Coming Soon",
+  },
+];
 
 const Resources = () => {
   const [filters, setFilters] = useState<Filters>({
@@ -86,6 +138,69 @@ const Resources = () => {
                 <div className="text-sm text-primary-foreground/70">Expert sessions</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Spain Setup Resources Section */}
+      <section className="py-16 bg-muted/30 border-b">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge variant="secondary" className="mb-4">Spain Expansion</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Spain Company Setup Resources
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Everything you need to establish your business presence in Spain — from initial planning to full incorporation.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {spainSetupResources.map((resource) => {
+              const IconComponent = resource.icon;
+              const isComingSoon = resource.badge === "Coming Soon";
+              
+              return (
+                <Card 
+                  key={resource.id} 
+                  className={`group hover:shadow-lg transition-all duration-300 ${isComingSoon ? 'opacity-75' : 'hover:border-primary/50'}`}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${isComingSoon ? 'bg-muted' : 'bg-primary/10'}`}>
+                        <IconComponent className={`w-6 h-6 ${isComingSoon ? 'text-muted-foreground' : 'text-primary'}`} />
+                      </div>
+                      <Badge variant={isComingSoon ? "outline" : "secondary"} className="text-xs">
+                        {resource.badge}
+                      </Badge>
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                      {resource.type}
+                    </div>
+                    <CardTitle className="text-lg leading-tight">
+                      {resource.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <CardDescription className="mb-4 line-clamp-2">
+                      {resource.description}
+                    </CardDescription>
+                    {isComingSoon ? (
+                      <Button variant="outline" disabled className="w-full">
+                        Coming Soon
+                      </Button>
+                    ) : (
+                      <Button variant="outline" asChild className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
+                        <Link to={resource.href}>
+                          {resource.type === "Assessment" ? "Start Assessment" : "Access Resource"}
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Link>
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
