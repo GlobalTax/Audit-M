@@ -57,6 +57,7 @@ import { NIEServiceSpain } from "./pages/NIEServiceSpain";
 import { TechStartupSetup } from "./pages/TechStartupSetup";
 import { ExpressCompanySetup } from "./pages/ExpressCompanySetup";
 import { SetupCompanySpain } from "./pages/SetupCompanySpain";
+import SetUpInSpain from "./pages/SetUpInSpain";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -106,6 +107,7 @@ const App = () => {
                 <Route path="/startup-company-setup-spain" element={<TechStartupSetup />} />
                 <Route path="/fast-company-registration-spain" element={<ExpressCompanySetup />} />
                 <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
+                <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
