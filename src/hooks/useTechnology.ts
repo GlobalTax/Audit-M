@@ -28,9 +28,12 @@ export const useTechnology = () => {
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
         .eq('source_site', SITE_SOURCE)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
+      
+      // If no record exists, return empty array
+      if (!data) return [];
       
       const content = data?.content as unknown as TechnologyContent;
       return content?.technologies || [];
@@ -43,36 +46,51 @@ export const useUpdateTechnology = () => {
   
   return useMutation({
     mutationFn: async (technologies: TechItem[]) => {
-      const { data: existing, error: fetchError } = await supabase
+      // First try to get existing record
+      const { data: existing } = await supabase
         .from('page_content')
         .select('*')
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
         .eq('source_site', SITE_SOURCE)
-        .single();
+        .maybeSingle();
 
-      if (fetchError) throw fetchError;
-
-      const currentContent = existing.content as unknown as TechnologyContent;
+      const existingContent = existing?.content as unknown as TechnologyContent | null;
       const updatedContent = {
-        ...currentContent,
+        overline: existingContent?.overline || 'Technology we use',
+        title: existingContent?.title || 'Our Software Stack',
         technologies
       };
 
-      const { error: updateError } = await supabase
-        .from('page_content')
-        .update({ content: updatedContent as any, updated_at: new Date().toISOString() })
-        .eq('id', existing.id);
+      if (existing) {
+        // Update existing record
+        const { error: updateError } = await supabase
+          .from('page_content')
+          .update({ content: updatedContent as any, updated_at: new Date().toISOString() })
+          .eq('id', existing.id);
 
-      if (updateError) throw updateError;
+        if (updateError) throw updateError;
+      } else {
+        // Create new record if it doesn't exist
+        const { error: insertError } = await supabase
+          .from('page_content')
+          .insert({
+            page_key: 'home',
+            section_key: 'tecnologia',
+            source_site: SITE_SOURCE,
+            content: updatedContent as any
+          });
+
+        if (insertError) throw insertError;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['technology-content'] });
-      toast.success('Tecnologías actualizadas correctamente');
+      toast.success('Technologies updated successfully');
     },
     onError: (error) => {
       console.error('Error updating technologies:', error);
-      toast.error('Error al actualizar las tecnologías');
+      toast.error('Error updating technologies');
     }
   });
 };
