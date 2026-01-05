@@ -275,44 +275,64 @@ const whySpainAdvantages = [
 
 const faqs = [
   { 
-    question: "How long does it take to fully set up a company in Spain?", 
-    answer: "The typical timeline is 8-12 weeks from initial consultation to full operational readiness. This includes legal formation (4-6 weeks), tax and registry processes (2-3 weeks), and payroll/HR setup (2-3 weeks). With expedited processing and experienced advisors, some formations can be completed in as little as 6 weeks." 
+    question: "What is the most common legal structure for foreign companies setting up in Spain?", 
+    answer: "The Sociedad Limitada (SL) is the most common choice for foreign companies entering Spain. It offers limited liability protection, requires only €3,000 minimum capital, and provides flexibility in governance. For larger operations or specific regulatory requirements, a Sociedad Anónima (SA) may be more appropriate. Use our calculator for a personalized assessment." 
   },
   { 
-    question: "What is the minimum capital required to form a Spanish company?", 
-    answer: "For a Sociedad Limitada (SL), the most common structure for foreign investors, the minimum share capital is €3,000. For a Sociedad Anónima (SA), required for larger operations or public offerings, the minimum is €60,000 with at least 25% deposited at incorporation. Branch offices do not require separate capital as they operate under the parent company's liability." 
+    question: "When should I consider an SA instead of an SL?", 
+    answer: "Choose a Sociedad Anónima (SA) when you need to raise capital through share issuance, operate in regulated industries like banking or insurance, or plan an eventual public listing. The SA requires €60,000 minimum capital (25% at incorporation) and has more formal governance requirements. For most SME operations, an SL is more cost-effective and administratively simpler." 
   },
   { 
-    question: "Can foreign nationals be directors of a Spanish company?", 
-    answer: "Yes, there are no nationality or residency requirements for directors of Spanish companies. Foreign nationals can serve as directors, though they will need to obtain a NIE (tax identification number). Board meetings can be held remotely, and powers of attorney can enable non-residents to fulfill most director obligations without physical presence." 
+    question: "Can I open a branch office instead of incorporating a subsidiary?", 
+    answer: "Yes, a branch office (sucursal) allows you to operate in Spain as an extension of your foreign parent company. However, the parent assumes full liability for branch obligations. Branches require registration of parent company documents in Spain and create a permanent establishment for tax purposes. Subsidiaries offer better liability protection and may access specific Spanish tax incentives." 
   },
   { 
-    question: "Do I need to travel to Spain to set up a company?", 
-    answer: "No, the entire process can be completed remotely using powers of attorney (poder notarial). We coordinate with Spanish notaries and can arrange for documentation to be executed at Spanish consulates in your country. Many clients complete their entire setup without stepping foot in Spain." 
+    question: "How long does it take to incorporate a company in Spain?", 
+    answer: "With all documents ready, incorporation typically takes 3-5 weeks for an SL and 4-6 weeks for an SA. This includes notarial execution (1-2 days), Commercial Registry filing (2-4 weeks), and tax registration (1-2 weeks). NIE applications for non-EU nationals can add 2-4 weeks if not processed in advance. Our team can run multiple workstreams in parallel to minimize total timeline." 
   },
   { 
-    question: "What ongoing compliance obligations exist for Spanish companies?", 
-    answer: "Spanish companies must file quarterly VAT returns (Modelo 303), annual corporate tax returns (Modelo 200), monthly/quarterly payroll withholdings, annual accounts with the Commercial Registry, and beneficial ownership declarations. We provide comprehensive compliance calendar management to ensure you never miss a deadline." 
+    question: "Can I accelerate the incorporation process?", 
+    answer: "Yes, with proper preparation. Key accelerators include: obtaining NIEs before starting the formation process, using CIRCE (Centro de Información y Red de Creación de Empresas) for express 24-48 hour formations of standard SLs, having all parent company documentation apostilled and translated in advance, and pre-clearing the company name with the Central Commercial Registry." 
   },
   { 
-    question: "Can I hire employees before the company is fully registered?", 
-    answer: "No, you must complete Social Security registration before legally employing staff in Spain. However, we can structure the timeline to have HR setup running in parallel with registry processes, minimizing delays. In urgent cases, secondment arrangements from a parent company can provide interim solutions." 
+    question: "What documents do foreign shareholders need to provide?", 
+    answer: "Corporate shareholders must provide certificate of incorporation, good standing certificate, board resolution authorizing the Spanish entity, and articles of association—all apostilled and sworn-translated. Individual shareholders need passport copies and NIE numbers. Powers of attorney may be required if shareholders cannot attend notarization personally. Download our document checklist for the complete list." 
   },
   { 
-    question: "What are the tax implications for foreign shareholders?", 
-    answer: "Spain has an extensive network of 90+ double taxation treaties. Dividends to non-residents are typically subject to 19% withholding tax, though treaties often reduce this to 5-15%. The EU Parent-Subsidiary Directive can eliminate withholding on qualifying intra-EU distributions. Proper structuring is essential to optimize tax efficiency." 
+    question: "What is an NIE and why is it required?", 
+    answer: "The NIE (Número de Identificación de Extranjero) is the tax identification number for foreigners in Spain. It's mandatory for all directors, shareholders, and employees. NIEs are required to open bank accounts, sign notarial deeds, file tax returns, and execute most legal transactions. EU citizens can often obtain NIEs at Spanish police stations; non-EU nationals typically apply through Spanish consulates." 
   },
   { 
-    question: "Is Spain a good location for holding companies?", 
-    answer: "Yes, Spain offers the ETVE (Entidad de Tenencia de Valores Extranjeros) regime, which provides participation exemption for dividends and capital gains from qualifying foreign subsidiaries. This makes Spain an attractive jurisdiction for European or Latin American holding structures, combining tax efficiency with EU membership benefits." 
+    question: "How do I open a corporate bank account in Spain?", 
+    answer: "Opening a corporate account requires: registered incorporation deed, NIF (tax ID), NIE of authorized signatories, and proof of company activity. Major Spanish banks (Santander, BBVA, CaixaBank) and international banks with Spanish presence can accommodate corporate accounts. Initial capital deposit accounts can be opened pre-incorporation with the notarial deed draft. Allow 1-3 weeks for full account activation." 
   },
   { 
-    question: "What support do you provide after company formation?", 
-    answer: "We offer comprehensive ongoing services including monthly/annual accounting, tax return preparation and filing, payroll processing, corporate secretarial support, board meeting documentation, regulatory compliance monitoring, and strategic tax planning. Our clients receive a dedicated team familiar with their business from day one." 
+    question: "What are the employer obligations for hiring employees in Spain?", 
+    answer: "Employers must: register with Social Security (Seguridad Social), register each employee within the hiring deadline, file monthly Social Security contributions (approximately 30% of gross salary), process monthly payroll with appropriate withholdings, and comply with Spanish labor law requirements including statutory benefits, working hours limits, and dismissal protections." 
   },
   { 
-    question: "How does the Beckham Law benefit expatriate executives?", 
-    answer: "The Beckham Law (Régimen Especial de Impatriados) allows qualifying individuals to pay a flat 24% tax rate on Spanish-source income up to €600,000 for 6 years, compared to progressive rates up to 47%. Foreign-source income (except employment income) is exempt. This applies to employees and, since 2023, to entrepreneurs and remote workers meeting specific criteria." 
+    question: "Do I need to register for payroll if I only have directors?", 
+    answer: "It depends. Directors who are also majority shareholders (>25% ownership) are typically classified as self-employed (autónomo) rather than employees and are not processed through standard payroll. Non-shareholder directors or minority shareholder directors are generally treated as employees requiring payroll registration. We analyze each situation to determine the optimal and compliant approach." 
+  },
+  { 
+    question: "What tax registrations are required after incorporation?", 
+    answer: "After incorporation, you must register for: NIF (corporate tax ID, obtained automatically during incorporation), VAT (IVA) if conducting taxable activities, corporate income tax (Impuesto sobre Sociedades), payroll withholding tax (IRPF retentions) if hiring employees, and municipal business activity tax (IAE, typically exempt for companies under €1M turnover)." 
+  },
+  { 
+    question: "Is VAT registration automatic when I incorporate?", 
+    answer: "No, VAT (IVA) registration is a separate process submitted to the Spanish Tax Agency (AEAT) using Form 036 or 037. You can register before starting activities, but registration is mandatory before issuing VAT-bearing invoices. The standard VAT rate is 21%, with reduced rates of 10% and 4% for specific goods and services. Intra-EU transactions require additional ROI (VIES) registration." 
+  },
+  { 
+    question: "What ongoing compliance obligations will I have?", 
+    answer: "Ongoing obligations include: quarterly VAT returns (Model 303), annual VAT summary (Model 390), quarterly/monthly payroll withholdings (Model 111), annual corporate tax return (Model 200), annual accounts filing with the Commercial Registry, beneficial ownership declarations (RETIR), and annual confirmation of company data. We provide comprehensive compliance calendar management." 
+  },
+  { 
+    question: "When do I need to appoint an auditor?", 
+    answer: "Audit is mandatory if the company exceeds two of three thresholds for two consecutive years: total assets over €4M, annual revenue over €8M, or average employees exceeding 50. Groups of companies have consolidated audit requirements. Even when not mandatory, audited accounts may be beneficial for bank financing, investor relations, or parent company reporting requirements." 
+  },
+  { 
+    question: "What are the typical costs for setting up a company in Spain?", 
+    answer: "Total first-year investment typically ranges from €8,000-€15,000 for a standard SL, including: advisory fees (€3,000-€8,000), notary and registry fees (€500-€1,500), share capital (€3,000 minimum), and initial compliance setup. Ongoing annual costs for accounting, tax, and secretarial services typically range from €3,000-€12,000 depending on transaction volume. Use our cost calculator for a personalized estimate." 
   }
 ];
 
@@ -354,7 +374,7 @@ const HeroSection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick: () 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+          className="hero-title text-white mb-6"
         >
           Set Up Your Business
           <span className="block text-primary-foreground/90">in Spain</span>
@@ -421,7 +441,7 @@ const HeroSection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick: () 
 
 const TableOfContentsNav = ({ activeSection }: { activeSection: string }) => (
   <nav className="sticky top-24 bg-background border border-border rounded-lg p-4 shadow-sm">
-    <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">Contents</h3>
+    <h3 className="font-medium text-foreground mb-4 text-sm uppercase tracking-wider">Contents</h3>
     <ul className="space-y-2">
       {tableOfContents.map((item) => (
         <li key={item.id}>
@@ -446,7 +466,7 @@ const DefinitionSection = () => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Understanding the Process</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-6">
           What Does "Setting Up in Spain" Mean for International Businesses?
         </h2>
         
@@ -481,7 +501,7 @@ const DefinitionSection = () => (
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <point.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">{point.title}</h3>
+              <h3 className="text-lg font-medium text-foreground mb-2">{point.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{point.description}</p>
             </motion.div>
           ))}
@@ -505,7 +525,7 @@ const RoadmapSection = () => {
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <Badge variant="secondary" className="mb-4">Step-by-Step Guide</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
             10-Step Setup Roadmap
           </h2>
           <p className="text-lg text-muted-foreground mb-12">
@@ -529,7 +549,7 @@ const RoadmapSection = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-foreground">{step.title}</h3>
+                      <h3 className="text-xl font-medium text-foreground">{step.title}</h3>
                       <Badge variant="outline" className={categoryColors[step.category]}>
                         {step.category}
                       </Badge>
@@ -555,7 +575,7 @@ const TimelineSection = () => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Project Timeline</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
           Timeline & Phases
         </h2>
         <p className="text-lg text-muted-foreground mb-12">
@@ -583,7 +603,7 @@ const TimelineSection = () => (
                 
                 <div className="text-center">
                   <div className="text-xs font-semibold text-muted-foreground mb-1">Phase {phase.phase}</div>
-                  <h4 className="font-semibold text-foreground text-sm mb-1">{phase.title}</h4>
+                  <h4 className="font-medium text-foreground text-sm mb-1">{phase.title}</h4>
                   <div className="text-xs text-primary font-medium mb-2">{phase.weeks}</div>
                   <p className="text-xs text-muted-foreground">{phase.description}</p>
                 </div>
@@ -611,7 +631,7 @@ const TimelineSection = () => (
               </div>
               <div className="pb-6">
                 <div className="text-xs font-semibold text-muted-foreground">Phase {phase.phase}</div>
-                <h4 className="font-semibold text-foreground">{phase.title}</h4>
+                <h4 className="font-medium text-foreground">{phase.title}</h4>
                 <div className="text-sm text-primary font-medium">{phase.weeks}</div>
                 <p className="text-sm text-muted-foreground mt-1">{phase.description}</p>
               </div>
@@ -637,7 +657,7 @@ const CTABanner = ({
   <section className="py-16 bg-primary">
     <div className="container">
       <div className="max-w-4xl mx-auto text-center">
-        <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-4">{title}</h3>
+        <h3 className="text-2xl md:text-3xl font-normal text-primary-foreground mb-4">{title}</h3>
         <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">{description}</p>
         <Button 
           size="lg" 
@@ -657,7 +677,7 @@ const CostsSection = () => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Investment Overview</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
           Costs & Investment Categories
         </h2>
         <p className="text-lg text-muted-foreground mb-12">
@@ -676,7 +696,7 @@ const CostsSection = () => (
               className="bg-background border border-border rounded-xl p-6"
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-lg font-semibold text-foreground">{cost.category}</h3>
+                <h3 className="text-lg font-medium text-foreground">{cost.category}</h3>
                 <span className="text-xl font-bold text-primary">{cost.range}</span>
               </div>
               <ul className="space-y-2 mb-4">
@@ -700,7 +720,7 @@ const CostsSection = () => (
               <Wallet className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-2">Typical Total Investment</h4>
+              <h4 className="font-medium text-foreground mb-2">Typical Total Investment</h4>
               <p className="text-muted-foreground text-sm">
                 For a standard SL formation with basic setup, expect to invest <strong>€8,000 - €15,000</strong> in 
                 the first year including formation, capital, and initial compliance. This excludes operational 
@@ -719,7 +739,7 @@ const WhySpainSection = () => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Strategic Advantages</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
           Why Spain: Business Value & Strategic Advantages
         </h2>
         <p className="text-lg text-muted-foreground mb-12">
@@ -740,7 +760,7 @@ const WhySpainSection = () => (
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <advantage.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">{advantage.title}</h3>
+              <h3 className="text-lg font-medium text-foreground mb-2">{advantage.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{advantage.description}</p>
             </motion.div>
           ))}
@@ -755,7 +775,7 @@ const FAQSection = ({ onCtaClick }: { onCtaClick: () => void }) => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Common Questions</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
           Frequently Asked Questions
         </h2>
         <p className="text-lg text-muted-foreground mb-12">
@@ -769,7 +789,7 @@ const FAQSection = ({ onCtaClick }: { onCtaClick: () => void }) => (
               value={`faq-${index}`}
               className="bg-background border border-border rounded-xl px-6 data-[state=open]:border-primary/30"
             >
-              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-6">
+              <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline py-6">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground pb-6 leading-relaxed">
@@ -796,7 +816,7 @@ const RelatedServicesSection = () => (
     <div className="container">
       <div className="max-w-4xl mx-auto">
         <Badge variant="secondary" className="mb-4">Explore More</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
           Related Services
         </h2>
         <p className="text-lg text-muted-foreground mb-12">
@@ -810,7 +830,7 @@ const RelatedServicesSection = () => (
               to={service.slug}
               className="group bg-muted/50 border border-border rounded-xl p-5 hover:border-primary/30 hover:bg-muted transition-all"
             >
-              <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+              <h3 className="font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
               <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
@@ -830,7 +850,7 @@ const FinalCTASection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick:
   <section className="py-20 bg-black">
     <div className="container">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+        <h2 className="text-3xl md:text-4xl font-normal text-white mb-6">
           Ready to Establish Your Business in Spain?
         </h2>
         <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto">
@@ -867,7 +887,7 @@ const ContactSection = () => (
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <Badge variant="secondary" className="mb-4">Get Started</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
             Start Your Spain Setup Project
           </h2>
           <p className="text-lg text-muted-foreground">
