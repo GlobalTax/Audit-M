@@ -26,7 +26,6 @@ const InternationalLogo = ({
   className?: string;
 }) => {
   const textColor = color === "light" ? "text-white" : "text-foreground";
-  const logoSrc = color === "light" ? logoInternationalWhite : logoInternationalDark;
 
   if (variant === "compact") {
     return (
@@ -37,11 +36,14 @@ const InternationalLogo = ({
   }
 
   return (
-    <img
-      src={logoSrc}
-      alt="Navarro International"
-      className={cn("h-12 md:h-14 w-auto object-contain", className)}
-    />
+    <div className={cn("flex flex-col", textColor, className)}>
+      <span className="text-2xl md:text-3xl font-bold tracking-tight leading-none">
+        NAVARRO
+      </span>
+      <span className="text-xs md:text-sm font-light tracking-[0.2em] uppercase">
+        International
+      </span>
+    </div>
   );
 };
 
