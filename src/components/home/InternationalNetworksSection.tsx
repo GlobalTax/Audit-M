@@ -43,7 +43,17 @@ export function InternationalNetworksSection() {
   const { data: contentData, isLoading } = usePageContent("home", "redes_internacionales", "en");
   
   const content = contentData?.[0]?.content;
-  const networks: NetworkInfo[] = content?.logos?.length > 0 ? content.logos : fallbackNetworks;
+  
+  // Merge database content with fallback logos - use local images when logo_url is empty
+  const networks: NetworkInfo[] = content?.logos?.length > 0 
+    ? content.logos.map((dbNetwork: NetworkInfo) => {
+        if (!dbNetwork.logo_url) {
+          const fallback = fallbackNetworks.find(f => f.name === dbNetwork.name);
+          return { ...dbNetwork, logo_url: fallback?.logo_url || '' };
+        }
+        return dbNetwork;
+      })
+    : fallbackNetworks;
   const overline = content?.overline || "Global Network Memberships";
 
   if (isLoading) {
