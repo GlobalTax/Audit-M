@@ -116,7 +116,7 @@ export default function AdminTechnology() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Tecnología que usamos</h1>
+          <h1 className="text-3xl font-normal">Tecnología que usamos</h1>
           <p className="text-muted-foreground mt-2">
             Gestiona las tecnologías mostradas en la página principal
           </p>
@@ -161,7 +161,7 @@ export default function AdminTechnology() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-lg">{tech.name}</h3>
+                          <h3 className="font-medium text-lg">{tech.name}</h3>
                           {tech.featured && (
                             <Badge variant="secondary" className="gap-1">
                               <Star className="h-3 w-3 fill-current" />

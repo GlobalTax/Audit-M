@@ -105,7 +105,7 @@ export default function AdminCandidatos() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Candidatos</h1>
+        <h1 className="text-3xl font-normal">Candidatos</h1>
         <p className="text-muted-foreground">
           Gestiona las candidaturas recibidas a través del portal de talento.
         </p>
@@ -322,25 +322,25 @@ export default function AdminCandidatos() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Nombre
                   </h4>
                   <p>{selectedCandidato.nombre}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Email
                   </h4>
                   <p>{selectedCandidato.email}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Teléfono
                   </h4>
                   <p>{selectedCandidato.telefono || "-"}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     LinkedIn
                   </h4>
                   {selectedCandidato.linkedin_url ? (
@@ -362,25 +362,25 @@ export default function AdminCandidatos() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Puesto solicitado
                   </h4>
                   <p>{selectedCandidato.puesto_solicitado}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Departamento
                   </h4>
                   <p>{selectedCandidato.departamento || "-"}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Estado
                   </h4>
                   {getEstadoBadge(selectedCandidato.estado)}
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1">
                     Fuente
                   </h4>
                   <Badge variant="outline">{selectedCandidato.fuente}</Badge>
@@ -390,7 +390,7 @@ export default function AdminCandidatos() {
               <Separator />
 
               <div>
-                <h4 className="text-sm font-semibold text-muted-foreground mb-2">
+                <h4 className="text-sm font-medium text-muted-foreground mb-2">
                   Mensaje motivacional
                 </h4>
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">

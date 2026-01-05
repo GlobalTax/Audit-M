@@ -112,7 +112,7 @@ const AdminPlaybookLeads = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Playbook Downloads</h1>
+          <h1 className="text-3xl font-normal text-foreground">Playbook Downloads</h1>
           <p className="text-muted-foreground">
             Manage leads from downloadable resources
           </p>

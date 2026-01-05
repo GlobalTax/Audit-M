@@ -100,7 +100,7 @@ export default function AdminContent() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Content Management</h1>
+            <h1 className="text-3xl font-normal">Content Management</h1>
             <p className="text-muted-foreground mt-2">
               Edit the content of all website pages
             </p>
@@ -208,7 +208,7 @@ export default function AdminContent() {
                               <CardContent className="flex items-center justify-between p-4">
                                 <div className="flex-1">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <h3 className="font-semibold">
+                                    <h3 className="font-medium">
                                       {content.section_key}
                                     </h3>
                                     <Badge variant={content.is_active ? 'default' : 'secondary'}>
