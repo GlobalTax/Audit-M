@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Meta } from '@/components/seo/Meta';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { FAQSchema } from '@/components/seo/FAQSchema';
@@ -26,8 +27,44 @@ import {
   Home,
   Search
 } from 'lucide-react';
+import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
+
+const tableOfContents = [
+  { id: "introduction", label: "Why Structure Matters" },
+  { id: "sl-details", label: "Sociedad Limitada (SL)" },
+  { id: "sa-details", label: "Sociedad Anónima (SA)" },
+  { id: "branch-details", label: "Branch Office" },
+  { id: "subsidiary-details", label: "Subsidiary" },
+  { id: "representative-details", label: "Representative Office" },
+  { id: "comparison", label: "Comparison Table" },
+  { id: "use-cases", label: "Use Cases" },
+  { id: "requirements", label: "Legal Requirements" },
+  { id: "pitfalls", label: "Pitfalls & Best Practices" },
+  { id: "faq", label: "FAQ" },
+];
 
 const LegalStructuresSpain = () => {
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-100px 0px -70% 0px" }
+    );
+
+    tableOfContents.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
   const breadcrumbs = [
     { name: 'Home', url: '/' },
     { name: 'International Services', url: '/international-services' },
@@ -214,14 +251,23 @@ const LegalStructuresSpain = () => {
         </div>
       </section>
 
+      {/* Floating Sidebar for Desktop */}
+      <div className="hidden lg:block fixed right-8 top-24 w-72 z-40">
+        <SpainSetupSidebar 
+          tableOfContents={tableOfContents}
+          activeSection={activeSection}
+          showTableOfContents={true}
+        />
+      </div>
+
       {/* Introduction Section */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="introduction" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl">
             <p className="text-sm font-medium text-primary uppercase tracking-wider mb-4">
               Why Structure Matters
             </p>
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-6">
               The Foundation of Your Spanish Operations
             </h2>
             <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
@@ -247,7 +293,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Structure Details - SL */}
-      <section className="py-16 lg:py-20 bg-muted/30">
+      <section id="sl-details" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-6">
@@ -337,7 +383,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Structure Details - SA */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="sa-details" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-6">
@@ -427,7 +473,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Structure Details - Branch */}
-      <section className="py-16 lg:py-20 bg-muted/30">
+      <section id="branch-details" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-6">
@@ -517,7 +563,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Structure Details - Subsidiary */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="subsidiary-details" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-6">
@@ -607,7 +653,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Structure Details - Representative Office */}
-      <section className="py-16 lg:py-20 bg-muted/30">
+      <section id="representative-details" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-6">
@@ -699,7 +745,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="comparison" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
@@ -747,7 +793,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Use Cases Section */}
-      <section className="py-16 lg:py-20 bg-muted/30">
+      <section id="use-cases" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
@@ -784,7 +830,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Legal Requirements Section */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="requirements" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
@@ -856,7 +902,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* Pitfalls & Best Practices */}
-      <section className="py-16 lg:py-20 bg-muted/30">
+      <section id="pitfalls" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-12 text-center">
@@ -933,7 +979,7 @@ const LegalStructuresSpain = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section id="faq" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">

@@ -41,6 +41,7 @@ import {
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 import { StickyMobileCTA } from "@/components/company-setup/StickyMobileCTA";
+import { SpainSetupSidebar } from "@/components/spain-setup/SpainSetupSidebar";
 
 // ============================================================================
 // DATA
@@ -453,27 +454,7 @@ const HeroSection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick: () 
   </section>
 );
 
-const TableOfContentsNav = ({ activeSection }: { activeSection: string }) => (
-  <nav className="sticky top-24 bg-background border border-border rounded-lg p-4 shadow-sm">
-    <h3 className="font-medium text-foreground mb-4 text-sm uppercase tracking-wider">Contents</h3>
-    <ul className="space-y-2">
-      {tableOfContents.map((item) => (
-        <li key={item.id}>
-          <a
-            href={`#${item.id}`}
-            className={`block text-sm py-1.5 px-3 rounded-md transition-colors ${
-              activeSection === item.id
-                ? "bg-primary/10 text-primary font-medium"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
-            }`}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
+// TableOfContentsNav removed - now using SpainSetupSidebar component
 
 // Quick Resources Grid
 const QuickResourcesSection = ({ 
@@ -1163,9 +1144,15 @@ const SetUpInSpain = () => {
         <div className="container py-12">
           <div className="flex gap-8">
             {/* Sidebar - Hidden on mobile */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
-              <TableOfContentsNav activeSection={activeSection} />
-            </aside>
+            <div className="hidden lg:block w-72 flex-shrink-0">
+              <div className="sticky top-24">
+                <SpainSetupSidebar 
+                  tableOfContents={tableOfContents}
+                  activeSection={activeSection}
+                  showTableOfContents={true}
+                />
+              </div>
+            </div>
 
             {/* Main content */}
             <main className="flex-1 min-w-0">
