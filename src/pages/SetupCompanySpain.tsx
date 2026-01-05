@@ -151,25 +151,25 @@ export const SetupCompanySpain = () => {
 
   const testimonials = [
     {
-      quote: "Navarro's team made our Spanish expansion seamless. Their expertise in cross-border structuring was invaluable.",
-      author: "James Patterson",
-      position: "CEO",
-      company: "Tech Ventures Ltd",
-      country: "🇬🇧 United Kingdom"
+      quote: "Setting up our tech startup in Barcelona was straightforward thanks to their step-by-step guidance. They handled everything from NIE applications to notary coordination—we could focus entirely on building our product.",
+      author: "Elena Rossi",
+      position: "CEO & Co-founder",
+      company: "Tech Startup",
+      country: "🇮🇹 Italy"
     },
     {
-      quote: "Professional, responsive, and highly knowledgeable. They guided us through every step of setting up our subsidiary in Barcelona.",
-      author: "Marie Laurent",
-      position: "CFO",
-      company: "InvestCorp SA",
-      country: "🇫🇷 France"
+      quote: "We needed to establish a Spanish subsidiary for our European logistics operations. Their expertise in cross-border structuring and ongoing compliance support made the entire process seamless and cost-effective.",
+      author: "Marc de Vries",
+      position: "Operations Director",
+      company: "Logistics Firm",
+      country: "🇳🇱 Netherlands"
     },
     {
-      quote: "The tax structuring advice saved us significant costs. Their international focus is exactly what we needed.",
-      author: "Thomas Mueller",
-      position: "Managing Partner",
-      company: "Global Assets GmbH",
-      country: "🇩🇪 Germany"
+      quote: "As a first-time founder expanding from the US, I had no idea where to start. Their team walked me through every document, every filing, and every deadline. The company was fully operational within 5 weeks.",
+      author: "Sarah Kim",
+      position: "Founder",
+      company: "E-commerce Brand",
+      country: "🇺🇸 United States"
     }
   ];
 
@@ -295,9 +295,13 @@ export const SetupCompanySpain = () => {
       
       {/* Testimonials with flags */}
       <TestimonialsSection
-        title="What Our Clients Say"
-        subtitle="Trusted by entrepreneurs and investors worldwide"
+        title="What Our Clients Say About Company Formation Support"
+        subtitle="Real experiences from founders and investors who trusted us with their Spain setup"
         testimonials={testimonials}
+        cta={{
+          text: "Work With Our Experts on Your Spain Setup",
+          url: "#contacto"
+        }}
       />
       
       {/* FAQ */}

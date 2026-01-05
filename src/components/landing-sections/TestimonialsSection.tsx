@@ -1,6 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { Quote } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Testimonial {
   quote?: string; // Formato nuevo
@@ -17,9 +19,13 @@ interface TestimonialsSectionProps {
   title: string;
   subtitle?: string;
   testimonials: Testimonial[];
+  cta?: {
+    text: string;
+    url: string;
+  };
 }
 
-export const TestimonialsSection = ({ title, subtitle, testimonials }: TestimonialsSectionProps) => {
+export const TestimonialsSection = ({ title, subtitle, testimonials, cta }: TestimonialsSectionProps) => {
   return (
     <section className="py-16 bg-muted/30">
       <div className="container">
@@ -54,7 +60,7 @@ export const TestimonialsSection = ({ title, subtitle, testimonials }: Testimoni
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <div className="font-semibold text-foreground">
+                      <div className="font-medium text-foreground">
                         {testimonial.author}
                       </div>
                       <div className="text-sm text-muted-foreground">
@@ -73,6 +79,14 @@ export const TestimonialsSection = ({ title, subtitle, testimonials }: Testimoni
             );
           })}
         </div>
+
+        {cta && (
+          <div className="text-center mt-10">
+            <Button asChild size="lg">
+              <Link to={cta.url}>{cta.text}</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
