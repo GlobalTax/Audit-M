@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Globe, Plane, Shield, User, MapPin, ArrowRight } from "lucide-react";
+import { Globe, Plane, Shield, User, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -14,19 +14,16 @@ const servicesData = {
   "in-spain": [
     {
       title: "Company Setup",
-      icon: Building2,
       services: ["SL Formation", "SA Formation", "Branch Registration", "Subsidiary Setup"],
-      link: "/services/company-setup-in-spain",
+      link: "/set-up-company-spain",
     },
     {
       title: "Tax & Accounting",
-      icon: Shield,
       services: ["Corporate Tax", "VAT Compliance", "Payroll Management", "Annual Accounts"],
-      link: "/services/international-accounting",
+      link: "/services/international-accounting-management",
     },
     {
       title: "Investor Services",
-      icon: User,
       services: ["Golden Visa", "NIE & Work Permits", "Property Acquisition", "Tax Residency"],
       link: "/ley-beckham",
     },
@@ -34,19 +31,16 @@ const servicesData = {
   "from-spain": [
     {
       title: "International Expansion",
-      icon: Globe,
       services: ["Subsidiary Setup Abroad", "Holding Structures", "Transfer Pricing", "Corporate Restructuring"],
       link: "/international-services",
     },
     {
       title: "Cross-Border Tax",
-      icon: Shield,
       services: ["Double Tax Treaties", "International Tax Planning", "Repatriation Strategies", "PE Analysis"],
       link: "/international-services",
     },
     {
       title: "Global Workforce",
-      icon: User,
       services: ["Expatriate Tax", "Social Security Coordination", "International Payroll", "Assignment Planning"],
       link: "/international-services",
     },
@@ -54,19 +48,16 @@ const servicesData = {
   "global": [
     {
       title: "Multi-Jurisdictional Support",
-      icon: Globe,
       services: ["Coordinated Services in 50+ Countries", "Single Point of Contact", "Unified Reporting", "Cross-Border Compliance"],
       link: "/international-services",
     },
     {
       title: "Network Partners",
-      icon: Building2,
       services: ["Integra International", "XLNC", "SBC Global Alliance", "Vetted Local Experts"],
       link: "/international-services",
     },
     {
       title: "Seamless Coordination",
-      icon: Shield,
       services: ["Project Management", "Multi-Country Rollouts", "Consolidated Advisory", "Quality Assurance"],
       link: "/international-services",
     },
@@ -146,9 +137,7 @@ export function MultiJurisdictionalServicesSection() {
             transition={{ duration: 0.3 }}
             className="grid md:grid-cols-3 gap-6 mb-16"
           >
-            {servicesData[activeTab as keyof typeof servicesData].map((category, index) => {
-              const Icon = category.icon;
-              return (
+            {servicesData[activeTab as keyof typeof servicesData].map((category, index) => (
                 <motion.div
                   key={category.title}
                   initial={{ opacity: 0, y: 20 }}
@@ -156,9 +145,6 @@ export function MultiJurisdictionalServicesSection() {
                   transition={{ delay: index * 0.1 }}
                   className="group relative bg-primary text-primary-foreground rounded-2xl p-6 hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="absolute top-4 right-4 opacity-20">
-                    <Icon className="w-12 h-12" />
-                  </div>
                   
                   <h3 className="text-xl font-medium mb-4">{category.title}</h3>
                   
@@ -182,8 +168,7 @@ export function MultiJurisdictionalServicesSection() {
                     </Button>
                   </Link>
                 </motion.div>
-              );
-            })}
+            ))}
           </motion.div>
         </AnimatePresence>
 
