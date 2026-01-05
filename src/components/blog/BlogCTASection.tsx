@@ -3,8 +3,20 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export const BlogCTASection = () => {
+interface BlogCTASectionProps {
+  onCTAClick?: (ctaType: string, ctaText: string) => void;
+}
+
+export const BlogCTASection = ({ onCTAClick }: BlogCTASectionProps) => {
   const { t } = useLanguage();
+  
+  const buttonText = t('blog.cta.button') || 'Contact us';
+  
+  const handleClick = () => {
+    if (onCTAClick) {
+      onCTAClick('contact_cta', buttonText);
+    }
+  };
   
   return (
     <section className="py-16 md:py-20 bg-background">
@@ -19,9 +31,9 @@ export const BlogCTASection = () => {
           </p>
           
           <div className="pt-4">
-            <Button asChild size="lg" className="group">
+            <Button asChild size="lg" className="group" onClick={handleClick}>
               <Link to="/contact">
-                {t('blog.cta.button') || 'Contact us'}
+                {buttonText}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
