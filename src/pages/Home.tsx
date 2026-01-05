@@ -189,6 +189,26 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Global Reach Bar */}
+        <section className="bg-neutral-900 py-6 border-t border-white/10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-3 gap-4 text-center text-white">
+              <div>
+                <span className="text-2xl md:text-3xl font-bold">50+</span>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Jurisdictions via Partners</p>
+              </div>
+              <div className="border-x border-white/10">
+                <span className="text-2xl md:text-3xl font-bold">3</span>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Global Networks</p>
+              </div>
+              <div>
+                <span className="text-2xl md:text-3xl font-bold">25+</span>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Years Cross-Border</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
         <section className="bg-background py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,6 +264,9 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* International Networks Section - Moved up for prominence */}
+        <InternationalNetworksSection />
 
         {/* Datos/Stats Section */}
         <section className="bg-neutral-50 py-20 md:py-28">
@@ -352,9 +375,6 @@ const Home = () => {
           </Carousel>
           </div>
         </section>
-
-        {/* International Networks Section */}
-        <InternationalNetworksSection />
 
         {/* Blog Preview */}
         <section className="bg-background py-24">
