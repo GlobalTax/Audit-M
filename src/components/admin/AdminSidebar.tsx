@@ -16,6 +16,7 @@ import {
   Presentation,
   BarChart3,
   Globe,
+  Calculator,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +35,7 @@ const navItems = [
   { path: '/admin/team', icon: Users, label: 'Team Members' },
   { path: '/admin/job-positions', icon: Briefcase, label: 'Job Positions' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
+  { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
   { path: '/admin/technology', icon: Monitor, label: 'Technology' },
   { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
 ];
