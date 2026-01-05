@@ -75,6 +75,11 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="space-y-8">
+            <Link to="/" className="inline-block hover:opacity-80 transition-opacity">
+              <span className="font-display text-2xl md:text-3xl font-normal text-white tracking-tight">
+                global.nrro
+              </span>
+            </Link>
             <p className="text-lg text-white/80 font-light leading-relaxed">
               {t("footer.tagline")}
             </p>
@@ -210,7 +215,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm text-white/60 font-light">
-            © {currentYear} Navarro International. {t("footer.rights")}
+            © {currentYear} global.nrro. {t("footer.rights")}
           </p>
           <div className="flex flex-wrap gap-6">
             <Link
