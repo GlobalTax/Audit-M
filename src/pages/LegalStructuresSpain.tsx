@@ -28,6 +28,7 @@ import {
   Search
 } from 'lucide-react';
 import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
+import { StepProgressBar } from '@/components/company-setup/StepProgressBar';
 
 const tableOfContents = [
   { id: "introduction", label: "Why Structure Matters" },
@@ -791,6 +792,14 @@ const LegalStructuresSpain = () => {
           </div>
         </div>
       </section>
+
+      {/* Step Progress Bar */}
+      <StepProgressBar 
+        cta={{
+          text: "Start Your Spain Setup",
+          url: "/set-up-company-spain"
+        }}
+      />
 
       {/* Use Cases Section */}
       <section id="use-cases" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">

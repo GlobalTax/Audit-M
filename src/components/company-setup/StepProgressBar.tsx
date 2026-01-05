@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Scale, FileText, CreditCard, Landmark, ScrollText, ClipboardList } from 'lucide-react';
+import { Scale, FileText, CreditCard, Landmark, ScrollText, ClipboardList, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 const steps = [
@@ -65,7 +67,39 @@ const steps = [
   }
 ];
 
-export const StepProgressBar = () => {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 }
+  }
+};
+
+const stepVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] as const }
+  }
+};
+
+const progressLineVariants = {
+  hidden: { scaleX: 0 },
+  visible: { 
+    scaleX: 1,
+    transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] as const, delay: 0.2 }
+  }
+};
+
+interface StepProgressBarProps {
+  cta?: {
+    text: string;
+    url: string;
+  };
+}
+
+export const StepProgressBar = ({ cta }: StepProgressBarProps) => {
   const { trackEvent } = useAnalytics();
 
   const handleStepHover = (stepNumber: number, stepTitle: string) => {
@@ -83,11 +117,26 @@ export const StepProgressBar = () => {
     });
   };
 
+  const handleFinalCtaClick = () => {
+    if (cta) {
+      trackEvent('step_progress_cta_final_click_global_nrro', {
+        cta_text: cta.text,
+        destination_url: cta.url
+      });
+    }
+  };
+
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div 
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70">
             The Process
           </span>
@@ -97,33 +146,53 @@ export const StepProgressBar = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Follow these essential steps to successfully register and launch your business entity in Spain
           </p>
-        </div>
+        </motion.div>
 
         {/* Progress Line - Desktop */}
         <div className="hidden lg:block relative mb-8">
+          {/* Background line */}
           <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-border -translate-y-1/2" />
+          {/* Animated progress line */}
+          <motion.div 
+            className="absolute top-1/2 left-0 right-0 h-0.5 bg-primary -translate-y-1/2 origin-left"
+            variants={progressLineVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          />
           <div className="flex justify-between relative">
-            {steps.map((step) => (
-              <div 
+            {steps.map((step, index) => (
+              <motion.div 
                 key={step.number}
                 className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-medium z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.3, type: "spring" }}
               >
                 {step.number}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Steps Grid */}
         <TooltipProvider delayDuration={200}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {steps.map((step) => {
               const Icon = step.icon;
               return (
                 <Tooltip key={step.number}>
                   <TooltipTrigger asChild>
-                    <div 
-                      className="group bg-card border border-border rounded-lg p-5 hover:border-primary/50 hover:shadow-md transition-all duration-200 cursor-pointer"
+                    <motion.div 
+                      className="group bg-card border border-border rounded-lg p-5 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                      variants={stepVariants}
                       onMouseEnter={() => handleStepHover(step.number, step.title)}
                     >
                       {/* Step Number - Mobile/Tablet */}
@@ -135,7 +204,7 @@ export const StepProgressBar = () => {
                       </div>
 
                       {/* Icon */}
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                         <Icon className="w-5 h-5 text-primary" />
                       </div>
 
@@ -158,7 +227,7 @@ export const StepProgressBar = () => {
                         {step.ctaText}
                         <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                       </Link>
-                    </div>
+                    </motion.div>
                   </TooltipTrigger>
                   <TooltipContent 
                     side="bottom" 
@@ -169,13 +238,37 @@ export const StepProgressBar = () => {
                 </Tooltip>
               );
             })}
-          </div>
+          </motion.div>
         </TooltipProvider>
 
         {/* Helper Text */}
-        <p className="text-center text-xs text-muted-foreground mt-8">
+        <motion.p 
+          className="text-center text-xs text-muted-foreground mt-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+        >
           Hover over each step to see more details
-        </p>
+        </motion.p>
+
+        {/* Optional Final CTA */}
+        {cta && (
+          <motion.div 
+            className="flex justify-center mt-10"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7 }}
+          >
+            <Button asChild size="lg" className="gap-2">
+              <Link to={cta.url} onClick={handleFinalCtaClick}>
+                {cta.text}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
