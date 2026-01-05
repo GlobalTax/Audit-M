@@ -132,7 +132,7 @@ export const CompanySetupCalculator = () => {
                                   : 'border-border'
                               }`}
                             >
-                              <div className="font-semibold">{option.label}</div>
+                              <div className="font-medium">{option.label}</div>
                               <div className="text-sm text-muted-foreground mt-1">{option.desc}</div>
                               <div className="text-xs text-muted-foreground mt-2">Min. capital: {option.capital}</div>
                             </button>
