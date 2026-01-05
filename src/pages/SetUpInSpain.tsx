@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   Building2, 
@@ -21,7 +21,10 @@ import {
   CreditCard,
   BadgeCheck,
   Briefcase,
-  MapPin
+  MapPin,
+  Calculator,
+  ClipboardList,
+  HelpCircle
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Meta } from "@/components/seo/Meta";
@@ -37,6 +40,7 @@ import {
 } from "@/components/ui/accordion";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
+import { StickyMobileCTA } from "@/components/company-setup/StickyMobileCTA";
 
 // ============================================================================
 // DATA
@@ -384,10 +388,20 @@ const HeroSection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick: () 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl text-white/70 mb-10 max-w-3xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-white/70 mb-4 max-w-3xl mx-auto leading-relaxed"
         >
           The definitive roadmap for foreign investors, multinational groups, and international entrepreneurs 
           establishing operations in Spain. From legal entity formation to full compliance—we guide you every step.
+        </motion.p>
+
+        {/* Microcopy */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="text-sm text-white/50 mb-10"
+        >
+          40+ page guide · No email required to start reading · Instant download
         </motion.p>
 
         <motion.div
@@ -460,6 +474,91 @@ const TableOfContentsNav = ({ activeSection }: { activeSection: string }) => (
     </ul>
   </nav>
 );
+
+// Quick Resources Grid
+const QuickResourcesSection = ({ 
+  onPlaybook, 
+  onChecklist, 
+  onCalculator, 
+  onQuiz 
+}: { 
+  onPlaybook: () => void; 
+  onChecklist: () => void; 
+  onCalculator: () => void; 
+  onQuiz: () => void;
+}) => {
+  const resources = [
+    {
+      icon: Download,
+      title: "Download Playbook",
+      description: "40+ page setup guide",
+      onClick: onPlaybook,
+      badge: "Free"
+    },
+    {
+      icon: ClipboardList,
+      title: "Get Checklist",
+      description: "Required documents list",
+      onClick: onChecklist,
+      badge: "Free"
+    },
+    {
+      icon: Calculator,
+      title: "Cost Calculator",
+      description: "Instant cost estimate",
+      onClick: onCalculator,
+      badge: "Free"
+    },
+    {
+      icon: HelpCircle,
+      title: "Readiness Quiz",
+      description: "2-minute assessment",
+      onClick: onQuiz,
+      badge: "Free"
+    }
+  ];
+
+  return (
+    <section className="py-12 bg-muted/30">
+      <div className="container">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70">
+              Quick Resources
+            </span>
+            <h2 className="text-2xl md:text-3xl font-normal text-foreground mt-2">
+              Free Tools to Get Started
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {resources.map((resource, index) => (
+              <motion.button
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                onClick={resource.onClick}
+                className="group bg-background border border-border rounded-xl p-5 text-left hover:border-primary/30 hover:shadow-md transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <resource.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <Badge variant="secondary" className="text-xs">{resource.badge}</Badge>
+                </div>
+                <h3 className="font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+                  {resource.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{resource.description}</p>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const DefinitionSection = () => (
   <section id="what-it-means" className="py-20 bg-background scroll-mt-24">
@@ -647,18 +746,23 @@ const CTABanner = ({
   title, 
   description, 
   buttonText, 
+  microcopy,
   onClick 
 }: { 
   title: string; 
   description: string; 
   buttonText: string; 
+  microcopy?: string;
   onClick: () => void 
 }) => (
   <section className="py-16 bg-primary">
     <div className="container">
       <div className="max-w-4xl mx-auto text-center">
         <h3 className="text-2xl md:text-3xl font-normal text-primary-foreground mb-4">{title}</h3>
-        <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">{description}</p>
+        <p className="text-primary-foreground/80 mb-6 max-w-2xl mx-auto">{description}</p>
+        {microcopy && (
+          <p className="text-sm text-primary-foreground/60 mb-6">{microcopy}</p>
+        )}
         <Button 
           size="lg" 
           onClick={onClick}
@@ -853,11 +957,14 @@ const FinalCTASection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick:
         <h2 className="text-3xl md:text-4xl font-normal text-white mb-6">
           Ready to Establish Your Business in Spain?
         </h2>
-        <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto">
+        <p className="text-lg text-white/70 mb-4 max-w-2xl mx-auto">
           Join 500+ international companies that have successfully set up operations in Spain with our guidance. 
           Let's discuss your project.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <p className="text-sm text-white/50 mb-10">
+          Free consultation · No commitment · Response within 24 hours
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <Button 
             size="lg" 
             onClick={onPrimaryClick}
@@ -876,6 +983,9 @@ const FinalCTASection = ({ onPrimaryClick, onSecondaryClick }: { onPrimaryClick:
             Download Playbook
           </Button>
         </div>
+        <p className="text-xs text-white/40">
+          Trusted by multinationals from 50+ countries · 98% client satisfaction rate
+        </p>
       </div>
     </div>
   </section>
@@ -906,6 +1016,7 @@ const ContactSection = () => (
 
 const SetUpInSpain = () => {
   const { trackEvent } = useAnalytics();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
 
   // Scroll spy effect
@@ -935,41 +1046,88 @@ const SetUpInSpain = () => {
     }
   };
 
+  // Hero CTAs
   const handleDownloadPlaybook = () => {
-    trackEvent("cta_download_playbook_spain_setup_global_nrro", {
+    trackEvent("playbook_download_global_nrro", {
       page: "set-up-in-spain",
-      cta_position: "hero"
+      cta_position: "hero",
+      resource_type: "playbook"
     });
-    // In a real implementation, this would trigger a download or lead capture modal
+    navigate("/spain-company-setup-playbook");
+  };
+
+  const handleBookConsultation = (position: string) => {
+    trackEvent("consultation_request_global_nrro", {
+      page: "set-up-in-spain",
+      cta_position: position
+    });
     scrollToContact();
   };
 
-  const handleBookConsultation = () => {
-    trackEvent("cta_book_consultation_spain_setup_global_nrro", {
+  // Resource CTAs
+  const handlePlaybookClick = (position: string) => {
+    trackEvent("playbook_download_global_nrro", {
       page: "set-up-in-spain",
-      cta_position: "hero"
+      cta_position: position,
+      resource_type: "playbook"
     });
-    scrollToContact();
+    navigate("/spain-company-setup-playbook");
   };
 
+  const handleChecklistClick = (position: string) => {
+    trackEvent("checklist_download_global_nrro", {
+      page: "set-up-in-spain",
+      cta_position: position,
+      resource_type: "checklist"
+    });
+    navigate("/spain-document-checklist");
+  };
+
+  const handleCalculatorClick = (position: string) => {
+    trackEvent("calculator_start_global_nrro", {
+      page: "set-up-in-spain",
+      cta_position: position,
+      resource_type: "calculator"
+    });
+    navigate("/spain-setup-calculator");
+  };
+
+  const handleQuizClick = (position: string) => {
+    trackEvent("readiness_quiz_start_global_nrro", {
+      page: "set-up-in-spain",
+      cta_position: position,
+      resource_type: "quiz"
+    });
+    navigate("/spain-readiness-quiz");
+  };
+
+  // Mid-page CTAs
   const handleDiscussProject = () => {
-    trackEvent("cta_discuss_project_spain_setup_global_nrro", {
+    trackEvent("cta_discuss_project_global_nrro", {
       page: "set-up-in-spain",
-      cta_position: "mid_page"
+      cta_position: "mid_page_1"
     });
     scrollToContact();
   };
 
   const handleGetQuote = () => {
-    trackEvent("cta_custom_quote_spain_setup_global_nrro", {
+    trackEvent("cta_custom_quote_global_nrro", {
       page: "set-up-in-spain",
-      cta_position: "after_costs"
+      cta_position: "mid_page_2"
     });
     scrollToContact();
   };
 
+  const handleCalculatorMidPage = () => {
+    trackEvent("calculator_start_global_nrro", {
+      page: "set-up-in-spain",
+      cta_position: "mid_page_3"
+    });
+    navigate("/spain-setup-calculator");
+  };
+
   const handleAskExperts = () => {
-    trackEvent("cta_ask_experts_spain_setup_global_nrro", {
+    trackEvent("cta_ask_experts_global_nrro", {
       page: "set-up-in-spain",
       cta_position: "faq_section"
     });
@@ -989,7 +1147,15 @@ const SetUpInSpain = () => {
 
       <HeroSection 
         onPrimaryClick={handleDownloadPlaybook}
-        onSecondaryClick={handleBookConsultation}
+        onSecondaryClick={() => handleBookConsultation("hero")}
+      />
+
+      {/* Quick Resources Section */}
+      <QuickResourcesSection
+        onPlaybook={() => handlePlaybookClick("quick_resources")}
+        onChecklist={() => handleChecklistClick("quick_resources")}
+        onCalculator={() => handleCalculatorClick("quick_resources")}
+        onQuiz={() => handleQuizClick("quick_resources")}
       />
 
       {/* Main content with sidebar TOC */}
@@ -1010,16 +1176,27 @@ const SetUpInSpain = () => {
                 title="Ready to Discuss Your Setup Project?"
                 description="Our team of international business specialists can provide a customized roadmap for your specific situation."
                 buttonText="Discuss Your Project"
+                microcopy="Free initial consultation · No obligation"
                 onClick={handleDiscussProject}
               />
 
               <TimelineSection />
+
+              <CTABanner 
+                title="Estimate Your Costs & Timeline"
+                description="Use our free calculator to get an instant estimate based on your company type and requirements."
+                buttonText="Use Our Free Calculator"
+                microcopy="Takes 30 seconds · Personalized results"
+                onClick={handleCalculatorMidPage}
+              />
+
               <CostsSection />
 
               <CTABanner 
                 title="Need a Custom Quote?"
                 description="Every business is unique. Get a detailed proposal tailored to your structure, timeline, and compliance needs."
                 buttonText="Get a Custom Quote"
+                microcopy="Response within 24 hours"
                 onClick={handleGetQuote}
               />
 
@@ -1032,13 +1209,19 @@ const SetUpInSpain = () => {
       </div>
 
       <FinalCTASection 
-        onPrimaryClick={handleBookConsultation}
-        onSecondaryClick={handleDownloadPlaybook}
+        onPrimaryClick={() => handleBookConsultation("final_section")}
+        onSecondaryClick={() => handlePlaybookClick("final_section")}
       />
 
       <div id="contact-form">
         <ContactSection />
       </div>
+
+      {/* Sticky Mobile CTA */}
+      <StickyMobileCTA
+        primaryText="Book Consultation"
+        primaryUrl="#contact-form"
+      />
     </Layout>
   );
 };
