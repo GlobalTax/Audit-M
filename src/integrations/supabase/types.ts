@@ -3205,6 +3205,39 @@ export type Database = {
         | {
             Args: {
               filter_category?: string
+              filter_site?: string
+              filter_status?: string
+              filter_tags?: string[]
+              lang?: string
+              limit_count?: number
+              offset_count?: number
+              search_query?: string
+            }
+            Returns: {
+              author_name: string
+              author_specialization: string
+              category: string
+              content: string
+              created_at: string
+              excerpt: string
+              featured_image: string
+              id: string
+              published_at: string
+              read_time: number
+              shared_sites: string[]
+              slug: string
+              slug_en: string
+              slug_es: string
+              source_site: string
+              status: string
+              tags: string[]
+              title: string
+              view_count: number
+            }[]
+          }
+        | {
+            Args: {
+              filter_category?: string
               filter_status?: string
               filter_tags?: string[]
               lang?: string
