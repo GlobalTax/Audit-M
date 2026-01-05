@@ -7,6 +7,7 @@ import { TimelineCostsSection } from '@/components/company-setup/TimelineCostsSe
 import { GuaranteesSection } from '@/components/company-setup/GuaranteesSection';
 import { StickyMobileCTA } from '@/components/company-setup/StickyMobileCTA';
 import { RelatedResourcesSection } from '@/components/company-setup/RelatedResourcesSection';
+import { StepProgressBar } from '@/components/company-setup/StepProgressBar';
 import { TrustBarSection } from '@/components/landing-sections/TrustBarSection';
 import { ProblemStatementSection } from '@/components/landing-sections/ProblemStatementSection';
 import { ServicesGridSection } from '@/components/landing-sections/ServicesGridSection';
@@ -263,6 +264,9 @@ export const SetupCompanySpain = () => {
       
       {/* Problem Statement */}
       <ProblemStatementSection {...problemStatement} />
+      
+      {/* 6-Step Progress Bar */}
+      <StepProgressBar />
       
       {/* Company Types Comparison */}
       <CompanyTypesSection />
