@@ -203,7 +203,7 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
         <Button
           type="submit"
           size="lg"
-          className="w-full md:w-auto bg-black text-white hover:bg-black/90"
+          className="w-full md:w-auto"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

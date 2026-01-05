@@ -136,7 +136,7 @@ export const PlaybookDownloadForm = () => {
         <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-xl font-semibold text-foreground mb-2">
+        <h3 className="text-xl font-medium text-foreground mb-2">
           Check Your Email!
         </h3>
         <p className="text-muted-foreground mb-4">

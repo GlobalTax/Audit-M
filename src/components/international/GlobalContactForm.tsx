@@ -151,7 +151,7 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
     <div className={className}>
       {/* Header */}
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        <h2 className="text-3xl font-normal tracking-tight text-foreground md:text-4xl">
           Start Your Global Business Conversation
         </h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
