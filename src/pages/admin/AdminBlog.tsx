@@ -40,8 +40,62 @@ import { useBlogSearch } from "@/hooks/useBlogSearch";
 import { Plus, Eye, Edit, Trash2, CheckCircle, Search } from "lucide-react";
 import { format } from "date-fns";
 import { CustomPagination } from "@/components/ui/custom-pagination";
+import { SITE_SOURCE } from "@/config/site";
 
 const ITEMS_PER_PAGE = 10;
+
+// Internationalized UI texts
+const UI_TEXTS = SITE_SOURCE === 'int' ? {
+  newArticle: "New Article",
+  searchPlaceholder: "Search articles...",
+  filterPlaceholder: "Filter by status",
+  all: "All",
+  published: "Published",
+  drafts: "Drafts",
+  scheduled: "Scheduled",
+  title: "Title",
+  category: "Category",
+  status: "Status",
+  date: "Date",
+  views: "Views",
+  actions: "Actions",
+  deleteTitle: "Are you sure?",
+  deleteDescription: "This action cannot be undone. The article will be permanently deleted.",
+  cancel: "Cancel",
+  delete: "Delete",
+  articleDeleted: "Article deleted",
+  articleDeletedDesc: "The article has been deleted successfully",
+  articlePublished: "Article published",
+  articlePublishedDesc: "The article has been published successfully",
+  badgePublished: "Published",
+  badgeDraft: "Draft",
+  badgeScheduled: "Scheduled",
+} : {
+  newArticle: "Nuevo Artículo",
+  searchPlaceholder: "Buscar artículos...",
+  filterPlaceholder: "Filtrar por estado",
+  all: "Todos",
+  published: "Publicados",
+  drafts: "Borradores",
+  scheduled: "Programados",
+  title: "Título",
+  category: "Categoría",
+  status: "Estado",
+  date: "Fecha",
+  views: "Vistas",
+  actions: "Acciones",
+  deleteTitle: "¿Estás seguro?",
+  deleteDescription: "Esta acción no se puede deshacer. El artículo será eliminado permanentemente.",
+  cancel: "Cancelar",
+  delete: "Eliminar",
+  articleDeleted: "Artículo eliminado",
+  articleDeletedDesc: "El artículo se ha eliminado correctamente",
+  articlePublished: "Artículo publicado",
+  articlePublishedDesc: "El artículo se ha publicado correctamente",
+  badgePublished: "Publicado",
+  badgeDraft: "Borrador",
+  badgeScheduled: "Programado",
+};
 
 export const AdminBlog = () => {
   const { toast } = useToast();
@@ -73,8 +127,8 @@ export const AdminBlog = () => {
       queryClient.invalidateQueries({ queryKey: ["blog-search"] });
       queryClient.invalidateQueries({ queryKey: ["blog-stats"] });
       toast({
-        title: "Artículo eliminado",
-        description: "El artículo se ha eliminado correctamente",
+        title: UI_TEXTS.articleDeleted,
+        description: UI_TEXTS.articleDeletedDesc,
       });
       setDeletePostId(null);
     },
@@ -99,8 +153,8 @@ export const AdminBlog = () => {
       refetch();
       queryClient.invalidateQueries({ queryKey: ["blog-stats"] });
       toast({
-        title: "Artículo publicado",
-        description: "El artículo se ha publicado correctamente",
+        title: UI_TEXTS.articlePublished,
+        description: UI_TEXTS.articlePublishedDesc,
       });
     },
     onError: (error: any) => {
@@ -115,11 +169,11 @@ export const AdminBlog = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "published":
-        return <Badge className="bg-green-500">Publicado</Badge>;
+        return <Badge className="bg-green-500">{UI_TEXTS.badgePublished}</Badge>;
       case "draft":
-        return <Badge variant="outline">Borrador</Badge>;
+        return <Badge variant="outline">{UI_TEXTS.badgeDraft}</Badge>;
       case "scheduled":
-        return <Badge className="bg-yellow-500">Programado</Badge>;
+        return <Badge className="bg-yellow-500">{UI_TEXTS.badgeScheduled}</Badge>;
       default:
         return <Badge>{status}</Badge>;
     }
@@ -148,23 +202,26 @@ export const AdminBlog = () => {
         <h1 className="text-3xl font-bold">Blog</h1>
         <Button onClick={handleNew}>
           <Plus className="mr-2 h-4 w-4" />
-          Nuevo Artículo
+          {UI_TEXTS.newArticle}
         </Button>
       </div>
 
       <BlogStatsCard />
 
+      {/* Only show translation tools for Spanish site */}
+      {SITE_SOURCE === 'es' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <TranslateBlogToCatalan />
           <TranslateBlogToEnglish />
         </div>
+      )}
 
       <Card className="p-6 space-y-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Buscar artículos..."
+              placeholder={UI_TEXTS.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9"
@@ -172,13 +229,13 @@ export const AdminBlog = () => {
           </div>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-full sm:w-[180px]">
-              <SelectValue placeholder="Filtrar por estado" />
+              <SelectValue placeholder={UI_TEXTS.filterPlaceholder} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos</SelectItem>
-              <SelectItem value="published">Publicados</SelectItem>
-              <SelectItem value="draft">Borradores</SelectItem>
-              <SelectItem value="scheduled">Programados</SelectItem>
+              <SelectItem value="all">{UI_TEXTS.all}</SelectItem>
+              <SelectItem value="published">{UI_TEXTS.published}</SelectItem>
+              <SelectItem value="draft">{UI_TEXTS.drafts}</SelectItem>
+              <SelectItem value="scheduled">{UI_TEXTS.scheduled}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -192,18 +249,20 @@ export const AdminBlog = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Título</TableHead>
-                  <TableHead>Categoría</TableHead>
-                  <TableHead>Estado</TableHead>
-                  <TableHead>Fecha</TableHead>
-                  <TableHead>Vistas</TableHead>
-                  <TableHead className="text-right">Acciones</TableHead>
+                  <TableHead>{UI_TEXTS.title}</TableHead>
+                  <TableHead>{UI_TEXTS.category}</TableHead>
+                  <TableHead>{UI_TEXTS.status}</TableHead>
+                  <TableHead>{UI_TEXTS.date}</TableHead>
+                  <TableHead>{UI_TEXTS.views}</TableHead>
+                  <TableHead className="text-right">{UI_TEXTS.actions}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {posts.map((post: any) => (
                   <TableRow key={post.id}>
-                    <TableCell className="font-medium">{post.title_es}</TableCell>
+                    <TableCell className="font-medium">
+                      {SITE_SOURCE === 'int' ? (post.title_en || post.title_es) : post.title_es}
+                    </TableCell>
                     <TableCell>
                       {post.category && <Badge variant="outline">{post.category}</Badge>}
                     </TableCell>
@@ -280,18 +339,18 @@ export const AdminBlog = () => {
       <AlertDialog open={!!deletePostId} onOpenChange={() => setDeletePostId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
+            <AlertDialogTitle>{UI_TEXTS.deleteTitle}</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción no se puede deshacer. El artículo será eliminado permanentemente.
+              {UI_TEXTS.deleteDescription}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>{UI_TEXTS.cancel}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deletePostId && deleteMutation.mutate(deletePostId)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Eliminar
+              {UI_TEXTS.delete}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
