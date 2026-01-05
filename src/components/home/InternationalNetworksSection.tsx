@@ -19,21 +19,21 @@ const fallbackNetworks: NetworkInfo[] = [
   {
     name: "Integra International",
     shortName: "II",
-    description: "A thriving international association of leading independent accounting, law and business advisory firms offering a unified global platform.",
+    description: "100+ member firms across 60+ countries. Access to legal, tax and advisory expertise worldwide through one unified platform.",
     website_url: "https://integra-international.net/",
     logo_url: integraLogo
   },
   {
     name: "XLNC",
     shortName: "XLNC",
-    description: "A global alliance of innovative and entrepreneurial professional services organizations delivering exceptional multi-jurisdictional service.",
+    description: "Multi-jurisdictional coverage across Europe, Americas and Asia-Pacific. Seamless cross-border advisory for international operations.",
     website_url: "https://xlnc.org/",
     logo_url: xlncLogo
   },
   {
     name: "SBC Global Alliance",
     shortName: "SBC",
-    description: "A global association of leading independent firms providing audit, tax, accounting, assurance and business advisory services worldwide.",
+    description: "Global network for audit, tax and assurance services. Trusted by multinational corporations for consistent quality worldwide.",
     website_url: "https://www.sbcglobalalliance.co.uk/",
     logo_url: sbcLogo
   }
@@ -62,11 +62,20 @@ export function InternationalNetworksSection() {
   }
 
   return (
-    <section className="py-24 md:py-32 bg-background border-t border-border">
+    <section className="py-20 md:py-28 bg-muted/30 border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-16 text-center">
-          {overline}
-        </h2>
+        {/* Enhanced header with global reach messaging */}
+        <div className="text-center mb-16">
+          <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            {overline}
+          </h2>
+          <p className="text-2xl md:text-3xl font-normal text-foreground mb-4">
+            Barcelona Headquarters. Global Reach.
+          </p>
+          <p className="text-foreground/60 max-w-2xl mx-auto">
+            Through our membership in three prestigious international networks, we provide seamless advisory services across 50+ jurisdictions worldwide.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {networks.map((network) => (
