@@ -174,32 +174,52 @@ export const SetupCompanySpain = () => {
 
   const faqs = [
     {
-      question: "How long does it take to set up a company in Spain?",
-      answer: "The typical timeline is 4-6 weeks from initial consultation to full incorporation. This includes corporate planning, document drafting, notarial appointments, and registration. Express procedures can be arranged for urgent cases."
+      question: "What are the steps to register a company in Spain?",
+      answer: "The main steps include: (1) obtaining a negative name certificate from the Central Commercial Registry, (2) opening a bank account and depositing share capital, (3) obtaining NIE/NIF for shareholders and directors, (4) drafting bylaws and corporate documents, (5) signing the public deed before a notary, and (6) registering with the Commercial Registry and Tax Agency. Our team handles each step on your behalf."
     },
     {
-      question: "Can foreign shareholders create a company?",
-      answer: "Yes, absolutely. Spain welcomes foreign investment and there are no restrictions on foreign ownership of Spanish companies. We specialize in assisting international investors with cross-border structuring."
+      question: "How long does company registration take in Spain?",
+      answer: "The typical timeline is 4-6 weeks from initial consultation to full incorporation. This includes 1-3 days for name reservation, 2-4 weeks for NIE processing (if needed), 1-2 weeks for bank account opening, and 2-4 weeks for registry inscription. Express procedures can reduce this to 2-3 weeks in urgent cases."
     },
     {
-      question: "What is the minimum capital required?",
-      answer: "For a Sociedad Limitada (SL), the most common structure, the minimum capital is €3,000. For a Sociedad Anónima (SA), it's €60,000. We help you choose the right structure based on your needs."
+      question: "What documents are required to incorporate a company in Spain?",
+      answer: "Required documents include valid passports or national ID cards for all shareholders and directors, proof of address (utility bill or bank statement), the negative name certificate, bank certificate of capital deposit, and drafted bylaws. For foreign documents, apostille or legalization and sworn translation into Spanish are typically required."
     },
     {
-      question: "What documents are required?",
-      answer: "Requirements include valid passports or ID cards for all shareholders and directors, proof of address, and in some cases apostilled documents. We provide a complete checklist and assist with document preparation and legalization."
+      question: "Do foreign founders need a NIE or NIF to set up a company?",
+      answer: "Yes, all shareholders and directors require a Spanish tax identification number. EU citizens need a NIE (Número de Identificación de Extranjero), while non-EU individuals also require a NIE. The company itself receives a NIF (Número de Identificación Fiscal) upon registration. We assist with all tax ID applications as part of our service."
     },
     {
-      question: "Do directors need to reside in Spain?",
-      answer: "No, directors don't need to be Spanish residents. However, having a registered office address in Spain is mandatory, and we provide registered office services as part of our comprehensive support."
+      question: "What is the minimum capital requirement for a Spanish company?",
+      answer: "For a Sociedad Limitada (SL), the most common structure for SMEs, the minimum share capital is €3,000, which must be fully paid at incorporation. For a Sociedad Anónima (SA), the minimum is €60,000, with at least 25% paid at incorporation. Branch offices have no capital requirement as they are extensions of the parent company."
     },
     {
-      question: "What are ongoing tax obligations?",
-      answer: "Spanish companies must file quarterly VAT returns, annual corporate tax returns, and maintain proper accounting records. We provide full ongoing compliance support including bookkeeping, payroll, and tax filings."
+      question: "What types of legal structures are available in Spain?",
+      answer: "The main structures are: Sociedad Limitada (SL) – ideal for SMEs with limited liability and flexible governance; Sociedad Anónima (SA) – suited for larger companies or those seeking external investment; Branch Office (Sucursal) – an extension of a foreign parent company; and Representative Office – for non-commercial activities only. We help you choose the optimal structure based on your business goals."
     },
     {
-      question: "Can I complete the process remotely?",
-      answer: "Yes, the entire incorporation process can be completed remotely using powers of attorney. You don't need to travel to Spain. We handle all in-person requirements on your behalf."
+      question: "Can I set up a company in Spain remotely without traveling?",
+      answer: "Yes, the entire incorporation process can be completed remotely using powers of attorney. You grant a representative in Spain the authority to act on your behalf for all notarial appointments, document signings, and administrative procedures. You don't need to travel to Spain at any point. We handle all in-person requirements."
+    },
+    {
+      question: "Do company directors need to be Spanish residents?",
+      answer: "No, directors of a Spanish company do not need to be Spanish residents or nationals. There are no nationality or residency requirements for directors or shareholders. However, all directors must obtain a NIE for tax purposes. The company must have a registered office address in Spain, which we can provide."
+    },
+    {
+      question: "What are the ongoing tax and compliance obligations?",
+      answer: "Spanish companies must file quarterly VAT returns (Modelo 303), annual corporate tax returns (Modelo 200), and maintain proper accounting records compliant with Spanish GAAP. Additional obligations include annual accounts filing with the Commercial Registry, monthly/quarterly payroll tax withholdings if you have employees, and maintaining corporate books. We provide comprehensive ongoing compliance support."
+    },
+    {
+      question: "How much does it cost to set up a company in Spain?",
+      answer: "Typical costs for an SL include: notary fees (€300-€800), Commercial Registry fees (€150-€400), share capital deposit (€3,000 minimum), NIE applications (€50-€150 each), and professional advisory fees (€2,000-€6,000). Total first-year investment typically ranges from €6,000 to €15,000 depending on complexity. Use our calculator for a personalized estimate."
+    },
+    {
+      question: "Can a foreign company open a branch office in Spain?",
+      answer: "Yes, foreign companies can establish a branch office (sucursal) in Spain. A branch is not a separate legal entity but an extension of the parent company, which remains fully liable for branch obligations. Branches must register with the Commercial Registry and comply with Spanish tax and accounting requirements. This structure is often chosen for initial market testing."
+    },
+    {
+      question: "What is the role of a notary in Spanish company formation?",
+      answer: "The notary plays a central role in Spanish company incorporation. They verify the identity of founders, ensure legal compliance of the bylaws, witness the signing of the public deed of incorporation, and certify the documents for registration. The notarized deed is mandatory for Commercial Registry inscription. Our team coordinates all notarial appointments and can represent you via power of attorney."
     }
   ];
 
