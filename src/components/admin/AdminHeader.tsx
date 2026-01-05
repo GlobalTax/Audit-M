@@ -53,7 +53,15 @@ export const AdminHeader = () => {
       
       <div className="flex items-center justify-between relative">
         <div className="flex-1">
-          {/* Breadcrumbs can be added here later */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono font-light text-slate-500 tracking-wide">
+              Intranet
+            </span>
+            <span className="text-xs text-slate-400">•</span>
+            <span className="text-xs font-mono font-light text-amber-600">
+              global.nrro.es
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-4">
