@@ -36,14 +36,9 @@ const InternationalLogo = ({
   }
 
   return (
-    <div className={cn("flex flex-col", textColor, className)}>
-      <span className="text-2xl md:text-3xl font-bold tracking-tight leading-none">
-        NAVARRO
-      </span>
-      <span className="text-xs md:text-sm font-light tracking-[0.2em] uppercase">
-        International
-      </span>
-    </div>
+    <span className={cn("text-2xl md:text-3xl font-normal tracking-tight", textColor, className)}>
+      global.nrro
+    </span>
   );
 };
 
