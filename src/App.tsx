@@ -67,6 +67,7 @@ import SpainSetupCalculator from "./pages/SpainSetupCalculator";
 import SpainSetupUSA from "./pages/SpainSetupUSA";
 import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
+import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -126,6 +127,7 @@ const App = () => {
                 <Route path="/spain-company-setup-usa" element={<Layout><SpainSetupUSA /></Layout>} />
                 <Route path="/spain-company-setup-uk" element={<Layout><SpainSetupUK /></Layout>} />
                 <Route path="/spain-company-setup-uae" element={<Layout><SpainSetupUAE /></Layout>} />
+                <Route path="/spain-business-bank-account" element={<Layout><SpainBusinessBankAccount /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
