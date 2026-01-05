@@ -1,6 +1,7 @@
 import { FileText, Edit, Calendar, Eye } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useBlogStats } from "@/hooks/useBlogSearch";
+import { SITE_SOURCE } from "@/config/site";
 
 export const BlogStatsCard = () => {
   const { data: stats, isLoading } = useBlogStats();
@@ -24,25 +25,25 @@ export const BlogStatsCard = () => {
 
   const statItems = [
     {
-      label: "Publicados",
+      label: SITE_SOURCE === 'int' ? "Published" : "Publicados",
       value: stats?.total_published || 0,
       icon: FileText,
       color: "text-green-600",
     },
     {
-      label: "Borradores",
+      label: SITE_SOURCE === 'int' ? "Drafts" : "Borradores",
       value: stats?.total_drafts || 0,
       icon: Edit,
       color: "text-gray-600",
     },
     {
-      label: "Programados",
+      label: SITE_SOURCE === 'int' ? "Scheduled" : "Programados",
       value: stats?.total_scheduled || 0,
       icon: Calendar,
       color: "text-yellow-600",
     },
     {
-      label: "Vistas Totales",
+      label: SITE_SOURCE === 'int' ? "Total Views" : "Vistas Totales",
       value: stats?.total_views || 0,
       icon: Eye,
       color: "text-blue-600",
