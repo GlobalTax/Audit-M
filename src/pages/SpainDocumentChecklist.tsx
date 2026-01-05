@@ -103,7 +103,7 @@ const SpainDocumentChecklist = () => {
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                       <FileCheck className="w-6 h-6 text-primary" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2 className="text-2xl font-normal text-white">
                       Download Your Free Checklist
                     </h2>
                     <p className="text-white/70 mt-2">
@@ -122,7 +122,7 @@ const SpainDocumentChecklist = () => {
       <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-normal text-foreground mb-4">
               What You'll Get
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -136,7 +136,7 @@ const SpainDocumentChecklist = () => {
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                   <ClipboardList className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-medium text-foreground mb-3">
                   Complete Document Inventory
                 </h3>
                 <p className="text-muted-foreground">
@@ -151,7 +151,7 @@ const SpainDocumentChecklist = () => {
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                   <Building2 className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-medium text-foreground mb-3">
                   Entity-Specific Guidance
                 </h3>
                 <p className="text-muted-foreground">
@@ -166,7 +166,7 @@ const SpainDocumentChecklist = () => {
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
                   <Globe2 className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-medium text-foreground mb-3">
                   International Requirements
                 </h3>
                 <p className="text-muted-foreground">
@@ -237,7 +237,7 @@ const SpainDocumentChecklist = () => {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <FileCheck className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground">
+                <h2 className="text-2xl font-normal text-foreground">
                   Download Your Free Checklist
                 </h2>
                 <p className="text-muted-foreground mt-2">
@@ -253,14 +253,14 @@ const SpainDocumentChecklist = () => {
       {/* FAQ Section */}
       <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-12">
+          <h2 className="text-3xl font-normal text-foreground text-center mb-12">
             Frequently Asked Questions
           </h2>
 
           <div className="space-y-6">
             {faqs.map((faq, index) => (
               <Card key={index} className="p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">
+                <h3 className="text-lg font-medium text-foreground mb-3">
                   {faq.question}
                 </h3>
                 <p className="text-muted-foreground">{faq.answer}</p>
@@ -273,7 +273,7 @@ const SpainDocumentChecklist = () => {
       {/* Alternative CTA */}
       <section className="py-20 md:py-28 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-normal mb-4">
             Need Professional Document Preparation?
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">

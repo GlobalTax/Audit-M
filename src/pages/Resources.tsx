@@ -148,7 +148,7 @@ const Resources = () => {
             <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
               Spain Expansion
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
               Spain Company Setup Resources
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

@@ -130,7 +130,7 @@ const SpainCompanySetupPlaybook = () => {
               <Card className="border-white/10 shadow-xl bg-white/5 backdrop-blur-sm">
                 <CardContent className="p-6 lg:p-8">
                   <div className="space-y-4 mb-6">
-                    <h2 className="text-2xl font-semibold text-white">
+                    <h2 className="text-2xl font-normal text-white">
                       Download Your Free Playbook
                     </h2>
                     <p className="text-white/70">
@@ -152,7 +152,7 @@ const SpainCompanySetupPlaybook = () => {
             <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
               What's Inside
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
               Everything You Need to Succeed
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -168,7 +168,7 @@ const SpainCompanySetupPlaybook = () => {
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-medium text-foreground mb-2">
                     {benefit.title}
                   </h3>
                   <p className="text-muted-foreground">
@@ -236,7 +236,7 @@ const SpainCompanySetupPlaybook = () => {
               <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
                 FAQ
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-3xl md:text-4xl font-normal text-foreground">
                 Common Questions
               </h2>
             </div>
@@ -245,7 +245,7 @@ const SpainCompanySetupPlaybook = () => {
               {faqItems.map((faq, index) => (
                 <Card key={index} className="border-border/50">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                    <h3 className="text-lg font-medium text-foreground mb-2">
                       {faq.question}
                     </h3>
                     <p className="text-muted-foreground">
@@ -263,7 +263,7 @@ const SpainCompanySetupPlaybook = () => {
       <section className="py-20 md:py-28 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-normal mb-4">
               Prefer to Speak with an Expert?
             </h2>
             <p className="text-lg opacity-90 mb-8">
@@ -304,7 +304,7 @@ const SpainCompanySetupPlaybook = () => {
             <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
               Related Resources
             </span>
-            <h2 className="text-3xl font-bold text-foreground">
+            <h2 className="text-3xl font-normal text-foreground">
               Continue Your Research
             </h2>
           </div>
@@ -312,7 +312,7 @@ const SpainCompanySetupPlaybook = () => {
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <Card className="border-border/50 hover:border-primary/30 transition-colors group">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                <h3 className="font-medium text-foreground group-hover:text-primary transition-colors mb-2">
                   Set Up in Spain Guide
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -329,7 +329,7 @@ const SpainCompanySetupPlaybook = () => {
             
             <Card className="border-border/50 hover:border-primary/30 transition-colors group">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                <h3 className="font-medium text-foreground group-hover:text-primary transition-colors mb-2">
                   Legal Structures in Spain
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -346,7 +346,7 @@ const SpainCompanySetupPlaybook = () => {
             
             <Card className="border-border/50 hover:border-primary/30 transition-colors group">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                <h3 className="font-medium text-foreground group-hover:text-primary transition-colors mb-2">
                   International Services
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">

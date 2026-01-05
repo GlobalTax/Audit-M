@@ -154,7 +154,7 @@ const SpainReadinessQuiz = () => {
                 {/* What You'll Learn */}
                 <Card className="mt-12 text-left border-white/10 bg-white/5 backdrop-blur-sm">
                   <CardContent className="p-8">
-                    <h2 className="text-xl font-semibold text-white mb-6 text-center">
+                    <h2 className="text-xl font-normal text-white mb-6 text-center">
                       What You'll Discover
                     </h2>
                     <div className="grid md:grid-cols-3 gap-6">
