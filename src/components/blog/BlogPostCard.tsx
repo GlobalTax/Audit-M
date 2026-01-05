@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import { format } from "date-fns";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface BlogPostCardProps {
   slug: string;
@@ -13,7 +14,7 @@ interface BlogPostCardProps {
   title: string;
   excerpt?: string;
   authorName?: string;
-  authorSpecialization?: string;
+  authorAvatarUrl?: string;
   publishedAt?: string;
   readTime?: number;
   className?: string;
@@ -27,13 +28,22 @@ export const BlogPostCard = memo(({
   title,
   excerpt,
   authorName,
-  authorSpecialization,
+  authorAvatarUrl,
   publishedAt,
   readTime,
   className = "",
 }: BlogPostCardProps) => {
   // Use English slug if available, fallback to Spanish, then generic slug
   const blogPath = `/blog/${slug_en || slug_es || slug}`;
+
+  const initials = authorName
+    ? authorName
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
+    : "";
   
   return (
     <Link to={blogPath}>
@@ -60,17 +70,25 @@ export const BlogPostCard = memo(({
 
           {/* Footer: Author, Date & Read Time */}
           <div className="flex items-end justify-between mt-auto pt-4 border-t border-border">
-            <div className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2">
               {authorName && (
-                <p className="text-sm font-medium text-foreground">
-                  {authorName}
-                </p>
+                <Avatar className="h-6 w-6">
+                  {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} alt={authorName} />}
+                  <AvatarFallback className="text-xs bg-muted">{initials}</AvatarFallback>
+                </Avatar>
               )}
-              {publishedAt && (
-                <p className="text-xs text-muted-foreground">
-                  {format(new Date(publishedAt), "d MMM yyyy")}
-                </p>
-              )}
+              <div className="flex flex-col gap-0.5">
+                {authorName && (
+                  <p className="text-sm font-medium text-foreground">
+                    {authorName}
+                  </p>
+                )}
+                {publishedAt && (
+                  <p className="text-xs text-muted-foreground">
+                    {format(new Date(publishedAt), "d MMM yyyy")}
+                  </p>
+                )}
+              </div>
             </div>
 
             {readTime && (

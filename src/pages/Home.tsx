@@ -405,7 +405,6 @@ const Home = () => {
                     title={post.title}
                     excerpt={post.excerpt}
                     authorName={post.author_name}
-                    authorSpecialization={post.author_specialization}
                     publishedAt={post.published_at}
                     readTime={post.read_time}
                   />

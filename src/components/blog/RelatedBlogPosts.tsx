@@ -71,7 +71,6 @@ export const RelatedBlogPosts = ({
                 title={post[`title_${language}`] || post.title_es}
                 excerpt={post[`excerpt_${language}`] || post.excerpt_es}
                 authorName={post.author_name}
-                authorSpecialization={post.author_specialization}
                 publishedAt={post.published_at}
                 readTime={post.read_time}
               />
