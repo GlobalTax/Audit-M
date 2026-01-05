@@ -15,6 +15,15 @@ export const useBlogSearch = (params: BlogSearchParams, language: string = 'es')
   return useQuery({
     queryKey: ["blog-search", params, language, SITE_SOURCE],
     queryFn: async () => {
+      // First, get team members for author avatars
+      const { data: teamMembers } = await supabase
+        .from("team_members")
+        .select("name, avatar_url");
+      
+      const avatarMap = new Map(
+        (teamMembers || []).map(tm => [tm.name, tm.avatar_url])
+      );
+
       // Build direct query with source_site filter
       let query = supabase
         .from("blog_posts")
@@ -47,8 +56,14 @@ export const useBlogSearch = (params: BlogSearchParams, language: string = 'es')
 
       if (error) throw error;
 
+      // Attach avatar URLs to posts
+      const postsWithAvatars = (posts || []).map(post => ({
+        ...post,
+        author_avatar_url: post.author_name ? avatarMap.get(post.author_name) : null
+      }));
+
       return {
-        posts: posts || [],
+        posts: postsWithAvatars,
         totalCount: count || 0,
       };
     },
