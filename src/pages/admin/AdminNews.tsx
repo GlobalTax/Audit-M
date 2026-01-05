@@ -60,7 +60,7 @@ export const AdminNews = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">News Articles</h1>
+        <h1 className="text-3xl font-normal">News Articles</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
