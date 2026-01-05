@@ -2,6 +2,11 @@ import { ExternalLink } from 'lucide-react';
 import { usePageContent } from '@/hooks/usePageContent';
 import { Skeleton } from '@/components/ui/skeleton';
 
+// Import network logos
+import integraLogo from '@/assets/networks/integra-international.webp';
+import xlncLogo from '@/assets/networks/xlnc.png';
+import sbcLogo from '@/assets/networks/sbc-global-alliance.jpeg';
+
 interface NetworkInfo {
   name: string;
   shortName: string;
@@ -16,21 +21,21 @@ const fallbackNetworks: NetworkInfo[] = [
     shortName: "II",
     description: "A thriving international association of leading independent accounting, law and business advisory firms offering a unified global platform.",
     website_url: "https://integra-international.net/",
-    logo_url: ""
+    logo_url: integraLogo
   },
   {
     name: "XLNC",
     shortName: "XLNC",
     description: "A global alliance of innovative and entrepreneurial professional services organizations delivering exceptional multi-jurisdictional service.",
     website_url: "https://xlnc.org/",
-    logo_url: ""
+    logo_url: xlncLogo
   },
   {
     name: "SBC Global Alliance",
     shortName: "SBC",
     description: "A global association of leading independent firms providing audit, tax, accounting, assurance and business advisory services worldwide.",
     website_url: "https://www.sbcglobalalliance.co.uk/",
-    logo_url: ""
+    logo_url: sbcLogo
   }
 ];
 
@@ -73,12 +78,12 @@ export function InternationalNetworksSection() {
               className="group bg-muted/50 border border-border rounded-xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-6">
-                <div className="w-14 h-14 rounded-full bg-foreground/5 border border-border flex items-center justify-center overflow-hidden">
+                <div className="w-20 h-20 rounded-lg bg-white border border-border flex items-center justify-center overflow-hidden p-2">
                   {network.logo_url ? (
                     <img 
                       src={network.logo_url} 
                       alt={network.name}
-                      className="w-10 h-10 object-contain"
+                      className="w-full h-full object-contain"
                     />
                   ) : (
                     <span className="font-mono text-sm font-medium text-foreground/70">
