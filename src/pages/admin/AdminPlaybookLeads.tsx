@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePlaybookLeads, useDeletePlaybookLead, usePlaybookStats, PlaybookLeadFilters } from "@/hooks/usePlaybookLeads";
+import { usePlaybookLeads, useDeletePlaybookLead, PlaybookLeadFilters } from "@/hooks/usePlaybookLeads";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,21 +21,17 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { 
-  FileText, 
   Download, 
   Trash2, 
   Search,
-  Calendar,
-  Globe,
-  Clock,
   Users
 } from "lucide-react";
 import { format } from "date-fns";
+import { LeadMagnetComparisonTable } from "@/components/admin/lead-magnets/LeadMagnetComparisonTable";
 
 const AdminPlaybookLeads = () => {
   const [filters, setFilters] = useState<PlaybookLeadFilters>({});
   const { data: leads, isLoading } = usePlaybookLeads(filters);
-  const { data: stats } = usePlaybookStats();
   const deleteMutation = useDeletePlaybookLead();
   const { toast } = useToast();
 
@@ -123,68 +119,8 @@ const AdminPlaybookLeads = () => {
         </Button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <FileText className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats?.total || 0}</p>
-                <p className="text-sm text-muted-foreground">Total Downloads</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-green-500/10">
-                <Calendar className="w-5 h-5 text-green-500" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats?.thisMonth || 0}</p>
-                <p className="text-sm text-muted-foreground">This Month</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-blue-500/10">
-                <Globe className="w-5 h-5 text-blue-500" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {Object.keys(stats?.byCountry || {}).length}
-                </p>
-                <p className="text-sm text-muted-foreground">Countries</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-orange-500/10">
-                <Clock className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {stats?.byTimeline?.immediate || 0}
-                </p>
-                <p className="text-sm text-muted-foreground">Immediate Interest</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Lead Magnet Comparison Table */}
+      <LeadMagnetComparisonTable />
 
       {/* Filters */}
       <Card>
