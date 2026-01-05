@@ -8,9 +8,16 @@ interface RelatedBlogPostsProps {
   category: string;
   tags: string[];
   language?: string;
+  onPostClick?: (targetArticleId: string, targetArticleTitle: string, position: number) => void;
 }
 
-export const RelatedBlogPosts = ({ currentPostId, category, tags, language = 'es' }: RelatedBlogPostsProps) => {
+export const RelatedBlogPosts = ({ 
+  currentPostId, 
+  category, 
+  tags, 
+  language = 'es',
+  onPostClick 
+}: RelatedBlogPostsProps) => {
   const { t } = useLanguage();
   
   const { data: relatedPosts, isLoading } = useRelatedBlogPosts({
@@ -19,6 +26,16 @@ export const RelatedBlogPosts = ({ currentPostId, category, tags, language = 'es
     tags: tags || [],
     language,
   });
+
+  const handlePostClick = (post: any, index: number) => {
+    if (onPostClick) {
+      onPostClick(
+        post.id,
+        post[`title_${language}`] || post.title_es,
+        index + 1
+      );
+    }
+  };
 
   if (isLoading) {
     return (
@@ -44,20 +61,21 @@ export const RelatedBlogPosts = ({ currentPostId, category, tags, language = 'es
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl md:text-3xl font-normal mb-8">{t('blog.relatedPosts.title')}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {relatedPosts.map((post: any) => (
-            <BlogPostCard
-              key={post.id}
-              slug={post[`slug_${language}`] || post.slug_es}
-              slug_es={post.slug_es}
-              slug_en={post.slug_en}
-              category={post.category}
-              title={post[`title_${language}`] || post.title_es}
-              excerpt={post[`excerpt_${language}`] || post.excerpt_es}
-              authorName={post.author_name}
-              authorSpecialization={post.author_specialization}
-              publishedAt={post.published_at}
-              readTime={post.read_time}
-            />
+          {relatedPosts.map((post: any, index: number) => (
+            <div key={post.id} onClick={() => handlePostClick(post, index)}>
+              <BlogPostCard
+                slug={post[`slug_${language}`] || post.slug_es}
+                slug_es={post.slug_es}
+                slug_en={post.slug_en}
+                category={post.category}
+                title={post[`title_${language}`] || post.title_es}
+                excerpt={post[`excerpt_${language}`] || post.excerpt_es}
+                authorName={post.author_name}
+                authorSpecialization={post.author_specialization}
+                publishedAt={post.published_at}
+                readTime={post.read_time}
+              />
+            </div>
           ))}
         </div>
       </div>

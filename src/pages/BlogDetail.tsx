@@ -1,8 +1,8 @@
 import { useParams, Link, useSearchParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowLeft, Clock, Loader2 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { useScrollDepth } from "@/hooks/useScrollDepth";
+import { useBlogAnalytics } from "@/hooks/useBlogAnalytics";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Overline } from "@/components/ui/typography";
@@ -30,11 +30,11 @@ const BlogDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { trackPageView } = useAnalytics();
-  useScrollDepth();
   const { language, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const previewToken = searchParams.get("preview");
   const queryClient = useQueryClient();
+  const analyticsCleanupRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!slug || slug === 'undefined') {
@@ -96,9 +96,30 @@ const BlogDetail = () => {
   const isPreviewMode = !!previewToken && !!previewData;
   const breadcrumbItems = post ? createDynamicBreadcrumb(mainBreadcrumbs.blog, post.title) : mainBreadcrumbs.blog;
 
+  // Blog analytics hook - must be called unconditionally
+  const blogAnalytics = useBlogAnalytics({
+    articleId: post?.id || '',
+    articleTitle: post?.title || '',
+    articleSlug: post?.slug || '',
+    category: post?.category || '',
+    author: post?.author_name || '',
+    readTime: post?.read_time || 5,
+  });
+
+  // Start tracking when post is loaded (not in preview mode)
   useEffect(() => {
-    if (post && !previewToken) { trackPageView("blog_detalle"); }
-  }, [post, slug, previewToken]);
+    if (post && !previewToken && post.id) {
+      trackPageView("blog_detalle");
+      analyticsCleanupRef.current = blogAnalytics.startTracking();
+    }
+    
+    return () => {
+      if (analyticsCleanupRef.current) {
+        analyticsCleanupRef.current();
+        analyticsCleanupRef.current = null;
+      }
+    };
+  }, [post?.id, previewToken]);
 
   if (isLoading) {
     return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>;
@@ -160,8 +181,14 @@ const BlogDetail = () => {
             {post.tags && post.tags.length > 0 && <div className="mt-12 pt-8 border-t"><h3 className="text-sm font-semibold mb-4">{t('blog.tags')}</h3><div className="flex flex-wrap gap-2">{post.tags.map((tag: string) => <span key={tag} className="px-3 py-1 bg-muted rounded-full text-sm">{tag}</span>)}</div></div>}
           </div>
         </article>
-        <RelatedBlogPosts currentPostId={post.id} category={post.category || ''} tags={post.tags || []} language={language} />
-        <BlogCTASection />
+        <RelatedBlogPosts 
+          currentPostId={post.id} 
+          category={post.category || ''} 
+          tags={post.tags || []} 
+          language={language}
+          onPostClick={blogAnalytics.trackRelatedClick}
+        />
+        <BlogCTASection onCTAClick={blogAnalytics.trackCTAClick} />
       </div>
     </>
   );
