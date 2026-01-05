@@ -55,7 +55,7 @@ export const WhyChooseUs = () => {
                       </div>
                     </div>
                     <div className="text-3xl font-bold text-primary mb-2">{credential.stat}</div>
-                    <h3 className="font-semibold mb-2">{credential.title}</h3>
+                    <h3 className="font-medium mb-2">{credential.title}</h3>
                     <p className="text-sm text-muted-foreground">{credential.description}</p>
                   </CardContent>
                 </Card>
