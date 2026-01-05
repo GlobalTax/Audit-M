@@ -4,10 +4,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { Globe, AlertTriangle, Clock } from 'lucide-react';
+import { AlertTriangle, Clock } from 'lucide-react';
 import { z } from 'zod';
 
 const loginSchema = z.object({
@@ -114,94 +113,91 @@ export const AdminLogin = () => {
     : 0;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl" />
-      </div>
-      
-      <Card className="w-full max-w-md relative border-t-4 border-t-amber-500 shadow-2xl">
-        <CardHeader className="text-center pb-2">
-          <div className="flex justify-center mb-4">
-            <div className="p-4 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-2xl border border-amber-500/20">
-              <Globe className="h-10 w-10 text-amber-500" />
-            </div>
-          </div>
-          <CardTitle className="text-2xl font-bold tracking-tight">
-            Navarro International
-          </CardTitle>
-          <CardDescription className="text-sm tracking-wide">
-            Global Administration Portal
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {isLockedOut && (
-            <Alert variant="destructive" className="mb-4">
-              <Clock className="h-4 w-4" />
-              <AlertDescription>
-                Too many failed attempts. Please wait {lockoutMinutes} minutes before trying again.
-              </AlertDescription>
-            </Alert>
-          )}
-          
-          {remainingAttempts !== null && remainingAttempts < 3 && remainingAttempts > 0 && !isLockedOut && (
-            <Alert variant="default" className="mb-4 border-amber-500/50 bg-amber-50">
-              <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="text-amber-800">
-                You have {remainingAttempts} attempts remaining before your account is temporarily locked.
-              </AlertDescription>
-            </Alert>
-          )}
+    <div className="bg-black min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        {/* Branding */}
+        <div className="text-center mb-12">
+          <h1 className="font-display text-3xl font-normal lowercase text-white mb-2">
+            global.nrro
+          </h1>
+          <p className="text-sm text-white/50">
+            Administration Portal
+          </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mt-6">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@company.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setErrors((prev) => ({ ...prev, email: undefined }));
-                }}
-                required
-                disabled={isLoading || isLockedOut}
-                className="focus-visible:ring-amber-500/50"
-              />
-              {errors.email && (
-                <p className="text-sm text-destructive">{errors.email}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setErrors((prev) => ({ ...prev, password: undefined }));
-                }}
-                required
-                disabled={isLoading || isLockedOut}
-                className="focus-visible:ring-amber-500/50"
-              />
-              {errors.password && (
-                <p className="text-sm text-destructive">{errors.password}</p>
-              )}
-            </div>
-            <Button 
-              type="submit" 
-              className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-medium" 
+        {/* Alerts */}
+        {isLockedOut && (
+          <Alert className="mb-6 bg-white/5 border-white/10 text-white">
+            <Clock className="h-4 w-4 text-white/70" />
+            <AlertDescription className="text-white/70">
+              Too many failed attempts. Please wait {lockoutMinutes} minutes before trying again.
+            </AlertDescription>
+          </Alert>
+        )}
+        
+        {remainingAttempts !== null && remainingAttempts < 3 && remainingAttempts > 0 && !isLockedOut && (
+          <Alert className="mb-6 bg-amber-500/10 border-amber-500/20">
+            <AlertTriangle className="h-4 w-4 text-amber-500" />
+            <AlertDescription className="text-amber-400">
+              You have {remainingAttempts} attempts remaining before your account is temporarily locked.
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-white/70 font-medium">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="admin@company.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors((prev) => ({ ...prev, email: undefined }));
+              }}
+              required
               disabled={isLoading || isLockedOut}
-            >
-              {isLoading ? 'Signing in...' : 'Sign In'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/30"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-400">{errors.email}</p>
+            )}
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-white/70 font-medium">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, password: undefined }));
+              }}
+              required
+              disabled={isLoading || isLockedOut}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/30"
+            />
+            {errors.password && (
+              <p className="text-sm text-red-400">{errors.password}</p>
+            )}
+          </div>
+          
+          <Button 
+            type="submit" 
+            className="w-full bg-white text-black hover:bg-white/90 font-normal" 
+            disabled={isLoading || isLockedOut}
+          >
+            {isLoading ? 'Signing in...' : 'Sign In'}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
