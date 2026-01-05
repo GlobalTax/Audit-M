@@ -102,7 +102,7 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
               <CheckCircle className="w-8 h-8 text-primary" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
+              <h3 className="text-xl font-medium text-foreground mb-2">
                 Report Sent Successfully!
               </h3>
               <p className="text-muted-foreground">

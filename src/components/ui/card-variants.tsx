@@ -140,7 +140,7 @@ export const TestimonialCard = React.forwardRef<HTMLDivElement, TestimonialCardP
             />
           )}
           <div>
-            <p className="font-semibold text-foreground">{author}</p>
+            <p className="font-medium text-foreground">{author}</p>
             {role && <p className="text-sm text-muted-foreground">{role}</p>}
             {company && <p className="text-xs text-muted-foreground">{company}</p>}
           </div>
