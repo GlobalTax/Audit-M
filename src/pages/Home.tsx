@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
 import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
+import { MultiJurisdictionalServicesSection } from "@/components/home/MultiJurisdictionalServicesSection";
 import { ArrowRight, Check, Globe } from "lucide-react";
 import {
   Carousel,
@@ -265,7 +266,10 @@ const Home = () => {
           </div>
         </section>
 
-        {/* International Networks Section - Moved up for prominence */}
+        {/* Multi-Jurisdictional Services Section - Lexidy style */}
+        <MultiJurisdictionalServicesSection />
+
+        {/* International Networks Section */}
         <InternationalNetworksSection />
 
         {/* Datos/Stats Section */}
