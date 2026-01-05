@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Clock, Euro, AlertTriangle, CheckCircle } from "lucide-react";
+import { Clock, Euro, AlertTriangle, CheckCircle, Info } from "lucide-react";
 import type { CalculatorResults as Results, CalculatorInputs } from "@/lib/calculatorLogic";
 import { getCompanyTypeLabel, formatCurrency } from "@/lib/calculatorLogic";
 
@@ -42,6 +42,12 @@ export function CalculatorResults({ results, inputs }: CalculatorResultsProps) {
             <Badge variant="secondary" className="text-xs">
               {getCompanyTypeLabel(inputs.companyType)}
             </Badge>
+            {results.timeline.nieRequired && (
+              <div className="mt-3 flex items-start gap-2 text-sm text-muted-foreground bg-muted/50 rounded-md p-2">
+                <Info className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>NIE processing for non-EU founders: additional 2–4 weeks (can be done in advance)</span>
+              </div>
+            )}
           </CardContent>
         </Card>
 

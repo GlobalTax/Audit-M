@@ -25,6 +25,7 @@ export interface CalculatorResults {
     minWeeks: number;
     maxWeeks: number;
     breakdown: TimelineBreakdown[];
+    nieRequired?: boolean;
   };
   costs: {
     minTotal: number;
@@ -35,55 +36,55 @@ export interface CalculatorResults {
 
 export function calculateTimeline(inputs: CalculatorInputs): CalculatorResults['timeline'] {
   const breakdown: TimelineBreakdown[] = [];
+  let nieRequired = inputs.founderResidency === 'non-eu';
 
-  // Base timeline varies by company type
+  // Realistic timelines based on NRRO's actual service
+  // Steps run in parallel, not sequentially
   switch (inputs.companyType) {
     case 'sl':
-      breakdown.push({ step: 'Company name reservation', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Bank account & capital deposit', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Notary & deed execution', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Commercial Registry filing', minWeeks: 2, maxWeeks: 4 });
+      breakdown.push({ step: 'Preparation (name reservation + bank account)', minWeeks: 1, maxWeeks: 1 });
+      breakdown.push({ step: 'Formalization (notary + capital deposit)', minWeeks: 1, maxWeeks: 2 });
+      breakdown.push({ step: 'Commercial Registry registration', minWeeks: 1, maxWeeks: 2 });
       break;
     case 'sa':
-      breakdown.push({ step: 'Company name reservation', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Bank account & capital deposit', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Notary & deed execution', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Share capital verification', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Commercial Registry filing', minWeeks: 3, maxWeeks: 5 });
+      breakdown.push({ step: 'Preparation (name reservation + bank account)', minWeeks: 1, maxWeeks: 1 });
+      breakdown.push({ step: 'Formalization (notary + capital verification)', minWeeks: 1, maxWeeks: 2 });
+      breakdown.push({ step: 'Commercial Registry registration', minWeeks: 2, maxWeeks: 3 });
       break;
     case 'branch':
-      breakdown.push({ step: 'Parent company documentation', minWeeks: 2, maxWeeks: 4 });
-      breakdown.push({ step: 'Apostille & translation', minWeeks: 1, maxWeeks: 3 });
-      breakdown.push({ step: 'Notary & deed execution', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Commercial Registry filing', minWeeks: 2, maxWeeks: 4 });
+      breakdown.push({ step: 'Documentation preparation & legalization', minWeeks: 1, maxWeeks: 2 });
+      breakdown.push({ step: 'Formalization (notary)', minWeeks: 1, maxWeeks: 1 });
+      breakdown.push({ step: 'Commercial Registry registration', minWeeks: 2, maxWeeks: 3 });
       break;
     case 'subsidiary':
-      breakdown.push({ step: 'Parent company resolutions', minWeeks: 1, maxWeeks: 3 });
-      breakdown.push({ step: 'Company name reservation', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Bank account & capital deposit', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Notary & deed execution', minWeeks: 1, maxWeeks: 2 });
-      breakdown.push({ step: 'Commercial Registry filing', minWeeks: 2, maxWeeks: 4 });
+      breakdown.push({ step: 'Preparation (resolutions + name + bank)', minWeeks: 1, maxWeeks: 1 });
+      breakdown.push({ step: 'Formalization (notary + capital deposit)', minWeeks: 1, maxWeeks: 2 });
+      breakdown.push({ step: 'Commercial Registry registration', minWeeks: 1, maxWeeks: 2 });
       break;
   }
 
-  // Non-EU founders need NIE
-  if (inputs.founderResidency === 'non-eu') {
-    breakdown.unshift({ step: 'NIE application & processing', minWeeks: 2, maxWeeks: 6 });
+  // Final step: tax registrations (runs in parallel with registry)
+  breakdown.push({ step: 'Tax registrations (NIF, VAT, IAE)', minWeeks: 0, maxWeeks: 1 });
+
+  // Calculate totals (steps are parallel, so we don't simply sum)
+  // Base is 3-5 weeks for SL/Subsidiary, 4-6 for SA/Branch
+  let minWeeks: number;
+  let maxWeeks: number;
+
+  switch (inputs.companyType) {
+    case 'sl':
+    case 'subsidiary':
+      minWeeks = 3;
+      maxWeeks = 5;
+      break;
+    case 'sa':
+    case 'branch':
+      minWeeks = 4;
+      maxWeeks = 6;
+      break;
   }
 
-  // Tax registrations
-  breakdown.push({ step: 'Tax Agency registrations (NIF, VAT, IAE)', minWeeks: 1, maxWeeks: 2 });
-
-  // Social Security if employees planned
-  if (inputs.plannedEmployees !== '0') {
-    breakdown.push({ step: 'Social Security employer registration', minWeeks: 1, maxWeeks: 2 });
-  }
-
-  // Calculate totals
-  const minWeeks = breakdown.reduce((sum, item) => sum + item.minWeeks, 0);
-  const maxWeeks = breakdown.reduce((sum, item) => sum + item.maxWeeks, 0);
-
-  return { minWeeks, maxWeeks, breakdown };
+  return { minWeeks, maxWeeks, breakdown, nieRequired };
 }
 
 export function calculateCosts(inputs: CalculatorInputs): CalculatorResults['costs'] {
