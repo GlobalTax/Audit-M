@@ -94,7 +94,7 @@ export function MultiJurisdictionalServicesSection() {
             Multi-Jurisdictional Advisory
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal mb-4">
-            Choose Your Business Scenario
+            Choose Your Path
           </h2>
           <p className="text-foreground/60 max-w-2xl mx-auto">
             Whether you're entering Spain, expanding from Spain, or need global coordination, 
