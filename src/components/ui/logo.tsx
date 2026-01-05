@@ -36,7 +36,7 @@ const InternationalLogo = ({
   }
 
   return (
-    <span className={cn("text-2xl md:text-3xl font-normal tracking-tight", textColor, className)}>
+    <span className={cn("font-display text-2xl md:text-3xl font-normal tracking-tight", textColor, className)}>
       global.nrro
     </span>
   );
