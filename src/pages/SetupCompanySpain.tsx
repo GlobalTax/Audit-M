@@ -3,6 +3,7 @@ import { HeroWithFormSection } from '@/components/company-setup/HeroWithFormSect
 import { QuickFactsBar } from '@/components/company-setup/QuickFactsBar';
 import { CompanyTypesSection } from '@/components/company-setup/CompanyTypesSection';
 import { CostComparisonSection } from '@/components/company-setup/CostComparisonSection';
+import { TimelineCostsSection } from '@/components/company-setup/TimelineCostsSection';
 import { GuaranteesSection } from '@/components/company-setup/GuaranteesSection';
 import { StickyMobileCTA } from '@/components/company-setup/StickyMobileCTA';
 import { TrustBarSection } from '@/components/landing-sections/TrustBarSection';
@@ -254,6 +255,9 @@ export const SetupCompanySpain = () => {
       
       {/* Cost Comparison: Spain vs Other Countries */}
       <CostComparisonSection />
+      
+      {/* Timeline & Costs Section */}
+      <TimelineCostsSection />
       
       {/* Client Logos */}
       <ClientLogosCarouselSection />
