@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
+import { format } from "date-fns";
 
 interface BlogPostCardProps {
   slug: string;
@@ -57,7 +58,7 @@ export const BlogPostCard = memo(({
             </p>
           )}
 
-          {/* Footer: Author & Read Time */}
+          {/* Footer: Author, Date & Read Time */}
           <div className="flex items-end justify-between mt-auto pt-4 border-t border-border">
             <div className="flex flex-col gap-0.5">
               {authorName && (
@@ -65,9 +66,9 @@ export const BlogPostCard = memo(({
                   {authorName}
                 </p>
               )}
-              {authorSpecialization && (
+              {publishedAt && (
                 <p className="text-xs text-muted-foreground">
-                  {authorSpecialization}
+                  {format(new Date(publishedAt), "d MMM yyyy")}
                 </p>
               )}
             </div>
