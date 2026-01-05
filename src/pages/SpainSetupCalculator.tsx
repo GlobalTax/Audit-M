@@ -124,7 +124,7 @@ export default function SpainSetupCalculator() {
             {!results ? (
               <>
                 <div className="text-center mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground mb-4">
                     Tell Us About Your Plans
                   </h2>
                   <p className="text-muted-foreground max-w-xl mx-auto">
@@ -140,7 +140,7 @@ export default function SpainSetupCalculator() {
             ) : (
               <>
                 <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Your Estimate
                   </h2>
                   <Button variant="outline" onClick={handleReset}>
@@ -222,7 +222,7 @@ export default function SpainSetupCalculator() {
             <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
               Related Resources
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl md:text-3xl font-normal text-foreground mb-4">
               Continue Your Spain Expansion Planning
             </h2>
           </div>
