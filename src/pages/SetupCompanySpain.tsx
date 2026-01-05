@@ -6,6 +6,7 @@ import { CostComparisonSection } from '@/components/company-setup/CostComparison
 import { TimelineCostsSection } from '@/components/company-setup/TimelineCostsSection';
 import { GuaranteesSection } from '@/components/company-setup/GuaranteesSection';
 import { StickyMobileCTA } from '@/components/company-setup/StickyMobileCTA';
+import { RelatedResourcesSection } from '@/components/company-setup/RelatedResourcesSection';
 import { TrustBarSection } from '@/components/landing-sections/TrustBarSection';
 import { ProblemStatementSection } from '@/components/landing-sections/ProblemStatementSection';
 import { ServicesGridSection } from '@/components/landing-sections/ServicesGridSection';
@@ -305,6 +306,9 @@ export const SetupCompanySpain = () => {
         subtitle="Everything you need to know about setting up a company in Spain"
         faqs={faqs}
       />
+      
+      {/* Related Resources */}
+      <RelatedResourcesSection />
       
       {/* Final CTA */}
       <CTAFinalSection {...ctaFinal} />
