@@ -134,10 +134,10 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Full Name *</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <Input
                 id="fullName"
-                placeholder="John Smith"
+                placeholder="e.g., John Smith"
                 {...register("fullName")}
                 className={errors.fullName ? "border-destructive" : ""}
               />
@@ -147,11 +147,11 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Business Email *</Label>
+              <Label htmlFor="email">Business Email</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="john@company.com"
+                placeholder="name@yourcompany.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
               />
@@ -161,10 +161,10 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name *</Label>
+              <Label htmlFor="companyName">Company Name</Label>
               <Input
                 id="companyName"
-                placeholder="Acme Corp"
+                placeholder="Your company's legal name"
                 {...register("companyName")}
                 className={errors.companyName ? "border-destructive" : ""}
               />
@@ -174,10 +174,10 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="country">Country *</Label>
+              <Label htmlFor="country">Country / Region</Label>
               <Input
                 id="country"
-                placeholder="United Kingdom"
+                placeholder="Where is your business based?"
                 {...register("country")}
                 className={errors.country ? "border-destructive" : ""}
               />
@@ -196,14 +196,15 @@ export function CalculatorLeadForm({ inputs, results }: CalculatorLeadFormProps)
             ) : (
               <>
                 <FileDown className="w-4 h-4 mr-2" />
-                Get My Free Report
+                Send My Custom Report
               </>
             )}
           </Button>
 
           <p className="text-xs text-muted-foreground text-center">
-            By submitting, you agree to receive your report and occasional updates. 
-            We respect your privacy and never share your data.
+            We'll send your custom cost & timeline report to this email. 
+            You may receive occasional tips about setting up in Spain.{" "}
+            <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>
           </p>
         </form>
       </CardContent>

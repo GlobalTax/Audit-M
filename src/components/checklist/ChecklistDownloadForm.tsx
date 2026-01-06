@@ -135,10 +135,10 @@ export const ChecklistDownloadForm = () => {
           <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
         <h3 className="text-xl font-medium text-foreground mb-2">
-          Check Your Email!
+          Your Checklist Is on the Way!
         </h3>
         <p className="text-muted-foreground mb-4">
-          We've sent the checklist download link to your email address.
+          We've sent the document checklist to your email address.
         </p>
         <p className="text-sm text-muted-foreground">
           Didn't receive it? Check your spam folder or{" "}
@@ -154,10 +154,10 @@ export const ChecklistDownloadForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="fullName">Full Name *</Label>
+        <Label htmlFor="fullName">Full Name</Label>
         <Input
           id="fullName"
-          placeholder="John Smith"
+          placeholder="e.g., John Smith"
           {...register("fullName")}
           className={errors.fullName ? "border-destructive" : ""}
         />
@@ -167,11 +167,11 @@ export const ChecklistDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Business Email *</Label>
+        <Label htmlFor="email">Business Email</Label>
         <Input
           id="email"
           type="email"
-          placeholder="john@company.com"
+          placeholder="name@yourcompany.com"
           {...register("email")}
           className={errors.email ? "border-destructive" : ""}
         />
@@ -181,10 +181,10 @@ export const ChecklistDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="companyName">Company Name *</Label>
+        <Label htmlFor="companyName">Company Name</Label>
         <Input
           id="companyName"
-          placeholder="Company Ltd."
+          placeholder="Your company's legal name"
           {...register("companyName")}
           className={errors.companyName ? "border-destructive" : ""}
         />
@@ -194,10 +194,10 @@ export const ChecklistDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="country">Country *</Label>
+        <Label htmlFor="country">Country / Region</Label>
         <Select onValueChange={(value) => setValue("country", value)}>
           <SelectTrigger className={errors.country ? "border-destructive" : ""}>
-            <SelectValue placeholder="Select your country" />
+            <SelectValue placeholder="Where is your business based?" />
           </SelectTrigger>
           <SelectContent>
             {countries.map((country) => (
@@ -213,10 +213,10 @@ export const ChecklistDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="entityType">Entity Type of Interest</Label>
+        <Label htmlFor="entityType">Preferred Company Structure</Label>
         <Select onValueChange={(value) => setValue("entityType", value)}>
           <SelectTrigger>
-            <SelectValue placeholder="Select entity type" />
+            <SelectValue placeholder="SL, SA, Branch, or Subsidiary" />
           </SelectTrigger>
           <SelectContent>
             {entityTypes.map((entity) => (
@@ -242,18 +242,17 @@ export const ChecklistDownloadForm = () => {
         ) : (
           <>
             <Download className="w-4 h-4 mr-2" />
-            Download Free Checklist
+            Get My Checklist
           </>
         )}
       </Button>
 
       <p className="text-xs text-muted-foreground text-center">
-        By downloading, you agree to receive occasional updates from NRRO. 
-        Unsubscribe anytime. We respect your{" "}
+        By downloading, you agree to receive helpful updates about Spain company formation. 
+        Unsubscribe anytime.{" "}
         <a href="/privacy" className="underline hover:text-foreground">
-          privacy
+          Privacy Policy
         </a>
-        .
       </p>
     </form>
   );

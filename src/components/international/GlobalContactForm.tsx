@@ -171,10 +171,10 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                 name="fullName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name *</FormLabel>
+                    <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Your full name"
+                        placeholder="e.g., John Smith"
                         {...field}
                         disabled={isSubmitting}
                       />
@@ -188,10 +188,10 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company *</FormLabel>
+                    <FormLabel>Company</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Your company name"
+                        placeholder="Your company's legal name"
                         {...field}
                         disabled={isSubmitting}
                       />
@@ -209,11 +209,11 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Business Email *</FormLabel>
+                    <FormLabel>Business Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="your.email@company.com"
+                        placeholder="name@yourcompany.com"
                         {...field}
                         disabled={isSubmitting}
                       />
@@ -227,10 +227,10 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                 name="countryRegion"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Country/Region of Business *</FormLabel>
+                    <FormLabel>Country / Region of Business</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="e.g., United Kingdom, Germany"
+                        placeholder="Where is your business based?"
                         {...field}
                         disabled={isSubmitting}
                       />
@@ -247,7 +247,7 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
               name="serviceInterest"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Service of Interest *</FormLabel>
+                  <FormLabel>Service of Interest</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     value={field.value}
@@ -255,7 +255,7 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a service" />
+                        <SelectValue placeholder="Select the service you need" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -280,7 +280,7 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
                   <FormLabel>Message (Optional)</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us about your business needs, timeline, or any specific questions..."
+                      placeholder="Share your goals, questions, or timeline..."
                       className="min-h-[120px] resize-none"
                       {...field}
                       disabled={isSubmitting}
@@ -336,7 +336,7 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
               ) : (
                 <>
                   <Send className="mr-2 h-4 w-4" />
-                  Request Your Consultation
+                  Book a Free Consultation
                 </>
               )}
             </Button>

@@ -156,10 +156,10 @@ export const PlaybookDownloadForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="fullName">Full Name *</Label>
+        <Label htmlFor="fullName">Full Name</Label>
         <Input
           id="fullName"
-          placeholder="John Smith"
+          placeholder="e.g., John Smith"
           {...register("fullName")}
           className={errors.fullName ? "border-destructive" : ""}
         />
@@ -169,11 +169,11 @@ export const PlaybookDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Business Email *</Label>
+        <Label htmlFor="email">Business Email</Label>
         <Input
           id="email"
           type="email"
-          placeholder="john@company.com"
+          placeholder="name@yourcompany.com"
           {...register("email")}
           className={errors.email ? "border-destructive" : ""}
         />
@@ -183,10 +183,10 @@ export const PlaybookDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="companyName">Company Name *</Label>
+        <Label htmlFor="companyName">Company Name</Label>
         <Input
           id="companyName"
-          placeholder="Company Ltd."
+          placeholder="Your company's legal name"
           {...register("companyName")}
           className={errors.companyName ? "border-destructive" : ""}
         />
@@ -196,19 +196,19 @@ export const PlaybookDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="jobTitle">Job Title</Label>
+        <Label htmlFor="jobTitle">Job Title (Optional)</Label>
         <Input
           id="jobTitle"
-          placeholder="CFO, Director, etc."
+          placeholder="e.g., CFO, Director"
           {...register("jobTitle")}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="country">Country *</Label>
+        <Label htmlFor="country">Country / Region</Label>
         <Select onValueChange={(value) => setValue("country", value)}>
           <SelectTrigger className={errors.country ? "border-destructive" : ""}>
-            <SelectValue placeholder="Select your country" />
+            <SelectValue placeholder="Where is your business based?" />
           </SelectTrigger>
           <SelectContent>
             {countries.map((country) => (
@@ -224,10 +224,10 @@ export const PlaybookDownloadForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="timeline">When are you planning to set up?</Label>
+        <Label htmlFor="timeline">When Do You Plan to Start?</Label>
         <Select onValueChange={(value) => setValue("timeline", value)}>
           <SelectTrigger>
-            <SelectValue placeholder="Select timeline" />
+            <SelectValue placeholder="When would you like to launch?" />
           </SelectTrigger>
           <SelectContent>
             {timelines.map((timeline) => (
@@ -253,18 +253,17 @@ export const PlaybookDownloadForm = () => {
         ) : (
           <>
             <Download className="w-4 h-4 mr-2" />
-            Download Free Playbook
+            Get Your Free Playbook
           </>
         )}
       </Button>
 
       <p className="text-xs text-muted-foreground text-center">
-        By downloading, you agree to receive occasional updates from NRRO. 
-        Unsubscribe anytime. We respect your{" "}
+        By requesting your free playbook, you agree to receive helpful updates about Spain company formation. 
+        Unsubscribe anytime.{" "}
         <a href="/privacy" className="underline hover:text-foreground">
-          privacy
+          Privacy Policy
         </a>
-        .
       </p>
     </form>
   );
