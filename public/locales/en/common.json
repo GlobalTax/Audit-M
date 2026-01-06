@@ -289,52 +289,52 @@
       }
     },
     "form": {
-      "fullName": "Full Name *",
-      "fullNamePlaceholder": "John Smith",
-      "email": "Email *",
-      "emailPlaceholder": "john@example.com",
-      "phone": "Phone",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "e.g., John Smith",
+      "email": "Business Email",
+      "emailPlaceholder": "name@yourcompany.com",
+      "phone": "Phone (Optional)",
       "phonePlaceholder": "+34 600 000 000",
       "companyName": "Company Name",
-      "companyNamePlaceholder": "Acme Inc",
-      "country": "Country of Origin *",
-      "countryPlaceholder": "Select your country",
-      "timeline": "Timeline",
-      "timelinePlaceholder": "When do you need this?",
+      "companyNamePlaceholder": "Your company's legal name",
+      "country": "Country / Region",
+      "countryPlaceholder": "Where is your business based?",
+      "timeline": "When Do You Plan to Start?",
+      "timelinePlaceholder": "When would you like to launch?",
       "timelineOptions": {
-        "immediate": "Immediate (ASAP)",
-        "1month": "Within 1 month",
-        "3months": "Within 3 months",
-        "6months": "Within 6 months",
-        "exploring": "Just exploring"
+        "immediate": "Immediately (within 1 month)",
+        "1month": "1-3 months",
+        "3months": "3-6 months",
+        "6months": "6-12 months",
+        "exploring": "Just exploring options"
       },
-      "companyStage": "Company Stage",
-      "companyStagePlaceholder": "Your current situation",
+      "companyStage": "Current Status",
+      "companyStagePlaceholder": "What's your current situation?",
       "companyStageOptions": {
         "idea": "Just an idea",
         "registeredAbroad": "Registered abroad",
-        "readyToRegister": "Ready to register",
+        "readyToRegister": "Ready to register in Spain",
         "relocating": "Relocating existing company"
       },
-      "message": "Additional Information",
-      "messagePlaceholder": "Tell us about your project...",
-      "submit": "Submit",
+      "message": "Additional Information (Optional)",
+      "messagePlaceholder": "Share your goals, questions, or timeline...",
+      "submit": "Start My Spain Setup",
       "submitting": "Submitting...",
-      "privacy": "By submitting, you agree to our privacy policy. We'll never share your data.",
+      "privacy": "By submitting, you agree to receive updates about your enquiry. We respect your privacy and never share your data.",
       "providedBy": "Service provided by:",
       "certifications": "Barcelona Bar Association • Tax Advisors Registry",
-      "herenciasButton": "Request free consultation",
+      "herenciasButton": "Request Free Consultation",
       "success": {
-        "title": "Success!",
-        "description": "Thank you for your interest. We'll contact you soon."
+        "title": "Request Received!",
+        "description": "Thank you for your interest. Our team will contact you within 24 hours."
       },
       "error": {
-        "title": "Error",
-        "description": "Something went wrong. Please try again."
+        "title": "Something Went Wrong",
+        "description": "Please try again or contact us directly."
       },
       "validation": {
-        "nameMin": "Name must be at least 2 characters",
-        "emailInvalid": "Invalid email address",
+        "nameMin": "Please enter your full name",
+        "emailInvalid": "Please enter a valid email address",
         "countryRequired": "Please select your country"
       }
     }

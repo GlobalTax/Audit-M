@@ -162,10 +162,10 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Full Name *</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <Input
                 id="fullName"
-                placeholder="John Smith"
+                placeholder="e.g., John Smith"
                 {...register("fullName")}
                 className={errors.fullName ? "border-destructive" : ""}
               />
@@ -175,11 +175,11 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Business Email *</Label>
+              <Label htmlFor="email">Business Email</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="john@company.com"
+                placeholder="name@yourcompany.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
               />
@@ -189,10 +189,10 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name *</Label>
+              <Label htmlFor="companyName">Company Name</Label>
               <Input
                 id="companyName"
-                placeholder="Company Ltd."
+                placeholder="Your company's legal name"
                 {...register("companyName")}
                 className={errors.companyName ? "border-destructive" : ""}
               />
@@ -202,10 +202,10 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="country">Country *</Label>
+              <Label htmlFor="country">Country / Region</Label>
               <Select onValueChange={(value) => setValue("country", value)}>
                 <SelectTrigger className={errors.country ? "border-destructive" : ""}>
-                  <SelectValue placeholder="Select your country" />
+                  <SelectValue placeholder="Where is your business based?" />
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map((country) => (
@@ -221,10 +221,10 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="serviceInterest">Service of Interest (Optional)</Label>
+              <Label htmlFor="serviceInterest">How Can We Help? (Optional)</Label>
               <Select onValueChange={(value) => setValue("serviceInterest", value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a service" />
+                  <SelectValue placeholder="Select the service you need" />
                 </SelectTrigger>
                 <SelectContent>
                   {services.map((service) => (
@@ -250,14 +250,16 @@ export const QuizLeadForm = ({ quizAnswers, scorePercentage, onComplete }: QuizL
               ) : (
                 <>
                   <BarChart3 className="w-4 h-4 mr-2" />
-                  See My Results
+                  Reveal My Score
                 </>
               )}
             </Button>
 
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
               <Lock className="w-3 h-3" />
-              <span>Your data is secure. We respect your privacy.</span>
+              <span>Your information is secure. We only use it to deliver your personalized results.{" "}
+                <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>
+              </span>
             </div>
           </form>
         </CardContent>

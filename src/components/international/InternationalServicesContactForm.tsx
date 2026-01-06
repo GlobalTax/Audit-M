@@ -267,10 +267,10 @@ export function InternationalServicesContactForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message (optional)</FormLabel>
+                <FormLabel>Message (Optional)</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Tell us more about your business needs, timeline, or any specific questions..."
+                    placeholder="Share your goals, questions, or timeline..."
                     className="min-h-[120px] resize-none"
                     {...field}
                     disabled={isSubmitting}
@@ -326,7 +326,7 @@ export function InternationalServicesContactForm() {
               </>
             ) : (
               <>
-                Request Consultation
+                Book a Free Consultation
                 <Send className="ml-2 h-4 w-4" />
               </>
             )}
