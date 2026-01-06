@@ -200,6 +200,12 @@ export const Footer = () => {
                 {t("footer.careers")}
               </Link>
               <Link
+                to="/testimonials"
+                className="text-white/80 hover:text-accent transition-colors text-base font-light"
+              >
+                Testimonials
+              </Link>
+              <Link
                 to="/contact"
                 className="text-white/80 hover:text-accent transition-colors text-base font-light"
               >

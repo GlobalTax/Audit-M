@@ -74,6 +74,7 @@ import CookiePolicyEN from "./pages/CookiePolicyEN";
 import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import LeaveReview from "./pages/LeaveReview";
+import Testimonials from "./pages/Testimonials";
 
 const queryClient = new QueryClient();
 
@@ -111,6 +112,7 @@ const App = () => {
                 <Route path="/international-services" element={<Layout><InternationalServices /></Layout>} />
                 <Route path="/resources" element={<Layout><Resources /></Layout>} />
                 <Route path="/leave-review" element={<Layout><LeaveReview /></Layout>} />
+                <Route path="/testimonials" element={<Layout><Testimonials /></Layout>} />
 
                 {/* Special landings for internationals */}
                 <Route path="/beckham-law" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
