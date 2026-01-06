@@ -131,7 +131,7 @@ export function HomeTestimonialsSection() {
             size="lg"
             onClick={handleCTAClick}
           >
-            <Link to="/case-studies">
+            <Link to="/testimonials">
               See More Success Stories
             </Link>
           </Button>
