@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -182,13 +183,9 @@ export const HomeThirdPartyReviewsSection = () => {
             onClick={handleLeaveReviewClick}
             asChild
           >
-            <a
-              href="https://g.page/r/nrro-barcelona/review"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link to="/leave-review">
               Leave a Review
-            </a>
+            </Link>
           </Button>
         </motion.div>
       </div>
