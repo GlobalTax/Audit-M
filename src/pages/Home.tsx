@@ -271,6 +271,34 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Servicios Relevantes */}
+        <section className="bg-white py-20 md:py-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Encabezado */}
+            {serviciosDestacados?.overline && (
+              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
+                {serviciosDestacados.overline}
+              </h2>
+            )}
+
+            {/* Grid de servicios */}
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+              {serviciosDestacados?.services?.map((service, index) => (
+                <FeaturedServiceCard
+                  key={index}
+                  title={service.title}
+                  description={service.description}
+                  category={service.category}
+                  features={service.features}
+                  slug={(service as any).slug}
+                  slug_en={(service as any).slug_en}
+                  slug_es={(service as any).slug_es}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Multi-Jurisdictional Services Section - Lexidy style */}
         <MultiJurisdictionalServicesSection />
 
@@ -318,34 +346,6 @@ const Home = () => {
               ))}
             </div>
             )}
-          </div>
-        </section>
-
-        {/* Servicios Relevantes */}
-        <section className="bg-white py-20 md:py-28">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Encabezado */}
-            {serviciosDestacados?.overline && (
-              <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12">
-                {serviciosDestacados.overline}
-              </h2>
-            )}
-
-            {/* Grid de servicios */}
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              {serviciosDestacados?.services?.map((service, index) => (
-                <FeaturedServiceCard
-                  key={index}
-                  title={service.title}
-                  description={service.description}
-                  category={service.category}
-                  features={service.features}
-                  slug={(service as any).slug}
-                  slug_en={(service as any).slug_en}
-                  slug_es={(service as any).slug_es}
-                />
-              ))}
-            </div>
           </div>
         </section>
 
