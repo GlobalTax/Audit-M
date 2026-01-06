@@ -100,13 +100,13 @@ export default function CaseStudies() {
               </div>
               <div>
                 <div className="text-4xl font-semibold text-accent mb-2">
-                  {filterOptions?.industries.length || 0}
+                  {filterOptions?.industries?.length || 0}
                 </div>
                 <div className="text-sm text-foreground/60">Sectores</div>
               </div>
               <div>
                 <div className="text-4xl font-semibold text-accent mb-2">
-                  {filterOptions?.services.length || 0}
+                  {filterOptions?.services?.length || 0}
                 </div>
                 <div className="text-sm text-foreground/60">Servicios</div>
               </div>
@@ -162,7 +162,7 @@ export default function CaseStudies() {
                         onChange={(e) => setActiveFilters({ ...activeFilters, industry: e.target.value })}
                       >
                         <option value="">Todos los Sectores</option>
-                        {filterOptions?.industries.map((industry) => (
+                        {filterOptions?.industries?.map((industry) => (
                           <option key={industry} value={industry}>{industry}</option>
                         ))}
                       </select>
@@ -175,7 +175,7 @@ export default function CaseStudies() {
                         onChange={(e) => setActiveFilters({ ...activeFilters, service: e.target.value })}
                       >
                         <option value="">Todos los Servicios</option>
-                        {filterOptions?.services.map((service) => (
+                        {filterOptions?.services?.map((service) => (
                           <option key={service} value={service}>{service}</option>
                         ))}
                       </select>
