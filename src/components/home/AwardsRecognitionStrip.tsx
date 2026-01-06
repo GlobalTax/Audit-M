@@ -1,10 +1,11 @@
-import { Trophy, Award, Scale } from "lucide-react";
+import { Trophy, Award, Scale, Star, Building2, Globe, Landmark } from "lucide-react";
 
 interface AwardItem {
   name: string;
   year: string;
   organization: string;
   icon: React.ElementType;
+  logoUrl?: string;
 }
 
 const awards: AwardItem[] = [
@@ -13,18 +14,45 @@ const awards: AwardItem[] = [
     year: "2023",
     organization: "Emprendedores",
     icon: Trophy,
+    logoUrl: "https://www.emprendedores.es/wp-content/uploads/2020/01/logo-emprendedores.png",
   },
   {
     name: "III Edición Premios ProDespachos & Emprendedores",
     year: "2023",
     organization: "Innovación",
     icon: Award,
+    logoUrl: "https://prodespachos.com/wp-content/uploads/2021/03/logo-prodespachos.png",
   },
   {
     name: "I Premios Derecho",
     year: "2022",
     organization: "OBN& · LA RAZÓN",
     icon: Scale,
+    logoUrl: "https://www.larazon.es/documents/10165/0/992x558/0c0/0d0/none/10810/DCTO/image_content_38889367_20220322132854.jpg",
+  },
+  {
+    name: "Best Tax Advisory Firm – Spain",
+    year: "2024",
+    organization: "Corporate INTL",
+    icon: Star,
+  },
+  {
+    name: "Top Legal Services Provider",
+    year: "2024",
+    organization: "Global Law Experts",
+    icon: Landmark,
+  },
+  {
+    name: "Excellence in Cross-Border Advisory",
+    year: "2024",
+    organization: "Finance Monthly",
+    icon: Globe,
+  },
+  {
+    name: "Best Corporate Formation Services",
+    year: "2024",
+    organization: "Acquisition International",
+    icon: Building2,
   },
 ];
 
@@ -46,7 +74,7 @@ export const AwardsRecognitionStrip = () => {
         </div>
 
         {/* Awards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
           {awards.map((award, index) => {
             const IconComponent = award.icon;
             return (
@@ -54,8 +82,23 @@ export const AwardsRecognitionStrip = () => {
                 key={index}
                 className="group text-center p-4 rounded-lg hover:bg-neutral-50 transition-colors duration-200"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200">
-                  <IconComponent className="w-5 h-5" />
+                {/* Logo or Icon */}
+                <div className="h-16 flex items-center justify-center mb-4">
+                  {award.logoUrl ? (
+                    <img 
+                      src={award.logoUrl} 
+                      alt={award.organization}
+                      className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-200"
+                      onError={(e) => {
+                        // Fallback to icon if logo fails to load
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200 ${award.logoUrl ? 'hidden' : ''}`}>
+                    <IconComponent className="w-5 h-5" />
+                  </div>
                 </div>
                 <h3 className="text-sm font-medium text-foreground leading-tight mb-2">
                   {award.name}
