@@ -115,7 +115,7 @@ export const HomeThirdPartyReviewsSection = () => {
         </div>
 
         {/* Platform Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-3 gap-6">
           {platformReviews.map((review, index) => (
             <motion.div
               key={review.platform}
@@ -124,17 +124,12 @@ export const HomeThirdPartyReviewsSection = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <Card className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
-                onClick={() => handlePlatformClick(review.platform, review.url)}
-              >
+              <Card className="h-full">
                 <CardContent className="p-6 flex flex-col h-full">
                   {/* Platform Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      {review.icon}
-                      <span className="font-medium text-lg">{review.platform}</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center gap-3 mb-4">
+                    {review.icon}
+                    <span className="font-medium text-lg">{review.platform}</span>
                   </div>
 
                   {/* Rating */}
@@ -155,39 +150,11 @@ export const HomeThirdPartyReviewsSection = () => {
                   <p className="text-sm text-muted-foreground">
                     — {review.author}
                   </p>
-
-                  {/* Link */}
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <span className="text-sm text-primary group-hover:underline flex items-center gap-1">
-                      View all on {review.platform}
-                      <ExternalLink className="w-3 h-3" />
-                    </span>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
-
-        {/* Leave a Review CTA */}
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={handleLeaveReviewClick}
-            asChild
-          >
-            <Link to="/leave-review">
-              Leave a Review
-            </Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );
