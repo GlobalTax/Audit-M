@@ -13,6 +13,7 @@ import {
   Globe,
   Calculator,
   FileDown,
+  MessageSquareQuote,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +25,7 @@ const navItems = [
   { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
+  { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
   { path: '/admin/playbook-leads', icon: FileDown, label: 'Resource Leads' },
   { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
