@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { AwardsRecognitionStrip } from '@/components/home/AwardsRecognitionStrip';
+import { HomeTestimonialsSection } from '@/components/home/HomeTestimonialsSection';
 
 export default function About() {
   const { t, language } = useLanguage();
@@ -132,9 +134,30 @@ export default function About() {
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               {hero.subtitle}
             </p>
+            
+            {/* Dual CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+              <Button 
+                size="lg" 
+                className="bg-white text-black hover:bg-white/90" 
+                asChild
+                onClick={() => trackCTAClick("Request a Global Consultation", "about_hero")}
+              >
+                <Link to="/contact">Request a Global Consultation</Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10" 
+                asChild
+                onClick={() => trackCTAClick("Explore Our Services", "about_hero")}
+              >
+                <Link to="/international-services">Explore Our Services</Link>
+              </Button>
+            </div>
           </div>
         </div>
-        </section>
+      </section>
 
       {/* Breadcrumb Navigation */}
       <div className="bg-muted/30 border-b border-border/50">
@@ -143,12 +166,12 @@ export default function About() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/">Inicio</Link>
+                  <Link to="/">Home</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Nosotros</BreadcrumbPage>
+                <BreadcrumbPage>About Us</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -414,6 +437,12 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Awards & Recognitions Section */}
+      <AwardsRecognitionStrip />
+
+      {/* Client Testimonials Section */}
+      <HomeTestimonialsSection />
 
       {/* Founder Section */}
       {founderData?.is_active && (
