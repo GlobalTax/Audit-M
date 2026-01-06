@@ -135,7 +135,7 @@ export const TeamCarouselSection = () => {
             variant="outline"
             onClick={() => trackCTAClick("View Full Team", "team_carousel")}
           >
-            <Link to="/about#team">
+            <Link to="/team">
               View Full Team
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
