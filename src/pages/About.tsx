@@ -11,7 +11,7 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles, Globe, Repeat, BarChart3 } from 'lucide-react';
+import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles, Globe, Repeat, BarChart3, Calendar, ArrowRight } from 'lucide-react';
 import { StatCard } from '@/components/ui/stat-card';
 import { BadgeHero } from '@/components/ui/badge-hero';
 import { usePageContent } from '@/hooks/usePageContent';
@@ -372,29 +372,44 @@ export default function About() {
         </section>
       )}
 
-      {/* CTA Final */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-primary-hover to-accent">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-6 leading-tight">
-              {t('about.cta.title')}
+      {/* Final CTA Section */}
+      <section className="py-20 md:py-28 bg-black">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-6">
+              Ready to Expand into Spain?
             </h2>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              {t('about.cta.subtitle')}
+            <p className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Partner with a trusted global advisory firm with 25+ years of experience guiding international companies through every stage of market entry and cross-border operations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Button 
                 size="lg" 
-                variant="secondary" 
+                className="bg-white text-black hover:bg-white/90"
                 asChild
-                onClick={() => trackCTAClick(t('about.cta.contactButton'), "nosotros_final_cta")}
+                onClick={() => trackCTAClick("Book a Global Consultation", "about_final_cta")}
               >
-                <Link to="/contacto">{t('about.cta.contactButton')}</Link>
+                <Link to="/contact">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Book a Global Consultation
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-                <Link to="/servicios">{t('about.cta.servicesButton')}</Link>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10"
+                asChild
+                onClick={() => trackCTAClick("Contact Our Team", "about_final_cta")}
+              >
+                <Link to="/contact">
+                  Contact Our Team
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
             </div>
+            <p className="text-sm text-white/50">
+              Response within 24 hours · No commitment required
+            </p>
           </div>
         </div>
       </section>
