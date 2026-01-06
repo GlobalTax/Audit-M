@@ -24,6 +24,7 @@ import { supabase } from "@/integrations/supabase/client";
 import DOMPurify from "dompurify";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { BlogCTASection } from "@/components/blog/BlogCTASection";
+import { PopularArticles } from "@/components/blog/PopularArticles";
 import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
 
 const BlogDetail = () => {
@@ -163,24 +164,37 @@ const BlogDetail = () => {
       </div>
 
       <div className="min-h-screen">
-        <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Button variant="ghost" asChild className="mb-8"><Link to="/blog"><ArrowLeft className="mr-2 h-4 w-4" />{t('blog.backToBlog')}</Link></Button>
-          <div className="max-w-3xl mx-auto">
-            <header className="mb-12 pb-12 border-b border-border">
-              {post.category && <Overline className="mb-4">{post.category}</Overline>}
-              <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title}</h1>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <time dateTime={post.published_at}>{new Date(post.published_at || post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
-                {post.read_time && <><span>•</span><span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" />{post.read_time} min</span></>}
+          
+          <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12">
+            {/* Main Article */}
+            <article>
+              <div className="max-w-3xl">
+                <header className="mb-12 pb-12 border-b border-border">
+                  {post.category && <Overline className="mb-4">{post.category}</Overline>}
+                  <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title}</h1>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <time dateTime={post.published_at}>{new Date(post.published_at || post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+                    {post.read_time && <><span>•</span><span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" />{post.read_time} min</span></>}
+                  </div>
+                </header>
+                <div className="prose-article">
+                  {post.excerpt && <p className="text-lead mb-8">{post.excerpt}</p>}
+                  {post.content && <div className="text-body space-y-6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content, { ALLOWED_TAGS: ["p", "br", "strong", "em", "u", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li", "a", "img", "blockquote", "code", "pre"], ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel"], ALLOW_DATA_ATTR: false }) }} />}
+                </div>
+                {post.tags && post.tags.length > 0 && <div className="mt-12 pt-8 border-t"><h3 className="text-sm font-medium mb-4">{t('blog.tags')}</h3><div className="flex flex-wrap gap-2">{post.tags.map((tag: string) => <span key={tag} className="px-3 py-1 bg-muted rounded-full text-sm">{tag}</span>)}</div></div>}
               </div>
-            </header>
-            <div className="prose-article">
-              {post.excerpt && <p className="text-lead mb-8">{post.excerpt}</p>}
-              {post.content && <div className="text-body space-y-6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content, { ALLOWED_TAGS: ["p", "br", "strong", "em", "u", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li", "a", "img", "blockquote", "code", "pre"], ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel"], ALLOW_DATA_ATTR: false }) }} />}
-            </div>
-            {post.tags && post.tags.length > 0 && <div className="mt-12 pt-8 border-t"><h3 className="text-sm font-semibold mb-4">{t('blog.tags')}</h3><div className="flex flex-wrap gap-2">{post.tags.map((tag: string) => <span key={tag} className="px-3 py-1 bg-muted rounded-full text-sm">{tag}</span>)}</div></div>}
+            </article>
+
+            {/* Sidebar - Desktop Only */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24">
+                <PopularArticles currentPostId={post.id} />
+              </div>
+            </aside>
           </div>
-        </article>
+        </div>
         <RelatedBlogPosts 
           currentPostId={post.id} 
           category={post.category || ''} 
