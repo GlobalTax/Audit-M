@@ -2,12 +2,19 @@
 
 export interface LaborCostInputs {
   grossSalary: number;
+  salaryInputMode: 'monthly' | 'annual';
+  numberOfPayments: 12 | 14;
   contractType: 'permanent' | 'fixed-term';
   numberOfEmployees: number;
   industryRisk: 'low' | 'medium' | 'high';
 }
 
 export interface LaborCostResults {
+  // Input reference
+  monthlyGross: number;
+  annualGross: number;
+  paymentsPerYear: number;
+  
   // Employer contributions
   employerSocialSecurity: number;      // 23.6%
   employerUnemployment: number;        // 5.5%
@@ -32,6 +39,14 @@ export interface LaborCostResults {
   employerContributionRate: number;
   employeeDeductionRate: number;
   effectiveIrpfRate: number;
+}
+
+export interface Scenario {
+  id: string;
+  label: string;
+  inputs: LaborCostInputs;
+  results: LaborCostResults;
+  savedAt: Date;
 }
 
 // IRPF brackets (simplified 2025 state + regional average)
@@ -88,14 +103,26 @@ function calculateProgressiveIRPF(annualGross: number): number {
 }
 
 export function calculateLaborCosts(inputs: LaborCostInputs): LaborCostResults {
-  const { grossSalary, industryRisk, numberOfEmployees } = inputs;
+  const { grossSalary, salaryInputMode, numberOfPayments, industryRisk, numberOfEmployees } = inputs;
   
-  // Calculate employer contributions
-  const employerSocialSecurity = grossSalary * EMPLOYER_RATES.socialSecurity;
-  const employerUnemployment = grossSalary * EMPLOYER_RATES.unemployment;
-  const employerTrainingFund = grossSalary * EMPLOYER_RATES.trainingFund;
-  const employerFOGASA = grossSalary * EMPLOYER_RATES.fogasa;
-  const workAccidentInsurance = grossSalary * ACCIDENT_RATES[industryRisk];
+  // Calculate monthly gross based on input mode
+  let monthlyGross: number;
+  let annualGross: number;
+  
+  if (salaryInputMode === 'annual') {
+    annualGross = grossSalary;
+    monthlyGross = grossSalary / numberOfPayments;
+  } else {
+    monthlyGross = grossSalary;
+    annualGross = grossSalary * numberOfPayments;
+  }
+  
+  // Calculate employer contributions (based on monthly gross)
+  const employerSocialSecurity = monthlyGross * EMPLOYER_RATES.socialSecurity;
+  const employerUnemployment = monthlyGross * EMPLOYER_RATES.unemployment;
+  const employerTrainingFund = monthlyGross * EMPLOYER_RATES.trainingFund;
+  const employerFOGASA = monthlyGross * EMPLOYER_RATES.fogasa;
+  const workAccidentInsurance = monthlyGross * ACCIDENT_RATES[industryRisk];
   
   const totalEmployerContributions = 
     employerSocialSecurity + 
@@ -105,17 +132,15 @@ export function calculateLaborCosts(inputs: LaborCostInputs): LaborCostResults {
     workAccidentInsurance;
 
   // Calculate employee deductions
-  const employeeSocialSecurity = grossSalary * EMPLOYEE_RATES.socialSecurity;
-  const employeeUnemployment = grossSalary * EMPLOYEE_RATES.unemployment;
-  const employeeTrainingFund = grossSalary * EMPLOYEE_RATES.trainingFund;
+  const employeeSocialSecurity = monthlyGross * EMPLOYEE_RATES.socialSecurity;
+  const employeeUnemployment = monthlyGross * EMPLOYEE_RATES.unemployment;
+  const employeeTrainingFund = monthlyGross * EMPLOYEE_RATES.trainingFund;
   
   // Calculate IRPF (annual basis, then monthly)
-  // Assume 14 payments (12 monthly + 2 extra pays)
-  const annualGross = grossSalary * 14;
-  const annualSocialSecurityDeductions = (employeeSocialSecurity + employeeUnemployment + employeeTrainingFund) * 14;
+  const annualSocialSecurityDeductions = (employeeSocialSecurity + employeeUnemployment + employeeTrainingFund) * numberOfPayments;
   const taxableBase = annualGross - annualSocialSecurityDeductions;
   const annualIRPF = calculateProgressiveIRPF(taxableBase);
-  const monthlyIRPF = annualIRPF / 12; // IRPF is withheld over 12 months
+  const monthlyIRPF = annualIRPF / 12; // IRPF is always withheld over 12 months
   
   const irpfWithholding = monthlyIRPF;
   const effectiveIrpfRate = (annualIRPF / annualGross) * 100;
@@ -127,18 +152,21 @@ export function calculateLaborCosts(inputs: LaborCostInputs): LaborCostResults {
     irpfWithholding;
 
   // Calculate totals
-  const netSalary = grossSalary - totalEmployeeDeductions;
-  const totalMonthlyEmployerCost = grossSalary + totalEmployerContributions;
-  const totalAnnualEmployerCost = (grossSalary + totalEmployerContributions) * 14;
+  const netSalary = monthlyGross - totalEmployeeDeductions;
+  const totalMonthlyEmployerCost = monthlyGross + totalEmployerContributions;
+  const totalAnnualEmployerCost = (monthlyGross + totalEmployerContributions) * numberOfPayments;
 
   // Calculate rates for display
-  const employerContributionRate = (totalEmployerContributions / grossSalary) * 100;
-  const employeeDeductionRate = (totalEmployeeDeductions / grossSalary) * 100;
+  const employerContributionRate = (totalEmployerContributions / monthlyGross) * 100;
+  const employeeDeductionRate = (totalEmployeeDeductions / monthlyGross) * 100;
 
   // Multiply by number of employees for totals
   const multiplier = numberOfEmployees || 1;
 
   return {
+    monthlyGross: monthlyGross * multiplier,
+    annualGross: annualGross * multiplier,
+    paymentsPerYear: numberOfPayments,
     employerSocialSecurity: employerSocialSecurity * multiplier,
     employerUnemployment: employerUnemployment * multiplier,
     employerTrainingFund: employerTrainingFund * multiplier,
@@ -160,3 +188,5 @@ export function calculateLaborCosts(inputs: LaborCostInputs): LaborCostResults {
 }
 
 export const SPAIN_MINIMUM_WAGE_2025 = 1184; // €/month (14 payments)
+export const SPAIN_MINIMUM_WAGE_ANNUAL_14 = 16576; // €/year (14 payments)
+export const SPAIN_MINIMUM_WAGE_ANNUAL_12 = 14208; // €/year (12 payments)

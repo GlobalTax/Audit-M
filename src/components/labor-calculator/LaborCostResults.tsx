@@ -1,11 +1,12 @@
 import { LaborCostResults as LaborCostResultsType } from "@/lib/laborCostCalculatorLogic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { 
   Building, 
   User, 
   TrendingUp, 
   Info,
-  ChevronDown
+  Plus
 } from "lucide-react";
 import {
   Accordion,
@@ -18,6 +19,8 @@ interface LaborCostResultsProps {
   results: LaborCostResultsType;
   grossSalary: number;
   numberOfEmployees: number;
+  onSaveScenario?: () => void;
+  canSaveScenario?: boolean;
 }
 
 function formatCurrency(value: number): string {
@@ -29,7 +32,13 @@ function formatCurrency(value: number): string {
   }).format(value);
 }
 
-export function LaborCostResults({ results, grossSalary, numberOfEmployees }: LaborCostResultsProps) {
+export function LaborCostResults({ 
+  results, 
+  grossSalary, 
+  numberOfEmployees,
+  onSaveScenario,
+  canSaveScenario = true
+}: LaborCostResultsProps) {
   const perEmployee = numberOfEmployees > 1;
   const label = perEmployee ? ` (${numberOfEmployees} employees)` : "";
 
@@ -79,7 +88,7 @@ export function LaborCostResults({ results, grossSalary, numberOfEmployees }: La
             <div className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
               <span className="font-medium">Annual Employer Cost</span>
-              <span className="text-xs text-muted-foreground">(14 payments)</span>
+              <span className="text-xs text-muted-foreground">({results.paymentsPerYear} payments)</span>
             </div>
             <span className="text-xl font-normal text-foreground">
               {formatCurrency(results.totalAnnualEmployerCost)}
@@ -88,10 +97,23 @@ export function LaborCostResults({ results, grossSalary, numberOfEmployees }: La
         </CardContent>
       </Card>
 
+      {/* Save Scenario Button */}
+      {onSaveScenario && canSaveScenario && (
+        <Button 
+          variant="outline" 
+          className="w-full" 
+          onClick={onSaveScenario}
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Save as Scenario for Comparison
+        </Button>
+      )}
+
       {/* Detailed Breakdown */}
       <div className="border rounded-lg overflow-hidden">
         <div className="bg-muted/50 px-4 py-3 border-b">
           <h3 className="font-medium">Detailed Breakdown</h3>
+          <p className="text-xs text-muted-foreground">Based on {results.paymentsPerYear} payments/year</p>
         </div>
         
         <div className="divide-y">
