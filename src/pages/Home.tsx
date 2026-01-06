@@ -18,6 +18,7 @@ import { HomeTestimonialsSection } from "@/components/home/HomeTestimonialsSecti
 import { HomeCaseStudiesSection } from "@/components/home/HomeCaseStudiesSection";
 import { HomeThirdPartyReviewsSection } from "@/components/home/HomeThirdPartyReviewsSection";
 import { AwardsRecognitionStrip } from "@/components/home/AwardsRecognitionStrip";
+import { TeamCarouselSection } from "@/components/home/TeamCarouselSection";
 import { ArrowRight, Check, Globe } from "lucide-react";
 import {
   Carousel,
@@ -287,6 +288,9 @@ const Home = () => {
 
         {/* Awards & Recognition Strip */}
         <AwardsRecognitionStrip />
+
+        {/* Meet the Team Carousel */}
+        <TeamCarouselSection />
 
         {/* Datos/Stats Section */}
         <section className="bg-neutral-50 py-20 md:py-28">
