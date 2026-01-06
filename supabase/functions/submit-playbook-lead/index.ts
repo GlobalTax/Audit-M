@@ -96,6 +96,32 @@ function getAssetConfig(playbookName: string): AssetConfig {
         "Annual cost projections (14 payments)",
         "Next steps for payroll setup"
       ]
+    },
+    "beckham-calculator": {
+      downloadUrl: "https://global.nrro.es/downloads/beckham-law-tax-comparison.pdf",
+      emailSubject: "Your Beckham Law Tax Comparison Report",
+      assetTitle: "Beckham Law Tax Comparison Report",
+      assetDescription: "Your personalized comparison of standard IRPF vs Beckham Law taxation is ready.",
+      whatsInside: [
+        "Standard IRPF vs Beckham Law comparison",
+        "Annual and 6-year savings projection",
+        "Tax bracket breakdown",
+        "Eligibility checklist",
+        "Next steps for application"
+      ]
+    },
+    "residency-risk": {
+      downloadUrl: "https://global.nrro.es/downloads/spain-tax-residency-assessment.pdf",
+      emailSubject: "Your Spain Tax Residency Risk Assessment",
+      assetTitle: "Spain Tax Residency Risk Assessment Report",
+      assetDescription: "Your personalized assessment of Spanish tax residency risk factors is ready.",
+      whatsInside: [
+        "Your risk score and level",
+        "Key factors identified",
+        "Official criteria analysis",
+        "Personalized recommendations",
+        "Days remaining before 183 threshold"
+      ]
     }
   };
 
