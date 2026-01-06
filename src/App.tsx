@@ -73,6 +73,7 @@ import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
 import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
+import LeaveReview from "./pages/LeaveReview";
 
 const queryClient = new QueryClient();
 
@@ -109,6 +110,7 @@ const App = () => {
                 <Route path="/careers" element={<Layout><Careers /></Layout>} />
                 <Route path="/international-services" element={<Layout><InternationalServices /></Layout>} />
                 <Route path="/resources" element={<Layout><Resources /></Layout>} />
+                <Route path="/leave-review" element={<Layout><LeaveReview /></Layout>} />
 
                 {/* Special landings for internationals */}
                 <Route path="/beckham-law" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
