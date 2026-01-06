@@ -30,6 +30,7 @@ export function LaborCostForm({ onCalculate, isCalculating }: LaborCostFormProps
   const [contractType, setContractType] = useState<'permanent' | 'fixed-term'>('permanent');
   const [numberOfEmployees, setNumberOfEmployees] = useState<string>("1");
   const [industryRisk, setIndustryRisk] = useState<'low' | 'medium' | 'high'>('low');
+  const [salaryError, setSalaryError] = useState<string | null>(null);
 
   const getMinSalary = () => {
     if (salaryInputMode === 'annual') {
@@ -49,6 +50,7 @@ export function LaborCostForm({ onCalculate, isCalculating }: LaborCostFormProps
   const handleSalaryModeChange = (mode: 'monthly' | 'annual') => {
     const currentSalary = parseFloat(grossSalary) || 0;
     setSalaryInputMode(mode);
+    setSalaryError(null);
     
     // Convert salary when switching modes
     if (mode === 'annual' && currentSalary > 0) {
@@ -58,14 +60,32 @@ export function LaborCostForm({ onCalculate, isCalculating }: LaborCostFormProps
     }
   };
 
+  const handleSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGrossSalary(e.target.value);
+    if (salaryError) setSalaryError(null);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const salary = parseFloat(grossSalary) || getMinSalary();
+    const salary = parseFloat(grossSalary) || 0;
+    const minSalary = getMinSalary();
+    
+    // Validate minimum salary
+    if (salary < minSalary) {
+      setSalaryError(
+        salaryInputMode === 'annual' 
+          ? `Minimum annual salary is €${minSalary.toLocaleString()}`
+          : `Minimum monthly salary is €${minSalary.toLocaleString()}`
+      );
+      return;
+    }
+    
+    setSalaryError(null);
     const employees = parseInt(numberOfEmployees) || 1;
     
     onCalculate({
-      grossSalary: Math.max(salary, getMinSalary()),
+      grossSalary: salary,
       salaryInputMode,
       numberOfPayments,
       contractType,
@@ -119,13 +139,15 @@ export function LaborCostForm({ onCalculate, isCalculating }: LaborCostFormProps
         <Input
           id="grossSalary"
           type="number"
-          min={getMinSalary()}
-          step={salaryInputMode === 'annual' ? 1000 : 100}
+          step="any"
           value={grossSalary}
-          onChange={(e) => setGrossSalary(e.target.value)}
+          onChange={handleSalaryChange}
           placeholder={salaryInputMode === 'monthly' ? "e.g., 3500" : "e.g., 49000"}
-          className="text-lg"
+          className={`text-lg ${salaryError ? 'border-destructive' : ''}`}
         />
+        {salaryError && (
+          <p className="text-xs text-destructive">{salaryError}</p>
+        )}
         <p className="text-xs text-muted-foreground">
           {getMinSalaryText()}
         </p>
