@@ -80,55 +80,64 @@ export const Footer = () => {
                 global.nrro
               </span>
             </Link>
-            <p className="text-lg text-white/80 font-light leading-relaxed">
+            <p className="text-base text-white/70 font-light leading-relaxed">
               {t("footer.tagline")}
             </p>
             
-            {/* Social Media Links */}
-            <div className="flex flex-col gap-4">
+            {/* Head Office */}
+            <div className="space-y-1">
+              <p className="text-xs font-mono uppercase tracking-wider text-white/50">Head Office:</p>
+              <p className="text-sm text-white/80 font-light">
+                Calle Ausias March 36 Pr<br />
+                08010 Barcelona
+              </p>
+            </div>
+
+            {/* Other Offices */}
+            <div className="space-y-1">
+              <p className="text-xs font-mono uppercase tracking-wider text-white/50">Other Offices:</p>
+              <p className="text-sm text-white/70 font-light leading-relaxed">
+                Madrid · Girona · Lleida · Tarragona · Palma de Mallorca · Zaragoza · Valencia
+              </p>
+            </div>
+            
+            {/* Social Media Links - Horizontal */}
+            <div className="flex items-center gap-3 pt-2">
               <a
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/80 hover:text-accent transition-colors group"
+                className="rounded-full border border-white/20 p-2 text-white/70 hover:text-accent hover:border-accent transition-colors"
+                aria-label="Instagram"
               >
-                <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
-                  <Instagram className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-mono uppercase tracking-wider">Instagram</span>
+                <Instagram className="h-4 w-4" />
               </a>
               <a
                 href={socialLinks.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/80 hover:text-accent transition-colors group"
+                className="rounded-full border border-white/20 p-2 text-white/70 hover:text-accent hover:border-accent transition-colors"
+                aria-label="Twitter"
               >
-                <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
-                  <Twitter className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-mono uppercase tracking-wider">Twitter</span>
+                <Twitter className="h-4 w-4" />
               </a>
               <a
                 href={socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/80 hover:text-accent transition-colors group"
+                className="rounded-full border border-white/20 p-2 text-white/70 hover:text-accent hover:border-accent transition-colors"
+                aria-label="Facebook"
               >
-                <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
-                  <Facebook className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-mono uppercase tracking-wider">Facebook</span>
+                <Facebook className="h-4 w-4" />
               </a>
               <a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/80 hover:text-accent transition-colors group"
+                className="rounded-full border border-white/20 p-2 text-white/70 hover:text-accent hover:border-accent transition-colors"
+                aria-label="LinkedIn"
               >
-                <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
-                  <Linkedin className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-mono uppercase tracking-wider">LinkedIn</span>
+                <Linkedin className="h-4 w-4" />
               </a>
             </div>
           </div>
