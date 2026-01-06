@@ -80,7 +80,7 @@ export const TeamCarouselSection = () => {
             {teamMembers.map((member) => (
               <CarouselItem
                 key={member.id}
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
               >
                 <Card className="overflow-hidden hover-lift group">
                   <div className="relative aspect-square overflow-hidden bg-muted">
@@ -92,14 +92,14 @@ export const TeamCarouselSection = () => {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-muted">
-                        <span className="text-6xl font-light text-muted-foreground/50">
+                        <span className="text-5xl font-light text-muted-foreground/50">
                           {getInitials(member.name)}
                         </span>
                       </div>
                     )}
                   </div>
-                  <CardContent className="p-5">
-                    <h3 className="font-medium text-foreground text-lg">{member.name}</h3>
+                  <CardContent className="p-4">
+                    <h3 className="font-medium text-foreground text-base">{member.name}</h3>
                     <p className="text-sm text-muted-foreground mt-1">
                       {member.position}
                     </p>
