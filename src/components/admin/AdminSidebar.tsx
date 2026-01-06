@@ -3,18 +3,13 @@ import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
 import {
   LayoutDashboard,
-  TrendingUp,
   Users,
   Newspaper,
   UserCog,
   Home,
   Settings,
   FileText,
-  Briefcase,
   Monitor,
-  Map,
-  Presentation,
-  BarChart3,
   Globe,
   Calculator,
 } from 'lucide-react';
@@ -27,17 +22,10 @@ const navItems = [
   { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
-  { path: '/admin/landing-dashboard', icon: BarChart3, label: 'Landing Dashboard' },
-  { path: '/admin/landings', icon: Presentation, label: 'Landing Control Center' },
-  { path: '/admin/case-studies', icon: TrendingUp, label: 'Case Studies' },
-  { path: '/admin/services', icon: Settings, label: 'Services' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
-  { path: '/admin/team', icon: Users, label: 'Team Members' },
-  { path: '/admin/job-positions', icon: Briefcase, label: 'Job Positions' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
   { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
   { path: '/admin/technology', icon: Monitor, label: 'Technology' },
-  { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
 ];
 
 export const AdminSidebar = () => {
