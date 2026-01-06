@@ -11,7 +11,7 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles, Globe, Repeat, BarChart3, Calendar, ArrowRight } from 'lucide-react';
+import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles, Globe, Repeat, BarChart3, Calendar, ArrowRight, Scale, FileCheck } from 'lucide-react';
 import { StatCard } from '@/components/ui/stat-card';
 import { BadgeHero } from '@/components/ui/badge-hero';
 import { usePageContent } from '@/hooks/usePageContent';
@@ -331,6 +331,86 @@ export default function About() {
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed italic">
               These numbers represent thousands of business decisions supported, international expansions executed, and long-term partnerships forged. Our track record speaks to a commitment that extends far beyond the initial engagement.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* NRRO Group Credentials Section */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Overline & Headline */}
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70">
+              THE NRRO GROUP
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal mt-4 mb-6">
+              Part of the Trusted NRRO Group
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12">
+              Backed by decades of institutional experience in legal, tax, and advisory services, NRRO combines the agility of a boutique firm with the reach and capabilities of a global professional network. Our clients benefit from a team that has advised on thousands of international transactions across 50+ jurisdictions.
+            </p>
+
+            {/* Key Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-normal text-foreground mb-1">25+</div>
+                <div className="text-xs font-mono uppercase tracking-wide text-foreground/60">Years</div>
+                <p className="text-sm text-muted-foreground mt-1 hidden md:block">Institutional experience</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-normal text-foreground mb-1">1000+</div>
+                <div className="text-xs font-mono uppercase tracking-wide text-foreground/60">Clients</div>
+                <p className="text-sm text-muted-foreground mt-1 hidden md:block">Companies served</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-normal text-foreground mb-1">87%</div>
+                <div className="text-xs font-mono uppercase tracking-wide text-foreground/60">Repeat</div>
+                <p className="text-sm text-muted-foreground mt-1 hidden md:block">Client retention</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-normal text-foreground mb-1">50+</div>
+                <div className="text-xs font-mono uppercase tracking-wide text-foreground/60">Markets</div>
+                <p className="text-sm text-muted-foreground mt-1 hidden md:block">Jurisdictions covered</p>
+              </div>
+            </div>
+
+            {/* Mini Certification Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-full text-sm text-foreground/80">
+                <Scale className="h-4 w-4" />
+                <span>Barcelona Bar Association</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-full text-sm text-foreground/80">
+                <FileCheck className="h-4 w-4" />
+                <span>Spanish Tax Registry</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-full text-sm text-foreground/80">
+                <Globe className="h-4 w-4" />
+                <span>3 Global Professional Networks</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-full text-sm text-foreground/80">
+                <Award className="h-4 w-4" />
+                <span>Award-Winning Practice</span>
+              </div>
+            </div>
+
+            {/* Closing Quote */}
+            <p className="text-base md:text-lg text-foreground/80 italic max-w-2xl mx-auto mb-10">
+              "Our institutional foundation and global network ensure every client receives world-class advisory backed by proven expertise."
+            </p>
+
+            {/* CTA Button */}
+            <Button 
+              variant="outline" 
+              size="lg"
+              asChild
+              onClick={() => trackCTAClick("Meet Our Experts", "about_group_credentials")}
+            >
+              <Link to="/team">
+                Meet Our Experts
+                <Users className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
