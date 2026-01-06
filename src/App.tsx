@@ -65,6 +65,8 @@ import SpainDocumentChecklist from "./pages/SpainDocumentChecklist";
 import SpainReadinessQuiz from "./pages/SpainReadinessQuiz";
 import SpainSetupCalculator from "./pages/SpainSetupCalculator";
 import SpainLaborCostCalculator from "./pages/SpainLaborCostCalculator";
+import BeckhamLawCalculator from "./pages/BeckhamLawCalculator";
+import SpainTaxResidencyRisk from "./pages/SpainTaxResidencyRisk";
 import SpainSetupUSA from "./pages/SpainSetupUSA";
 import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
@@ -136,6 +138,8 @@ const App = () => {
                 <Route path="/spain-company-setup-uae" element={<Layout><SpainSetupUAE /></Layout>} />
                 <Route path="/spain-business-bank-account" element={<Layout><SpainBusinessBankAccount /></Layout>} />
                 <Route path="/spain-labor-cost-calculator" element={<Layout><SpainLaborCostCalculator /></Layout>} />
+                <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
+                <Route path="/spain-tax-residency-risk" element={<Layout><SpainTaxResidencyRisk /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

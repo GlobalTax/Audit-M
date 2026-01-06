@@ -14,7 +14,9 @@ import {
   Coins,
   FileText,
   Globe,
-  Video
+  Video,
+  Percent,
+  Shield
 } from "lucide-react";
 
 // Spain Setup Resources - Static featured items
@@ -62,6 +64,24 @@ const spainSetupResources = [
     type: "Tool",
     icon: Coins,
     href: "/spain-labor-cost-calculator",
+    badge: "New",
+  },
+  {
+    id: "beckham-calculator",
+    title: "Beckham Law Calculator",
+    description: "Compare standard IRPF vs the 24% flat tax rate under Spain's special expat regime.",
+    type: "Tool",
+    icon: Percent,
+    href: "/beckham-law-calculator",
+    badge: "New",
+  },
+  {
+    id: "residency-risk",
+    title: "Tax Residency Risk Assessment",
+    description: "Assess your risk of being considered a Spanish tax resident based on official criteria.",
+    type: "Assessment",
+    icon: Shield,
+    href: "/spain-tax-residency-risk",
     badge: "New",
   },
 ];
@@ -127,8 +147,8 @@ const Resources = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {spainSetupResources.map((resource) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            {spainSetupResources.slice(0, 4).map((resource) => {
               const IconComponent = resource.icon;
               
               return (
@@ -141,9 +161,54 @@ const Resources = () => {
                       <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10">
                         <IconComponent className="w-6 h-6 text-primary" />
                       </div>
-                      <Badge variant="secondary" className="text-xs">
-                        {resource.badge}
-                      </Badge>
+                      {resource.badge && (
+                        <Badge variant="secondary" className="text-xs">
+                          {resource.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                      {resource.type}
+                    </div>
+                    <CardTitle className="text-lg leading-tight">
+                      {resource.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <CardDescription className="mb-4 line-clamp-2">
+                      {resource.description}
+                    </CardDescription>
+                    <Button variant="outline" asChild className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
+                      <Link to={resource.href}>
+                        {resource.type === "Assessment" ? "Start Assessment" : "Access Resource"}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {spainSetupResources.slice(4).map((resource) => {
+              const IconComponent = resource.icon;
+              
+              return (
+                <Card 
+                  key={resource.id} 
+                  className="group hover:shadow-lg transition-all duration-300 hover:border-primary/50"
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10">
+                        <IconComponent className="w-6 h-6 text-primary" />
+                      </div>
+                      {resource.badge && (
+                        <Badge variant="secondary" className="text-xs">
+                          {resource.badge}
+                        </Badge>
+                      )}
                     </div>
                     <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
                       {resource.type}
