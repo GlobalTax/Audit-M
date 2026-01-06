@@ -2,101 +2,23 @@ import { Link } from "react-router-dom";
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useAnalytics } from "@/hooks/useAnalytics";
-
-interface Testimonial {
-  id: string;
-  quote: string;
-  author: string;
-  role: string;
-  company: string;
-  companyType: 'multinational' | 'family_business' | 'investor' | 'startup' | 'sme';
-  companyTypeLabel: string;
-  location: string;
-  flag: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: "1",
-    quote: "Setting up our European headquarters in Barcelona was seamless. Navarro's team handled every step — from legal structuring to tax registration — in under four weeks.",
-    author: "James Mitchell",
-    role: "CEO",
-    company: "TechBridge Ventures",
-    companyType: "startup",
-    companyTypeLabel: "Tech Startup",
-    location: "United Kingdom",
-    flag: "🇬🇧"
-  },
-  {
-    id: "2",
-    quote: "Their transfer pricing expertise saved us significant tax exposure across three jurisdictions. Proactive advice that goes beyond compliance.",
-    author: "Dr. Elena Fischer",
-    role: "Group Tax Director",
-    company: "Hartmann Industries AG",
-    companyType: "multinational",
-    companyTypeLabel: "Multinational",
-    location: "Germany",
-    flag: "🇩🇪"
-  },
-  {
-    id: "3",
-    quote: "As a US investor entering Spain, I needed advisors who understood both legal systems. Their bilingual team and responsive communication exceeded all expectations.",
-    author: "Rachel Morrison",
-    role: "Investment Director",
-    company: "Atlantic Capital Partners",
-    companyType: "investor",
-    companyTypeLabel: "Investor",
-    location: "United States",
-    flag: "🇺🇸"
-  },
-  {
-    id: "4",
-    quote: "Managing payroll across Spain, Portugal, and France was a constant headache. Since partnering with Navarro, our multi-country operations run like clockwork.",
-    author: "Pierre Dubois",
-    role: "VP of Global HR",
-    company: "LogiTrans Europe SA",
-    companyType: "multinational",
-    companyTypeLabel: "Multinational",
-    location: "France",
-    flag: "🇫🇷"
-  },
-  {
-    id: "5",
-    quote: "Our family business needed succession planning that preserved our legacy while optimizing tax efficiency. They delivered a solution that satisfied all stakeholders.",
-    author: "Carlos Mendoza III",
-    role: "Managing Director",
-    company: "Grupo Mendoza",
-    companyType: "family_business",
-    companyTypeLabel: "Family Business",
-    location: "Mexico",
-    flag: "🇲🇽"
-  },
-  {
-    id: "6",
-    quote: "From subsidiary incorporation to ongoing compliance, they've been our trusted partner for five years. Their integrated approach eliminates the silos we had with previous advisors.",
-    author: "Isabelle van der Berg",
-    role: "CFO",
-    company: "Nordica Consumer Goods",
-    companyType: "multinational",
-    companyTypeLabel: "Multinational",
-    location: "Netherlands",
-    flag: "🇳🇱"
-  }
-];
+import { useTestimonials } from "@/hooks/useTestimonials";
 
 const getInitials = (name: string) => {
-  return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 };
 
 export function HomeTestimonialsSection() {
   const { trackEvent, trackCTAClick } = useAnalytics();
+  const { data: testimonials, isLoading } = useTestimonials('int');
 
-  const handleTestimonialClick = (testimonial: Testimonial, index: number) => {
+  const handleTestimonialClick = (testimonial: { author_name: string; company_type: string }, index: number) => {
     trackEvent('testimonial_click_homepage_global_nrro', {
-      author: testimonial.author,
-      company_type: testimonial.companyType,
+      author: testimonial.author_name,
+      company_type: testimonial.company_type,
       position: index + 1
     });
   };
@@ -105,6 +27,39 @@ export function HomeTestimonialsSection() {
     trackCTAClick('See More Success Stories', 'homepage_testimonials');
     trackEvent('testimonials_cta_click_global_nrro', {});
   };
+
+  if (isLoading) {
+    return (
+      <section className="bg-muted/30 py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16">
+            <Skeleton className="h-4 w-40 mx-auto mb-4" />
+            <Skeleton className="h-10 w-64 mx-auto mb-4" />
+            <Skeleton className="h-6 w-96 mx-auto" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-card border rounded-lg p-6">
+                <Skeleton className="h-8 w-8 mb-4" />
+                <Skeleton className="h-20 w-full mb-6" />
+                <div className="flex items-start gap-3">
+                  <Skeleton className="h-10 w-10 rounded-full" />
+                  <div className="flex-1">
+                    <Skeleton className="h-5 w-32 mb-2" />
+                    <Skeleton className="h-4 w-48" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
 
   return (
     <section className="bg-muted/30 py-20 md:py-28">
@@ -134,31 +89,32 @@ export function HomeTestimonialsSection() {
               <Quote className="h-8 w-8 text-primary/20 mb-4" />
               
               {/* Quote Text */}
-              <p className="text-foreground/90 italic leading-relaxed mb-6 text-sm md:text-base">
+              <p className="text-foreground/90 italic leading-relaxed mb-6 text-sm md:text-base line-clamp-4">
                 "{testimonial.quote}"
               </p>
               
               {/* Author Info */}
               <div className="flex items-start gap-3">
                 <Avatar className="h-10 w-10 border border-border">
+                  <AvatarImage src={testimonial.avatar_url || undefined} alt={testimonial.author_name} />
                   <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
-                    {getInitials(testimonial.author)}
+                    {getInitials(testimonial.author_name)}
                   </AvatarFallback>
                 </Avatar>
                 
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-foreground truncate">
-                    {testimonial.author}
+                    {testimonial.author_name}
                   </p>
                   <p className="text-sm text-muted-foreground truncate">
-                    {testimonial.role}, {testimonial.company}
+                    {testimonial.author_role}, {testimonial.company_name}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
                     <span className="text-xs text-muted-foreground">
-                      {testimonial.flag} {testimonial.location}
+                      {testimonial.flag_emoji} {testimonial.location}
                     </span>
                     <Badge variant="secondary" className="text-xs">
-                      {testimonial.companyTypeLabel}
+                      {testimonial.company_type_label}
                     </Badge>
                   </div>
                 </div>

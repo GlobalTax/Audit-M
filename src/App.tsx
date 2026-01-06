@@ -72,6 +72,7 @@ import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
 import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
+import AdminTestimonials from "./pages/admin/AdminTestimonials";
 
 const queryClient = new QueryClient();
 
@@ -148,6 +149,7 @@ const App = () => {
                   <Route path="case-studies" element={<AdminCaseStudies />} />
                   <Route path="services" element={<AdminServices />} />
                   <Route path="blog" element={<AdminBlog />} />
+                  <Route path="testimonials" element={<AdminTestimonials />} />
                   <Route path="team" element={<AdminTeam />} />
                   <Route path="job-positions" element={<AdminJobPositions />} />
                   <Route path="candidatos" element={<AdminCandidatos />} />
