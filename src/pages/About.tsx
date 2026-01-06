@@ -11,7 +11,8 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles } from 'lucide-react';
+import { Users, Target, TrendingUp, Award, Briefcase, Rocket, Zap, Building, Handshake, CheckCircle, Sparkles, Globe, Repeat, BarChart3 } from 'lucide-react';
+import { StatCard } from '@/components/ui/stat-card';
 import { BadgeHero } from '@/components/ui/badge-hero';
 import { usePageContent } from '@/hooks/usePageContent';
 import { Button } from '@/components/ui/button';
@@ -272,27 +273,67 @@ export default function About() {
         </section>
       )}
 
-      {/* Stats Section */}
-      {statsData?.is_active && (
-        <section className="py-20 md:py-28 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-mono text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
-              {stats.overline}
+      {/* Results & Impact Section */}
+      <section className="py-20 md:py-28 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70">
+              Results & Impact
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal mt-4 mb-4">
+              Our Impact in Numbers
             </h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center max-w-6xl mx-auto">
-              {stats.stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="text-5xl md:text-6xl font-normal text-foreground mb-2">{stat.valor}</div>
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider">
-                    {stat.descripcion}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Measurable outcomes that drive client confidence
+            </p>
           </div>
-        </section>
-      )}
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <StatCard
+              label="Years"
+              value="25+"
+              description="Over 25 years building trusted relationships with multinational companies and international investors."
+              delay={0}
+            />
+            <StatCard
+              label="International"
+              value="1000+"
+              description="International companies and investors who have chosen us for their cross-border legal and tax needs."
+              delay={100}
+            />
+            <StatCard
+              label="Repeat Business"
+              value="87%"
+              description="Client retention rate reflecting sustained satisfaction and ongoing partnership."
+              delay={200}
+            />
+            <StatCard
+              label="Global Expertise"
+              value="10"
+              description="Specialized practice areas covering legal, tax, accounting, labour, and M&A across jurisdictions."
+              delay={300}
+            />
+            <StatCard
+              label="Markets"
+              value="50+"
+              description="Markets served through our 3 global professional networks spanning Europe, Americas, and Asia-Pacific."
+              delay={400}
+            />
+            <StatCard
+              label="Cross-Border"
+              value="500+"
+              description="International projects successfully delivered including company setups, restructurings, and M&A transactions."
+              delay={500}
+            />
+          </div>
+
+          <div className="max-w-3xl mx-auto text-center mt-12">
+            <p className="text-base md:text-lg text-foreground/80 leading-relaxed italic">
+              These numbers represent thousands of business decisions supported, international expansions executed, and long-term partnerships forged. Our track record speaks to a commitment that extends far beyond the initial engagement.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Founder Section */}
       {founderData?.is_active && (
