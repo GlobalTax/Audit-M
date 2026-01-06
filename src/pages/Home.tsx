@@ -14,6 +14,7 @@ import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
 import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
 import { MultiJurisdictionalServicesSection } from "@/components/home/MultiJurisdictionalServicesSection";
+import { HomeTestimonialsSection } from "@/components/home/HomeTestimonialsSection";
 import { ArrowRight, Check, Globe } from "lucide-react";
 import {
   Carousel,
@@ -271,6 +272,9 @@ const Home = () => {
 
         {/* International Networks Section */}
         <InternationalNetworksSection />
+
+        {/* Testimonials Section */}
+        <HomeTestimonialsSection />
 
         {/* Datos/Stats Section */}
         <section className="bg-neutral-50 py-20 md:py-28">
