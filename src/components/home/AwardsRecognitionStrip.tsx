@@ -1,66 +1,32 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-
-interface AwardItem {
-  name: string;
-  category: string;
-  shortName: string;
-  year: string;
-  organization: string;
-}
-
-const awards: AwardItem[] = [
-  {
-    name: "XIX Edición Premios Emprendedores",
-    category: "PREMIO",
-    shortName: "EMPRENDEDORES",
-    year: "2023",
-    organization: "Emprendedores",
-  },
-  {
-    name: "III Edición Premios ProDespachos & Emprendedores (Innovación)",
-    category: "PREMIO",
-    shortName: "INNOVACIÓN",
-    year: "2023",
-    organization: "ProDespachos",
-  },
-  {
-    name: "I Premios Derecho — OBN& · LA RAZÓN",
-    category: "PREMIO",
-    shortName: "DERECHO",
-    year: "2022",
-    organization: "LA RAZÓN",
-  },
-  {
-    name: "Best Tax Advisory Firm – Spain",
-    category: "BEST",
-    shortName: "TAX FIRM",
-    year: "2024",
-    organization: "Corporate INTL",
-  },
-  {
-    name: "Top Legal Services Provider",
-    category: "TOP",
-    shortName: "LEGAL",
-    year: "2024",
-    organization: "Global Law Experts",
-  },
-  {
-    name: "Excellence in Cross-Border Advisory",
-    category: "AWARD",
-    shortName: "CROSS-BORDER",
-    year: "2024",
-    organization: "Finance Monthly",
-  },
-  {
-    name: "Best Corporate Formation Services",
-    category: "BEST",
-    shortName: "CORPORATE",
-    year: "2024",
-    organization: "Acquisition Intl",
-  },
-];
+import { useAwards } from "@/hooks/useAwards";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const AwardsRecognitionStrip = () => {
+  const { data: awards, isLoading } = useAwards();
+
+  if (isLoading) {
+    return (
+      <section className="py-16 md:py-20 bg-background border-t border-border/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Skeleton className="h-4 w-32 mx-auto mb-3" />
+            <Skeleton className="h-8 w-64 mx-auto" />
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
+            {[...Array(7)].map((_, i) => (
+              <Skeleton key={i} className="h-32 rounded-sm" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!awards || awards.length === 0) {
+    return null;
+  }
+
   return (
     <section 
       className="py-16 md:py-20 bg-background border-t border-border/50"
@@ -80,8 +46,8 @@ export const AwardsRecognitionStrip = () => {
         {/* Awards Grid */}
         <TooltipProvider>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
-            {awards.map((award, index) => (
-              <Tooltip key={index}>
+            {awards.map((award) => (
+              <Tooltip key={award.id}>
                 <TooltipTrigger asChild>
                   <div 
                     className="
@@ -105,7 +71,7 @@ export const AwardsRecognitionStrip = () => {
                     
                     {/* Award Name */}
                     <h3 className="text-xs font-medium text-foreground mt-1 uppercase tracking-wide leading-tight min-h-[2rem] flex items-center justify-center">
-                      {award.shortName}
+                      {award.short_name}
                     </h3>
                     
                     {/* Year */}

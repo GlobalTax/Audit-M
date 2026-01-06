@@ -14,6 +14,7 @@ import {
   Calculator,
   FileDown,
   MessageSquareQuote,
+  Trophy,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,7 @@ const navItems = [
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
   { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
+  { path: '/admin/awards', icon: Trophy, label: 'Awards' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
   { path: '/admin/playbook-leads', icon: FileDown, label: 'Resource Leads' },
   { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },

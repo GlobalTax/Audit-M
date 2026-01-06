@@ -73,6 +73,7 @@ import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
 import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
+import AdminAwards from "./pages/admin/AdminAwards";
 import LeaveReview from "./pages/LeaveReview";
 import Testimonials from "./pages/Testimonials";
 
@@ -154,6 +155,7 @@ const App = () => {
                   <Route path="services" element={<AdminServices />} />
                   <Route path="blog" element={<AdminBlog />} />
                   <Route path="testimonials" element={<AdminTestimonials />} />
+                  <Route path="awards" element={<AdminAwards />} />
                   <Route path="team" element={<AdminTeam />} />
                   <Route path="job-positions" element={<AdminJobPositions />} />
                   <Route path="candidatos" element={<AdminCandidatos />} />
