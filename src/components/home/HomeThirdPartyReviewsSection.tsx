@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Star, ExternalLink, MessageSquarePlus } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -179,7 +179,6 @@ export const HomeThirdPartyReviewsSection = () => {
           <Button
             size="lg"
             variant="outline"
-            className="gap-2"
             onClick={handleLeaveReviewClick}
             asChild
           >
@@ -188,13 +187,9 @@ export const HomeThirdPartyReviewsSection = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageSquarePlus className="w-4 h-4" />
               Leave a Review
             </a>
           </Button>
-          <p className="text-sm text-muted-foreground mt-3">
-            Your feedback helps other international businesses find trusted advisory
-          </p>
         </motion.div>
       </div>
     </section>
