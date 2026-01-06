@@ -2,6 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 interface AwardItem {
   name: string;
+  category: string;
   shortName: string;
   year: string;
   organization: string;
@@ -10,84 +11,100 @@ interface AwardItem {
 const awards: AwardItem[] = [
   {
     name: "XIX Edición Premios Emprendedores",
-    shortName: "PREMIOS EMPRENDEDORES",
+    category: "PREMIO",
+    shortName: "EMPRENDEDORES",
     year: "2023",
     organization: "Emprendedores",
   },
   {
     name: "III Edición Premios ProDespachos & Emprendedores (Innovación)",
-    shortName: "INNOVACIÓN PRODESPACHOS",
+    category: "PREMIO",
+    shortName: "INNOVACIÓN",
     year: "2023",
     organization: "ProDespachos",
   },
   {
     name: "I Premios Derecho — OBN& · LA RAZÓN",
-    shortName: "PREMIOS DERECHO",
+    category: "PREMIO",
+    shortName: "DERECHO",
     year: "2022",
     organization: "LA RAZÓN",
   },
   {
     name: "Best Tax Advisory Firm – Spain",
-    shortName: "BEST TAX FIRM",
+    category: "BEST",
+    shortName: "TAX FIRM",
     year: "2024",
     organization: "Corporate INTL",
   },
   {
     name: "Top Legal Services Provider",
-    shortName: "TOP LEGAL PROVIDER",
+    category: "TOP",
+    shortName: "LEGAL",
     year: "2024",
     organization: "Global Law Experts",
   },
   {
     name: "Excellence in Cross-Border Advisory",
-    shortName: "CROSS-BORDER EXCELLENCE",
+    category: "AWARD",
+    shortName: "CROSS-BORDER",
     year: "2024",
     organization: "Finance Monthly",
   },
   {
     name: "Best Corporate Formation Services",
-    shortName: "BEST CORP SERVICES",
+    category: "BEST",
+    shortName: "CORPORATE",
     year: "2024",
     organization: "Acquisition Intl",
   },
 ];
 
-const LaurelWreath = ({ className }: { className?: string }) => (
+const GoldenLaurelWreath = ({ className }: { className?: string }) => (
   <svg
-    viewBox="0 0 100 100"
+    viewBox="0 0 100 120"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
   >
-    {/* Left branch */}
-    <g stroke="currentColor" strokeWidth="1" fill="none">
+    {/* Star at top */}
+    <polygon 
+      fill="currentColor" 
+      points="50,0 52.5,7 60,7 54,12 56,20 50,16 44,20 46,12 40,7 47.5,7"
+    />
+    
+    {/* Left branch with filled leaves */}
+    <g fill="currentColor">
       {/* Left stem */}
-      <path d="M50 95 Q35 75 30 50" strokeWidth="1.5" />
+      <path d="M48 108 Q32 85 28 55" stroke="currentColor" strokeWidth="2" fill="none" />
       
-      {/* Left leaves */}
-      <ellipse cx="28" cy="75" rx="6" ry="12" transform="rotate(-30 28 75)" />
-      <ellipse cx="24" cy="62" rx="5" ry="10" transform="rotate(-40 24 62)" />
-      <ellipse cx="22" cy="50" rx="5" ry="10" transform="rotate(-50 22 50)" />
-      <ellipse cx="22" cy="38" rx="5" ry="10" transform="rotate(-60 22 38)" />
-      <ellipse cx="25" cy="27" rx="4" ry="9" transform="rotate(-70 25 27)" />
-      <ellipse cx="30" cy="18" rx="4" ry="8" transform="rotate(-80 30 18)" />
-      <ellipse cx="38" cy="12" rx="3" ry="7" transform="rotate(-85 38 12)" />
+      {/* Left leaves - bottom to top */}
+      <path d="M35 95 Q28 88 30 78 Q38 82 35 95" />
+      <path d="M30 82 Q22 74 24 64 Q33 68 30 82" />
+      <path d="M26 68 Q18 60 20 50 Q29 54 26 68" />
+      <path d="M24 54 Q16 46 18 36 Q27 40 24 54" />
+      <path d="M24 40 Q18 32 22 22 Q29 28 24 40" />
+      <path d="M28 28 Q24 18 30 10 Q35 18 28 28" />
+      <path d="M36 18 Q34 8 42 4 Q44 14 36 18" />
     </g>
     
-    {/* Right branch */}
-    <g stroke="currentColor" strokeWidth="1" fill="none">
+    {/* Right branch with filled leaves */}
+    <g fill="currentColor">
       {/* Right stem */}
-      <path d="M50 95 Q65 75 70 50" strokeWidth="1.5" />
+      <path d="M52 108 Q68 85 72 55" stroke="currentColor" strokeWidth="2" fill="none" />
       
-      {/* Right leaves */}
-      <ellipse cx="72" cy="75" rx="6" ry="12" transform="rotate(30 72 75)" />
-      <ellipse cx="76" cy="62" rx="5" ry="10" transform="rotate(40 76 62)" />
-      <ellipse cx="78" cy="50" rx="5" ry="10" transform="rotate(50 78 50)" />
-      <ellipse cx="78" cy="38" rx="5" ry="10" transform="rotate(60 78 38)" />
-      <ellipse cx="75" cy="27" rx="4" ry="9" transform="rotate(70 75 27)" />
-      <ellipse cx="70" cy="18" rx="4" ry="8" transform="rotate(80 70 18)" />
-      <ellipse cx="62" cy="12" rx="3" ry="7" transform="rotate(85 62 12)" />
+      {/* Right leaves - bottom to top */}
+      <path d="M65 95 Q72 88 70 78 Q62 82 65 95" />
+      <path d="M70 82 Q78 74 76 64 Q67 68 70 82" />
+      <path d="M74 68 Q82 60 80 50 Q71 54 74 68" />
+      <path d="M76 54 Q84 46 82 36 Q73 40 76 54" />
+      <path d="M76 40 Q82 32 78 22 Q71 28 76 40" />
+      <path d="M72 28 Q76 18 70 10 Q65 18 72 28" />
+      <path d="M64 18 Q66 8 58 4 Q56 14 64 18" />
     </g>
+    
+    {/* Decorative dot at bottom */}
+    <circle cx="50" cy="115" r="3" fill="currentColor" />
   </svg>
 );
 
@@ -116,22 +133,25 @@ export const AwardsRecognitionStrip = () => {
                 <TooltipTrigger asChild>
                   <div className="group flex flex-col items-center cursor-default">
                     {/* Laurel Wreath Badge */}
-                    <div className="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
-                      <LaurelWreath className="absolute inset-0 w-full h-full text-foreground/80 group-hover:text-foreground transition-colors duration-200" />
+                    <div className="relative w-28 h-32 md:w-32 md:h-36 flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+                      <GoldenLaurelWreath className="absolute inset-0 w-full h-full text-[#C9A227] group-hover:text-[#D4AF37] transition-colors duration-200" />
                       
                       {/* Text inside wreath */}
-                      <div className="relative z-10 flex flex-col items-center justify-center text-center px-3 pt-1">
-                        <span className="text-[8px] md:text-[9px] font-medium leading-tight text-foreground/90 uppercase tracking-wide">
+                      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-3">
+                        <span className="text-[9px] md:text-[10px] font-medium leading-tight text-[#8B7355] uppercase tracking-wider">
+                          {award.category}
+                        </span>
+                        <span className="text-[10px] md:text-xs font-medium leading-tight text-foreground uppercase tracking-wide mt-0.5">
                           {award.shortName}
                         </span>
-                        <span className="text-xs md:text-sm font-normal text-foreground mt-1">
+                        <span className="text-sm md:text-base font-normal text-foreground mt-1">
                           {award.year}
                         </span>
                       </div>
                     </div>
                     
                     {/* Organization below */}
-                    <span className="text-[10px] md:text-xs text-muted-foreground mt-2 text-center">
+                    <span className="text-[10px] md:text-xs text-muted-foreground mt-1 text-center">
                       {award.organization}
                     </span>
                   </div>
