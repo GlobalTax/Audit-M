@@ -1,4 +1,4 @@
-import { Trophy, Scale, Award, Building2, Star, Globe } from "lucide-react";
+import { Trophy, Award, Scale } from "lucide-react";
 
 interface AwardItem {
   name: string;
@@ -9,40 +9,22 @@ interface AwardItem {
 
 const awards: AwardItem[] = [
   {
-    name: "Best Tax Advisory Firm – Spain",
-    year: "2025",
-    organization: "Corporate INTL Global Awards",
+    name: "XIX Edición Premios Emprendedores",
+    year: "2023",
+    organization: "Emprendedores",
     icon: Trophy,
   },
   {
-    name: "Top Legal Services Provider",
-    year: "2024",
-    organization: "Global Law Experts",
-    icon: Scale,
-  },
-  {
-    name: "Excellence in Cross-Border Advisory",
-    year: "2024",
-    organization: "Finance Monthly",
+    name: "III Edición Premios ProDespachos & Emprendedores",
+    year: "2023",
+    organization: "Innovación",
     icon: Award,
   },
   {
-    name: "Best Corporate Formation Services",
-    year: "2024",
-    organization: "Acquisition International",
-    icon: Building2,
-  },
-  {
-    name: "Recommended Firm – Corporate Tax",
-    year: "2023-2025",
-    organization: "Legal 500",
-    icon: Star,
-  },
-  {
-    name: "Top Tier – International Tax Planning",
-    year: "2024",
-    organization: "World Tax",
-    icon: Globe,
+    name: "I Premios Derecho",
+    year: "2022",
+    organization: "OBN& · LA RAZÓN",
+    icon: Scale,
   },
 ];
 
@@ -64,7 +46,7 @@ export const AwardsRecognitionStrip = () => {
         </div>
 
         {/* Awards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {awards.map((award, index) => {
             const IconComponent = award.icon;
             return (
