@@ -16,9 +16,11 @@ import {
 import { LaborCostForm } from "@/components/labor-calculator/LaborCostForm";
 import { LaborCostResults } from "@/components/labor-calculator/LaborCostResults";
 import { LaborCostLeadForm } from "@/components/labor-calculator/LaborCostLeadForm";
+import { ScenarioComparator } from "@/components/labor-calculator/ScenarioComparator";
 import { 
   LaborCostInputs, 
   LaborCostResults as LaborCostResultsType, 
+  Scenario,
   calculateLaborCosts 
 } from "@/lib/laborCostCalculatorLogic";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -50,11 +52,14 @@ const relatedResources = [
   },
 ];
 
+const SCENARIO_LABELS = ['Scenario A', 'Scenario B', 'Scenario C'];
+
 export default function SpainLaborCostCalculator() {
   const { trackEvent } = useAnalytics();
   const [inputs, setInputs] = useState<LaborCostInputs | null>(null);
   const [results, setResults] = useState<LaborCostResultsType | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [scenarios, setScenarios] = useState<Scenario[]>([]);
 
   useEffect(() => {
     trackEvent("labor_calculator_view_global_nrro");
@@ -65,6 +70,8 @@ export default function SpainLaborCostCalculator() {
     
     trackEvent("labor_calculator_submit_global_nrro", {
       gross_salary: formInputs.grossSalary,
+      salary_mode: formInputs.salaryInputMode,
+      payments: formInputs.numberOfPayments,
       contract_type: formInputs.contractType,
       employees: formInputs.numberOfEmployees,
       industry_risk: formInputs.industryRisk,
@@ -84,9 +91,53 @@ export default function SpainLaborCostCalculator() {
     }, 500);
   };
 
+  const handleSaveScenario = () => {
+    if (!inputs || !results || scenarios.length >= 3) return;
+
+    const newScenario: Scenario = {
+      id: crypto.randomUUID(),
+      label: SCENARIO_LABELS[scenarios.length],
+      inputs: { ...inputs },
+      results: { ...results },
+      savedAt: new Date(),
+    };
+
+    setScenarios([...scenarios, newScenario]);
+    
+    trackEvent("labor_calculator_scenario_saved_global_nrro", {
+      scenario_label: newScenario.label,
+      total_scenarios: scenarios.length + 1,
+    });
+  };
+
+  const handleRemoveScenario = (id: string) => {
+    const removedScenario = scenarios.find(s => s.id === id);
+    const remaining = scenarios.filter(s => s.id !== id);
+    
+    // Re-label remaining scenarios
+    const relabeled = remaining.map((s, i) => ({
+      ...s,
+      label: SCENARIO_LABELS[i],
+    }));
+    
+    setScenarios(relabeled);
+
+    trackEvent("labor_calculator_scenario_removed_global_nrro", {
+      scenario_label: removedScenario?.label,
+      remaining_scenarios: relabeled.length,
+    });
+  };
+
+  const handleAddScenario = () => {
+    // Scroll to form to modify inputs
+    document.getElementById('calculator-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleCTAClick = (ctaType: string) => {
     trackEvent(`labor_calculator_cta_${ctaType}_global_nrro`);
   };
+
+  const canSaveScenario = results && scenarios.length < 3;
 
   return (
     <>
@@ -124,7 +175,7 @@ export default function SpainLaborCostCalculator() {
       </section>
 
       {/* Calculator Section */}
-      <section className="py-20 md:py-28 bg-neutral-50">
+      <section className="py-20 md:py-28 bg-neutral-50" id="calculator-form">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Input Form */}
@@ -164,6 +215,8 @@ export default function SpainLaborCostCalculator() {
                   results={results}
                   grossSalary={inputs.grossSalary}
                   numberOfEmployees={inputs.numberOfEmployees}
+                  onSaveScenario={handleSaveScenario}
+                  canSaveScenario={canSaveScenario}
                 />
               ) : (
                 <Card className="border-dashed">
@@ -180,9 +233,23 @@ export default function SpainLaborCostCalculator() {
         </div>
       </section>
 
+      {/* Scenario Comparison Section */}
+      {scenarios.length > 0 && (
+        <section className="py-20 md:py-28 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <ScenarioComparator
+              scenarios={scenarios}
+              onRemoveScenario={handleRemoveScenario}
+              onAddScenario={handleAddScenario}
+              maxScenarios={3}
+            />
+          </div>
+        </section>
+      )}
+
       {/* Lead Capture + CTAs Section */}
       {results && (
-        <section className="py-20 md:py-28 bg-background">
+        <section className={`py-20 md:py-28 ${scenarios.length > 0 ? 'bg-muted/30' : 'bg-background'}`}>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Lead Capture Form */}
@@ -200,6 +267,8 @@ export default function SpainLaborCostCalculator() {
                   <LaborCostLeadForm 
                     calculatorInputs={inputs ? {
                       grossSalary: inputs.grossSalary,
+                      salaryInputMode: inputs.salaryInputMode,
+                      numberOfPayments: inputs.numberOfPayments,
                       contractType: inputs.contractType,
                       numberOfEmployees: inputs.numberOfEmployees,
                       industryRisk: inputs.industryRisk,
@@ -265,7 +334,7 @@ export default function SpainLaborCostCalculator() {
       )}
 
       {/* Related Resources */}
-      <section className="py-20 md:py-28 bg-muted/30">
+      <section className={`py-20 md:py-28 ${results ? 'bg-background' : 'bg-muted/30'}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">

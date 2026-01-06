@@ -17,6 +17,8 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 interface LaborCostLeadFormProps {
   calculatorInputs?: {
     grossSalary: number;
+    salaryInputMode: 'monthly' | 'annual';
+    numberOfPayments: 12 | 14;
     contractType: string;
     numberOfEmployees: number;
     industryRisk: string;
