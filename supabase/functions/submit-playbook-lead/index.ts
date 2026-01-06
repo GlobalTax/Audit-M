@@ -83,6 +83,19 @@ function getAssetConfig(playbookName: string): AssetConfig {
         "Next steps checklist",
         "Advisory team contact details"
       ]
+    },
+    "spain-labor-cost-calculator": {
+      downloadUrl: "https://global.nrro.es/downloads/spain-labor-cost-report.pdf",
+      emailSubject: "Your Spain Labor Cost Estimate",
+      assetTitle: "Spain Labor Cost Report",
+      assetDescription: "Your detailed labor cost breakdown for hiring employees in Spain is ready.",
+      whatsInside: [
+        "Complete employer contribution breakdown",
+        "Net vs gross salary analysis",
+        "Industry-specific cost adjustments",
+        "Annual cost projections (14 payments)",
+        "Next steps for payroll setup"
+      ]
     }
   };
 

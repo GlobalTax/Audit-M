@@ -11,6 +11,7 @@ import {
   ClipboardCheck, 
   BarChart3, 
   Calculator,
+  Coins,
   FileText,
   Globe,
   Video
@@ -52,6 +53,15 @@ const spainSetupResources = [
     type: "Tool",
     icon: Calculator,
     href: "/spain-setup-calculator",
+    badge: null,
+  },
+  {
+    id: "labor-calculator",
+    title: "Labor Cost Calculator",
+    description: "Calculate true hiring costs including employer contributions, IRPF, and net salary estimates.",
+    type: "Tool",
+    icon: Coins,
+    href: "/spain-labor-cost-calculator",
     badge: "New",
   },
 ];
