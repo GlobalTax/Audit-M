@@ -109,7 +109,7 @@ export const HomeCaseStudiesSection = () => {
         </div>
 
         {/* Primary CTA */}
-        <div className="text-center mb-12">
+        <div className="text-center">
           <Button 
             asChild 
             size="lg"
@@ -118,22 +118,6 @@ export const HomeCaseStudiesSection = () => {
             <Link to="/case-studies">
               Explore All Case Studies
               <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-
-        {/* Mini CTA */}
-        <div className="text-center pt-8 border-t border-border">
-          <p className="text-muted-foreground mb-3">
-            Have a success story to share?
-          </p>
-          <Button 
-            variant="outline" 
-            asChild
-            onClick={handleShareClick}
-          >
-            <Link to="/contact?subject=testimonial">
-              Share Your Experience with NRRO
             </Link>
           </Button>
         </div>
