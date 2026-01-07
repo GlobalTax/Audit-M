@@ -36,55 +36,55 @@ export default function About() {
   
   // Track page view
   useEffect(() => {
-    trackPageView("nosotros");
+    trackPageView("about");
   }, []);
   
   const heroData = heroContent?.[0];
   const hero = heroData?.content || {
-    overline: 'NOSOTROS',
-    title: '25 años de experiencia. Un proyecto personal.',
-    subtitle: 'De Garrigues a obn.es, y ahora navarro. Experiencia consolidada, servicio personalizado, máxima ilusión.'
+    overline: 'ABOUT US',
+    title: '25 Years of Experience. A Personal Commitment.',
+    subtitle: 'From Garrigues to obn.es, and now navarro. Proven expertise, personalized service, unwavering dedication.'
   };
 
   const storyData = storyContent?.[0];
   const story = storyData?.content || {
-    overline: 'Mi trayectoria',
-    titulo: '25 años construyendo relaciones de confianza',
+    overline: 'Our Journey',
+    titulo: '25 Years Building Trusted Relationships',
     parrafos: [],
     destacado: ''
   };
 
   const timelineData = timelineContent?.[0];
   const timeline = timelineData?.content || {
-    overline: 'Trayectoria',
+    overline: 'Our History',
     hitos: []
   };
 
   const valuesData = valuesContent?.[0];
   const values = valuesData?.content || {
-    overline: 'Nuestros Valores',
+    overline: 'Our Values',
     valores: []
   };
 
   const diferenciacionData = diferenciacionContent?.[0];
   const diferenciacion = diferenciacionData?.content || {
-    overline: 'Diferenciación',
+    overline: 'What Sets Us Apart',
     cards: []
   };
 
   const statsData = statsContent?.[0];
   const stats = statsData?.content || {
-    overline: 'Navarro en cifras',
+    overline: 'Navarro in Numbers',
     stats: []
   };
 
   const founderData = founderContent?.[0];
   const founder = founderData?.content || {
-    overline: 'Fundador',
+    overline: 'Founder',
     nombre: 'Samuel L. Navarro',
     parrafos: [],
-    cta_texto: 'Conoce al equipo completo',
-    cta_url: '/equipo'
+    cta_texto: 'Meet the Full Team',
+    cta_url: '/team'
   };
 
   // Icon mapping
@@ -115,9 +115,9 @@ export default function About() {
       {founder.nombre && (
         <PersonSchema
           name={founder.nombre}
-          jobTitle="Fundador"
+          jobTitle="Founder"
           description={founder.parrafos?.[0] || ''}
-          url={`${window.location.origin}/equipo`}
+          url={`${window.location.origin}/team`}
         />
       )}
 
