@@ -119,7 +119,7 @@ const Careers = () => {
       <Meta
         title={t('careers.meta.title')}
         description={t('careers.meta.description')}
-        canonicalUrl={`${window.location.origin}/carreras`}
+        canonicalUrl={`${window.location.origin}/careers`}
       />
       <BreadcrumbSchema items={mainBreadcrumbs.careers} />
       <FAQSchema faqs={faqs} />

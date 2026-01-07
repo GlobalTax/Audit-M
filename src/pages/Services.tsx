@@ -39,7 +39,7 @@ const Services = () => {
   
   // Track page view
   useEffect(() => {
-    trackPageView("servicios");
+    trackPageView("services");
   }, []);
   
   // Track search (debounced)
@@ -92,7 +92,7 @@ const Services = () => {
       <Meta
         title={t('services.meta.title')}
         description={t('services.meta.description')}
-        canonicalUrl={`${window.location.origin}/servicios`}
+        canonicalUrl={`${window.location.origin}/services`}
       />
       <BreadcrumbSchema items={mainBreadcrumbs.services} />
 
@@ -179,7 +179,7 @@ const Services = () => {
                         setCurrentPage(1);
                       }}
                       className="pl-10"
-                      aria-label="Buscar servicios"
+                      aria-label="Search services"
                     />
                   </div>
                 </div>
