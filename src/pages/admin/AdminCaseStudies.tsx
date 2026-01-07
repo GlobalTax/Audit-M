@@ -72,10 +72,10 @@ export function AdminCaseStudies() {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Estado actualizado correctamente');
+      toast.success('Status updated successfully');
       queryClient.invalidateQueries({ queryKey: ['admin-case-studies'] });
     } catch (error) {
-      toast.error('Error al actualizar el estado');
+      toast.error('Error updating status');
     }
   };
 
@@ -87,11 +87,11 @@ export function AdminCaseStudies() {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Caso de éxito eliminado correctamente');
+      toast.success('Case study deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['admin-case-studies'] });
       setCaseStudyToDelete(null);
     } catch (error) {
-      toast.error('Error al eliminar el caso de éxito');
+      toast.error('Error deleting case study');
     }
   };
 
@@ -121,21 +121,21 @@ export function AdminCaseStudies() {
   };
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-normal">Casos de Éxito</h1>
+          <h1 className="text-3xl font-normal">Case Studies</h1>
           <p className="text-foreground/70 mt-2">
-            Gestiona los casos de éxito de tus clientes
+            Manage client success stories
           </p>
         </div>
         <Button onClick={handleAddNew}>
           <Plus className="h-4 w-4 mr-2" />
-          Añadir Caso de Éxito
+          Add Case Study
         </Button>
       </div>
 
@@ -148,7 +148,7 @@ export function AdminCaseStudies() {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/50" />
           <Input
-            placeholder="Buscar casos de éxito..."
+            placeholder="Search case studies..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -160,14 +160,14 @@ export function AdminCaseStudies() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Cliente</TableHead>
-              <TableHead>Título</TableHead>
-              <TableHead>Sector</TableHead>
-              <TableHead>Servicio</TableHead>
-              <TableHead>Estado</TableHead>
-              <TableHead>Destacado</TableHead>
-              <TableHead>Vistas</TableHead>
-              <TableHead className="text-right">Acciones</TableHead>
+              <TableHead>Client</TableHead>
+              <TableHead>Title</TableHead>
+              <TableHead>Industry</TableHead>
+              <TableHead>Service</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Featured</TableHead>
+              <TableHead>Views</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -227,7 +227,7 @@ export function AdminCaseStudies() {
             ) : (
               <TableRow>
                 <TableCell colSpan={8} className="text-center py-8 text-foreground/60">
-                  No se encontraron casos de éxito
+                  No case studies found
                 </TableCell>
               </TableRow>
             )}
@@ -256,18 +256,18 @@ export function AdminCaseStudies() {
       <AlertDialog open={!!caseStudyToDelete} onOpenChange={() => setCaseStudyToDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción no se puede deshacer. Se eliminará permanentemente este caso de éxito.
+              This action cannot be undone. This will permanently delete the case study.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => caseStudyToDelete && handleDelete(caseStudyToDelete)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Eliminar
+              Delete
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
