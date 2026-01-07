@@ -218,6 +218,10 @@ export default function Contact() {
                       {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
                       <Send className="ml-2 h-4 w-4" />
                     </Button>
+                    {/* Trust Microcopy */}
+                    <p className="text-xs text-muted-foreground text-center mt-4">
+                      Confidential. No obligation. We reply within 1 business day.
+                    </p>
                   </form>
                 </CardContent>
               </Card>
