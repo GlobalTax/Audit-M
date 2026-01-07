@@ -72,6 +72,8 @@ import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
 import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
 import SpainMAGateway from "./pages/SpainMAGateway";
+import { SpanishPayrollInternational } from "./pages/SpanishPayrollInternational";
+import { SpanishSubsidiaryCompliance } from "./pages/SpanishSubsidiaryCompliance";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -142,6 +144,8 @@ const App = () => {
                 <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
                 <Route path="/spain-tax-residency-risk" element={<Layout><SpainTaxResidencyRisk /></Layout>} />
                 <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
+                <Route path="/spanish-payroll-international" element={<SpanishPayrollInternational />} />
+                <Route path="/spanish-subsidiary-compliance" element={<SpanishSubsidiaryCompliance />} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

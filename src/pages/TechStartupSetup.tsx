@@ -1,4 +1,5 @@
 import { Meta } from '@/components/seo/Meta';
+import { BadgeHero } from '@/components/ui/badge-hero';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Rocket, TrendingUp, Globe, DollarSign, CheckCircle2, Users } from 'lucide-react';
@@ -72,20 +73,20 @@ export const TechStartupSetup = () => {
       />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-primary/5 to-background">
-        <div className="container">
+      <section className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4" variant="outline">
+            <BadgeHero className="mb-6">
               <Rocket className="h-4 w-4 mr-2" />
-              FOR TECH FOUNDERS
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-normal mb-6">
+              For Tech Founders
+            </BadgeHero>
+            <h1 className="hero-title mb-6">
               Launch Your Tech Startup in Spain
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-lead text-white/80 mb-8">
               Legal setup + Tax strategy + Visa support. Built for founders.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/70">
               <div>🤝 Partner of Barcelona Tech City</div>
               <div>•</div>
               <div>🚀 ACCIÓ Certified</div>
@@ -99,10 +100,10 @@ export const TechStartupSetup = () => {
       <TrustBar />
 
       {/* Why Spain for Tech */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-normal mb-12 text-center">Why Spain for Tech Startups?</h2>
+            <h2 className="text-3xl md:text-4xl font-normal mb-12 text-center">Why Spain for Tech Startups?</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
@@ -113,7 +114,7 @@ export const TechStartupSetup = () => {
                         <Icon className="h-8 w-8 text-primary" />
                       </div>
                       <div className="text-3xl font-bold text-primary mb-2">{benefit.stat}</div>
-                      <div className="font-semibold mb-2">{benefit.title}</div>
+                      <div className="font-medium mb-2">{benefit.title}</div>
                       <div className="text-sm text-muted-foreground">{benefit.description}</div>
                     </CardContent>
                   </Card>
@@ -127,11 +128,11 @@ export const TechStartupSetup = () => {
       <WhyChooseUs />
 
       {/* Startup Package */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Complete Startup Setup Package</h2>
+              <h2 className="text-3xl md:text-4xl font-normal mb-4">Complete Startup Setup Package</h2>
               <p className="text-lg text-muted-foreground">
                 Everything you need to launch properly
               </p>
@@ -160,7 +161,7 @@ export const TechStartupSetup = () => {
                 </div>
 
                 <div className="border-t pt-6 mb-8">
-                  <h3 className="font-semibold mb-4">Tech Ecosystem Access</h3>
+                  <h3 className="font-medium mb-4">Tech Ecosystem Access</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     We're not just lawyers, we're part of the ecosystem. Get intros to:
                   </p>
@@ -180,6 +181,9 @@ export const TechStartupSetup = () => {
                   conversionType="full-service"
                   submitButtonText="Get Startup Quote"
                 />
+                <p className="text-center text-sm text-muted-foreground mt-4">
+                  Confidential. No obligation. Reply within 1 business day.
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -187,15 +191,15 @@ export const TechStartupSetup = () => {
       </section>
 
       {/* FAQs */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-normal mb-12 text-center">Tech-Specific FAQs</h2>
+            <h2 className="text-3xl md:text-4xl font-normal mb-12 text-center">Tech-Specific FAQs</h2>
             <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <Card key={index}>
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                    <h3 className="font-medium text-lg mb-2">{faq.question}</h3>
                     <p className="text-muted-foreground">{faq.answer}</p>
                   </CardContent>
                 </Card>
@@ -206,13 +210,13 @@ export const TechStartupSetup = () => {
       </section>
 
       {/* Case Study */}
-      <section className="py-16 bg-primary/5">
-        <div className="container">
+      <section className="py-20 md:py-28 bg-primary/5">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <Card>
               <CardContent className="p-8">
                 <Badge className="mb-4">Success Story</Badge>
-                <h3 className="text-2xl font-bold mb-4">From UK to Barcelona in 30 Days</h3>
+                <h3 className="text-2xl font-normal mb-4">From UK to Barcelona in 30 Days</h3>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
                     <strong className="text-foreground">Client:</strong> SaaS startup, 3 UK founders

@@ -1,7 +1,7 @@
 import { Meta } from '@/components/seo/Meta';
-import { Badge } from '@/components/ui/badge';
+import { BadgeHero } from '@/components/ui/badge-hero';
 import { Card, CardContent } from '@/components/ui/card';
-import { Zap, Clock, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
+import { Zap, Clock, CheckCircle2, Shield } from 'lucide-react';
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
@@ -60,41 +60,41 @@ export const ExpressCompanySetup = () => {
       />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-primary/5 to-background">
-        <div className="container">
+      <section className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-primary text-primary-foreground" variant="default">
+            <BadgeHero className="mb-6">
               <Zap className="h-4 w-4 mr-2" />
-              EXPRESS SERVICE
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-normal mb-6">
+              Express Service
+            </BadgeHero>
+            <h1 className="hero-title mb-6">
               Register Your Spanish Company in 30 Days. Guaranteed.
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-lead text-white/80 mb-8">
               Fast-track registration. No delays. Money-back guarantee.
             </p>
 
             {/* Countdown Timer */}
-            <Card className="max-w-md mx-auto border-primary bg-primary/5">
+            <Card className="max-w-md mx-auto border-white/20 bg-white/5">
               <CardContent className="p-6">
-                <div className="text-sm text-muted-foreground mb-3">Next Express Batch Starts:</div>
+                <div className="text-sm text-white/70 mb-3">Next Express Batch Starts:</div>
                 <div className="flex justify-center gap-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary">{timeLeft.days}</div>
-                    <div className="text-xs text-muted-foreground">Days</div>
+                    <div className="text-xs text-white/50">Days</div>
                   </div>
-                  <div className="text-3xl font-bold">:</div>
+                  <div className="text-3xl font-bold text-white/50">:</div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary">{String(timeLeft.hours).padStart(2, '0')}</div>
-                    <div className="text-xs text-muted-foreground">Hours</div>
+                    <div className="text-xs text-white/50">Hours</div>
                   </div>
-                  <div className="text-3xl font-bold">:</div>
+                  <div className="text-3xl font-bold text-white/50">:</div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                    <div className="text-xs text-muted-foreground">Minutes</div>
+                    <div className="text-xs text-white/50">Minutes</div>
                   </div>
                 </div>
-                <div className="mt-4 text-sm text-destructive font-semibold">
+                <div className="mt-4 text-sm text-destructive font-medium">
                   ⚠️ Only 5 slots left this month
                 </div>
               </CardContent>
@@ -106,16 +106,16 @@ export const ExpressCompanySetup = () => {
       <TrustBar />
 
       {/* Timeline Comparison */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-normal mb-12 text-center">DIY vs. Express Service</h2>
+            <h2 className="text-3xl md:text-4xl font-normal mb-12 text-center">DIY vs. Express Service</h2>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* DIY Column */}
               <div>
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-semibold mb-2 text-muted-foreground">DIY Approach</h3>
+                  <h3 className="text-xl font-medium mb-2 text-muted-foreground">DIY Approach</h3>
                   <div className="text-3xl font-bold text-muted-foreground">60-90 Days</div>
                 </div>
                 <div className="space-y-4">
@@ -123,7 +123,7 @@ export const ExpressCompanySetup = () => {
                     <Card key={index} className="border-dashed">
                       <CardContent className="p-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-16 text-sm font-semibold text-muted-foreground shrink-0">
+                          <div className="w-16 text-sm font-medium text-muted-foreground shrink-0">
                             {step.week}
                           </div>
                           <div className="flex-1">
@@ -140,7 +140,7 @@ export const ExpressCompanySetup = () => {
               {/* Express Column */}
               <div>
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-semibold mb-2 text-primary">Express Service</h3>
+                  <h3 className="text-xl font-medium mb-2 text-primary">Express Service</h3>
                   <div className="text-3xl font-bold text-primary">30 Days</div>
                 </div>
                 <div className="space-y-4">
@@ -148,7 +148,7 @@ export const ExpressCompanySetup = () => {
                     <Card key={index} className="border-primary">
                       <CardContent className="p-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-16 text-sm font-semibold text-primary shrink-0">{step.week}</div>
+                          <div className="w-16 text-sm font-medium text-primary shrink-0">{step.week}</div>
                           <div className="flex-1">
                             {step.tasks.map((task, idx) => (
                               <div key={idx} className="flex items-center gap-2 text-sm">
@@ -169,10 +169,10 @@ export const ExpressCompanySetup = () => {
       </section>
 
       {/* What Makes Us Fast */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-normal mb-12 text-center">What Makes Us Fast?</h2>
+            <h2 className="text-3xl md:text-4xl font-normal mb-12 text-center">What Makes Us Fast?</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
@@ -194,7 +194,7 @@ export const ExpressCompanySetup = () => {
               ].map((item, index) => (
                 <Card key={index}>
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                    <h3 className="font-medium text-lg mb-2">{item.title}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </CardContent>
                 </Card>
@@ -207,12 +207,12 @@ export const ExpressCompanySetup = () => {
       <WhyChooseUs />
 
       {/* Guarantee & Pricing */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <Shield className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-normal mb-4">Express Guarantee</h2>
+              <h2 className="text-3xl md:text-4xl font-normal mb-4">Express Guarantee</h2>
               <p className="text-lg text-muted-foreground">
                 We stand behind our promise
               </p>
@@ -256,7 +256,7 @@ export const ExpressCompanySetup = () => {
                 </div>
 
                 <div className="mb-8 p-4 bg-muted rounded-lg">
-                  <div className="font-semibold mb-2">Super-Express Available</div>
+                  <div className="font-medium mb-2">Super-Express Available</div>
                   <div className="text-sm text-muted-foreground">
                     Need it even faster? <strong>+€500</strong> for 20-day registration
                   </div>
@@ -269,9 +269,9 @@ export const ExpressCompanySetup = () => {
                   showAllFields={false}
                 />
 
-                <div className="text-center mt-4 text-sm text-muted-foreground">
-                  Get confirmation in 2 hours
-                </div>
+                <p className="text-center mt-4 text-sm text-muted-foreground">
+                  Confidential. No obligation. Get confirmation in 2 hours.
+                </p>
               </CardContent>
             </Card>
 
@@ -284,7 +284,7 @@ export const ExpressCompanySetup = () => {
                     <p className="text-lg mb-4">
                       Company registered in 28 days. Literally impossible to do it faster. Unbelievable.
                     </p>
-                    <div className="font-semibold">— Laura Schmidt</div>
+                    <div className="font-medium">— Laura Schmidt</div>
                     <div className="text-sm text-muted-foreground">Managing Director (Germany)</div>
                   </div>
                 </div>
