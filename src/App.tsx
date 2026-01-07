@@ -71,6 +71,7 @@ import SpainSetupUSA from "./pages/SpainSetupUSA";
 import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
 import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
+import SpainMAGateway from "./pages/SpainMAGateway";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -140,6 +141,7 @@ const App = () => {
                 <Route path="/spain-labor-cost-calculator" element={<Layout><SpainLaborCostCalculator /></Layout>} />
                 <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
                 <Route path="/spain-tax-residency-risk" element={<Layout><SpainTaxResidencyRisk /></Layout>} />
+                <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
