@@ -264,7 +264,7 @@ export default function CaseStudies() {
                     <img
                       src={featuredCase.hero_image_url}
                       alt={featuredCase.hero_title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                     />
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-white text-black">Featured</Badge>
@@ -477,7 +477,7 @@ function CaseStudyCardComponent({ caseStudy, variant, onCardClick }: CaseStudyCa
             <img
               src={caseStudy.hero_image_url}
               alt={caseStudy.hero_title}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500"
             />
           </div>
           <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
@@ -518,7 +518,7 @@ function CaseStudyCardComponent({ caseStudy, variant, onCardClick }: CaseStudyCa
           <img
             src={caseStudy.hero_image_url}
             alt={caseStudy.hero_title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
           />
         </div>
         <div className="p-6 flex flex-col flex-1">
