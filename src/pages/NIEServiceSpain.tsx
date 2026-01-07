@@ -5,8 +5,10 @@ import { AlertCircle, CheckCircle2, Clock, Shield, X } from 'lucide-react';
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
+import { useNavigate } from 'react-router-dom';
 
 export const NIEServiceSpain = () => {
+  const navigate = useNavigate();
   const painPoints = [
     '3+ hour queues at immigration office',
     'Appointments 2 months away',
@@ -182,6 +184,7 @@ export const NIEServiceSpain = () => {
                   landingVariant="nie-hell"
                   conversionType="nie-service"
                   submitButtonText="Secure My NIE Service"
+                  onSuccess={() => navigate('/thank-you/nie')}
                 />
                 <p className="text-center text-sm text-muted-foreground mt-4">
                   Confidential. No obligation. Reply within 1 business day.
