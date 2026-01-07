@@ -1,92 +1,48 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Meta } from '@/components/seo/Meta';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
-  CheckCircle, 
-  Mail, 
-  Calendar, 
-  FileText,
-  Phone,
-  Clock,
-  ArrowRight,
-  Calculator,
-  Users
-} from 'lucide-react';
+import { Phone, Clock, Mail, Calendar, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { motion } from 'framer-motion';
+import { CheckCircle } from 'lucide-react';
+import { thankYouConfigs } from '@/config/thankYouConfigs';
 
-export const ThankYouPayroll = () => {
+export const ThankYou = () => {
+  const { variant } = useParams<{ variant: string }>();
   const { trackEvent } = useAnalytics();
+  
+  const config = thankYouConfigs[variant || 'default'] || thankYouConfigs.default;
 
   useEffect(() => {
     trackEvent('thank_you_page_view_global_nrro', {
-      page_type: 'payroll',
-      source: 'spanish-payroll-international'
+      page_type: variant || 'default',
+      source: config.source
     });
-  }, [trackEvent]);
+  }, [trackEvent, variant, config.source]);
 
   const handleBookCallClick = () => {
     trackEvent('thank_you_book_call_click_global_nrro', {
-      page_type: 'payroll'
+      page_type: variant || 'default'
     });
   };
 
   const handleResourceClick = (resourceName: string, url: string) => {
     trackEvent('thank_you_resource_click_global_nrro', {
-      page_type: 'payroll',
+      page_type: variant || 'default',
       resource_name: resourceName,
       destination_url: url
     });
   };
 
-  const nextSteps = [
-    {
-      icon: Mail,
-      title: 'Check Your Inbox',
-      description: 'We\'ve sent you a confirmation email with details about what happens next.'
-    },
-    {
-      icon: Calendar,
-      title: 'Book a Call',
-      description: 'Schedule a 15-minute consultation to discuss your specific payroll needs.',
-      action: true
-    },
-    {
-      icon: FileText,
-      title: 'Prepare Your Questions',
-      description: 'Think about your team size, current payroll challenges, and timeline expectations.'
-    }
-  ];
-
-  const resources = [
-    {
-      title: 'Beckham Law Calculator',
-      description: 'See if your employees qualify for the 24% flat tax rate',
-      url: '/beckham-law-calculator',
-      icon: Calculator
-    },
-    {
-      title: 'Spain Labor Cost Calculator',
-      description: 'Estimate total employment costs including Social Security',
-      url: '/spain-labor-cost-calculator',
-      icon: Users
-    },
-    {
-      title: 'Spain Company Setup Playbook',
-      description: 'Complete guide to establishing your Spanish entity',
-      url: '/spain-company-setup-playbook',
-      icon: FileText
-    }
-  ];
-
   return (
     <>
       <Meta
-        title="Thank You | Your Payroll Request Has Been Received | NRRO"
-        description="Thank you for your interest in our Spanish payroll services. A specialist will contact you within 1 business day."
-        canonicalUrl="https://global.nrro.es/thank-you/payroll"
+        title={config.meta.title}
+        description={config.meta.description}
+        canonicalUrl={`https://global.nrro.es/thank-you/${variant || 'default'}`}
       />
 
       {/* Hero Section */}
@@ -115,7 +71,7 @@ export const ThankYouPayroll = () => {
               transition={{ delay: 0.3 }}
               className="text-lead text-white/80"
             >
-              We've received your request. A payroll specialist will contact you within 1 business day.
+              We've received your request. A {config.specialistType} will contact you within 1 business day.
             </motion.p>
           </div>
         </div>
@@ -135,7 +91,7 @@ export const ThankYouPayroll = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {nextSteps.map((step, index) => {
+              {config.nextSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
                   <Card key={index}>
@@ -174,12 +130,12 @@ export const ThankYouPayroll = () => {
                 Explore Our Resources
               </h2>
               <p className="text-lg text-muted-foreground">
-                Learn more about Spanish employment and payroll requirements.
+                {config.resourcesSubtitle}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {resources.map((resource, index) => {
+              {config.resources.map((resource, index) => {
                 const Icon = resource.icon;
                 return (
                   <Link 
@@ -264,28 +220,22 @@ export const ThankYouPayroll = () => {
             <Card className="border-0 bg-background">
               <CardContent className="p-8 md:p-12">
                 <blockquote className="text-xl md:text-2xl font-normal italic text-foreground/80 mb-6">
-                  "NRRO took the complexity out of Spanish payroll. Monthly filings, Social Security—everything handled without us having to think about it. Exactly what we needed as a US company expanding to Barcelona."
+                  "{config.testimonial.quote}"
                 </blockquote>
                 <div>
-                  <p className="font-medium">Sarah Mitchell</p>
-                  <p className="text-sm text-muted-foreground">CFO, TechVentures Inc.</p>
+                  <p className="font-medium">{config.testimonial.author}</p>
+                  <p className="text-sm text-muted-foreground">{config.testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>
 
             <div className="grid grid-cols-3 gap-8 mt-12">
-              <div>
-                <p className="text-3xl font-bold text-primary">300+</p>
-                <p className="text-sm text-muted-foreground">Payrolls Managed</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-primary">50+</p>
-                <p className="text-sm text-muted-foreground">Countries Served</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-primary">99%</p>
-                <p className="text-sm text-muted-foreground">On-Time Filing</p>
-              </div>
+              {config.stats.map((stat, index) => (
+                <div key={index}>
+                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -294,4 +244,4 @@ export const ThankYouPayroll = () => {
   );
 };
 
-export default ThankYouPayroll;
+export default ThankYou;

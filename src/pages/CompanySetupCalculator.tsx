@@ -16,9 +16,11 @@ import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 export const CompanySetupCalculator = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [calculatorData, setCalculatorData] = useState({
     legalStructure: '',
@@ -304,6 +306,7 @@ export const CompanySetupCalculator = () => {
                       calculatorData={calculatorData}
                       submitButtonText="Download Full Report"
                       showAllFields={false}
+                      onSuccess={() => navigate('/thank-you/calculator')}
                     />
                   </CardContent>
                 </Card>

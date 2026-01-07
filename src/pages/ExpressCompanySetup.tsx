@@ -6,8 +6,10 @@ import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ExpressCompanySetup = () => {
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState({
     days: 3,
     hours: 12,
@@ -267,6 +269,7 @@ export const ExpressCompanySetup = () => {
                   conversionType="express-booking"
                   submitButtonText="Book Express Service Now"
                   showAllFields={false}
+                  onSuccess={() => navigate('/thank-you/express')}
                 />
 
                 <p className="text-center mt-4 text-sm text-muted-foreground">

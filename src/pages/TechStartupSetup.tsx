@@ -6,8 +6,10 @@ import { Rocket, TrendingUp, Globe, DollarSign, CheckCircle2, Users } from 'luci
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
+import { useNavigate } from 'react-router-dom';
 
 export const TechStartupSetup = () => {
+  const navigate = useNavigate();
   const benefits = [
     {
       icon: Globe,
@@ -180,6 +182,7 @@ export const TechStartupSetup = () => {
                   landingVariant="tech-startup"
                   conversionType="full-service"
                   submitButtonText="Get Startup Quote"
+                  onSuccess={() => navigate('/thank-you/tech-startup')}
                 />
                 <p className="text-center text-sm text-muted-foreground mt-4">
                   Confidential. No obligation. Reply within 1 business day.

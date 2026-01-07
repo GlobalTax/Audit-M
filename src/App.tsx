@@ -82,8 +82,7 @@ import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import AdminAwards from "./pages/admin/AdminAwards";
 import LeaveReview from "./pages/LeaveReview";
 import Testimonials from "./pages/Testimonials";
-import ThankYouPayroll from "./pages/ThankYouPayroll";
-import ThankYouSubsidiary from "./pages/ThankYouSubsidiary";
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -148,8 +147,7 @@ const App = () => {
                 <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
                 <Route path="/spanish-payroll-international" element={<Layout><SpanishPayrollInternational /></Layout>} />
                 <Route path="/spanish-subsidiary-compliance" element={<Layout><SpanishSubsidiaryCompliance /></Layout>} />
-                <Route path="/thank-you/payroll" element={<Layout><ThankYouPayroll /></Layout>} />
-                <Route path="/thank-you/subsidiary" element={<Layout><ThankYouSubsidiary /></Layout>} />
+                <Route path="/thank-you/:variant" element={<Layout><ThankYou /></Layout>} />
 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

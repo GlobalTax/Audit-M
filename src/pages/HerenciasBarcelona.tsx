@@ -7,8 +7,11 @@ import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { Calculator, Scale, FileCheck, Users, Euro, Shield, Clock, CheckCircle2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const HerenciasBarcelona = () => {
+  const navigate = useNavigate();
+  
   return (
     <>
       <Meta
@@ -529,6 +532,7 @@ export const HerenciasBarcelona = () => {
                 <CompanySetupForm 
                   landingVariant="herencias-barcelona"
                   showAllFields={false}
+                  onSuccess={() => navigate('/thank-you/herencias')}
                 />
               </CardContent>
             </Card>
