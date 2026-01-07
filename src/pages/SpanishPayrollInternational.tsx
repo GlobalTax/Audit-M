@@ -17,7 +17,7 @@ import {
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { FAQSchema } from '@/components/seo/FAQSchema';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/accordion";
 
 export const SpanishPayrollInternational = () => {
+  const navigate = useNavigate();
   const painPoints = [
     {
       icon: AlertTriangle,
@@ -348,6 +349,7 @@ export const SpanishPayrollInternational = () => {
                   landingVariant="payroll-international"
                   conversionType="payroll-quote"
                   submitButtonText="Get Payroll Quote"
+                  onSuccess={() => navigate('/thank-you/payroll')}
                 />
                 <p className="text-center text-sm text-white/50 mt-4">
                   Confidential. No obligation. Reply within 1 business day.
