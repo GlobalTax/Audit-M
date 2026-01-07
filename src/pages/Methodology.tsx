@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Overline, SectionHeader } from "@/components/ui/typography";
 import { Meta } from "@/components/seo/Meta";
 import { Target, Users, Zap, TrendingUp } from "lucide-react";
 
@@ -7,36 +6,36 @@ const Methodology = () => {
   const steps = [
     {
       icon: Target,
-      title: "Análisis Inicial",
+      title: "Initial Analysis",
       description:
-        "Estudiamos tu situación actual para entender tus necesidades específicas y objetivos empresariales.",
+        "We study your current situation to understand your specific needs and business objectives.",
     },
     {
       icon: Users,
-      title: "Propuesta Personalizada",
+      title: "Tailored Proposal",
       description:
-        "Diseñamos una estrategia adaptada a tu negocio con servicios, plazos y honorarios claros.",
+        "We design a strategy tailored to your business with clear services, timelines, and fees.",
     },
     {
       icon: Zap,
-      title: "Implementación",
+      title: "Implementation",
       description:
-        "Ejecutamos el plan con eficiencia, manteniéndote informado en todo momento del proceso.",
+        "We execute the plan efficiently, keeping you informed at every step of the process.",
     },
     {
       icon: TrendingUp,
-      title: "Seguimiento Continuo",
+      title: "Ongoing Support",
       description:
-        "Acompañamiento permanente y revisiones periódicas para asegurar el cumplimiento de tus objetivos.",
+        "Continuous guidance and periodic reviews to ensure your objectives are met.",
     },
   ];
 
   return (
     <>
       <Meta
-        title="Nuestra Metodología"
-        description="Descubre cómo trabajamos en NRRO: análisis, propuesta personalizada, implementación y seguimiento continuo para tu empresa"
-        canonicalUrl={`${window.location.origin}/metodologia`}
+        title="Our Methodology"
+        description="Discover how we work at NRRO: analysis, tailored proposals, implementation, and ongoing support for your business"
+        canonicalUrl={`${window.location.origin}/methodology`}
       />
 
       <div className="min-h-screen">
@@ -44,57 +43,57 @@ const Methodology = () => {
         <section className="bg-black py-32 md:py-48 text-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="service-hero-overline mb-6">Nuestro Enfoque</div>
+              <div className="service-hero-overline mb-6">Our Approach</div>
               <h1 className="service-hero-title mb-8">
-                Metodología de Trabajo
+                Working Methodology
               </h1>
               <p className="service-hero-subtitle max-w-3xl mx-auto">
-                Trabajamos con un método probado que combina experiencia profesional, 
-                trato personalizado y tecnología para ofrecer el mejor servicio a nuestros clientes.
+                We work with a proven method that combines professional experience, 
+                personalized attention, and technology to deliver the best service to our clients.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Nuestra Filosofía */}
+        {/* Our Philosophy */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <div className="section-overline mb-4">Nuestra Filosofía</div>
+              <div className="section-overline mb-4">Our Philosophy</div>
               <h2 className="text-3xl md:text-4xl font-normal mb-8">
-                Soluciones personalizadas para cada cliente
+                Tailored Solutions for Every Client
               </h2>
               <div className="space-y-4 service-body">
                 <p>
-                  En NRRO creemos que cada empresa es única y requiere soluciones personalizadas.
-                  No aplicamos fórmulas estándar, sino que adaptamos nuestros servicios a las
-                  necesidades reales de cada cliente.
+                  At NRRO, we believe every business is unique and requires tailored solutions.
+                  We don't apply standard formulas; instead, we adapt our services to the
+                  real needs of each client.
                 </p>
                 <p>
-                  Combinamos la experiencia de más de 25 años en asesoría con las últimas
-                  herramientas tecnológicas para ofrecer un servicio eficiente, transparente
-                  y de máxima calidad.
+                  We combine over 25 years of advisory experience with the latest
+                  technological tools to deliver an efficient, transparent,
+                  and high-quality service.
                 </p>
                 <p>
-                  Nuestro compromiso es ser tu socio estratégico, no solo tu asesor. Queremos
-                  que tu empresa crezca y nosotros crecer contigo, manteniendo una relación
-                  de confianza a largo plazo basada en resultados tangibles.
+                  Our commitment is to be your strategic partner, not just your advisor. We want
+                  your business to grow, and we want to grow with you, maintaining a long-term
+                  relationship of trust based on tangible results.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Proceso de Trabajo */}
+        {/* Work Process */}
         <section className="py-16 md:py-24 bg-muted">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <div className="section-overline mb-4">Proceso</div>
+              <div className="section-overline mb-4">Process</div>
               <h2 className="text-3xl md:text-4xl font-normal mb-4">
-                Cómo Trabajamos Contigo
+                How We Work With You
               </h2>
               <p className="service-body max-w-2xl mx-auto">
-                Un proceso claro y estructurado en 4 fases
+                A clear and structured process in 4 phases
               </p>
             </div>
 
@@ -118,38 +117,38 @@ const Methodology = () => {
           </div>
         </section>
 
-        {/* Valores Diferenciales */}
+        {/* Differentiating Values */}
         <section className="py-16 md:py-24 bg-white border-t border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <div className="section-overline mb-4">Valores</div>
+              <div className="section-overline mb-4">Values</div>
               <h2 className="text-3xl md:text-4xl font-normal mb-4">
-                Lo que nos Diferencia
+                What Sets Us Apart
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <Card className="border-border bg-white">
                 <div className="p-8 text-center">
-                  <h3 className="text-xl font-medium mb-3">Proximidad</h3>
+                  <h3 className="text-xl font-medium mb-3">Proximity</h3>
                   <p className="service-body">
-                    Trato cercano y personalizado. Tu asesor te conoce y conoce tu negocio.
+                    Personalized and approachable service. Your advisor knows you and your business.
                   </p>
                 </div>
               </Card>
               <Card className="border-border bg-white">
                 <div className="p-8 text-center">
-                  <h3 className="text-xl font-medium mb-3">Multidisciplinar</h3>
+                  <h3 className="text-xl font-medium mb-3">Multidisciplinary</h3>
                   <p className="service-body">
-                    Equipo experto en todas las áreas: fiscal, contable, legal y laboral.
+                    Expert team across all areas: tax, accounting, legal, and labor.
                   </p>
                 </div>
               </Card>
               <Card className="border-border bg-white">
                 <div className="p-8 text-center">
-                  <h3 className="text-xl font-medium mb-3">Tecnología</h3>
+                  <h3 className="text-xl font-medium mb-3">Technology</h3>
                   <p className="service-body">
-                    Plataformas digitales para gestión eficiente y acceso 24/7 a tu información.
+                    Digital platforms for efficient management and 24/7 access to your information.
                   </p>
                 </div>
               </Card>

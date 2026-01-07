@@ -106,7 +106,7 @@ const ServiceDetail = () => {
         <div className="text-center text-white">
           <h1 className="mb-4 text-4xl">{t('services.notFound.title')}</h1>
           <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
-            <Link to="/servicios">{t('services.notFound.backLink')}</Link>
+            <Link to="/services">{t('services.notFound.backLink')}</Link>
           </Button>
         </div>
       </div>
@@ -124,13 +124,13 @@ const ServiceDetail = () => {
         title={service.meta_title || service.name}
         description={service.meta_description || service.description}
         ogImage={ogImageUrl}
-        canonicalUrl={`${window.location.origin}/servicios/${service.slug}`}
+        canonicalUrl={`${window.location.origin}/services/${service.slug}`}
       />
       <BreadcrumbSchema items={breadcrumbItems} />
       <ServiceSchema
         name={service.name}
         description={service.description}
-        serviceUrl={`https://navarrotax.legal/servicios/${service.slug}`}
+        serviceUrl={`https://global.nrro.es/services/${service.slug}`}
         serviceType={service.area_es || service.area}
       />
 
@@ -177,7 +177,7 @@ const ServiceDetail = () => {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/servicios">{t('nav.services')}</Link>
+                  <Link to="/services">{t('nav.services')}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

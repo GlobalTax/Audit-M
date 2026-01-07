@@ -3,58 +3,56 @@ import { ArrowRight, Building2, FileText, Shield, TrendingUp } from 'lucide-reac
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Meta } from '@/components/seo/Meta';
-import { useLanguage } from '@/contexts/LanguageContext';
 import officeHero from '@/assets/office-hero.jpg';
 
 export default function Index() {
-  const { t } = useLanguage();
   const services = [
     {
       icon: FileText,
-      title: 'Asesoría Fiscal',
-      description: 'Optimización fiscal y cumplimiento normativo para particulares y empresas.',
-      link: '#',
+      title: 'Tax Advisory',
+      description: 'Tax optimization and regulatory compliance for individuals and businesses.',
+      link: '/services',
     },
     {
       icon: TrendingUp,
-      title: 'Gestión Contable',
-      description: 'Control exhaustivo de tu contabilidad con los más altos estándares de calidad.',
-      link: '#',
+      title: 'Accounting Services',
+      description: 'Comprehensive accounting management with the highest quality standards.',
+      link: '/services',
     },
     {
       icon: Shield,
-      title: 'Consultoría Legal',
-      description: 'Asesoramiento jurídico especializado en derecho tributario y mercantil.',
-      link: '#',
+      title: 'Legal Consulting',
+      description: 'Specialized legal advice in tax and corporate law.',
+      link: '/services',
     },
     {
       icon: Building2,
-      title: 'Planificación Estratégica',
-      description: 'Soluciones integrales para la gestión y el crecimiento de tu negocio.',
-      link: '#',
+      title: 'Strategic Planning',
+      description: 'Integrated solutions for business management and growth.',
+      link: '/services',
     },
   ];
 
   const values = [
     {
       number: '25+',
-      label: 'Años de experiencia',
+      label: 'Years of experience',
     },
     {
       number: '500+',
-      label: 'Clientes satisfechos',
+      label: 'Satisfied clients',
     },
     {
       number: '100%',
-      label: 'Compromiso',
+      label: 'Commitment',
     },
   ];
 
   return (
     <>
       <Meta
-        title={t("index.meta.title")}
-        description={t("index.meta.description")}
+        title="Global Legal, Tax & Accounting Advisory | NRRO International"
+        description="Expert advisory services for international businesses in Spain. Tax, legal, accounting, and payroll solutions for multinational companies."
       />
 
       {/* Hero Section */}
@@ -62,7 +60,7 @@ export default function Index() {
         <div className="absolute inset-0">
           <img
             src={officeHero}
-            alt="Oficinas NRRO en Barcelona"
+            alt="NRRO offices in Barcelona"
             className="w-full h-full object-cover opacity-20 mix-blend-overlay"
           />
         </div>
@@ -70,20 +68,20 @@ export default function Index() {
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary-foreground mb-6 leading-tight">
-              Tu socio de confianza en asesoría fiscal y legal
+              Your trusted partner in tax and legal advisory
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed">
-              En <span className="font-display font-normal">navarro</span>, transformamos la gestión fiscal y contable en un impulso real para tu negocio.
+              At <span className="font-display font-normal">navarro</span>, we transform tax and accounting management into real momentum for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-strong">
                 <Link to="/contact">
-                  Contacta con nosotros <ArrowRight className="ml-2 h-5 w-5" />
+                  Contact us <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20">
-                <Link to="#services">
-                  Nuestros servicios
+                <Link to="/services">
+                  Our services
                 </Link>
               </Button>
             </div>
@@ -99,10 +97,10 @@ export default function Index() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
-              Nuestros Servicios
+              Our Services
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Soluciones integrales para particulares y empresas con el máximo rigor y profesionalidad
+              Comprehensive solutions for individuals and businesses with the highest rigor and professionalism
             </p>
           </div>
 
@@ -129,7 +127,7 @@ export default function Index() {
                       to={service.link}
                       className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-hover transition-colors"
                     >
-                      Saber más <ArrowRight className="ml-1 h-4 w-4" />
+                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
                   </CardContent>
                 </Card>
@@ -163,14 +161,14 @@ export default function Index() {
           <Card className="bg-gradient-to-r from-primary to-primary-hover border-none shadow-strong">
             <CardContent className="p-12 text-center">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground mb-4">
-                ¿Listo para optimizar tu gestión fiscal?
+                Ready to optimize your tax management?
               </h2>
               <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-                Agenda una consulta gratuita con nuestro equipo de expertos
+                Schedule a free consultation with our team of experts
               </p>
               <Button asChild size="lg" className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-glow">
                 <Link to="/contact">
-                  Contactar ahora <ArrowRight className="ml-2 h-5 w-5" />
+                  Contact now <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </CardContent>
@@ -184,18 +182,18 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
-                Nuevas Oficinas en Barcelona
+                Our Offices in Barcelona
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Nos hemos trasladado a un espacio emblemático en el corazón del Eixample barcelonés, 
-                diseñado para ofrecer el mejor servicio a nuestros clientes.
+                We are located in an iconic space in the heart of Barcelona's Eixample district, 
+                designed to offer the best service to our clients.
               </p>
               <div className="space-y-3 mb-8">
                 <div className="flex items-start">
                   <Building2 className="h-5 w-5 text-accent mt-1 mr-3 flex-shrink-0" />
                   <div>
-                    <p className="font-display font-normal text-foreground">Dirección</p>
-                    <p className="text-muted-foreground">Carrer Ausias March número 36, 08010 Barcelona</p>
+                    <p className="font-display font-normal text-foreground">Address</p>
+                    <p className="text-muted-foreground">Carrer Ausias March 36, 08010 Barcelona</p>
                   </div>
                 </div>
               </div>
@@ -205,14 +203,14 @@ export default function Index() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Ver en Google Maps <ArrowRight className="ml-2 h-4 w-4" />
+                  View on Google Maps <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </div>
             <div className="animate-slide-up">
               <img
                 src={officeHero}
-                alt="Nuevas oficinas NRRO en Barcelona"
+                alt="NRRO offices in Barcelona"
                 className="rounded-lg shadow-strong w-full h-auto"
               />
             </div>

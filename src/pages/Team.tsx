@@ -39,7 +39,7 @@ const Team = () => {
       <Meta
         title={t('team.meta.title')}
         description={t('team.meta.description')}
-        canonicalUrl={`${window.location.origin}/equipo`}
+        canonicalUrl={`${window.location.origin}/team`}
       />
       <BreadcrumbSchema items={mainBreadcrumbs.team} />
       
