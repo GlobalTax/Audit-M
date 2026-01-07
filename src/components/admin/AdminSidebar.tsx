@@ -15,6 +15,7 @@ import {
   FileDown,
   MessageSquareQuote,
   Trophy,
+  Briefcase,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,7 @@ const navItems = [
   { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
+  { path: '/admin/case-studies', icon: Briefcase, label: 'Case Studies' },
   { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
   { path: '/admin/awards', icon: Trophy, label: 'Awards' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },

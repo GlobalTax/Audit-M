@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 import { Meta } from '@/components/seo/Meta';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import {
@@ -154,9 +156,45 @@ export default function CaseStudies() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const { trackEvent } = useAnalytics();
 
-  const featuredCase = SAMPLE_CASE_STUDIES.find(c => c.is_featured);
+  // Fetch case studies from database
+  const { data: dbCaseStudies } = useQuery({
+    queryKey: ['public-case-studies'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('case_studies')
+        .select('*')
+        .eq('status', 'published')
+        .eq('source_site', 'int')
+        .order('is_featured', { ascending: false })
+        .order('display_order', { ascending: true });
+
+      if (error) throw error;
+      return (data || []).map(item => ({
+        id: item.id,
+        slug: item.slug_en || item.slug,
+        hero_image_url: item.hero_image_url,
+        client_name: item.client_name,
+        client_industry: item.client_industry,
+        primary_service: item.primary_service,
+        hero_title: item.hero_title_en || item.hero_title,
+        hero_subtitle: item.hero_subtitle_en || item.hero_subtitle,
+        metrics: (Array.isArray(item.metrics) ? item.metrics : []) as { label: string; value: string }[],
+        is_featured: item.is_featured,
+        testimonial: item.testimonial_text_en || item.testimonial_text ? {
+          text: item.testimonial_text_en || item.testimonial_text,
+          author: item.testimonial_author,
+          position: item.testimonial_position,
+        } : undefined,
+      }));
+    },
+  });
+
+  // Use database data if available, otherwise use samples
+  const caseStudies = dbCaseStudies && dbCaseStudies.length > 0 ? dbCaseStudies : SAMPLE_CASE_STUDIES;
+
+  const featuredCase = caseStudies.find(c => c.is_featured);
   
-  const filteredCases = SAMPLE_CASE_STUDIES.filter(c => {
+  const filteredCases = caseStudies.filter(c => {
     const matchesIndustry = activeIndustry === 'all' || c.client_industry === activeIndustry;
     const matchesSearch = !searchTerm || 
       c.hero_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
