@@ -1,5 +1,5 @@
 import { Meta } from '@/components/seo/Meta';
-import { Badge } from '@/components/ui/badge';
+import { BadgeHero } from '@/components/ui/badge-hero';
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertCircle, CheckCircle2, Clock, Shield, X } from 'lucide-react';
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
@@ -30,25 +30,23 @@ export const NIEServiceSpain = () => {
       />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-destructive/5 to-background">
-        <div className="container">
+      <section className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-destructive text-destructive-foreground" variant="default">
-              🚨 STOP THE NIE FRUSTRATION
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-normal mb-6">
+            <BadgeHero className="mb-6">🚨 Stop the NIE Frustration</BadgeHero>
+            <h1 className="hero-title mb-6">
               Get Your Spanish NIE Without the Bureaucratic Nightmare
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-lead text-white/80 mb-8">
               7-day express service. No queues. No rejections. Guaranteed.
             </p>
-            <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center justify-center gap-6 text-sm text-white/70">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
                 <span>500+ NIEs processed</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
                 <span>99% success rate</span>
               </div>
             </div>
@@ -59,12 +57,12 @@ export const NIEServiceSpain = () => {
       <TrustBar />
 
       {/* Pain Points Section */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <AlertCircle className="h-16 w-16 text-destructive mx-auto mb-4" />
-              <h2 className="text-3xl font-normal mb-4">Tired of the NIE Nightmare?</h2>
+              <h2 className="text-3xl md:text-4xl font-normal mb-4">Tired of the NIE Nightmare?</h2>
               <p className="text-lg text-muted-foreground">
                 Sound familiar? There's a better way.
               </p>
@@ -85,12 +83,12 @@ export const NIEServiceSpain = () => {
       </section>
 
       {/* Our Process */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <Clock className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-normal mb-4">Our Express NIE Process</h2>
+              <h2 className="text-3xl md:text-4xl font-normal mb-4">Our Express NIE Process</h2>
               <p className="text-lg text-muted-foreground">
                 From application to delivery in just 7 days
               </p>
@@ -105,7 +103,7 @@ export const NIEServiceSpain = () => {
                         <div className="text-lg font-bold text-primary">{step.day}</div>
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-lg mb-1">{step.action}</div>
+                        <div className="font-medium text-lg mb-1">{step.action}</div>
                         <div className="text-sm text-muted-foreground">{step.status}</div>
                       </div>
                       <CheckCircle2 className="h-6 w-6 text-green-600" />
@@ -118,13 +116,13 @@ export const NIEServiceSpain = () => {
             <div className="mt-8 grid md:grid-cols-2 gap-6">
               <Card className="bg-primary/5">
                 <CardContent className="p-6 text-center">
-                  <div className="font-semibold mb-2">You do:</div>
+                  <div className="font-medium mb-2">You do:</div>
                   <div className="text-muted-foreground">Send us scanned docs</div>
                 </CardContent>
               </Card>
               <Card className="bg-primary/5">
                 <CardContent className="p-6 text-center">
-                  <div className="font-semibold mb-2">We do:</div>
+                  <div className="font-medium mb-2">We do:</div>
                   <div className="text-muted-foreground">Everything else</div>
                 </CardContent>
               </Card>
@@ -136,11 +134,11 @@ export const NIEServiceSpain = () => {
       <WhyChooseUs />
 
       {/* Pricing Section */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-normal mb-4">Transparent Pricing</h2>
+              <h2 className="text-3xl md:text-4xl font-normal mb-4">Transparent Pricing</h2>
               <p className="text-lg text-muted-foreground">
                 No hidden fees. No surprises.
               </p>
@@ -172,7 +170,7 @@ export const NIEServiceSpain = () => {
                   <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
                     <Shield className="h-8 w-8 text-primary shrink-0" />
                     <div>
-                      <div className="font-semibold">Money-Back Guarantee</div>
+                      <div className="font-medium">Money-Back Guarantee</div>
                       <div className="text-sm text-muted-foreground">
                         If we don't get your NIE, full refund
                       </div>
@@ -185,6 +183,9 @@ export const NIEServiceSpain = () => {
                   conversionType="nie-service"
                   submitButtonText="Secure My NIE Service"
                 />
+                <p className="text-center text-sm text-muted-foreground mt-4">
+                  Confidential. No obligation. Reply within 1 business day.
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -192,10 +193,10 @@ export const NIEServiceSpain = () => {
       </section>
 
       {/* Who Needs NIE */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-normal mb-8 text-center">Who Needs a NIE?</h2>
+            <h2 className="text-3xl md:text-4xl font-normal mb-8 text-center">Who Needs a NIE?</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 'Opening a company in Spain',

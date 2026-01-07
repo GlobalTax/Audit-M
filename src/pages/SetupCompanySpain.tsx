@@ -244,12 +244,7 @@ export const SetupCompanySpain = () => {
         title="Set Up a Company in Spain | Expert Legal & Tax Advisors | Navarro"
         description="Set up your company in Spain with expert legal and tax advisors. Company incorporation, tax structuring, compliance support for entrepreneurs and foreign investors."
         keywords="set up company spain, incorporate spain, spain company formation, form company spain, start operations spain, spanish company setup, business registration spain"
-        canonicalUrl={`${BASE_DOMAIN}/en/set-up-company-spain`}
-        slugs={{
-          es: '/crear-empresa-espana',
-          ca: '/ca/crear-empresa-espanya',
-          en: '/en/set-up-company-spain'
-        }}
+        canonicalUrl={`${BASE_DOMAIN}/set-up-company-spain`}
       />
       <FAQSchema faqs={faqs} />
 
