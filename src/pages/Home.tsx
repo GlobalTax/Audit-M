@@ -19,7 +19,10 @@ import { HomeCaseStudiesSection } from "@/components/home/HomeCaseStudiesSection
 import { HomeThirdPartyReviewsSection } from "@/components/home/HomeThirdPartyReviewsSection";
 import { AwardsRecognitionStrip } from "@/components/home/AwardsRecognitionStrip";
 import { TeamCarouselSection } from "@/components/home/TeamCarouselSection";
-import { ArrowRight, Check, Globe } from "lucide-react";
+import { HowItWorksSection } from "@/components/home/HowItWorksSection";
+import { WhyNRROSection } from "@/components/home/WhyNRROSection";
+import { InternationalFAQSection } from "@/components/home/InternationalFAQSection";
+import { ArrowRight, Calendar } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -171,10 +174,10 @@ const Home = () => {
                   asChild
                   size="lg"
                   variant="secondary"
-                  onClick={() => trackCTAClick("Request International Consultation", "Hero")}
+                  onClick={() => trackCTAClick("hero_cta_book_call_global_nrro", "Hero")}
                 >
                   <Link to="/contact">
-                    <Globe className="mr-2 h-5 w-5" />
+                    <Calendar className="mr-2 h-5 w-5" />
                     {heroContent?.cta_primary?.text || t("home.hero.cta_primary")}
                   </Link>
                 </Button>
@@ -183,14 +186,18 @@ const Home = () => {
                   size="lg" 
                   variant="outline" 
                   className="border-white/20 bg-white/10 text-white hover:bg-white/20"
-                  onClick={() => trackCTAClick("Explore Global Services", "home_hero")}
+                  onClick={() => trackCTAClick("hero_cta_fee_estimate_global_nrro", "home_hero")}
                 >
-                  <Link to="/services">
+                  <Link to="/contact?inquiry=fee-estimate">
                     {heroContent?.cta_secondary?.text || t("home.hero.cta_secondary")}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               </div>
+              {/* Trust Microcopy */}
+              <p className="text-xs text-white/50 mt-6">
+                {t("home.hero.microcopy")}
+              </p>
             </div>
           </div>
         </section>
@@ -302,14 +309,23 @@ const Home = () => {
         {/* Multi-Jurisdictional Services Section - Lexidy style */}
         <MultiJurisdictionalServicesSection />
 
+        {/* How It Works */}
+        <HowItWorksSection />
+
         {/* International Networks Section */}
         <InternationalNetworksSection />
+
+        {/* Why NRRO Section */}
+        <WhyNRROSection />
 
         {/* Testimonials Section */}
         <HomeTestimonialsSection />
 
         {/* Case Studies Teaser Section */}
         <HomeCaseStudiesSection />
+
+        {/* International FAQ Section */}
+        <InternationalFAQSection />
 
         {/* Third-Party Reviews Section */}
         <HomeThirdPartyReviewsSection />

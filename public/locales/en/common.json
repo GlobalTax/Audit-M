@@ -1125,12 +1125,13 @@
   },
   "home": {
     "hero": {
-      "badge": "Global Advisory Excellence",
-      "title": "Your Strategic Partner for<br/>International Business in Spain",
-      "subtitle": "Comprehensive legal, tax, accounting and labour advisory for multinational companies, foreign investors, and businesses expanding across borders.",
-      "tagline": "Barcelona headquarters. Global reach through 3 international networks spanning 50+ jurisdictions.",
-      "cta_primary": "Request International Consultation",
-      "cta_secondary": "Explore Global Services"
+      "badge": "Spain Business Advisory",
+      "title": "Set Up and Run Your Business in Spain—<br/>With One Integrated Advisory Team",
+      "subtitle": "Company formation, cross-border tax, accounting and payroll—built for international groups, investors and fast-moving companies entering Spain.",
+      "tagline": "Barcelona-based execution. International standards. 25+ years of cross-border experience.",
+      "cta_primary": "Book a 15-Minute Call",
+      "cta_secondary": "Request a Fee Estimate",
+      "microcopy": "Confidential. No obligation. We reply within 1 business day."
     },
     "about": {
       "overline": "About Navarro International",

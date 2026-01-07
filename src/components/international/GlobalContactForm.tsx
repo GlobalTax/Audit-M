@@ -322,24 +322,33 @@ export function GlobalContactForm({ className }: GlobalContactFormProps) {
             />
 
             {/* Submit Button */}
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full md:w-auto"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                <>
-                  <Send className="mr-2 h-4 w-4" />
-                  Book a Free Consultation
-                </>
-              )}
-            </Button>
+            <div className="space-y-3">
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full md:w-auto"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" />
+                    Book a Free Consultation
+                  </>
+                )}
+              </Button>
+              {/* Trust Microcopy */}
+              <p className="text-xs text-muted-foreground">
+                Confidential. No obligation. Reply within 1 business day.
+                <br className="sm:hidden" />
+                <span className="hidden sm:inline"> · </span>
+                Prefer direct contact? <a href="tel:+34934593600" className="underline hover:text-foreground">+34 934 593 600</a> · <a href="mailto:info@nrro.es" className="underline hover:text-foreground">info@nrro.es</a>
+              </p>
+            </div>
           </form>
         </Form>
       </div>
