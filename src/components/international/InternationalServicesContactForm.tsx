@@ -62,6 +62,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const serviceOptions = [
+  { value: "ma-advisory", label: "M&A Transaction Advisory" },
   { value: "international-accounting", label: "International Accounting Management" },
   { value: "international-tax", label: "International Tax Management" },
   { value: "international-payroll", label: "International Payroll Management" },

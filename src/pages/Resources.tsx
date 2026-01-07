@@ -16,7 +16,8 @@ import {
   Globe,
   Video,
   Percent,
-  Shield
+  Shield,
+  Briefcase
 } from "lucide-react";
 
 // Spain Setup Resources - Static featured items
@@ -82,6 +83,15 @@ const spainSetupResources = [
     type: "Assessment",
     icon: Shield,
     href: "/spain-tax-residency-risk",
+    badge: "New",
+  },
+  {
+    id: "ma-gateway",
+    title: "Spain M&A Gateway",
+    description: "End-to-end advisory for international acquirers. Due diligence, deal structuring, and post-merger integration.",
+    type: "Service",
+    icon: Briefcase,
+    href: "/spain-ma-gateway",
     badge: "New",
   },
 ];
