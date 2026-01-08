@@ -13,8 +13,9 @@ const spainSetupGuides = [
   { name: "Legal Structures", href: "/legal-structures-spain", icon: Scale },
   { name: "Bank Account Guide", href: "/spain-business-bank-account", icon: Landmark },
   { name: "NIE for Foreigners", href: "/nie-spain-foreigners", icon: FileText },
-  { name: "Tech Startup Setup", href: "/tech-startup-spain", icon: Rocket },
-  { name: "Express Registration", href: "/express-spain-company-registration", icon: Zap },
+  { name: "Spanish Payroll", href: "/spanish-payroll-international", icon: Receipt },
+  { name: "Tech Startup Setup", href: "/startup-company-setup-spain", icon: Rocket },
+  { name: "Express Registration", href: "/fast-company-registration-spain", icon: Zap },
 ];
 
 const spainSetupTools = [
