@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Building2, Scale, Landmark, FileText, Rocket, Zap, Calculator, ClipboardCheck, HelpCircle, BookOpen } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Scale, Landmark, FileText, Rocket, Zap, Calculator, ClipboardCheck, HelpCircle, BookOpen, Receipt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -31,12 +31,30 @@ const spainSetupByCountry = [
   { name: "UAE Companies", href: "/spain-company-setup-uae", flag: "🇦🇪" },
 ];
 
+// Resources mega-menu data
+const resourceCalculators = [
+  { name: "Setup Cost Calculator", href: "/spain-setup-calculator", icon: Calculator },
+  { name: "Labor Cost Calculator", href: "/spain-labor-cost-calculator", icon: Receipt },
+  { name: "Beckham Law Calculator", href: "/beckham-law-calculator", icon: Scale },
+];
+
+const resourceGuides = [
+  { name: "Company Setup Playbook", href: "/spain-company-setup-playbook", icon: BookOpen },
+  { name: "Document Checklist", href: "/spain-document-checklist", icon: ClipboardCheck },
+];
+
+const resourceAssessments = [
+  { name: "Readiness Quiz", href: "/spain-readiness-quiz", icon: HelpCircle },
+  { name: "Tax Residency Risk Assessment", href: "/spain-tax-residency-risk", icon: Scale },
+];
+
 export const Navbar = () => {
   const { t, language } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [serviciosOpen, setServiciosOpen] = useState(false);
   const [spainSetupOpen, setSpainSetupOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [isLightMode, setIsLightMode] = useState(false);
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
@@ -149,11 +167,14 @@ export const Navbar = () => {
       if (spainSetupOpen && !(event.target as Element).closest('.spain-setup-dropdown')) {
         setSpainSetupOpen(false);
       }
+      if (resourcesOpen && !(event.target as Element).closest('.resources-dropdown')) {
+        setResourcesOpen(false);
+      }
     };
     
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [serviciosOpen, spainSetupOpen]);
+  }, [serviciosOpen, spainSetupOpen, resourcesOpen]);
 
   return (
     <nav
@@ -344,6 +365,113 @@ export const Navbar = () => {
                                 >
                                   <tool.icon className="h-4 w-4 text-foreground/50" />
                                   {tool.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              // Resources mega-menu
+              if (item.name === "Resources") {
+                return (
+                  <div
+                    key={item.name}
+                    className="relative group resources-dropdown"
+                  >
+                    <button
+                      onClick={() => {
+                        setResourcesOpen(!resourcesOpen);
+                        setServiciosOpen(false);
+                        setSpainSetupOpen(false);
+                      }}
+                      className={cn(
+                        "flex items-center gap-1 font-display text-base transition-colors",
+                        scrolled || isLightMode
+                          ? "text-foreground hover:text-accent"
+                          : "text-white hover:text-accent",
+                        isActive("/resources") && (scrolled || isLightMode 
+                          ? "text-accent font-semibold" 
+                          : "text-white font-semibold underline decoration-2 underline-offset-4")
+                      )}
+                    >
+                      {item.name}
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                    
+                    {resourcesOpen && (
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border rounded-lg shadow-xl overflow-hidden min-w-[580px] z-[100]">
+                        <div className="grid grid-cols-3 gap-px bg-border">
+                          {/* Column 1: Calculators */}
+                          <div className="bg-background p-4">
+                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
+                              Calculators
+                            </h3>
+                            <div className="space-y-1">
+                              {resourceCalculators.map((calc) => (
+                                <Link
+                                  key={calc.href}
+                                  to={calc.href}
+                                  onClick={() => setResourcesOpen(false)}
+                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                                >
+                                  <calc.icon className="h-4 w-4 text-foreground/50" />
+                                  {calc.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          {/* Column 2: Guides */}
+                          <div className="bg-background p-4">
+                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
+                              Guides
+                            </h3>
+                            <div className="space-y-1">
+                              {resourceGuides.map((guide) => (
+                                <Link
+                                  key={guide.href}
+                                  to={guide.href}
+                                  onClick={() => setResourcesOpen(false)}
+                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                                >
+                                  <guide.icon className="h-4 w-4 text-foreground/50" />
+                                  {guide.name}
+                                </Link>
+                              ))}
+                            </div>
+                            
+                            <div className="mt-4 pt-4 border-t border-border">
+                              <Link
+                                to="/resources"
+                                onClick={() => setResourcesOpen(false)}
+                                className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-accent hover:bg-accent/10 rounded transition-colors"
+                              >
+                                <BookOpen className="h-4 w-4" />
+                                Explore All Resources →
+                              </Link>
+                            </div>
+                          </div>
+                          
+                          {/* Column 3: Assessments */}
+                          <div className="bg-muted/30 p-4">
+                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
+                              Assessments
+                            </h3>
+                            <div className="space-y-1">
+                              {resourceAssessments.map((assess) => (
+                                <Link
+                                  key={assess.href}
+                                  to={assess.href}
+                                  onClick={() => setResourcesOpen(false)}
+                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                                >
+                                  <assess.icon className="h-4 w-4 text-foreground/50" />
+                                  {assess.name}
                                 </Link>
                               ))}
                             </div>

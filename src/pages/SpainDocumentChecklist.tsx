@@ -1,9 +1,12 @@
 import { Meta } from "@/components/seo/Meta";
 import { FAQSchema } from "@/components/seo/FAQSchema";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { ChecklistDownloadForm } from "@/components/checklist/ChecklistDownloadForm";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
 import { 
   FileCheck, 
   ClipboardList, 
@@ -17,6 +20,12 @@ import {
   Users,
   Star
 } from "lucide-react";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://global.nrro.es" },
+  { name: "Spain Setup", url: "https://global.nrro.es/spain-company-setup" },
+  { name: "Document Checklist", url: "https://global.nrro.es/spain-document-checklist" }
+];
 
 const faqs = [
   {
@@ -45,6 +54,7 @@ const SpainDocumentChecklist = () => {
         description="Download our free Spain company setup document checklist. Complete template covering parent company docs, director requirements, NIE, apostille & legalization requirements."
         canonicalUrl="https://global.nrro.es/spain-document-checklist"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <FAQSchema faqs={faqs} />
 
       {/* Hero Section */}
@@ -297,8 +307,15 @@ const SpainDocumentChecklist = () => {
         </div>
       </section>
 
+      {/* Related Resources */}
+      <RelatedResourcesGrid 
+        currentPage="/spain-document-checklist"
+        title="More Spain Business Resources"
+        excludeTypes={['guide']}
+      />
+
       {/* Trust Footer */}
-      <section className="py-8 bg-neutral-50 border-t">
+      <section className="py-8 bg-background border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
@@ -316,6 +333,9 @@ const SpainDocumentChecklist = () => {
           </div>
         </div>
       </section>
+
+      {/* Sticky CTA */}
+      <SpainSetupStickyCTA />
     </>
   );
 };

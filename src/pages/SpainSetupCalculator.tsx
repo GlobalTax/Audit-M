@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { SetupCalculatorForm } from "@/components/calculator/SetupCalculatorForm";
 import { CalculatorResults } from "@/components/calculator/CalculatorResults";
 import { CalculatorLeadForm } from "@/components/calculator/CalculatorLeadForm";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
 import { Link } from "react-router-dom";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { 
@@ -23,6 +26,12 @@ import {
   type CalculatorInputs, 
   type CalculatorResults as Results 
 } from "@/lib/calculatorLogic";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://global.nrro.es" },
+  { name: "Spain Setup", url: "https://global.nrro.es/spain-company-setup" },
+  { name: "Setup Calculator", url: "https://global.nrro.es/spain-setup-calculator" }
+];
 
 export default function SpainSetupCalculator() {
   const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
@@ -78,6 +87,7 @@ export default function SpainSetupCalculator() {
         keywords="Spain company setup cost, SL formation timeline, Spain incorporation calculator, business setup Spain estimate"
         canonicalUrl="/spain-setup-calculator"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
@@ -216,71 +226,14 @@ export default function SpainSetupCalculator() {
       </section>
 
       {/* Related Resources */}
-      <section className="py-20 md:py-28 bg-neutral-50 border-t">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
-              Related Resources
-            </span>
-            <h2 className="text-2xl md:text-3xl font-normal text-foreground mb-4">
-              Continue Your Spain Expansion Planning
-            </h2>
-          </div>
+      <RelatedResourcesGrid 
+        currentPage="/spain-setup-calculator"
+        title="Continue Your Spain Expansion Planning"
+        excludeTypes={['calculator']}
+      />
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg">Setup Playbook</CardTitle>
-                <CardDescription>
-                  Complete 12-step guide with checklists and compliance requirements.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/spain-company-setup-playbook">
-                    Download Playbook
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg">Document Checklist</CardTitle>
-                <CardDescription>
-                  40+ documents you'll need with NIE and apostille guidance.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/spain-document-checklist">
-                    Get Checklist
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg">Readiness Quiz</CardTitle>
-                <CardDescription>
-                  10-question assessment to evaluate your expansion readiness.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/spain-readiness-quiz">
-                    Take Quiz
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      {/* Sticky CTA */}
+      <SpainSetupStickyCTA />
     </>
   );
 }

@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
+import { SpainSetupStickyCTA } from '@/components/spain-setup/SpainSetupStickyCTA';
 import { InternationalServicesContactForm } from '@/components/international/InternationalServicesContactForm';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { 
@@ -789,6 +790,9 @@ const SpainBusinessBankAccount = () => {
           </div>
         </div>
       </section>
+
+      {/* Sticky CTA */}
+      <SpainSetupStickyCTA />
     </>
   );
 };
