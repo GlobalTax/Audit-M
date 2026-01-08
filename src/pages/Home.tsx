@@ -365,7 +365,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Tecnología que usamos */}
+        {/* Tecnología que usamos - ARCHIVED (kept for future use)
         <section className="bg-neutral-50 py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {tecnologiaContent?.overline && (
@@ -377,6 +377,7 @@ const Home = () => {
             <TechnologyShowcase />
           </div>
         </section>
+        */}
 
         {/* Carrusel de Logos */}
         <section className="bg-white py-16 md:py-20 border-t border-border">
