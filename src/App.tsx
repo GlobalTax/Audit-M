@@ -76,6 +76,7 @@ import SpainSetupUAE from "./pages/SpainSetupUAE";
 import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
 import SpainMAGateway from "./pages/SpainMAGateway";
 import { SpanishPayrollInternational } from "./pages/SpanishPayrollInternational";
+import InternationalPayrollManagement from "./pages/services/InternationalPayrollManagement";
 import { SpanishSubsidiaryCompliance } from "./pages/SpanishSubsidiaryCompliance";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
@@ -103,6 +104,7 @@ const App = () => {
                 {/* Main routes - English (no prefix) */}
                 <Route path="/" element={<Layout><Home /></Layout>} />
                 <Route path="/services" element={<Layout><Services /></Layout>} />
+                <Route path="/services/international-payroll-management" element={<Layout><InternationalPayrollManagement /></Layout>} />
                 <Route path="/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
                 <Route path="/case-studies" element={<Layout><CaseStudies /></Layout>} />
                 <Route path="/case-studies/:slug" element={<Layout><CaseStudyDetail /></Layout>} />
