@@ -3,8 +3,10 @@ import { Meta } from '@/components/seo/Meta';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { FAQSchema } from '@/components/seo/FAQSchema';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { BadgeHero } from '@/components/ui/badge-hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { GlobalContactForm } from '@/components/international/GlobalContactForm';
+import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Link } from 'react-router-dom';
@@ -226,24 +228,22 @@ const LegalStructuresSpain = () => {
       <FAQSchema faqs={faqItems} />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-background via-background to-muted/30 py-20 lg:py-28">
-        <div className="container">
+      <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40" data-dark="true">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
-            <Badge variant="outline" className="mb-6 text-primary border-primary/30">
-              Corporate Structuring
-            </Badge>
-            <h1 className="hero-title text-foreground mb-6">
+            <BadgeHero>Corporate Structuring</BadgeHero>
+            <h1 className="hero-title mt-6 mb-6">
               Choosing the Right Legal Structure in Spain
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl">
+            <p className="text-lead text-white/70 mb-8 max-w-3xl">
               A strategic guide for international investors, multinational groups, and global entrepreneurs navigating Spain's corporate framework. Select the structure that aligns with your liability protection, tax objectives, and growth plans.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" variant="secondary" className="gap-2">
                 <Download className="h-5 w-5" />
                 Download Comparison PDF
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" asChild>
+              <Button size="lg" variant="outline" className="gap-2 border-white/30 text-white hover:bg-white/10" asChild>
                 <Link to="/contact">
                   <MessageSquare className="h-5 w-5" />
                   Request Legal Advisory
@@ -1016,39 +1016,36 @@ const LegalStructuresSpain = () => {
         </div>
       </section>
 
-      {/* Internal Links Section */}
-      <section className="py-16 lg:py-20 bg-muted/30">
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-normal text-foreground mb-8 text-center">
-              Related Resources
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                { title: 'Set Up in Spain Guide', url: '/set-up-in-spain', description: '10-step roadmap from strategy to operations' },
-                { title: 'Company Setup in Spain', url: '/setup-company-spain', description: 'Quick incorporation with legal and tax support' },
-                { title: 'NIE & Tax Registration', url: '/nie-service-spain', description: 'Obtain your tax identification number' },
-                { title: 'Beckham Law Advisory', url: '/ley-beckham', description: 'Tax optimization for expatriate executives' },
-                { title: 'International Services', url: '/international-services', description: 'Full global advisory capabilities' },
-                { title: 'Contact Us', url: '/contact', description: 'Speak with our corporate advisory team' },
-              ].map((link, index) => (
-                <Link
-                  key={index}
-                  to={link.url}
-                  className="group p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      {link.title}
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {link.description}
-                  </p>
-                </Link>
-              ))}
+      {/* Contact Form Section */}
+      <section className="py-20 md:py-28 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+            <div>
+              <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
+                Get Expert Guidance
+              </span>
+              <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-6">
+                Not Sure Which Structure Fits Your Business?
+              </h2>
+              <p className="text-muted-foreground mb-8 text-lg">
+                Our corporate advisory team can help you evaluate your options and select the optimal legal structure for your Spanish operations. We provide tailored recommendations based on your specific business objectives, tax position, and growth plans.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Free initial consultation with no obligation</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">30+ years advising international companies</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">500+ successful incorporations in Spain</span>
+                </div>
+              </div>
             </div>
+            <GlobalContactForm />
           </div>
         </div>
       </section>
