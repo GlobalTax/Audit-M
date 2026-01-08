@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BadgeHero } from "@/components/ui/badge-hero";
@@ -16,6 +17,12 @@ import {
   CheckCircle,
   Building2
 } from "lucide-react";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://global.nrro.es" },
+  { name: "Spain Setup", url: "https://global.nrro.es/spain-company-setup" },
+  { name: "Readiness Quiz", url: "https://global.nrro.es/spain-readiness-quiz" }
+];
 
 type QuizStep = "intro" | "questions" | "lead-form" | "results";
 
@@ -109,6 +116,7 @@ const SpainReadinessQuiz = () => {
         description="Take our free 2-minute quiz to assess your readiness for establishing a business in Spain. Get personalized recommendations and next steps."
         canonicalUrl="https://global.nrro.es/spain-readiness-quiz"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       <div className="min-h-screen bg-background">
         {/* Intro Screen */}

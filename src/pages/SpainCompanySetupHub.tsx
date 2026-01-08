@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { 
   Scale, 
   FileText, 
@@ -19,6 +21,11 @@ import {
   Globe
 } from "lucide-react";
 import { motion } from "framer-motion";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://global.nrro.es" },
+  { name: "Spain Company Setup", url: "https://global.nrro.es/spain-company-setup" }
+];
 
 const clusterPages = [
   {
@@ -121,6 +128,7 @@ const SpainCompanySetupHub = () => {
         description="Your complete resource center for establishing a company in Spain. Legal structures, bank accounts, NIE, and step-by-step guides for international founders."
         canonicalUrl="https://global.nrro.es/spain-company-setup"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40" data-dark="true">
@@ -372,6 +380,8 @@ const SpainCompanySetupHub = () => {
           </div>
         </div>
       </section>
+      {/* Sticky CTA */}
+      <SpainSetupStickyCTA />
     </>
   );
 };

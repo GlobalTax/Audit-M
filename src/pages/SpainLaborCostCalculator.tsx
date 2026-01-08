@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Meta } from "@/components/seo/Meta";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,8 @@ import { LaborCostForm } from "@/components/labor-calculator/LaborCostForm";
 import { LaborCostResults } from "@/components/labor-calculator/LaborCostResults";
 import { LaborCostLeadForm } from "@/components/labor-calculator/LaborCostLeadForm";
 import { ScenarioComparator } from "@/components/labor-calculator/ScenarioComparator";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
 import { 
   LaborCostInputs, 
   LaborCostResults as LaborCostResultsType, 
@@ -24,6 +27,12 @@ import {
   calculateLaborCosts 
 } from "@/lib/laborCostCalculatorLogic";
 import { useAnalytics } from "@/hooks/useAnalytics";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://global.nrro.es" },
+  { name: "Spain Setup", url: "https://global.nrro.es/spain-company-setup" },
+  { name: "Labor Cost Calculator", url: "https://global.nrro.es/spain-labor-cost-calculator" }
+];
 
 const trustPoints = [
   "1000+ international clients",
@@ -147,6 +156,7 @@ export default function SpainLaborCostCalculator() {
         keywords="labor costs Spain, payroll cost calculator Spain, employer social security Spain, hiring costs Spain, Spain payroll estimator"
         canonicalUrl="/spain-labor-cost-calculator"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48" data-dark="true">
@@ -334,43 +344,14 @@ export default function SpainLaborCostCalculator() {
       )}
 
       {/* Related Resources */}
-      <section className={`py-20 md:py-28 ${results ? 'bg-background' : 'bg-muted/30'}`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4 block">
-              Related Tools
-            </span>
-            <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-              More Spain Business Resources
-            </h2>
-          </div>
+      <RelatedResourcesGrid 
+        currentPage="/spain-labor-cost-calculator"
+        title="More Spain Business Resources"
+        excludeTypes={['calculator']}
+      />
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {relatedResources.map((resource) => {
-              const Icon = resource.icon;
-              return (
-                <Card key={resource.href} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="pt-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-medium mb-2">{resource.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {resource.description}
-                    </p>
-                    <Button variant="outline" asChild className="w-full">
-                      <Link to={resource.href}>
-                        View Resource
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Sticky CTA */}
+      <SpainSetupStickyCTA />
     </>
   );
 }
