@@ -52,6 +52,24 @@ export function ResidencyRiskResults({ results }: ResidencyRiskResultsProps) {
                 className="h-3"
               />
             </div>
+
+            {/* Risk Breakdown */}
+            {results.riskBreakdown && (
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/20 mt-4">
+                <div className="text-center">
+                  <div className="text-lg font-bold">{results.riskBreakdown.daysScore}</div>
+                  <div className="text-xs text-muted-foreground">Days Score</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold">{results.riskBreakdown.economicScore}</div>
+                  <div className="text-xs text-muted-foreground">Economic</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold">{results.riskBreakdown.vitalScore}</div>
+                  <div className="text-xs text-muted-foreground">Vital Interests</div>
+                </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
