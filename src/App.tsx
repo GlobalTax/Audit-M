@@ -75,6 +75,7 @@ import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
 import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
 import SpainMAGateway from "./pages/SpainMAGateway";
+import SpainMAHub from "./pages/SpainMAHub";
 import { SpanishPayrollInternational } from "./pages/SpanishPayrollInternational";
 import InternationalPayrollManagement from "./pages/services/InternationalPayrollManagement";
 import { SpanishSubsidiaryCompliance } from "./pages/SpanishSubsidiaryCompliance";
@@ -153,6 +154,7 @@ const App = () => {
                 <Route path="/beckham-law-hub" element={<Layout><BeckhamLawHub /></Layout>} />
                 <Route path="/visa-spain-hub" element={<Layout><VisaSpainHub /></Layout>} />
                 <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
+                <Route path="/spain-ma-hub" element={<Layout><SpainMAHub /></Layout>} />
                 <Route path="/spanish-payroll-international" element={<Layout><SpanishPayrollInternational /></Layout>} />
                 <Route path="/spanish-subsidiary-compliance" element={<Layout><SpanishSubsidiaryCompliance /></Layout>} />
                 <Route path="/thank-you/:variant" element={<Layout><ThankYou /></Layout>} />

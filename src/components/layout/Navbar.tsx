@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Building2, Scale, Landmark, FileText, Rocket, Zap, Calculator, ClipboardCheck, HelpCircle, BookOpen, Receipt } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Scale, Landmark, FileText, Rocket, Zap, Calculator, ClipboardCheck, HelpCircle, BookOpen, Receipt, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,6 +15,7 @@ const spainSetupGuides = [
   { name: "Bank Account Guide", href: "/spain-business-bank-account", icon: Landmark },
   { name: "NIE for Foreigners", href: "/nie-spain-foreigners", icon: FileText },
   { name: "Spanish Payroll", href: "/spanish-payroll-international", icon: Receipt },
+  { name: "M&A Hub", href: "/spain-ma-hub", icon: Briefcase },
   { name: "Tech Startup Setup", href: "/startup-company-setup-spain", icon: Rocket },
   { name: "Express Registration", href: "/fast-company-registration-spain", icon: Zap },
 ];
