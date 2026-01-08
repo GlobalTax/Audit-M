@@ -91,7 +91,7 @@ const setupRoadmap = [
     number: 1, 
     title: "Strategic Assessment", 
     description: "Evaluate your business objectives, target market, investment structure, and optimal entry strategy for Spain. We analyze your global corporate structure to recommend the most tax-efficient and operationally sound approach.",
-    duration: "Week 1",
+    duration: "Pre-start",
     category: "Planning",
     icon: Briefcase
   },
@@ -99,7 +99,7 @@ const setupRoadmap = [
     number: 2, 
     title: "Legal Structure Selection", 
     description: "Choose between Sociedad Limitada (SL), Sociedad Anónima (SA), branch office, or subsidiary based on liability protection, tax implications, capital requirements, and governance flexibility.",
-    duration: "Week 1-2",
+    duration: "Week 1",
     category: "Legal",
     icon: Scale
   },
@@ -107,7 +107,7 @@ const setupRoadmap = [
     number: 3, 
     title: "Corporate Documentation", 
     description: "Draft comprehensive bylaws (estatutos), shareholder agreements, articles of association, and powers of attorney. All documents prepared in accordance with Spanish commercial law.",
-    duration: "Week 2-3",
+    duration: "Week 1-2",
     category: "Legal",
     icon: FileText
   },
@@ -115,7 +115,7 @@ const setupRoadmap = [
     number: 4, 
     title: "NIE/NIF Acquisition", 
     description: "Obtain tax identification numbers (NIE for individuals, NIF for entities) for all directors, shareholders, and the company itself. This is mandatory before any commercial activity.",
-    duration: "Week 2-4",
+    duration: "Pre-start*",
     category: "Administrative",
     icon: BadgeCheck
   },
@@ -123,7 +123,7 @@ const setupRoadmap = [
     number: 5, 
     title: "Notarial Incorporation", 
     description: "Execute the public deed of incorporation (escritura pública) before a Spanish notary. This formalizes the company's creation and requires capital deposit certification.",
-    duration: "Week 4-5",
+    duration: "Week 2-3",
     category: "Legal",
     icon: Landmark
   },
@@ -131,7 +131,7 @@ const setupRoadmap = [
     number: 6, 
     title: "Commercial Registry Filing", 
     description: "Register the company with the Mercantile Registry (Registro Mercantil) to obtain legal personality. The company can begin trading once registration is confirmed.",
-    duration: "Week 5-7",
+    duration: "Week 3-4",
     category: "Administrative",
     icon: BookOpen
   },
@@ -139,7 +139,7 @@ const setupRoadmap = [
     number: 7, 
     title: "Tax Authority Registration", 
     description: "Complete registration with the Spanish Tax Agency (AEAT) for VAT (IVA), corporate income tax (Impuesto sobre Sociedades), and payroll withholding obligations.",
-    duration: "Week 6-8",
+    duration: "Week 4-5",
     category: "Compliance",
     icon: FileText
   },
@@ -147,7 +147,7 @@ const setupRoadmap = [
     number: 8, 
     title: "Bank Account Opening", 
     description: "Establish corporate banking relationships with Spanish or international banks. This includes capital deposit accounts, operational accounts, and international payment capabilities.",
-    duration: "Week 4-8",
+    duration: "Week 3-5",
     category: "Administrative",
     icon: CreditCard
   },
@@ -155,7 +155,7 @@ const setupRoadmap = [
     number: 9, 
     title: "Payroll & Social Security Setup", 
     description: "Register with Social Security (Seguridad Social), establish payroll processing systems, prepare compliant employment contracts, and ensure full labor law compliance.",
-    duration: "Week 7-10",
+    duration: "Week 5-6",
     category: "Compliance",
     icon: Users
   },
@@ -163,7 +163,7 @@ const setupRoadmap = [
     number: 10, 
     title: "Operational Launch", 
     description: "Final compliance verification, industry-specific license applications, IT and operational infrastructure setup, and formal business activation. Your Spain operation is ready.",
-    duration: "Week 10+",
+    duration: "Week 6",
     category: "Operational",
     icon: CheckCircle2
   }
@@ -173,28 +173,28 @@ const timelinePhases = [
   { 
     phase: 1, 
     title: "Planning & Strategy", 
-    weeks: "Weeks 1-2",
+    weeks: "Week 1",
     description: "Strategic assessment, structure selection, and project planning",
     color: "bg-blue-500"
   },
   { 
     phase: 2, 
     title: "Legal Formation", 
-    weeks: "Weeks 2-5",
+    weeks: "Weeks 1-3",
     description: "Documentation, NIE acquisition, and notarial incorporation",
     color: "bg-emerald-500"
   },
   { 
     phase: 3, 
     title: "Registration & Compliance", 
-    weeks: "Weeks 5-8",
+    weeks: "Weeks 3-5",
     description: "Registry filings, tax registration, and bank setup",
     color: "bg-amber-500"
   },
   { 
     phase: 4, 
     title: "Operational Setup", 
-    weeks: "Weeks 8-12",
+    weeks: "Weeks 4-6",
     description: "Payroll, HR compliance, and operational infrastructure",
     color: "bg-purple-500"
   },
