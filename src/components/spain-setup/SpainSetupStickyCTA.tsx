@@ -14,7 +14,7 @@ interface SpainSetupStickyCTAProps {
 export const SpainSetupStickyCTA = ({
   primaryText = 'Schedule Consultation',
   primaryUrl = '/contact?service=spain-setup',
-  whatsappUrl = 'https://wa.me/34931222888',
+  whatsappUrl = 'https://wa.me/34620273552',
   scrollThreshold = 0.3
 }: SpainSetupStickyCTAProps) => {
   const [isVisible, setIsVisible] = useState(false);
