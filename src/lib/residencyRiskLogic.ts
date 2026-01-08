@@ -10,6 +10,10 @@ export interface ResidencyInputs {
   primaryBankAccounts: 'yes' | 'no';
   registeredPadron: 'yes' | 'no';
   spanishSocialSecurity: 'yes' | 'no';
+  // New questions
+  investmentPropertySpain: 'yes' | 'no';
+  spanishWorkContract: 'yes' | 'no';
+  previousTaxDeclarations: 'yes' | 'no';
 }
 
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'VERY_HIGH';
@@ -25,6 +29,12 @@ export interface ResidencyRiskResults {
     days183: boolean;
     economicCenter: boolean;
     vitalInterests: boolean;
+  };
+  // Enhanced results
+  riskBreakdown: {
+    daysScore: number;
+    economicScore: number;
+    vitalScore: number;
   };
 }
 
@@ -156,6 +166,41 @@ export function assessResidencyRisk(inputs: ResidencyInputs): ResidencyRiskResul
     });
   }
   
+  // NEW: Investment property in Spain
+  if (inputs.investmentPropertySpain === 'yes') {
+    factors.push({
+      condition: true,
+      points: 15,
+      finding: 'You own investment property (rental) in Spain',
+      category: 'economic',
+    });
+  }
+  
+  // NEW: Spanish work contract
+  if (inputs.spanishWorkContract === 'yes') {
+    factors.push({
+      condition: true,
+      points: 20,
+      finding: 'You have a signed work contract in Spain',
+      category: 'economic',
+    });
+  }
+  
+  // NEW: Previous tax declarations
+  if (inputs.previousTaxDeclarations === 'yes') {
+    factors.push({
+      condition: true,
+      points: 25,
+      finding: 'You have filed tax declarations in Spain previously',
+      category: 'economic',
+    });
+  }
+  
+  // Calculate scores by category
+  const daysScore = factors.filter(f => f.category === 'days').reduce((sum, f) => sum + f.points, 0);
+  const economicScore = factors.filter(f => f.category === 'economic').reduce((sum, f) => sum + f.points, 0);
+  const vitalScore = factors.filter(f => f.category === 'vital').reduce((sum, f) => sum + f.points, 0);
+  
   // Calculate total score
   const score = Math.min(100, factors.reduce((sum, f) => sum + f.points, 0));
   
@@ -174,8 +219,8 @@ export function assessResidencyRisk(inputs: ResidencyInputs): ResidencyRiskResul
   // Check criteria triggers
   const criteriaTriggered = {
     days183: inputs.daysInSpain > 183,
-    economicCenter: factors.filter(f => f.category === 'economic').reduce((sum, f) => sum + f.points, 0) >= 30,
-    vitalInterests: factors.filter(f => f.category === 'vital').reduce((sum, f) => sum + f.points, 0) >= 40,
+    economicCenter: economicScore >= 30,
+    vitalInterests: vitalScore >= 40,
   };
   
   // Generate recommendations
@@ -192,6 +237,11 @@ export function assessResidencyRisk(inputs: ResidencyInputs): ResidencyRiskResul
     daysRemaining,
     automaticResident: inputs.daysInSpain > 183,
     criteriaTriggered,
+    riskBreakdown: {
+      daysScore,
+      economicScore,
+      vitalScore,
+    },
   };
 }
 

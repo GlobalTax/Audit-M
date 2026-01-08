@@ -68,6 +68,8 @@ import SpainSetupCalculator from "./pages/SpainSetupCalculator";
 import SpainLaborCostCalculator from "./pages/SpainLaborCostCalculator";
 import BeckhamLawCalculator from "./pages/BeckhamLawCalculator";
 import SpainTaxResidencyRisk from "./pages/SpainTaxResidencyRisk";
+import BeckhamLawHub from "./pages/BeckhamLawHub";
+import VisaSpainHub from "./pages/VisaSpainHub";
 import SpainSetupUSA from "./pages/SpainSetupUSA";
 import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
@@ -146,6 +148,8 @@ const App = () => {
                 <Route path="/spain-labor-cost-calculator" element={<Layout><SpainLaborCostCalculator /></Layout>} />
                 <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
                 <Route path="/spain-tax-residency-risk" element={<Layout><SpainTaxResidencyRisk /></Layout>} />
+                <Route path="/beckham-law-hub" element={<Layout><BeckhamLawHub /></Layout>} />
+                <Route path="/visa-spain-hub" element={<Layout><VisaSpainHub /></Layout>} />
                 <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
                 <Route path="/spanish-payroll-international" element={<Layout><SpanishPayrollInternational /></Layout>} />
                 <Route path="/spanish-subsidiary-compliance" element={<Layout><SpanishSubsidiaryCompliance /></Layout>} />

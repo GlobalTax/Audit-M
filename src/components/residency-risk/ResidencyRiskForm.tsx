@@ -23,6 +23,10 @@ export function ResidencyRiskForm({ onAssess, isAssessing }: ResidencyRiskFormPr
     primaryBankAccounts: 'no',
     registeredPadron: 'no',
     spanishSocialSecurity: 'no',
+    // New fields
+    investmentPropertySpain: 'no',
+    spanishWorkContract: 'no',
+    previousTaxDeclarations: 'no',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -266,6 +270,78 @@ export function ResidencyRiskForm({ onAssess, isAssessing }: ResidencyRiskFormPr
               value={formData.spanishSocialSecurity}
               onValueChange={(value: 'yes' | 'no') => 
                 setFormData(prev => ({ ...prev, spanishSocialSecurity: value }))
+              }
+              className="grid grid-cols-2 gap-2"
+            >
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="yes" />
+                <span>Yes</span>
+              </Label>
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="no" />
+                <span>No</span>
+              </Label>
+            </RadioGroup>
+          </div>
+
+          {/* NEW: Investment Property */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Home className="h-4 w-4 text-primary" />
+              <Label className="font-medium">Do you own investment/rental property in Spain?</Label>
+            </div>
+            <RadioGroup
+              value={formData.investmentPropertySpain}
+              onValueChange={(value: 'yes' | 'no') => 
+                setFormData(prev => ({ ...prev, investmentPropertySpain: value }))
+              }
+              className="grid grid-cols-2 gap-2"
+            >
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="yes" />
+                <span>Yes</span>
+              </Label>
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="no" />
+                <span>No</span>
+              </Label>
+            </RadioGroup>
+          </div>
+
+          {/* NEW: Spanish Work Contract */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <FileCheck className="h-4 w-4 text-primary" />
+              <Label className="font-medium">Do you have a signed work contract in Spain?</Label>
+            </div>
+            <RadioGroup
+              value={formData.spanishWorkContract}
+              onValueChange={(value: 'yes' | 'no') => 
+                setFormData(prev => ({ ...prev, spanishWorkContract: value }))
+              }
+              className="grid grid-cols-2 gap-2"
+            >
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="yes" />
+                <span>Yes</span>
+              </Label>
+              <Label className="flex items-center space-x-2 border rounded-lg p-3 cursor-pointer hover:bg-muted/50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                <RadioGroupItem value="no" />
+                <span>No</span>
+              </Label>
+            </RadioGroup>
+          </div>
+
+          {/* NEW: Previous Tax Declarations */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-primary" />
+              <Label className="font-medium">Have you filed tax declarations in Spain previously?</Label>
+            </div>
+            <RadioGroup
+              value={formData.previousTaxDeclarations}
+              onValueChange={(value: 'yes' | 'no') => 
+                setFormData(prev => ({ ...prev, previousTaxDeclarations: value }))
               }
               className="grid grid-cols-2 gap-2"
             >
