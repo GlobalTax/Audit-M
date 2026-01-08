@@ -25,7 +25,8 @@ export const sitemapEntries: SitemapEntry[] = [
   { url: '/testimonials', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/careers', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
 
-  // === SPAIN COMPANY SETUP CLUSTER (7 URLs) ===
+  // === SPAIN COMPANY SETUP CLUSTER (8 URLs) ===
+  { url: '/spain-company-setup', priority: 0.9, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
   { url: '/set-up-in-spain', priority: 0.9, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
   { url: '/legal-structures-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
   { url: '/spain-business-bank-account', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },

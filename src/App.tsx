@@ -61,6 +61,7 @@ import { SetupCompanySpain } from "./pages/SetupCompanySpain";
 import SetUpInSpain from "./pages/SetUpInSpain";
 import LegalStructuresSpain from "./pages/LegalStructuresSpain";
 import SpainCompanySetupPlaybook from "./pages/SpainCompanySetupPlaybook";
+import SpainCompanySetupHub from "./pages/SpainCompanySetupHub";
 import SpainDocumentChecklist from "./pages/SpainDocumentChecklist";
 import SpainReadinessQuiz from "./pages/SpainReadinessQuiz";
 import SpainSetupCalculator from "./pages/SpainSetupCalculator";
@@ -133,6 +134,7 @@ const App = () => {
                 <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
                 <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
                 <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
+                <Route path="/spain-company-setup" element={<Layout><SpainCompanySetupHub /></Layout>} />
                 <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
                 <Route path="/spain-document-checklist" element={<Layout><SpainDocumentChecklist /></Layout>} />
                 <Route path="/spain-readiness-quiz" element={<Layout><SpainReadinessQuiz /></Layout>} />
