@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const spainSetupGuides = [
   { name: "How to Set Up in Spain", href: "/set-up-in-spain", icon: Building2 },
   { name: "Legal Structures", href: "/legal-structures-spain", icon: Scale },
+  { name: "Beckham Law", href: "/ley-beckham", icon: Scale },
   { name: "Bank Account Guide", href: "/spain-business-bank-account", icon: Landmark },
   { name: "NIE for Foreigners", href: "/nie-spain-foreigners", icon: FileText },
   { name: "Spanish Payroll", href: "/spanish-payroll-international", icon: Receipt },
