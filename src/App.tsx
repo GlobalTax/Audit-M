@@ -130,9 +130,9 @@ const App = () => {
                 
                 {/* Company Setup Landings */}
                 <Route path="/company-setup-calculator" element={<CompanySetupCalculator />} />
-                <Route path="/nie-spain-foreigners" element={<NIEServiceSpain />} />
-                <Route path="/startup-company-setup-spain" element={<TechStartupSetup />} />
-                <Route path="/fast-company-registration-spain" element={<ExpressCompanySetup />} />
+                <Route path="/nie-spain-foreigners" element={<Layout><NIEServiceSpain /></Layout>} />
+                <Route path="/startup-company-setup-spain" element={<Layout><TechStartupSetup /></Layout>} />
+                <Route path="/fast-company-registration-spain" element={<Layout><ExpressCompanySetup /></Layout>} />
                 <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
                 <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
                 <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
