@@ -9,67 +9,63 @@ export interface SitemapEntry {
 export const SITEMAP_DOMAIN = 'https://global.nrro.es';
 
 export const sitemapEntries: SitemapEntry[] = [
-  // === CORE PAGES (Priority 1.0) ===
-  { url: '/', priority: 1.0, changefreq: 'weekly', category: 'Core' },
-  
-  // === PILLAR PAGES (Priority 0.9) ===
-  { url: '/set-up-in-spain', priority: 0.9, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/services', priority: 0.9, changefreq: 'weekly', category: 'Core' },
-  { url: '/international-services', priority: 0.9, changefreq: 'weekly', category: 'Core' },
-  { url: '/case-studies', priority: 0.9, changefreq: 'weekly', category: 'Core' },
-  
-  // === SPAIN SETUP CLUSTER (Priority 0.8) ===
-  { url: '/legal-structures-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/spain-business-bank-account', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/set-up-company-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/nie-spain-foreigners', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/startup-company-setup-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  { url: '/fast-company-registration-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Setup' },
-  
-  // === GEOGRAPHIC TARGETING (Priority 0.8) ===
-  { url: '/spain-company-setup-usa', priority: 0.8, changefreq: 'monthly', category: 'Geographic' },
-  { url: '/spain-company-setup-uk', priority: 0.8, changefreq: 'monthly', category: 'Geographic' },
-  { url: '/spain-company-setup-uae', priority: 0.8, changefreq: 'monthly', category: 'Geographic' },
-  
-  // === COMPLIANCE & SERVICES (Priority 0.8) ===
-  { url: '/spanish-payroll-international', priority: 0.8, changefreq: 'monthly', category: 'Services' },
-  { url: '/spanish-subsidiary-compliance', priority: 0.8, changefreq: 'monthly', category: 'Services' },
-  { url: '/spain-ma-gateway', priority: 0.8, changefreq: 'monthly', category: 'Services' },
-  
-  // === CALCULATORS & TOOLS (Priority 0.8) ===
-  { url: '/beckham-law', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  { url: '/beckham-law-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  { url: '/spain-labor-cost-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  { url: '/spain-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  { url: '/spain-tax-residency-risk', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  { url: '/company-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators' },
-  
-  // === CONTENT PAGES (Priority 0.7-0.8) ===
-  { url: '/blog', priority: 0.8, changefreq: 'weekly', category: 'Content' },
-  { url: '/resources', priority: 0.8, changefreq: 'weekly', category: 'Content' },
-  { url: '/testimonials', priority: 0.7, changefreq: 'monthly', category: 'Content' },
-  
-  // === LEAD MAGNETS (Priority 0.7) ===
+  // === PÁGINAS PRINCIPALES (14 URLs) ===
+  { url: '/', priority: 1.0, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/services', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/international-services', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/case-studies', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/blog', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/resources', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/about', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/team', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/methodology', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/sectors', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/strategy', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/contact', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/testimonials', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/careers', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+
+  // === SPAIN COMPANY SETUP CLUSTER (7 URLs) ===
+  { url: '/set-up-in-spain', priority: 0.9, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/legal-structures-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/spain-business-bank-account', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/set-up-company-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/nie-spain-foreigners', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/startup-company-setup-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  { url: '/fast-company-registration-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+
+  // === GEOGRAPHIC TARGETING PAGES (3 URLs) ===
+  { url: '/spain-company-setup-usa', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
+  { url: '/spain-company-setup-uk', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
+  { url: '/spain-company-setup-uae', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
+
+  // === COMPLIANCE & SERVICES (3 URLs) ===
+  { url: '/spanish-payroll-international', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
+  { url: '/spanish-subsidiary-compliance', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
+  { url: '/spain-ma-gateway', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
+
+  // === CALCULATORS & TOOLS (6 URLs) ===
+  { url: '/beckham-law', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+  { url: '/beckham-law-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+  { url: '/spain-labor-cost-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+  { url: '/spain-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+  { url: '/spain-tax-residency-risk', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+  { url: '/company-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
+
+  // === LEAD MAGNETS (3 URLs) ===
   { url: '/spain-company-setup-playbook', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
   { url: '/spain-document-checklist', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
   { url: '/spain-readiness-quiz', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
-  
-  // === COMPANY PAGES (Priority 0.7) ===
-  { url: '/about', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/team', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/methodology', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/sectors', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/strategy', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/contact', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/careers', priority: 0.7, changefreq: 'monthly', category: 'Company' },
-  { url: '/leave-review', priority: 0.5, changefreq: 'yearly', category: 'Company' },
-  
-  // === LEGAL PAGES (Priority 0.3) ===
-  { url: '/privacy', priority: 0.3, changefreq: 'yearly', category: 'Legal' },
-  { url: '/legal-notice', priority: 0.3, changefreq: 'yearly', category: 'Legal' },
-  { url: '/cookies', priority: 0.3, changefreq: 'yearly', category: 'Legal' },
-  { url: '/cookie-policy', priority: 0.3, changefreq: 'yearly', category: 'Legal' },
-  { url: '/terms', priority: 0.3, changefreq: 'yearly', category: 'Legal' },
+
+  // === OTHER (1 URL) ===
+  { url: '/leave-review', priority: 0.5, changefreq: 'yearly', category: 'Other' },
+
+  // === LEGAL PAGES (5 URLs) ===
+  { url: '/privacy', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
+  { url: '/legal-notice', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
+  { url: '/cookies', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
+  { url: '/cookie-policy', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
+  { url: '/terms', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
 ];
 
 export const generateSitemapXML = (entries: SitemapEntry[], domain: string = SITEMAP_DOMAIN): string => {
