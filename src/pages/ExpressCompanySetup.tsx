@@ -5,6 +5,7 @@ import { Zap, Clock, CheckCircle2, Shield } from 'lucide-react';
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -296,6 +297,8 @@ export const ExpressCompanySetup = () => {
           </div>
         </div>
       </section>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };

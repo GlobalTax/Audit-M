@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
 import { StepProgressBar } from '@/components/company-setup/StepProgressBar';
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 
 const tableOfContents = [
   { id: "introduction", label: "Why Structure Matters" },
@@ -1050,6 +1051,8 @@ const LegalStructuresSpain = () => {
           </div>
         </div>
       </section>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };

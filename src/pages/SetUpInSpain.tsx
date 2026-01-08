@@ -42,6 +42,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 import { StickyMobileCTA } from "@/components/company-setup/StickyMobileCTA";
 import { SpainSetupSidebar } from "@/components/spain-setup/SpainSetupSidebar";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 
 // ============================================================================
 // DATA
@@ -1209,6 +1210,8 @@ const SetUpInSpain = () => {
         primaryText="Book Consultation"
         primaryUrl="#contact-form"
       />
+      
+      <SpainSetupStickyCTA />
     </Layout>
   );
 };

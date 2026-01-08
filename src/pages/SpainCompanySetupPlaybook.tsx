@@ -2,6 +2,7 @@ import { Meta } from "@/components/seo/Meta";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { PlaybookDownloadForm } from "@/components/playbook/PlaybookDownloadForm";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -363,6 +364,8 @@ const SpainCompanySetupPlaybook = () => {
           </div>
         </div>
       </section>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };
