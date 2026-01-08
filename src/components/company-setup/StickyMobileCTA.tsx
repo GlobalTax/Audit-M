@@ -11,7 +11,7 @@ interface StickyMobileCTAProps {
 export const StickyMobileCTA = ({
   primaryText = 'Schedule Consultation',
   primaryUrl = '#contacto',
-  whatsappUrl = 'https://wa.me/34931222888'
+  whatsappUrl = 'https://wa.me/34620273552'
 }: StickyMobileCTAProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
