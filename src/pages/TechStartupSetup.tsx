@@ -6,6 +6,7 @@ import { Rocket, TrendingUp, Globe, DollarSign, CheckCircle2, Users } from 'luci
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { useNavigate } from 'react-router-dom';
 
 export const TechStartupSetup = () => {
@@ -242,6 +243,8 @@ export const TechStartupSetup = () => {
           </div>
         </div>
       </section>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };

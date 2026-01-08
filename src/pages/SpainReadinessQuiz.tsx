@@ -9,7 +9,8 @@ import { QuizQuestion } from "@/components/quiz/QuizQuestion";
 import { QuizLeadForm } from "@/components/quiz/QuizLeadForm";
 import { QuizResult } from "@/components/quiz/QuizResult";
 import { quizQuestions, calculateResult, getScorePercentage, ResultTier } from "@/components/quiz/quizData";
-import { 
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import {
   ArrowLeft, 
   ArrowRight, 
   Clock, 
@@ -262,6 +263,8 @@ const SpainReadinessQuiz = () => {
           </div>
         )}
       </div>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };

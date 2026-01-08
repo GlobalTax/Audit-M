@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SpainSetupSidebar } from "@/components/spain-setup/SpainSetupSidebar";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -471,6 +472,8 @@ const SpainSetupUSA = () => {
           </div>
         </div>
       </div>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };

@@ -5,6 +5,7 @@ import { AlertCircle, CheckCircle2, Clock, Shield, X } from 'lucide-react';
 import { TrustBar } from '@/components/company-setup/shared/TrustBar';
 import { CompanySetupForm } from '@/components/company-setup/shared/CompanySetupForm';
 import { WhyChooseUs } from '@/components/company-setup/shared/WhyChooseUs';
+import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { useNavigate } from 'react-router-dom';
 
 export const NIEServiceSpain = () => {
@@ -218,6 +219,8 @@ export const NIEServiceSpain = () => {
           </div>
         </div>
       </section>
+
+      <SpainSetupStickyCTA />
     </>
   );
 };
