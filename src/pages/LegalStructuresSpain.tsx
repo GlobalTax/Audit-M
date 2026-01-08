@@ -232,7 +232,7 @@ const LegalStructuresSpain = () => {
             <Badge variant="outline" className="mb-6 text-primary border-primary/30">
               Corporate Structuring
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-6 leading-tight">
+            <h1 className="hero-title text-foreground mb-6">
               Choosing the Right Legal Structure in Spain
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl">
@@ -304,7 +304,7 @@ const LegalStructuresSpain = () => {
                 <Building2 className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Sociedad Limitada (SL)
                 </h2>
                 <p className="text-muted-foreground">Limited Liability Company</p>
@@ -394,7 +394,7 @@ const LegalStructuresSpain = () => {
                 <Building className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Sociedad Anónima (SA)
                 </h2>
                 <p className="text-muted-foreground">Public Limited Company</p>
@@ -484,7 +484,7 @@ const LegalStructuresSpain = () => {
                 <Globe className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Branch Office (Sucursal)
                 </h2>
                 <p className="text-muted-foreground">Extension of a foreign entity</p>
@@ -574,7 +574,7 @@ const LegalStructuresSpain = () => {
                 <Users className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Subsidiary (Filial)
                 </h2>
                 <p className="text-muted-foreground">Independent legal entity under parent control</p>
@@ -664,7 +664,7 @@ const LegalStructuresSpain = () => {
                 <Search className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Representative Office
                 </h2>
                 <p className="text-muted-foreground">Oficina de Representación</p>
@@ -751,7 +751,7 @@ const LegalStructuresSpain = () => {
       <section id="comparison" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4 text-center">
               Pros & Cons Comparison
             </h2>
             <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
@@ -807,7 +807,7 @@ const LegalStructuresSpain = () => {
       <section id="use-cases" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4 text-center">
               Typical Use Cases by Company Type
             </h2>
             <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -844,7 +844,7 @@ const LegalStructuresSpain = () => {
       <section id="requirements" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4 text-center">
               Legal & Compliance Requirements
             </h2>
             <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -916,7 +916,7 @@ const LegalStructuresSpain = () => {
       <section id="pitfalls" className="py-16 lg:py-20 bg-muted/30 scroll-mt-24">
         <div className="container">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-12 text-center">
               Common Pitfalls & Best Practices
             </h2>
 
@@ -967,7 +967,7 @@ const LegalStructuresSpain = () => {
       <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+            <h2 className="text-3xl md:text-4xl font-normal mb-6">
               Download Our Legal Structure Comparison Guide
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -993,7 +993,7 @@ const LegalStructuresSpain = () => {
       <section id="faq" className="py-16 lg:py-20 bg-background scroll-mt-24">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-normal text-foreground mb-4 text-center">
               Frequently Asked Questions
             </h2>
             <p className="text-muted-foreground text-center mb-10">
@@ -1020,7 +1020,7 @@ const LegalStructuresSpain = () => {
       <section className="py-16 lg:py-20 bg-muted/30">
         <div className="container">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-normal text-foreground mb-8 text-center">
               Related Resources
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
