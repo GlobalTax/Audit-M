@@ -3,6 +3,9 @@ project_id = "zntotcpagkunvkwpubqu"
 [functions.regenerate-sitemap]
 verify_jwt = false
 
+[functions.regenerate-sitemap-int]
+verify_jwt = false
+
 [functions.sync-site-pages]
 verify_jwt = false
 

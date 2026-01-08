@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LayoutGrid, List, Search } from "lucide-react";
+import { LayoutGrid, List, Search, FileCode } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,6 +22,7 @@ import { ExportButton } from "@/components/admin/sitemap/ExportButton";
 import { CustomPagination } from "@/components/ui/custom-pagination";
 import { SitePage, useUpdateSitePage, useCreateSitePage } from "@/hooks/useSitePages";
 import { toast } from "sonner";
+import SitemapXMLTab from "@/components/admin/sitemap/SitemapXMLTab";
 
 const PAGES_PER_PAGE = 25;
 
@@ -129,19 +130,28 @@ const AdminSitemap = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-normal">Mapa del Sitio</h1>
+          <h1 className="text-3xl font-normal">Sitemap Manager</h1>
           <p className="text-muted-foreground mt-1">
-            Gestiona todas las páginas y landings de nrro.es
+            Manage all pages for global.nrro.es
           </p>
         </div>
       </div>
 
-      <Tabs defaultValue="pages" className="space-y-6">
+      <Tabs defaultValue="sitemap-xml" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="pages">Páginas</TabsTrigger>
-          <TabsTrigger value="metrics">Métricas</TabsTrigger>
-          <TabsTrigger value="sync">Sincronización</TabsTrigger>
+          <TabsTrigger value="sitemap-xml" className="flex items-center gap-2">
+            <FileCode className="h-4 w-4" />
+            Sitemap XML
+          </TabsTrigger>
+          <TabsTrigger value="pages">Pages</TabsTrigger>
+          <TabsTrigger value="metrics">Metrics</TabsTrigger>
+          <TabsTrigger value="sync">Sync</TabsTrigger>
         </TabsList>
+
+        {/* Tab 0: Sitemap XML */}
+        <TabsContent value="sitemap-xml" className="space-y-6">
+          <SitemapXMLTab />
+        </TabsContent>
 
         {/* Tab 1: Páginas */}
         <TabsContent value="pages" className="space-y-6">

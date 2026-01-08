@@ -5,27 +5,19 @@ const SitemapXML = () => {
   useEffect(() => {
     const fetchAndServeSitemap = async () => {
       try {
-        // Obtener el sitemap desde Supabase Storage
+        // Get sitemap for international site from Supabase Storage
         const { data: urlData } = supabase.storage
           .from('public-files')
-          .getPublicUrl('sitemap.xml');
+          .getPublicUrl('sitemap-int.xml');
 
-        // Descargar el contenido del sitemap
-        const response = await fetch(urlData.publicUrl);
-        const xmlContent = await response.text();
-
-        // Crear un nuevo documento con el contenido XML
-        const blob = new Blob([xmlContent], { type: 'application/xml' });
-        const url = URL.createObjectURL(blob);
-
-        // Reemplazar el contenido de la página con el XML
+        // Redirect to the sitemap URL
         window.location.replace(urlData.publicUrl);
       } catch (error) {
         console.error('Error serving sitemap:', error);
-        // Si hay error, redirigir a la URL de Storage directamente
+        // Fallback: redirect to Storage URL directly
         const { data: urlData } = supabase.storage
           .from('public-files')
-          .getPublicUrl('sitemap.xml');
+          .getPublicUrl('sitemap-int.xml');
         window.location.replace(urlData.publicUrl);
       }
     };
