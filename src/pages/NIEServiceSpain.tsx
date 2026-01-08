@@ -150,9 +150,8 @@ export const NIEServiceSpain = () => {
             <Card className="border-primary border-2">
               <CardContent className="p-8">
                 <div className="text-center mb-8">
-                  <div className="text-sm text-muted-foreground mb-2">NIE Express Service</div>
-                  <div className="text-5xl font-bold text-primary mb-4">€350</div>
-                  <div className="text-muted-foreground">Complete service</div>
+                  <div className="text-2xl font-medium mb-2">NIE Express Service</div>
+                  <div className="text-lg text-muted-foreground">Complete professional service with guarantee</div>
                 </div>
 
                 <div className="space-y-3 mb-8">
