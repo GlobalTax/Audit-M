@@ -16,20 +16,26 @@ export const Navbar = () => {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   
-  // Fetch dynamic services from DB
-  const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
+  // Fetch dynamic services from DB (only active international services)
+  const { data: servicesData } = useServicesSearch({ limit: 20 }, language);
   const services = servicesData?.services || [];
 
-  // Separate services and areas
-  const serviciosMenu = services.slice(0, 5).map(service => ({
-    name: service.name,
-    href: `/services/${service.slug_en || service.slug_es}`
-  }));
+  // Separate services into two columns based on display_order
+  // SERVICES (display_order 1-6): Core international services
+  // AREAS (display_order 7-13): Specialized services
+  const serviciosMenu = services
+    .filter(s => s.display_order >= 1 && s.display_order <= 6)
+    .map(service => ({
+      name: service.name,
+      href: `/services/${service.slug_en || service.slug_es}`
+    }));
 
-  const areasMenu = services.slice(5, 11).map(service => ({
-    name: service.name,
-    href: `/services/${service.slug_en || service.slug_es}`
-  }));
+  const areasMenu = services
+    .filter(s => s.display_order >= 7 && s.display_order <= 13)
+    .map(service => ({
+      name: service.name,
+      href: `/services/${service.slug_en || service.slug_es}`
+    }));
 
   const navigation = [
     { name: t("nav.services"), href: "/services" },
