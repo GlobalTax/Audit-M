@@ -16,6 +16,7 @@ import {
   MessageSquareQuote,
   Trophy,
   Briefcase,
+  Map,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -33,6 +34,7 @@ const navItems = [
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
   { path: '/admin/playbook-leads', icon: FileDown, label: 'Resource Leads' },
   { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
+  { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
   { path: '/admin/technology', icon: Monitor, label: 'Technology' },
 ];
 
