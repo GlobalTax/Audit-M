@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
 import { SpainSetupStickyCTA } from '@/components/spain-setup/SpainSetupStickyCTA';
+import { RelatedResourcesGrid } from '@/components/spain-setup/RelatedResourcesGrid';
 import { InternationalServicesContactForm } from '@/components/international/InternationalServicesContactForm';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { 
@@ -790,6 +791,11 @@ const SpainBusinessBankAccount = () => {
           </div>
         </div>
       </section>
+
+      <RelatedResourcesGrid 
+        currentPage="/spain-business-bank-account"
+        title="More Spain Business Resources"
+      />
 
       {/* Sticky CTA */}
       <SpainSetupStickyCTA />

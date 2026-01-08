@@ -30,6 +30,7 @@ import {
 import { SpainSetupSidebar } from '@/components/spain-setup/SpainSetupSidebar';
 import { StepProgressBar } from '@/components/company-setup/StepProgressBar';
 import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
 
 const tableOfContents = [
   { id: "introduction", label: "Why Structure Matters" },
@@ -1051,6 +1052,11 @@ const LegalStructuresSpain = () => {
           </div>
         </div>
       </section>
+
+      <RelatedResourcesGrid 
+        currentPage="/legal-structures-spain"
+        title="More Spain Business Resources"
+      />
 
       <SpainSetupStickyCTA />
     </>

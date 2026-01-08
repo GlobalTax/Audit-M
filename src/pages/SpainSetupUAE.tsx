@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { SpainSetupSidebar } from "@/components/spain-setup/SpainSetupSidebar";
 import { InternationalServicesContactForm } from "@/components/international/InternationalServicesContactForm";
 import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
+import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -518,6 +519,11 @@ const SpainSetupUAE = () => {
           </div>
         </div>
       </div>
+
+      <RelatedResourcesGrid 
+        currentPage="/spain-setup-uae"
+        title="More Spain Business Resources"
+      />
 
       <SpainSetupStickyCTA />
     </>
