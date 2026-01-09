@@ -998,6 +998,63 @@ export type Database = {
         }
         Relationships: []
       }
+      corporate_presentations: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string | null
+          download_count: number | null
+          file_url: string
+          format: string
+          id: string
+          is_active: boolean | null
+          language: string | null
+          page_count: number | null
+          tags: string[] | null
+          target_audience: string | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string | null
+          version: number | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          download_count?: number | null
+          file_url: string
+          format?: string
+          id?: string
+          is_active?: boolean | null
+          language?: string | null
+          page_count?: number | null
+          tags?: string[] | null
+          target_audience?: string | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string | null
+          version?: number | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          download_count?: number | null
+          file_url?: string
+          format?: string
+          id?: string
+          is_active?: boolean | null
+          language?: string | null
+          page_count?: number | null
+          tags?: string[] | null
+          target_audience?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string | null
+          version?: number | null
+        }
+        Relationships: []
+      }
       demo_requests: {
         Row: {
           created_at: string | null
@@ -1199,6 +1256,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      internal_tools: {
+        Row: {
+          category: string | null
+          color: string | null
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          login_url: string
+          name: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          login_url: string
+          name: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          login_url?: string
+          name?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       job_positions: {
         Row: {

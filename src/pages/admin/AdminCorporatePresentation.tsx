@@ -56,7 +56,10 @@ const AdminCorporatePresentation = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-normal text-foreground">Corporate Presentation Generator</h1>
+          <h1 className="text-3xl font-normal text-foreground flex items-center gap-3">
+            <Monitor className="h-6 w-6 text-amber-500" />
+            Corporate Presentation Generator
+          </h1>
           <p className="text-sm text-muted-foreground mt-1">
             Create professional corporate presentations for potential clients
           </p>
@@ -86,7 +89,7 @@ const AdminCorporatePresentation = () => {
           {/* Quick Tips */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-medium flex items-center gap-2">
+              <CardTitle className="text-lg font-normal flex items-center gap-2">
                 <Info className="h-4 w-4 text-muted-foreground" />
                 Quick Tips
               </CardTitle>
@@ -101,9 +104,9 @@ const AdminCorporatePresentation = () => {
 
           {/* Last Generated */}
           {lastGeneratedPresentation && (
-            <Card className="border-amber-500/30 bg-amber-500/5">
+            <Card className="border-amber-500/50 bg-amber-500/5">
               <CardHeader className="pb-3">
-                <CardTitle className="text-base font-medium">Last Generated</CardTitle>
+                <CardTitle className="text-lg font-normal">Last Generated</CardTitle>
                 <CardDescription>Successfully created</CardDescription>
               </CardHeader>
               <CardContent className="text-sm space-y-2">
@@ -132,7 +135,7 @@ const AdminCorporatePresentation = () => {
           {/* PDF Structure */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-medium">PDF Structure</CardTitle>
+              <CardTitle className="text-lg font-normal">PDF Structure</CardTitle>
               <CardDescription>Possible sections in the presentation</CardDescription>
             </CardHeader>
             <CardContent className="text-sm space-y-1.5">

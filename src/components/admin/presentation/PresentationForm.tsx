@@ -192,7 +192,7 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
       <Button
         onClick={handleGenerate}
         disabled={isGenerating}
-        className="w-full h-12 text-base"
+        className="w-full h-12 text-base bg-amber-500 hover:bg-amber-600 text-black"
         size="lg"
       >
         <FileDown className="mr-2 h-5 w-5" />
