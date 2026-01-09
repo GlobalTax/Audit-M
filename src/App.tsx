@@ -86,6 +86,7 @@ import CookiePolicyEN from "./pages/CookiePolicyEN";
 import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import AdminAwards from "./pages/admin/AdminAwards";
+import AdminProposalGenerator from "./pages/admin/AdminProposalGenerator";
 import LeaveReview from "./pages/LeaveReview";
 import Testimonials from "./pages/Testimonials";
 import ThankYou from "./pages/ThankYou";
@@ -191,6 +192,7 @@ const App = () => {
                   <Route path="company-setup-leads" element={<AdminCompanySetupLeads />} />
                   <Route path="playbook-leads" element={<AdminPlaybookLeads />} />
                   <Route path="calculator-settings" element={<AdminCalculatorSettings />} />
+                  <Route path="proposal-generator" element={<AdminProposalGenerator />} />
                   <Route path="technology" element={<AdminTechnology />} />
                   <Route path="sitemap" element={<AdminSitemap />} />
                   <Route
