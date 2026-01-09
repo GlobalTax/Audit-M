@@ -197,6 +197,53 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track form field focus for conversion optimization
+   */
+  const trackFormFieldFocus = (formName: string, fieldName: string) => {
+    trackEvent('form_field_focus_global_nrro', {
+      form_name: formName,
+      field_name: fieldName,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  /**
+   * Track form abandonment
+   */
+  const trackFormAbandon = (formName: string, lastField: string, fieldsCompleted: number) => {
+    trackEvent('form_abandon_global_nrro', {
+      form_name: formName,
+      last_field: lastField,
+      fields_completed: fieldsCompleted,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  /**
+   * Track when a form enters the viewport
+   */
+  const trackScrollToForm = (formName: string) => {
+    trackEvent('scroll_to_form_global_nrro', {
+      form_name: formName,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  /**
+   * Track time on page milestones
+   */
+  const trackTimeOnPage = (seconds: number, pagePath: string) => {
+    trackEvent('time_on_page_global_nrro', {
+      seconds,
+      page_path: pagePath,
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -211,5 +258,9 @@ export const useAnalytics = () => {
     trackTestimonialInteraction,
     trackBenefitClick,
     trackConsentChange,
+    trackFormFieldFocus,
+    trackFormAbandon,
+    trackScrollToForm,
+    trackTimeOnPage,
   };
 };

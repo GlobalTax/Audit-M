@@ -5,6 +5,7 @@ import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
 import { SocialProofToast } from "@/components/ui/SocialProofToast";
+import { NewsletterPopup } from "@/components/newsletter/NewsletterPopup";
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <WhatsAppFloatingButton />
       <SocialProofToast />
       <ExitIntentPopup />
+      <NewsletterPopup />
     </>
   );
 };
