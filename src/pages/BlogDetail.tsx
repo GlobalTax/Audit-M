@@ -25,6 +25,7 @@ import DOMPurify from "dompurify";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { BlogCTASection } from "@/components/blog/BlogCTASection";
 import { PopularArticles } from "@/components/blog/PopularArticles";
+import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
 import { mainBreadcrumbs, createDynamicBreadcrumb } from "@/lib/seoUtils";
 
 const BlogDetail = () => {
@@ -152,6 +153,7 @@ const BlogDetail = () => {
 
   return (
     <>
+      <ReadingProgressBar />
       {isPreviewMode && previewData?.preview_info && <PreviewBanner expiresAt={previewData.preview_info.expires_at} accessedCount={previewData.preview_info.accessed_count} />}
       <Meta title={post.seo_title || post.title} description={post.seo_description || post.excerpt || ""} ogImage={ogImageUrl} canonicalUrl={`${window.location.origin}/blog/${post.slug}`} />
       <BreadcrumbSchema items={breadcrumbItems} />
