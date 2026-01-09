@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BeckhamResults } from '@/lib/beckhamCalculatorLogic';
-import { TrendingDown, TrendingUp, AlertTriangle, CheckCircle, Euro, Percent } from 'lucide-react';
+import { TrendingDown, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip, Legend } from 'recharts';
 
 interface BeckhamCalculatorResultsProps {
   results: BeckhamResults;
@@ -20,6 +21,29 @@ export function BeckhamCalculatorResults({ results }: BeckhamCalculatorResultsPr
   const formatPercent = (value: number) => {
     return `${value.toFixed(1)}%`;
   };
+
+  // Data for comparison chart
+  const taxComparisonData = [
+    {
+      name: 'Tax Due',
+      'Standard IRPF': results.standardIRPF,
+      'Beckham Law': results.beckhamTax,
+    },
+  ];
+
+  const netIncomeData = [
+    {
+      name: 'Net Income',
+      'Standard IRPF': results.standardNetSalary,
+      'Beckham Law': results.beckhamNetSalary,
+    },
+  ];
+
+  // 6-year cumulative savings
+  const cumulativeSavingsData = Array.from({ length: 6 }, (_, i) => ({
+    year: `Year ${i + 1}`,
+    savings: results.annualSavings * (i + 1),
+  }));
 
   return (
     <div className="space-y-6">
@@ -49,6 +73,57 @@ export function BeckhamCalculatorResults({ results }: BeckhamCalculatorResultsPr
           </CardContent>
         </Card>
       )}
+
+      {/* Visual Comparison Charts */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-normal">Annual Tax Comparison</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={taxComparisonData} layout="vertical" margin={{ left: 20, right: 30 }}>
+                  <XAxis type="number" tickFormatter={(v) => `€${(v / 1000).toFixed(0)}k`} />
+                  <YAxis type="category" dataKey="name" hide />
+                  <Tooltip 
+                    formatter={(value: number) => formatCurrency(value)}
+                    contentStyle={{ borderRadius: '8px' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="Standard IRPF" fill="hsl(0, 70%, 50%)" radius={4} />
+                  <Bar dataKey="Beckham Law" fill="hsl(142, 70%, 45%)" radius={4} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-normal">6-Year Cumulative Savings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={cumulativeSavingsData} margin={{ left: 10, right: 10 }}>
+                  <XAxis dataKey="year" tick={{ fontSize: 12 }} />
+                  <YAxis tickFormatter={(v) => `€${(v / 1000).toFixed(0)}k`} />
+                  <Tooltip 
+                    formatter={(value: number) => formatCurrency(value)}
+                    contentStyle={{ borderRadius: '8px' }}
+                  />
+                  <Bar dataKey="savings" fill="hsl(142, 70%, 45%)" radius={[4, 4, 0, 0]}>
+                    {cumulativeSavingsData.map((_, index) => (
+                      <Cell key={`cell-${index}`} fillOpacity={0.6 + (index * 0.07)} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Comparison Cards */}
       <div className="grid md:grid-cols-2 gap-4">

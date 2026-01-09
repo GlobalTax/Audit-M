@@ -60,6 +60,7 @@ import { ExpressCompanySetup } from "./pages/ExpressCompanySetup";
 import { SetupCompanySpain } from "./pages/SetupCompanySpain";
 import SetUpInSpain from "./pages/SetUpInSpain";
 import LegalStructuresSpain from "./pages/LegalStructuresSpain";
+import LegalStructuresComparator from "./pages/LegalStructuresComparator";
 import SpainCompanySetupPlaybook from "./pages/SpainCompanySetupPlaybook";
 import SpainCompanySetupHub from "./pages/SpainCompanySetupHub";
 import SpainDocumentChecklist from "./pages/SpainDocumentChecklist";
@@ -139,6 +140,7 @@ const App = () => {
                 <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
                 <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
                 <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
+                <Route path="/legal-structures-comparator" element={<Layout><LegalStructuresComparator /></Layout>} />
                 <Route path="/spain-company-setup" element={<Layout><SpainCompanySetupHub /></Layout>} />
                 <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
                 <Route path="/spain-document-checklist" element={<Layout><SpainDocumentChecklist /></Layout>} />
