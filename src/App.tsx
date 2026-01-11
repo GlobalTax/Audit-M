@@ -48,6 +48,9 @@ import AdminLandings from "./pages/admin/AdminLandings";
 import LandingDetailPage from "./pages/admin/LandingDetailPage";
 import LandingDashboard from "./pages/admin/LandingDashboard";
 import AdminLeyBeckhamLeads from "./pages/admin/AdminLeyBeckhamLeads";
+import DeckStudioList from "./pages/admin/deck-studio/DeckStudioList";
+import DeckStudioContent from "./pages/admin/deck-studio/DeckStudioContent";
+import DeckStudioBrand from "./pages/admin/deck-studio/DeckStudioBrand";
 import AdminDemoRequests from "./pages/admin/AdminDemoRequests";
 import { AdminCompanySetupLeads } from "./pages/admin/AdminCompanySetupLeads";
 import AdminTechnology from "./pages/admin/AdminTechnology";
@@ -195,6 +198,9 @@ const App = () => {
                   <Route path="calculator-settings" element={<AdminCalculatorSettings />} />
                   <Route path="proposal-generator" element={<AdminProposalGenerator />} />
                   <Route path="corporate-presentation" element={<AdminCorporatePresentation />} />
+                  <Route path="deck-studio" element={<DeckStudioList />} />
+                  <Route path="deck-studio/content" element={<DeckStudioContent />} />
+                  <Route path="deck-studio/brand" element={<DeckStudioBrand />} />
                   <Route path="technology" element={<AdminTechnology />} />
                   <Route path="sitemap" element={<AdminSitemap />} />
                   <Route
