@@ -38,6 +38,7 @@ const navItems = [
   { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
   { path: '/admin/proposal-generator', icon: FileOutput, label: 'Proposal Generator' },
   { path: '/admin/corporate-presentation', icon: Presentation, label: 'Corporate Presentation' },
+  { path: '/admin/deck-studio', icon: Presentation, label: 'Deck Studio' },
   { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
   { path: '/admin/technology', icon: Monitor, label: 'Technology' },
 ];
