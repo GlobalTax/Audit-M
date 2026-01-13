@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
 import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
+import { GlobalCoverageMap } from "@/components/home/GlobalCoverageMap";
 import { MultiJurisdictionalServicesSection } from "@/components/home/MultiJurisdictionalServicesSection";
 import { HomeTestimonialsSection } from "@/components/home/HomeTestimonialsSection";
 import { HomeCaseStudiesSection } from "@/components/home/HomeCaseStudiesSection";
@@ -314,6 +315,9 @@ const Home = () => {
 
         {/* International Networks Section */}
         <InternationalNetworksSection />
+
+        {/* Global Coverage Map */}
+        <GlobalCoverageMap />
 
         {/* Why NRRO Section */}
         <WhyNRROSection />
