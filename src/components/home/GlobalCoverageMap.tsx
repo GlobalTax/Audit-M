@@ -34,48 +34,49 @@ const MemoGeography = memo(({ geo, isHighlighted }: { geo: any; isHighlighted: b
 
 MemoGeography.displayName = 'MemoGeography';
 
-// City Marker component
-function CityMarker({ city, isActive, onClick }: { city: CoverageCity; isActive: boolean; onClick: () => void }) {
-  const size = city.isHQ ? 12 : 6;
+// City Marker component - receives zoom to scale markers appropriately
+function CityMarker({ city, isActive, onClick, zoom }: { city: CoverageCity; isActive: boolean; onClick: () => void; zoom: number }) {
+  // Scale marker size inversely with zoom so they remain visible at all zoom levels
+  const baseSize = city.isHQ ? 14 : 7;
+  const size = Math.max(baseSize / Math.sqrt(zoom), city.isHQ ? 8 : 4);
+  const pingSize = Math.max(28 / Math.sqrt(zoom), 12);
   
   return (
     <Marker coordinates={[city.lng, city.lat]}>
-      <TooltipProvider>
-        <Tooltip delayDuration={0}>
-          <TooltipTrigger asChild>
-            <g onClick={onClick} style={{ cursor: 'pointer' }}>
-              {city.isHQ && (
-                <circle
-                  r={20}
-                  fill="#F59E0B"
-                  opacity={0.2}
-                  className="animate-ping"
-                  style={{ transformOrigin: 'center', animationDuration: '2s' }}
-                />
-              )}
+      <Tooltip delayDuration={0}>
+        <TooltipTrigger asChild>
+          <g onClick={onClick} style={{ cursor: 'pointer' }}>
+            {city.isHQ && (
               <circle
-                r={size}
+                r={pingSize}
                 fill="#F59E0B"
-                stroke="#FFFFFF"
-                strokeWidth={city.isHQ ? 3 : 2}
-                className={`transition-all duration-200 ${isActive ? 'scale-150' : ''}`}
-                style={{ 
-                  transformOrigin: 'center',
-                  filter: isActive ? 'drop-shadow(0 0 6px #F59E0B)' : undefined
-                }}
+                opacity={0.25}
+                className="animate-ping"
+                style={{ transformOrigin: 'center', animationDuration: '2s' }}
               />
-            </g>
-          </TooltipTrigger>
-          <TooltipContent side="top" className="bg-card border-border shadow-lg">
-            <div className="text-sm">
-              <p className="font-medium text-foreground">{city.name}, {city.country}</p>
-              <p className="text-xs text-muted-foreground">
-                {city.isHQ ? 'NRRO Headquarters' : networkInfo[city.network].name}
-              </p>
-            </div>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+            )}
+            <circle
+              r={size}
+              fill="#F59E0B"
+              stroke="#FFFFFF"
+              strokeWidth={city.isHQ ? 2.5 : 1.5}
+              className={`transition-all duration-200 ${isActive ? 'scale-125' : ''}`}
+              style={{ 
+                transformOrigin: 'center',
+                filter: isActive ? 'drop-shadow(0 0 6px #F59E0B)' : undefined
+              }}
+            />
+          </g>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="bg-card border-border shadow-lg z-50">
+          <div className="text-sm">
+            <p className="font-medium text-foreground">{city.name}, {city.country}</p>
+            <p className="text-xs text-muted-foreground">
+              {city.isHQ ? 'NRRO Headquarters' : networkInfo[city.network].name}
+            </p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
     </Marker>
   );
 }
@@ -170,14 +171,15 @@ export function GlobalCoverageMap() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="relative aspect-[21/9]">
-            <ComposableMap
-              projection="geoMercator"
-              projectionConfig={{
-                scale: 180,
-                center: [0, 30],
-              }}
-              style={{ width: '100%', height: '100%' }}
-            >
+            <TooltipProvider delayDuration={0}>
+              <ComposableMap
+                projection="geoMercator"
+                projectionConfig={{
+                  scale: 180,
+                  center: [0, 30],
+                }}
+                style={{ width: '100%', height: '100%' }}
+              >
               <Sphere stroke="#CBD5E1" strokeWidth={0.5} fill="#F8FAFC" id="sphere" />
               <Graticule stroke="#E2E8F0" strokeWidth={0.3} />
               <ZoomableGroup
@@ -213,10 +215,12 @@ export function GlobalCoverageMap() {
                     city={city}
                     isActive={activeCity === city.name}
                     onClick={() => handleCityClick(city)}
+                    zoom={zoom}
                   />
                 ))}
               </ZoomableGroup>
-            </ComposableMap>
+              </ComposableMap>
+            </TooltipProvider>
 
             {/* Reset button */}
             <button
