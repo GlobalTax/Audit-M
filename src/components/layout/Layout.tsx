@@ -4,7 +4,6 @@ import { Footer } from "./Footer";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
-import { SocialProofToast } from "@/components/ui/SocialProofToast";
 import { NewsletterPopup } from "@/components/newsletter/NewsletterPopup";
 
 interface LayoutProps {
@@ -21,7 +20,6 @@ export const Layout = ({ children }: LayoutProps) => {
         <Footer />
       </div>
       <WhatsAppFloatingButton />
-      <SocialProofToast />
       <ExitIntentPopup />
       <NewsletterPopup />
     </>
