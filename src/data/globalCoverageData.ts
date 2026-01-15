@@ -15,23 +15,60 @@ export interface CoverageRegion {
   cities: CoverageCity[];
 }
 
-// ISO 3166-1 alpha-3 codes for covered countries
+// ISO 3166-1 numeric codes for covered countries (used by world-atlas TopoJSON)
 export const coveredCountries: string[] = [
   // HQ
-  'ESP',
+  '724', // Spain
   
   // Europe
-  'GBR', 'FRA', 'DEU', 'ITA', 'NLD', 'BEL', 'CHE', 'AUT', 'POL', 'CZE', 
-  'PRT', 'IRL', 'DNK', 'SWE', 'NOR', 'FIN', 'GRC', 'HUN', 'ROU', 'LUX',
+  '826', // United Kingdom
+  '250', // France
+  '276', // Germany
+  '380', // Italy
+  '528', // Netherlands
+  '056', // Belgium
+  '756', // Switzerland
+  '040', // Austria
+  '616', // Poland
+  '203', // Czech Republic
+  '620', // Portugal
+  '372', // Ireland
+  '208', // Denmark
+  '752', // Sweden
+  '578', // Norway
+  '246', // Finland
+  '300', // Greece
+  '348', // Hungary
+  '642', // Romania
+  '442', // Luxembourg
   
   // Americas
-  'USA', 'CAN', 'MEX', 'BRA', 'ARG', 'CHL', 'COL', 'PER',
+  '840', // United States
+  '124', // Canada
+  '484', // Mexico
+  '076', // Brazil
+  '032', // Argentina
+  '152', // Chile
+  '170', // Colombia
+  '604', // Peru
   
   // Asia-Pacific
-  'SGP', 'HKG', 'AUS', 'NZL', 'JPN', 'KOR', 'IND', 'CHN', 'MYS', 'THA',
+  '702', // Singapore
+  '344', // Hong Kong
+  '036', // Australia
+  '554', // New Zealand
+  '392', // Japan
+  '410', // South Korea
+  '356', // India
+  '156', // China
+  '458', // Malaysia
+  '764', // Thailand
   
   // Middle East & Africa
-  'ARE', 'SAU', 'ZAF', 'ISR',
+  '784', // UAE
+  '682', // Saudi Arabia
+  '710', // South Africa
+  '376', // Israel
 ];
 
 export const coverageCities: CoverageCity[] = [
