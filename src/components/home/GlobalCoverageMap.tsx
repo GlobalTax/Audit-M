@@ -8,7 +8,7 @@ import { RegionList } from '@/components/map/RegionList';
 import { coverageCities, coveredCountries, regions, networkInfo, CoverageCity } from '@/data/globalCoverageData';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const geoUrl = "/data/countries-110m.json";
 
 // Region view presets
 const regionViews: Record<string, { center: [number, number]; zoom: number }> = {
