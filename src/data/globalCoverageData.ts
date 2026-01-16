@@ -72,8 +72,10 @@ export const coveredCountries: string[] = [
 ];
 
 export const coverageCities: CoverageCity[] = [
-  // HQ
+  // NRRO Offices (Spain)
   { name: 'Barcelona', country: 'Spain', countryCode: 'ES', lat: 41.3851, lng: 2.1734, region: 'europe', network: 'nrro', isHQ: true },
+  { name: 'Madrid', country: 'Spain', countryCode: 'ES', lat: 40.4168, lng: -3.7038, region: 'europe', network: 'nrro' },
+  { name: 'Pamplona', country: 'Spain', countryCode: 'ES', lat: 42.8125, lng: -1.6458, region: 'europe', network: 'nrro' },
   
   // Europe
   { name: 'London', country: 'United Kingdom', countryCode: 'GB', lat: 51.5074, lng: -0.1278, region: 'europe', network: 'integra' },
