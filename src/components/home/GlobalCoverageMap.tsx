@@ -1,11 +1,10 @@
 import { useState, memo, useCallback } from 'react';
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup, Sphere, Graticule } from 'react-simple-maps';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe2, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { coverageCities, coveredCountries, networkInfo, CoverageCity } from '@/data/globalCoverageData';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const geoUrl = "/data/countries-110m.json";
 
@@ -34,74 +33,21 @@ const MemoGeography = memo(({ geo, isHighlighted }: { geo: any; isHighlighted: b
 
 MemoGeography.displayName = 'MemoGeography';
 
-// City Marker component - receives zoom to scale markers appropriately
-function CityMarker({ city, isActive, onClick, zoom }: { city: CoverageCity; isActive: boolean; onClick: () => void; zoom: number }) {
-  // Scale marker size inversely with zoom so they remain visible at all zoom levels
-  const baseSize = city.isHQ ? 14 : 7;
-  const size = Math.max(baseSize / Math.sqrt(zoom), city.isHQ ? 8 : 4);
-  const pingSize = Math.max(28 / Math.sqrt(zoom), 12);
-  
-  return (
-    <Marker coordinates={[city.lng, city.lat]}>
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>
-          <g onClick={onClick} style={{ cursor: 'pointer' }}>
-            {city.isHQ && (
-              <circle
-                r={pingSize}
-                fill="#F59E0B"
-                opacity={0.25}
-                className="animate-ping"
-                style={{ transformOrigin: 'center', animationDuration: '2s' }}
-              />
-            )}
-            <circle
-              r={size}
-              fill="#F59E0B"
-              stroke="#FFFFFF"
-              strokeWidth={city.isHQ ? 2.5 : 1.5}
-              className={`transition-all duration-200 ${isActive ? 'scale-125' : ''}`}
-              style={{ 
-                transformOrigin: 'center',
-                filter: isActive ? 'drop-shadow(0 0 6px #F59E0B)' : undefined
-              }}
-            />
-          </g>
-        </TooltipTrigger>
-        <TooltipContent side="top" className="bg-card border-border shadow-lg z-50">
-          <div className="text-sm">
-            <p className="font-medium text-foreground">{city.name}, {city.country}</p>
-            <p className="text-xs text-muted-foreground">
-              {city.isHQ ? 'NRRO Headquarters' : networkInfo[city.network].name}
-            </p>
-          </div>
-        </TooltipContent>
-      </Tooltip>
-    </Marker>
-  );
-}
-
 export function GlobalCoverageMap() {
-  const [activeCity, setActiveCity] = useState<string | null>(null);
+  const [hoveredCity, setHoveredCity] = useState<CoverageCity | null>(null);
   const [activeRegion, setActiveRegion] = useState<string>('europe');
   const [center, setCenter] = useState<[number, number]>(regionViews.europe.center);
   const [zoom, setZoom] = useState(regionViews.europe.zoom);
 
-  const handleCityClick = useCallback((city: CoverageCity) => {
-    setActiveCity(city.name);
-    setCenter([city.lng, city.lat]);
-    setZoom(4);
-  }, []);
-
   const handleRegionChange = useCallback((region: string) => {
     setActiveRegion(region);
-    setActiveCity(null);
+    setHoveredCity(null);
     setCenter(regionViews[region].center);
     setZoom(regionViews[region].zoom);
   }, []);
 
   const handleReset = useCallback(() => {
-    setActiveCity(null);
+    setHoveredCity(null);
     setActiveRegion('europe');
     setCenter(regionViews.europe.center);
     setZoom(regionViews.europe.zoom);
@@ -113,6 +59,12 @@ export function GlobalCoverageMap() {
     { id: 'americas', label: 'Americas' },
     { id: 'asia_pacific', label: 'Asia-Pacific' },
   ];
+
+  // Calculate marker sizes based on zoom
+  const getMarkerSize = (isHQ: boolean) => {
+    const baseSize = isHQ ? 10 : 5;
+    return Math.max(baseSize / Math.sqrt(zoom), isHQ ? 6 : 3);
+  };
 
   return (
     <section className="py-20 md:py-28 bg-muted/30">
@@ -162,24 +114,23 @@ export function GlobalCoverageMap() {
           </div>
         </motion.div>
 
-        {/* Map Container - Full Width */}
+        {/* Map Container */}
         <motion.div 
-          className="bg-slate-100 rounded-2xl border border-border overflow-hidden shadow-sm"
+          className="bg-slate-100 rounded-2xl border border-border overflow-hidden shadow-sm relative"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="relative aspect-[21/9]">
-            <TooltipProvider delayDuration={0}>
-              <ComposableMap
-                projection="geoMercator"
-                projectionConfig={{
-                  scale: 180,
-                  center: [0, 30],
-                }}
-                style={{ width: '100%', height: '100%' }}
-              >
+            <ComposableMap
+              projection="geoMercator"
+              projectionConfig={{
+                scale: 180,
+                center: [0, 30],
+              }}
+              style={{ width: '100%', height: '100%' }}
+            >
               <Sphere stroke="#CBD5E1" strokeWidth={0.5} fill="#F8FAFC" id="sphere" />
               <Graticule stroke="#E2E8F0" strokeWidth={0.3} />
               <ZoomableGroup
@@ -208,19 +159,70 @@ export function GlobalCoverageMap() {
                   }
                 </Geographies>
                 
-                {/* City Markers */}
-                {coverageCities.map((city) => (
-                  <CityMarker
-                    key={`${city.name}-${city.countryCode}`}
-                    city={city}
-                    isActive={activeCity === city.name}
-                    onClick={() => handleCityClick(city)}
-                    zoom={zoom}
-                  />
-                ))}
+                {/* City Markers - Direct SVG circles */}
+                {coverageCities.map((city) => {
+                  const size = getMarkerSize(city.isHQ || false);
+                  const pingSize = size * 2.5;
+                  
+                  return (
+                    <Marker 
+                      key={`${city.name}-${city.countryCode}`}
+                      coordinates={[city.lng, city.lat]}
+                    >
+                      <g 
+                        onMouseEnter={() => setHoveredCity(city)}
+                        onMouseLeave={() => setHoveredCity(null)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {/* HQ ping effect */}
+                        {city.isHQ && (
+                          <circle
+                            r={pingSize}
+                            fill="#F59E0B"
+                            opacity={0.3}
+                            className="animate-ping"
+                            style={{ transformOrigin: 'center', animationDuration: '2s' }}
+                          />
+                        )}
+                        {/* Outer glow for all markers */}
+                        <circle
+                          r={size * 1.5}
+                          fill="#F59E0B"
+                          opacity={0.2}
+                        />
+                        {/* Main marker */}
+                        <circle
+                          r={size}
+                          fill="#F59E0B"
+                          stroke="#FFFFFF"
+                          strokeWidth={city.isHQ ? 2 : 1}
+                        />
+                      </g>
+                    </Marker>
+                  );
+                })}
               </ZoomableGroup>
-              </ComposableMap>
-            </TooltipProvider>
+            </ComposableMap>
+
+            {/* Custom Tooltip - positioned outside SVG */}
+            <AnimatePresence>
+              {hoveredCity && (
+                <motion.div
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+                >
+                  <div className="bg-card border border-border rounded-lg shadow-lg px-3 py-2 text-sm">
+                    <p className="font-medium text-foreground">{hoveredCity.name}, {hoveredCity.country}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {hoveredCity.isHQ ? 'NRRO Headquarters' : networkInfo[hoveredCity.network].name}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Reset button */}
             <button
