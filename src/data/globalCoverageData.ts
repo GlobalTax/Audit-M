@@ -63,12 +63,18 @@ export const coveredCountries: string[] = [
   '156', // China
   '458', // Malaysia
   '764', // Thailand
+  '360', // Indonesia
   
   // Middle East & Africa
   '784', // UAE
   '682', // Saudi Arabia
   '710', // South Africa
   '376', // Israel
+  '818', // Egypt
+  '566', // Nigeria
+  
+  // Americas (additional)
+  '591', // Panama
 ];
 
 export const coverageCities: CoverageCity[] = [
@@ -81,37 +87,62 @@ export const coverageCities: CoverageCity[] = [
   { name: 'London', country: 'United Kingdom', countryCode: 'GB', lat: 51.5074, lng: -0.1278, region: 'europe', network: 'integra' },
   { name: 'Paris', country: 'France', countryCode: 'FR', lat: 48.8566, lng: 2.3522, region: 'europe', network: 'xlnc' },
   { name: 'Frankfurt', country: 'Germany', countryCode: 'DE', lat: 50.1109, lng: 8.6821, region: 'europe', network: 'integra' },
+  { name: 'Berlin', country: 'Germany', countryCode: 'DE', lat: 52.5200, lng: 13.4050, region: 'europe', network: 'xlnc' },
+  { name: 'Munich', country: 'Germany', countryCode: 'DE', lat: 48.1351, lng: 11.5820, region: 'europe', network: 'integra' },
   { name: 'Amsterdam', country: 'Netherlands', countryCode: 'NL', lat: 52.3676, lng: 4.9041, region: 'europe', network: 'xlnc' },
   { name: 'Zurich', country: 'Switzerland', countryCode: 'CH', lat: 47.3769, lng: 8.5417, region: 'europe', network: 'integra' },
   { name: 'Milan', country: 'Italy', countryCode: 'IT', lat: 45.4642, lng: 9.1900, region: 'europe', network: 'sbc' },
+  { name: 'Rome', country: 'Italy', countryCode: 'IT', lat: 41.9028, lng: 12.4964, region: 'europe', network: 'integra' },
   { name: 'Brussels', country: 'Belgium', countryCode: 'BE', lat: 50.8503, lng: 4.3517, region: 'europe', network: 'xlnc' },
   { name: 'Vienna', country: 'Austria', countryCode: 'AT', lat: 48.2082, lng: 16.3738, region: 'europe', network: 'integra' },
   { name: 'Dublin', country: 'Ireland', countryCode: 'IE', lat: 53.3498, lng: -6.2603, region: 'europe', network: 'sbc' },
   { name: 'Lisbon', country: 'Portugal', countryCode: 'PT', lat: 38.7223, lng: -9.1393, region: 'europe', network: 'xlnc' },
   { name: 'Warsaw', country: 'Poland', countryCode: 'PL', lat: 52.2297, lng: 21.0122, region: 'europe', network: 'integra' },
+  { name: 'Copenhagen', country: 'Denmark', countryCode: 'DK', lat: 55.6761, lng: 12.5683, region: 'europe', network: 'integra' },
+  { name: 'Stockholm', country: 'Sweden', countryCode: 'SE', lat: 59.3293, lng: 18.0686, region: 'europe', network: 'xlnc' },
+  { name: 'Oslo', country: 'Norway', countryCode: 'NO', lat: 59.9139, lng: 10.7522, region: 'europe', network: 'integra' },
+  { name: 'Helsinki', country: 'Finland', countryCode: 'FI', lat: 60.1699, lng: 24.9384, region: 'europe', network: 'xlnc' },
+  { name: 'Prague', country: 'Czech Republic', countryCode: 'CZ', lat: 50.0755, lng: 14.4378, region: 'europe', network: 'sbc' },
+  { name: 'Budapest', country: 'Hungary', countryCode: 'HU', lat: 47.4979, lng: 19.0402, region: 'europe', network: 'integra' },
+  { name: 'Athens', country: 'Greece', countryCode: 'GR', lat: 37.9838, lng: 23.7275, region: 'europe', network: 'sbc' },
   
   // Americas
   { name: 'New York', country: 'United States', countryCode: 'US', lat: 40.7128, lng: -74.0060, region: 'americas', network: 'integra' },
+  { name: 'Los Angeles', country: 'United States', countryCode: 'US', lat: 34.0522, lng: -118.2437, region: 'americas', network: 'integra' },
+  { name: 'Chicago', country: 'United States', countryCode: 'US', lat: 41.8781, lng: -87.6298, region: 'americas', network: 'xlnc' },
   { name: 'Miami', country: 'United States', countryCode: 'US', lat: 25.7617, lng: -80.1918, region: 'americas', network: 'xlnc' },
   { name: 'Toronto', country: 'Canada', countryCode: 'CA', lat: 43.6532, lng: -79.3832, region: 'americas', network: 'integra' },
+  { name: 'Vancouver', country: 'Canada', countryCode: 'CA', lat: 49.2827, lng: -123.1207, region: 'americas', network: 'integra' },
   { name: 'Mexico City', country: 'Mexico', countryCode: 'MX', lat: 19.4326, lng: -99.1332, region: 'americas', network: 'sbc' },
   { name: 'São Paulo', country: 'Brazil', countryCode: 'BR', lat: -23.5505, lng: -46.6333, region: 'americas', network: 'xlnc' },
   { name: 'Buenos Aires', country: 'Argentina', countryCode: 'AR', lat: -34.6037, lng: -58.3816, region: 'americas', network: 'integra' },
   { name: 'Santiago', country: 'Chile', countryCode: 'CL', lat: -33.4489, lng: -70.6693, region: 'americas', network: 'sbc' },
   { name: 'Bogotá', country: 'Colombia', countryCode: 'CO', lat: 4.7110, lng: -74.0721, region: 'americas', network: 'xlnc' },
+  { name: 'Lima', country: 'Peru', countryCode: 'PE', lat: -12.0464, lng: -77.0428, region: 'americas', network: 'sbc' },
+  { name: 'Panama City', country: 'Panama', countryCode: 'PA', lat: 8.9824, lng: -79.5199, region: 'americas', network: 'xlnc' },
   
   // Asia-Pacific
   { name: 'Singapore', country: 'Singapore', countryCode: 'SG', lat: 1.3521, lng: 103.8198, region: 'asia_pacific', network: 'sbc' },
   { name: 'Hong Kong', country: 'Hong Kong', countryCode: 'HK', lat: 22.3193, lng: 114.1694, region: 'asia_pacific', network: 'integra' },
   { name: 'Sydney', country: 'Australia', countryCode: 'AU', lat: -33.8688, lng: 151.2093, region: 'asia_pacific', network: 'xlnc' },
+  { name: 'Melbourne', country: 'Australia', countryCode: 'AU', lat: -37.8136, lng: 144.9631, region: 'asia_pacific', network: 'integra' },
   { name: 'Tokyo', country: 'Japan', countryCode: 'JP', lat: 35.6762, lng: 139.6503, region: 'asia_pacific', network: 'integra' },
   { name: 'Shanghai', country: 'China', countryCode: 'CN', lat: 31.2304, lng: 121.4737, region: 'asia_pacific', network: 'sbc' },
   { name: 'Mumbai', country: 'India', countryCode: 'IN', lat: 19.0760, lng: 72.8777, region: 'asia_pacific', network: 'xlnc' },
+  { name: 'Delhi', country: 'India', countryCode: 'IN', lat: 28.6139, lng: 77.2090, region: 'asia_pacific', network: 'xlnc' },
   { name: 'Seoul', country: 'South Korea', countryCode: 'KR', lat: 37.5665, lng: 126.9780, region: 'asia_pacific', network: 'integra' },
+  { name: 'Jakarta', country: 'Indonesia', countryCode: 'ID', lat: -6.2088, lng: 106.8456, region: 'asia_pacific', network: 'xlnc' },
+  { name: 'Kuala Lumpur', country: 'Malaysia', countryCode: 'MY', lat: 3.1390, lng: 101.6869, region: 'asia_pacific', network: 'sbc' },
+  { name: 'Bangkok', country: 'Thailand', countryCode: 'TH', lat: 13.7563, lng: 100.5018, region: 'asia_pacific', network: 'integra' },
   
-  // Middle East
+  // Middle East & Africa
   { name: 'Dubai', country: 'UAE', countryCode: 'AE', lat: 25.2048, lng: 55.2708, region: 'middle_east', network: 'sbc' },
+  { name: 'Abu Dhabi', country: 'UAE', countryCode: 'AE', lat: 24.4539, lng: 54.3773, region: 'middle_east', network: 'integra' },
   { name: 'Tel Aviv', country: 'Israel', countryCode: 'IL', lat: 32.0853, lng: 34.7818, region: 'middle_east', network: 'integra' },
+  { name: 'Riyadh', country: 'Saudi Arabia', countryCode: 'SA', lat: 24.7136, lng: 46.6753, region: 'middle_east', network: 'xlnc' },
+  { name: 'Johannesburg', country: 'South Africa', countryCode: 'ZA', lat: -26.2041, lng: 28.0473, region: 'middle_east', network: 'sbc' },
+  { name: 'Cairo', country: 'Egypt', countryCode: 'EG', lat: 30.0444, lng: 31.2357, region: 'middle_east', network: 'integra' },
+  { name: 'Lagos', country: 'Nigeria', countryCode: 'NG', lat: 6.5244, lng: 3.3792, region: 'middle_east', network: 'xlnc' },
 ];
 
 export const regions: CoverageRegion[] = [
