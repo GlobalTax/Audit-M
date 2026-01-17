@@ -1,64 +1,135 @@
-# Welcome to your Lovable project
+# global.nrro.es — Navarro Global Advisory
 
-## Project info
+## Sobre el Proyecto
 
-**URL**: https://lovable.dev/projects/632c2fc0-5729-4c68-81a2-361783c0e7cd
+**global.nrro.es** es la plataforma digital de la división internacional del **Grupo Navarro**, un grupo de firmas de asesoría legal, fiscal y contable con sede en España.
 
-## How can I edit this code?
+### Grupo Navarro
 
-There are several ways of editing your application.
+El grupo está compuesto por tres entidades:
 
-**Use Lovable**
+| Entidad | Enfoque | Dominio |
+|---------|---------|---------|
+| **Navarro Legal & Tax** | Asesoría doméstica España | nrro.es |
+| **Navarro Global** | Clientes internacionales | global.nrro.es |
+| **Capittal** | Servicios especializados | capittal.es |
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/632c2fc0-5729-4c68-81a2-361783c0e7cd) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Propósito
 
-**Use your preferred IDE**
+Plataforma premium de conversión para ejecutivos y empresas internacionales que buscan asesoramiento legal, fiscal y contable en España.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Audiencia Objetivo
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Multinacionales entrando en España
+- Empresas españolas expandiéndose internacionalmente
+- Inversores extranjeros
+- Expatriados y ejecutivos en movilidad global
+- Family offices con operaciones transfronterizas
+- Fondos de PE/VC estructurando en España
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Stack Tecnológico
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+| Categoría | Tecnología |
+|-----------|------------|
+| Frontend | React 18 + Vite |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS + shadcn/ui |
+| Backend | Supabase (Auth, DB, Edge Functions, Storage) |
+| Animaciones | Framer Motion |
+| Mapas | react-simple-maps |
+| Data Fetching | TanStack Query |
+| Analytics | Google Analytics 4 |
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Arquitectura Multi-Sitio
+
+El proyecto comparte base de datos con `nrro.es` usando separación por `source_site`:
+
+- `SITE_SOURCE = 'int'` en `src/config/site.ts`
+- Columna `source_site` en tablas: blog_posts, services, demo_requests, etc.
+- Edge Functions respetan el filtrado por sitio
+
+---
+
+## Redes Internacionales
+
+Navarro Global proyecta presencia global a través de alianzas con:
+
+- **Integra International** — Red global de firmas contables
+- **XLNC** — Alianza de firmas legales y fiscales
+- **SBC Global Alliance** — Red de advisory boutique
+
+El **Global Coverage Map** muestra 54+ ciudades de estas redes.
+
+---
+
+## Características Principales
+
+### Conversión
+
+- Homepage con Global Reach Bar y mapa interactivo
+- Lead magnets descargables (Playbooks, Checklists)
+- Herramientas interactivas (Calculators, Quizzes)
+- CTAs estratégicos con tracking GA4
+
+### SEO
+
+- Topic Hubs: Spain Company Setup, Beckham Law, M&A Gateway
+- Pillar pages con contenido de autoridad
+- Schema markup (Organization, FAQ, Breadcrumb)
+
+### Admin
+
+- Blog CMS con AI-assisted content
+- Services Manager
+- Deck Studio (presentaciones)
+- Proposal Generator
+- Lead Management
+
+---
+
+## Sistema de Diseño
+
+| Elemento | Especificación |
+|----------|----------------|
+| Hero | `bg-black text-white`, clase `.hero-title` |
+| H1/H2 | `font-normal` (peso 400) |
+| H3 Cards | `font-medium` (peso 500) |
+| Overlines | `font-mono font-light uppercase` |
+| Secciones | `py-20 md:py-28` |
+| Container | `container mx-auto px-4 sm:px-6 lg:px-8` |
+
+---
+
+## Configuración
+
+El sitio se configura en `src/config/site.ts`:
+
+```typescript
+export const SITE_SOURCE: SiteSource = 'int';
+```
+
+---
+
+## Desarrollo
+
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Despliegue
 
-**Use GitHub Codespaces**
+El frontend se despliega via Lovable. Las Edge Functions se despliegan automáticamente.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
 ## 📅 Sistema de Versionado de Páginas Legales
 
@@ -101,21 +172,6 @@ export const legalVersions = {
 npm run sync-sitemap
 ```
 
-**Resultado esperado:**
-
-```
-🔄 Iniciando sincronización de fechas en sitemap.xml...
-
-📅 Fecha de actualización: 2025-12-15
-📄 Leyendo: /path/to/public/sitemap.xml
-  ✓ /privacidad: 2025-11-12 → 2025-12-15
-  ✓ /aviso-legal: 2025-11-12 → 2025-12-15
-  ✓ /cookies: 2025-11-12 → 2025-12-15
-  ✓ /condiciones-contratacion: 2025-11-12 → 2025-12-15
-
-✅ Sitemap actualizado correctamente (4 cambios)
-```
-
 **Paso 3:** Verificar los cambios
 
 - ✅ Las 4 páginas legales muestran la nueva fecha en su UI
@@ -125,62 +181,15 @@ npm run sync-sitemap
 ### 📋 Scripts Disponibles
 
 ```bash
-# Sincronizar fechas del sitemap con seoUtils.ts
 npm run sync-sitemap
-
-# (Opcional) Puedes agregar esto al pre-build para automatización
-npm run build  # Si configuras prebuild, sync-sitemap se ejecuta automáticamente
 ```
 
-### ✅ Beneficios del Sistema
+---
 
-- **Centralizado**: Un solo lugar para actualizar fechas (`seoUtils.ts`)
-- **Automático**: Las páginas se actualizan sin tocar código
-- **Sincronizado**: Script garantiza consistencia con `sitemap.xml`
-- **SEO-friendly**: Fechas correctas para indexación de Google
-- **Sin errores**: Elimina actualizaciones manuales propensas a errores
+## Lovable Project
 
-### 🔍 Archivos Involucrados
+**URL**: https://lovable.dev/projects/632c2fc0-5729-4c68-81a2-361783c0e7cd
 
-| Archivo | Propósito |
-|---------|-----------|
-| `src/lib/seoUtils.ts` | Fuente única de verdad para fechas legales |
-| `src/pages/Privacy.tsx` | Página de Política de Privacidad |
-| `src/pages/Legal.tsx` | Página de Aviso Legal |
-| `src/pages/Cookies.tsx` | Página de Política de Cookies |
-| `src/pages/Terms.tsx` | Página de Términos de Contratación |
-| `src/scripts/syncSitemapDates.ts` | Script de sincronización de sitemap |
-| `public/sitemap.xml` | Sitemap para motores de búsqueda |
-
-### 🚨 Importante
-
-Después de actualizar las fechas:
-1. ✅ Ejecuta `npm run sync-sitemap`
-2. ✅ Verifica que el script muestre actualización exitosa
-3. ✅ Haz commit de los cambios en `seoUtils.ts` y `sitemap.xml`
-4. ✅ Despliega a producción
-
-### 🛠️ Troubleshooting
-
-**Error: "No se encontró lastUpdateISO en seoUtils.ts"**
-- Verifica que `seoUtils.ts` tenga la propiedad `lastUpdateISO` con formato `"YYYY-MM-DD"`
-
-**El script no actualiza las fechas**
-- Verifica que las URLs en `LEGAL_URLS` coincidan con las del `sitemap.xml`
-- Las URLs deben ser: `/privacidad`, `/aviso-legal`, `/cookies`, `/condiciones-contratacion`
-
-**Fechas desincronizadas**
-- Siempre ejecuta `npm run sync-sitemap` después de editar `seoUtils.ts`
-- Considera agregar el script como prebuild si haces muchas actualizaciones
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/632c2fc0-5729-4c68-81a2-361783c0e7cd) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
+## Custom Domain
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
