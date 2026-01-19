@@ -97,6 +97,7 @@ import AdminCorporatePresentation from "./pages/admin/AdminCorporatePresentation
 import LeaveReview from "./pages/LeaveReview";
 import Testimonials from "./pages/Testimonials";
 import ThankYou from "./pages/ThankYou";
+import AdminABTests from "./pages/admin/AdminABTests";
 
 const queryClient = new QueryClient();
 
@@ -209,6 +210,7 @@ const App = () => {
                   <Route path="deck-studio/brand" element={<DeckStudioBrand />} />
                   <Route path="technology" element={<AdminTechnology />} />
                   <Route path="sitemap" element={<AdminSitemap />} />
+                  <Route path="ab-tests" element={<AdminABTests />} />
                   <Route
                     path="users"
                     element={

@@ -60,4 +60,6 @@ export const useABTest = ({ testName, defaultVariant = 'A' }: ABTestConfig) => {
 export const AB_TESTS = {
   HERO_CTA: 'hero_cta_text',
   CONTACT_FORM_LAYOUT: 'contact_form_layout',
+  PLAYBOOK_CTA_POSITION: 'playbook_cta_position',
+  CALCULATOR_RESULTS_STYLE: 'calculator_results_style',
 } as const;
