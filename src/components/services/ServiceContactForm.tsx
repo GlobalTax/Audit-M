@@ -35,7 +35,7 @@ interface ServiceContactFormProps {
 }
 
 export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => {
-  const { trackFormSubmit } = useAnalytics();
+  const { trackFormSubmit, trackContactFormConversion, trackCompanyValuationConversion } = useAnalytics();
   const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -75,6 +75,13 @@ export const ServiceContactForm = ({ serviceName }: ServiceContactFormProps) => 
         has_phone: !!values.phone,
         has_company: !!values.company,
       });
+
+      // Track Google Ads conversion - use company valuation for valoración services
+      if (serviceName.toLowerCase().includes('valoración') || serviceName.toLowerCase().includes('valuation')) {
+        trackCompanyValuationConversion(values.email);
+      } else {
+        trackContactFormConversion(values.email, serviceName);
+      }
       
       toast.success(t('serviceForm.success.title'), {
         description: t('serviceForm.success.description'),
