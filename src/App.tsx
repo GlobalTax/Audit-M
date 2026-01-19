@@ -48,6 +48,7 @@ import AdminLandings from "./pages/admin/AdminLandings";
 import LandingDetailPage from "./pages/admin/LandingDetailPage";
 import LandingDashboard from "./pages/admin/LandingDashboard";
 import AdminLeyBeckhamLeads from "./pages/admin/AdminLeyBeckhamLeads";
+import { AdminAnalyticsDashboard } from "./pages/admin/AdminAnalyticsDashboard";
 import DeckStudioList from "./pages/admin/deck-studio/DeckStudioList";
 import DeckStudioContent from "./pages/admin/deck-studio/DeckStudioContent";
 import DeckStudioBrand from "./pages/admin/deck-studio/DeckStudioBrand";
@@ -211,6 +212,7 @@ const App = () => {
                   <Route path="technology" element={<AdminTechnology />} />
                   <Route path="sitemap" element={<AdminSitemap />} />
                   <Route path="ab-tests" element={<AdminABTests />} />
+                  <Route path="analytics" element={<AdminAnalyticsDashboard />} />
                   <Route
                     path="users"
                     element={
