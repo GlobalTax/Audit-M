@@ -4,9 +4,11 @@ import { hashEmail } from '@/lib/hashUtils';
 // Google Ads Configuration
 const GOOGLE_ADS_ID = 'AW-561508636';
 const CONVERSION_LABELS = {
-  contact_form: 'PLACEHOLDER_CONTACT', // Replace with actual label from Google Ads
-  resource_download: 'PLACEHOLDER_DOWNLOAD', // Replace with actual label from Google Ads
-  newsletter: 'PLACEHOLDER_NEWSLETTER', // Replace with actual label from Google Ads
+  contact_form: 'WIVqCP3W5s8bEJzi34sC',           // Formulario de Contacto
+  company_valuation: '2NbTCIDX5s8bEJzi34sC',      // Formulario Valoración Empresas
+  phone_call: '9nE0CIPX5s8bEJzi34sC',             // Contacto Llamada
+  resource_download: '',                           // Pendiente crear en Google Ads
+  newsletter: '',                                  // Pendiente crear en Google Ads
 };
 
 export const useAnalytics = () => {
@@ -264,13 +266,20 @@ export const useAnalytics = () => {
    * @param userData - Optional user data for Enhanced Conversions
    */
   const trackGoogleAdsConversion = async (
-    conversionType: 'contact_form' | 'resource_download' | 'newsletter',
+    conversionType: 'contact_form' | 'resource_download' | 'newsletter' | 'company_valuation' | 'phone_call',
     value?: number,
     userData?: { email?: string }
   ) => {
     if (typeof window === 'undefined' || !window.gtag) return;
 
     const conversionLabel = CONVERSION_LABELS[conversionType];
+    
+    // Skip if no conversion label configured
+    if (!conversionLabel) {
+      console.log('[Analytics] Skipping Google Ads conversion - no label configured for:', conversionType);
+      return;
+    }
+
     const conversionId = `${GOOGLE_ADS_ID}/${conversionLabel}`;
 
     const conversionData: Record<string, any> = {
@@ -352,6 +361,37 @@ export const useAnalytics = () => {
     });
   };
 
+  /**
+   * Track company valuation form conversion (Valoración Empresas)
+   * @param email - User email for Enhanced Conversions
+   */
+  const trackCompanyValuationConversion = async (email: string) => {
+    // Track in Google Ads with €150 value (high-intent lead)
+    await trackGoogleAdsConversion('company_valuation', 150, { email });
+    
+    // Also track in GA4
+    trackEvent('company_valuation_conversion_global_nrro', {
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  /**
+   * Track phone call click conversion (Contacto Llamada)
+   * @param phoneNumber - Phone number clicked
+   */
+  const trackPhoneCallConversion = async (phoneNumber?: string) => {
+    // Track in Google Ads with €75 value
+    await trackGoogleAdsConversion('phone_call', 75);
+    
+    // Also track in GA4
+    trackEvent('phone_call_conversion_global_nrro', {
+      phone_number: phoneNumber || '',
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -375,5 +415,7 @@ export const useAnalytics = () => {
     trackContactFormConversion,
     trackResourceDownloadConversion,
     trackNewsletterConversion,
+    trackCompanyValuationConversion,
+    trackPhoneCallConversion,
   };
 };
