@@ -76,7 +76,7 @@ const serviceOptions = [
 export function InternationalServicesContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const { trackFormSubmit } = useAnalytics();
+  const { trackFormSubmit, trackContactFormConversion, trackPhoneCallConversion } = useAnalytics();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -116,6 +116,9 @@ export function InternationalServicesContactForm() {
         service_interest: data.serviceInterest,
         country: data.country,
       });
+
+      // Track Google Ads conversion with Enhanced Conversions
+      trackContactFormConversion(data.email, data.serviceInterest);
 
       toast({
         title: "Enquiry submitted successfully",
@@ -338,7 +341,7 @@ export function InternationalServicesContactForm() {
               Confidential. No obligation. Reply within 1 business day.
               <br className="sm:hidden" />
               <span className="hidden sm:inline"> · </span>
-              Prefer direct contact? <a href="tel:+34934593600" className="underline hover:text-foreground">+34 934 593 600</a> · <a href="mailto:info@nrro.es" className="underline hover:text-foreground">info@nrro.es</a>
+              Prefer direct contact? <a href="tel:+34934593600" onClick={() => trackPhoneCallConversion('+34934593600')} className="underline hover:text-foreground">+34 934 593 600</a> · <a href="mailto:info@nrro.es" className="underline hover:text-foreground">info@nrro.es</a>
             </p>
           </div>
         </form>

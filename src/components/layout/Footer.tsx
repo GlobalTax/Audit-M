@@ -9,7 +9,7 @@ import { useAnalytics } from '@/hooks/useAnalytics';
 
 export const Footer = () => {
   const { t, language } = useLanguage();
-  const { trackContactClick } = useAnalytics();
+  const { trackContactClick, trackPhoneCallConversion } = useAnalytics();
   const currentYear = new Date().getFullYear();
   const { settings } = useSiteSettingsMap();
   
@@ -47,7 +47,10 @@ export const Footer = () => {
             <div className="flex flex-wrap gap-6">
               <a
                 href={`tel:${contactInfo.phone}`}
-                onClick={() => trackContactClick('phone', contactInfo.phone, 'footer')}
+                onClick={() => {
+                  trackContactClick('phone', contactInfo.phone, 'footer');
+                  trackPhoneCallConversion(contactInfo.phone);
+                }}
                 className="flex items-center gap-3 text-white/90 hover:text-accent transition-colors group"
               >
                 <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">

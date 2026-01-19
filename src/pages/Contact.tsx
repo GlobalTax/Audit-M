@@ -16,7 +16,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { LazyLocationMap } from '@/components/map/LazyLocationMap';
 
 export default function Contact() {
-  const { trackPageView, trackFormSubmit, trackCTAClick, trackContactClick } = useAnalytics();
+  const { trackPageView, trackFormSubmit, trackCTAClick, trackContactClick, trackContactFormConversion, trackPhoneCallConversion } = useAnalytics();
   useScrollDepth();
   const { t } = useLanguage();
   const { toast } = useToast();
@@ -57,6 +57,9 @@ export default function Contact() {
         subject: formData.subject,
         has_phone: !!formData.phone,
       });
+
+      // Track Google Ads conversion with Enhanced Conversions
+      trackContactFormConversion(formData.email, formData.subject);
 
       toast({
         title: t("contact.form.successTitle"),
@@ -266,6 +269,7 @@ export default function Contact() {
                               onClick={() => {
                                 if (isPhone) {
                                   trackContactClick('phone', item.value, 'contact_page_info');
+                                  trackPhoneCallConversion(item.value);
                                 } else if (isEmail) {
                                   trackContactClick('email', item.value, 'contact_page_info');
                                 } else {

@@ -5,7 +5,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 
 export const LandingFooter = () => {
   const currentYear = new Date().getFullYear();
-  const { trackContactClick } = useAnalytics();
+  const { trackContactClick, trackPhoneCallConversion } = useAnalytics();
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -25,7 +25,10 @@ export const LandingFooter = () => {
             <p className="text-lg font-medium mb-2">¿Necesitas asesoramiento?</p>
             <a
               href="tel:+34934593600"
-              onClick={() => trackContactClick('phone', '+34934593600', 'landing_footer')}
+              onClick={() => {
+                trackContactClick('phone', '+34934593600', 'landing_footer');
+                trackPhoneCallConversion('+34934593600');
+              }}
               className="text-2xl font-semibold text-accent hover:text-accent/80 transition-colors"
             >
               934 593 600
