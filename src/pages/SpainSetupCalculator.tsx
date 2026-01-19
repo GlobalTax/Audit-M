@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { SetupCalculatorForm } from "@/components/calculator/SetupCalculatorForm";
 import { CalculatorResults } from "@/components/calculator/CalculatorResults";
+import { CalculatorResultsTeaser } from "@/components/calculator/CalculatorResultsTeaser";
 import { CalculatorLeadForm } from "@/components/calculator/CalculatorLeadForm";
 import { SpainSetupStickyCTA } from "@/components/spain-setup/SpainSetupStickyCTA";
 import { RelatedResourcesGrid } from "@/components/spain-setup/RelatedResourcesGrid";
@@ -37,6 +38,7 @@ export default function SpainSetupCalculator() {
   const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
   const [results, setResults] = useState<Results | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const { trackEvent } = useAnalytics();
 
   // Track page view
@@ -77,6 +79,14 @@ export default function SpainSetupCalculator() {
   const handleReset = () => {
     setInputs(null);
     setResults(null);
+    setIsUnlocked(false);
+  };
+
+  const handleUnlock = () => {
+    setIsUnlocked(true);
+    trackEvent("calculator_unlocked_global_nrro", {
+      company_type: inputs?.companyType,
+    });
   };
 
   return (
@@ -147,11 +157,20 @@ export default function SpainSetupCalculator() {
                   isCalculating={isCalculating} 
                 />
               </>
+            ) : !isUnlocked ? (
+              /* Show Teaser with Email Gate */
+              <CalculatorResultsTeaser 
+                results={results} 
+                inputs={inputs!} 
+                onUnlock={handleUnlock}
+                onReset={handleReset}
+              />
             ) : (
+              /* Show Full Results After Email Capture */
               <>
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Your Estimate
+                    Your Complete Estimate
                   </h2>
                   <Button variant="outline" onClick={handleReset}>
                     <RefreshCw className="w-4 h-4 mr-2" />
@@ -160,11 +179,6 @@ export default function SpainSetupCalculator() {
                 </div>
 
                 <CalculatorResults results={results} inputs={inputs!} />
-
-                {/* Lead Form */}
-                <div className="mt-12">
-                  <CalculatorLeadForm inputs={inputs!} results={results} />
-                </div>
 
                 {/* Result CTAs */}
                 <div className="grid md:grid-cols-2 gap-6 mt-12">
