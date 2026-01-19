@@ -312,6 +312,65 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_topics_queue: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          error_message: string | null
+          generated_post_id: string | null
+          id: string
+          priority: number | null
+          processed_at: string | null
+          scheduled_for: string | null
+          status: string | null
+          target_keywords: string[] | null
+          target_language: string | null
+          target_site: string | null
+          topic: string
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          generated_post_id?: string | null
+          id?: string
+          priority?: number | null
+          processed_at?: string | null
+          scheduled_for?: string | null
+          status?: string | null
+          target_keywords?: string[] | null
+          target_language?: string | null
+          target_site?: string | null
+          topic: string
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          generated_post_id?: string | null
+          id?: string
+          priority?: number | null
+          processed_at?: string | null
+          scheduled_for?: string | null
+          status?: string | null
+          target_keywords?: string[] | null
+          target_language?: string | null
+          target_site?: string | null
+          topic?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_topics_queue_generated_post_id_fkey"
+            columns: ["generated_post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       brand_kits: {
         Row: {
           cover_bg_url: string | null
