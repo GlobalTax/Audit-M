@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { ChatMarkdownRenderer } from "./ChatMarkdownRenderer";
+import { ChatActionButtons, extractActionButtons } from "./ChatActionButtons";
 
 interface Message {
   id: string;
@@ -14,10 +16,10 @@ interface Message {
 }
 
 const SUGGESTED_QUESTIONS = [
-  "How do I set up a company in Spain?",
-  "What is the Beckham Law?",
-  "How long does incorporation take?",
-  "What are the costs involved?",
+  "How much does it cost to set up an SL?",
+  "Compare SL vs SA for me",
+  "Calculate Beckham Law savings for €100,000 salary",
+  "What documents do I need for NIE?",
 ];
 
 export function AIChatWidget() {
@@ -38,7 +40,7 @@ export function AIChatWidget() {
         {
           id: "welcome",
           role: "assistant",
-          content: "Hello! I'm your NRRO assistant. I can help you with questions about setting up a company in Spain, tax optimization, the Beckham Law, and our international services. How can I assist you today?",
+          content: "Hello! I'm your NRRO assistant with **real-time data access**. I can:\n\n• Calculate setup costs and timelines\n• Compare legal structures (SL, SA, Branch, Subsidiary)\n• Estimate Beckham Law tax savings\n• Explain NIE requirements\n\nWhat would you like to know?",
           timestamp: new Date(),
         },
       ]);
@@ -48,7 +50,10 @@ export function AIChatWidget() {
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      const scrollElement = scrollRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      if (scrollElement) {
+        scrollElement.scrollTop = scrollElement.scrollHeight;
+      }
     }
   }, [messages]);
 
@@ -59,13 +64,13 @@ export function AIChatWidget() {
     }
   }, [isOpen]);
 
-  // Show email capture after 3 messages
+  // Show email capture after 3 user messages
   useEffect(() => {
     const userMessages = messages.filter((m) => m.role === "user");
-    if (userMessages.length >= 3 && !showEmailCapture) {
+    if (userMessages.length >= 3 && !showEmailCapture && !email) {
       setShowEmailCapture(true);
     }
-  }, [messages, showEmailCapture]);
+  }, [messages, showEmailCapture, email]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -172,6 +177,7 @@ export function AIChatWidget() {
         trackEvent("chatbot_message_global_nrro", {
           user_message: userMessage.slice(0, 100),
           response_length: assistantContent.length,
+          had_data: assistantContent.includes("€") || assistantContent.includes("|"),
         });
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : "Sorry, something went wrong. Please try again.";
@@ -237,7 +243,7 @@ export function AIChatWidget() {
               transition={{ delay: 2 }}
               className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm shadow-lg"
             >
-              <span className="text-foreground">Need help? Ask me!</span>
+              <span className="text-foreground">Ask me for real estimates!</span>
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 border-8 border-transparent border-l-white" />
             </motion.div>
           </motion.div>
@@ -251,7 +257,7 @@ export function AIChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 flex h-[500px] w-[380px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            className="fixed bottom-6 right-6 z-50 flex h-[550px] w-[420px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between bg-primary px-4 py-3 text-white">
@@ -260,8 +266,8 @@ export function AIChatWidget() {
                   <Sparkles className="h-4 w-4" />
                 </div>
                 <div>
-                  <h3 className="font-medium">NRRO Assistant</h3>
-                  <p className="text-xs text-white/70">Usually replies instantly</p>
+                  <h3 className="font-medium">NRRO Expert Assistant</h3>
+                  <p className="text-xs text-white/70">Real-time data & estimates</p>
                 </div>
               </div>
               <Button
@@ -277,37 +283,52 @@ export function AIChatWidget() {
             {/* Messages */}
             <ScrollArea className="flex-1 p-4" ref={scrollRef}>
               <div className="space-y-4">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex gap-2 ${
-                      message.role === "user" ? "flex-row-reverse" : ""
-                    }`}
-                  >
+                {messages.map((message) => {
+                  const actionButtons = message.role === "assistant" 
+                    ? extractActionButtons(message.content) 
+                    : [];
+                  
+                  return (
                     <div
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-                        message.role === "user"
-                          ? "bg-primary text-white"
-                          : "bg-muted"
+                      key={message.id}
+                      className={`flex gap-2 ${
+                        message.role === "user" ? "flex-row-reverse" : ""
                       }`}
                     >
-                      {message.role === "user" ? (
-                        <User className="h-4 w-4" />
-                      ) : (
-                        <Bot className="h-4 w-4" />
-                      )}
+                      <div
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+                          message.role === "user"
+                            ? "bg-primary text-white"
+                            : "bg-muted"
+                        }`}
+                      >
+                        {message.role === "user" ? (
+                          <User className="h-4 w-4" />
+                        ) : (
+                          <Bot className="h-4 w-4" />
+                        )}
+                      </div>
+                      <div
+                        className={`max-w-[85%] rounded-2xl px-4 py-2 ${
+                          message.role === "user"
+                            ? "bg-primary text-white"
+                            : "bg-muted"
+                        }`}
+                      >
+                        {message.role === "assistant" ? (
+                          <>
+                            <ChatMarkdownRenderer content={message.content} />
+                            {actionButtons.length > 0 && message.content.length > 50 && (
+                              <ChatActionButtons actions={actionButtons} />
+                            )}
+                          </>
+                        ) : (
+                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        )}
+                      </div>
                     </div>
-                    <div
-                      className={`max-w-[75%] rounded-2xl px-4 py-2 ${
-                        message.role === "user"
-                          ? "bg-primary text-white"
-                          : "bg-muted"
-                      }`}
-                    >
-                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 {isLoading && messages[messages.length - 1]?.content === "" && (
                   <div className="flex gap-2">
@@ -316,7 +337,7 @@ export function AIChatWidget() {
                     </div>
                     <div className="flex items-center gap-1 rounded-2xl bg-muted px-4 py-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      <span className="text-sm text-muted-foreground">Thinking...</span>
+                      <span className="text-sm text-muted-foreground">Calculating...</span>
                     </div>
                   </div>
                 )}
@@ -324,12 +345,12 @@ export function AIChatWidget() {
                 {/* Suggested Questions */}
                 {messages.length === 1 && (
                   <div className="space-y-2 pt-2">
-                    <p className="text-xs text-muted-foreground">Popular questions:</p>
+                    <p className="text-xs text-muted-foreground font-medium">Try asking:</p>
                     {SUGGESTED_QUESTIONS.map((question) => (
                       <button
                         key={question}
                         onClick={() => handleSuggestionClick(question)}
-                        className="block w-full rounded-lg border border-border bg-background px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
+                        className="block w-full rounded-lg border border-border bg-background px-3 py-2 text-left text-sm transition-colors hover:bg-muted hover:border-primary/30"
                       >
                         {question}
                       </button>
@@ -345,7 +366,7 @@ export function AIChatWidget() {
                     className="rounded-lg border border-primary/20 bg-primary/5 p-3"
                   >
                     <p className="mb-2 text-sm font-medium">
-                      Want detailed information sent to your inbox?
+                      💡 Get a personalized report with these estimates?
                     </p>
                     <form onSubmit={handleEmailSubmit} className="flex gap-2">
                       <Input
@@ -371,7 +392,7 @@ export function AIChatWidget() {
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
+                  placeholder="Ask about costs, timelines, taxes..."
                   disabled={isLoading}
                   className="flex-1"
                 />
@@ -384,7 +405,7 @@ export function AIChatWidget() {
                 </Button>
               </div>
               <p className="mt-2 text-center text-xs text-muted-foreground">
-                Powered by AI • May make mistakes
+                Powered by AI with real NRRO data
               </p>
             </form>
           </motion.div>
