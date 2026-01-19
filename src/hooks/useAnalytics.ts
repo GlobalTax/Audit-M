@@ -1,4 +1,13 @@
 // Analytics event tracking hook with GTM integration
+import { hashEmail } from '@/lib/hashUtils';
+
+// Google Ads Configuration
+const GOOGLE_ADS_ID = 'AW-561508636';
+const CONVERSION_LABELS = {
+  contact_form: 'PLACEHOLDER_CONTACT', // Replace with actual label from Google Ads
+  resource_download: 'PLACEHOLDER_DOWNLOAD', // Replace with actual label from Google Ads
+  newsletter: 'PLACEHOLDER_NEWSLETTER', // Replace with actual label from Google Ads
+};
 
 export const useAnalytics = () => {
   const trackEvent = (eventName: string, properties?: Record<string, any>) => {
@@ -244,6 +253,105 @@ export const useAnalytics = () => {
     });
   };
 
+  // ============================================
+  // Google Ads Conversion Tracking Functions
+  // ============================================
+
+  /**
+   * Track Google Ads conversion with Enhanced Conversions
+   * @param conversionType - Type of conversion (contact_form, resource_download, newsletter)
+   * @param value - Optional conversion value in EUR
+   * @param userData - Optional user data for Enhanced Conversions
+   */
+  const trackGoogleAdsConversion = async (
+    conversionType: 'contact_form' | 'resource_download' | 'newsletter',
+    value?: number,
+    userData?: { email?: string }
+  ) => {
+    if (typeof window === 'undefined' || !window.gtag) return;
+
+    const conversionLabel = CONVERSION_LABELS[conversionType];
+    const conversionId = `${GOOGLE_ADS_ID}/${conversionLabel}`;
+
+    const conversionData: Record<string, any> = {
+      send_to: conversionId,
+      value: value || 0,
+      currency: 'EUR',
+    };
+
+    // Enhanced Conversions: add hashed email
+    if (userData?.email) {
+      try {
+        const hashedEmail = await hashEmail(userData.email);
+        conversionData.user_data = {
+          sha256_email_address: hashedEmail,
+        };
+      } catch (error) {
+        console.error('[Analytics] Error hashing email for Enhanced Conversions:', error);
+      }
+    }
+
+    window.gtag('event', 'conversion', conversionData);
+    
+    // Also push to dataLayer for GTM
+    window.dataLayer?.push({
+      event: `gads_conversion_${conversionType}_global_nrro`,
+      conversion_id: conversionId,
+      conversion_value: value || 0,
+      conversion_currency: 'EUR',
+    });
+
+    console.log('[Analytics] Google Ads Conversion:', conversionType, conversionData);
+  };
+
+  /**
+   * Track contact form conversion in Google Ads
+   * @param email - User email for Enhanced Conversions
+   * @param serviceInterest - Service the user is interested in
+   */
+  const trackContactFormConversion = async (email: string, serviceInterest: string) => {
+    // Track in Google Ads with €100 value
+    await trackGoogleAdsConversion('contact_form', 100, { email });
+    
+    // Also track in GA4
+    trackGlobalContactFormSubmission({ serviceInterest, countryRegion: '' });
+  };
+
+  /**
+   * Track resource download conversion (Playbook, Checklist, Calculator, Quiz)
+   * @param email - User email for Enhanced Conversions
+   * @param resourceType - Type of resource downloaded
+   */
+  const trackResourceDownloadConversion = async (
+    email: string, 
+    resourceType: 'playbook' | 'checklist' | 'calculator' | 'quiz' | 'other'
+  ) => {
+    // Track in Google Ads with €50 value
+    await trackGoogleAdsConversion('resource_download', 50, { email });
+    
+    // Also track in GA4
+    trackEvent('resource_download_conversion_global_nrro', {
+      resource_type: resourceType,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  /**
+   * Track newsletter signup conversion
+   * @param email - User email for Enhanced Conversions
+   */
+  const trackNewsletterConversion = async (email: string) => {
+    // Track in Google Ads with €25 value
+    await trackGoogleAdsConversion('newsletter', 25, { email });
+    
+    // Also track in GA4
+    trackEvent('newsletter_signup_conversion_global_nrro', {
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString(),
+    });
+  };
+
   return {
     trackEvent,
     trackCTAClick,
@@ -262,5 +370,10 @@ export const useAnalytics = () => {
     trackFormAbandon,
     trackScrollToForm,
     trackTimeOnPage,
+    // Google Ads Conversion functions
+    trackGoogleAdsConversion,
+    trackContactFormConversion,
+    trackResourceDownloadConversion,
+    trackNewsletterConversion,
   };
 };
