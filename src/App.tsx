@@ -77,6 +77,9 @@ import VisaSpainHub from "./pages/VisaSpainHub";
 import SpainSetupUSA from "./pages/SpainSetupUSA";
 import SpainSetupUK from "./pages/SpainSetupUK";
 import SpainSetupUAE from "./pages/SpainSetupUAE";
+import SpainSetupFrance from "./pages/SpainSetupFrance";
+import SpainSetupGermany from "./pages/SpainSetupGermany";
+import SpainSetupCanada from "./pages/SpainSetupCanada";
 import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
 import SpainMAGateway from "./pages/SpainMAGateway";
 import SpainMAHub from "./pages/SpainMAHub";
@@ -154,6 +157,9 @@ const App = () => {
                 <Route path="/spain-company-setup-usa" element={<Layout><SpainSetupUSA /></Layout>} />
                 <Route path="/spain-company-setup-uk" element={<Layout><SpainSetupUK /></Layout>} />
                 <Route path="/spain-company-setup-uae" element={<Layout><SpainSetupUAE /></Layout>} />
+                <Route path="/spain-company-setup-france" element={<Layout><SpainSetupFrance /></Layout>} />
+                <Route path="/spain-company-setup-germany" element={<Layout><SpainSetupGermany /></Layout>} />
+                <Route path="/spain-company-setup-canada" element={<Layout><SpainSetupCanada /></Layout>} />
                 <Route path="/spain-business-bank-account" element={<Layout><SpainBusinessBankAccount /></Layout>} />
                 <Route path="/spain-labor-cost-calculator" element={<Layout><SpainLaborCostCalculator /></Layout>} />
                 <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
