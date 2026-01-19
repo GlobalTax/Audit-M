@@ -1260,6 +1260,42 @@ export type Database = {
         }
         Relationships: []
       }
+      email_nurture_sequences: {
+        Row: {
+          created_at: string | null
+          delay_days: number
+          html_content: string
+          id: string
+          is_active: boolean | null
+          lead_type: string
+          sequence_order: number
+          subject: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          delay_days?: number
+          html_content: string
+          id?: string
+          is_active?: boolean | null
+          lead_type: string
+          sequence_order?: number
+          subject: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          delay_days?: number
+          html_content?: string
+          id?: string
+          is_active?: boolean | null
+          lead_type?: string
+          sequence_order?: number
+          subject?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       empleados: {
         Row: {
           activo: boolean | null
@@ -2631,6 +2667,53 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      nurture_email_log: {
+        Row: {
+          clicked_at: string | null
+          id: string
+          lead_email: string
+          lead_id: string
+          lead_type: string
+          opened_at: string | null
+          sent_at: string | null
+          sequence_id: string | null
+          sequence_order: number
+          status: string | null
+        }
+        Insert: {
+          clicked_at?: string | null
+          id?: string
+          lead_email: string
+          lead_id: string
+          lead_type: string
+          opened_at?: string | null
+          sent_at?: string | null
+          sequence_id?: string | null
+          sequence_order: number
+          status?: string | null
+        }
+        Update: {
+          clicked_at?: string | null
+          id?: string
+          lead_email?: string
+          lead_id?: string
+          lead_type?: string
+          opened_at?: string | null
+          sent_at?: string | null
+          sequence_id?: string | null
+          sequence_order?: number
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nurture_email_log_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "email_nurture_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       page_audits: {
         Row: {
