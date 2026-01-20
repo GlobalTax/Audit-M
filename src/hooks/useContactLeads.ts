@@ -140,3 +140,93 @@ export const useDeleteContactLead = () => {
     },
   });
 };
+
+type ServiceType = "empresa_familiar" | "financial_planning" | "legal_advisory" | "other" | "tax_advisory";
+
+export interface CreateContactLeadInput {
+  name: string;
+  email: string;
+  phone?: string | null;
+  company?: string | null;
+  subject: string;
+  message: string;
+  service_type?: ServiceType | null;
+  lead_source?: string;
+  email_sent?: boolean;
+}
+
+export const useCreateContactLead = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (lead: CreateContactLeadInput) => {
+      const insertData: Record<string, unknown> = {
+        name: lead.name,
+        email: lead.email,
+        subject: lead.subject,
+        message: lead.message,
+        source_site: SITE_SOURCE,
+      };
+      
+      if (lead.phone) insertData.phone = lead.phone;
+      if (lead.company) insertData.company = lead.company;
+      if (lead.service_type) insertData.service_type = lead.service_type;
+      if (lead.lead_source) insertData.lead_source = lead.lead_source;
+      if (lead.email_sent !== undefined) insertData.email_sent = lead.email_sent;
+
+      const { error } = await supabase
+        .from("contact_leads")
+        .insert(insertData as any);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["contact-leads"] });
+      toast.success("Lead añadido correctamente");
+    },
+    onError: (error) => {
+      console.error("Error creating lead:", error);
+      toast.error("Error al crear el lead");
+    },
+  });
+};
+
+export const useBulkCreateContactLeads = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (leads: CreateContactLeadInput[]) => {
+      const leadsWithSource = leads.map((lead) => {
+        const insertData: Record<string, unknown> = {
+          name: lead.name,
+          email: lead.email,
+          subject: lead.subject,
+          message: lead.message,
+          source_site: SITE_SOURCE,
+        };
+        
+        if (lead.phone) insertData.phone = lead.phone;
+        if (lead.company) insertData.company = lead.company;
+        if (lead.service_type) insertData.service_type = lead.service_type;
+        if (lead.lead_source) insertData.lead_source = lead.lead_source;
+        if (lead.email_sent !== undefined) insertData.email_sent = lead.email_sent;
+        
+        return insertData;
+      });
+
+      const { error } = await supabase
+        .from("contact_leads")
+        .insert(leadsWithSource as any);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["contact-leads"] });
+      toast.success("Leads importados correctamente");
+    },
+    onError: (error) => {
+      console.error("Error importing leads:", error);
+      toast.error("Error al importar los leads");
+    },
+  });
+};
