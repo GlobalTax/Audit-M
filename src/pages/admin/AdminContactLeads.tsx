@@ -3,11 +3,13 @@ import { useContactLeads, useUpdateContactLead, useDeleteContactLead, ContactLea
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Mail, ExternalLink, Eye, Download } from "lucide-react";
+import { Trash2, Mail, ExternalLink, Eye, Download, UserPlus, Upload, MessageSquare, Phone, Globe } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { ContactLeadDetailModal } from "@/components/admin/contact-leads/ContactLeadDetailModal";
 import { ContactLeadFilters, ContactLeadFiltersState } from "@/components/admin/contact-leads/ContactLeadFilters";
+import { AddContactLeadDialog } from "@/components/admin/contact-leads/AddContactLeadDialog";
+import { ImportLeadsDialog } from "@/components/admin/contact-leads/ImportLeadsDialog";
 import { exportContactLeadsToCSV, exportContactLeadsToExcel } from "@/lib/exportContactLeads";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import {
@@ -36,6 +38,33 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const getSourceIcon = (source: string | null | undefined) => {
+  switch (source) {
+    case "whatsapp":
+      return <MessageSquare className="h-3 w-3" />;
+    case "phone":
+      return <Phone className="h-3 w-3" />;
+    case "web":
+      return <Globe className="h-3 w-3" />;
+    default:
+      return null;
+  }
+};
+
+const getSourceLabel = (source: string | null | undefined) => {
+  switch (source) {
+    case "whatsapp":
+      return "WhatsApp";
+    case "phone":
+      return "Teléfono";
+    case "referral":
+      return "Referido";
+    case "web":
+    default:
+      return "Web";
+  }
+};
+
 export default function AdminContactLeads() {
   const { trackDownload } = useAnalytics();
   const [filters, setFilters] = useState<ContactLeadFiltersState>({
@@ -53,6 +82,8 @@ export default function AdminContactLeads() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState<ContactLead | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
 
   const handleClearFilters = () => {
     setFilters({
@@ -125,29 +156,39 @@ export default function AdminContactLeads() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-normal">Leads de Contacto</h1>
           <p className="text-muted-foreground mt-1">
             Gestiona los mensajes de contacto recibidos
           </p>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
-              <Download className="h-4 w-4 mr-2" />
-              Exportar
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={handleExportCSV}>
-              Exportar a CSV
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleExportExcel}>
-              Exportar a Excel
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" size="sm" onClick={() => setIsAddDialogOpen(true)}>
+            <UserPlus className="h-4 w-4 mr-2" />
+            Añadir Lead
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setIsImportDialogOpen(true)}>
+            <Upload className="h-4 w-4 mr-2" />
+            Importar CSV
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Download className="h-4 w-4 mr-2" />
+                Exportar
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={handleExportCSV}>
+                Exportar a CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleExportExcel}>
+                Exportar a Excel
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <ContactLeadFilters
@@ -204,6 +245,7 @@ export default function AdminContactLeads() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Fecha</TableHead>
+                    <TableHead>Origen</TableHead>
                     <TableHead>Nombre</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Empresa</TableHead>
@@ -223,6 +265,12 @@ export default function AdminContactLeads() {
                         {format(new Date(lead.created_at), "dd MMM yyyy HH:mm", {
                           locale: es,
                         })}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="flex items-center gap-1 w-fit">
+                          {getSourceIcon((lead as any).lead_source)}
+                          {getSourceLabel((lead as any).lead_source)}
+                        </Badge>
                       </TableCell>
                       <TableCell className="font-medium">{lead.name}</TableCell>
                       <TableCell>
@@ -303,6 +351,18 @@ export default function AdminContactLeads() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Add Lead Dialog */}
+      <AddContactLeadDialog 
+        open={isAddDialogOpen} 
+        onOpenChange={setIsAddDialogOpen} 
+      />
+
+      {/* Import CSV Dialog */}
+      <ImportLeadsDialog 
+        open={isImportDialogOpen} 
+        onOpenChange={setIsImportDialogOpen} 
+      />
     </div>
   );
 }
