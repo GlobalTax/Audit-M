@@ -3,9 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { format } from "date-fns";
-import { Mail, Trash2, CheckCircle2, XCircle } from "lucide-react";
-import { ContactLead } from "@/hooks/useContactLeads";
+import { Mail, Trash2, CheckCircle2, XCircle, Globe, Building } from "lucide-react";
+import { ContactLead, useUpdateContactLeadSourceSite } from "@/hooks/useContactLeads";
 import { useState } from "react";
 
 interface ContactLeadDetailModalProps {
@@ -24,12 +31,17 @@ export const ContactLeadDetailModal = ({
   onDelete,
 }: ContactLeadDetailModalProps) => {
   const [responseNotes, setResponseNotes] = useState(lead?.response_notes || "");
+  const updateSourceSite = useUpdateContactLeadSourceSite();
 
   if (!lead) return null;
 
   const handleSaveResponse = () => {
     onUpdateStatus(lead.id, true, responseNotes);
     onOpenChange(false);
+  };
+
+  const handleSourceSiteChange = (value: 'es' | 'int') => {
+    updateSourceSite.mutate({ id: lead.id, source_site: value });
   };
 
   const emailTemplate = `Estimado/a ${lead.name},
@@ -51,13 +63,49 @@ Equipo NRRO Tax & Legal`;
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <span>Detalle del Contacto</span>
-            <Badge variant={lead.email_sent ? "default" : "secondary"}>
-              {lead.email_sent ? "Respondido" : "Pendiente"}
-            </Badge>
+            <div className="flex items-center gap-2">
+              <Badge variant={lead.source_site === 'int' ? 'default' : 'secondary'}>
+                {lead.source_site === 'int' ? '🌍 Internacional' : '🇪🇸 España'}
+              </Badge>
+              <Badge variant={lead.email_sent ? "default" : "outline"}>
+                {lead.email_sent ? "Respondido" : "Pendiente"}
+              </Badge>
+            </div>
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
+          {/* Sitio de origen */}
+          <div className="p-4 bg-muted/30 rounded-md">
+            <Label className="text-sm font-medium mb-2 block">Asignar a sitio</Label>
+            <Select 
+              value={lead.source_site || 'es'} 
+              onValueChange={handleSourceSiteChange}
+              disabled={updateSourceSite.isPending}
+            >
+              <SelectTrigger className="w-full max-w-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="es">
+                  <div className="flex items-center gap-2">
+                    <Building className="h-4 w-4" />
+                    <span>España (nrro.es)</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="int">
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-4 w-4" />
+                    <span>Internacional (global.nrro.es)</span>
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted-foreground mt-2">
+              Cambiar el sitio moverá el lead al panel de administración correspondiente.
+            </p>
+          </div>
+
           {/* Información del Cliente */}
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -68,6 +116,12 @@ Equipo NRRO Tax & Legal`;
               <Label className="text-muted-foreground">Email</Label>
               <p className="font-medium">{lead.email}</p>
             </div>
+            {lead.phone && (
+              <div>
+                <Label className="text-muted-foreground">Teléfono</Label>
+                <p className="font-medium">{lead.phone}</p>
+              </div>
+            )}
             {lead.company && (
               <div>
                 <Label className="text-muted-foreground">Empresa</Label>
@@ -78,6 +132,12 @@ Equipo NRRO Tax & Legal`;
               <div>
                 <Label className="text-muted-foreground">Tipo de Servicio</Label>
                 <p className="font-medium capitalize">{lead.service_type.replace('_', ' ')}</p>
+              </div>
+            )}
+            {lead.lead_source && (
+              <div>
+                <Label className="text-muted-foreground">Origen</Label>
+                <p className="font-medium capitalize">{lead.lead_source}</p>
               </div>
             )}
           </div>
