@@ -13,7 +13,6 @@ interface TimelineStep {
 
 interface CostItem {
   category: string;
-  range: string;
   includes: string;
 }
 
@@ -53,37 +52,30 @@ const timelineSteps: TimelineStep[] = [
 const costBreakdown: CostItem[] = [
   {
     category: "Notary Fees",
-    range: "€300 - €800",
     includes: "Public deed execution, certified copies, document authentication"
   },
   {
     category: "Registry Fees",
-    range: "€150 - €400",
     includes: "Commercial Registry inscription, publication fees, certifications"
   },
   {
     category: "Bank Charges",
-    range: "€0 - €500",
     includes: "Account opening fees, initial deposits, corporate card setup"
   },
   {
     category: "Share Capital (SL)",
-    range: "€3,000 min",
-    includes: "Minimum required capital for Sociedad Limitada"
+    includes: "€3,000 minimum required by law for Sociedad Limitada"
   },
   {
     category: "Share Capital (SA)",
-    range: "€60,000 min",
-    includes: "Minimum required capital for Sociedad Anónima (25% at incorporation)"
+    includes: "€60,000 minimum required by law for Sociedad Anónima (25% at incorporation)"
   },
   {
     category: "Professional Services",
-    range: "€2,000 - €6,000",
     includes: "Legal advisory, document drafting, notary coordination, filings"
   },
   {
     category: "NIE & Documentation",
-    range: "€50 - €300",
     includes: "Tax ID applications, translations, apostille costs"
   }
 ];
@@ -177,7 +169,7 @@ export const TimelineCostsSection = () => {
         {/* Cost Breakdown Table */}
         <div className="mb-12">
           <h3 className="text-xl font-medium text-foreground mb-8 text-center">
-            Cost Breakdown for Spain Company Formation
+            Cost Categories for Spain Company Formation
           </h3>
           
           <div className="max-w-4xl mx-auto bg-card rounded-lg border overflow-hidden">
@@ -185,16 +177,14 @@ export const TimelineCostsSection = () => {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead className="font-medium">Cost Category</TableHead>
-                  <TableHead className="font-medium">Typical Range</TableHead>
-                  <TableHead className="font-medium hidden md:table-cell">Includes</TableHead>
+                  <TableHead className="font-medium">What's Included</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {costBreakdown.map((item, index) => (
                   <TableRow key={index} className="hover:bg-muted/30 transition-colors">
                     <TableCell className="font-medium">{item.category}</TableCell>
-                    <TableCell className="font-mono text-primary">{item.range}</TableCell>
-                    <TableCell className="text-muted-foreground hidden md:table-cell">{item.includes}</TableCell>
+                    <TableCell className="text-muted-foreground">{item.includes}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -202,18 +192,17 @@ export const TimelineCostsSection = () => {
           </div>
         </div>
 
-        {/* Total Summary */}
+        {/* CTA Summary */}
         <div className="max-w-4xl mx-auto mb-12">
-          <div className="bg-muted/30 rounded-lg p-6 border">
-            <p className="text-foreground text-center">
-              <span className="font-medium">Total First-Year Investment (SL):</span>{' '}
-              <span className="font-mono text-primary text-lg">€6,000 - €15,000</span>
-              <br />
-              <span className="text-sm text-muted-foreground mt-2 block">
-                For a standard Sociedad Limitada including share capital. SA formations or complex structures 
-                require additional capital and may incur higher professional fees.
-              </span>
+          <div className="bg-muted/30 rounded-lg p-6 border text-center">
+            <p className="font-medium text-foreground mb-2">Need a Personalized Quote?</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              Every business is unique. Contact us for a detailed, transparent quote tailored to your 
+              specific entity type, complexity, and timeline requirements.
             </p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/contact">Request a Quote</Link>
+            </Button>
           </div>
         </div>
 

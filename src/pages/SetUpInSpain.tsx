@@ -210,39 +210,28 @@ const timelinePhases = [
 const costCategories = [
   {
     category: "Legal & Advisory Fees",
-    range: "€3,000 - €8,000",
     includes: ["Corporate structuring advice", "Document drafting & review", "Notary coordination", "Registry filings management"],
     note: "Varies by complexity and structure type"
   },
   {
     category: "Government & Registry Fees",
-    range: "€500 - €1,500",
     includes: ["Notary public fees", "Commercial Registry fees", "Tax registration costs", "Certified translations"],
     note: "Fixed official fees"
   },
   {
     category: "Share Capital",
-    range: "€3,000 - €60,000+",
-    includes: ["SL minimum: €3,000", "SA minimum: €60,000", "25% deposit required at incorporation", "Balance within defined timeline"],
+    includes: ["SL minimum: €3,000 (legal requirement)", "SA minimum: €60,000 (legal requirement)", "25% deposit required at incorporation", "Balance within defined timeline"],
     note: "Depends on legal structure"
   },
   {
     category: "Bank Setup",
-    range: "€0 - €500",
     includes: ["Account opening fees", "Initial deposit requirements", "International transfer setup", "Corporate card issuance"],
     note: "Varies by bank"
   },
   {
     category: "Payroll & HR Setup",
-    range: "€500 - €2,000",
     includes: ["Social Security registration", "Payroll system configuration", "Employment contract drafting", "Labor compliance audit"],
     note: "Per-employee costs additional"
-  },
-  {
-    category: "Ongoing Compliance (Annual)",
-    range: "€3,000 - €12,000+",
-    includes: ["Accounting & bookkeeping", "Tax filings (quarterly + annual)", "Corporate secretarial services", "Audit fees (if required)"],
-    note: "Based on activity volume"
   }
 ];
 
@@ -338,7 +327,7 @@ const faqs = [
   },
   { 
     question: "What are the typical costs for setting up a company in Spain?", 
-    answer: "Total first-year investment typically ranges from €8,000-€15,000 for a standard SL, including: advisory fees (€3,000-€8,000), notary and registry fees (€500-€1,500), share capital (€3,000 minimum), and initial compliance setup. Ongoing annual costs for accounting, tax, and secretarial services typically range from €3,000-€12,000 depending on transaction volume. Use our cost calculator for a personalized estimate." 
+    answer: "Setting up a company in Spain involves several cost categories: legal and advisory fees, government and registry fees, share capital requirements (€3,000 minimum for SL, €60,000 for SA as required by law), banking setup, and initial compliance. Actual costs vary significantly based on complexity, entity type, and specific requirements. Contact us for a personalized quote tailored to your situation." 
   }
 ];
 
@@ -781,10 +770,7 @@ const CostsSection = () => (
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-background border border-border rounded-xl p-6"
             >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-lg font-medium text-foreground">{cost.category}</h3>
-                <span className="text-xl font-bold text-primary">{cost.range}</span>
-              </div>
+              <h3 className="text-lg font-medium text-foreground mb-4">{cost.category}</h3>
               <ul className="space-y-2 mb-4">
                 {cost.includes.map((item, i) => (
                   <li key={i} className="flex items-start text-sm text-muted-foreground">
@@ -806,12 +792,14 @@ const CostsSection = () => (
               <Wallet className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-2">Typical Total Investment</h4>
+              <h4 className="font-medium text-foreground mb-2">Get a Personalized Quote</h4>
               <p className="text-muted-foreground text-sm">
-                For a standard SL formation with basic setup, expect to invest <strong>€8,000 - €15,000</strong> in 
-                the first year including formation, capital, and initial compliance. This excludes operational 
-                costs like rent, salaries, and ongoing accounting which vary based on business activity.
+                Every business is different. Share your requirements with us and receive a detailed, 
+                transparent quote tailored to your specific entity type, complexity, and timeline.
               </p>
+              <Button asChild variant="outline" size="sm" className="mt-4">
+                <Link to="/contact">Request a Quote</Link>
+              </Button>
             </div>
           </div>
         </div>

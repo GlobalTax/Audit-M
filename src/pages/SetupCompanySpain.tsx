@@ -213,7 +213,7 @@ export const SetupCompanySpain = () => {
     },
     {
       question: "How much does it cost to set up a company in Spain?",
-      answer: "Typical costs for an SL include: notary fees (€300-€800), Commercial Registry fees (€150-€400), share capital deposit (€3,000 minimum), NIE applications (€50-€150 each), and professional advisory fees (€2,000-€6,000). Total first-year investment typically ranges from €6,000 to €15,000 depending on complexity. Use our calculator for a personalized estimate."
+      answer: "Setting up an SL in Spain involves notary fees, Commercial Registry fees, share capital deposit (€3,000 minimum required by law), NIE applications, and professional advisory fees. Costs vary based on your specific structure and requirements. Use our calculator for an initial estimate, or contact us for a detailed personalized quote."
     },
     {
       question: "Can a foreign company open a branch office in Spain?",
