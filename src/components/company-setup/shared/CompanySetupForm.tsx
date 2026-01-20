@@ -17,6 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -53,6 +54,7 @@ export const CompanySetupForm = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { trackContactFormConversion } = useAnalytics();
   
   const {
     register,
@@ -99,9 +101,13 @@ export const CompanySetupForm = ({
         description: t('shared.form.success.description'),
       });
 
-      // Track conversion event
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'lead_captured', {
+      // Track Google Ads conversion with Enhanced Conversions
+      await trackContactFormConversion(data.email, landingVariant);
+
+      // Also track in dataLayer for GTM
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'company_setup_lead_captured_global_nrro',
           variant: landingVariant,
           conversion_type: conversionType,
           lead_score: result.leadScore,
