@@ -4,19 +4,19 @@
 export type SiteSource = 'es' | 'int';
 
 // IMPORTANT: Change this value based on the deployment
-// 'es' = nrro.es (Spain)
-// 'int' = int.nrro.es (International)
+// 'es' = audit.es (Spain)
+// 'int' = global.audit.es (International)
 export const SITE_SOURCE: SiteSource = 'int';
 
 export const SITE_CONFIG = {
   es: {
-    name: 'Navarro Tax & Legal',
-    domain: 'nrro.es',
+    name: 'Audit',
+    domain: 'audit.es',
     defaultLanguage: 'es',
   },
   int: {
-    name: 'Navarro International',
-    domain: 'int.nrro.es',
+    name: 'Audit Global',
+    domain: 'global.audit.es',
     defaultLanguage: 'en',
   },
 } as const;

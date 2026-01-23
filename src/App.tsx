@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { LandingLayout } from "@/components/layout/LandingLayout";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -21,7 +20,6 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
-import LeyBeckham from "./pages/LeyBeckham";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
@@ -29,7 +27,6 @@ import Cookies from "./pages/Cookies";
 import Terms from "./pages/Terms";
 import Strategy from "./pages/Strategy";
 import Sectors from "./pages/Sectors";
-import InternationalServices from "./pages/InternationalServices";
 import Resources from "./pages/Resources";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
@@ -47,7 +44,6 @@ import AdminContactLeads from "./pages/admin/AdminContactLeads";
 import AdminLandings from "./pages/admin/AdminLandings";
 import LandingDetailPage from "./pages/admin/LandingDetailPage";
 import LandingDashboard from "./pages/admin/LandingDashboard";
-import AdminLeyBeckhamLeads from "./pages/admin/AdminLeyBeckhamLeads";
 import { AdminAnalyticsDashboard } from "./pages/admin/AdminAnalyticsDashboard";
 import DeckStudioList from "./pages/admin/deck-studio/DeckStudioList";
 import DeckStudioContent from "./pages/admin/deck-studio/DeckStudioContent";
@@ -57,36 +53,6 @@ import { AdminCompanySetupLeads } from "./pages/admin/AdminCompanySetupLeads";
 import AdminTechnology from "./pages/admin/AdminTechnology";
 import AdminSitemap from "./pages/admin/AdminSitemap";
 import AdminCalculatorSettings from "./pages/admin/AdminCalculatorSettings";
-import { CompanySetupCalculator } from "./pages/CompanySetupCalculator";
-import { NIEServiceSpain } from "./pages/NIEServiceSpain";
-import { TechStartupSetup } from "./pages/TechStartupSetup";
-import { ExpressCompanySetup } from "./pages/ExpressCompanySetup";
-import { SetupCompanySpain } from "./pages/SetupCompanySpain";
-import SetUpInSpain from "./pages/SetUpInSpain";
-import LegalStructuresSpain from "./pages/LegalStructuresSpain";
-import LegalStructuresComparator from "./pages/LegalStructuresComparator";
-import SpainCompanySetupPlaybook from "./pages/SpainCompanySetupPlaybook";
-import SpainCompanySetupHub from "./pages/SpainCompanySetupHub";
-import SpainDocumentChecklist from "./pages/SpainDocumentChecklist";
-import SpainReadinessQuiz from "./pages/SpainReadinessQuiz";
-import SpainSetupCalculator from "./pages/SpainSetupCalculator";
-import SpainLaborCostCalculator from "./pages/SpainLaborCostCalculator";
-import BeckhamLawCalculator from "./pages/BeckhamLawCalculator";
-import SpainTaxResidencyRisk from "./pages/SpainTaxResidencyRisk";
-import BeckhamLawHub from "./pages/BeckhamLawHub";
-import VisaSpainHub from "./pages/VisaSpainHub";
-import SpainSetupUSA from "./pages/SpainSetupUSA";
-import SpainSetupUK from "./pages/SpainSetupUK";
-import SpainSetupUAE from "./pages/SpainSetupUAE";
-import SpainSetupFrance from "./pages/SpainSetupFrance";
-import SpainSetupGermany from "./pages/SpainSetupGermany";
-import SpainSetupCanada from "./pages/SpainSetupCanada";
-import SpainBusinessBankAccount from "./pages/SpainBusinessBankAccount";
-import SpainMAGateway from "./pages/SpainMAGateway";
-import SpainMAHub from "./pages/SpainMAHub";
-import { SpanishPayrollInternational } from "./pages/SpanishPayrollInternational";
-import InternationalPayrollManagement from "./pages/services/InternationalPayrollManagement";
-import { SpanishSubsidiaryCompliance } from "./pages/SpanishSubsidiaryCompliance";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
@@ -113,10 +79,9 @@ const App = () => {
             <BrowserRouter>
               <ScrollToTop />
               <Routes>
-                {/* Main routes - English (no prefix) */}
+                {/* Main routes */}
                 <Route path="/" element={<Layout><Home /></Layout>} />
                 <Route path="/services" element={<Layout><Services /></Layout>} />
-                <Route path="/services/international-payroll-management" element={<Layout><InternationalPayrollManagement /></Layout>} />
                 <Route path="/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
                 <Route path="/case-studies" element={<Layout><CaseStudies /></Layout>} />
                 <Route path="/case-studies/:slug" element={<Layout><CaseStudyDetail /></Layout>} />
@@ -134,44 +99,9 @@ const App = () => {
                 <Route path="/cookie-policy" element={<Layout><CookiePolicyEN /></Layout>} />
                 <Route path="/terms" element={<Layout><Terms /></Layout>} />
                 <Route path="/careers" element={<Layout><Careers /></Layout>} />
-                <Route path="/international-services" element={<Layout><InternationalServices /></Layout>} />
                 <Route path="/resources" element={<Layout><Resources /></Layout>} />
                 <Route path="/leave-review" element={<Layout><LeaveReview /></Layout>} />
                 <Route path="/testimonials" element={<Layout><Testimonials /></Layout>} />
-
-                {/* Special landings for internationals */}
-                <Route path="/beckham-law" element={<LandingLayout><LeyBeckham /></LandingLayout>} />
-                
-                {/* Company Setup Landings */}
-                <Route path="/company-setup-calculator" element={<CompanySetupCalculator />} />
-                <Route path="/nie-spain-foreigners" element={<Layout><NIEServiceSpain /></Layout>} />
-                <Route path="/startup-company-setup-spain" element={<Layout><TechStartupSetup /></Layout>} />
-                <Route path="/fast-company-registration-spain" element={<Layout><ExpressCompanySetup /></Layout>} />
-                <Route path="/set-up-company-spain" element={<SetupCompanySpain />} />
-                <Route path="/set-up-in-spain" element={<SetUpInSpain />} />
-                <Route path="/legal-structures-spain" element={<Layout><LegalStructuresSpain /></Layout>} />
-                <Route path="/legal-structures-comparator" element={<Layout><LegalStructuresComparator /></Layout>} />
-                <Route path="/spain-company-setup" element={<Layout><SpainCompanySetupHub /></Layout>} />
-                <Route path="/spain-company-setup-playbook" element={<Layout><SpainCompanySetupPlaybook /></Layout>} />
-                <Route path="/spain-document-checklist" element={<Layout><SpainDocumentChecklist /></Layout>} />
-                <Route path="/spain-readiness-quiz" element={<Layout><SpainReadinessQuiz /></Layout>} />
-                <Route path="/spain-setup-calculator" element={<Layout><SpainSetupCalculator /></Layout>} />
-                <Route path="/spain-company-setup-usa" element={<Layout><SpainSetupUSA /></Layout>} />
-                <Route path="/spain-company-setup-uk" element={<Layout><SpainSetupUK /></Layout>} />
-                <Route path="/spain-company-setup-uae" element={<Layout><SpainSetupUAE /></Layout>} />
-                <Route path="/spain-company-setup-france" element={<Layout><SpainSetupFrance /></Layout>} />
-                <Route path="/spain-company-setup-germany" element={<Layout><SpainSetupGermany /></Layout>} />
-                <Route path="/spain-company-setup-canada" element={<Layout><SpainSetupCanada /></Layout>} />
-                <Route path="/spain-business-bank-account" element={<Layout><SpainBusinessBankAccount /></Layout>} />
-                <Route path="/spain-labor-cost-calculator" element={<Layout><SpainLaborCostCalculator /></Layout>} />
-                <Route path="/beckham-law-calculator" element={<Layout><BeckhamLawCalculator /></Layout>} />
-                <Route path="/spain-tax-residency-risk" element={<Layout><SpainTaxResidencyRisk /></Layout>} />
-                <Route path="/beckham-law-hub" element={<Layout><BeckhamLawHub /></Layout>} />
-                <Route path="/visa-spain-hub" element={<Layout><VisaSpainHub /></Layout>} />
-                <Route path="/spain-ma-gateway" element={<Layout><SpainMAGateway /></Layout>} />
-                <Route path="/spain-ma-hub" element={<Layout><SpainMAHub /></Layout>} />
-                <Route path="/spanish-payroll-international" element={<Layout><SpanishPayrollInternational /></Layout>} />
-                <Route path="/spanish-subsidiary-compliance" element={<Layout><SpanishSubsidiaryCompliance /></Layout>} />
                 <Route path="/thank-you/:variant" element={<Layout><ThankYou /></Layout>} />
 
                 {/* Admin routes */}
@@ -199,7 +129,6 @@ const App = () => {
                   <Route path="job-positions" element={<AdminJobPositions />} />
                   <Route path="candidatos" element={<AdminCandidatos />} />
                   <Route path="contact-leads" element={<AdminContactLeads />} />
-                  <Route path="ley-beckham-leads" element={<AdminLeyBeckhamLeads />} />
                   <Route path="demo-requests" element={<AdminDemoRequests />} />
                   <Route path="company-setup-leads" element={<AdminCompanySetupLeads />} />
                   <Route path="playbook-leads" element={<AdminPlaybookLeads />} />

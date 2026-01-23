@@ -22,7 +22,7 @@ import { CustomPagination } from "@/components/ui/custom-pagination";
 import { useBlogSearch } from "@/hooks/useBlogSearch";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
-import { GlobalContactForm } from "@/components/international/GlobalContactForm";
+
 
 const ITEMS_PER_PAGE = 9;
 
@@ -192,25 +192,6 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* Contact Form Section */}
-      <section className="py-20 md:py-28 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-                Get in Touch
-              </p>
-              <h2 className="text-3xl md:text-4xl font-normal mb-4">
-                Need Expert Advice?
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our international advisory team specializes in tax, legal, and corporate matters for global businesses. Connect with us to discuss your specific needs.
-              </p>
-            </div>
-            <GlobalContactForm />
-          </div>
-        </div>
-      </section>
     </>
   );
 };
