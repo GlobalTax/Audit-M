@@ -545,5 +545,65 @@
     "transactionalAudit": "Auditoría Transaccional",
     "internalAudit": "Auditoría Interna",
     "specialReports": "Informes Especiales"
+  },
+  "auditHub": {
+    "meta": {
+      "title": "Centro de Auditoría | Servicios de Auditoría Profesional",
+      "description": "Hub central de servicios de auditoría: financiera, cumplimiento, ESG, due diligence, interna e informes especiales. Auditores inscritos en el ROAC."
+    },
+    "hero": {
+      "badge": "ROAC · ICAC · 25+ años",
+      "title": "Centro de Auditoría",
+      "subtitle": "Servicios de auditoría independiente para empresas que buscan excelencia, transparencia y cumplimiento normativo",
+      "ctaPrimary": "Solicitar propuesta",
+      "ctaSecondary": "¿Obligado a auditar?"
+    },
+    "trustBar": {
+      "services": "Servicios especializados",
+      "registered": "Auditores inscritos",
+      "networks": "Redes internacionales",
+      "experience": "Años de experiencia"
+    },
+    "categories": {
+      "overline": "Áreas de especialización",
+      "title": "Nuestros Servicios de Auditoría",
+      "subtitle": "Soluciones de auditoría adaptadas a las necesidades específicas de cada organización"
+    },
+    "whyUs": {
+      "overline": "Nuestra diferencia",
+      "title": "¿Por qué elegirnos?",
+      "subtitle": "Combinamos rigor técnico con un enfoque práctico orientado a aportar valor real",
+      "roac": {
+        "title": "Inscritos en el ROAC",
+        "description": "Auditores de cuentas oficialmente registrados en el Registro Oficial de Auditores de Cuentas"
+      },
+      "methodology": {
+        "title": "Metodología NIA-ES",
+        "description": "Aplicamos las Normas Internacionales de Auditoría adaptadas por el ICAC"
+      },
+      "team": {
+        "title": "Equipo multidisciplinar",
+        "description": "Profesionales especializados en auditoría financiera, fiscal, ESG y control interno"
+      },
+      "networks": {
+        "title": "Alcance internacional",
+        "description": "Miembros de 3 redes internacionales con cobertura en más de 100 países"
+      },
+      "independence": {
+        "title": "Independencia garantizada",
+        "description": "Políticas estrictas de independencia y control de calidad interno"
+      },
+      "value": {
+        "title": "Valor añadido",
+        "description": "Más allá del informe: recomendaciones prácticas para mejorar la gestión"
+      }
+    },
+    "cta": {
+      "title": "¿Necesita una auditoría?",
+      "subtitle": "Solicite una propuesta personalizada sin compromiso",
+      "primary": "Solicitar propuesta",
+      "secondary": "Llamar ahora",
+      "guarantee": "Respuesta en menos de 24 horas · Presupuesto sin compromiso"
+    }
   }
 }

@@ -276,5 +276,65 @@
     "transactionalAudit": "Auditoria Transaccional",
     "internalAudit": "Auditoria Interna",
     "specialReports": "Informes Especials"
+  },
+  "auditHub": {
+    "meta": {
+      "title": "Centre d'Auditoria | Serveis d'Auditoria Professional",
+      "description": "Hub central de serveis d'auditoria: financera, compliment, ESG, due diligence, interna i informes especials. Auditors inscrits al ROAC."
+    },
+    "hero": {
+      "badge": "ROAC · ICAC · 25+ anys",
+      "title": "Centre d'Auditoria",
+      "subtitle": "Serveis d'auditoria independent per a empreses que busquen excel·lència, transparència i compliment normatiu",
+      "ctaPrimary": "Sol·licitar proposta",
+      "ctaSecondary": "Obligat a auditar?"
+    },
+    "trustBar": {
+      "services": "Serveis especialitzats",
+      "registered": "Auditors inscrits",
+      "networks": "Xarxes internacionals",
+      "experience": "Anys d'experiència"
+    },
+    "categories": {
+      "overline": "Àrees d'especialització",
+      "title": "Els nostres Serveis d'Auditoria",
+      "subtitle": "Solucions d'auditoria adaptades a les necessitats específiques de cada organització"
+    },
+    "whyUs": {
+      "overline": "La nostra diferència",
+      "title": "Per què triar-nos?",
+      "subtitle": "Combinem rigor tècnic amb un enfocament pràctic orientat a aportar valor real",
+      "roac": {
+        "title": "Inscrits al ROAC",
+        "description": "Auditors de comptes oficialment registrats al Registre Oficial d'Auditors de Comptes"
+      },
+      "methodology": {
+        "title": "Metodologia NIA-ES",
+        "description": "Apliquem les Normes Internacionals d'Auditoria adaptades per l'ICAC"
+      },
+      "team": {
+        "title": "Equip multidisciplinari",
+        "description": "Professionals especialitzats en auditoria financera, fiscal, ESG i control intern"
+      },
+      "networks": {
+        "title": "Abast internacional",
+        "description": "Membres de 3 xarxes internacionals amb cobertura en més de 100 països"
+      },
+      "independence": {
+        "title": "Independència garantida",
+        "description": "Polítiques estrictes d'independència i control de qualitat intern"
+      },
+      "value": {
+        "title": "Valor afegit",
+        "description": "Més enllà de l'informe: recomanacions pràctiques per millorar la gestió"
+      }
+    },
+    "cta": {
+      "title": "Necessita una auditoria?",
+      "subtitle": "Sol·liciti una proposta personalitzada sense compromís",
+      "primary": "Sol·licitar proposta",
+      "secondary": "Trucar ara",
+      "guarantee": "Resposta en menys de 24 hores · Pressupost sense compromís"
+    }
   }
 }
