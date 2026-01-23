@@ -1,30 +1,33 @@
-import { Check, Users, Clock, Shield, Zap } from "lucide-react";
+import { Shield, Users, Target, TrendingUp, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const reasons = [
   {
-    icon: Users,
-    text: "One point of contact in English—across legal, tax, accounting and payroll.",
-  },
-  {
     icon: Shield,
-    text: "Clear scope, clear fees. No surprises.",
+    text: "Complete independence and objectivity in every audit engagement.",
   },
   {
-    icon: Clock,
-    text: "We coordinate filings and deadlines so your Spain operations don't stall.",
+    icon: Users,
+    text: "Certified auditors with deep industry expertise and international experience.",
   },
   {
-    icon: Zap,
-    text: "Built for international decision-makers: fast response, practical guidance.",
+    icon: Target,
+    text: "Risk-based methodology aligned with ISA and local GAAP standards.",
+  },
+  {
+    icon: TrendingUp,
+    text: "Actionable insights and recommendations that go beyond compliance.",
   },
   {
     icon: Check,
-    text: "Senior advice, boutique speed—without Big4 bureaucracy.",
+    text: "Rigorous quality control and peer review processes.",
   },
 ];
 
-export function WhyNRROSection() {
+export function WhyAuditSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-white py-20 md:py-28 border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,16 +35,15 @@ export function WhyNRROSection() {
           {/* Left column - Title */}
           <div>
             <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-6">
-              Why NRRO for International Clients
+              {t("home.whyAudit.overline")}
             </h2>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight text-foreground">
-              Barcelona-based execution.<br />
-              International standards.
+              {t("home.whyAudit.title")}
             </h3>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              NRRO Global is the international advisory practice of NRRO (Spain), 
-              serving foreign companies and cross-border matters since 2017. 
-              Backed by 25+ years of domestic expertise.
+              Audit is an independent audit firm with over 25 years of experience. 
+              We provide rigorous, value-added audit services that help stakeholders 
+              make informed decisions based on reliable financial information.
             </p>
           </div>
 

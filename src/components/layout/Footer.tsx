@@ -22,13 +22,13 @@ export const Footer = () => {
     instagram: settings.social_instagram || 'https://www.instagram.com',
     twitter: settings.social_twitter || 'https://www.twitter.com',
     facebook: settings.social_facebook || 'https://www.facebook.com',
-    linkedin: settings.social_linkedin || 'https://www.linkedin.com/company/navarro-tax-legal/',
+    linkedin: settings.social_linkedin || 'https://www.linkedin.com/company/audit/',
   };
 
   const contactInfo = {
     phone: settings.contact_phone || '+34934593600',
     phoneDisplay: settings.contact_phone_display || '934593600',
-    email: settings.contact_email || 'info@nrro.es',
+    email: settings.contact_email || 'info@audit.es',
   };
 
   // Separate services and areas

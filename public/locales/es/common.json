@@ -1,0 +1,542 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "about": "Nosotros",
+    "blog": "Insights",
+    "team": "Equipo",
+    "careers": "Trabaja con nosotros",
+    "contact": "Contacto",
+    "areas": "Áreas de Auditoría",
+    "caseStudies": "Casos de Éxito"
+  },
+  "breadcrumb": {
+    "home": "Inicio"
+  },
+  "services": {
+    "annualAccounts": "Auditoría de Cuentas Anuales",
+    "dueDiligence": "Due Diligence",
+    "internalAudit": "Auditoría Interna",
+    "esgAudit": "Auditoría ESG y Sostenibilidad",
+    "consolidatedGroups": "Auditoría de Grupos Consolidados",
+    "foundationsNgo": "Auditoría de Fundaciones y ONG",
+    "financialDD": "Due Diligence Financiera",
+    "taxDD": "Due Diligence Fiscal",
+    "legalDD": "Due Diligence Legal",
+    "operationalDD": "Due Diligence Operativa",
+    "internalControls": "Auditoría de Control Interno",
+    "complianceAudit": "Auditoría de Cumplimiento",
+    "processAudit": "Auditoría de Procesos",
+    "sustainabilityReports": "Verificación de Informes de Sostenibilidad",
+    "einfAudit": "Auditoría EINF",
+    "carbonFootprint": "Auditoría de Huella de Carbono",
+    "crossServices": "Servicios especializados de auditoría",
+    "whatElse": "¿En qué más podemos ayudarte?",
+    "keyData": "Datos clave",
+    "letsChat": "¿Hablamos?",
+    "howWeWork": "NUESTRA METODOLOGÍA",
+    "notFound": {
+      "title": "Servicio no encontrado",
+      "backLink": "Volver a Servicios"
+    },
+    "contactSubtitle": "Cuéntanos tus necesidades de auditoría",
+    "meta": {
+      "title": "Servicios de Auditoría",
+      "description": "Servicios profesionales de auditoría: cuentas anuales, due diligence, auditoría interna y verificación ESG. Solicita presupuesto."
+    },
+    "hero": {
+      "title": "Servicios de Auditoría",
+      "subtitle": "Auditoría independiente, rigurosa y con valor añadido"
+    },
+    "filters": {
+      "filterBy": "Filtrar por",
+      "all": "Todos",
+      "search": "Buscar servicios..."
+    },
+    "empty": {
+      "title": "No se encontraron servicios",
+      "description": "Prueba a cambiar el término de búsqueda o los filtros",
+      "error": "Error al cargar servicios",
+      "errorDescription": "Por favor, recarga la página"
+    },
+    "card": {
+      "learnMore": "Saber más",
+      "moreInfo": "Más información"
+    },
+    "relatedServices": "Servicios de auditoría relacionados",
+    "mightInterest": "También te puede interesar"
+  },
+  "blog": {
+    "meta": {
+      "title": "Insights - Audit",
+      "description": "Insights y análisis de auditoría: novedades normativas, mejores prácticas en auditoría financiera, due diligence e informes de sostenibilidad.",
+      "keywords": "blog auditoría, insights auditoría, auditoría financiera, due diligence, auditoría ESG, informes sostenibilidad"
+    },
+    "hero": {
+      "badge": "Insights",
+      "title": "Insights de Auditoría",
+      "subtitle": "Análisis, novedades y artículos sobre auditoría, cumplimiento e información financiera"
+    },
+    "search": "Buscar artículos...",
+    "empty": "No se encontraron artículos",
+    "relatedPosts": {
+      "title": "Artículos relacionados"
+    },
+    "backToBlog": "Volver a Insights",
+    "notFound": "Artículo no encontrado",
+    "previewNotAvailable": "Vista previa no disponible",
+    "previewExpired": "Esta vista previa ha expirado o no es válida",
+    "tags": "Etiquetas"
+  },
+  "caseStudies": {
+    "challenge": "El Reto",
+    "solution": "Nuestro Enfoque",
+    "results": "Resultados Clave",
+    "testimonial": "Testimonio del Cliente",
+    "testimonialSubtitle": "Lo que dicen de nosotros",
+    "timeline": "Cronología de la Auditoría",
+    "relatedServices": "Servicios Relacionados",
+    "otherCases": "Otros Casos de Éxito",
+    "similarProject": "¿Tienes un Proyecto Similar?",
+    "contactSubtitle": "Contáctanos y descubre cómo podemos ayudarte",
+    "contactUs": "Contactar",
+    "viewServices": "Ver Servicios",
+    "backToCases": "Volver a Casos de Éxito",
+    "notFound": "Caso de éxito no encontrado"
+  },
+  "team": {
+    "meta": {
+      "title": "Nuestro Equipo",
+      "description": "Equipo de auditores y expertos financieros. Profesionales certificados con amplia experiencia en auditoría estatutaria, due diligence y verificación ESG."
+    },
+    "hero": {
+      "badge": "Equipo",
+      "title": "Nuestro Equipo",
+      "subtitle": "Auditores certificados a tu servicio"
+    },
+    "filters": {
+      "category": "Categoría",
+      "allCategories": "Todas las categorías",
+      "specialization": "Especialización",
+      "all": "Todos"
+    },
+    "empty": {
+      "title": "Sin miembros",
+      "descriptionWithFilter": "No hay miembros con la especialización {{specialization}}.",
+      "descriptionGeneral": "No hay miembros que coincidan con los filtros seleccionados"
+    }
+  },
+  "careers": {
+    "meta": {
+      "title": "Trabaja con Nosotros - Únete a Nuestro Equipo de Auditoría",
+      "description": "Únete a Audit: oportunidades laborales en auditoría financiera, due diligence y verificación ESG. Desarrolla tu carrera con expertos en auditoría."
+    },
+    "breadcrumb": "Únete al Equipo",
+    "hero": {
+      "badge": "Empleo",
+      "title": "Construye Tu Futuro Profesional Con Nosotros",
+      "subtitle": "Únete a nuestro equipo de expertos en auditoría y desarrolla tu carrera profesional en un entorno de excelencia."
+    },
+    "whyUs": {
+      "overline": "Por Qué Elegirnos",
+      "title": "Un Lugar para Crecer",
+      "description": "En Audit, creemos en el desarrollo continuo de nuestro equipo. Ofrecemos un entorno de trabajo colaborativo donde la excelencia profesional se combina con el equilibrio personal."
+    },
+    "benefits": [
+      {
+        "title": "Excelencia Profesional",
+        "description": "Trabaja en encargos de auditoría de alto impacto con clientes líderes"
+      },
+      {
+        "title": "Equipo Experto",
+        "description": "Colabora con auditores certificados experimentados"
+      },
+      {
+        "title": "Innovación Continua",
+        "description": "Acceso a las últimas tecnologías y metodologías de auditoría"
+      },
+      {
+        "title": "Desarrollo Profesional",
+        "description": "Apoyo para certificaciones (ROAC, CIA, CISA) y planes de carrera"
+      },
+      {
+        "title": "Conciliación",
+        "description": "Horarios flexibles y opciones de trabajo híbrido"
+      },
+      {
+        "title": "Crecimiento",
+        "description": "Oportunidades reales de promoción interna"
+      }
+    ],
+    "areas": {
+      "overline": "Áreas de Auditoría",
+      "items": [
+        {
+          "name": "Auditoría Financiera",
+          "description": "Auditorías estatutarias y voluntarias"
+        },
+        {
+          "name": "Due Diligence",
+          "description": "Servicios de soporte a transacciones"
+        },
+        {
+          "name": "Auditoría Interna",
+          "description": "Controles y gestión de riesgos"
+        },
+        {
+          "name": "ESG y Sostenibilidad",
+          "description": "Verificación de información no financiera"
+        },
+        {
+          "name": "Tecnología",
+          "description": "Analítica de datos y automatización de auditoría"
+        },
+        {
+          "name": "Advisory",
+          "description": "Consultoría contable y de cumplimiento"
+        }
+      ]
+    },
+    "openPositions": {
+      "overline": "Oportunidades",
+      "title": "Posiciones Abiertas",
+      "description": "Explora las oportunidades disponibles y encuentra la posición que mejor se adapte a tu perfil.",
+      "loading": "Cargando posiciones...",
+      "noPositions": {
+        "title": "Posiciones Abiertas",
+        "description": "Actualmente no tenemos posiciones abiertas, pero siempre buscamos talento excepcional. Envíanos tu candidatura espontánea y te contactaremos cuando surjan oportunidades que encajen con tu perfil."
+      }
+    },
+    "faq": {
+      "overline": "Preguntas Frecuentes",
+      "title": "¿Tienes dudas sobre trabajar con nosotros?",
+      "items": [
+        {
+          "question": "¿Cuánto dura el proceso de selección?",
+          "answer": "El proceso completo suele durar entre 2-3 semanas desde la recepción de tu candidatura hasta la oferta final. Nos esforzamos por mantener una comunicación fluida en cada etapa."
+        },
+        {
+          "question": "¿Qué documentos necesito para aplicar?",
+          "answer": "Necesitas enviar tu CV actualizado. Si tienes certificaciones (ROAC, CIA, CISA), inclúyelas para enriquecer tu candidatura."
+        },
+        {
+          "question": "¿Ofrecéis trabajo remoto o híbrido?",
+          "answer": "Sí, ofrecemos flexibilidad en la modalidad de trabajo. Dependiendo del encargo y las necesidades del cliente, puedes trabajar en remoto, híbrido o presencial."
+        },
+        {
+          "question": "¿Cómo es el ambiente de trabajo en Audit?",
+          "answer": "Promovemos un ambiente colaborativo y profesional donde valoramos la excelencia técnica, el trabajo en equipo y el desarrollo continuo."
+        },
+        {
+          "question": "¿Qué oportunidades de crecimiento profesional ofrecéis?",
+          "answer": "Tenemos planes de carrera personalizados, apoyo para certificaciones profesionales y oportunidades reales de promoción interna."
+        },
+        {
+          "question": "¿Ofrecéis programas de formación?",
+          "answer": "Sí, invertimos en formación continua con acceso a cursos, certificaciones y talleres especializados en metodologías y tecnologías de auditoría."
+        },
+        {
+          "question": "¿Cuál es el horario de trabajo?",
+          "answer": "Ofrecemos horarios flexibles. Durante la temporada alta puede haber horas adicionales, pero compensamos con tiempo libre en periodos más tranquilos."
+        },
+        {
+          "question": "¿Hay periodo de prueba?",
+          "answer": "Sí, según la legislación española aplicamos un periodo de prueba. Durante este tiempo, evaluamos mutuamente si existe un buen encaje profesional."
+        },
+        {
+          "question": "¿Puedo aplicar si no tengo experiencia en auditoría?",
+          "answer": "Sí, consideramos candidatos junior con potencial. Valoramos la actitud, las habilidades analíticas y las ganas de aprender."
+        },
+        {
+          "question": "¿Cómo me mantengo informado sobre nuevas oportunidades?",
+          "answer": "Puedes consultar regularmente nuestra sección de posiciones abiertas o enviarnos tu candidatura espontánea."
+        }
+      ]
+    },
+    "application": {
+      "overline": "Aplica Ahora",
+      "title": "Únete a Nuestro Equipo",
+      "description": "Envíanos tu candidatura y te contactaremos"
+    }
+  },
+  "shared": {
+    "trustBar": {
+      "heading": "Más de 300 empresas confían en nosotros",
+      "subtitle": "🏛️ Audit • Inscrito en el ROAC • Miembro de Redes Internacionales de Auditoría"
+    },
+    "whyChooseUs": {
+      "title": "¿Por qué Audit?",
+      "subtitle": "Auditoría independiente, rigurosa y con valor añadido.",
+      "experience": {
+        "stat": "25+",
+        "title": "Años de Experiencia",
+        "desc": "Especializados en auditoría financiera desde 1998"
+      },
+      "professionals": {
+        "stat": "50+",
+        "title": "Auditores Certificados",
+        "desc": "ROAC, CIA y auditores de sostenibilidad certificados"
+      },
+      "international": {
+        "stat": "40%",
+        "title": "Clientes Internacionales",
+        "desc": "Filiales de grupos multinacionales"
+      },
+      "success": {
+        "stat": "500+",
+        "title": "Auditorías Completadas",
+        "desc": "Auditorías estatutarias, DD y verificación ESG"
+      },
+      "certifications": {
+        "title": "Certificaciones:",
+        "barAssociation": "🏛️ Inscrito en ROAC",
+        "taxRegistry": "📋 Auditores Certificados",
+        "network": "🌍 Red Internacional de Auditoría"
+      }
+    },
+    "form": {
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Ej: Juan García",
+      "email": "Email Corporativo",
+      "emailPlaceholder": "nombre@tuempresa.com",
+      "phone": "Teléfono (Opcional)",
+      "phonePlaceholder": "+34 600 000 000",
+      "companyName": "Nombre de la Empresa",
+      "companyNamePlaceholder": "Razón social de tu empresa",
+      "country": "País / Región",
+      "countryPlaceholder": "¿Dónde está ubicada tu empresa?",
+      "timeline": "¿Cuándo necesitas la auditoría?",
+      "timelinePlaceholder": "Selecciona el plazo",
+      "timelineOptions": {
+        "immediate": "Inmediatamente (en 1 mes)",
+        "1month": "1-3 meses",
+        "3months": "3-6 meses",
+        "6months": "6-12 meses",
+        "exploring": "Solo explorando opciones"
+      },
+      "auditType": "Tipo de Auditoría Necesaria",
+      "auditTypePlaceholder": "Selecciona el tipo de auditoría",
+      "auditTypeOptions": {
+        "statutory": "Auditoría Anual Estatutaria",
+        "dueDiligence": "Due Diligence",
+        "internal": "Auditoría Interna",
+        "esg": "Verificación ESG / Sostenibilidad"
+      },
+      "message": "Información Adicional (Opcional)",
+      "messagePlaceholder": "Comparte detalles sobre tus necesidades de auditoría...",
+      "submit": "Solicitar Presupuesto",
+      "submitting": "Enviando...",
+      "privacy": "Al enviar, aceptas recibir actualizaciones sobre tu consulta. Respetamos tu privacidad y nunca compartimos tus datos.",
+      "providedBy": "Servicio proporcionado por:",
+      "certifications": "Inscrito en ROAC • Auditores Certificados",
+      "success": {
+        "title": "¡Solicitud Recibida!",
+        "description": "Gracias por tu interés. Nuestro equipo te contactará en 24 horas."
+      },
+      "error": {
+        "title": "Algo Salió Mal",
+        "description": "Por favor, inténtalo de nuevo o contáctanos directamente."
+      },
+      "validation": {
+        "nameMin": "Por favor, introduce tu nombre completo",
+        "emailInvalid": "Por favor, introduce un email válido",
+        "countryRequired": "Por favor, selecciona tu país"
+      }
+    }
+  },
+  "index": {
+    "meta": {
+      "title": "Audit | Servicios Profesionales de Auditoría",
+      "description": "Firma de auditoría independiente: auditoría de cuentas anuales, due diligence, auditoría interna y verificación ESG. Más de 300 empresas confían en nosotros."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Nosotros | Firma de Auditoría Independiente",
+      "description": "Audit es una firma de auditoría independiente especializada en auditoría estatutaria, due diligence, auditoría interna y verificación ESG para empresas de todos los tamaños.",
+      "keywords": "firma auditoría, auditores independientes, auditoría estatutaria, due diligence, auditoría interna, verificación ESG"
+    },
+    "cta": {
+      "title": "¿Listos para trabajar juntos?",
+      "subtitle": "Descubre cómo nuestros servicios de auditoría pueden aportar valor a tu organización",
+      "contactButton": "Contactar",
+      "servicesButton": "Ver Servicios"
+    }
+  },
+  "serviceForm": {
+    "name": {
+      "label": "Nombre completo",
+      "placeholder": "Tu nombre"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "tu@email.com"
+    },
+    "phone": {
+      "label": "Teléfono (opcional)",
+      "placeholder": "+34 600 000 000"
+    },
+    "company": {
+      "label": "Empresa",
+      "placeholder": "Nombre de tu empresa"
+    },
+    "message": {
+      "label": "Mensaje",
+      "placeholder": "Cuéntanos tus necesidades de auditoría..."
+    },
+    "defaultMessage": "Estoy interesado en saber más sobre",
+    "privacy": {
+      "label": "Acepto la política de privacidad y el tratamiento de mis datos personales"
+    },
+    "button": {
+      "submit": "Solicitar presupuesto",
+      "sending": "Enviando..."
+    },
+    "validation": {
+      "nameMin": "El nombre debe tener al menos 2 caracteres",
+      "emailInvalid": "Por favor, introduce un email válido",
+      "messageMin": "El mensaje debe tener al menos 10 caracteres",
+      "privacyRequired": "Debes aceptar la política de privacidad"
+    },
+    "success": {
+      "title": "¡Mensaje enviado!",
+      "description": "Te contactaremos lo antes posible"
+    },
+    "error": {
+      "title": "Error al enviar",
+      "description": "Ha ocurrido un error. Por favor, inténtalo de nuevo"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Firma de Auditoría Independiente",
+      "title": "Auditoría Rigurosa.<br/>Resultados de Confianza.",
+      "subtitle": "Auditoría de cuentas anuales, due diligence, auditoría interna y verificación ESG—realizada por profesionales certificados con independencia y experiencia.",
+      "tagline": "Inscrito en ROAC. Red Internacional. Más de 25 años de experiencia.",
+      "cta_primary": "Solicitar Presupuesto",
+      "cta_secondary": "Ver Nuestros Servicios",
+      "microcopy": "Confidencial. Sin compromiso. Respondemos en 1 día laborable."
+    },
+    "about": {
+      "overline": "Sobre Audit",
+      "title": "Auditoría independiente para decisiones informadas.",
+      "paragraph1": "En Audit, proporcionamos servicios de auditoría independientes y rigurosos que ayudan a los stakeholders a tomar decisiones informadas basadas en información financiera fiable.",
+      "paragraph2": "Con más de 25 años de experiencia, entendemos la importancia de la independencia, la objetividad y el escepticismo profesional para realizar auditorías de calidad.",
+      "paragraph3": "Nuestro equipo de auditores certificados realiza exámenes exhaustivos que identifican riesgos, fortalecen controles y aportan valor más allá del cumplimiento.",
+      "paragraph4": "Ya sea que necesites una auditoría estatutaria, soporte en transacciones, auditoría interna o verificación ESG, acompañamos a nuestros clientes con total confidencialidad y compromiso con la excelencia.",
+      "cta": "Conoce a nuestro equipo"
+    },
+    "stats": {
+      "overline": "Datos clave"
+    },
+    "technology": {
+      "overline": "Tecnología de auditoría que usamos"
+    },
+    "clients": {
+      "overline": "Empresas que confían en nosotros"
+    },
+    "blog": {
+      "overline": "Insights de auditoría",
+      "cta": "Ver todos los insights"
+    },
+    "whyAudit": {
+      "overline": "Por qué Audit",
+      "title": "¿Por qué elegirnos?",
+      "independence": {
+        "title": "Independencia",
+        "description": "Objetividad e independencia total en cada encargo"
+      },
+      "expertise": {
+        "title": "Experiencia",
+        "description": "Profesionales certificados con profundo conocimiento sectorial"
+      },
+      "methodology": {
+        "title": "Metodología",
+        "description": "Enfoque basado en riesgos alineado con estándares internacionales"
+      },
+      "valueAdd": {
+        "title": "Valor Añadido",
+        "description": "Insights y recomendaciones más allá del cumplimiento"
+      }
+    }
+  },
+  "footer": {
+    "contact": "Contacto",
+    "tagline": "Servicios de auditoría independiente para una información financiera fiable.",
+    "services": "Servicios",
+    "areas": "Áreas de Auditoría",
+    "company": "Empresa",
+    "about": "Nosotros",
+    "team": "Equipo",
+    "blog": "Insights",
+    "careers": "Empleo",
+    "rights": "Todos los derechos reservados.",
+    "legal": "Aviso Legal",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "terms": "Términos"
+  },
+  "auditServices": {
+    "annualAccounts": {
+      "title": "Auditoría de Cuentas Anuales",
+      "description": "Auditoría estatutaria de estados financieros conforme al PGC y NIAs",
+      "features": [
+        "Examen de estados financieros",
+        "Evaluación de controles internos",
+        "Verificación de cumplimiento",
+        "Informe de auditoría independiente"
+      ]
+    },
+    "dueDiligence": {
+      "title": "Due Diligence",
+      "description": "Servicios de soporte a transacciones para M&A, inversiones y decisiones empresariales",
+      "features": [
+        "Due diligence financiera",
+        "Due diligence fiscal",
+        "Due diligence operativa",
+        "Análisis de calidad de beneficios"
+      ]
+    },
+    "internalAudit": {
+      "title": "Auditoría Interna",
+      "description": "Evaluación independiente de controles internos y gestión de riesgos",
+      "features": [
+        "Evaluación de controles internos",
+        "Evaluación de riesgos",
+        "Mejora de procesos",
+        "Monitorización de cumplimiento"
+      ]
+    },
+    "esgAudit": {
+      "title": "Auditoría ESG y Sostenibilidad",
+      "description": "Verificación de informes de sostenibilidad e información no financiera",
+      "features": [
+        "Verificación EINF",
+        "Aseguramiento de informes de sostenibilidad",
+        "Verificación de huella de carbono",
+        "Validación de métricas ESG"
+      ]
+    }
+  },
+  "methodology": {
+    "title": "Nuestra Metodología de Auditoría",
+    "description": "Un enfoque riguroso basado en riesgos alineado con las normas internacionales de auditoría",
+    "phases": {
+      "planning": {
+        "title": "Planificación",
+        "description": "Comprensión del negocio, identificación de riesgos y diseño del enfoque de auditoría"
+      },
+      "fieldwork": {
+        "title": "Trabajo de Campo",
+        "description": "Pruebas de controles y procedimientos sustantivos para obtener evidencia"
+      },
+      "reporting": {
+        "title": "Emisión de Informe",
+        "description": "Comunicación de hallazgos y emisión de la opinión de auditoría"
+      },
+      "followUp": {
+        "title": "Seguimiento",
+        "description": "Monitorización de recomendaciones y mejora continua"
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ export const PersonSchema = ({
   imageUrl,
   url,
   organization = {
-    name: "Navarro Tax Legal",
+    name: "Audit",
     url: BASE_DOMAIN
   }
 }: PersonSchemaProps) => {

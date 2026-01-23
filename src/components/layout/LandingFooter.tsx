@@ -16,7 +16,7 @@ export const LandingFooter = () => {
           <div className="flex flex-col items-center md:items-start gap-4">
             <Logo variant="compact" brand="international" color="light" className="h-12" />
             <p className="text-sm text-primary-foreground/80 font-light text-center md:text-left">
-              Planifica el futuro, con decisiones hoy.
+              Rigorous auditing. Trusted results.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export const LandingFooter = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm font-mono text-primary-foreground/70">
-            © {currentYear} Navarro International. All rights reserved.
+            © {currentYear} Audit. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link 

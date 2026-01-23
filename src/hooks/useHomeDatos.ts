@@ -10,32 +10,32 @@ const DEFAULT_DATOS: DatoItem[] = [
   {
     categoria: "Clients",
     valor: "300+",
-    descripcion: "Over 300 family businesses and corporate groups trust Navarro."
+    descripcion: "Over 300 companies trust Audit for their audit needs."
   },
   {
-    categoria: "Projects",
+    categoria: "Audits Completed",
     valor: "500+",
-    descripcion: "Restructuring, succession, and M&A operations successfully completed."
+    descripcion: "Statutory audits, due diligence, and ESG verification engagements."
   },
   {
     categoria: "Years of Experience",
     valor: "25+",
-    descripcion: "A solid track record supporting family businesses in their growth."
+    descripcion: "A solid track record providing independent audit services."
   },
   {
     categoria: "Team",
-    valor: "70+",
-    descripcion: "Attorneys and professionals specializing in tax, corporate, labour, and M&A."
+    valor: "50+",
+    descripcion: "Certified auditors specializing in financial audit, DD, and ESG."
   },
   {
-    categoria: "Commitment",
+    categoria: "Independence",
     valor: "100%",
-    descripcion: "Full dedication to every engagement, with technical rigor and confidentiality."
+    descripcion: "Complete objectivity in every audit engagement."
   },
   {
-    categoria: "M&A Transactions",
-    valor: "100+",
-    descripcion: "Buy-side and sell-side mandates advised with an integrated approach."
+    categoria: "International Clients",
+    valor: "40%",
+    descripcion: "Subsidiaries of multinational groups audited annually."
   }
 ];
 
