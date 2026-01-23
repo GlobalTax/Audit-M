@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import logoFull from "@/assets/logos/navarro-tax-legal.svg";
-import logoFullWhite from "@/assets/logos/navarro-tax-legal-white.svg";
-import logoCompact from "@/assets/logos/navarro.svg";
-import logoCompactWhite from "@/assets/logos/navarro-white.svg";
-import logoInternationalWhite from "@/assets/logos/navarro-international-white.png";
-import logoInternationalDark from "@/assets/logos/navarro-international-dark.png";
 
 interface LogoProps {
   variant?: "full" | "compact";
@@ -16,7 +10,7 @@ interface LogoProps {
   to?: string;
 }
 
-const InternationalLogo = ({ 
+const AuditLogo = ({ 
   variant, 
   color,
   className
@@ -30,14 +24,14 @@ const InternationalLogo = ({
   if (variant === "compact") {
     return (
       <span className={cn("text-2xl font-bold tracking-tight", textColor)}>
-        NI
+        A
       </span>
     );
   }
 
   return (
     <span className={cn("font-display text-2xl md:text-3xl font-normal tracking-tight", textColor, className)}>
-      global.nrro
+      Audit
     </span>
   );
 };
@@ -50,25 +44,11 @@ export const Logo = ({
   asLink = true,
   to = "/"
 }: LogoProps) => {
-  const getLogoSrc = () => {
-    if (variant === "full") {
-      return color === "light" ? logoFullWhite : logoFull;
-    }
-    return color === "light" ? logoCompactWhite : logoCompact;
-  };
+  const altText = brand === "international" ? "Audit Global" : "Audit";
+  const ariaLabel = brand === "international" ? "Audit Global - Home" : "Audit - Inicio";
 
-  const isInternational = brand === "international";
-  const altText = isInternational ? "Navarro International" : "Navarro Tax Legal";
-  const ariaLabel = isInternational ? "Navarro International - Home" : "Navarro Tax Legal - Inicio";
-
-  const logoContent = isInternational ? (
-    <InternationalLogo variant={variant} color={color} className={className} />
-  ) : (
-    <img
-      src={getLogoSrc()}
-      alt={altText}
-      className="h-full w-auto"
-    />
+  const logoContent = (
+    <AuditLogo variant={variant} color={color} className={className} />
   );
 
   if (!asLink) {

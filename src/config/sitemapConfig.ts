@@ -6,62 +6,29 @@ export interface SitemapEntry {
   lastmod?: string;
 }
 
-export const SITEMAP_DOMAIN = 'https://global.nrro.es';
+export const SITEMAP_DOMAIN = 'https://global.audit.es';
 
 export const sitemapEntries: SitemapEntry[] = [
-  // === PÁGINAS PRINCIPALES (14 URLs) ===
+  // === PÁGINAS PRINCIPALES ===
   { url: '/', priority: 1.0, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/services', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
-  { url: '/international-services', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/case-studies', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/blog', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/resources', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/about', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/team', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/methodology', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
-  { url: '/sectors', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
-  { url: '/strategy', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/contact', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/testimonials', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/careers', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
 
-  // === SPAIN COMPANY SETUP CLUSTER (8 URLs) ===
-  { url: '/spain-company-setup', priority: 0.9, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/set-up-in-spain', priority: 0.9, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/legal-structures-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/spain-business-bank-account', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/set-up-company-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/nie-spain-foreigners', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/startup-company-setup-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
-  { url: '/fast-company-registration-spain', priority: 0.8, changefreq: 'weekly', category: 'Spain Company Setup Cluster' },
+  // === SERVICIOS DE AUDITORÍA ===
+  { url: '/auditoria-cuentas-anuales', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
+  { url: '/due-diligence', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
+  { url: '/auditoria-interna', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
+  { url: '/auditoria-esg', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
 
-  // === GEOGRAPHIC TARGETING PAGES (3 URLs) ===
-  { url: '/spain-company-setup-usa', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
-  { url: '/spain-company-setup-uk', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
-  { url: '/spain-company-setup-uae', priority: 0.8, changefreq: 'monthly', category: 'Geographic Targeting Pages' },
-
-  // === COMPLIANCE & SERVICES (3 URLs) ===
-  { url: '/spanish-payroll-international', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
-  { url: '/spanish-subsidiary-compliance', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
-  { url: '/spain-ma-gateway', priority: 0.8, changefreq: 'monthly', category: 'Compliance & Services' },
-
-  // === CALCULATORS & TOOLS (6 URLs) ===
-  { url: '/beckham-law', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-  { url: '/beckham-law-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-  { url: '/spain-labor-cost-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-  { url: '/spain-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-  { url: '/spain-tax-residency-risk', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-  { url: '/company-setup-calculator', priority: 0.8, changefreq: 'monthly', category: 'Calculators & Tools' },
-
-  // === LEAD MAGNETS (3 URLs) ===
-  { url: '/spain-company-setup-playbook', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
-  { url: '/spain-document-checklist', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
-  { url: '/spain-readiness-quiz', priority: 0.7, changefreq: 'monthly', category: 'Lead Magnets' },
-
-  // === OTHER (1 URL) ===
-  { url: '/leave-review', priority: 0.5, changefreq: 'yearly', category: 'Other' },
-
-  // === LEGAL PAGES (5 URLs) ===
+  // === LEGAL PAGES ===
   { url: '/privacy', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
   { url: '/legal-notice', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
   { url: '/cookies', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },

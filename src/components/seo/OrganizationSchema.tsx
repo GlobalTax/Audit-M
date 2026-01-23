@@ -8,12 +8,12 @@ export const OrganizationSchema = () => {
     const organizationSchema = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Navarro Tax Legal",
-      "alternateName": "NRRO",
-      "url": "https://nrro.es",
-      "logo": "https://nrro.es/assets/logos/navarro-tax-legal.svg",
-      "image": "https://nrro.es/assets/logos/navarro-tax-legal.svg",
-      "description": "Asesoría fiscal, laboral y legal en Barcelona. Servicios profesionales de tax & legal para empresas y particulares.",
+      "name": "Audit",
+      "alternateName": "Audit Global",
+      "url": "https://audit.es",
+      "logo": "https://audit.es/logo.svg",
+      "image": "https://audit.es/logo.svg",
+      "description": "Firma de auditoría especializada en auditoría de cuentas anuales, due diligence, auditoría interna y auditoría ESG/Sostenibilidad.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. Diagonal 640, 2º 1ª",
@@ -26,22 +26,18 @@ export const OrganizationSchema = () => {
         "@type": "ContactPoint",
         "telephone": settings.contact_phone || "+34934593600",
         "contactType": "customer service",
-        "email": settings.contact_email || "info@nrro.es",
+        "email": settings.contact_email || "info@audit.es",
         "areaServed": "ES",
         "availableLanguage": ["Spanish", "Catalan", "English"]
       },
       "sameAs": [
-        settings.social_linkedin || "https://www.linkedin.com/company/navarro-tax-legal/",
-        settings.social_instagram || "https://www.instagram.com/navarrotaxlegal/",
-        settings.social_twitter || "https://twitter.com/navarrotaxlegal",
-        settings.social_facebook || "https://www.facebook.com/navarrotaxlegal"
+        settings.social_linkedin,
+        settings.social_instagram,
+        settings.social_twitter,
+        settings.social_facebook
       ].filter(Boolean),
       "foundingDate": "2010",
-      "founder": {
-        "@type": "Person",
-        "name": "Navarro"
-      },
-      "slogan": "Planifica el futuro, con decisiones hoy."
+      "slogan": "Transparencia y confianza en cada auditoría."
     };
 
     // Crear o actualizar el script tag
