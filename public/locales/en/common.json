@@ -2,45 +2,50 @@
   "nav": {
     "services": "Services",
     "about": "About Us",
-    "blog": "Blog",
+    "blog": "Insights",
     "team": "Team",
     "careers": "Careers",
     "contact": "Contact",
-    "areas": "Areas",
+    "areas": "Audit Areas",
     "caseStudies": "Case Studies"
   },
   "breadcrumb": {
     "home": "Home"
   },
   "services": {
-    "familyBusiness": "Family Business",
-    "mergersAcquisitions": "Mergers & Acquisitions",
-    "taxAdvisory": "Tax Advisory",
-    "corporateLaw": "Corporate Law",
-    "accountingLabor": "Accounting & Labor Advisory",
-    "taxProcedure": "Tax Procedure",
-    "shareholderConflict": "Shareholder Conflict",
-    "ventureCapital": "Venture Capital",
-    "internationalization": "Business Internationalization",
-    "civilProcedure": "Civil Procedure",
-    "businessValuation": "Business Valuation",
-    "crossServices": "Cross-cutting services",
-    "whatElse": "What else can we do for you",
+    "annualAccounts": "Annual Accounts Audit",
+    "dueDiligence": "Due Diligence",
+    "internalAudit": "Internal Audit",
+    "esgAudit": "ESG & Sustainability Audit",
+    "consolidatedGroups": "Consolidated Groups Audit",
+    "foundationsNgo": "Foundations & NGO Audit",
+    "financialDD": "Financial Due Diligence",
+    "taxDD": "Tax Due Diligence",
+    "legalDD": "Legal Due Diligence",
+    "operationalDD": "Operational Due Diligence",
+    "internalControls": "Internal Controls Audit",
+    "complianceAudit": "Compliance Audit",
+    "processAudit": "Process Audit",
+    "sustainabilityReports": "Sustainability Reports Verification",
+    "einfAudit": "EINF Audit",
+    "carbonFootprint": "Carbon Footprint Audit",
+    "crossServices": "Specialized audit services",
+    "whatElse": "How else can we help you",
     "keyData": "Key data",
     "letsChat": "Let's talk?",
-    "howWeWork": "HOW WE WORK",
+    "howWeWork": "OUR METHODOLOGY",
     "notFound": {
       "title": "Service not found",
       "backLink": "Back to Services"
     },
-    "contactSubtitle": "Tell us what you need and we'll get back to you",
+    "contactSubtitle": "Tell us about your audit needs",
     "meta": {
-      "title": "Services",
-      "description": "Tax, legal, and strategic services for family businesses in Barcelona: business succession, M&A, valuation, and restructuring. Request consultation."
+      "title": "Audit Services",
+      "description": "Professional audit services: annual accounts, due diligence, internal audit, and ESG verification. Request a proposal."
     },
     "hero": {
-      "title": "Services",
-      "subtitle": "Tax, legal, accounting and labor consulting"
+      "title": "Audit Services",
+      "subtitle": "Independent, rigorous, and value-added auditing"
     },
     "filters": {
       "filterBy": "Filter by",
@@ -57,26 +62,26 @@
       "learnMore": "Learn more",
       "moreInfo": "More information"
     },
-    "relatedServices": "Related services",
+    "relatedServices": "Related audit services",
     "mightInterest": "You might also be interested in"
   },
   "blog": {
     "meta": {
-      "title": "Blog - NRRO",
-      "description": "Legal and tax blog: expert analysis on family businesses, M&A, taxation, and business succession in Barcelona. Read our insights.",
-      "keywords": "legal blog, legal analysis, family businesses, M&A, taxation, business succession Barcelona"
+      "title": "Insights - Audit",
+      "description": "Audit insights and analysis: regulatory updates, best practices in financial auditing, due diligence, and sustainability reporting.",
+      "keywords": "audit blog, audit insights, financial audit, due diligence, ESG audit, sustainability reporting"
     },
     "hero": {
       "badge": "Insights",
-      "title": "Blog",
-      "subtitle": "Analysis, news and articles about taxation, accounting and business consulting"
+      "title": "Audit Insights",
+      "subtitle": "Analysis, news and articles about auditing, compliance and financial reporting"
     },
     "search": "Search articles...",
     "empty": "No articles found",
     "relatedPosts": {
       "title": "Related articles"
     },
-    "backToBlog": "Back to Blog",
+    "backToBlog": "Back to Insights",
     "notFound": "Article not found",
     "previewNotAvailable": "Preview not available",
     "previewExpired": "This preview has expired or is not valid",
@@ -84,11 +89,11 @@
   },
   "caseStudies": {
     "challenge": "The Challenge",
-    "solution": "Our Solution",
+    "solution": "Our Approach",
     "results": "Key Results",
     "testimonial": "Client Testimonial",
     "testimonialSubtitle": "What they say about us",
-    "timeline": "Project Timeline",
+    "timeline": "Audit Timeline",
     "relatedServices": "Related Services",
     "otherCases": "Other Success Stories",
     "similarProject": "Do You Have a Similar Project?",
@@ -100,13 +105,13 @@
   },
   "team": {
     "meta": {
-      "title": "Team",
-      "description": "Team of lawyers and tax advisors specialized in family businesses in Barcelona. Experts in M&A, business succession, and corporate law. Meet us."
+      "title": "Our Team",
+      "description": "Team of auditors and financial experts. Certified professionals with extensive experience in statutory audit, due diligence, and ESG verification."
     },
     "hero": {
       "badge": "Team",
-      "title": "Our team",
-      "subtitle": "Professionals at your service"
+      "title": "Our Team",
+      "subtitle": "Certified auditors at your service"
     },
     "filters": {
       "category": "Category",
@@ -122,40 +127,40 @@
   },
   "careers": {
     "meta": {
-      "title": "Work With Us - Join Our Team",
-      "description": "Join NRRO Barcelona: job opportunities in tax, legal advisory, and M&A. Develop your career with family business experts. Send your application."
+      "title": "Work With Us - Join Our Audit Team",
+      "description": "Join Audit: career opportunities in financial auditing, due diligence, and ESG verification. Develop your career with audit experts."
     },
     "breadcrumb": "Join the Team",
     "hero": {
       "badge": "Careers",
       "title": "Build Your Professional Future With Us",
-      "subtitle": "Join our team of experts and develop your professional career in an environment of excellence."
+      "subtitle": "Join our team of audit experts and develop your professional career in an environment of excellence."
     },
     "whyUs": {
       "overline": "Why Choose Us",
       "title": "A Place to Grow",
-      "description": "At NRRO, we believe in the continuous development of our team. We offer a collaborative work environment where professional excellence is combined with personal balance."
+      "description": "At Audit, we believe in the continuous development of our team. We offer a collaborative work environment where professional excellence is combined with personal balance."
     },
     "benefits": [
       {
         "title": "Professional Excellence",
-        "description": "Work on high-impact projects with leading clients"
+        "description": "Work on high-impact audit engagements with leading clients"
       },
       {
         "title": "Expert Team",
-        "description": "Collaborate with experienced professionals"
+        "description": "Collaborate with experienced certified auditors"
       },
       {
         "title": "Continuous Innovation",
-        "description": "Access to the latest technologies and methodologies"
+        "description": "Access to the latest audit technologies and methodologies"
       },
       {
         "title": "Professional Development",
-        "description": "Continuous training and personalized career plans"
+        "description": "Support for certifications (CPA, CIA, CISA) and career plans"
       },
       {
         "title": "Work-Life Balance",
-        "description": "Flexible schedules and remote work"
+        "description": "Flexible schedules and hybrid work options"
       },
       {
         "title": "Growth",
@@ -163,31 +168,31 @@
       }
     ],
     "areas": {
-      "overline": "Work Areas",
+      "overline": "Audit Areas",
       "items": [
         {
-          "name": "Legal",
-          "description": "Specialized legal consulting"
+          "name": "Financial Audit",
+          "description": "Statutory and voluntary audits"
         },
         {
-          "name": "Tax",
-          "description": "Tax planning and optimization"
+          "name": "Due Diligence",
+          "description": "Transaction support services"
         },
         {
-          "name": "Accounting",
-          "description": "Accounting and financial management"
+          "name": "Internal Audit",
+          "description": "Controls and risk management"
         },
         {
-          "name": "Labor",
-          "description": "Human resources and labor relations"
+          "name": "ESG & Sustainability",
+          "description": "Non-financial reporting verification"
         },
         {
           "name": "Technology",
-          "description": "Digital transformation and systems"
+          "description": "Data analytics and audit automation"
         },
         {
-          "name": "Consulting",
-          "description": "Business strategy and M&A"
+          "name": "Advisory",
+          "description": "Accounting and compliance consulting"
         }
       ]
     },
@@ -211,39 +216,39 @@
         },
         {
           "question": "What documents do I need to apply?",
-          "answer": "You need to send your updated CV. If you have a cover letter, portfolio or relevant certifications, you can also attach them to enrich your application."
+          "answer": "You need to send your updated CV. If you have certifications (CPA, CIA, CISA), please include them to enrich your application."
         },
         {
           "question": "Do you offer remote or hybrid work?",
-          "answer": "Yes, we offer flexibility in the work modality. Depending on the position and project needs, you can work remotely, hybrid or in-person at our offices."
+          "answer": "Yes, we offer flexibility in the work modality. Depending on the engagement and client needs, you can work remotely, hybrid or on-site."
         },
         {
-          "question": "What is the work environment like at NRRO?",
-          "answer": "We promote a collaborative and professional environment where we value excellence, teamwork and continuous development. We believe in the balance between personal and professional life."
+          "question": "What is the work environment like at Audit?",
+          "answer": "We promote a collaborative and professional environment where we value technical excellence, teamwork and continuous development."
         },
         {
           "question": "What professional growth opportunities do you offer?",
-          "answer": "We have personalized career plans, continuous training and real opportunities for internal promotion. Your professional development is important to us."
+          "answer": "We have personalized career plans, support for professional certifications, and real opportunities for internal promotion."
         },
         {
           "question": "Do you offer training programs?",
-          "answer": "Yes, we invest in the continuous training of our team with access to courses, certifications, conferences and workshops specialized in the latest technologies and methodologies."
+          "answer": "Yes, we invest in continuous training with access to courses, certifications, and specialized workshops in audit methodologies and technologies."
         },
         {
           "question": "What are the working hours?",
-          "answer": "We offer flexible schedules that adapt to the needs of the team and projects. We value productivity and results over strict hours."
+          "answer": "We offer flexible schedules. During busy season, there may be additional hours, but we compensate with time off during slower periods."
         },
         {
           "question": "Is there a probation period?",
-          "answer": "Yes, according to Spanish legislation we apply a probation period that varies depending on the type of contract and position. During this time, we mutually evaluate if there is a good professional fit."
+          "answer": "Yes, according to Spanish legislation we apply a probation period. During this time, we mutually evaluate if there is a good professional fit."
         },
         {
-          "question": "Can I apply if I have no experience?",
-          "answer": "Depending on the position, we consider junior candidates with potential and eagerness to learn. We highly value attitude, commitment and development capacity."
+          "question": "Can I apply if I have no audit experience?",
+          "answer": "Yes, we consider junior candidates with potential. We value attitude, analytical skills, and willingness to learn."
         },
         {
           "question": "How do I stay informed about new opportunities?",
-          "answer": "You can regularly check our open positions section or send us your spontaneous application. We keep interesting profiles for future opportunities."
+          "answer": "You can regularly check our open positions section or send us your spontaneous application."
         }
       ]
     },
@@ -255,37 +260,37 @@
   },
   "shared": {
     "trustBar": {
-      "heading": "Trusted by 500+ companies since 1998",
-      "subtitle": "🏛️ Navarro Tax Legal • Barcelona Bar Association • Tax Advisors Registry"
+      "heading": "Trusted by 300+ companies",
+      "subtitle": "🏛️ Audit • ICAC Registered • Member of International Audit Networks"
     },
     "whyChooseUs": {
-      "title": "Why Navarro Tax Legal?",
-      "subtitle": "Not just lawyers. Your trusted partners in Spain.",
+      "title": "Why Audit?",
+      "subtitle": "Independent, rigorous, and value-added auditing.",
       "experience": {
-        "stat": "1998",
-        "title": "25+ Years Experience",
-        "desc": "Specialized in international corporate law since 1998"
+        "stat": "25+",
+        "title": "Years of Experience",
+        "desc": "Specialized in financial auditing since 1998"
       },
       "professionals": {
-        "stat": "70+",
-        "title": "70+ Professionals",
-        "desc": "Multidisciplinary team: lawyers, tax advisors, accountants"
+        "stat": "50+",
+        "title": "Certified Auditors",
+        "desc": "CPAs, CIAs, and certified sustainability auditors"
       },
       "international": {
         "stat": "40%",
         "title": "International Clients",
-        "desc": "40% of our clients are foreign companies"
+        "desc": "Subsidiaries of multinational groups"
       },
       "success": {
-        "stat": "99%",
-        "title": "500+ Companies Formed",
-        "desc": "99% success rate in business registrations"
+        "stat": "500+",
+        "title": "Audits Completed",
+        "desc": "Statutory audits, DD, and ESG verification"
       },
       "certifications": {
-        "title": "Certified by:",
-        "barAssociation": "🏛️ Barcelona Bar Association",
-        "taxRegistry": "📋 Tax Advisors Registry",
-        "network": "🌍 International Legal Network"
+        "title": "Certifications:",
+        "barAssociation": "🏛️ ICAC Registered",
+        "taxRegistry": "📋 Certified Auditors",
+        "network": "🌍 International Audit Network"
       }
     },
     "form": {
@@ -299,8 +304,8 @@
       "companyNamePlaceholder": "Your company's legal name",
       "country": "Country / Region",
       "countryPlaceholder": "Where is your business based?",
-      "timeline": "When Do You Plan to Start?",
-      "timelinePlaceholder": "When would you like to launch?",
+      "timeline": "When Do You Need the Audit?",
+      "timelinePlaceholder": "Select your timeline",
       "timelineOptions": {
         "immediate": "Immediately (within 1 month)",
         "1month": "1-3 months",
@@ -308,22 +313,21 @@
         "6months": "6-12 months",
         "exploring": "Just exploring options"
       },
-      "companyStage": "Current Status",
-      "companyStagePlaceholder": "What's your current situation?",
-      "companyStageOptions": {
-        "idea": "Just an idea",
-        "registeredAbroad": "Registered abroad",
-        "readyToRegister": "Ready to register in Spain",
-        "relocating": "Relocating existing company"
+      "auditType": "Type of Audit Needed",
+      "auditTypePlaceholder": "Select audit type",
+      "auditTypeOptions": {
+        "statutory": "Statutory Annual Audit",
+        "dueDiligence": "Due Diligence",
+        "internal": "Internal Audit",
+        "esg": "ESG / Sustainability Verification"
       },
       "message": "Additional Information (Optional)",
-      "messagePlaceholder": "Share your goals, questions, or timeline...",
-      "submit": "Start My Spain Setup",
+      "messagePlaceholder": "Share details about your audit needs...",
+      "submit": "Request Audit Proposal",
       "submitting": "Submitting...",
       "privacy": "By submitting, you agree to receive updates about your enquiry. We respect your privacy and never share your data.",
       "providedBy": "Service provided by:",
-      "certifications": "Barcelona Bar Association • Tax Advisors Registry",
-      "herenciasButton": "Request Free Consultation",
+      "certifications": "ICAC Registered • Certified Auditors",
       "success": {
         "title": "Request Received!",
         "description": "Thank you for your interest. Our team will contact you within 24 hours."
@@ -339,742 +343,21 @@
       }
     }
   },
-  "landings": {
-    "calculator": {
-      "meta": {
-        "title": "Company Setup Cost Calculator Spain | Free Estimate",
-        "description": "Calculate exact costs to open your company in Spain. Legal fees, government charges, and professional services. Get instant estimate + free guide."
-      },
-      "hero": {
-        "badge": "Free Cost Estimator",
-        "title": "How Much Does It Cost to Open a Company in Spain?",
-        "subtitle": "Get your personalized cost estimate in 2 minutes. No hidden fees, no surprises."
-      },
-      "calculator": {
-        "title": "Company Setup Calculator",
-        "step": "Step {{current}} of {{total}}",
-        "selectStructure": "Select Legal Structure",
-        "structures": {
-          "sl": {
-            "name": "Sociedad Limitada (SL)",
-            "desc": "Most common for SMEs",
-            "capital": "€3,000"
-          },
-          "sa": {
-            "name": "Sociedad Anónima (SA)",
-            "desc": "For larger companies",
-            "capital": "€60,000"
-          },
-          "autonomo": {
-            "name": "Autónomo",
-            "desc": "Self-employed",
-            "capital": "None"
-          },
-          "sucursal": {
-            "name": "Branch Office",
-            "desc": "Foreign company branch",
-            "capital": "None"
-          }
-        },
-        "capitalInvestment": "Capital Investment",
-        "capitalPlaceholder": "Select initial capital",
-        "capitalOptions": {
-          "3000": "€3,000 (Minimum for SL)",
-          "10000": "€10,000",
-          "25000": "€25,000",
-          "60000": "€60,000 (Required for SA)",
-          "100000": "€100,000+"
-        },
-        "additionalServices": "Additional Services Needed",
-        "services": {
-          "nie": {
-            "label": "NIE (Tax ID) for founders",
-            "price": "+€350"
-          },
-          "tax": {
-            "label": "Tax registration",
-            "price": "+€150"
-          },
-          "bookkeeping": {
-            "label": "1st year bookkeeping",
-            "price": "+€200/mo"
-          },
-          "office": {
-            "label": "Virtual office address",
-            "price": "+€500/yr"
-          }
-        },
-        "timeline": "When do you need this?",
-        "timelinePlaceholder": "Select your timeline",
-        "nextStep": "Next Step",
-        "back": "Back",
-        "calculate": "Calculate Cost"
-      },
-      "results": {
-        "title": "Your Estimated Cost",
-        "complete": "Complete setup including all professional fees",
-        "breakdown": {
-          "government": "Government & notary fees",
-          "professional": "Professional services",
-          "included": "Included"
-        },
-        "downloadReport": {
-          "title": "Get Your Full Cost Breakdown",
-          "subtitle": "Download detailed PDF report + Setup checklist",
-          "button": "Download Full Report"
-        },
-        "startOver": "Start Over"
-      }
-    },
-    "express": {
-      "meta": {
-        "title": "Fast Company Registration Spain | 30-Day Guarantee",
-        "description": "Express company setup service. Registered in 30 days or 50% refund. No delays, no hassle. Limited slots available."
-      },
-      "hero": {
-        "badge": "EXPRESS SERVICE",
-        "title": "Register Your Spanish Company in 30 Days. Guaranteed.",
-        "subtitle": "Fast-track registration. No delays. Money-back guarantee.",
-        "timer": {
-          "label": "Next Express Batch Starts:",
-          "days": "Days",
-          "hours": "Hours",
-          "minutes": "Minutes",
-          "warning": "⚠️ Only 5 slots left this month"
-        }
-      },
-      "comparison": {
-        "title": "DIY vs. Express Service",
-        "diy": {
-          "title": "DIY Approach",
-          "duration": "60-90 Days",
-          "steps": {
-            "week12": "Week 1-2",
-            "week34": "Week 3-4",
-            "week56": "Week 5-6",
-            "week78": "Week 7-8",
-            "week912": "Week 9-12"
-          },
-          "issues": {
-            "nie": "NIE application - Wait for appointment",
-            "name": "Company name - Rejection likely",
-            "bank": "Bank account - Complicated for foreigners",
-            "notary": "Notary deed - Translation issues",
-            "tax": "Tax registration - Complex forms"
-          }
-        },
-        "express": {
-          "title": "Express Service",
-          "duration": "30 Days",
-          "week1": {
-            "title": "Week 1",
-            "tasks": ["NIE", "Name registration", "Business structure"]
-          },
-          "week2": {
-            "title": "Week 2",
-            "tasks": ["Bank account", "Capital deposit"]
-          },
-          "week3": {
-            "title": "Week 3",
-            "tasks": ["Public deed", "Notary signing"]
-          },
-          "week4": {
-            "title": "Week 4",
-            "tasks": ["Tax registration", "Social Security"]
-          }
-        }
-      },
-      "advantages": {
-        "title": "What Makes Us Fast?",
-        "relationships": {
-          "title": "Pre-existing Relationships",
-          "desc": "Direct contacts at notaries, banks, and registro mercantil"
-        },
-        "manager": {
-          "title": "Dedicated Express Manager",
-          "desc": "Your personal manager available 24/7 via WhatsApp"
-        },
-        "digital": {
-          "title": "Digital-First Process",
-          "desc": "No need to travel to Spain. Sign docs online securely."
-        },
-        "priority": {
-          "title": "Priority Handling",
-          "desc": "Your case gets immediate attention at every step"
-        }
-      },
-      "guarantee": {
-        "title": "Express Guarantee",
-        "subtitle": "We stand behind our promise",
-        "package": "Express Package",
-        "price": "€2,999",
-        "included": "Everything included",
-        "features": [
-          "Complete company registration",
-          "NIE for 2 founders",
-          "Bank account setup",
-          "Tax & social security registration",
-          "1st year compliance",
-          "Dedicated Express Manager",
-          "WhatsApp support 24/7"
-        ],
-        "moneyBack": {
-          "title": "30-Day Registration or 50% Refund",
-          "desc": "If we don't register your company in 30 days, you get 50% back. No questions asked."
-        },
-        "superExpress": {
-          "title": "Super-Express Available",
-          "desc": "Need it even faster? <strong>+€500</strong> for 20-day registration"
-        },
-        "button": "Book Express Service Now",
-        "confirmation": "Get confirmation in 2 hours"
-      },
-      "testimonial": {
-        "quote": "Company registered in 28 days. Literally impossible to do it faster. Unbelievable.",
-        "author": "Laura Schmidt",
-        "role": "Managing Director (Germany)"
-      }
-    },
-    "nie": {
-      "meta": {
-        "title": "Get Your Spanish NIE in 7 Days | Express Service",
-        "description": "Skip the queues and bureaucracy. Express NIE service for foreigners. 99% success rate. Money-back guarantee. Book now."
-      },
-      "hero": {
-        "badge": "🚨 STOP THE NIE FRUSTRATION",
-        "title": "Get Your Spanish NIE Without the Bureaucratic Nightmare",
-        "subtitle": "7-day express service. No queues. No rejections. Guaranteed.",
-        "stats": [
-          "500+ NIEs processed",
-          "99% success rate"
-        ]
-      },
-      "painPoints": {
-        "title": "Tired of the NIE Nightmare?",
-        "subtitle": "Sound familiar? There's a better way.",
-        "points": [
-          "3+ hour queues at immigration office",
-          "Appointments 2 months away",
-          "Rejected applications (incorrect docs)",
-          "Language barriers",
-          "Lost time = lost business opportunities"
-        ]
-      },
-      "process": {
-        "title": "Our Express NIE Process",
-        "subtitle": "From application to delivery in just 7 days",
-        "day1": {
-          "label": "Day 1",
-          "action": "Document review & preparation",
-          "status": "We check everything"
-        },
-        "day23": {
-          "label": "Day 2-3",
-          "action": "Appointment secured",
-          "status": "Using our contacts"
-        },
-        "day45": {
-          "label": "Day 4-5",
-          "action": "Application submission",
-          "status": "We go for you"
-        },
-        "day67": {
-          "label": "Day 6-7",
-          "action": "NIE delivered",
-          "status": "To your door"
-        },
-        "youDo": "You do:",
-        "youDoDesc": "Send us scanned docs",
-        "weDo": "We do:",
-        "weDoDesc": "Everything else"
-      },
-      "pricing": {
-        "title": "Transparent Pricing",
-        "subtitle": "No hidden fees. No surprises.",
-        "package": "NIE Express Service",
-        "price": "€350",
-        "label": "Complete service",
-        "includes": [
-          "Document review & preparation",
-          "Appointment secured within 48h",
-          "Application submission",
-          "NIE delivered to your door"
-        ],
-        "guarantee": {
-          "title": "Money-Back Guarantee",
-          "desc": "If we don't get your NIE, full refund"
-        },
-        "button": "Secure My NIE Service"
-      },
-      "whoNeeds": {
-        "title": "Who Needs a NIE?",
-        "reasons": [
-          "Opening a company in Spain",
-          "Buying property",
-          "Opening a bank account",
-          "Hiring employees",
-          "Signing contracts",
-          "Registering for taxes"
-        ]
-      }
-    },
-    "techStartup": {
-      "meta": {
-        "title": "Launch Your Tech Startup in Spain | Complete Setup Package",
-        "description": "All-in-one startup setup: Company registration, tax strategy, visa support. Built for tech founders. €3,500 package. 30 days."
-      },
-      "hero": {
-        "badge": "FOR TECH FOUNDERS",
-        "title": "Launch Your Tech Startup in Spain",
-        "subtitle": "Legal setup + Tax strategy + Visa support. Built for founders.",
-        "partners": {
-          "techCity": "🤝 Partner of Barcelona Tech City",
-          "accio": "🚀 ACCIÓ Certified",
-          "mwc": "📱 Mobile World Capital"
-        }
-      },
-      "whySpain": {
-        "title": "Why Spain for Tech Startups?",
-        "gateway": {
-          "title": "Gateway to EU Market",
-          "desc": "500M consumers, single market access",
-          "stat": "500M"
-        },
-        "costs": {
-          "title": "40% Lower Costs",
-          "desc": "Than London/Berlin/Paris",
-          "stat": "-40%"
-        },
-        "talent": {
-          "title": "Talent + Lifestyle",
-          "desc": "Lower employee churn, happy teams",
-          "stat": "95%"
-        },
-        "ecosystem": {
-          "title": "Growing Ecosystem",
-          "desc": "4,000+ startups in Barcelona alone",
-          "stat": "4,000+"
-        }
-      },
-      "package": {
-        "title": "Complete Startup Setup Package",
-        "subtitle": "Everything you need to launch properly",
-        "price": "€3,500",
-        "duration": "Complete setup in 30 days",
-        "payment": "💳 50% upfront • 💳 50% at registration",
-        "includes": [
-          "SL company registration",
-          "NIE for 2 founders",
-          "Tax optimization strategy",
-          "ENISA loan application support",
-          "Founder-friendly cap table structure",
-          "Stock options plan template",
-          "1st year tax compliance",
-          "Intro to investors & accelerators"
-        ],
-        "ecosystem": {
-          "title": "Tech Ecosystem Access",
-          "subtitle": "We're not just lawyers, we're part of the ecosystem. Get intros to:",
-          "spaces": ["22@ Barcelona", "Pier01", "IESE Angels", "Antai Venture Builder", "Barcelona Activa"]
-        },
-        "button": "Get Startup Quote"
-      },
-      "faqs": {
-        "title": "Tech-Specific FAQs",
-        "fundraising": {
-          "q": "Can I raise funding before registering?",
-          "a": "Yes! You can sign term sheets and LOIs. We help structure the cap table correctly from day one."
-        },
-        "stockOptions": {
-          "q": "How do stock options work in Spain?",
-          "a": "We set up a proper ESOP (Employee Stock Option Plan) that's investor-friendly and tax-efficient for employees."
-        },
-        "beckham": {
-          "q": "What about the Beckham Law?",
-          "a": "Foreign founders can pay just 24% tax (vs 47%) for the first 6 years. We handle the application."
-        },
-        "remote": {
-          "q": "Can my team work remotely?",
-          "a": "Yes! Spain offers digital nomad visas. We help with the paperwork for your international team."
-        }
-      },
-      "caseStudy": {
-        "badge": "Success Story",
-        "title": "From UK to Barcelona in 30 Days",
-        "client": "Client: SaaS startup, 3 UK founders",
-        "problem": "Problem: Complex cap table with investor commitments, needed investor-ready structure",
-        "solution": "Solution: Clean SL setup + SOPs + ENISA €500k secured",
-        "result": "Result: Series A within 18 months, now 25 employees"
-      }
-    },
-    "herencias": {
-      "meta": {
-        "title": "Inheritance Lawyers in Barcelona | Succession Experts Catalonia",
-        "description": "Lawyers specialized in inheritances in Barcelona. Complete inheritance processing according to the Catalan Civil Code. Catalan legitimate portion, taxes, conflicts. Free consultation."
-      },
-      "hero": {
-        "badge": "Experts in Catalan Succession Law",
-        "title": "Inheritance Lawyers in Barcelona. Succession Experts in Catalonia.",
-        "subtitle": "We handle your inheritance from start to finish: declaration of heirs, distribution, Catalan legitimate portion, taxes and family conflicts.",
-        "calculateButton": "Calculate my inheritance in Catalonia",
-        "contactButton": "Speak with a lawyer now"
-      },
-      "calculator": {
-        "title": "Calculate now how much corresponds to you according to the Catalan Civil Code",
-        "subtitle": "In less than 3 minutes, automatic estimate of distribution among heirs",
-        "comingSoon": "Interactive calculator coming soon",
-        "requestButton": "Request personalized calculation now"
-      },
-      "faq": {
-        "title": "Frequently asked questions about inheritances in Catalonia"
-      },
-      "contact": {
-        "title": "Need advice on your inheritance?",
-        "subtitle": "First free consultation. Resolve your doubts without commitment.",
-        "button": "Request free consultation"
-      }
-    }
-  },
-  "leyBeckham": {
-    "seo": {
-      "title": "Beckham Law - Special Tax Regime for Expats in Spain",
-      "description": "Specialized advisory on Beckham Law: reduce your income tax to 24% for 6 years when moving to Spain. Experts in expat taxation in Barcelona.",
-      "keywords": "beckham law, special tax regime expats, 24% income tax, spain taxation, moving to spain, expat taxes barcelona"
-    },
-    "breadcrumb": "Beckham Law",
-    "hero": {
-      "badge": "Beckham Law",
-      "title": "Optimize your taxes when moving to Spain",
-      "subtitle": "Reduce your tax burden to 24% income tax for 6 years with the special regime for expats. We guide you through the entire process.",
-      "cta": {
-        "consult": "Request Free Consultation",
-        "requirements": "View Requirements"
-      },
-      "stat": {
-        "success": "Success rate",
-        "years": "years",
-        "experience": "of experience",
-        "tax": "Fixed income tax"
-      }
-    },
-    "benefits": {
-      "eyebrow": "Benefits",
-      "title": "Beckham Regime Advantages",
-      "subtitle": "Discover the main tax benefits of this special regime",
-      "tax": {
-        "title": "Fixed 24% rate",
-        "description": "You'll pay 24% on the first €600,000 of employment income instead of the progressive general rate"
-      },
-      "duration": {
-        "title": "Up to 6 years",
-        "description": "You can benefit from the regime during the year of residence change and the following 5 years"
-      },
-      "worldwide": {
-        "title": "Foreign income exempt",
-        "description": "You'll only pay taxes on Spanish-sourced income, with foreign income being exempt"
-      },
-      "security": {
-        "title": "Legal certainty",
-        "description": "Regime backed by specific regulations and established case law"
-      }
-    },
-    "whatIs": {
-      "eyebrow": "What is it?",
-      "title": "Special Tax Regime for Expats",
-      "p1": "The Beckham Law is a special tax regime designed to attract international talent to Spain.",
-      "p2": "It allows professionals who transfer their residence to Spain to be taxed as non-residents for a maximum period of 6 years, applying a fixed rate of 24% on employment income obtained in Spain.",
-      "p3": "This regime represents significant tax savings compared to the general progressive income tax scale, which can reach up to 47% in some autonomous communities."
-    },
-    "requirements": {
-      "eyebrow": "Requirements",
-      "title": "Can you apply for the Beckham Law?",
-      "subtitle": "Check if you meet the necessary requirements to benefit from this regime",
-      "req1": {
-        "title": "Not having been a tax resident in Spain",
-        "description": "You must not have been a tax resident in Spain during the 10 years prior to the transfer"
-      },
-      "req2": {
-        "title": "Transfer for work reasons",
-        "description": "The move to Spain must occur as a result of an employment contract, appointment as director, or start of economic activity"
-      },
-      "req3": {
-        "title": "Become a tax resident in Spain",
-        "description": "You must acquire tax residence in Spain according to income tax criteria (more than 183 days per year or center of economic interests)"
-      },
-      "req4": {
-        "title": "Work performed in Spanish territory",
-        "description": "Work must be effectively performed in Spain for a company or entity established in Spanish territory"
-      },
-      "req5": {
-        "title": "Application within deadline",
-        "description": "You must submit the application within 6 months following the start of your work activity in Spain"
-      },
-      "keyLabel": "Key requirement",
-      "req6": {
-        "title": "Not conducting activities through a Permanent Establishment",
-        "description": "If you're a business owner or professional, you can't conduct your activity through a permanent establishment that was already in Spain before your transfer"
-      },
-      "req7": {
-        "title": "Employment contract or appointment",
-        "description": "You need to have an employment contract, be appointed as a company director, or start an economic activity in Spain"
-      },
-      "req8": {
-        "title": "Not in incompatibility situations",
-        "description": "You cannot be in specific situations that the law considers incompatible with this regime"
-      },
-      "cta": {
-        "text": "Not sure if you meet the requirements? We can help you evaluate",
-        "button": "Consult my case"
-      }
-    },
-    "profiles": {
-      "eyebrow": "Profiles",
-      "title": "Who can benefit?",
-      "subtitle": "Professional profiles that typically apply for the Beckham regime",
-      "executives": {
-        "title": "International executives",
-        "description": "Multinational executives who transfer their residence to Spain to occupy high-responsibility positions",
-        "badge": "High impact"
-      },
-      "tech": {
-        "title": "Tech professionals",
-        "description": "Developers, engineers and technology specialists joining Spanish companies or startups",
-        "badge": "High demand"
-      },
-      "financial": {
-        "title": "Financial sector",
-        "description": "Financial sector professionals, investment banking and asset management moving to Spain",
-        "badge": "Specialized"
-      },
-      "consultants": {
-        "title": "Consultants and advisors",
-        "description": "Strategic consultants and specialized advisors providing services from Spain",
-        "badge": "Flexible"
-      },
-      "entrepreneurs": {
-        "title": "Entrepreneurs",
-        "description": "Startup founders and business owners establishing their economic activity in Spain",
-        "badge": "Innovative"
-      },
-      "researchers": {
-        "title": "Researchers",
-        "description": "R&D professionals and academics joining Spanish centers",
-        "badge": "Qualified"
-      }
-    },
-    "comparison": {
-      "eyebrow": "Comparison",
-      "title": "Real tax savings with the Beckham Law",
-      "subtitle": "Compare how much you'd pay with general income tax versus the Beckham regime",
-      "disclaimer": "Approximate calculations based on current legislation. Consult your specific case.",
-      "table": {
-        "income": "Annual income",
-        "generalTax": "General Income Tax",
-        "beckhamTax": "Beckham Law",
-        "savings": "Annual savings",
-        "rate": "Effective rate"
-      },
-      "irpf": {
-        "title": "General Income Tax (Progressive scale)",
-        "description": "Ordinary tax regime in Spain",
-        "point1": "Rates from 19% to 47% depending on brackets",
-        "point2": "Worldwide income taxation",
-        "point3": "Complex tax return",
-        "point4": "Limited deductions and reductions"
-      },
-      "beckham": {
-        "title": "Beckham Law (Fixed 24% rate)",
-        "description": "Special regime for expats",
-        "point1": "Fixed 24% rate up to €600,000",
-        "point2": "Only Spanish-sourced income",
-        "point3": "Simplified tax return",
-        "point4": "Significant tax savings"
-      }
-    },
-    "process": {
-      "eyebrow": "Process",
-      "title": "How we help you apply for the Beckham Law",
-      "subtitle": "Complete advisory and processing service",
-      "step": "Step",
-      "step1": {
-        "title": "Feasibility analysis",
-        "description": "We evaluate your personal case and verify compliance with all requirements",
-        "duration": "1-2 days",
-        "point1": "Review of your personal and professional situation",
-        "point2": "Verification of legal requirements",
-        "point3": "Estimation of potential tax savings",
-        "point4": "Identification of possible obstacles"
-      },
-      "step2": {
-        "title": "Tax planning",
-        "description": "We design the optimal strategy to maximize regime benefits",
-        "duration": "3-5 days",
-        "point1": "Employment structure planning",
-        "point2": "Income and assets optimization",
-        "point3": "Coordination with other tax regimes",
-        "point4": "Implementation timeline"
-      },
-      "step3": {
-        "title": "Documentation preparation",
-        "description": "We collect and prepare all necessary documentation for the application",
-        "duration": "5-7 days",
-        "point1": "Collection of supporting documents",
-        "point2": "Preparation of contracts and agreements",
-        "point3": "Tax residence certificates",
-        "point4": "Reports and additional documents"
-      },
-      "step4": {
-        "title": "Submission to Tax Authority",
-        "description": "We manage the formal submission of your application to the Tax Agency",
-        "duration": "1-2 days",
-        "point1": "Electronic submission of form 149",
-        "point2": "Attach supporting documentation",
-        "point3": "Registration tracking",
-        "point4": "Receipt confirmation"
-      },
-      "step5": {
-        "title": "Follow-up and resolution",
-        "description": "We track your file and handle any requirements",
-        "duration": "2-4 months",
-        "point1": "File status monitoring",
-        "point2": "Response to Tax Authority requirements",
-        "point3": "Submission of additional documentation",
-        "point4": "Final application resolution"
-      },
-      "step6": {
-        "title": "Ongoing advisory",
-        "description": "We support you throughout the entire period of regime validity",
-        "duration": "6 years",
-        "point1": "Annual non-resident tax returns",
-        "point2": "Continuous tax optimization",
-        "point3": "Compliance with obligations",
-        "point4": "Exit strategy planning"
-      },
-      "cta": {
-        "title": "Ready to start?",
-        "description": "Request a free consultation and we'll explain your particular case",
-        "button": "Request consultation"
-      }
-    },
-    "faq": {
-      "eyebrow": "Frequently asked questions",
-      "title": "Questions about the Beckham Law",
-      "subtitle": "Answers to the most common questions about the expat regime",
-      "q1": "What exactly is the Beckham Law?",
-      "a1": "It's a special tax regime that allows professionals who transfer their residence to Spain to be taxed as non-residents for a maximum of 6 years, applying a fixed rate of 24% on employment income obtained in Spain, instead of the general progressive income tax scale that can reach up to 47%.",
-      "q2": "How long can I benefit from the Beckham Law?",
-      "a2": "You can apply for this regime during the tax period in which you acquire tax residence in Spain and the following 5 tax periods, which represents a maximum of 6 complete calendar years.",
-      "q3": "What types of income are taxed at 24%?",
-      "a3": "The 24% rate applies to employment and business income obtained in Spain up to €600,000. Above this amount, the rate is 47%. Capital income and capital gains are taxed at 19-26% according to non-resident regulations.",
-      "q4": "Do I have to pay taxes on my foreign income?",
-      "a4": "No. One of the main advantages of the Beckham Law is that you'll only pay taxes on Spanish-sourced income. Income obtained abroad (dividends, interest, rent, etc.) is exempt from taxation in Spain, although you must declare it as exempt income.",
-      "q5": "When should I submit the application?",
-      "a5": "You must submit the application (form 149) within 6 months from the start of your work activity in Spain. It's essential to meet this deadline because otherwise you'll lose the possibility of applying for the regime.",
-      "q6": "Can I apply if I've already been in Spain for some time?",
-      "a6": "No. One of the requirements is not having been a tax resident in Spain during the previous 10 years. If you're already a resident, you cannot apply for this regime. It's important to plan the transfer in advance.",
-      "q7": "What if I work for a foreign company?",
-      "a7": "You can apply for the regime as long as the work is effectively performed in Spanish territory and for companies or entities resident in Spain. If you work remotely for a foreign company, the situation is more complex and must be analyzed case by case.",
-      "q8": "Can I be a company director and apply for the regime?",
-      "a8": "Yes, the regime allows those appointed as directors of entities in Spain to apply, as long as they meet the other requirements. It's a widely used option by international executives and entrepreneurs.",
-      "cta": {
-        "text": "Have more questions about your particular case?",
-        "button": "Contact an expert"
-      }
-    },
-    "form": {
-      "eyebrow": "Contact",
-      "title": "Request your free consultation",
-      "subtitle": "Tell us about your case and we'll advise you on your eligibility and the process",
-      "name": "Full name",
-      "namePlaceholder": "Your name",
-      "email": "Email",
-      "emailPlaceholder": "your@email.com",
-      "phone": "Phone",
-      "phonePlaceholder": "+34 / +1 / etc.",
-      "country": "Country of origin",
-      "countryPlaceholder": "Select your current country",
-      "jobSituation": "Employment situation",
-      "jobSituationPlaceholder": "Select an option",
-      "jobOptions": {
-        "employee": "Employee",
-        "freelance": "Self-employed / Freelance",
-        "business_owner": "Business owner",
-        "executive": "Executive / Director",
-        "looking": "Looking for employment in Spain"
-      },
-      "transferDate": "Expected transfer date",
-      "transferDatePlaceholder": "When do you plan to move?",
-      "transferOptions": {
-        "immediate": "Immediate (already in Spain)",
-        "1_3_months": "1-3 months",
-        "3_6_months": "3-6 months",
-        "6_12_months": "6-12 months",
-        "12_plus_months": "More than 12 months",
-        "undecided": "Not yet decided"
-      },
-      "message": "Message (optional)",
-      "messagePlaceholder": "Tell us more about your situation, specific questions, etc.",
-      "privacy": "I accept the privacy policy and the processing of my data",
-      "submit": "Submit request",
-      "submitting": "Sending...",
-      "success": {
-        "title": "Request submitted!",
-        "description": "We've received your inquiry. Our Beckham Law specialized team will contact you within the next 24-48 hours."
-      },
-      "error": {
-        "title": "Submission error",
-        "description": "An error occurred. Please try again or contact us directly."
-      },
-      "confidentiality": "All information provided is strictly confidential and will be used solely to evaluate your case.",
-      "responseTime": "Response time: 24-48 business hours"
-    },
-    "whyUs": {
-      "eyebrow": "Why choose us",
-      "title": "Beckham Law Experts",
-      "subtitle": "Over 25 years of experience advising on international taxation and expat regime",
-      "stat1": {
-        "label": "Success rate",
-        "value": "98%",
-        "description": "of approved applications"
-      },
-      "stat2": {
-        "label": "Years of experience",
-        "value": "25+",
-        "description": "in international taxation"
-      },
-      "stat3": {
-        "label": "Average savings",
-        "value": "24%",
-        "description": "vs general income tax"
-      },
-      "stat4": {
-        "label": "Average time",
-        "value": "45 days",
-        "description": "from consultation to submission"
-      }
-    },
-    "finalCta": {
-      "title": "Ready to optimize your taxation in Spain?",
-      "subtitle": "Request a free consultation and discover how much you can save with the Beckham Law",
-      "button": "Request free consultation",
-      "footer": "Initial consultation with no commitment • Response in 24-48h • Personalized advisory"
-    }
-  },
   "index": {
     "meta": {
-      "title": "Navarro Tax Legal | Tax and Legal Advisory for Family Businesses",
-      "description": "Strategic, tax and legal consulting specialized in family businesses and corporate groups in Barcelona and Madrid."
+      "title": "Audit | Professional Audit Services",
+      "description": "Independent audit firm: annual accounts audit, due diligence, internal audit, and ESG verification. Trusted by 300+ companies."
     }
   },
   "about": {
     "meta": {
-      "title": "About Us | Global Corporate Advisory Firm",
-      "description": "NRRO is a global corporate advisory firm specializing in company formation in Spain, cross-border tax planning, and international legal services for multinational companies.",
-      "keywords": "global corporate advisory firm, company formation experts Spain, international legal advisory, cross-border tax planning, international business setup Spain"
+      "title": "About Us | Independent Audit Firm",
+      "description": "Audit is an independent audit firm specializing in statutory audits, due diligence, internal audit, and ESG verification for companies of all sizes.",
+      "keywords": "audit firm, independent auditors, statutory audit, due diligence, internal audit, ESG verification"
     },
     "cta": {
       "title": "Ready to work together?",
-      "subtitle": "Discover how we can help you achieve your business goals",
+      "subtitle": "Discover how our audit services can add value to your organization",
       "contactButton": "Contact Us",
       "servicesButton": "View Services"
     }
@@ -1093,19 +376,19 @@
       "placeholder": "+34 600 000 000"
     },
     "company": {
-      "label": "Company (optional)",
+      "label": "Company",
       "placeholder": "Your company name"
     },
     "message": {
       "label": "Message",
-      "placeholder": "Tell us how we can help you..."
+      "placeholder": "Tell us about your audit needs..."
     },
     "defaultMessage": "I'm interested in learning more about",
     "privacy": {
       "label": "I accept the privacy policy and the processing of my personal data"
     },
     "button": {
-      "submit": "Send inquiry",
+      "submit": "Request proposal",
       "sending": "Sending..."
     },
     "validation": {
@@ -1125,46 +408,66 @@
   },
   "home": {
     "hero": {
-      "badge": "Spain Business Advisory",
-      "title": "Set Up and Run Your Business in Spain—<br/>With One Integrated Advisory Team",
-      "subtitle": "Company formation, cross-border tax, accounting and payroll—built for international groups, investors and fast-moving companies entering Spain.",
-      "tagline": "Barcelona-based execution. International standards. 25+ years of cross-border experience.",
-      "cta_primary": "Book a 15-Minute Call",
-      "cta_secondary": "Request a Fee Estimate",
+      "badge": "Independent Audit Firm",
+      "title": "Rigorous Auditing.<br/>Trusted Results.",
+      "subtitle": "Annual accounts audit, due diligence, internal audit, and ESG verification—delivered by certified professionals with independence and expertise.",
+      "tagline": "ICAC Registered. International Network. 25+ years of experience.",
+      "cta_primary": "Request a Proposal",
+      "cta_secondary": "View Our Services",
       "microcopy": "Confidential. No obligation. We reply within 1 business day."
     },
     "about": {
-      "overline": "About Navarro International",
-      "title": "Strategic advisory for global business operations.",
-      "paragraph1": "At Navarro, we provide integrated legal, tax, accounting and labour advisory services for international companies operating in Spain and Spanish businesses expanding globally.",
-      "paragraph2": "With over 25 years of cross-border experience, we understand the complexities of multi-jurisdictional compliance, international tax planning, and global workforce management.",
-      "paragraph3": "Our team delivers strategic solutions that minimize risk and maximize business outcomes for clients across every continent.",
-      "paragraph4": "Whether entering Spain, restructuring international operations, or navigating cross-border compliance, we accompany our clients with total confidentiality and a long-term approach.",
+      "overline": "About Audit",
+      "title": "Independent audit for informed decisions.",
+      "paragraph1": "At Audit, we provide independent, rigorous audit services that help stakeholders make informed decisions based on reliable financial information.",
+      "paragraph2": "With over 25 years of experience, we understand the importance of independence, objectivity, and professional skepticism in delivering quality audits.",
+      "paragraph3": "Our team of certified auditors delivers thorough examinations that identify risks, strengthen controls, and add value beyond compliance.",
+      "paragraph4": "Whether you need a statutory audit, transaction support, internal audit, or ESG verification, we accompany our clients with total confidentiality and a commitment to excellence.",
       "cta": "Meet our team"
     },
     "stats": {
       "overline": "Key data"
     },
     "technology": {
-      "overline": "Technology we use"
+      "overline": "Audit technology we use"
     },
     "clients": {
       "overline": "Companies that trust us"
     },
     "blog": {
-      "overline": "Our publications",
-      "cta": "View all articles"
+      "overline": "Audit insights",
+      "cta": "View all insights"
+    },
+    "whyAudit": {
+      "overline": "Why Audit",
+      "title": "Why choose us?",
+      "independence": {
+        "title": "Independence",
+        "description": "Complete objectivity and independence in every engagement"
+      },
+      "expertise": {
+        "title": "Expertise",
+        "description": "Certified professionals with deep industry knowledge"
+      },
+      "methodology": {
+        "title": "Methodology",
+        "description": "Risk-based approach aligned with international standards"
+      },
+      "valueAdd": {
+        "title": "Value-Add",
+        "description": "Insights and recommendations beyond compliance"
+      }
     }
   },
   "footer": {
     "contact": "Contact",
-    "tagline": "Strategic and legal consulting for family businesses and corporate groups.",
+    "tagline": "Independent audit services for reliable financial reporting.",
     "services": "Services",
-    "areas": "Areas",
+    "areas": "Audit Areas",
     "company": "Company",
     "about": "About Us",
     "team": "Team",
-    "blog": "Blog",
+    "blog": "Insights",
     "careers": "Careers",
     "rights": "All rights reserved.",
     "legal": "Legal Notice",
@@ -1172,83 +475,68 @@
     "cookies": "Cookies",
     "terms": "Terms"
   },
-  "internationalServices": {
-    "meta": {
-      "title": "International Services | Global Legal, Tax & Advisory | NRRO",
-      "description": "Comprehensive international legal, tax, accounting and labour advisory services for multinational companies and foreign investors expanding into Spain."
+  "auditServices": {
+    "annualAccounts": {
+      "title": "Annual Accounts Audit",
+      "description": "Statutory audit of financial statements in accordance with GAAP and ISAs",
+      "features": [
+        "Financial statements examination",
+        "Internal controls assessment",
+        "Compliance verification",
+        "Independent auditor's report"
+      ]
     },
-    "hero": {
-      "badge": "Global Advisory Excellence",
-      "title": "International Services",
-      "subtitle": "End-to-end legal, tax, accounting and labour solutions for multinational companies operating across borders.",
-      "tagline": "Barcelona headquarters. Global reach. Local expertise in 50+ jurisdictions."
+    "dueDiligence": {
+      "title": "Due Diligence",
+      "description": "Transaction support services for M&A, investments, and business decisions",
+      "features": [
+        "Financial due diligence",
+        "Tax due diligence",
+        "Operational due diligence",
+        "Quality of earnings analysis"
+      ]
     },
-    "intro": {
-      "title": "What Are International Services?",
-      "paragraph1": "For multinational companies and foreign investors, navigating cross-border operations requires more than local expertise — it demands a partner who understands the complexities of international compliance, tax optimization, and workforce management across jurisdictions.",
-      "paragraph2": "Our International Services division provides integrated advisory solutions that help you establish, operate, and grow your business in Spain while maintaining compliance with global standards."
+    "internalAudit": {
+      "title": "Internal Audit",
+      "description": "Independent assessment of internal controls and risk management",
+      "features": [
+        "Internal controls evaluation",
+        "Risk assessment",
+        "Process improvement",
+        "Compliance monitoring"
+      ]
     },
-    "services": {
-      "accountingTitle": "International Accounting Management",
-      "accountingDesc": "Consolidation, reporting, and compliance with international accounting standards for multinational operations.",
-      "taxTitle": "International Tax Management",
-      "taxDesc": "Strategic tax planning and compliance to optimize your global tax position while minimizing risk.",
-      "payrollTitle": "International Payroll Management",
-      "payrollDesc": "Efficient payroll processing aligned with local labour legislation across multiple jurisdictions.",
-      "legalTitle": "Corporate Legal Services",
-      "legalDesc": "Entity formation, legal advisory, and ongoing compliance support for international companies.",
-      "treasuryTitle": "Treasury Management",
-      "treasuryDesc": "Monitoring and managing international cash flows to optimize liquidity and minimize financial risk.",
-      "transferPricingTitle": "Transfer Pricing",
-      "transferPricingDesc": "Ensuring compliance with intercompany transaction regulations across all jurisdictions.",
-      "governanceTitle": "Local Presence & Governance Support",
-      "governanceDesc": "International domiciliation and provision of local directors for compliant market presence."
-    },
-    "cta": {
-      "title": "Ready to Expand Your Global Operations?",
-      "subtitle": "Our international advisory team is ready to help you navigate cross-border complexities with confidence.",
-      "primary": "Request International Consultation",
-      "secondary": "Explore All Services"
+    "esgAudit": {
+      "title": "ESG & Sustainability Audit",
+      "description": "Verification of sustainability reports and non-financial information",
+      "features": [
+        "EINF verification",
+        "Sustainability reports assurance",
+        "Carbon footprint verification",
+        "ESG metrics validation"
+      ]
     }
   },
-  "contact": {
-    "hero": {
-      "badge": "Contact",
-      "title": "Contact Our International Team",
-      "subtitle": "Ready to discuss your global business needs? Our team in Barcelona is here to help you navigate international legal, tax, and accounting challenges."
-    },
-    "form": {
-      "title": "Send Us a Message",
-      "name": "Full Name",
-      "namePlaceholder": "John Smith",
-      "email": "Email",
-      "emailPlaceholder": "john@example.com",
-      "phone": "Phone",
-      "phonePlaceholder": "+34 600 000 000",
-      "subject": "Subject",
-      "subjectPlaceholder": "How can we help you?",
-      "message": "Message",
-      "messagePlaceholder": "Tell us about your project or question...",
-      "messageError": "Message must be at least 10 characters",
-      "submit": "Send Message",
-      "submitting": "Sending...",
-      "successTitle": "Message Sent",
-      "successDescription": "Thank you for contacting us. We'll get back to you shortly.",
-      "errorTitle": "Error",
-      "errorDescription": "Something went wrong. Please try again."
-    },
-    "info": {
-      "title": "Get in Touch",
-      "subtitle": "Our global advisory team is ready to assist with your international business needs.",
-      "phone": "Phone",
-      "email": "Email",
-      "address": "Address",
-      "addressValue": "Ausias March 36 Principal, 08010 Barcelona",
-      "hours": "Office Hours",
-      "weekdays": "Monday - Friday",
-      "weekdaysValue": "9:00 - 18:00",
-      "weekend": "Saturday - Sunday",
-      "weekendValue": "Closed"
+  "methodology": {
+    "title": "Our Audit Methodology",
+    "description": "A rigorous, risk-based approach aligned with international auditing standards",
+    "phases": {
+      "planning": {
+        "title": "Planning",
+        "description": "Understanding the business, identifying risks, and designing the audit approach"
+      },
+      "fieldwork": {
+        "title": "Fieldwork",
+        "description": "Testing controls and substantive procedures to gather evidence"
+      },
+      "reporting": {
+        "title": "Reporting",
+        "description": "Communicating findings and issuing the audit opinion"
+      },
+      "followUp": {
+        "title": "Follow-up",
+        "description": "Monitoring recommendations and continuous improvement"
+      }
     }
   }
 }
