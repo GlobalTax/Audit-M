@@ -1,0 +1,272 @@
+{
+  "nav": {
+    "services": "Serveis",
+    "about": "Nosaltres",
+    "blog": "Insights",
+    "team": "Equip",
+    "careers": "Treballa amb nosaltres",
+    "contact": "Contacte",
+    "areas": "Àrees d'Auditoria",
+    "caseStudies": "Casos d'Èxit"
+  },
+  "breadcrumb": {
+    "home": "Inici"
+  },
+  "services": {
+    "annualAccounts": "Auditoria de Comptes Anuals",
+    "dueDiligence": "Due Diligence",
+    "internalAudit": "Auditoria Interna",
+    "esgAudit": "Auditoria ESG i Sostenibilitat",
+    "consolidatedGroups": "Auditoria de Grups Consolidats",
+    "foundationsNgo": "Auditoria de Fundacions i ONG",
+    "financialDD": "Due Diligence Financera",
+    "taxDD": "Due Diligence Fiscal",
+    "legalDD": "Due Diligence Legal",
+    "operationalDD": "Due Diligence Operativa",
+    "internalControls": "Auditoria de Control Intern",
+    "complianceAudit": "Auditoria de Compliment",
+    "processAudit": "Auditoria de Processos",
+    "sustainabilityReports": "Verificació d'Informes de Sostenibilitat",
+    "einfAudit": "Auditoria EINF",
+    "carbonFootprint": "Auditoria de Petjada de Carboni",
+    "crossServices": "Serveis especialitzats d'auditoria",
+    "whatElse": "En què més podem ajudar-te?",
+    "keyData": "Dades clau",
+    "letsChat": "Parlem?",
+    "howWeWork": "LA NOSTRA METODOLOGIA",
+    "notFound": {
+      "title": "Servei no trobat",
+      "backLink": "Tornar a Serveis"
+    },
+    "contactSubtitle": "Explica'ns les teves necessitats d'auditoria",
+    "meta": {
+      "title": "Serveis d'Auditoria",
+      "description": "Serveis professionals d'auditoria: comptes anuals, due diligence, auditoria interna i verificació ESG. Sol·licita pressupost."
+    },
+    "hero": {
+      "title": "Serveis d'Auditoria",
+      "subtitle": "Auditoria independent, rigorosa i amb valor afegit"
+    },
+    "filters": {
+      "filterBy": "Filtrar per",
+      "all": "Tots",
+      "search": "Cercar serveis..."
+    },
+    "empty": {
+      "title": "No s'han trobat serveis",
+      "description": "Prova a canviar el terme de cerca o els filtres",
+      "error": "Error en carregar serveis",
+      "errorDescription": "Si us plau, recarrega la pàgina"
+    },
+    "card": {
+      "learnMore": "Saber més",
+      "moreInfo": "Més informació"
+    },
+    "relatedServices": "Serveis d'auditoria relacionats",
+    "mightInterest": "També et pot interessar"
+  },
+  "blog": {
+    "meta": {
+      "title": "Insights - Audit",
+      "description": "Insights i anàlisi d'auditoria: novetats normatives, millors pràctiques en auditoria financera, due diligence i informes de sostenibilitat.",
+      "keywords": "blog auditoria, insights auditoria, auditoria financera, due diligence, auditoria ESG, informes sostenibilitat"
+    },
+    "hero": {
+      "badge": "Insights",
+      "title": "Insights d'Auditoria",
+      "subtitle": "Anàlisi, novetats i articles sobre auditoria, compliment i informació financera"
+    },
+    "search": "Cercar articles...",
+    "empty": "No s'han trobat articles",
+    "relatedPosts": {
+      "title": "Articles relacionats"
+    },
+    "backToBlog": "Tornar a Insights",
+    "notFound": "Article no trobat",
+    "previewNotAvailable": "Vista prèvia no disponible",
+    "previewExpired": "Aquesta vista prèvia ha expirat o no és vàlida",
+    "tags": "Etiquetes"
+  },
+  "caseStudies": {
+    "challenge": "El Repte",
+    "solution": "El Nostre Enfocament",
+    "results": "Resultats Clau",
+    "testimonial": "Testimoni del Client",
+    "testimonialSubtitle": "El que diuen de nosaltres",
+    "timeline": "Cronologia de l'Auditoria",
+    "relatedServices": "Serveis Relacionats",
+    "otherCases": "Altres Casos d'Èxit",
+    "similarProject": "Tens un Projecte Similar?",
+    "contactSubtitle": "Contacta'ns i descobreix com podem ajudar-te",
+    "contactUs": "Contactar",
+    "viewServices": "Veure Serveis",
+    "backToCases": "Tornar a Casos d'Èxit",
+    "notFound": "Cas d'èxit no trobat"
+  },
+  "team": {
+    "meta": {
+      "title": "El Nostre Equip",
+      "description": "Equip d'auditors i experts financers. Professionals certificats amb àmplia experiència en auditoria estatutària, due diligence i verificació ESG."
+    },
+    "hero": {
+      "badge": "Equip",
+      "title": "El Nostre Equip",
+      "subtitle": "Auditors certificats al teu servei"
+    },
+    "filters": {
+      "category": "Categoria",
+      "allCategories": "Totes les categories",
+      "specialization": "Especialització",
+      "all": "Tots"
+    },
+    "empty": {
+      "title": "Sense membres",
+      "descriptionWithFilter": "No hi ha membres amb l'especialització {{specialization}}.",
+      "descriptionGeneral": "No hi ha membres que coincideixin amb els filtres seleccionats"
+    }
+  },
+  "careers": {
+    "meta": {
+      "title": "Treballa amb Nosaltres - Uneix-te al Nostre Equip d'Auditoria",
+      "description": "Uneix-te a Audit: oportunitats laborals en auditoria financera, due diligence i verificació ESG. Desenvolupa la teva carrera amb experts en auditoria."
+    },
+    "breadcrumb": "Uneix-te a l'Equip",
+    "hero": {
+      "badge": "Feina",
+      "title": "Construeix el Teu Futur Professional Amb Nosaltres",
+      "subtitle": "Uneix-te al nostre equip d'experts en auditoria i desenvolupa la teva carrera professional en un entorn d'excel·lència."
+    },
+    "whyUs": {
+      "overline": "Per Què Escollir-nos",
+      "title": "Un Lloc per Créixer",
+      "description": "A Audit, creiem en el desenvolupament continu del nostre equip. Oferim un entorn de treball col·laboratiu on l'excel·lència professional es combina amb l'equilibri personal."
+    },
+    "openPositions": {
+      "overline": "Oportunitats",
+      "title": "Posicions Obertes",
+      "description": "Explora les oportunitats disponibles i troba la posició que millor s'adapti al teu perfil.",
+      "loading": "Carregant posicions...",
+      "noPositions": {
+        "title": "Posicions Obertes",
+        "description": "Actualment no tenim posicions obertes, però sempre busquem talent excepcional. Envia'ns la teva candidatura espontània i et contactarem quan sorgeixin oportunitats que encaixin amb el teu perfil."
+      }
+    },
+    "application": {
+      "overline": "Aplica Ara",
+      "title": "Uneix-te al Nostre Equip",
+      "description": "Envia'ns la teva candidatura i et contactarem"
+    }
+  },
+  "shared": {
+    "trustBar": {
+      "heading": "Més de 300 empreses confien en nosaltres",
+      "subtitle": "🏛️ Audit • Inscrit al ROAC • Membre de Xarxes Internacionals d'Auditoria"
+    },
+    "whyChooseUs": {
+      "title": "Per què Audit?",
+      "subtitle": "Auditoria independent, rigorosa i amb valor afegit.",
+      "experience": {
+        "stat": "25+",
+        "title": "Anys d'Experiència",
+        "desc": "Especialitzats en auditoria financera des de 1998"
+      },
+      "professionals": {
+        "stat": "50+",
+        "title": "Auditors Certificats",
+        "desc": "ROAC, CIA i auditors de sostenibilitat certificats"
+      },
+      "international": {
+        "stat": "40%",
+        "title": "Clients Internacionals",
+        "desc": "Filials de grups multinacionals"
+      },
+      "success": {
+        "stat": "500+",
+        "title": "Auditories Completades",
+        "desc": "Auditories estatutàries, DD i verificació ESG"
+      }
+    },
+    "form": {
+      "fullName": "Nom Complet",
+      "fullNamePlaceholder": "Ex: Joan Garcia",
+      "email": "Email Corporatiu",
+      "emailPlaceholder": "nom@latuaempresa.com",
+      "phone": "Telèfon (Opcional)",
+      "phonePlaceholder": "+34 600 000 000",
+      "companyName": "Nom de l'Empresa",
+      "companyNamePlaceholder": "Raó social de la teva empresa",
+      "submit": "Sol·licitar Pressupost",
+      "submitting": "Enviant...",
+      "success": {
+        "title": "Sol·licitud Rebuda!",
+        "description": "Gràcies pel teu interès. El nostre equip et contactarà en 24 hores."
+      },
+      "error": {
+        "title": "Alguna Cosa Ha Anat Malament",
+        "description": "Si us plau, torna-ho a intentar o contacta'ns directament."
+      }
+    }
+  },
+  "index": {
+    "meta": {
+      "title": "Audit | Serveis Professionals d'Auditoria",
+      "description": "Firma d'auditoria independent: auditoria de comptes anuals, due diligence, auditoria interna i verificació ESG. Més de 300 empreses confien en nosaltres."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Nosaltres | Firma d'Auditoria Independent",
+      "description": "Audit és una firma d'auditoria independent especialitzada en auditoria estatutària, due diligence, auditoria interna i verificació ESG per a empreses de totes les mides.",
+      "keywords": "firma auditoria, auditors independents, auditoria estatutària, due diligence, auditoria interna, verificació ESG"
+    },
+    "cta": {
+      "title": "Preparats per treballar junts?",
+      "subtitle": "Descobreix com els nostres serveis d'auditoria poden aportar valor a la teva organització",
+      "contactButton": "Contactar",
+      "servicesButton": "Veure Serveis"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Firma d'Auditoria Independent",
+      "title": "Auditoria Rigorosa.<br/>Resultats de Confiança.",
+      "subtitle": "Auditoria de comptes anuals, due diligence, auditoria interna i verificació ESG—realitzada per professionals certificats amb independència i experiència.",
+      "tagline": "Inscrit al ROAC. Xarxa Internacional. Més de 25 anys d'experiència.",
+      "cta_primary": "Sol·licitar Pressupost",
+      "cta_secondary": "Veure els Nostres Serveis",
+      "microcopy": "Confidencial. Sense compromís. Responem en 1 dia laborable."
+    },
+    "about": {
+      "overline": "Sobre Audit",
+      "title": "Auditoria independent per a decisions informades.",
+      "paragraph1": "A Audit, proporcionem serveis d'auditoria independents i rigorosos que ajuden els stakeholders a prendre decisions informades basades en informació financera fiable.",
+      "paragraph2": "Amb més de 25 anys d'experiència, entenem la importància de la independència, l'objectivitat i l'escepticisme professional per realitzar auditories de qualitat.",
+      "paragraph3": "El nostre equip d'auditors certificats realitza exàmens exhaustius que identifiquen riscos, enforteixen controls i aporten valor més enllà del compliment.",
+      "paragraph4": "Ja sigui que necessitis una auditoria estatutària, suport en transaccions, auditoria interna o verificació ESG, acompanyem els nostres clients amb total confidencialitat i compromís amb l'excel·lència.",
+      "cta": "Coneix el nostre equip"
+    },
+    "stats": {
+      "overline": "Dades clau"
+    },
+    "blog": {
+      "overline": "Insights d'auditoria",
+      "cta": "Veure tots els insights"
+    }
+  },
+  "footer": {
+    "contact": "Contacte",
+    "tagline": "Serveis d'auditoria independent per a una informació financera fiable.",
+    "services": "Serveis",
+    "areas": "Àrees d'Auditoria",
+    "company": "Empresa",
+    "about": "Nosaltres",
+    "team": "Equip",
+    "blog": "Insights",
+    "careers": "Feina",
+    "rights": "Tots els drets reservats.",
+    "legal": "Avís Legal",
+    "privacy": "Privacitat",
+    "cookies": "Cookies",
+    "terms": "Termes"
+  }
+}

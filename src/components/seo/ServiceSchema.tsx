@@ -37,7 +37,7 @@ export const ServiceSchema = ({
         "url": provider.url,
         "logo": {
           "@type": "ImageObject",
-          "url": `${BASE_DOMAIN}/assets/logos/navarro-tax-legal.svg`
+          "url": `${BASE_DOMAIN}/assets/logos/audit-logo.svg`
         }
       },
       "areaServed": {

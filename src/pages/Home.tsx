@@ -21,7 +21,7 @@ import { HomeThirdPartyReviewsSection } from "@/components/home/HomeThirdPartyRe
 import { AwardsRecognitionStrip } from "@/components/home/AwardsRecognitionStrip";
 import { TeamCarouselSection } from "@/components/home/TeamCarouselSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { WhyNRROSection } from "@/components/home/WhyNRROSection";
+import { WhyAuditSection } from "@/components/home/WhyAuditSection";
 import { InternationalFAQSection } from "@/components/home/InternationalFAQSection";
 import { ArrowRight, Calendar } from "lucide-react";
 import {
@@ -319,8 +319,8 @@ const Home = () => {
         {/* Global Coverage Map */}
         <GlobalCoverageMap />
 
-        {/* Why NRRO Section */}
-        <WhyNRROSection />
+        {/* Why Audit Section */}
+        <WhyAuditSection />
 
         {/* Testimonials Section */}
         <HomeTestimonialsSection />

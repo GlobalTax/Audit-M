@@ -68,10 +68,10 @@ export default function Index() {
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary-foreground mb-6 leading-tight">
-              Your trusted partner in tax and legal advisory
+              Your trusted partner in audit services
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed">
-              At <span className="font-display font-normal">navarro</span>, we transform tax and accounting management into real momentum for your business.
+              At <span className="font-display font-normal">Audit</span>, we provide rigorous, independent audit services that help stakeholders make informed decisions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-strong">

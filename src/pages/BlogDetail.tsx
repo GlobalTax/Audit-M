@@ -157,7 +157,7 @@ const BlogDetail = () => {
       {isPreviewMode && previewData?.preview_info && <PreviewBanner expiresAt={previewData.preview_info.expires_at} accessedCount={previewData.preview_info.accessed_count} />}
       <Meta title={post.seo_title || post.title} description={post.seo_description || post.excerpt || ""} ogImage={ogImageUrl} canonicalUrl={`${window.location.origin}/blog/${post.slug}`} />
       <BreadcrumbSchema items={breadcrumbItems} />
-      <ArticleSchema title={post.title} description={post.excerpt || post.seo_description || ""} author={{ name: post.author_name || "Navarro Tax Legal", url: `${window.location.origin}/team` }} publishedDate={post.published_at || post.created_at} modifiedDate={post.updated_at} imageUrl={post.featured_image || ogImageUrl} articleUrl={`${window.location.origin}/blog/${post.slug}`} category={post.category} tags={post.tags} />
+      <ArticleSchema title={post.title} description={post.excerpt || post.seo_description || ""} author={{ name: post.author_name || "Audit", url: `${window.location.origin}/team` }} publishedDate={post.published_at || post.created_at} modifiedDate={post.updated_at} imageUrl={post.featured_image || ogImageUrl} articleUrl={`${window.location.origin}/blog/${post.slug}`} category={post.category} tags={post.tags} />
 
       <div className="bg-muted/30 border-b border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
