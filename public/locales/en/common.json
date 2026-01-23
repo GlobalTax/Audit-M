@@ -546,5 +546,65 @@
     "transactionalAudit": "Transactional Audit",
     "internalAudit": "Internal Audit",
     "specialReports": "Special Reports"
+  },
+  "auditHub": {
+    "meta": {
+      "title": "Audit Center | Professional Audit Services",
+      "description": "Central hub for audit services: financial, compliance, ESG, due diligence, internal audit and special reports. ROAC-registered auditors."
+    },
+    "hero": {
+      "badge": "ROAC · ICAC · 25+ years",
+      "title": "Audit Center",
+      "subtitle": "Independent audit services for companies seeking excellence, transparency and regulatory compliance",
+      "ctaPrimary": "Request a proposal",
+      "ctaSecondary": "Am I required to audit?"
+    },
+    "trustBar": {
+      "services": "Specialized services",
+      "registered": "Registered auditors",
+      "networks": "International networks",
+      "experience": "Years of experience"
+    },
+    "categories": {
+      "overline": "Areas of expertise",
+      "title": "Our Audit Services",
+      "subtitle": "Audit solutions tailored to the specific needs of each organization"
+    },
+    "whyUs": {
+      "overline": "Our difference",
+      "title": "Why choose us?",
+      "subtitle": "We combine technical rigor with a practical approach focused on delivering real value",
+      "roac": {
+        "title": "ROAC Registered",
+        "description": "Auditors officially registered in the Official Register of Auditors"
+      },
+      "methodology": {
+        "title": "ISA-ES Methodology",
+        "description": "We apply International Standards on Auditing adapted by ICAC"
+      },
+      "team": {
+        "title": "Multidisciplinary team",
+        "description": "Professionals specialized in financial, tax, ESG and internal control auditing"
+      },
+      "networks": {
+        "title": "International reach",
+        "description": "Members of 3 international networks with coverage in over 100 countries"
+      },
+      "independence": {
+        "title": "Guaranteed independence",
+        "description": "Strict independence policies and internal quality control"
+      },
+      "value": {
+        "title": "Added value",
+        "description": "Beyond the report: practical recommendations to improve management"
+      }
+    },
+    "cta": {
+      "title": "Need an audit?",
+      "subtitle": "Request a customized proposal with no commitment",
+      "primary": "Request proposal",
+      "secondary": "Call now",
+      "guarantee": "Response within 24 hours · No-obligation quote"
+    }
   }
 }
