@@ -1,54 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Building2, Scale, Landmark, FileText, Rocket, Zap, Calculator, ClipboardCheck, HelpCircle, BookOpen, Receipt, Briefcase } from "lucide-react";
+import { Menu, X, ChevronDown, FileCheck, CheckCircle, Leaf, Search, Shield, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useServicesSearch } from "@/hooks/useServicesSearch";
 import { cn } from "@/lib/utils";
 
-// Spain Setup mega-menu data
-const spainSetupGuides = [
-  { name: "How to Set Up in Spain", href: "/set-up-in-spain", icon: Building2 },
-  { name: "Legal Structures", href: "/legal-structures-spain", icon: Scale },
-  { name: "Beckham Law", href: "/ley-beckham", icon: Scale },
-  { name: "Bank Account Guide", href: "/spain-business-bank-account", icon: Landmark },
-  { name: "NIE for Foreigners", href: "/nie-spain-foreigners", icon: FileText },
-  { name: "Spanish Payroll", href: "/spanish-payroll-international", icon: Receipt },
-  { name: "M&A Hub", href: "/spain-ma-hub", icon: Briefcase },
-  { name: "Tech Startup Setup", href: "/startup-company-setup-spain", icon: Rocket },
-  { name: "Express Registration", href: "/fast-company-registration-spain", icon: Zap },
-];
-
-const spainSetupTools = [
-  { name: "Setup Calculator", href: "/spain-setup-calculator", icon: Calculator },
-  { name: "Labor Cost Calculator", href: "/spain-labor-cost-calculator", icon: Calculator },
-  { name: "Readiness Quiz", href: "/spain-readiness-quiz", icon: HelpCircle },
-  { name: "Free Playbook", href: "/spain-company-setup-playbook", icon: BookOpen },
-  { name: "Document Checklist", href: "/spain-document-checklist", icon: ClipboardCheck },
-];
-
-const spainSetupByCountry = [
-  { name: "US Companies", href: "/spain-company-setup-usa", flag: "🇺🇸" },
-  { name: "UK Companies", href: "/spain-company-setup-uk", flag: "🇬🇧" },
-  { name: "UAE Companies", href: "/spain-company-setup-uae", flag: "🇦🇪" },
-];
-
-// Resources mega-menu data
-const resourceCalculators = [
-  { name: "Setup Cost Calculator", href: "/spain-setup-calculator", icon: Calculator },
-  { name: "Labor Cost Calculator", href: "/spain-labor-cost-calculator", icon: Receipt },
-  { name: "Beckham Law Calculator", href: "/beckham-law-calculator", icon: Scale },
-];
-
-const resourceGuides = [
-  { name: "Company Setup Playbook", href: "/spain-company-setup-playbook", icon: BookOpen },
-  { name: "Document Checklist", href: "/spain-document-checklist", icon: ClipboardCheck },
-];
-
-const resourceAssessments = [
-  { name: "Readiness Quiz", href: "/spain-readiness-quiz", icon: HelpCircle },
-  { name: "Tax Residency Risk Assessment", href: "/spain-tax-residency-risk", icon: Scale },
+// Audit service categories with icons
+const auditCategories = [
+  { key: "Auditoría Financiera", label: { es: "Financiera", en: "Financial", ca: "Financera" }, icon: FileCheck },
+  { key: "Auditoría de Cumplimiento", label: { es: "Cumplimiento", en: "Compliance", ca: "Compliment" }, icon: CheckCircle },
+  { key: "Auditoría ESG", label: { es: "ESG / Sostenibilidad", en: "ESG / Sustainability", ca: "ESG / Sostenibilitat" }, icon: Leaf },
+  { key: "Auditoría Transaccional", label: { es: "Transaccional", en: "Transactional", ca: "Transaccional" }, icon: Search },
+  { key: "Auditoría Interna", label: { es: "Auditoría Interna", en: "Internal Audit", ca: "Auditoria Interna" }, icon: Shield },
+  { key: "Informes Especiales", label: { es: "Informes Especiales", en: "Special Reports", ca: "Informes Especials" }, icon: FileText },
 ];
 
 export const Navbar = () => {
@@ -56,41 +22,26 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [serviciosOpen, setServiciosOpen] = useState(false);
-  const [spainSetupOpen, setSpainSetupOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [isLightMode, setIsLightMode] = useState(false);
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   
-  // Fetch dynamic services from DB (only active international services)
-  const { data: servicesData } = useServicesSearch({ limit: 20 }, language);
+  // Fetch dynamic services from DB (only active audit services)
+  const { data: servicesData } = useServicesSearch({ limit: 30 }, language);
   const services = servicesData?.services || [];
 
-  // Separate services into two columns based on display_order
-  // SERVICES (display_order 1-6): Core international services
-  // AREAS (display_order 7-13): Specialized services
-  const serviciosMenu = services
-    .filter(s => s.display_order >= 1 && s.display_order <= 6)
-    .map(service => ({
-      name: service.name,
-      href: `/services/${service.slug_en || service.slug_es}`
-    }));
-
-  const areasMenu = services
-    .filter(s => s.display_order >= 7 && s.display_order <= 13)
-    .map(service => ({
-      name: service.name,
-      href: `/services/${service.slug_en || service.slug_es}`
-    }));
+  // Group services by audit area
+  const servicesByArea = auditCategories.reduce((acc, cat) => {
+    acc[cat.key] = services.filter(s => s.area === cat.key);
+    return acc;
+  }, {} as Record<string, typeof services>);
 
   const navigation = [
-    { name: t("nav.services"), href: "/services" },
-    { name: "Spain Setup", href: "/spain-company-setup" },
-    { name: "Resources", href: "/resources" },
-    { name: t("nav.about"), href: "/about" },
+    { name: t("nav.services"), href: "/servicios" },
+    { name: t("nav.about"), href: "/nosotros" },
+    { name: t("nav.caseStudies"), href: "/casos-exito" },
     { name: t("nav.blog"), href: "/blog" },
-    { name: t("nav.team"), href: "/team" },
-    { name: t("nav.careers"), href: "/careers" },
+    { name: t("nav.team"), href: "/equipo" },
   ];
 
   const isActive = (path: string) => {
@@ -109,7 +60,7 @@ export const Navbar = () => {
     const detectBackgroundColor = () => {
       if (!navRef.current) return;
 
-      if (location.pathname.startsWith('/services') && window.scrollY < 10) {
+      if (location.pathname.startsWith('/servicios') && window.scrollY < 10) {
         setIsLightMode(false);
         return;
       }
@@ -167,17 +118,15 @@ export const Navbar = () => {
       if (serviciosOpen && !(event.target as Element).closest('.servicios-dropdown')) {
         setServiciosOpen(false);
       }
-      if (spainSetupOpen && !(event.target as Element).closest('.spain-setup-dropdown')) {
-        setSpainSetupOpen(false);
-      }
-      if (resourcesOpen && !(event.target as Element).closest('.resources-dropdown')) {
-        setResourcesOpen(false);
-      }
     };
     
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [serviciosOpen, spainSetupOpen, resourcesOpen]);
+  }, [serviciosOpen]);
+
+  const getCategoryLabel = (cat: typeof auditCategories[0]) => {
+    return cat.label[language as keyof typeof cat.label] || cat.label.es;
+  };
 
   return (
     <nav
@@ -226,259 +175,81 @@ export const Navbar = () => {
                       )}
                     >
                       {item.name}
-                      <ChevronDown className="h-4 w-4" />
+                      <ChevronDown className={cn("h-4 w-4 transition-transform", serviciosOpen && "rotate-180")} />
                     </button>
                     
                     {serviciosOpen && (
-                      <div className="absolute top-full left-0 mt-2 bg-background border border-border rounded-lg shadow-lg overflow-hidden min-w-[500px] z-[100]">
-                        <div className="grid grid-cols-2 gap-px bg-border">
-                          <div className="bg-background p-4">
-                            <h3 className="text-sm font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              {t("footer.services")}
-                            </h3>
-                            <div className="space-y-2">
-                              {serviciosMenu.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  to={service.href}
-                                  onClick={() => setServiciosOpen(false)}
-                                  className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="bg-background p-4">
-                            <h3 className="text-sm font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              {t("footer.areas")}
-                            </h3>
-                            <div className="space-y-2">
-                              {areasMenu.map((area) => (
-                                <Link
-                                  key={area.href}
-                                  to={area.href}
-                                  onClick={() => setServiciosOpen(false)}
-                                  className="block px-3 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  {area.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              // Spain Setup mega-menu
-              if (item.name === "Spain Setup") {
-                return (
-                  <div
-                    key={item.name}
-                    className="relative group spain-setup-dropdown"
-                  >
-                    <button
-                      onClick={() => {
-                        setSpainSetupOpen(!spainSetupOpen);
-                        setServiciosOpen(false);
-                      }}
-                      className={cn(
-                        "flex items-center gap-1 font-display text-base transition-colors",
-                        scrolled || isLightMode
-                          ? "text-foreground hover:text-accent"
-                          : "text-white hover:text-accent",
-                        isActive("/spain-company-setup") && (scrolled || isLightMode 
-                          ? "text-accent font-semibold" 
-                          : "text-white font-semibold underline decoration-2 underline-offset-4")
-                      )}
-                    >
-                      {item.name}
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                    
-                    {spainSetupOpen && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border rounded-lg shadow-xl overflow-hidden min-w-[680px] z-[100]">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border rounded-xl shadow-xl overflow-hidden min-w-[900px] z-[100]">
                         <div className="grid grid-cols-3 gap-px bg-border">
-                          {/* Column 1: Guides */}
-                          <div className="bg-background p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              Guides
-                            </h3>
-                            <div className="space-y-1">
-                              {spainSetupGuides.map((guide) => (
-                                <Link
-                                  key={guide.href}
-                                  to={guide.href}
-                                  onClick={() => setSpainSetupOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <guide.icon className="h-4 w-4 text-foreground/50" />
-                                  {guide.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* Column 2: By Country */}
-                          <div className="bg-background p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              By Country
-                            </h3>
-                            <div className="space-y-1">
-                              {spainSetupByCountry.map((country) => (
-                                <Link
-                                  key={country.href}
-                                  to={country.href}
-                                  onClick={() => setSpainSetupOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <span className="text-base">{country.flag}</span>
-                                  {country.name}
-                                </Link>
-                              ))}
-                            </div>
-                            
-                            <div className="mt-4 pt-4 border-t border-border">
-                              <Link
-                                to="/spain-company-setup"
-                                onClick={() => setSpainSetupOpen(false)}
-                                className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-accent hover:bg-accent/10 rounded transition-colors"
-                              >
-                                <Building2 className="h-4 w-4" />
-                                View All Resources →
-                              </Link>
-                            </div>
-                          </div>
-                          
-                          {/* Column 3: Tools */}
-                          <div className="bg-muted/30 p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              Tools & Calculators
-                            </h3>
-                            <div className="space-y-1">
-                              {spainSetupTools.map((tool) => (
-                                <Link
-                                  key={tool.href}
-                                  to={tool.href}
-                                  onClick={() => setSpainSetupOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <tool.icon className="h-4 w-4 text-foreground/50" />
-                                  {tool.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                          {/* First row: 3 categories */}
+                          {auditCategories.slice(0, 3).map((cat) => {
+                            const Icon = cat.icon;
+                            const categoryServices = servicesByArea[cat.key] || [];
+                            return (
+                              <div key={cat.key} className="bg-background p-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Icon className="h-4 w-4 text-accent" />
+                                  <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                                    {getCategoryLabel(cat)}
+                                  </h3>
+                                </div>
+                                <div className="space-y-1">
+                                  {categoryServices.map((service) => (
+                                    <Link
+                                      key={service.id}
+                                      to={`/servicios/${service.slug}`}
+                                      onClick={() => setServiciosOpen(false)}
+                                      className="block px-2 py-1.5 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                                    >
+                                      {service.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              // Resources mega-menu
-              if (item.name === "Resources") {
-                return (
-                  <div
-                    key={item.name}
-                    className="relative group resources-dropdown"
-                  >
-                    <button
-                      onClick={() => {
-                        setResourcesOpen(!resourcesOpen);
-                        setServiciosOpen(false);
-                        setSpainSetupOpen(false);
-                      }}
-                      className={cn(
-                        "flex items-center gap-1 font-display text-base transition-colors",
-                        scrolled || isLightMode
-                          ? "text-foreground hover:text-accent"
-                          : "text-white hover:text-accent",
-                        isActive("/resources") && (scrolled || isLightMode 
-                          ? "text-accent font-semibold" 
-                          : "text-white font-semibold underline decoration-2 underline-offset-4")
-                      )}
-                    >
-                      {item.name}
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                    
-                    {resourcesOpen && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border rounded-lg shadow-xl overflow-hidden min-w-[580px] z-[100]">
-                        <div className="grid grid-cols-3 gap-px bg-border">
-                          {/* Column 1: Calculators */}
-                          <div className="bg-background p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              Calculators
-                            </h3>
-                            <div className="space-y-1">
-                              {resourceCalculators.map((calc) => (
-                                <Link
-                                  key={calc.href}
-                                  to={calc.href}
-                                  onClick={() => setResourcesOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <calc.icon className="h-4 w-4 text-foreground/50" />
-                                  {calc.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* Column 2: Guides */}
-                          <div className="bg-background p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              Guides
-                            </h3>
-                            <div className="space-y-1">
-                              {resourceGuides.map((guide) => (
-                                <Link
-                                  key={guide.href}
-                                  to={guide.href}
-                                  onClick={() => setResourcesOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <guide.icon className="h-4 w-4 text-foreground/50" />
-                                  {guide.name}
-                                </Link>
-                              ))}
-                            </div>
-                            
-                            <div className="mt-4 pt-4 border-t border-border">
-                              <Link
-                                to="/resources"
-                                onClick={() => setResourcesOpen(false)}
-                                className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-accent hover:bg-accent/10 rounded transition-colors"
-                              >
-                                <BookOpen className="h-4 w-4" />
-                                Explore All Resources →
-                              </Link>
-                            </div>
-                          </div>
-                          
-                          {/* Column 3: Assessments */}
-                          <div className="bg-muted/30 p-4">
-                            <h3 className="text-xs font-semibold text-foreground/60 mb-3 uppercase tracking-wider">
-                              Assessments
-                            </h3>
-                            <div className="space-y-1">
-                              {resourceAssessments.map((assess) => (
-                                <Link
-                                  key={assess.href}
-                                  to={assess.href}
-                                  onClick={() => setResourcesOpen(false)}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                                >
-                                  <assess.icon className="h-4 w-4 text-foreground/50" />
-                                  {assess.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                        <div className="grid grid-cols-3 gap-px bg-border border-t border-border">
+                          {/* Second row: 3 categories */}
+                          {auditCategories.slice(3, 6).map((cat) => {
+                            const Icon = cat.icon;
+                            const categoryServices = servicesByArea[cat.key] || [];
+                            return (
+                              <div key={cat.key} className="bg-background p-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Icon className="h-4 w-4 text-accent" />
+                                  <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                                    {getCategoryLabel(cat)}
+                                  </h3>
+                                </div>
+                                <div className="space-y-1">
+                                  {categoryServices.map((service) => (
+                                    <Link
+                                      key={service.id}
+                                      to={`/servicios/${service.slug}`}
+                                      onClick={() => setServiciosOpen(false)}
+                                      className="block px-2 py-1.5 text-sm text-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                                    >
+                                      {service.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {/* Footer CTA */}
+                        <div className="bg-muted/40 px-4 py-3 border-t border-border flex items-center justify-between">
+                          <span className="text-sm text-foreground/60">
+                            {language === 'en' ? 'Not sure which service you need?' : language === 'ca' ? 'No saps quin servei necessites?' : '¿No sabes qué servicio necesitas?'}
+                          </span>
+                          <Link
+                            to="/contacto"
+                            onClick={() => setServiciosOpen(false)}
+                            className="text-sm font-medium text-accent hover:underline"
+                          >
+                            {language === 'en' ? 'Contact us →' : language === 'ca' ? 'Contacta\'ns →' : 'Contáctanos →'}
+                          </Link>
                         </div>
                       </div>
                     )}
@@ -505,7 +276,7 @@ export const Navbar = () => {
               );
             })}
 
-            <Link to="/contact">
+            <Link to="/contacto">
               <Button 
                 variant={scrolled || isLightMode ? "default" : "secondary"}
                 className="font-medium"
@@ -554,7 +325,7 @@ export const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/contacto" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="default" className="w-full">
                   {t("nav.contact")}
                 </Button>
