@@ -268,5 +268,13 @@
     "privacy": "Privacitat",
     "cookies": "Cookies",
     "terms": "Termes"
+  },
+  "serviceAreas": {
+    "financialAudit": "Auditoria Financera",
+    "complianceAudit": "Auditoria de Compliment",
+    "esgAudit": "Auditoria ESG",
+    "transactionalAudit": "Auditoria Transaccional",
+    "internalAudit": "Auditoria Interna",
+    "specialReports": "Informes Especials"
   }
 }

@@ -30,7 +30,7 @@ export interface Service {
   slug: string; // Mapped from slug_es/ca/en
   description: string; // Mapped from description_es/ca/en
   icon_name: string;
-  area: 'Fiscal' | 'Contable' | 'Legal' | 'Laboral'; // Mapped from area_es/ca/en
+  area: 'Auditoría Financiera' | 'Auditoría de Cumplimiento' | 'Auditoría ESG' | 'Auditoría Transaccional' | 'Auditoría Interna' | 'Informes Especiales'; // Mapped from area_es/ca/en
   features: string[];
   benefits?: string;
   typical_clients: string[];

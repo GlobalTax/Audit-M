@@ -536,7 +536,14 @@
       "followUp": {
         "title": "Seguimiento",
         "description": "Monitorización de recomendaciones y mejora continua"
-      }
     }
+  },
+  "serviceAreas": {
+    "financialAudit": "Auditoría Financiera",
+    "complianceAudit": "Auditoría de Cumplimiento",
+    "esgAudit": "Auditoría ESG",
+    "transactionalAudit": "Auditoría Transaccional",
+    "internalAudit": "Auditoría Interna",
+    "specialReports": "Informes Especiales"
   }
 }
