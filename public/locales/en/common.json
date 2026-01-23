@@ -538,5 +538,13 @@
         "description": "Monitoring recommendations and continuous improvement"
       }
     }
+  },
+  "serviceAreas": {
+    "financialAudit": "Financial Audit",
+    "complianceAudit": "Compliance Audit",
+    "esgAudit": "ESG Audit",
+    "transactionalAudit": "Transactional Audit",
+    "internalAudit": "Internal Audit",
+    "specialReports": "Special Reports"
   }
 }

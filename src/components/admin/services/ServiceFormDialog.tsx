@@ -85,7 +85,7 @@ export const ServiceFormDialog = ({ open, onClose, service }: ServiceFormDialogP
       slug: '',
       description: '',
       icon_name: 'Calculator',
-      area: 'Fiscal',
+      area: 'Auditoría Financiera',
       features: [''],
       benefits: '',
       typical_clients: [''],
