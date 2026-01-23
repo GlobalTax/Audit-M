@@ -7,14 +7,38 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useServicesSearch } from "@/hooks/useServicesSearch";
 import { cn } from "@/lib/utils";
 
-// Audit service categories with icons
+// Audit service categories with icons - keys match DB area values in each language
 const auditCategories = [
-  { key: "Auditoría Financiera", label: { es: "Financiera", en: "Financial", ca: "Financera" }, icon: FileCheck },
-  { key: "Auditoría de Cumplimiento", label: { es: "Cumplimiento", en: "Compliance", ca: "Compliment" }, icon: CheckCircle },
-  { key: "Auditoría ESG", label: { es: "ESG / Sostenibilidad", en: "ESG / Sustainability", ca: "ESG / Sostenibilitat" }, icon: Leaf },
-  { key: "Auditoría Transaccional", label: { es: "Transaccional", en: "Transactional", ca: "Transaccional" }, icon: Search },
-  { key: "Auditoría Interna", label: { es: "Auditoría Interna", en: "Internal Audit", ca: "Auditoria Interna" }, icon: Shield },
-  { key: "Informes Especiales", label: { es: "Informes Especiales", en: "Special Reports", ca: "Informes Especials" }, icon: FileText },
+  { 
+    key: { es: "Auditoría Financiera", en: "Financial Audit", ca: "Auditoria Financera" },
+    label: { es: "Financiera", en: "Financial", ca: "Financera" }, 
+    icon: FileCheck 
+  },
+  { 
+    key: { es: "Auditoría de Cumplimiento", en: "Compliance Audit", ca: "Auditoria de Compliment" },
+    label: { es: "Cumplimiento", en: "Compliance", ca: "Compliment" }, 
+    icon: CheckCircle 
+  },
+  { 
+    key: { es: "Auditoría ESG", en: "ESG Audit", ca: "Auditoria ESG" },
+    label: { es: "ESG / Sostenibilidad", en: "ESG / Sustainability", ca: "ESG / Sostenibilitat" }, 
+    icon: Leaf 
+  },
+  { 
+    key: { es: "Auditoría Transaccional", en: "Transaction Audit", ca: "Auditoria Transaccional" },
+    label: { es: "Transaccional", en: "Transactional", ca: "Transaccional" }, 
+    icon: Search 
+  },
+  { 
+    key: { es: "Auditoría Interna", en: "Internal Audit", ca: "Auditoria Interna" },
+    label: { es: "Auditoría Interna", en: "Internal Audit", ca: "Auditoria Interna" }, 
+    icon: Shield 
+  },
+  { 
+    key: { es: "Informes Especiales", en: "Special Reports", ca: "Informes Especials" },
+    label: { es: "Informes Especiales", en: "Special Reports", ca: "Informes Especials" }, 
+    icon: FileText 
+  },
 ];
 
 export const Navbar = () => {
@@ -30,9 +54,15 @@ export const Navbar = () => {
   const { data: servicesData } = useServicesSearch({ limit: 30 }, language);
   const services = servicesData?.services || [];
 
-  // Group services by audit area
+  // Helper to get category key for current language
+  const getCategoryKey = (cat: typeof auditCategories[0]) => {
+    return cat.key[language as keyof typeof cat.key] || cat.key.es;
+  };
+
+  // Group services by audit area using language-aware keys
   const servicesByArea = auditCategories.reduce((acc, cat) => {
-    acc[cat.key] = services.filter(s => s.area === cat.key);
+    const areaKey = getCategoryKey(cat);
+    acc[areaKey] = services.filter(s => s.area === areaKey);
     return acc;
   }, {} as Record<string, typeof services>);
 
@@ -182,11 +212,12 @@ export const Navbar = () => {
                       <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border rounded-xl shadow-xl overflow-hidden min-w-[900px] z-[100]">
                         <div className="grid grid-cols-3 gap-px bg-border">
                           {/* First row: 3 categories */}
-                          {auditCategories.slice(0, 3).map((cat) => {
+                          {auditCategories.slice(0, 3).map((cat, idx) => {
                             const Icon = cat.icon;
-                            const categoryServices = servicesByArea[cat.key] || [];
+                            const catKey = getCategoryKey(cat);
+                            const categoryServices = servicesByArea[catKey] || [];
                             return (
-                              <div key={cat.key} className="bg-background p-4">
+                              <div key={idx} className="bg-background p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                   <Icon className="h-4 w-4 text-accent" />
                                   <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
@@ -211,11 +242,12 @@ export const Navbar = () => {
                         </div>
                         <div className="grid grid-cols-3 gap-px bg-border border-t border-border">
                           {/* Second row: 3 categories */}
-                          {auditCategories.slice(3, 6).map((cat) => {
+                          {auditCategories.slice(3, 6).map((cat, idx) => {
                             const Icon = cat.icon;
-                            const categoryServices = servicesByArea[cat.key] || [];
+                            const catKey = getCategoryKey(cat);
+                            const categoryServices = servicesByArea[catKey] || [];
                             return (
-                              <div key={cat.key} className="bg-background p-4">
+                              <div key={idx + 3} className="bg-background p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                   <Icon className="h-4 w-4 text-accent" />
                                   <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
