@@ -3,42 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PlusCircle, Loader2, Upload } from 'lucide-react';
+import { PlusCircle, Loader2 } from 'lucide-react';
 import { LandingFormDialog } from '@/components/admin/landings/LandingFormDialog';
 import { LandingCard } from '@/components/admin/landings/LandingCard';
 import { useLandingPages } from '@/hooks/useLandingPages';
-import { migrateHerenciasLanding } from '@/scripts/migrateHerenciasLanding';
-import { toast } from 'sonner';
 
 export default function AdminLandings() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isMigrating, setIsMigrating] = useState(false);
   
-  const { data: landings, isLoading, refetch } = useLandingPages({
+  const { data: landings, isLoading } = useLandingPages({
     status: statusFilter,
     search: searchQuery,
   });
-
-  const handleMigrateHerencias = async () => {
-    try {
-      setIsMigrating(true);
-      toast.info('Migrando landing de herencias...');
-      
-      await migrateHerenciasLanding();
-      
-      toast.success('Landing de herencias migrada correctamente');
-      await refetch();
-    } catch (error: any) {
-      console.error('Error migrando landing:', error);
-      toast.error(error.message || 'Error al migrar la landing');
-    } finally {
-      setIsMigrating(false);
-    }
-  };
-
-  const hasHerenciasLanding = landings?.some(l => l.slug === 'abogados-herencias-barcelona');
   
   return (
     <div className="space-y-6">
@@ -50,31 +28,10 @@ export default function AdminLandings() {
             Gestiona las páginas de aterrizaje y sus contenidos
           </p>
         </div>
-        <div className="flex gap-2">
-          {!hasHerenciasLanding && (
-            <Button 
-              variant="outline" 
-              onClick={handleMigrateHerencias}
-              disabled={isMigrating}
-            >
-              {isMigrating ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Migrando...
-                </>
-              ) : (
-                <>
-                  <Upload className="mr-2 h-4 w-4" />
-                  Migrar Herencias
-                </>
-              )}
-            </Button>
-          )}
-          <Button onClick={() => setIsCreateOpen(true)}>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Nueva Landing Page
-          </Button>
-        </div>
+        <Button onClick={() => setIsCreateOpen(true)}>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Nueva Landing Page
+        </Button>
       </div>
       
       {/* Filters */}

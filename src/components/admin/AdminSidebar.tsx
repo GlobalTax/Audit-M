@@ -10,32 +10,30 @@ import {
   Settings,
   FileText,
   Monitor,
-  Globe,
-  Calculator,
-  FileDown,
   MessageSquareQuote,
   Trophy,
   Briefcase,
   Map,
   FileOutput,
   Presentation,
+  ClipboardList,
+  UsersRound,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Logo } from '@/components/ui/logo';
 
 const navItems = [
   { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
+  { path: '/admin/services', icon: ClipboardList, label: 'Services' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
   { path: '/admin/case-studies', icon: Briefcase, label: 'Case Studies' },
   { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
   { path: '/admin/awards', icon: Trophy, label: 'Awards' },
+  { path: '/admin/team', icon: UsersRound, label: 'Team' },
   { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
-  { path: '/admin/playbook-leads', icon: FileDown, label: 'Resource Leads' },
-  { path: '/admin/calculator-settings', icon: Calculator, label: 'Calculator' },
   { path: '/admin/proposal-generator', icon: FileOutput, label: 'Proposal Generator' },
   { path: '/admin/corporate-presentation', icon: Presentation, label: 'Corporate Presentation' },
   { path: '/admin/deck-studio', icon: Presentation, label: 'Deck Studio' },
@@ -57,22 +55,24 @@ export const AdminSidebar = () => {
 
   return (
     <aside className="w-64 bg-slate-950 text-white min-h-screen flex flex-col">
-      {/* Header with International Branding */}
-      <div className="p-6 border-b border-amber-500/20">
+      {/* Header with Audit Branding */}
+      <div className="p-6 border-b border-primary/20">
         <div className="flex items-center gap-3 mb-3">
-          <div className="p-2 bg-amber-500/10 rounded-lg">
-            <Globe className="h-6 w-6 text-amber-500" />
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <ClipboardList className="h-6 w-6 text-primary" />
           </div>
-          <Logo brand="international" variant="compact" color="light" asLink={false} className="h-8" />
+          <div>
+            <span className="font-display text-xl font-semibold text-white lowercase">audit</span>
+          </div>
         </div>
-        <p className="text-[10px] text-amber-500/80 tracking-[0.2em] uppercase font-medium">
+        <p className="text-[10px] text-primary/80 tracking-[0.2em] uppercase font-medium">
           Admin Portal
         </p>
         {adminUser && (
           <div className="mt-3">
             <Badge 
               variant="outline" 
-              className="text-[10px] border-amber-500/30 text-amber-400 bg-amber-500/10"
+              className="text-[10px] border-primary/30 text-primary bg-primary/10"
             >
               {adminUser.role.replace('_', ' ').toUpperCase()}
             </Badge>
@@ -80,8 +80,8 @@ export const AdminSidebar = () => {
         )}
       </div>
 
-      {/* Decorative gold line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+      {/* Decorative line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         <Link to="/">
@@ -100,21 +100,20 @@ export const AdminSidebar = () => {
           <Link 
             key={item.path} 
             to={item.path}
-            {...((item as any).external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
             <Button
               variant="ghost"
               className={`w-full justify-start gap-2 transition-all ${
                 isActive(item.path)
-                  ? 'bg-slate-800 text-white border-l-2 border-amber-500 rounded-l-none'
+                  ? 'bg-slate-800 text-white border-l-2 border-primary rounded-l-none'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
             >
-              <item.icon className={`h-4 w-4 ${isActive(item.path) ? 'text-amber-500' : ''}`} />
+              <item.icon className={`h-4 w-4 ${isActive(item.path) ? 'text-primary' : ''}`} />
               <span className="flex-1 text-left text-sm">{item.label}</span>
               {item.path === '/admin/contact-leads' && unreadLeads > 0 && (
                 <Badge 
-                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs bg-amber-500 text-slate-950 hover:bg-amber-400"
+                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   {unreadLeads > 99 ? '99+' : unreadLeads}
                 </Badge>
@@ -131,11 +130,11 @@ export const AdminSidebar = () => {
                 variant="ghost"
                 className={`w-full justify-start ${
                   isActive('/admin/users')
-                    ? 'bg-slate-800 text-white border-l-2 border-amber-500 rounded-l-none'
+                    ? 'bg-slate-800 text-white border-l-2 border-primary rounded-l-none'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                 }`}
               >
-                <UserCog className={`mr-3 h-4 w-4 ${isActive('/admin/users') ? 'text-amber-500' : ''}`} />
+                <UserCog className={`mr-3 h-4 w-4 ${isActive('/admin/users') ? 'text-primary' : ''}`} />
                 Admin Users
               </Button>
             </Link>

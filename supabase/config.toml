@@ -69,16 +69,7 @@ verify_jwt = false
 [functions.translate-news-to-english]
 verify_jwt = false
 
-[functions.process-ley-beckham-lead]
-verify_jwt = false
-
-[functions.submit-company-setup-lead]
-verify_jwt = false
-
 [functions.submit-career-application]
-verify_jwt = false
-
-[functions.submit-playbook-lead]
 verify_jwt = false
 
 [functions.chat-assistant]

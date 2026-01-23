@@ -48,15 +48,11 @@ import { AdminAnalyticsDashboard } from "./pages/admin/AdminAnalyticsDashboard";
 import DeckStudioList from "./pages/admin/deck-studio/DeckStudioList";
 import DeckStudioContent from "./pages/admin/deck-studio/DeckStudioContent";
 import DeckStudioBrand from "./pages/admin/deck-studio/DeckStudioBrand";
-import AdminDemoRequests from "./pages/admin/AdminDemoRequests";
-import { AdminCompanySetupLeads } from "./pages/admin/AdminCompanySetupLeads";
 import AdminTechnology from "./pages/admin/AdminTechnology";
 import AdminSitemap from "./pages/admin/AdminSitemap";
-import AdminCalculatorSettings from "./pages/admin/AdminCalculatorSettings";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
-import AdminPlaybookLeads from "./pages/admin/AdminPlaybookLeads";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import AdminAwards from "./pages/admin/AdminAwards";
 import AdminProposalGenerator from "./pages/admin/AdminProposalGenerator";
@@ -129,10 +125,6 @@ const App = () => {
                   <Route path="job-positions" element={<AdminJobPositions />} />
                   <Route path="candidatos" element={<AdminCandidatos />} />
                   <Route path="contact-leads" element={<AdminContactLeads />} />
-                  <Route path="demo-requests" element={<AdminDemoRequests />} />
-                  <Route path="company-setup-leads" element={<AdminCompanySetupLeads />} />
-                  <Route path="playbook-leads" element={<AdminPlaybookLeads />} />
-                  <Route path="calculator-settings" element={<AdminCalculatorSettings />} />
                   <Route path="proposal-generator" element={<AdminProposalGenerator />} />
                   <Route path="corporate-presentation" element={<AdminCorporatePresentation />} />
                   <Route path="deck-studio" element={<DeckStudioList />} />
