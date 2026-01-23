@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { AlertTriangle, Clock } from 'lucide-react';
+import { AlertTriangle, Clock, ClipboardList } from 'lucide-react';
 import { z } from 'zod';
 
 const loginSchema = z.object({
@@ -113,12 +113,17 @@ export const AdminLogin = () => {
     : 0;
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center px-4">
+    <div className="bg-slate-950 min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Branding */}
         <div className="text-center mb-12">
-          <h1 className="font-display text-3xl font-normal lowercase text-white mb-2">
-            global.nrro
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <ClipboardList className="h-8 w-8 text-primary" />
+            </div>
+          </div>
+          <h1 className="font-display text-3xl font-semibold lowercase text-white mb-2">
+            audit
           </h1>
           <p className="text-sm text-white/50">
             Administration Portal
@@ -153,7 +158,7 @@ export const AdminLogin = () => {
             <Input
               id="email"
               type="email"
-              placeholder="admin@company.com"
+              placeholder="admin@audit.es"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -161,7 +166,7 @@ export const AdminLogin = () => {
               }}
               required
               disabled={isLoading || isLockedOut}
-              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/30"
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-primary/50"
             />
             {errors.email && (
               <p className="text-sm text-red-400">{errors.email}</p>
@@ -182,7 +187,7 @@ export const AdminLogin = () => {
               }}
               required
               disabled={isLoading || isLockedOut}
-              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/30"
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-primary/50"
             />
             {errors.password && (
               <p className="text-sm text-red-400">{errors.password}</p>
@@ -191,7 +196,7 @@ export const AdminLogin = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-white text-black hover:bg-white/90 font-normal" 
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium" 
             disabled={isLoading || isLockedOut}
           >
             {isLoading ? 'Signing in...' : 'Sign In'}

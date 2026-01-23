@@ -48,8 +48,8 @@ export const AdminHeader = () => {
 
   return (
     <header className="bg-slate-50 border-b border-slate-200 px-6 py-4">
-      {/* Subtle gold accent line at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+      {/* Subtle accent line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
       <div className="flex items-center justify-between relative">
         <div className="flex-1">
@@ -58,8 +58,8 @@ export const AdminHeader = () => {
               Intranet
             </span>
             <span className="text-xs text-slate-400">•</span>
-            <span className="text-xs font-mono font-light text-amber-600">
-              global.nrro.es
+            <span className="text-xs font-mono font-light text-primary">
+              audit.es
             </span>
           </div>
         </div>
@@ -73,7 +73,7 @@ export const AdminHeader = () => {
           >
             <Bell className="h-5 w-5 text-slate-600" />
             {unreadLeads > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-[10px] font-medium text-slate-950">
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
                 {unreadLeads > 9 ? '9+' : unreadLeads}
               </span>
             )}
