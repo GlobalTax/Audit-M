@@ -14,7 +14,7 @@ import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
 import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
 import { GlobalCoverageMap } from "@/components/home/GlobalCoverageMap";
-import { MultiJurisdictionalServicesSection } from "@/components/home/MultiJurisdictionalServicesSection";
+import { AuditServicesHighlightSection } from "@/components/home/AuditServicesHighlightSection";
 import { HomeTestimonialsSection } from "@/components/home/HomeTestimonialsSection";
 import { HomeCaseStudiesSection } from "@/components/home/HomeCaseStudiesSection";
 import { HomeThirdPartyReviewsSection } from "@/components/home/HomeThirdPartyReviewsSection";
@@ -203,21 +203,21 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Global Reach Bar */}
+        {/* Audit Stats Bar */}
         <section className="bg-neutral-900 py-6 border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-3 gap-4 text-center text-white">
               <div>
-                <span className="text-2xl md:text-3xl font-bold">50+</span>
-                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Jurisdictions via Partners</p>
+                <span className="text-2xl md:text-3xl font-bold">21</span>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.services")}</p>
               </div>
               <div className="border-x border-white/10">
-                <span className="text-2xl md:text-3xl font-bold">3</span>
-                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Global Networks</p>
+                <span className="text-2xl md:text-3xl font-bold">ROAC</span>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.registered")}</p>
               </div>
               <div>
                 <span className="text-2xl md:text-3xl font-bold">25+</span>
-                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">Years Cross-Border</p>
+                <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.experience")}</p>
               </div>
             </div>
           </div>
@@ -307,8 +307,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Multi-Jurisdictional Services Section - Lexidy style */}
-        <MultiJurisdictionalServicesSection />
+        {/* Audit Services Highlight Section */}
+        <AuditServicesHighlightSection />
 
         {/* How It Works */}
         <HowItWorksSection />

@@ -438,24 +438,82 @@
       "overline": "Audit insights",
       "cta": "View all insights"
     },
+    "auditBar": {
+      "services": "Audit Services",
+      "registered": "Officially Registered",
+      "experience": "Years of Experience"
+    },
+    "methodology": {
+      "overline": "Our Methodology",
+      "title": "How We Work"
+    },
+    "auditServicesSection": {
+      "overline": "Audit Services",
+      "title": "Specialized Audit Solutions",
+      "subtitle": "Rigorous audit services tailored to the needs of each organization",
+      "cta": "View services",
+      "viewAll": "View all services",
+      "servicesIncluded": "Services included"
+    },
+    "auditServices": {
+      "financial": {
+        "description": "Statutory audit of financial statements in accordance with GAAP and International Standards on Auditing",
+        "consolidation": "Consolidated Accounts Audit",
+        "statutory": "Mandatory Statutory Audit"
+      },
+      "compliance": {
+        "description": "Verification of compliance with sector-specific, legal and corporate governance regulations",
+        "regulatory": "Regulatory Compliance",
+        "internal": "Internal Policies Audit",
+        "aml": "Anti-Money Laundering Compliance"
+      },
+      "esg": {
+        "description": "Verification of sustainability reports, non-financial information and carbon footprint",
+        "einf": "EINF Verification",
+        "carbon": "Carbon Footprint Verification",
+        "csrd": "CSRD Assurance"
+      },
+      "transactional": {
+        "description": "Support for M&A operations, investments and critical business decisions",
+        "qoe": "Quality of Earnings Analysis",
+        "spaReview": "SPA Review"
+      },
+      "internal": {
+        "description": "Independent assessment of internal control systems and risk management",
+        "controls": "Internal Controls Evaluation",
+        "risk": "Risk Mapping",
+        "outsourcing": "Internal Audit Outsourcing"
+      },
+      "special": {
+        "description": "Special reports required for corporate operations and agreed-upon procedures",
+        "capitalIncrease": "Capital Increase Report",
+        "expertReports": "Independent Expert Reports",
+        "agreedProcedures": "Agreed-Upon Procedures"
+      }
+    },
     "whyAudit": {
       "overline": "Why Audit",
       "title": "Why choose us?",
+      "intro": "Audit is an independent audit firm with over 25 years of experience. We provide rigorous, value-added audit services that help stakeholders make informed decisions based on reliable financial information.",
       "independence": {
         "title": "Independence",
-        "description": "Complete objectivity and independence in every engagement"
+        "description": "Complete objectivity and independence in every audit engagement"
       },
       "expertise": {
         "title": "Expertise",
-        "description": "Certified professionals with deep industry knowledge"
+        "description": "Certified professionals with deep industry and international knowledge"
       },
       "methodology": {
         "title": "Methodology",
-        "description": "Risk-based approach aligned with international standards"
+        "description": "Risk-based approach aligned with ISA-ES and local regulations"
       },
       "valueAdd": {
         "title": "Value-Add",
-        "description": "Insights and recommendations beyond compliance"
+        "description": "Practical insights and recommendations beyond compliance"
+      },
+      "quality": {
+        "title": "Quality Control",
+        "description": "Rigorous quality control and peer review processes"
       }
     }
   },

@@ -2,27 +2,12 @@ import { Shield, Users, Target, TrendingUp, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const reasons = [
-  {
-    icon: Shield,
-    text: "Complete independence and objectivity in every audit engagement.",
-  },
-  {
-    icon: Users,
-    text: "Certified auditors with deep industry expertise and international experience.",
-  },
-  {
-    icon: Target,
-    text: "Risk-based methodology aligned with ISA and local GAAP standards.",
-  },
-  {
-    icon: TrendingUp,
-    text: "Actionable insights and recommendations that go beyond compliance.",
-  },
-  {
-    icon: Check,
-    text: "Rigorous quality control and peer review processes.",
-  },
+const reasonKeys = [
+  { icon: Shield, key: "independence" },
+  { icon: Users, key: "expertise" },
+  { icon: Target, key: "methodology" },
+  { icon: TrendingUp, key: "valueAdd" },
+  { icon: Check, key: "quality" },
 ];
 
 export function WhyAuditSection() {
@@ -41,15 +26,13 @@ export function WhyAuditSection() {
               {t("home.whyAudit.title")}
             </h3>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              Audit is an independent audit firm with over 25 years of experience. 
-              We provide rigorous, value-added audit services that help stakeholders 
-              make informed decisions based on reliable financial information.
+              {t("home.whyAudit.intro")}
             </p>
           </div>
 
           {/* Right column - Bullets */}
           <div className="space-y-5">
-            {reasons.map((reason, index) => {
+            {reasonKeys.map((reason, index) => {
               const Icon = reason.icon;
               return (
                 <motion.div
@@ -63,9 +46,14 @@ export function WhyAuditSection() {
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center">
                     <Icon className="h-5 w-5 text-foreground" />
                   </div>
-                  <p className="text-foreground pt-2 leading-relaxed">
-                    {reason.text}
-                  </p>
+                  <div>
+                    <p className="font-medium text-foreground">
+                      {t(`home.whyAudit.${reason.key}.title`)}
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-1">
+                      {t(`home.whyAudit.${reason.key}.description`)}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
