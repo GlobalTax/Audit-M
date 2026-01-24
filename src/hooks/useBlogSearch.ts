@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 interface BlogSearchParams {
   searchQuery?: string;
@@ -12,8 +12,10 @@ interface BlogSearchParams {
 }
 
 export const useBlogSearch = (params: BlogSearchParams, language: string = 'es') => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["blog-search", params, language, SITE_SOURCE],
+    queryKey: ["blog-search", params, language, SITE_SOURCE, sourceFilter],
     queryFn: async () => {
       // First, get team members for author avatars
       const { data: teamMembers } = await supabase
@@ -28,7 +30,7 @@ export const useBlogSearch = (params: BlogSearchParams, language: string = 'es')
       let query = supabase
         .from("blog_posts")
         .select("*", { count: "exact" })
-        .eq("source_site", SITE_SOURCE)
+        .eq("source_site", sourceFilter)
         .eq("status", params.status || "published");
 
       if (params.searchQuery) {
@@ -72,13 +74,15 @@ export const useBlogSearch = (params: BlogSearchParams, language: string = 'es')
 };
 
 export const useBlogFilterOptions = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["blog-filter-options", SITE_SOURCE],
+    queryKey: ["blog-filter-options", SITE_SOURCE, sourceFilter],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("category, tags")
-        .eq("source_site", SITE_SOURCE)
+        .eq("source_site", sourceFilter)
         .eq("status", "published");
       
       if (error) throw error;
@@ -93,13 +97,15 @@ export const useBlogFilterOptions = () => {
 };
 
 export const useBlogStats = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["blog-stats", SITE_SOURCE],
+    queryKey: ["blog-stats", SITE_SOURCE, sourceFilter],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("status, view_count")
-        .eq("source_site", SITE_SOURCE);
+        .eq("source_site", sourceFilter);
       
       if (error) throw error;
       

@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { shouldCreateVersion, generateChangeSummary } from './useLandingVersions';
-import { SITE_SOURCE } from '@/config/site';
+import { SITE_SOURCE, getSourceFilter } from '@/config/site';
 
 export interface LandingPage {
   id: string;
@@ -63,13 +63,15 @@ interface LandingFilters {
 }
 
 export const useLandingPages = (filters: LandingFilters = {}) => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ['landing-pages', filters],
+    queryKey: ['landing-pages', filters, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from('landing_pages')
         .select('*')
-        .eq('source_site', SITE_SOURCE)
+        .eq('source_site', sourceFilter)
         .order('created_at', { ascending: false });
       
       if (filters.status && filters.status !== 'all') {
@@ -110,12 +112,13 @@ export const useLandingPageBySlug = (slug: string) => {
 
 export const useCreateLandingPage = () => {
   const queryClient = useQueryClient();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
   
   return useMutation({
     mutationFn: async (landing: Partial<LandingPage>) => {
       const { data, error } = await supabase
         .from('landing_pages')
-        .insert([{ ...landing, source_site: SITE_SOURCE } as any])
+        .insert([{ ...landing, source_site: sourceFilter } as any])
         .select()
         .single();
       
@@ -261,4 +264,3 @@ export const useDuplicateLanding = () => {
     },
   });
 };
-

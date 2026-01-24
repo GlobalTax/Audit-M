@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { SITE_SOURCE } from '@/config/site';
+import { SITE_SOURCE, getSourceFilter } from '@/config/site';
 
 export interface TechItem {
   name: string;
@@ -19,6 +19,8 @@ interface TechnologyContent {
 }
 
 export const useTechnology = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
     queryKey: ['technology-content', SITE_SOURCE],
     queryFn: async () => {
@@ -27,7 +29,7 @@ export const useTechnology = () => {
         .select('*')
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
-        .eq('source_site', SITE_SOURCE)
+        .eq('source_site', sourceFilter)
         .maybeSingle();
 
       if (error) throw error;
@@ -43,6 +45,7 @@ export const useTechnology = () => {
 
 export const useUpdateTechnology = () => {
   const queryClient = useQueryClient();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
   
   return useMutation({
     mutationFn: async (technologies: TechItem[]) => {
@@ -52,7 +55,7 @@ export const useUpdateTechnology = () => {
         .select('*')
         .eq('page_key', 'home')
         .eq('section_key', 'tecnologia')
-        .eq('source_site', SITE_SOURCE)
+        .eq('source_site', sourceFilter)
         .maybeSingle();
 
       const existingContent = existing?.content as unknown as TechnologyContent | null;
@@ -74,12 +77,12 @@ export const useUpdateTechnology = () => {
         // Create new record if it doesn't exist
         const { error: insertError } = await supabase
           .from('page_content')
-          .insert({
+          .insert([{
             page_key: 'home',
             section_key: 'tecnologia',
-            source_site: SITE_SOURCE,
+            source_site: sourceFilter,
             content: updatedContent as any
-          });
+          }]);
 
         if (insertError) throw insertError;
       }

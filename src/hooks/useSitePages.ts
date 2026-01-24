@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 export interface SitePage {
   id: string;
@@ -40,13 +40,15 @@ export interface SitePageFilters {
 }
 
 export const useSitePages = (filters?: SitePageFilters) => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
     queryKey: ["site-pages", filters, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from("site_pages")
         .select("*")
-        .eq("source_site", SITE_SOURCE);
+        .eq("source_site", sourceFilter);
 
       if (filters?.search) {
         query = query.or(`title.ilike.%${filters.search}%,url.ilike.%${filters.search}%`);
@@ -180,13 +182,15 @@ export const useCreateSitePage = () => {
 };
 
 export const useSitePageStats = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
     queryKey: ["site-pages-stats", SITE_SOURCE],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("site_pages")
         .select("page_type, status, language, is_landing")
-        .eq("source_site", SITE_SOURCE);
+        .eq("source_site", sourceFilter);
 
       if (error) {
         console.error("Error fetching stats:", error);

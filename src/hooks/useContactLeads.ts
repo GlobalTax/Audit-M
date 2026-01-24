@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 export interface ContactLead {
   id: string;
@@ -33,13 +33,15 @@ export interface ContactLeadFilters {
 }
 
 export const useContactLeads = (filters?: ContactLeadFilters) => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["contact-leads", filters],
+    queryKey: ["contact-leads", filters, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from("contact_leads")
         .select("*")
-        .eq("source_site", SITE_SOURCE);
+        .eq("source_site", sourceFilter);
 
       // Apply filters
       if (filters?.search) {
@@ -192,6 +194,7 @@ export interface CreateContactLeadInput {
 
 export const useCreateContactLead = () => {
   const queryClient = useQueryClient();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
 
   return useMutation({
     mutationFn: async (lead: CreateContactLeadInput) => {
@@ -200,7 +203,7 @@ export const useCreateContactLead = () => {
         email: lead.email,
         subject: lead.subject,
         message: lead.message,
-        source_site: SITE_SOURCE,
+        source_site: sourceFilter,
       };
       
       if (lead.phone) insertData.phone = lead.phone;
@@ -263,6 +266,7 @@ export const useSendLeadNotification = () => {
 
 export const useBulkCreateContactLeads = () => {
   const queryClient = useQueryClient();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
 
   return useMutation({
     mutationFn: async (leads: CreateContactLeadInput[]) => {
@@ -272,7 +276,7 @@ export const useBulkCreateContactLeads = () => {
           email: lead.email,
           subject: lead.subject,
           message: lead.message,
-          source_site: SITE_SOURCE,
+          source_site: sourceFilter,
         };
         
         if (lead.phone) insertData.phone = lead.phone;

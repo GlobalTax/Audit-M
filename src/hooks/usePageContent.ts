@@ -1,9 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { PageContent, PageContentInsert, PageContentUpdate } from '@/types/pageContent';
-import { SITE_SOURCE } from '@/config/site';
+import { SITE_SOURCE, getSourceFilter } from '@/config/site';
 
 export const usePageContent = (pageKey?: string, sectionKey?: string, language: string = 'es') => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
     queryKey: ['page-content', pageKey, sectionKey, language, SITE_SOURCE],
     queryFn: async () => {
@@ -12,7 +14,7 @@ export const usePageContent = (pageKey?: string, sectionKey?: string, language: 
         .select('*')
         .eq('is_active', true)
         .eq('language', language)
-        .eq('source_site', SITE_SOURCE);
+        .eq('source_site', sourceFilter);
       
       if (pageKey) {
         query = query.eq('page_key', pageKey);
@@ -32,13 +34,15 @@ export const usePageContent = (pageKey?: string, sectionKey?: string, language: 
 };
 
 export const useAllPageContent = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
     queryKey: ['page-content', 'all', SITE_SOURCE],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('page_content')
         .select('*')
-        .eq('source_site', SITE_SOURCE)
+        .eq('source_site', sourceFilter)
         .order('page_key')
         .order('display_order');
       
