@@ -3885,6 +3885,7 @@ export type Database = {
           description: string | null
           id: string
           key: string
+          source_site: string | null
           updated_at: string | null
           value: string
         }
@@ -3894,6 +3895,7 @@ export type Database = {
           description?: string | null
           id?: string
           key: string
+          source_site?: string | null
           updated_at?: string | null
           value: string
         }
@@ -3903,6 +3905,7 @@ export type Database = {
           description?: string | null
           id?: string
           key?: string
+          source_site?: string | null
           updated_at?: string | null
           value?: string
         }

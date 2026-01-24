@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { Logo } from "@/components/ui/logo";
 import { Separator } from "@/components/ui/separator";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { getCurrentSiteConfig } from "@/config/site";
 
 export const LandingFooter = () => {
   const currentYear = new Date().getFullYear();
   const { trackContactClick, trackPhoneCallConversion } = useAnalytics();
+  const siteConfig = getCurrentSiteConfig();
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -14,22 +15,24 @@ export const LandingFooter = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-4">
-            <Logo variant="compact" brand="international" color="light" className="h-12" />
+            <span className="font-display text-2xl font-normal text-primary-foreground tracking-tight">
+              {siteConfig.footer.brandName}
+            </span>
             <p className="text-sm text-primary-foreground/80 font-light text-center md:text-left">
-              Rigorous auditing. Trusted results.
+              {siteConfig.footer.tagline}
             </p>
           </div>
 
           {/* Contact CTA */}
           <div className="text-center md:text-right">
-            <p className="text-lg font-medium mb-2">¿Necesitas asesoramiento?</p>
+            <p className="text-lg font-normal mb-2">¿Necesitas asesoramiento?</p>
             <a
               href="tel:+34934593600"
               onClick={() => {
                 trackContactClick('phone', '+34934593600', 'landing_footer');
                 trackPhoneCallConversion('+34934593600');
               }}
-              className="text-2xl font-semibold text-accent hover:text-accent/80 transition-colors"
+              className="text-2xl font-normal text-accent hover:text-accent/80 transition-colors"
             >
               934 593 600
             </a>
@@ -42,7 +45,7 @@ export const LandingFooter = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm font-mono text-primary-foreground/70">
-            © {currentYear} Audit. All rights reserved.
+            © {currentYear} {siteConfig.footer.copyright}. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link 

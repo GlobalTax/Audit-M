@@ -13,11 +13,27 @@ export const SITE_CONFIG = {
     name: 'Audit',
     domain: 'audit.es',
     defaultLanguage: 'es',
+    footer: {
+      brandName: 'Audit',
+      tagline: 'Auditoría rigurosa. Resultados de confianza.',
+      headOffice: 'Barcelona',
+      headOfficeAddress: 'Calle Ausias March 36 Pr\n08010 Barcelona',
+      otherOffices: ['Madrid', 'Girona', 'Lleida', 'Tarragona'],
+      copyright: 'Audit',
+    },
   },
   int: {
     name: 'Audit Global',
     domain: 'global.audit.es',
     defaultLanguage: 'en',
+    footer: {
+      brandName: 'Audit Global',
+      tagline: 'Rigorous auditing. Trusted results.',
+      headOffice: 'Barcelona',
+      headOfficeAddress: 'Calle Ausias March 36 Pr\n08010 Barcelona',
+      otherOffices: ['Madrid', 'Girona', 'Lleida', 'Tarragona', 'Palma de Mallorca', 'Zaragoza', 'Valencia'],
+      copyright: 'Audit Global',
+    },
   },
 } as const;
 
