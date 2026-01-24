@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
     name: 'Audit',
     domain: 'audit.es',
     defaultLanguage: 'es',
-    sourceFilter: 'navarro_asesores', // Maps to source_site in DB
+    sourceFilter: 'audit', // Unified with source_site in DB
     footer: {
       brandName: 'Audit',
       tagline: 'Auditoría rigurosa. Resultados de confianza.',
