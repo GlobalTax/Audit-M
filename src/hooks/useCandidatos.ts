@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 export interface Candidato {
   id: string;
@@ -25,13 +25,15 @@ export const useCandidatos = (filters?: {
   departamento?: string;
   search?: string;
 }) => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["candidatos", filters],
+    queryKey: ["candidatos", filters, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from("candidatos")
         .select("*")
-        .eq("source_site", SITE_SOURCE)
+        .eq("source_site", sourceFilter)
         .order("created_at", { ascending: false });
 
       if (filters?.estado) {
@@ -106,10 +108,12 @@ export const useDeleteCandidato = () => {
 };
 
 export const useCandidatoStats = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["candidatos-stats"],
+    queryKey: ["candidatos-stats", SITE_SOURCE],
     queryFn: async () => {
-      const { data, error } = await supabase.from("candidatos").select("estado").eq("source_site", SITE_SOURCE);
+      const { data, error } = await supabase.from("candidatos").select("estado").eq("source_site", sourceFilter);
 
       if (error) throw error;
 

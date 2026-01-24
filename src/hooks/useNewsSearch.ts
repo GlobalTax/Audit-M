@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 interface NewsSearchParams {
   searchQuery?: string;
@@ -29,15 +29,16 @@ interface NewsArticle {
 
 export const useNewsSearch = (params: NewsSearchParams) => {
   const { language } = useLanguage();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
   
   return useQuery({
-    queryKey: ["news-search", params, language],
+    queryKey: ["news-search", params, language, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from('news_articles')
         .select('*')
         .eq('is_published', true)
-        .eq('source_site', SITE_SOURCE)
+        .eq('source_site', sourceFilter)
         .order('is_featured', { ascending: false })
         .order('published_at', { ascending: false });
 

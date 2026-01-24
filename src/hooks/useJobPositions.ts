@@ -2,19 +2,21 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { JobPosition } from "@/types/jobPosition";
 import { toast } from "sonner";
-import { SITE_SOURCE } from "@/config/site";
+import { SITE_SOURCE, getSourceFilter } from "@/config/site";
 
 export const useJobPositions = (filters?: {
   status?: 'draft' | 'published' | 'closed';
   department?: string;
 }, language: string = 'es') => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["job-positions", filters, language],
+    queryKey: ["job-positions", filters, language, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from("job_positions")
         .select("*")
-        .eq("source_site", SITE_SOURCE)
+        .eq("source_site", sourceFilter)
         .order("is_featured", { ascending: false })
         .order("display_order", { ascending: true })
         .order("published_at", { ascending: false });
@@ -85,12 +87,13 @@ export const useJobPosition = (slug: string, language: string = 'es') => {
 
 export const useCreateJobPosition = () => {
   const queryClient = useQueryClient();
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
 
   return useMutation({
     mutationFn: async (jobPosition: any) => {
       const { data, error } = await supabase
         .from("job_positions")
-        .insert([{ ...jobPosition, source_site: SITE_SOURCE }])
+        .insert([{ ...jobPosition, source_site: sourceFilter }])
         .select()
         .single();
 
@@ -161,13 +164,15 @@ export const useDeleteJobPosition = () => {
 };
 
 export const useJobPositionStats = () => {
+  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  
   return useQuery({
-    queryKey: ["job-position-stats"],
+    queryKey: ["job-position-stats", SITE_SOURCE],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("job_positions")
         .select("status")
-        .eq("source_site", SITE_SOURCE);
+        .eq("source_site", sourceFilter);
 
       if (error) throw error;
 
