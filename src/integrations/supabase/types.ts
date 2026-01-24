@@ -2602,6 +2602,51 @@ export type Database = {
         }
         Relationships: []
       }
+      news_automation_runs: {
+        Row: {
+          articles_generated: number
+          articles_requested: number
+          completed_at: string | null
+          created_at: string
+          error_details: Json | null
+          error_message: string | null
+          execution_time_ms: number | null
+          id: string
+          settings_snapshot: Json | null
+          started_at: string
+          status: string
+          trigger_type: string | null
+        }
+        Insert: {
+          articles_generated?: number
+          articles_requested?: number
+          completed_at?: string | null
+          created_at?: string
+          error_details?: Json | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          settings_snapshot?: Json | null
+          started_at?: string
+          status?: string
+          trigger_type?: string | null
+        }
+        Update: {
+          articles_generated?: number
+          articles_requested?: number
+          completed_at?: string | null
+          created_at?: string
+          error_details?: Json | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          settings_snapshot?: Json | null
+          started_at?: string
+          status?: string
+          trigger_type?: string | null
+        }
+        Relationships: []
+      }
       news_automation_settings: {
         Row: {
           articles_per_run: number
