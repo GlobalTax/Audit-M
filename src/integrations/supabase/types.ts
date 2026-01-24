@@ -4578,7 +4578,7 @@ export type Database = {
         | "legal_advisory"
         | "financial_planning"
         | "other"
-      site_source: "es" | "int"
+      site_source: "es" | "int" | "audit"
       traffic_source:
         | "seo"
         | "sem"
@@ -4777,7 +4777,7 @@ export const Constants = {
         "financial_planning",
         "other",
       ],
-      site_source: ["es", "int"],
+      site_source: ["es", "int", "audit"],
       traffic_source: [
         "seo",
         "sem",
