@@ -2,6 +2,7 @@ import { createContext, useContext, ReactNode, useEffect, useMemo, useCallback, 
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 import '@/i18n/config';
+import { detectLanguageByLocation } from '@/lib/geoLanguageDetection';
 
 export type Language = 'es' | 'ca' | 'en';
 
@@ -26,6 +27,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(
     (i18n.language as Language) || 'es'
   );
+  const [isDetecting, setIsDetecting] = useState(true);
 
   // Show loading state while i18next initializes
   if (!ready) {
@@ -48,6 +50,44 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const t = useCallback((key: string, options?: any): string => {
     return i18nT(key, options) as string;
   }, [i18nT]);
+
+  // Detect language on mount with geolocation
+  useEffect(() => {
+    const detectAndSetLanguage = async () => {
+      // 1. Si ya hay preferencia guardada, respetarla
+      const saved = localStorage.getItem('preferredLanguage');
+      if (saved && ['es', 'ca', 'en'].includes(saved)) {
+        if (saved !== i18n.language) {
+          i18n.changeLanguage(saved);
+          setCurrentLanguage(saved as Language);
+          document.documentElement.lang = saved;
+        }
+        setIsDetecting(false);
+        return;
+      }
+
+      // 2. Si el navegador está en catalán, usar catalán directamente
+      const browserLang = navigator.language.split('-')[0];
+      if (browserLang === 'ca') {
+        setLanguage('ca');
+        setIsDetecting(false);
+        return;
+      }
+
+      // 3. Detectar por geolocalización (solo si es navegador español o sin preferencia clara)
+      try {
+        const geoLang = await detectLanguageByLocation();
+        setLanguage(geoLang);
+      } catch {
+        // Fallback a español si falla todo
+        setLanguage('es');
+      }
+      
+      setIsDetecting(false);
+    };
+
+    detectAndSetLanguage();
+  }, [i18n, setLanguage]);
 
   // Sync language state with i18n
   useEffect(() => {
