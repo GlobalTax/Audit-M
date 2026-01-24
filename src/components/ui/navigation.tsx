@@ -34,7 +34,7 @@ export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
                     {item.label}
                   </Link>
                 ) : (
-                  <span className={cn(isLast && "font-medium text-foreground")}>
+                  <span className={cn(isLast && "font-normal text-foreground")}>
                     {item.label}
                   </span>
                 )}
@@ -84,7 +84,7 @@ export const NavTabs = React.forwardRef<HTMLDivElement, NavTabsProps>(
             };
 
             const className = cn(
-              "border-b-2 px-4 py-2 text-sm font-medium transition-colors",
+              "border-b-2 px-4 py-2 text-sm font-normal transition-colors",
               isActive
                 ? "border-accent text-accent"
                 : "border-transparent text-muted-foreground hover:text-foreground"
@@ -152,7 +152,7 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(
-                      "flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-semibold transition-colors",
+                      "flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-normal transition-colors",
                       isCompleted &&
                         "border-accent bg-accent text-accent-foreground",
                       isCurrent &&
@@ -167,7 +167,7 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                   <div className="hidden md:block">
                     <p
                       className={cn(
-                        "text-sm font-medium",
+                        "text-sm font-normal",
                         (isCompleted || isCurrent)
                           ? "text-foreground"
                           : "text-muted-foreground"

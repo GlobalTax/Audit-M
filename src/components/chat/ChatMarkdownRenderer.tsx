@@ -24,7 +24,7 @@ export function ChatMarkdownRenderer({ content }: ChatMarkdownRendererProps) {
             <thead className="bg-muted/50">{children}</thead>
           ),
           th: ({ children }) => (
-            <th className="px-2 py-1 text-left font-medium border-b border-border">
+            <th className="px-2 py-1 text-left font-normal border-b border-border">
               {children}
             </th>
           ),
@@ -48,7 +48,7 @@ export function ChatMarkdownRenderer({ content }: ChatMarkdownRendererProps) {
           
           // Emphasis
           strong: ({ children }) => (
-            <strong className="font-semibold text-foreground">{children}</strong>
+            <strong className="font-normal text-foreground">{children}</strong>
           ),
           
           // Links - handle internal vs external
@@ -82,13 +82,13 @@ export function ChatMarkdownRenderer({ content }: ChatMarkdownRendererProps) {
           
           // Headings (scaled down for chat)
           h1: ({ children }) => (
-            <h4 className="font-medium text-sm mt-2 mb-1">{children}</h4>
+            <h4 className="font-normal text-sm mt-2 mb-1">{children}</h4>
           ),
           h2: ({ children }) => (
-            <h5 className="font-medium text-sm mt-2 mb-1">{children}</h5>
+            <h5 className="font-normal text-sm mt-2 mb-1">{children}</h5>
           ),
           h3: ({ children }) => (
-            <h6 className="font-medium text-sm mt-1 mb-0.5">{children}</h6>
+            <h6 className="font-normal text-sm mt-1 mb-0.5">{children}</h6>
           ),
           
           // Code blocks

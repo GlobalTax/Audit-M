@@ -47,8 +47,8 @@ const MetricCard = ({
     <CardContent className="p-6">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-muted-foreground mb-2">{label}</p>
-          <p className="text-4xl font-bold text-foreground mb-1">{value}</p>
+          <p className="text-sm font-normal text-muted-foreground mb-2">{label}</p>
+          <p className="text-4xl font-normal text-foreground mb-1">{value}</p>
           <p className="text-sm text-muted-foreground">{description}</p>
         </div>
         <div className={`p-3 rounded-lg ${color}`}>
@@ -145,7 +145,7 @@ export const LandingDashboard = () => {
         {/* Category Chart */}
         <Card className="bg-white shadow-sm border-gray-100">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Distribución por Categoría</CardTitle>
+            <CardTitle className="text-xl font-normal">Distribución por Categoría</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -163,7 +163,7 @@ export const LandingDashboard = () => {
         {/* Status Chart */}
         <Card className="bg-white shadow-sm border-gray-100">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Por Estado</CardTitle>
+            <CardTitle className="text-xl font-normal">Por Estado</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -186,7 +186,7 @@ export const LandingDashboard = () => {
               </PieChart>
             </ResponsiveContainer>
             <div className="text-center mt-4">
-              <p className="text-3xl font-bold text-foreground">{totalForDonut}</p>
+              <p className="text-3xl font-normal text-foreground">{totalForDonut}</p>
               <p className="text-sm text-muted-foreground">Total Landings</p>
             </div>
           </CardContent>
@@ -196,7 +196,7 @@ export const LandingDashboard = () => {
       {/* Latest Landings Table */}
       <Card className="bg-white shadow-sm border-gray-100">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">Últimas 10 Landing Pages</CardTitle>
+          <CardTitle className="text-xl font-normal">Últimas 10 Landing Pages</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
@@ -212,7 +212,7 @@ export const LandingDashboard = () => {
             <TableBody>
               {recentLandings?.slice(0, 10).map((landing) => (
                 <TableRow key={landing.id}>
-                  <TableCell className="font-medium">{landing.title}</TableCell>
+                  <TableCell className="font-normal">{landing.title}</TableCell>
                   <TableCell>
                     <LandingCategoryBadge category={landing.category || 'Other'} />
                   </TableCell>

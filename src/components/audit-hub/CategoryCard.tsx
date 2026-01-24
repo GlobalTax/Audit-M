@@ -77,10 +77,10 @@ export const CategoryCard = ({
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg font-semibold text-foreground truncate">
+            <h3 className="text-lg font-normal text-foreground truncate">
               {label}
             </h3>
-            <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-primary/10 text-primary">
+            <span className="px-2 py-0.5 text-xs font-normal rounded-full bg-primary/10 text-primary">
               {serviceCount}
             </span>
           </div>

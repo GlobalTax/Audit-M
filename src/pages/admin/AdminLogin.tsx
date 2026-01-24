@@ -122,7 +122,7 @@ export const AdminLogin = () => {
               <ClipboardList className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <h1 className="font-display text-3xl font-semibold lowercase text-white mb-2">
+          <h1 className="font-display text-3xl font-normal lowercase text-white mb-2">
             audit
           </h1>
           <p className="text-sm text-white/50">
@@ -152,7 +152,7 @@ export const AdminLogin = () => {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-white/70 font-medium">
+            <Label htmlFor="email" className="text-white/70 font-normal">
               Email
             </Label>
             <Input
@@ -174,7 +174,7 @@ export const AdminLogin = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-white/70 font-medium">
+            <Label htmlFor="password" className="text-white/70 font-normal">
               Password
             </Label>
             <Input
@@ -196,7 +196,7 @@ export const AdminLogin = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium" 
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-normal" 
             disabled={isLoading || isLockedOut}
           >
             {isLoading ? 'Signing in...' : 'Sign In'}

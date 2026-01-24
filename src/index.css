@@ -30,31 +30,9 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/general-sans/GeneralSans-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+/* Medium, Semibold and Bold weights removed - using only Regular (400) */
 
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/general-sans/GeneralSans-Semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/general-sans/GeneralSans-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* General Sans Italic Variants */
+/* General Sans Italic Variants - only Light Italic kept */
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/general-sans/GeneralSans-LightItalic.woff2') format('woff2');
@@ -63,21 +41,7 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/general-sans/GeneralSans-MediumItalic.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/general-sans/GeneralSans-SemiboldItalic.woff2') format('woff2');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
+/* Medium and Semibold Italic weights removed - using only Regular (400) */
 
 @tailwind base;
 @tailwind components;

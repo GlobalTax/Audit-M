@@ -233,7 +233,7 @@ export default function Contact() {
             {/* Contact Info */}
             <div className="space-y-6 animate-fade-in">
               <div>
-                <h2 className="text-3xl font-serif font-bold text-foreground mb-4">
+                <h2 className="text-3xl font-serif font-normal text-foreground mb-4">
                   {t("contact.info.title")}
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
@@ -296,11 +296,11 @@ export default function Contact() {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">{t("contact.info.weekdays")}</span>
-                      <span className="font-medium text-foreground">{t("contact.info.weekdaysValue")}</span>
+                      <span className="font-normal text-foreground">{t("contact.info.weekdaysValue")}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">{t("contact.info.weekend")}</span>
-                      <span className="font-medium text-foreground">{t("contact.info.weekendValue")}</span>
+                      <span className="font-normal text-foreground">{t("contact.info.weekendValue")}</span>
                     </div>
                   </div>
                 </CardContent>

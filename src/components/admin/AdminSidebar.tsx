@@ -62,10 +62,10 @@ export const AdminSidebar = () => {
             <ClipboardList className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <span className="font-display text-xl font-semibold text-white lowercase">audit</span>
+            <span className="font-display text-xl font-normal text-white lowercase">audit</span>
           </div>
         </div>
-        <p className="text-[10px] text-primary/80 tracking-[0.2em] uppercase font-medium">
+        <p className="text-[10px] text-primary/80 tracking-[0.2em] uppercase font-normal">
           Admin Portal
         </p>
         {adminUser && (
@@ -146,7 +146,7 @@ export const AdminSidebar = () => {
       <div className="p-4 border-t border-slate-800">
         {adminUser && (
           <div className="text-sm">
-            <p className="truncate text-slate-300 font-medium">{adminUser.full_name}</p>
+            <p className="truncate text-slate-300 font-normal">{adminUser.full_name}</p>
             <p className="text-xs truncate text-slate-500">{adminUser.email}</p>
           </div>
         )}

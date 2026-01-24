@@ -99,7 +99,7 @@ export const ThankYou = () => {
                       <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                         <Icon className="h-7 w-7 text-primary" />
                       </div>
-                      <h3 className="font-medium text-lg mb-2">{step.title}</h3>
+                      <h3 className="font-normal text-lg mb-2">{step.title}</h3>
                       <p className="text-muted-foreground text-sm mb-4">{step.description}</p>
                       {step.action && (
                         <Button asChild onClick={handleBookCallClick}>
@@ -149,11 +149,11 @@ export const ThankYou = () => {
                         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                           <Icon className="h-6 w-6 text-primary" />
                         </div>
-                        <h3 className="font-medium text-lg mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="font-normal text-lg mb-2 group-hover:text-primary transition-colors">
                           {resource.title}
                         </h3>
                         <p className="text-muted-foreground text-sm">{resource.description}</p>
-                        <div className="flex items-center gap-1 mt-4 text-primary text-sm font-medium">
+                        <div className="flex items-center gap-1 mt-4 text-primary text-sm font-normal">
                           Explore <ArrowRight className="h-4 w-4" />
                         </div>
                       </CardContent>
@@ -184,7 +184,7 @@ export const ThankYou = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Call us</p>
-                      <a href="tel:+34934593600" className="font-medium hover:text-primary transition-colors">
+                      <a href="tel:+34934593600" className="font-normal hover:text-primary transition-colors">
                         +34 934 593 600
                       </a>
                     </div>
@@ -196,7 +196,7 @@ export const ThankYou = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email us</p>
-                      <a href="mailto:info@nrro.es" className="font-medium hover:text-primary transition-colors">
+                      <a href="mailto:info@nrro.es" className="font-normal hover:text-primary transition-colors">
                         info@nrro.es
                       </a>
                     </div>
@@ -223,7 +223,7 @@ export const ThankYou = () => {
                   "{config.testimonial.quote}"
                 </blockquote>
                 <div>
-                  <p className="font-medium">{config.testimonial.author}</p>
+                  <p className="font-normal">{config.testimonial.author}</p>
                   <p className="text-sm text-muted-foreground">{config.testimonial.role}</p>
                 </div>
               </CardContent>
@@ -232,7 +232,7 @@ export const ThankYou = () => {
             <div className="grid grid-cols-3 gap-8 mt-12">
               {config.stats.map((stat, index) => (
                 <div key={index}>
-                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
+                  <p className="text-3xl font-normal text-primary">{stat.value}</p>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
               ))}
