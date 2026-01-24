@@ -1,9 +1,28 @@
 /**
  * Detección automática de idioma basada en geolocalización por IP
  * Usa ip-api.com (gratuita, sin API key necesaria)
+ * 
+ * Detecta catalán/valenciano en:
+ * - Cataluña
+ * - Islas Baleares
+ * - Comunidad Valenciana
  */
 
-const CATALAN_REGIONS = ['Catalonia', 'Cataluña', 'Catalunya'];
+const CATALAN_REGIONS = [
+  // Cataluña
+  'Catalonia', 
+  'Cataluña', 
+  'Catalunya',
+  // Islas Baleares
+  'Balearic Islands',
+  'Illes Balears',
+  'Islas Baleares',
+  // Comunidad Valenciana
+  'Valencia',
+  'Valencian Community',
+  'Comunidad Valenciana',
+  'Comunitat Valenciana'
+];
 
 interface GeoResponse {
   status: string;
