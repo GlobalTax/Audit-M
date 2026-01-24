@@ -1,37 +1,31 @@
-import { Phone, FileText, Rocket } from "lucide-react";
+import { ClipboardList, Search, FileCheck, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const steps = [
-  {
-    icon: Phone,
-    number: "01",
-    title: "Discovery Call",
-    description: "Tell us about your business goals and timeline. We'll identify the right structure and next steps.",
-  },
-  {
-    icon: FileText,
-    number: "02",
-    title: "Clear Proposal",
-    description: "Receive a fixed-fee proposal with scope, timeline, and deliverables. No surprises.",
-  },
-  {
-    icon: Rocket,
-    number: "03",
-    title: "Seamless Execution",
-    description: "We handle the paperwork, filings, and coordination. You focus on your business.",
-  },
+const stepKeys = [
+  { icon: ClipboardList, key: "planning" },
+  { icon: Search, key: "fieldwork" },
+  { icon: FileCheck, key: "reporting" },
+  { icon: TrendingUp, key: "followUp" },
 ];
 
 export function HowItWorksSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-neutral-50 py-20 md:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-12 text-center">
-          How It Works
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
+            {t("home.methodology.overline")}
+          </h2>
+          <h3 className="text-2xl md:text-3xl font-normal">
+            {t("home.methodology.title")}
+          </h3>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {steps.map((step, index) => {
+        <div className="grid md:grid-cols-4 gap-8 lg:gap-12">
+          {stepKeys.map((step, index) => {
             const Icon = step.icon;
             return (
               <motion.div
@@ -45,7 +39,7 @@ export function HowItWorksSection() {
                 <div className="flex flex-col items-center text-center">
                   {/* Step number */}
                   <span className="font-mono text-xs text-foreground/40 mb-4">
-                    {step.number}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                   
                   {/* Icon */}
@@ -54,16 +48,16 @@ export function HowItWorksSection() {
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-xl font-medium text-foreground mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
+                  <h4 className="text-xl font-medium text-foreground mb-3">
+                    {t(`methodology.phases.${step.key}.title`)}
+                  </h4>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {t(`methodology.phases.${step.key}.description`)}
                   </p>
                 </div>
 
                 {/* Connector line (hidden on last item and mobile) */}
-                {index < steps.length - 1 && (
+                {index < stepKeys.length - 1 && (
                   <div className="hidden md:block absolute top-[72px] left-[calc(50%+48px)] right-[-48px] h-[1px] bg-border" />
                 )}
               </motion.div>

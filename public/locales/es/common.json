@@ -438,24 +438,82 @@
       "overline": "Insights de auditoría",
       "cta": "Ver todos los insights"
     },
+    "auditBar": {
+      "services": "Servicios de Auditoría",
+      "registered": "Inscrito Oficial",
+      "experience": "Años de Experiencia"
+    },
+    "methodology": {
+      "overline": "Nuestra Metodología",
+      "title": "Cómo Trabajamos"
+    },
+    "auditServicesSection": {
+      "overline": "Servicios de Auditoría",
+      "title": "Soluciones de Auditoría Especializadas",
+      "subtitle": "Servicios de auditoría rigurosos adaptados a las necesidades de cada organización",
+      "cta": "Ver servicios",
+      "viewAll": "Ver todos los servicios",
+      "servicesIncluded": "Servicios incluidos"
+    },
+    "auditServices": {
+      "financial": {
+        "description": "Auditoría estatutaria de estados financieros conforme al PGC y Normas Internacionales de Auditoría",
+        "consolidation": "Auditoría de Cuentas Consolidadas",
+        "statutory": "Auditoría Estatutaria Obligatoria"
+      },
+      "compliance": {
+        "description": "Verificación del cumplimiento de normativas sectoriales, legales y de gobierno corporativo",
+        "regulatory": "Cumplimiento Regulatorio",
+        "internal": "Auditoría de Políticas Internas",
+        "aml": "Prevención de Blanqueo de Capitales"
+      },
+      "esg": {
+        "description": "Verificación de memorias de sostenibilidad, información no financiera y huella de carbono",
+        "einf": "Verificación EINF",
+        "carbon": "Verificación Huella de Carbono",
+        "csrd": "Aseguramiento CSRD"
+      },
+      "transactional": {
+        "description": "Soporte en operaciones de M&A, inversiones y decisiones de negocio críticas",
+        "qoe": "Análisis de Calidad de Beneficios",
+        "spaReview": "Revisión de Contrato de Compraventa"
+      },
+      "internal": {
+        "description": "Evaluación independiente del sistema de control interno y gestión de riesgos",
+        "controls": "Evaluación de Controles Internos",
+        "risk": "Mapeo de Riesgos",
+        "outsourcing": "Externalización de Auditoría Interna"
+      },
+      "special": {
+        "description": "Informes especiales requeridos por operaciones societarias y procedimientos acordados",
+        "capitalIncrease": "Informe de Ampliación de Capital",
+        "expertReports": "Informes de Experto Independiente",
+        "agreedProcedures": "Procedimientos Acordados"
+      }
+    },
     "whyAudit": {
       "overline": "Por qué Audit",
       "title": "¿Por qué elegirnos?",
+      "intro": "Audit es una firma de auditoría independiente con más de 25 años de experiencia. Proporcionamos servicios de auditoría rigurosos y de valor añadido que ayudan a los stakeholders a tomar decisiones informadas basadas en información financiera fiable.",
       "independence": {
         "title": "Independencia",
-        "description": "Objetividad e independencia total en cada encargo"
+        "description": "Objetividad e independencia total en cada encargo de auditoría"
       },
       "expertise": {
         "title": "Experiencia",
-        "description": "Profesionales certificados con profundo conocimiento sectorial"
+        "description": "Profesionales certificados con profundo conocimiento sectorial e internacional"
       },
       "methodology": {
         "title": "Metodología",
-        "description": "Enfoque basado en riesgos alineado con estándares internacionales"
+        "description": "Enfoque basado en riesgos alineado con las NIA-ES y normativa local"
       },
       "valueAdd": {
         "title": "Valor Añadido",
-        "description": "Insights y recomendaciones más allá del cumplimiento"
+        "description": "Insights y recomendaciones prácticas más allá del cumplimiento"
+      },
+      "quality": {
+        "title": "Control de Calidad",
+        "description": "Procesos rigurosos de control y revisión por pares"
       }
     }
   },

@@ -251,6 +251,84 @@
     "blog": {
       "overline": "Insights d'auditoria",
       "cta": "Veure tots els insights"
+    },
+    "auditBar": {
+      "services": "Serveis d'Auditoria",
+      "registered": "Inscrit Oficial",
+      "experience": "Anys d'Experiència"
+    },
+    "methodology": {
+      "overline": "La nostra Metodologia",
+      "title": "Com Treballem"
+    },
+    "auditServicesSection": {
+      "overline": "Serveis d'Auditoria",
+      "title": "Solucions d'Auditoria Especialitzades",
+      "subtitle": "Serveis d'auditoria rigorosos adaptats a les necessitats de cada organització",
+      "cta": "Veure serveis",
+      "viewAll": "Veure tots els serveis",
+      "servicesIncluded": "Serveis inclosos"
+    },
+    "auditServices": {
+      "financial": {
+        "description": "Auditoria estatutària d'estats financers conforme al PGC i Normes Internacionals d'Auditoria",
+        "consolidation": "Auditoria de Comptes Consolidats",
+        "statutory": "Auditoria Estatutària Obligatòria"
+      },
+      "compliance": {
+        "description": "Verificació del compliment de normatives sectorials, legals i de govern corporatiu",
+        "regulatory": "Compliment Regulatori",
+        "internal": "Auditoria de Polítiques Internes",
+        "aml": "Prevenció de Blanqueig de Capitals"
+      },
+      "esg": {
+        "description": "Verificació de memòries de sostenibilitat, informació no financera i petjada de carboni",
+        "einf": "Verificació EINF",
+        "carbon": "Verificació Petjada de Carboni",
+        "csrd": "Assegurament CSRD"
+      },
+      "transactional": {
+        "description": "Suport en operacions de M&A, inversions i decisions de negoci crítiques",
+        "qoe": "Anàlisi de Qualitat de Beneficis",
+        "spaReview": "Revisió de Contracte de Compravenda"
+      },
+      "internal": {
+        "description": "Avaluació independent del sistema de control intern i gestió de riscos",
+        "controls": "Avaluació de Controls Interns",
+        "risk": "Mapeig de Riscos",
+        "outsourcing": "Externalització d'Auditoria Interna"
+      },
+      "special": {
+        "description": "Informes especials requerits per operacions societàries i procediments acordats",
+        "capitalIncrease": "Informe d'Ampliació de Capital",
+        "expertReports": "Informes d'Expert Independent",
+        "agreedProcedures": "Procediments Acordats"
+      }
+    },
+    "whyAudit": {
+      "overline": "Per què Audit",
+      "title": "Per què triar-nos?",
+      "intro": "Audit és una firma d'auditoria independent amb més de 25 anys d'experiència. Proporcionem serveis d'auditoria rigorosos i de valor afegit que ajuden els stakeholders a prendre decisions informades basades en informació financera fiable.",
+      "independence": {
+        "title": "Independència",
+        "description": "Objectivitat i independència total en cada encàrrec d'auditoria"
+      },
+      "expertise": {
+        "title": "Experiència",
+        "description": "Professionals certificats amb profund coneixement sectorial i internacional"
+      },
+      "methodology": {
+        "title": "Metodologia",
+        "description": "Enfocament basat en riscos alineat amb les NIA-ES i normativa local"
+      },
+      "valueAdd": {
+        "title": "Valor Afegit",
+        "description": "Insights i recomanacions pràctiques més enllà del compliment"
+      },
+      "quality": {
+        "title": "Control de Qualitat",
+        "description": "Processos rigorosos de control i revisió per parells"
+      }
     }
   },
   "footer": {
