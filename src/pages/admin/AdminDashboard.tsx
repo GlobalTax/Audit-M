@@ -97,10 +97,10 @@ export const AdminDashboard = () => {
           <Card key={stat.title} className="cursor-pointer hover:shadow-md transition-shadow">
             <Link to={stat.link}>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+                <CardTitle className="text-sm font-normal text-muted-foreground">{stat.title}</CardTitle>
                 <div className={`p-2 rounded-full ${stat.bgColor}`}><stat.icon className={`h-4 w-4 ${stat.color}`} /></div>
               </CardHeader>
-              <CardContent><div className="text-3xl font-bold">{formatViewCount(stat.value)}</div></CardContent>
+              <CardContent><div className="text-3xl font-normal">{formatViewCount(stat.value)}</div></CardContent>
             </Link>
           </Card>
         ))}
@@ -117,9 +117,9 @@ export const AdminDashboard = () => {
               <div className="space-y-4">
                 {stats.topArticles.map((article, index) => (
                   <div key={article.id} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium text-muted-foreground">{index + 1}</span>
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-normal text-muted-foreground">{index + 1}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium line-clamp-1">{article.title_en}</p>
+                      <p className="text-sm font-normal line-clamp-1">{article.title_en}</p>
                       <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
                         {article.category && <span>{article.category}</span>}
                         <span className="flex items-center gap-1"><Eye className="h-3 w-3" />{formatViewCount(article.view_count || 0)}</span>
@@ -143,7 +143,7 @@ export const AdminDashboard = () => {
                 {stats.recentLeads.map((lead) => (
                   <div key={lead.id} className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="text-sm font-medium truncate">{lead.name}</p>
+                      <p className="text-sm font-normal truncate">{lead.name}</p>
                       <p className="text-xs text-muted-foreground truncate">{lead.email}</p>
                     </div>
                     <div className="text-right flex-shrink-0">

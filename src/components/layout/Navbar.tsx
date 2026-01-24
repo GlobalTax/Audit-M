@@ -201,8 +201,8 @@ export const Navbar = () => {
                           ? "text-foreground hover:text-accent"
                           : "text-white hover:text-accent",
                         isActive(item.href) && (scrolled || isLightMode 
-                          ? "text-accent font-semibold" 
-                          : "text-white font-semibold underline decoration-2 underline-offset-4")
+                          ? "text-accent font-normal" 
+                          : "text-white font-normal underline decoration-2 underline-offset-4")
                       )}
                     >
                       {item.name}
@@ -221,7 +221,7 @@ export const Navbar = () => {
                               <div key={idx} className="bg-background p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                   <Icon className="h-4 w-4 text-accent" />
-                                  <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                                  <h3 className="text-xs font-normal text-foreground/70 uppercase tracking-wider">
                                     {getCategoryLabel(cat)}
                                   </h3>
                                 </div>
@@ -251,7 +251,7 @@ export const Navbar = () => {
                               <div key={idx + 3} className="bg-background p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                   <Icon className="h-4 w-4 text-accent" />
-                                  <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                                  <h3 className="text-xs font-normal text-foreground/70 uppercase tracking-wider">
                                     {getCategoryLabel(cat)}
                                   </h3>
                                 </div>
@@ -279,7 +279,7 @@ export const Navbar = () => {
                           <Link
                             to="/contacto"
                             onClick={() => setServiciosOpen(false)}
-                            className="text-sm font-medium text-accent hover:underline"
+                            className="text-sm font-normal text-accent hover:underline"
                           >
                             {language === 'en' ? 'Contact us →' : language === 'ca' ? 'Contacta\'ns →' : 'Contáctanos →'}
                           </Link>
@@ -300,8 +300,8 @@ export const Navbar = () => {
                       ? "text-foreground hover:text-accent"
                       : "text-white hover:text-accent",
                     isActive(item.href) && (scrolled || isLightMode 
-                      ? "text-accent font-semibold" 
-                      : "text-white font-semibold underline decoration-2 underline-offset-4")
+                      ? "text-accent font-normal" 
+                      : "text-white font-normal underline decoration-2 underline-offset-4")
                   )}
                 >
                   {item.name}
@@ -317,7 +317,7 @@ export const Navbar = () => {
             <Link to="/contacto">
               <Button 
                 variant={scrolled || isLightMode ? "default" : "secondary"}
-                className="font-medium"
+                className="font-normal"
               >
                 {t("nav.contact")}
               </Button>
@@ -359,7 +359,7 @@ export const Navbar = () => {
                   className={cn(
                     "font-display text-base px-4 py-2 transition-colors",
                     isActive(item.href)
-                      ? "text-accent bg-accent/10 font-semibold"
+                      ? "text-accent bg-accent/10 font-normal"
                       : "text-foreground hover:text-accent hover:bg-accent/5"
                   )}
                 >

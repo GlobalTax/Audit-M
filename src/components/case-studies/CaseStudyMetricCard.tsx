@@ -13,10 +13,10 @@ export const CaseStudyMetricCard = ({ metric }: CaseStudyMetricCardProps) => {
           <TrendingUp className="h-6 w-6 text-accent" />
         </div>
         <div className="flex-1">
-          <div className="text-3xl lg:text-4xl font-semibold text-accent mb-2">
+          <div className="text-3xl lg:text-4xl font-normal text-accent mb-2">
             {metric.value}
           </div>
-          <div className="text-base font-medium text-foreground mb-1">
+          <div className="text-base font-normal text-foreground mb-1">
             {metric.label}
           </div>
           {metric.description && (
