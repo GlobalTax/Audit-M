@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useServicesSearch } from "@/hooks/useServicesSearch";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 // Audit service categories with icons - keys match DB area values in each language
@@ -308,6 +309,11 @@ export const Navbar = () => {
               );
             })}
 
+            {/* Language Switcher */}
+            <LanguageSwitcher 
+              variant={scrolled || isLightMode ? 'light' : 'dark'}
+            />
+
             <Link to="/contacto">
               <Button 
                 variant={scrolled || isLightMode ? "default" : "secondary"}
@@ -320,6 +326,9 @@ export const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-4 lg:hidden">
+            <LanguageSwitcher 
+              variant={scrolled || isLightMode ? 'light' : 'dark'}
+            />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={cn(
