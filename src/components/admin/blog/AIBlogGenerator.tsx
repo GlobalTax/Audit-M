@@ -106,7 +106,7 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
               <div className="flex items-center justify-center gap-3">
                 <Loader2 className="h-6 w-6 animate-spin text-primary" />
                 <div className="text-center">
-                  <p className="font-medium">Generando artículo con IA...</p>
+                  <p className="font-normal">Generando artículo con IA...</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     Esto puede tardar 20-30 segundos
                   </p>
@@ -140,7 +140,7 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-success mt-0.5" />
               <div className="flex-1">
-                <p className="font-medium text-success">¡Artículo generado con éxito!</p>
+                <p className="font-normal text-success">¡Artículo generado con éxito!</p>
                 <p className="text-sm text-muted-foreground mt-1">
                   Revisa el contenido generado y haz clic en "Usar este contenido" para importarlo al formulario.
                 </p>
@@ -155,12 +155,12 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
                   <Badge variant="outline">{state.article.category}</Badge>
                   <Badge variant="secondary">{state.article.read_time} min lectura</Badge>
                 </div>
-                <h3 className="text-xl font-bold">{state.article.title_es}</h3>
+                <h3 className="text-xl font-normal">{state.article.title_es}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{state.article.excerpt_es}</p>
               </div>
 
               <div>
-                <Label className="text-sm font-medium">Tags:</Label>
+                <Label className="text-sm font-normal">Tags:</Label>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {state.article.tags.map((tag, idx) => (
                     <Badge key={idx} variant="secondary">{tag}</Badge>
@@ -169,7 +169,7 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
               </div>
 
               <div>
-                <Label className="text-sm font-medium">Vista previa del contenido (ES):</Label>
+                <Label className="text-sm font-normal">Vista previa del contenido (ES):</Label>
                 <div 
                   className="prose prose-sm max-w-none mt-2 p-4 bg-muted/50 rounded-md"
                   dangerouslySetInnerHTML={{ __html: state.article.content_es.substring(0, 500) + "..." }}
@@ -178,7 +178,7 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
 
               {state.article.title_en && (
                 <div className="pt-4 border-t">
-                  <h4 className="text-lg font-semibold">{state.article.title_en}</h4>
+                  <h4 className="text-lg font-normal">{state.article.title_en}</h4>
                   <p className="text-sm text-muted-foreground mt-1">{state.article.excerpt_en}</p>
                 </div>
               )}
@@ -205,7 +205,7 @@ export const AIBlogGenerator = ({ onGenerated, onCancel }: AIBlogGeneratorProps)
             <div className="flex items-start gap-3">
               <XCircle className="h-5 w-5 text-destructive mt-0.5" />
               <div className="flex-1">
-                <p className="font-medium text-destructive">Error al generar el artículo</p>
+                <p className="font-normal text-destructive">Error al generar el artículo</p>
                 <p className="text-sm text-muted-foreground mt-1">{state.message}</p>
               </div>
             </div>

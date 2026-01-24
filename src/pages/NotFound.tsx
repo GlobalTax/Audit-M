@@ -18,10 +18,10 @@ const NotFound = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center animate-fade-in">
             <div className="mb-8">
-              <h1 className="text-8xl md:text-9xl font-serif font-bold text-primary mb-4">
+              <h1 className="text-8xl md:text-9xl font-serif font-normal text-primary mb-4">
                 404
               </h1>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-serif font-normal text-foreground mb-4">
                 {t("notFound.heading") || "Page not found"}
               </h2>
               <p className="text-lg text-muted-foreground mb-8">

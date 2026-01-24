@@ -63,7 +63,7 @@ const Testimonials = () => {
                   <div className="flex justify-center mb-2">
                     <stat.icon className="h-5 w-5 text-white/50" />
                   </div>
-                  <p className="text-2xl md:text-3xl font-bold text-white mb-1">
+                  <p className="text-2xl md:text-3xl font-normal text-white mb-1">
                     {stat.value}
                   </p>
                   <p className="text-xs md:text-sm text-white/60">

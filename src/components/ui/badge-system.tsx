@@ -8,7 +8,7 @@ import { themeConfig } from "@/components/design-system/theme-config";
 // ============================================
 
 const badgeAreaVariants = cva(
-  "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-smooth",
+  "inline-flex items-center rounded-full px-3 py-1 text-xs font-normal transition-smooth",
   {
     variants: {
       area: {
@@ -50,7 +50,7 @@ BadgeArea.displayName = "BadgeArea";
 // ============================================
 
 const badgeStatusVariants = cva(
-  "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-smooth",
+  "inline-flex items-center rounded-full px-3 py-1 text-xs font-normal transition-smooth",
   {
     variants: {
       status: {
@@ -134,7 +134,7 @@ BadgePriority.displayName = "BadgePriority";
 // ============================================
 
 const badgePillVariants = cva(
-  "inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-smooth",
+  "inline-flex items-center rounded-full px-4 py-1.5 text-sm font-normal transition-smooth",
   {
     variants: {
       variant: {
@@ -183,7 +183,7 @@ export const BadgeCount = React.forwardRef<HTMLDivElement, BadgeCountProps>(
       <div
         ref={ref}
         className={cn(
-          "inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-destructive px-1.5 text-xs font-semibold text-destructive-foreground",
+          "inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-destructive px-1.5 text-xs font-normal text-destructive-foreground",
           className
         )}
         {...props}
