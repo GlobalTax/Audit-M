@@ -140,7 +140,7 @@ export const TestimonialCard = React.forwardRef<HTMLDivElement, TestimonialCardP
             />
           )}
           <div>
-            <p className="font-medium text-foreground">{author}</p>
+            <p className="font-normal text-foreground">{author}</p>
             {role && <p className="text-sm text-muted-foreground">{role}</p>}
             {company && <p className="text-xs text-muted-foreground">{company}</p>}
           </div>
@@ -189,7 +189,7 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           <CardTitle className="text-2xl">{name}</CardTitle>
           {description && <CardDescription>{description}</CardDescription>}
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-foreground">{price}</span>
+            <span className="text-4xl font-normal text-foreground">{price}</span>
             <span className="text-sm text-muted-foreground">/ {period}</span>
           </div>
         </CardHeader>

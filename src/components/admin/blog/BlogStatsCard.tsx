@@ -57,10 +57,10 @@ export const BlogStatsCard = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className="text-sm font-normal text-muted-foreground">
                   {stat.label}
                 </p>
-                <p className="text-3xl font-bold mt-2">{stat.value}</p>
+                <p className="text-3xl font-normal mt-2">{stat.value}</p>
               </div>
               <stat.icon className={`h-8 w-8 ${stat.color}`} />
             </div>

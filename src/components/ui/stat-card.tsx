@@ -42,7 +42,7 @@ export const StatCard = ({
       }}
     >
       {/* Label */}
-      <div className="text-xs font-sans font-semibold uppercase tracking-wider text-muted-foreground">
+      <div className="text-xs font-sans font-normal uppercase tracking-wider text-muted-foreground">
         {label}
       </div>
       

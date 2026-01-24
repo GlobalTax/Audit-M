@@ -28,7 +28,7 @@ export const AuditHeroSection = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-tight tracking-tight">
             {t('auditHub.hero.title')}
           </h1>
           

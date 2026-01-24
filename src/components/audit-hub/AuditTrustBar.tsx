@@ -13,7 +13,7 @@ const Stat = ({ icon: Icon, value, label }: StatProps) => (
       <Icon className="h-5 w-5 text-primary" />
     </div>
     <div className="text-left">
-      <p className="text-lg font-semibold text-foreground">{value}</p>
+      <p className="text-lg font-normal text-foreground">{value}</p>
       <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   </div>

@@ -10,7 +10,7 @@ export const AuditCTASection = () => {
     <section className="py-16 md:py-24 bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-normal text-white mb-4">
             {t('auditHub.cta.title')}
           </h2>
           <p className="text-xl text-white/80 mb-8">

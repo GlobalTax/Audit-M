@@ -23,7 +23,7 @@ const AuditLogo = ({
 
   if (variant === "compact") {
     return (
-      <span className={cn("text-2xl font-bold tracking-tight", textColor)}>
+      <span className={cn("text-2xl font-normal tracking-tight", textColor)}>
         A
       </span>
     );
