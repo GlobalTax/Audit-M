@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { SITE_SOURCE } from '@/config/site';
 
 export interface SiteSetting {
   id: string;
@@ -8,17 +9,19 @@ export interface SiteSetting {
   value: string;
   description: string | null;
   category: string;
+  source_site: string;
   created_at: string;
   updated_at: string;
 }
 
 export function useSiteSettings(category?: string) {
   return useQuery({
-    queryKey: ['site-settings', category],
+    queryKey: ['site-settings', category, SITE_SOURCE],
     queryFn: async () => {
       let query = supabase
         .from('site_settings')
         .select('*')
+        .eq('source_site', SITE_SOURCE)
         .order('key');
 
       if (category) {

@@ -1,23 +1,24 @@
 import { Linkedin, Instagram, Twitter, Facebook, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Logo } from "@/components/ui/logo";
 import { Separator } from "@/components/ui/separator";
 import { useSiteSettingsMap } from '@/hooks/useSiteSettings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useServicesSearch } from '@/hooks/useServicesSearch';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { getCurrentSiteConfig } from '@/config/site';
 
 export const Footer = () => {
   const { t, language } = useLanguage();
   const { trackContactClick, trackPhoneCallConversion } = useAnalytics();
   const currentYear = new Date().getFullYear();
   const { settings } = useSiteSettingsMap();
+  const siteConfig = getCurrentSiteConfig();
   
-  // Fetch dynamic services from DB
+  // Fetch dynamic services from DB (filtered by SITE_SOURCE via hook)
   const { data: servicesData } = useServicesSearch({ limit: 11 }, language);
   const services = servicesData?.services || [];
 
-  // Default values (fallback)
+  // Use site settings with fallbacks from site config
   const socialLinks = {
     instagram: settings.social_instagram || 'https://www.instagram.com',
     twitter: settings.social_twitter || 'https://www.twitter.com',
@@ -56,7 +57,7 @@ export const Footer = () => {
                 <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
                   <Phone className="h-4 w-4" />
                 </div>
-                <span className="font-medium">{contactInfo.phoneDisplay}</span>
+                <span className="font-normal">{contactInfo.phoneDisplay}</span>
               </a>
               <a
                 href={`mailto:${contactInfo.email}`}
@@ -66,7 +67,7 @@ export const Footer = () => {
                 <div className="rounded-full border-2 border-white/20 p-2 group-hover:border-accent transition-colors">
                   <Mail className="h-4 w-4" />
                 </div>
-                <span className="font-medium">{contactInfo.email}</span>
+                <span className="font-normal">{contactInfo.email}</span>
               </a>
             </div>
           </div>
@@ -80,19 +81,18 @@ export const Footer = () => {
           <div className="space-y-8">
             <Link to="/" className="inline-block hover:opacity-80 transition-opacity">
               <span className="font-display text-2xl md:text-3xl font-normal text-white tracking-tight">
-                global.nrro
+                {siteConfig.footer.brandName}
               </span>
             </Link>
             <p className="text-base text-white/70 font-light leading-relaxed">
-              {t("footer.tagline")}
+              {siteConfig.footer.tagline}
             </p>
             
             {/* Head Office */}
             <div className="space-y-1">
               <p className="text-xs font-mono uppercase tracking-wider text-white/50">Head Office:</p>
-              <p className="text-sm text-white/80 font-light">
-                Calle Ausias March 36 Pr<br />
-                08010 Barcelona
+              <p className="text-sm text-white/80 font-light whitespace-pre-line">
+                {siteConfig.footer.headOfficeAddress}
               </p>
             </div>
 
@@ -100,7 +100,7 @@ export const Footer = () => {
             <div className="space-y-1">
               <p className="text-xs font-mono uppercase tracking-wider text-white/50">Other Offices:</p>
               <p className="text-sm text-white/70 font-light leading-relaxed">
-                Madrid · Girona · Lleida · Tarragona · Palma de Mallorca · Zaragoza · Valencia
+                {siteConfig.footer.otherOffices.join(' · ')}
               </p>
             </div>
             
@@ -233,7 +233,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm text-white/60 font-light">
-            © {currentYear} global.nrro. {t("footer.rights")}
+            © {currentYear} {siteConfig.footer.copyright}. {t("footer.rights")}
           </p>
           <div className="flex flex-wrap gap-6">
             <Link
