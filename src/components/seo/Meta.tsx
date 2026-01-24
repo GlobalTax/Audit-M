@@ -26,8 +26,17 @@ export const Meta = ({
   const { language } = useLanguage();
   
   useEffect(() => {
-    // Update html lang attribute
-    document.documentElement.lang = 'en';
+    // Update html lang attribute based on current language
+    document.documentElement.lang = language;
+    
+    // Get locale code for og:locale
+    const getOgLocale = () => {
+      switch (language) {
+        case 'ca': return 'ca_ES';
+        case 'en': return 'en_US';
+        default: return 'es_ES';
+      }
+    };
     
     // Update title
     document.title = `${title} | NRRO`;
@@ -39,7 +48,7 @@ export const Meta = ({
       { property: "og:description", content: description },
       { property: "og:image", content: ogImage },
       { property: "og:type", content: "website" },
-      { property: "og:locale", content: "en_US" },
+      { property: "og:locale", content: getOgLocale() },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: `${title} | NRRO` },
       { name: "twitter:description", content: description },
