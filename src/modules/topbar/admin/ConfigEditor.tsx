@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
+import { Label } from '../ui/Label';
+import { Switch } from '../ui/Switch';
+import { Select } from '../ui/Select';
 import { TopBarConfig } from '../types';
 import { COLOR_PRESETS, ColorPresetKey, FONT_OPTIONS, FONT_SIZE_OPTIONS } from '../utils/defaults';
 
@@ -32,7 +32,7 @@ export function ConfigEditor({ config, onChange, onSave, isSaving }: ConfigEdito
       {/* Contact Settings */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Contact Settings</CardTitle>
+          <CardTitle>Contact Settings</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -76,7 +76,7 @@ export function ConfigEditor({ config, onChange, onSave, isSaving }: ConfigEdito
       {/* Appearance */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Appearance</CardTitle>
+          <CardTitle>Appearance</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Color Presets */}
@@ -88,7 +88,6 @@ export function ConfigEditor({ config, onChange, onSave, isSaving }: ConfigEdito
                   key={key}
                   variant="outline"
                   size="sm"
-                  className="h-8"
                   style={{
                     backgroundColor: preset.backgroundColor,
                     color: preset.textColor,
@@ -161,36 +160,18 @@ export function ConfigEditor({ config, onChange, onSave, isSaving }: ConfigEdito
               <Select
                 value={config.fontFamily}
                 onValueChange={(value) => handleChange('fontFamily', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {FONT_OPTIONS.map((font) => (
-                    <SelectItem key={font.value} value={font.value}>
-                      {font.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                options={FONT_OPTIONS}
+                placeholder="Select font..."
+              />
             </div>
             <div>
               <Label>Font Size</Label>
               <Select
                 value={config.fontSize}
                 onValueChange={(value) => handleChange('fontSize', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {FONT_SIZE_OPTIONS.map((size) => (
-                    <SelectItem key={size.value} value={size.value}>
-                      {size.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                options={FONT_SIZE_OPTIONS}
+                placeholder="Select size..."
+              />
             </div>
           </div>
         </CardContent>

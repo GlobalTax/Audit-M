@@ -1,94 +1,136 @@
+import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Star, ExternalLink } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { cn } from '../utils/cn';
 import { TopBarCompany } from '../types';
 
 interface GroupDropdownProps {
   companies: TopBarCompany[];
-  textColor?: string;
-  hoverColor?: string;
+  textColor: string;
+  hoverColor: string;
 }
 
+/**
+ * GroupDropdown - fully independent dropdown (no Radix dependency)
+ */
 export function GroupDropdown({ companies, textColor, hoverColor }: GroupDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Find current company
   const currentCompany = companies.find(c => c.isCurrent);
   const otherCompanies = companies.filter(c => !c.isCurrent);
 
-  if (!currentCompany && otherCompanies.length === 0) {
-    return null;
-  }
+  // Close on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
 
-  const triggerStyle = {
-    color: textColor,
-    '--hover-color': hoverColor,
-  } as React.CSSProperties;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
+
+  // Don't render if no companies
+  if (companies.length === 0) return null;
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.color = hoverColor;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.color = textColor;
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger 
-        className="flex items-center gap-1.5 text-sm font-medium transition-colors outline-none"
-        style={triggerStyle}
-        onMouseEnter={(e) => {
-          if (hoverColor) e.currentTarget.style.color = hoverColor;
-        }}
-        onMouseLeave={(e) => {
-          if (textColor) e.currentTarget.style.color = textColor;
-        }}
+    <div ref={ref} className="relative">
+      {/* Trigger */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={cn(
+          'flex items-center gap-1.5 text-sm font-medium transition-colors',
+          'focus:outline-none focus:ring-2 focus:ring-white/20 rounded px-1 -mx-1'
+        )}
+        style={{ color: textColor }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
-        {currentCompany ? (
-          <>
-            {currentCompany.logoUrl ? (
-              <img 
-                src={currentCompany.logoUrl} 
-                alt={currentCompany.name}
-                className="h-4 w-auto"
-              />
-            ) : (
-              <span>{currentCompany.name}</span>
-            )}
-          </>
+        {currentCompany?.logoUrl ? (
+          <img 
+            src={currentCompany.logoUrl} 
+            alt={currentCompany.name} 
+            className="h-4 w-auto"
+          />
         ) : (
-          <span>Group Companies</span>
+          <span>{currentCompany?.name || 'Select Company'}</span>
         )}
-        <ChevronDown className="w-3.5 h-3.5" />
-      </DropdownMenuTrigger>
+        <ChevronDown className={cn(
+          'w-3.5 h-3.5 transition-transform',
+          isOpen && 'rotate-180'
+        )} />
+      </button>
 
-      <DropdownMenuContent 
-        align="start" 
-        className="bg-slate-800 border-slate-700 min-w-[200px] z-[70]"
-      >
-        {/* Current company (disabled) */}
-        {currentCompany && (
-          <DropdownMenuItem 
-            disabled 
-            className="text-white/60 cursor-default flex items-center gap-2"
-          >
-            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-            <span>{currentCompany.name}</span>
-            <span className="text-xs text-white/40 ml-auto">(current)</span>
-          </DropdownMenuItem>
-        )}
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div 
+          className={cn(
+            'absolute top-full left-0 mt-2 min-w-[200px] rounded-md shadow-lg z-[70]',
+            'bg-slate-800 border border-slate-700',
+            'py-1'
+          )}
+          role="menu"
+        >
+          {/* Current company (disabled) */}
+          {currentCompany && (
+            <div 
+              className="flex items-center gap-2 px-3 py-2 text-sm text-white/50 cursor-default"
+              role="menuitem"
+              aria-disabled="true"
+            >
+              <Star className="w-4 h-4 fill-current text-yellow-500" />
+              <span>{currentCompany.name}</span>
+              <span className="ml-auto text-xs">(current)</span>
+            </div>
+          )}
 
-        {/* Other companies as external links */}
-        {otherCompanies.map((company) => (
-          <DropdownMenuItem 
-            key={company.id} 
-            asChild
-            className="text-white/80 hover:text-white hover:bg-slate-700 cursor-pointer"
-          >
-            <a 
+          {/* Separator */}
+          {currentCompany && otherCompanies.length > 0 && (
+            <div className="h-px my-1 bg-slate-700" />
+          )}
+
+          {/* Other companies */}
+          {otherCompanies.map((company) => (
+            <a
+              key={company.id}
               href={company.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 w-full"
+              className={cn(
+                'flex items-center gap-2 px-3 py-2 text-sm cursor-pointer',
+                'text-white/80 hover:bg-slate-700 hover:text-white',
+                'transition-colors'
+              )}
+              role="menuitem"
+              onClick={() => setIsOpen(false)}
             >
               {company.logoUrl ? (
                 <img 
                   src={company.logoUrl} 
-                  alt={company.name}
+                  alt={company.name} 
                   className="h-4 w-auto"
                 />
               ) : (
@@ -96,9 +138,16 @@ export function GroupDropdown({ companies, textColor, hoverColor }: GroupDropdow
               )}
               <ExternalLink className="w-3 h-3 ml-auto opacity-50" />
             </a>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+          ))}
+
+          {/* Empty state */}
+          {companies.length === 0 && (
+            <div className="px-3 py-2 text-sm text-white/50">
+              No companies configured
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

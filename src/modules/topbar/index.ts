@@ -8,6 +8,7 @@ export { TopBarAdmin } from './admin';
 
 // Hooks
 export { useTopBar, useTopBarOptional, useTopBarWithDefaults } from './hooks/useTopBar';
+export { useTopBarState } from './hooks/useTopBarState';
 
 // Adapters
 export { createLocalStorageAdapter } from './adapters/localStorage';
@@ -33,3 +34,7 @@ export {
   FONT_SIZE_OPTIONS,
 } from './utils/defaults';
 export type { ColorPresetKey } from './utils/defaults';
+export { cn } from './utils/cn';
+
+// Internal UI (optional re-export for customization)
+export * from './ui';

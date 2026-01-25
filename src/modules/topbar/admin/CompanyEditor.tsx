@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Plus, Trash2, GripVertical, Star, ExternalLink } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
+import { Plus, Trash2, GripVertical, Star } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
+import { Label } from '../ui/Label';
+import { Switch } from '../ui/Switch';
 import { TopBarCompany } from '../types';
 
 interface CompanyEditorProps {
@@ -22,7 +22,6 @@ export function CompanyEditor({
   onSave,
   onCreate,
   onDelete,
-  onReorder,
 }: CompanyEditorProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newCompany, setNewCompany] = useState({
@@ -83,7 +82,7 @@ export function CompanyEditor({
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-lg">Group Companies</CardTitle>
+        <CardTitle>Group Companies</CardTitle>
         <Button
           variant="outline"
           size="sm"
@@ -96,7 +95,7 @@ export function CompanyEditor({
       <CardContent className="space-y-4">
         {/* Add new company form */}
         {isAdding && (
-          <div className="p-4 border rounded-lg bg-muted/50 space-y-3">
+          <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-800/50 space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <Label>Name</Label>
@@ -141,9 +140,9 @@ export function CompanyEditor({
         {companies.map((company) => (
           <div
             key={company.id}
-            className="flex items-center gap-3 p-3 border rounded-lg bg-background"
+            className="flex items-center gap-3 p-3 border rounded-lg bg-white dark:bg-gray-900"
           >
-            <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
+            <GripVertical className="w-4 h-4 text-gray-400 cursor-grab" />
             
             <div className="flex-1 grid grid-cols-3 gap-3">
               <Input
@@ -179,7 +178,7 @@ export function CompanyEditor({
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-destructive hover:text-destructive"
+              className="h-8 w-8 text-red-600 hover:text-red-700"
               onClick={() => onDelete(company.id)}
             >
               <Trash2 className="w-4 h-4" />
@@ -188,7 +187,7 @@ export function CompanyEditor({
         ))}
 
         {companies.length === 0 && !isAdding && (
-          <p className="text-sm text-muted-foreground text-center py-4">
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
             No companies added yet. Click "Add Company" to get started.
           </p>
         )}
