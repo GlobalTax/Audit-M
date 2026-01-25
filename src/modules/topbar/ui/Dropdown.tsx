@@ -1,5 +1,21 @@
-import { useState, useRef, useEffect, ReactNode, HTMLAttributes, forwardRef } from 'react';
+import React, { useState, useRef, useEffect, ReactNode, HTMLAttributes, forwardRef } from 'react';
 import { cn } from '../utils/cn';
+
+// Context
+interface DropdownContextValue {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+const DropdownContext = React.createContext<DropdownContextValue | null>(null);
+
+function useDropdownContext() {
+  const context = React.useContext(DropdownContext);
+  if (!context) {
+    throw new Error('Dropdown components must be used within a Dropdown');
+  }
+  return context;
+}
 
 // Dropdown Root
 interface DropdownProps {
@@ -40,24 +56,6 @@ export function Dropdown({ children }: DropdownProps) {
     </DropdownContext.Provider>
   );
 }
-
-// Context
-interface DropdownContextValue {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-}
-
-const DropdownContext = React.createContext<DropdownContextValue | null>(null);
-
-function useDropdownContext() {
-  const context = React.useContext(DropdownContext);
-  if (!context) {
-    throw new Error('Dropdown components must be used within a Dropdown');
-  }
-  return context;
-}
-
-import React from 'react';
 
 // Trigger
 interface DropdownTriggerProps extends HTMLAttributes<HTMLButtonElement> {
