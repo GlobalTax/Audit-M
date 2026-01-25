@@ -88,10 +88,17 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    // Rutas que siempre usan modo oscuro cuando no hay scroll
+    const darkRoutes = ['/', '/servicios'];
+    const isDarkRoute = darkRoutes.some(route => 
+      location.pathname === route || location.pathname.startsWith('/servicios/')
+    );
+
     const detectBackgroundColor = () => {
       if (!navRef.current) return;
 
-      if ((location.pathname === '/' || location.pathname.startsWith('/servicios')) && window.scrollY < 10) {
+      // Si estamos en una ruta oscura y sin scroll significativo, forzar modo oscuro
+      if (isDarkRoute && window.scrollY < 50) {
         setIsLightMode(false);
         return;
       }
@@ -132,6 +139,11 @@ export const Navbar = () => {
       setIsLightMode(false);
     };
 
+    // Ejecutar inmediatamente con el estado correcto
+    if (isDarkRoute) {
+      setIsLightMode(false);
+    }
+    
     detectBackgroundColor();
     requestAnimationFrame(() => detectBackgroundColor());
 
