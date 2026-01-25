@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useTestimonials } from "@/hooks/useTestimonials";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const getInitials = (name: string) => {
   return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
@@ -14,9 +15,10 @@ const getInitials = (name: string) => {
 export function HomeTestimonialsSection() {
   const { trackEvent, trackCTAClick } = useAnalytics();
   const { data: testimonials, isLoading } = useTestimonials('int');
+  const { t } = useLanguage();
 
   const handleTestimonialClick = (testimonial: { author_name: string; company_type: string }, index: number) => {
-    trackEvent('testimonial_click_homepage_global_nrro', {
+    trackEvent('testimonial_click_homepage', {
       author: testimonial.author_name,
       company_type: testimonial.company_type,
       position: index + 1
@@ -24,8 +26,8 @@ export function HomeTestimonialsSection() {
   };
 
   const handleCTAClick = () => {
-    trackCTAClick('See More Success Stories', 'homepage_testimonials');
-    trackEvent('testimonials_cta_click_global_nrro', {});
+    trackCTAClick(t("home.testimonials.cta"), 'homepage_testimonials');
+    trackEvent('testimonials_cta_click', {});
   };
 
   if (isLoading) {
@@ -67,13 +69,13 @@ export function HomeTestimonialsSection() {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <p className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            Client Success Stories
+            {t("home.testimonials.overline")}
           </p>
           <h2 className="text-3xl md:text-4xl font-normal mb-4">
-            What Our Clients Say
+            {t("home.testimonials.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Trusted by multinational leaders, investors, and family businesses worldwide
+            {t("home.testimonials.subtitle")}
           </p>
         </div>
 
@@ -132,7 +134,7 @@ export function HomeTestimonialsSection() {
             onClick={handleCTAClick}
           >
             <Link to="/testimonials">
-              See More Success Stories
+              {t("home.testimonials.cta")}
             </Link>
           </Button>
         </div>

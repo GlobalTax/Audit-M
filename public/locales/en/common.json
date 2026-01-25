@@ -520,6 +520,34 @@
         "title": "Quality Control",
         "description": "Rigorous quality control and peer review processes"
       }
+    },
+    "awards": {
+      "overline": "Awards & Recognition",
+      "title": "Recognized for Excellence"
+    },
+    "caseStudies": {
+      "overline": "Success Stories",
+      "title": "Results That Speak for Our Clients",
+      "subtitle": "From statutory audits to complex verifications, discover how we've helped companies meet their compliance obligations.",
+      "readMore": "Read full case",
+      "cta": "View All Case Studies"
+    },
+    "reviews": {
+      "overline": "Independent Verification",
+      "title": "Verified Reviews from Trusted Platforms",
+      "subtitle": "See what clients say about us on independent review platforms",
+      "verifiedReviews": "verified reviews"
+    },
+    "team": {
+      "overline": "Professionals at Your Service",
+      "title": "Meet Our Team",
+      "cta": "View Full Team"
+    },
+    "testimonials": {
+      "overline": "Client Success Stories",
+      "title": "What Our Clients Say",
+      "subtitle": "Trusted by multinational leaders, investors, and family businesses",
+      "cta": "See More Success Stories"
     }
   },
   "footer": {

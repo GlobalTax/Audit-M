@@ -520,6 +520,34 @@
         "title": "Control de Calidad",
         "description": "Procesos rigurosos de control y revisión por pares"
       }
+    },
+    "awards": {
+      "overline": "Premios y Reconocimientos",
+      "title": "Reconocidos por la Excelencia"
+    },
+    "caseStudies": {
+      "overline": "Casos de Éxito",
+      "title": "Resultados que Hablan por Nuestros Clientes",
+      "subtitle": "Desde auditorías obligatorias hasta verificaciones complejas, descubre cómo hemos ayudado a empresas a cumplir con sus obligaciones.",
+      "readMore": "Leer caso completo",
+      "cta": "Ver Todos los Casos de Éxito"
+    },
+    "reviews": {
+      "overline": "Verificación Independiente",
+      "title": "Opiniones Verificadas en Plataformas de Confianza",
+      "subtitle": "Descubre lo que dicen nuestros clientes en plataformas de reseñas independientes",
+      "verifiedReviews": "reseñas verificadas"
+    },
+    "team": {
+      "overline": "Profesionales a tu Servicio",
+      "title": "Conoce a Nuestro Equipo",
+      "cta": "Ver Equipo Completo"
+    },
+    "testimonials": {
+      "overline": "Historias de Éxito",
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "subtitle": "La confianza de empresas líderes, inversores y empresas familiares",
+      "cta": "Ver Más Testimonios"
     }
   },
   "footer": {
