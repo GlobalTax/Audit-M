@@ -47,8 +47,16 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [serviciosOpen, setServiciosOpen] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(false);
   const location = useLocation();
+  
+  // Rutas que siempre usan modo oscuro cuando no hay scroll
+  const darkRoutes = ['/', '/servicios'];
+  const isDarkRoute = darkRoutes.some(route => 
+    location.pathname === route || location.pathname.startsWith('/servicios/')
+  );
+  
+  // Inicializar isLightMode basándose en la ruta actual
+  const [isLightMode, setIsLightMode] = useState(() => !isDarkRoute);
   const navRef = useRef<HTMLElement>(null);
   
   // Fetch dynamic services from DB (only active audit services)
@@ -87,18 +95,24 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Cuando cambia la ruta, resetear isLightMode basándose en si es ruta oscura
   useEffect(() => {
-    // Rutas que siempre usan modo oscuro cuando no hay scroll
-    const darkRoutes = ['/', '/servicios'];
-    const isDarkRoute = darkRoutes.some(route => 
-      location.pathname === route || location.pathname.startsWith('/servicios/')
-    );
+    // Forzar modo oscuro inmediatamente para rutas oscuras
+    if (isDarkRoute) {
+      setIsLightMode(false);
+    }
+  }, [location.pathname, isDarkRoute]);
 
+  useEffect(() => {
     const detectBackgroundColor = () => {
-      if (!navRef.current) return;
-
-      // Si estamos en una ruta oscura y sin scroll significativo, forzar modo oscuro
+      // PRIORIDAD 1: Rutas oscuras sin scroll = siempre modo oscuro
       if (isDarkRoute && window.scrollY < 50) {
+        setIsLightMode(false);
+        return;
+      }
+
+      // PRIORIDAD 2: Detección basada en DOM para otros casos
+      if (!navRef.current) {
         setIsLightMode(false);
         return;
       }
@@ -109,6 +123,7 @@ export const Navbar = () => {
         navRect.bottom + 10
       );
 
+      // Buscar atributo data-dark
       for (const element of elementsBelow) {
         if (element instanceof HTMLElement) {
           const dataDark = element.getAttribute('data-dark');
@@ -119,6 +134,7 @@ export const Navbar = () => {
         }
       }
 
+      // Analizar color de fondo
       for (const element of elementsBelow) {
         if (element instanceof HTMLElement && element !== navRef.current) {
           const bgColor = window.getComputedStyle(element).backgroundColor;
@@ -136,16 +152,12 @@ export const Navbar = () => {
         }
       }
       
+      // Default: modo oscuro
       setIsLightMode(false);
     };
 
-    // Ejecutar inmediatamente con el estado correcto
-    if (isDarkRoute) {
-      setIsLightMode(false);
-    }
-    
+    // Ejecutar detección inicial
     detectBackgroundColor();
-    requestAnimationFrame(() => detectBackgroundColor());
 
     const scrollHandler = () => {
       requestAnimationFrame(detectBackgroundColor);
@@ -153,7 +165,7 @@ export const Navbar = () => {
 
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
-  }, [location]);
+  }, [location.pathname, isDarkRoute]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
