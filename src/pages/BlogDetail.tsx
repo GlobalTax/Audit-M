@@ -21,7 +21,7 @@ import { PreviewBanner } from "@/components/ui/preview-banner";
 import { usePreviewContent } from "@/hooks/usePreviewContent";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import DOMPurify from "dompurify";
+import { BlogMarkdownRenderer } from "@/components/blog/BlogMarkdownRenderer";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { BlogCTASection } from "@/components/blog/BlogCTASection";
 import { PopularArticles } from "@/components/blog/PopularArticles";
@@ -183,7 +183,7 @@ const BlogDetail = () => {
                 </header>
                 <div className="prose-article">
                   {post.excerpt && <p className="text-lead mb-8">{post.excerpt}</p>}
-                  {post.content && <div className="text-body space-y-6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content, { ALLOWED_TAGS: ["p", "br", "strong", "em", "u", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li", "a", "img", "blockquote", "code", "pre"], ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel"], ALLOW_DATA_ATTR: false }) }} />}
+                  {post.content && <BlogMarkdownRenderer content={post.content} />}
                 </div>
                 {post.tags && post.tags.length > 0 && <div className="mt-12 pt-8 border-t"><h3 className="text-sm font-medium mb-4">{t('blog.tags')}</h3><div className="flex flex-wrap gap-2">{post.tags.map((tag: string) => <span key={tag} className="px-3 py-1 bg-muted rounded-full text-sm">{tag}</span>)}</div></div>}
               </div>
