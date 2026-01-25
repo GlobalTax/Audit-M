@@ -65,21 +65,8 @@ const Home = () => {
   // Fetch datos/stats for the home page
   const { datos, isLoading: datosLoading } = useHomeDatos(language);
 
-  // Fallback data
-  const defaultClientLogos = [
-    { name: "Empresa 1", logo_url: "https://via.placeholder.com/150x60?text=Logo+1" },
-    { name: "Empresa 2", logo_url: "https://via.placeholder.com/150x60?text=Logo+2" },
-    { name: "Empresa 3", logo_url: "https://via.placeholder.com/150x60?text=Logo+3" },
-    { name: "Empresa 4", logo_url: "https://via.placeholder.com/150x60?text=Logo+4" },
-    { name: "Empresa 5", logo_url: "https://via.placeholder.com/150x60?text=Logo+5" },
-    { name: "Empresa 6", logo_url: "https://via.placeholder.com/150x60?text=Logo+6" },
-    { name: "Empresa 7", logo_url: "https://via.placeholder.com/150x60?text=Logo+7" },
-    { name: "Empresa 8", logo_url: "https://via.placeholder.com/150x60?text=Logo+8" },
-    { name: "Empresa 9", logo_url: "https://via.placeholder.com/150x60?text=Logo+9" },
-    { name: "Empresa 10", logo_url: "https://via.placeholder.com/150x60?text=Logo+10" },
-  ];
-
-  const clientLogos = clientesContent?.logos || defaultClientLogos;
+  // Client logos - only show if real logos exist in DB
+  const clientLogos = clientesContent?.logos || [];
 
   const { data: services } = useQuery({
     queryKey: ['featured-services', language],
@@ -383,7 +370,8 @@ const Home = () => {
         </section>
         */}
 
-        {/* Carrusel de Logos */}
+        {/* Carrusel de Logos - only render if logos exist */}
+        {clientLogos.length > 0 && (
         <section className="bg-white py-16 md:py-20 border-t border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {clientesContent?.overline && (
@@ -409,7 +397,7 @@ const Home = () => {
                   <CarouselItem key={index} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
                     <div className="flex items-center justify-center h-24 p-4">
                       <img
-                        src={logo.logo_url || `https://via.placeholder.com/150x60?text=${logo.name}`}
+                        src={logo.logo_url}
                         alt={logo.name}
                         className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
                       />
@@ -417,9 +405,10 @@ const Home = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-          </Carousel>
+            </Carousel>
           </div>
         </section>
+        )}
 
         {/* Blog Preview */}
         <section className="bg-background py-24">
