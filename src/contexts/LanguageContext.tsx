@@ -29,15 +29,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   );
   const [isDetecting, setIsDetecting] = useState(true);
 
-  // Show loading state while i18next initializes
-  if (!ready) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
   // Function to change language
   const setLanguage = useCallback((lang: Language) => {
     i18n.changeLanguage(lang);
@@ -112,6 +103,17 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLanguage,
     t
   }), [currentLanguage, setLanguage, t]);
+
+  // Show loading state while i18next initializes, but still provide context
+  if (!ready) {
+    return (
+      <LanguageContext.Provider value={contextValue}>
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </LanguageContext.Provider>
+    );
+  }
 
   return (
     <LanguageContext.Provider value={contextValue}>
