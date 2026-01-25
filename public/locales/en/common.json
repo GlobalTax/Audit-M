@@ -85,7 +85,12 @@
     "notFound": "Article not found",
     "previewNotAvailable": "Preview not available",
     "previewExpired": "This preview has expired or is not valid",
-    "tags": "Tags"
+    "tags": "Tags",
+    "cta": {
+      "title": "Need specialized advice?",
+      "subtitle": "Our team of expert auditors is ready to help you with your auditing, compliance, and financial verification needs.",
+      "button": "Contact an expert"
+    }
   },
   "caseStudies": {
     "challenge": "The Challenge",

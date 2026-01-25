@@ -85,7 +85,12 @@
     "notFound": "Artículo no encontrado",
     "previewNotAvailable": "Vista previa no disponible",
     "previewExpired": "Esta vista previa ha expirado o no es válida",
-    "tags": "Etiquetas"
+    "tags": "Etiquetas",
+    "cta": {
+      "title": "¿Necesitas asesoramiento especializado?",
+      "subtitle": "Nuestro equipo de auditores expertos está preparado para ayudarte con tus necesidades de auditoría, cumplimiento normativo y verificación financiera.",
+      "button": "Contactar con un experto"
+    }
   },
   "caseStudies": {
     "challenge": "El Reto",

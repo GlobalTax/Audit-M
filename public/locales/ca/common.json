@@ -85,7 +85,12 @@
     "notFound": "Article no trobat",
     "previewNotAvailable": "Vista prèvia no disponible",
     "previewExpired": "Aquesta vista prèvia ha expirat o no és vàlida",
-    "tags": "Etiquetes"
+    "tags": "Etiquetes",
+    "cta": {
+      "title": "Necessites assessorament especialitzat?",
+      "subtitle": "El nostre equip d'auditors experts està preparat per ajudar-te amb les teves necessitats d'auditoria, compliment normatiu i verificació financera.",
+      "button": "Contactar amb un expert"
+    }
   },
   "caseStudies": {
     "challenge": "El Repte",
