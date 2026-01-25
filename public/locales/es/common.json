@@ -664,5 +664,171 @@
       "secondary": "Llamar ahora",
       "guarantee": "Respuesta en menos de 24 horas · Presupuesto sin compromiso"
     }
+  },
+  "subsidyHub": {
+    "meta": {
+      "title": "Auditoría de Subvenciones 2026 | CDTI, FEDER, PRTR",
+      "description": "Expertos en auditoría y justificación de subvenciones públicas. CDTI, fondos europeos, PRTR, IDAE. 99% tasa de aprobación en justificaciones.",
+      "keywords": "auditoría subvenciones, auditoría CDTI, justificación fondos europeos, auditoría PRTR, cuenta justificativa con auditor"
+    },
+    "breadcrumb": "Auditoría de Subvenciones",
+    "hero": {
+      "badge": "⚠️ Cierre PRTR 2026 - Plazos críticos",
+      "title": "Auditoría de Subvenciones 2026",
+      "subtitle": "Expertos en justificación de fondos públicos y europeos. Asegure la correcta aplicación y reintegro cero.",
+      "ctaPrimary": "Solicitar auditoría",
+      "ctaSecondary": "Ver plazos 2026"
+    },
+    "stats": {
+      "approvalRate": "Tasa de aprobación",
+      "verifiedFunds": "Fondos verificados",
+      "projectsYear": "Proyectos/año",
+      "reimbursements": "Reintegros por error formal"
+    },
+    "trustBar": {
+      "roac": "ROAC",
+      "icac": "ICAC",
+      "igae": "IGAE",
+      "cdti": "CDTI",
+      "feder": "FEDER",
+      "prtr": "PRTR/NextGen"
+    },
+    "programs": {
+      "overline": "Programas de financiación",
+      "title": "Auditoría por Tipo de Subvención",
+      "subtitle": "Especialización en todos los principales programas de ayudas públicas y fondos europeos",
+      "viewDetails": "Ver detalles",
+      "rdi": {
+        "title": "I+D+i e Innovación",
+        "description": "Auditoría de proyectos CDTI, Torres Quevedo, Neotec y programas autonómicos de I+D"
+      },
+      "energy": {
+        "title": "Energía y Sostenibilidad",
+        "description": "Verificación de programas IDAE, MOVES, PREE y ayudas de rehabilitación energética"
+      },
+      "digital": {
+        "title": "Digitalización",
+        "description": "Justificación de Kit Digital, CE Implementa y programas de transformación digital"
+      },
+      "training": {
+        "title": "Formación Bonificada",
+        "description": "Auditoría de créditos FUNDAE, contratos de formación y prácticas bonificadas"
+      },
+      "european": {
+        "title": "Fondos Europeos",
+        "description": "Auditoría FEDER, FSE+, PRTR NextGeneration EU e Interreg"
+      },
+      "regional": {
+        "title": "Ayudas Autonómicas",
+        "description": "Justificación de subvenciones ACCIÓ, IVACE, SPRI, ICEX y programas regionales"
+      }
+    },
+    "timeline": {
+      "overline": "Calendario 2026",
+      "title": "Plazos Críticos de Justificación",
+      "subtitle": "Fechas clave para la justificación de subvenciones y fondos europeos en 2026",
+      "types": {
+        "critical": "Crítico",
+        "important": "Importante",
+        "opportunity": "Oportunidad",
+        "info": "Informativo"
+      },
+      "events": {
+        "prtr": {
+          "date": "Q1 2026",
+          "title": "Cierre Justificación PRTR",
+          "description": "Última fecha para presentar justificaciones de proyectos financiados con fondos NextGeneration EU"
+        },
+        "cdti": {
+          "date": "31/03/2026",
+          "title": "Límite Cuentas Justificativas CDTI",
+          "description": "Fecha límite para presentar cuentas justificativas de proyectos CDTI finalizados en 2025"
+        },
+        "feder": {
+          "date": "Q2 2026",
+          "title": "Convocatorias FEDER 21-27",
+          "description": "Nuevas convocatorias del período de programación FEDER 2021-2027"
+        },
+        "nextgen": {
+          "date": "30/06/2026",
+          "title": "Deadline NextGen EU",
+          "description": "Fecha límite europea para la ejecución de fondos del Plan de Recuperación"
+        },
+        "idae": {
+          "date": "Q4 2026",
+          "title": "Nuevas Convocatorias IDAE",
+          "description": "Previsión de nuevas convocatorias de eficiencia energética y renovables"
+        }
+      }
+    },
+    "requirements": {
+      "overline": "Normativa 2026",
+      "title": "Nuevos Requisitos Obligatorios",
+      "subtitle": "Obligaciones normativas que debe cumplir su proyecto subvencionado",
+      "morosidad": {
+        "title": "Ley Crea y Crece (Morosidad)",
+        "description": "Obligatorio certificar cumplimiento de plazos de pago para subvenciones >30.000€. Se requiere informe de auditor sobre periodos medios de pago."
+      },
+      "dnsh": {
+        "title": "Principio DNSH (No Daño Significativo)",
+        "description": "Verificación medioambiental obligatoria para fondos PRTR. Su incumplimiento es causa de reintegro total de la ayuda recibida."
+      },
+      "daci": {
+        "title": "DACI (Antifraude)",
+        "description": "Declaración de Ausencia de Conflicto de Intereses obligatoria. Control mediante sistema MINERVA de la IGAE."
+      },
+      "accounting": {
+        "title": "Contabilidad Separada",
+        "description": "Obligatoria para fondos PRTR y FEDER. Debe existir trazabilidad completa de todos los gastos imputados al proyecto."
+      },
+      "warning": "⚠️ El incumplimiento de cualquiera de estos requisitos puede suponer la pérdida total o parcial de la subvención"
+    },
+    "faq": {
+      "overline": "Preguntas frecuentes",
+      "title": "Resolvemos tus Dudas",
+      "subtitle": "Las preguntas más habituales sobre auditoría de subvenciones",
+      "items": {
+        "obligatorio": {
+          "question": "¿Cuándo es obligatorio el informe de auditor en una subvención?",
+          "answer": "Es obligatorio cuando la convocatoria lo exige expresamente, cuando el importe supera determinados umbrales (generalmente 60.000€ para gastos y/o 150.000€ de subvención), o cuando el organismo concedente lo determina. Además, para fondos PRTR es casi siempre obligatorio."
+        },
+        "simplificada": {
+          "question": "¿Qué diferencia hay entre cuenta justificativa simplificada y con auditor?",
+          "answer": "La cuenta simplificada solo requiere declaración responsable y facturas, mientras que la cuenta con auditor incluye un informe de revisión por un auditor inscrito en el ROAC que verifica la elegibilidad de los gastos y el cumplimiento de las bases."
+        },
+        "prtrIncumplimiento": {
+          "question": "¿Qué sucede si no justifico correctamente una subvención del PRTR?",
+          "answer": "El incumplimiento de la justificación PRTR puede conllevar el reintegro total de la ayuda más intereses de demora. Además, podría suponer la exclusión de futuras convocatorias y, en casos graves, responsabilidades adicionales."
+        },
+        "dnsh": {
+          "question": "¿Qué es el principio DNSH y cómo afecta a mi subvención?",
+          "answer": "DNSH (Do No Significant Harm) significa que las inversiones financiadas con fondos europeos no pueden causar daño significativo al medio ambiente. Es obligatorio para PRTR y su incumplimiento es causa de reintegro total."
+        },
+        "coste": {
+          "question": "¿Cuánto cuesta una auditoría de subvenciones?",
+          "answer": "El coste depende de la complejidad del proyecto, el importe de la subvención y la documentación a revisar. Generalmente oscila entre 1.500€ y 8.000€. Ofrecemos presupuesto sin compromiso adaptado a cada caso."
+        },
+        "documentacion": {
+          "question": "¿Qué documentación necesito preparar?",
+          "answer": "Necesitará: resolución de concesión, presupuesto aprobado, facturas y justificantes de pago, contratos con proveedores, extractos bancarios, declaraciones DACI, y documentación técnica del proyecto según la convocatoria."
+        },
+        "tiempo": {
+          "question": "¿Cuánto tiempo tarda una auditoría de subvenciones?",
+          "answer": "Depende del volumen de documentación, pero habitualmente entre 2 y 4 semanas desde que recibimos toda la documentación. Es importante planificar con antelación respecto a los plazos de justificación."
+        },
+        "irregularidades": {
+          "question": "¿Qué pasa si el organismo detecta irregularidades?",
+          "answer": "Si hay irregularidades, el organismo puede requerir documentación adicional, aplicar correcciones financieras parciales o, en casos graves, exigir el reintegro total. Una auditoría previa ayuda a detectar y corregir problemas antes de la presentación."
+        }
+      }
+    },
+    "cta": {
+      "title": "¿Necesita auditar una subvención?",
+      "subtitle": "Asegure la correcta justificación de sus fondos públicos. Evite reintegros y sanciones.",
+      "primary": "Solicitar propuesta",
+      "secondary": "Llamar ahora",
+      "response": "Respuesta en 24h",
+      "freeQuote": "Presupuesto sin compromiso"
+    }
   }
 }

@@ -14,6 +14,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import AuditHub from "./pages/AuditHub";
+import SubsidyAuditHub from "./pages/SubsidyAuditHub";
 import ServiceDetail from "./pages/ServiceDetail";
 import Methodology from "./pages/Methodology";
 import Team from "./pages/Team";
@@ -81,6 +82,9 @@ const App = () => {
                 <Route path="/servicios" element={<Layout><AuditHub /></Layout>} />
                 <Route path="/services" element={<Layout><AuditHub /></Layout>} />
                 <Route path="/serveis" element={<Layout><AuditHub /></Layout>} />
+                <Route path="/servicios/subvenciones" element={<Layout><SubsidyAuditHub /></Layout>} />
+                <Route path="/services/subsidies" element={<Layout><SubsidyAuditHub /></Layout>} />
+                <Route path="/serveis/subvencions" element={<Layout><SubsidyAuditHub /></Layout>} />
                 <Route path="/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
                 <Route path="/servicios/:slug" element={<Layout><ServiceDetail /></Layout>} />
                 <Route path="/serveis/:slug" element={<Layout><ServiceDetail /></Layout>} />

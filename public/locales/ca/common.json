@@ -414,5 +414,171 @@
       "secondary": "Trucar ara",
       "guarantee": "Resposta en menys de 24 hores · Pressupost sense compromís"
     }
+  },
+  "subsidyHub": {
+    "meta": {
+      "title": "Auditoria de Subvencions 2026 | CDTI, FEDER, PRTR",
+      "description": "Experts en auditoria i justificació de subvencions públiques. CDTI, fons europeus, PRTR, IDAE. 99% taxa d'aprovació.",
+      "keywords": "auditoria subvencions, auditoria CDTI, justificació fons europeus, auditoria PRTR, compte justificatiu amb auditor"
+    },
+    "breadcrumb": "Auditoria de Subvencions",
+    "hero": {
+      "badge": "⚠️ Tancament PRTR 2026 - Terminis crítics",
+      "title": "Auditoria de Subvencions 2026",
+      "subtitle": "Experts en justificació de fons públics i europeus. Assegureu la correcta aplicació i reintegrament zero.",
+      "ctaPrimary": "Sol·licitar auditoria",
+      "ctaSecondary": "Veure terminis 2026"
+    },
+    "stats": {
+      "approvalRate": "Taxa d'aprovació",
+      "verifiedFunds": "Fons verificats",
+      "projectsYear": "Projectes/any",
+      "reimbursements": "Reintegraments per error formal"
+    },
+    "trustBar": {
+      "roac": "ROAC",
+      "icac": "ICAC",
+      "igae": "IGAE",
+      "cdti": "CDTI",
+      "feder": "FEDER",
+      "prtr": "PRTR/NextGen"
+    },
+    "programs": {
+      "overline": "Programes de finançament",
+      "title": "Auditoria per Tipus de Subvenció",
+      "subtitle": "Especialització en tots els principals programes d'ajudes públiques i fons europeus",
+      "viewDetails": "Veure detalls",
+      "rdi": {
+        "title": "R+D+i i Innovació",
+        "description": "Auditoria de projectes CDTI, Torres Quevedo, Neotec i programes autonòmics de R+D"
+      },
+      "energy": {
+        "title": "Energia i Sostenibilitat",
+        "description": "Verificació de programes IDAE, MOVES, PREE i ajudes de rehabilitació energètica"
+      },
+      "digital": {
+        "title": "Digitalització",
+        "description": "Justificació de Kit Digital, CE Implementa i programes de transformació digital"
+      },
+      "training": {
+        "title": "Formació Bonificada",
+        "description": "Auditoria de crèdits FUNDAE, contractes de formació i pràctiques bonificades"
+      },
+      "european": {
+        "title": "Fons Europeus",
+        "description": "Auditoria FEDER, FSE+, PRTR NextGeneration EU i Interreg"
+      },
+      "regional": {
+        "title": "Ajudes Autonòmiques",
+        "description": "Justificació de subvencions ACCIÓ, IVACE, SPRI, ICEX i programes regionals"
+      }
+    },
+    "timeline": {
+      "overline": "Calendari 2026",
+      "title": "Terminis Crítics de Justificació",
+      "subtitle": "Dates clau per a la justificació de subvencions i fons europeus el 2026",
+      "types": {
+        "critical": "Crític",
+        "important": "Important",
+        "opportunity": "Oportunitat",
+        "info": "Informatiu"
+      },
+      "events": {
+        "prtr": {
+          "date": "Q1 2026",
+          "title": "Tancament Justificació PRTR",
+          "description": "Última data per presentar justificacions de projectes finançats amb fons NextGeneration EU"
+        },
+        "cdti": {
+          "date": "31/03/2026",
+          "title": "Límit Comptes Justificatius CDTI",
+          "description": "Data límit per presentar comptes justificatius de projectes CDTI finalitzats el 2025"
+        },
+        "feder": {
+          "date": "Q2 2026",
+          "title": "Convocatòries FEDER 21-27",
+          "description": "Noves convocatòries del període de programació FEDER 2021-2027"
+        },
+        "nextgen": {
+          "date": "30/06/2026",
+          "title": "Deadline NextGen EU",
+          "description": "Data límit europea per a l'execució de fons del Pla de Recuperació"
+        },
+        "idae": {
+          "date": "Q4 2026",
+          "title": "Noves Convocatòries IDAE",
+          "description": "Previsió de noves convocatòries d'eficiència energètica i renovables"
+        }
+      }
+    },
+    "requirements": {
+      "overline": "Normativa 2026",
+      "title": "Nous Requisits Obligatoris",
+      "subtitle": "Obligacions normatives que ha de complir el seu projecte subvencionat",
+      "morosidad": {
+        "title": "Llei Crea i Creix (Morositat)",
+        "description": "Obligatori certificar compliment de terminis de pagament per a subvencions >30.000€. Es requereix informe d'auditor sobre períodes mitjans de pagament."
+      },
+      "dnsh": {
+        "title": "Principi DNSH (No Dany Significatiu)",
+        "description": "Verificació mediambiental obligatòria per a fons PRTR. El seu incompliment és causa de reintegrament total de l'ajuda rebuda."
+      },
+      "daci": {
+        "title": "DACI (Antifrau)",
+        "description": "Declaració d'Absència de Conflicte d'Interessos obligatòria. Control mitjançant sistema MINERVA de la IGAE."
+      },
+      "accounting": {
+        "title": "Comptabilitat Separada",
+        "description": "Obligatòria per a fons PRTR i FEDER. Ha d'existir traçabilitat completa de totes les despeses imputades al projecte."
+      },
+      "warning": "⚠️ L'incompliment de qualsevol d'aquests requisits pot suposar la pèrdua total o parcial de la subvenció"
+    },
+    "faq": {
+      "overline": "Preguntes freqüents",
+      "title": "Resolem els teus Dubtes",
+      "subtitle": "Les preguntes més habituals sobre auditoria de subvencions",
+      "items": {
+        "obligatorio": {
+          "question": "Quan és obligatori l'informe d'auditor en una subvenció?",
+          "answer": "És obligatori quan la convocatòria ho exigeix expressament, quan l'import supera determinats llindars (generalment 60.000€ per a despeses i/o 150.000€ de subvenció), o quan l'organisme concedent ho determina. A més, per a fons PRTR és gairebé sempre obligatori."
+        },
+        "simplificada": {
+          "question": "Quina diferència hi ha entre compte justificatiu simplificat i amb auditor?",
+          "answer": "El compte simplificat només requereix declaració responsable i factures, mentre que el compte amb auditor inclou un informe de revisió per un auditor inscrit al ROAC que verifica l'elegibilitat de les despeses i el compliment de les bases."
+        },
+        "prtrIncumplimiento": {
+          "question": "Què succeeix si no justifico correctament una subvenció del PRTR?",
+          "answer": "L'incompliment de la justificació PRTR pot comportar el reintegrament total de l'ajuda més interessos de demora. A més, podria suposar l'exclusió de futures convocatòries i, en casos greus, responsabilitats addicionals."
+        },
+        "dnsh": {
+          "question": "Què és el principi DNSH i com afecta la meva subvenció?",
+          "answer": "DNSH (Do No Significant Harm) significa que les inversions finançades amb fons europeus no poden causar dany significatiu al medi ambient. És obligatori per a PRTR i el seu incompliment és causa de reintegrament total."
+        },
+        "coste": {
+          "question": "Quant costa una auditoria de subvencions?",
+          "answer": "El cost depèn de la complexitat del projecte, l'import de la subvenció i la documentació a revisar. Generalment oscil·la entre 1.500€ i 8.000€. Oferim pressupost sense compromís adaptat a cada cas."
+        },
+        "documentacion": {
+          "question": "Quina documentació necessito preparar?",
+          "answer": "Necessitarà: resolució de concessió, pressupost aprovat, factures i justificants de pagament, contractes amb proveïdors, extractes bancaris, declaracions DACI, i documentació tècnica del projecte segons la convocatòria."
+        },
+        "tiempo": {
+          "question": "Quant temps triga una auditoria de subvencions?",
+          "answer": "Depèn del volum de documentació, però habitualment entre 2 i 4 setmanes des que rebem tota la documentació. És important planificar amb antelació respecte als terminis de justificació."
+        },
+        "irregularidades": {
+          "question": "Què passa si l'organisme detecta irregularitats?",
+          "answer": "Si hi ha irregularitats, l'organisme pot requerir documentació addicional, aplicar correccions financeres parcials o, en casos greus, exigir el reintegrament total. Una auditoria prèvia ajuda a detectar i corregir problemes abans de la presentació."
+        }
+      }
+    },
+    "cta": {
+      "title": "Necessita auditar una subvenció?",
+      "subtitle": "Assegureu la correcta justificació dels vostres fons públics. Eviteu reintegraments i sancions.",
+      "primary": "Sol·licitar proposta",
+      "secondary": "Trucar ara",
+      "response": "Resposta en 24h",
+      "freeQuote": "Pressupost sense compromís"
+    }
   }
 }
