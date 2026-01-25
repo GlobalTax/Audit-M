@@ -11,7 +11,7 @@ export const TopBar = () => {
   if (isLoading) return null;
 
   return (
-    <div className="h-10 bg-slate-900 text-white/70 hidden md:block relative z-50">
+    <div className="h-10 bg-slate-900 text-white/70 hidden md:block fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto h-full px-4 flex items-center justify-between">
         {/* Izquierda: Empresas del grupo + enlaces */}
         <div className="flex items-center gap-4">
