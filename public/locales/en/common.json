@@ -664,5 +664,171 @@
       "secondary": "Call now",
       "guarantee": "Response within 24 hours · No-obligation quote"
     }
+  },
+  "subsidyHub": {
+    "meta": {
+      "title": "Grant Audit 2026 | CDTI, FEDER, PRTR",
+      "description": "Experts in grant auditing and public funding justification. CDTI, European funds, PRTR, IDAE. 99% approval rate.",
+      "keywords": "grant audit, CDTI audit, European funds justification, PRTR audit, auditor certificate"
+    },
+    "breadcrumb": "Grant Audit",
+    "hero": {
+      "badge": "⚠️ PRTR Closure 2026 - Critical Deadlines",
+      "title": "Grant Audit 2026",
+      "subtitle": "Experts in public and European fund justification. Ensure correct application and zero reimbursement.",
+      "ctaPrimary": "Request audit",
+      "ctaSecondary": "View 2026 deadlines"
+    },
+    "stats": {
+      "approvalRate": "Approval rate",
+      "verifiedFunds": "Verified funds",
+      "projectsYear": "Projects/year",
+      "reimbursements": "Formal error reimbursements"
+    },
+    "trustBar": {
+      "roac": "ROAC",
+      "icac": "ICAC",
+      "igae": "IGAE",
+      "cdti": "CDTI",
+      "feder": "FEDER",
+      "prtr": "PRTR/NextGen"
+    },
+    "programs": {
+      "overline": "Funding programs",
+      "title": "Audit by Grant Type",
+      "subtitle": "Specialization in all major public aid programs and European funds",
+      "viewDetails": "View details",
+      "rdi": {
+        "title": "R&D&I and Innovation",
+        "description": "Audit of CDTI projects, Torres Quevedo, Neotec and regional R&D programs"
+      },
+      "energy": {
+        "title": "Energy and Sustainability",
+        "description": "Verification of IDAE, MOVES, PREE programs and energy rehabilitation grants"
+      },
+      "digital": {
+        "title": "Digitalization",
+        "description": "Kit Digital justification, CE Implementa and digital transformation programs"
+      },
+      "training": {
+        "title": "Subsidized Training",
+        "description": "FUNDAE credit audits, training contracts and subsidized internships"
+      },
+      "european": {
+        "title": "European Funds",
+        "description": "FEDER, ESF+, PRTR NextGeneration EU and Interreg audits"
+      },
+      "regional": {
+        "title": "Regional Grants",
+        "description": "ACCIÓ, IVACE, SPRI, ICEX grants justification and regional programs"
+      }
+    },
+    "timeline": {
+      "overline": "2026 Calendar",
+      "title": "Critical Justification Deadlines",
+      "subtitle": "Key dates for grant and European fund justification in 2026",
+      "types": {
+        "critical": "Critical",
+        "important": "Important",
+        "opportunity": "Opportunity",
+        "info": "Informative"
+      },
+      "events": {
+        "prtr": {
+          "date": "Q1 2026",
+          "title": "PRTR Justification Closure",
+          "description": "Final date to submit justifications for NextGeneration EU funded projects"
+        },
+        "cdti": {
+          "date": "31/03/2026",
+          "title": "CDTI Justification Deadline",
+          "description": "Deadline for submitting justification accounts for CDTI projects completed in 2025"
+        },
+        "feder": {
+          "date": "Q2 2026",
+          "title": "FEDER 21-27 Calls",
+          "description": "New calls for the FEDER 2021-2027 programming period"
+        },
+        "nextgen": {
+          "date": "30/06/2026",
+          "title": "NextGen EU Deadline",
+          "description": "European deadline for Recovery Plan fund execution"
+        },
+        "idae": {
+          "date": "Q4 2026",
+          "title": "New IDAE Calls",
+          "description": "Forecast for new energy efficiency and renewable energy calls"
+        }
+      }
+    },
+    "requirements": {
+      "overline": "2026 Regulations",
+      "title": "New Mandatory Requirements",
+      "subtitle": "Regulatory obligations your subsidized project must comply with",
+      "morosidad": {
+        "title": "Create and Grow Law (Late Payment)",
+        "description": "Mandatory certification of payment deadline compliance for grants >€30,000. Auditor report on average payment periods required."
+      },
+      "dnsh": {
+        "title": "DNSH Principle (Do No Significant Harm)",
+        "description": "Mandatory environmental verification for PRTR funds. Non-compliance is grounds for full grant reimbursement."
+      },
+      "daci": {
+        "title": "DACI (Anti-Fraud)",
+        "description": "Mandatory Declaration of Absence of Conflict of Interest. Controlled through IGAE's MINERVA system."
+      },
+      "accounting": {
+        "title": "Separate Accounting",
+        "description": "Mandatory for PRTR and FEDER funds. Complete traceability of all project-attributed expenses required."
+      },
+      "warning": "⚠️ Non-compliance with any of these requirements may result in total or partial loss of the grant"
+    },
+    "faq": {
+      "overline": "Frequently asked questions",
+      "title": "We Answer Your Questions",
+      "subtitle": "The most common questions about grant auditing",
+      "items": {
+        "obligatorio": {
+          "question": "When is an auditor's report mandatory for a grant?",
+          "answer": "It's mandatory when the call explicitly requires it, when the amount exceeds certain thresholds (generally €60,000 for expenses and/or €150,000 in grants), or when the granting body determines so. Additionally, for PRTR funds it's almost always mandatory."
+        },
+        "simplificada": {
+          "question": "What's the difference between simplified and audited justification accounts?",
+          "answer": "Simplified accounts only require a declaration and invoices, while audited accounts include a review report by a ROAC-registered auditor who verifies expense eligibility and compliance with the rules."
+        },
+        "prtrIncumplimiento": {
+          "question": "What happens if I don't correctly justify a PRTR grant?",
+          "answer": "Non-compliance with PRTR justification may result in full grant reimbursement plus late interest. It could also mean exclusion from future calls and, in serious cases, additional liabilities."
+        },
+        "dnsh": {
+          "question": "What is the DNSH principle and how does it affect my grant?",
+          "answer": "DNSH (Do No Significant Harm) means investments funded with European funds cannot cause significant environmental damage. It's mandatory for PRTR and non-compliance is grounds for full reimbursement."
+        },
+        "coste": {
+          "question": "How much does a grant audit cost?",
+          "answer": "The cost depends on project complexity, grant amount and documentation to review. Generally ranges from €1,500 to €8,000. We offer no-obligation quotes tailored to each case."
+        },
+        "documentacion": {
+          "question": "What documentation do I need to prepare?",
+          "answer": "You'll need: grant resolution, approved budget, invoices and payment receipts, supplier contracts, bank statements, DACI declarations, and project technical documentation as per the call."
+        },
+        "tiempo": {
+          "question": "How long does a grant audit take?",
+          "answer": "Depends on documentation volume, but usually 2 to 4 weeks from receiving all documentation. It's important to plan ahead regarding justification deadlines."
+        },
+        "irregularidades": {
+          "question": "What happens if the body detects irregularities?",
+          "answer": "If there are irregularities, the body may request additional documentation, apply partial financial corrections or, in serious cases, demand full reimbursement. A prior audit helps detect and correct issues before submission."
+        }
+      }
+    },
+    "cta": {
+      "title": "Need to audit a grant?",
+      "subtitle": "Ensure correct justification of your public funds. Avoid reimbursements and penalties.",
+      "primary": "Request proposal",
+      "secondary": "Call now",
+      "response": "Response in 24h",
+      "freeQuote": "No-obligation quote"
+    }
   }
 }
