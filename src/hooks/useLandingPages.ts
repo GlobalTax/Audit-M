@@ -101,10 +101,10 @@ export const useLandingPageBySlug = (slug: string) => {
         .from('landing_pages')
         .select('*')
         .eq('slug', slug)
-        .single();
+        .maybeSingle();
       
       if (error) throw error;
-      return data as LandingPage;
+      return data as LandingPage | null;
     },
     enabled: !!slug,
   });
