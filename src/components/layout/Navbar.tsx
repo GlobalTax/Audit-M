@@ -91,7 +91,7 @@ export const Navbar = () => {
     const detectBackgroundColor = () => {
       if (!navRef.current) return;
 
-      if (location.pathname.startsWith('/servicios') && window.scrollY < 10) {
+      if ((location.pathname === '/' || location.pathname.startsWith('/servicios')) && window.scrollY < 10) {
         setIsLightMode(false);
         return;
       }
