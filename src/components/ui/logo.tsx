@@ -21,14 +21,10 @@ const AuditLogo = ({
 }) => {
   const textColor = color === "light" ? "text-white" : "text-foreground";
   const separatorOpacity = color === "light" ? "opacity-40" : "opacity-30";
-  const barColor = color === "light" ? "bg-amber-400" : "bg-amber-500";
 
   if (variant === "compact") {
     return (
-      <div className={cn("flex items-center gap-1.5", className)}>
-        {/* Golden vertical bar */}
-        <div className={cn("w-0.5 h-5 rounded-sm", barColor)} />
-        {/* Audit text only */}
+      <div className={cn("flex items-center", className)}>
         <span className={cn("font-display text-lg font-medium tracking-tight", textColor)}>
           Audit
         </span>
@@ -38,9 +34,6 @@ const AuditLogo = ({
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      {/* Golden vertical bar */}
-      <div className={cn("w-1 h-7 md:h-8 rounded-sm", barColor)} />
-      
       {/* Audit text */}
       <span className={cn("font-display text-2xl md:text-3xl font-medium tracking-tight", textColor)}>
         Audit
