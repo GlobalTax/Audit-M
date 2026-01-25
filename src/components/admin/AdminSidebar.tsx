@@ -18,6 +18,7 @@ import {
   Presentation,
   ClipboardList,
   UsersRound,
+  PanelTop,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,7 @@ import { Separator } from '@/components/ui/separator';
 const navItems = [
   { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
+  { path: '/admin/topbar', icon: PanelTop, label: 'TopBar' },
   { path: '/admin/content', icon: FileText, label: 'Content Management' },
   { path: '/admin/services', icon: ClipboardList, label: 'Services' },
   { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
