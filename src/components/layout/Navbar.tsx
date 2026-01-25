@@ -238,8 +238,8 @@ export const Navbar = () => {
                           ? "text-foreground hover:text-accent"
                           : "text-white hover:text-accent",
                         isActive(item.href) && (scrolled || mobileMenuOpen || (!isDarkRoute && isLightMode))
-                          ? "text-accent font-normal" 
-                          : "text-white font-normal underline decoration-2 underline-offset-4"
+                      ? "text-accent font-normal" 
+                          : "text-white font-normal"
                       )}
                     >
                       {item.name}
@@ -338,7 +338,7 @@ export const Navbar = () => {
                       : "text-white hover:text-accent",
                     isActive(item.href) && (scrolled || mobileMenuOpen || (!isDarkRoute && isLightMode))
                       ? "text-accent font-normal" 
-                      : "text-white font-normal underline decoration-2 underline-offset-4"
+                      : "text-white font-normal"
                   )}
                 >
                   {item.name}
