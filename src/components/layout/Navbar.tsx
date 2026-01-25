@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Menu, X, ChevronDown, FileCheck, CheckCircle, Leaf, Search, Shield, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useServicesSearch } from "@/hooks/useServicesSearch";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { cn } from "@/lib/utils";
-
 // Audit service categories with icons - keys match DB area values in each language
 const auditCategories = [
   { 
@@ -58,6 +57,13 @@ export const Navbar = () => {
   // Inicializar isLightMode basándose en la ruta actual
   const [isLightMode, setIsLightMode] = useState(() => !isDarkRoute);
   const navRef = useRef<HTMLElement>(null);
+  
+  // Calcular modo visual directamente - esto se ejecuta en cada render, sin depender de useEffect
+  const visualMode = useMemo(() => {
+    if (scrolled || mobileMenuOpen) return 'scrolled';
+    if (isDarkRoute) return 'dark';
+    return isLightMode ? 'light' : 'dark';
+  }, [scrolled, mobileMenuOpen, isDarkRoute, isLightMode]);
   
   // Fetch dynamic services from DB (only active audit services)
   const { data: servicesData } = useServicesSearch({ limit: 30 }, language);
@@ -188,9 +194,9 @@ export const Navbar = () => {
       ref={navRef}
       className={cn(
         "fixed top-0 md:top-10 left-0 right-0 z-40 transition-all duration-300",
-        scrolled || mobileMenuOpen
+        visualMode === 'scrolled'
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
-          : isLightMode
+          : visualMode === 'light'
           ? "bg-background/80 backdrop-blur-sm border-b border-border/40"
           : "bg-transparent border-b border-white/10"
       )}
@@ -202,7 +208,7 @@ export const Navbar = () => {
             <Logo
               variant="full"
               brand="default"
-              color={scrolled || (isLightMode && !mobileMenuOpen) ? "dark" : "light"}
+              color={visualMode === 'scrolled' || visualMode === 'light' ? "dark" : "light"}
               className="h-auto"
               asLink={false}
             />
@@ -221,10 +227,10 @@ export const Navbar = () => {
                       onClick={() => setServiciosOpen(!serviciosOpen)}
                       className={cn(
                         "flex items-center gap-1 font-display text-base transition-colors",
-                        scrolled || isLightMode
+                        visualMode === 'scrolled' || visualMode === 'light'
                           ? "text-foreground hover:text-accent"
                           : "text-white hover:text-accent",
-                        isActive(item.href) && (scrolled || isLightMode 
+                        isActive(item.href) && (visualMode === 'scrolled' || visualMode === 'light'
                           ? "text-accent font-normal" 
                           : "text-white font-normal underline decoration-2 underline-offset-4")
                       )}
@@ -320,10 +326,10 @@ export const Navbar = () => {
                   to={item.href}
                   className={cn(
                     "font-display text-base transition-colors",
-                    scrolled || isLightMode
+                    visualMode === 'scrolled' || visualMode === 'light'
                       ? "text-foreground hover:text-accent"
                       : "text-white hover:text-accent",
-                    isActive(item.href) && (scrolled || isLightMode 
+                    isActive(item.href) && (visualMode === 'scrolled' || visualMode === 'light'
                       ? "text-accent font-normal" 
                       : "text-white font-normal underline decoration-2 underline-offset-4")
                   )}
@@ -335,7 +341,7 @@ export const Navbar = () => {
 
             <Link to="/contacto">
               <Button 
-                variant={scrolled || isLightMode ? "default" : "secondary"}
+                variant={visualMode === 'scrolled' || visualMode === 'light' ? "default" : "secondary"}
                 className="font-normal"
               >
                 {t("nav.contact")}
@@ -346,13 +352,13 @@ export const Navbar = () => {
           {/* Mobile menu button */}
           <div className="flex items-center gap-4 lg:hidden">
             <LanguageSwitcher 
-              variant={scrolled || isLightMode ? 'light' : 'dark'}
+              variant={visualMode === 'scrolled' || visualMode === 'light' ? 'light' : 'dark'}
             />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={cn(
                 "p-2 rounded-md transition-colors",
-                scrolled || isLightMode
+                visualMode === 'scrolled' || visualMode === 'light'
                   ? "text-foreground hover:text-accent"
                   : "text-white hover:text-accent"
               )}
