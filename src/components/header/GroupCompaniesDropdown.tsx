@@ -27,29 +27,25 @@ export const GroupCompaniesDropdown = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="start" 
-        className="bg-slate-800 border-slate-700 min-w-[200px] z-[60]"
+        sideOffset={8}
+        className="bg-slate-800 border-slate-700 min-w-[200px] z-[100] shadow-xl"
       >
         {companies.map((company) => (
-          <DropdownMenuItem
-            key={company.id}
-            disabled={company.is_current}
-            className={`
-              flex items-center justify-between gap-2 cursor-pointer
-              ${company.is_current 
-                ? 'text-white bg-slate-700/50' 
-                : 'text-white/70 hover:text-white hover:bg-slate-700'
-              }
-            `}
-            asChild={!company.is_current}
-          >
-            {company.is_current ? (
-              <div className="flex items-center justify-between w-full">
-                <span className="flex items-center gap-2">
-                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                  {company.name}
-                </span>
-              </div>
-            ) : (
+          company.is_current ? (
+            <DropdownMenuItem
+              key={company.id}
+              disabled
+              className="text-white bg-slate-700/50 focus:bg-slate-700/50 focus:text-white cursor-default"
+            >
+              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400 mr-2" />
+              {company.name}
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem 
+              key={company.id}
+              asChild 
+              className="text-white/70 hover:text-white hover:bg-slate-700 focus:bg-slate-700 focus:text-white cursor-pointer"
+            >
               <a 
                 href={company.url} 
                 target="_blank" 
@@ -59,8 +55,8 @@ export const GroupCompaniesDropdown = ({
                 <span>{company.name}</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-50" />
               </a>
-            )}
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          )
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
