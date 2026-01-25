@@ -16,7 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className="flex min-h-screen flex-col">
         <TopBar />
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-20 md:pt-[120px]">{children}</main>
         <Footer />
       </div>
       <WhatsAppFloatingButton />
