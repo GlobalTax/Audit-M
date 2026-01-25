@@ -39,18 +39,18 @@ export const Meta = ({
     };
     
     // Update title
-    document.title = `${title} | NRRO`;
+    document.title = `${title} | Audit | m`;
 
     // Update meta tags
     const metaTags = [
       { name: "description", content: description },
-      { property: "og:title", content: `${title} | NRRO` },
+      { property: "og:title", content: `${title} | Audit | m` },
       { property: "og:description", content: description },
       { property: "og:image", content: ogImage },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: getOgLocale() },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: `${title} | NRRO` },
+      { name: "twitter:title", content: `${title} | Audit | m` },
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: ogImage },
     ];
