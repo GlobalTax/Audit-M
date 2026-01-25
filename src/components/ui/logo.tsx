@@ -20,19 +20,40 @@ const AuditLogo = ({
   className?: string;
 }) => {
   const textColor = color === "light" ? "text-white" : "text-foreground";
+  const separatorOpacity = color === "light" ? "opacity-40" : "opacity-30";
+  const barColor = color === "light" ? "bg-amber-400" : "bg-amber-500";
 
   if (variant === "compact") {
     return (
-      <span className={cn("text-2xl font-normal tracking-tight", textColor)}>
-        A
-      </span>
+      <div className={cn("flex items-center gap-1.5", className)}>
+        {/* Golden vertical bar */}
+        <div className={cn("w-0.5 h-5 rounded-sm", barColor)} />
+        {/* Audit text only */}
+        <span className={cn("font-display text-lg font-medium tracking-tight", textColor)}>
+          Audit
+        </span>
+      </div>
     );
   }
 
   return (
-    <span className={cn("font-display text-2xl md:text-3xl font-normal tracking-tight", textColor, className)}>
-      Audit
-    </span>
+    <div className={cn("flex items-center gap-2", className)}>
+      {/* Golden vertical bar */}
+      <div className={cn("w-1 h-7 md:h-8 rounded-sm", barColor)} />
+      
+      {/* Audit text */}
+      <span className={cn("font-display text-2xl md:text-3xl font-medium tracking-tight", textColor)}>
+        Audit
+      </span>
+      
+      {/* Vertical separator */}
+      <div className={cn("w-px h-5 md:h-6 bg-current", separatorOpacity, textColor)} />
+      
+      {/* Submarca "m" */}
+      <span className={cn("text-lg md:text-xl font-light", textColor)}>
+        m
+      </span>
+    </div>
   );
 };
 
@@ -44,7 +65,6 @@ export const Logo = ({
   asLink = true,
   to = "/"
 }: LogoProps) => {
-  const altText = brand === "international" ? "Audit Global" : "Audit";
   const ariaLabel = brand === "international" ? "Audit Global - Home" : "Audit - Inicio";
 
   const logoContent = (
