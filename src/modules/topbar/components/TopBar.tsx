@@ -1,20 +1,57 @@
 import { Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { useTopBarOptional } from '../hooks/useTopBar';
 import { GroupDropdown } from './GroupDropdown';
 import { TopBarData } from '../types';
 import { DEFAULT_DATA } from '../utils/defaults';
+import { cn } from '../utils/cn';
+
+interface LinkComponentProps {
+  to: string;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
+}
 
 interface TopBarProps {
   /** Direct data prop for use without Provider */
   data?: TopBarData;
   /** Optional language switcher component */
   LanguageSwitcher?: React.ComponentType;
+  /** Custom Link component (e.g., from react-router-dom) */
+  LinkComponent?: React.ComponentType<LinkComponentProps>;
   /** Additional className */
   className?: string;
 }
 
-export function TopBar({ data: propData, LanguageSwitcher, className = '' }: TopBarProps) {
+/**
+ * Default link component - uses native anchor tags
+ */
+function DefaultLink({ to, children, className, style, onMouseEnter, onMouseLeave }: LinkComponentProps) {
+  return (
+    <a 
+      href={to} 
+      className={className} 
+      style={style}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {children}
+    </a>
+  );
+}
+
+/**
+ * TopBar component - fully independent, no external dependencies
+ * Works with or without TopBarProvider
+ */
+export function TopBar({ 
+  data: propData, 
+  LanguageSwitcher, 
+  LinkComponent = DefaultLink,
+  className = '' 
+}: TopBarProps) {
   const contextData = useTopBarOptional();
   const data = propData || contextData || DEFAULT_DATA;
 
@@ -26,17 +63,17 @@ export function TopBar({ data: propData, LanguageSwitcher, className = '' }: Top
   }
 
   // Dynamic styles
-  const containerStyle = {
+  const containerStyle: React.CSSProperties = {
     backgroundColor: config.backgroundColor,
     fontFamily: config.fontFamily,
     fontSize: config.fontSize,
-  } as React.CSSProperties;
+  };
 
-  const textStyle = {
+  const textStyle: React.CSSProperties = {
     color: config.textColor,
   };
 
-  const separatorStyle = {
+  const separatorStyle: React.CSSProperties = {
     color: config.textColor,
     opacity: 0.3,
   };
@@ -51,7 +88,7 @@ export function TopBar({ data: propData, LanguageSwitcher, className = '' }: Top
 
   return (
     <div 
-      className={`h-10 hidden md:block fixed top-0 left-0 right-0 z-[60] ${className}`}
+      className={cn('h-10 hidden md:block fixed top-0 left-0 right-0 z-[60]', className)}
       style={containerStyle}
     >
       <div className="container mx-auto h-full px-4 flex items-center justify-between">
@@ -82,7 +119,7 @@ export function TopBar({ data: propData, LanguageSwitcher, className = '' }: Top
                         {link.label}
                       </a>
                     ) : (
-                      <Link
+                      <LinkComponent
                         to={link.href}
                         className="text-sm transition-colors"
                         style={textStyle}
@@ -90,7 +127,7 @@ export function TopBar({ data: propData, LanguageSwitcher, className = '' }: Top
                         onMouseLeave={handleMouseLeave}
                       >
                         {link.label}
-                      </Link>
+                      </LinkComponent>
                     )}
                     {index < links.length - 1 && (
                       <span style={separatorStyle}>|</span>
