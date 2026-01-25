@@ -11,6 +11,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const getInitials = (name: string): string => {
   return name
@@ -22,7 +23,8 @@ const getInitials = (name: string): string => {
 };
 
 export const TeamCarouselSection = () => {
-  const { data: teamMembers, isLoading } = useTeamMembers("en");
+  const { t, language } = useLanguage();
+  const { data: teamMembers, isLoading } = useTeamMembers(language);
   const { trackCTAClick } = useAnalytics();
 
   if (isLoading) {
@@ -54,10 +56,10 @@ export const TeamCarouselSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70 mb-4">
-            The People Behind Your Success
+            {t("home.team.overline")}
           </h2>
           <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground max-w-2xl mx-auto">
-            Meet Our Global Team
+            {t("home.team.title")}
           </p>
         </div>
 
@@ -133,10 +135,10 @@ export const TeamCarouselSection = () => {
           <Button
             asChild
             variant="outline"
-            onClick={() => trackCTAClick("View Full Team", "team_carousel")}
+            onClick={() => trackCTAClick(t("home.team.cta"), "team_carousel")}
           >
             <Link to="/team">
-              View Full Team
+              {t("home.team.cta")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

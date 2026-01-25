@@ -1,9 +1,11 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useAwards } from "@/hooks/useAwards";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const AwardsRecognitionStrip = () => {
   const { data: awards, isLoading } = useAwards();
+  const { t } = useLanguage();
 
   if (isLoading) {
     return (
@@ -30,16 +32,16 @@ export const AwardsRecognitionStrip = () => {
   return (
     <section 
       className="py-16 md:py-20 bg-background border-t border-border/50"
-      aria-label="Awards and Recognition"
+      aria-label={t("home.awards.title")}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="font-mono font-light text-xs md:text-sm tracking-wide uppercase text-foreground/70">
-            Awards & Accolades
+            {t("home.awards.overline")}
           </span>
           <h2 className="text-2xl md:text-3xl font-normal text-foreground mt-3">
-            Recognized for Excellence
+            {t("home.awards.title")}
           </h2>
         </div>
 

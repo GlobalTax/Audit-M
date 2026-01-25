@@ -334,6 +334,34 @@
         "title": "Control de Qualitat",
         "description": "Processos rigorosos de control i revisió per parells"
       }
+    },
+    "awards": {
+      "overline": "Premis i Reconeixements",
+      "title": "Reconeguts per l'Excel·lència"
+    },
+    "caseStudies": {
+      "overline": "Casos d'Èxit",
+      "title": "Resultats que Parlen pels Nostres Clients",
+      "subtitle": "Des d'auditories obligatòries fins a verificacions complexes, descobreix com hem ajudat a empreses a complir amb les seves obligacions.",
+      "readMore": "Llegir cas complet",
+      "cta": "Veure Tots els Casos d'Èxit"
+    },
+    "reviews": {
+      "overline": "Verificació Independent",
+      "title": "Opinions Verificades en Plataformes de Confiança",
+      "subtitle": "Descobreix el que diuen els nostres clients en plataformes de ressenyes independents",
+      "verifiedReviews": "ressenyes verificades"
+    },
+    "team": {
+      "overline": "Professionals al teu Servei",
+      "title": "Coneix el Nostre Equip",
+      "cta": "Veure Equip Complet"
+    },
+    "testimonials": {
+      "overline": "Històries d'Èxit",
+      "title": "El Que Diuen els Nostres Clients",
+      "subtitle": "La confiança d'empreses líders, inversors i empreses familiars",
+      "cta": "Veure Més Testimonis"
     }
   },
   "footer": {
