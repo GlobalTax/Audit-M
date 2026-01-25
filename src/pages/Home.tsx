@@ -12,8 +12,6 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedServiceCard } from "@/components/home/FeaturedServiceCard";
-import { InternationalNetworksSection } from "@/components/home/InternationalNetworksSection";
-import { GlobalCoverageMap } from "@/components/home/GlobalCoverageMap";
 import { AuditServicesHighlightSection } from "@/components/home/AuditServicesHighlightSection";
 import { HomeTestimonialsSection } from "@/components/home/HomeTestimonialsSection";
 import { HomeCaseStudiesSection } from "@/components/home/HomeCaseStudiesSection";
@@ -22,7 +20,6 @@ import { AwardsRecognitionStrip } from "@/components/home/AwardsRecognitionStrip
 import { TeamCarouselSection } from "@/components/home/TeamCarouselSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { WhyAuditSection } from "@/components/home/WhyAuditSection";
-import { InternationalFAQSection } from "@/components/home/InternationalFAQSection";
 import { ArrowRight, Calendar } from "lucide-react";
 import {
   Carousel,
@@ -124,9 +121,8 @@ const Home = () => {
   return (
     <>
       <Meta
-        title="Global Advisory for International Business"
-        description="Strategic legal, tax, accounting and labour advisory for multinational companies and foreign investors. Barcelona-based, globally trusted."
-        keywords="international business advisory, global tax planning, multinational corporate services, foreign investment Spain"
+        title={t("index.meta.title")}
+        description={t("index.meta.description")}
         canonicalUrl="/"
       />
 
@@ -300,12 +296,6 @@ const Home = () => {
         {/* How It Works */}
         <HowItWorksSection />
 
-        {/* International Networks Section */}
-        <InternationalNetworksSection />
-
-        {/* Global Coverage Map */}
-        <GlobalCoverageMap />
-
         {/* Why Audit Section */}
         <WhyAuditSection />
 
@@ -314,9 +304,6 @@ const Home = () => {
 
         {/* Case Studies Teaser Section */}
         <HomeCaseStudiesSection />
-
-        {/* International FAQ Section */}
-        <InternationalFAQSection />
 
         {/* Third-Party Reviews Section */}
         <HomeThirdPartyReviewsSection />

@@ -17,7 +17,7 @@ export const LandingNavbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Logo variant="full" brand="international" color="light" />
+          <Logo variant="full" brand="default" color="light" />
 
           <div className="flex items-center gap-4">
             <Button 
