@@ -6,6 +6,8 @@ import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { Switch } from '../ui/Switch';
 import { TopBarCompany } from '../types';
+import { useDragAndDrop } from '../hooks/useDragAndDrop';
+import { cn } from '../utils/cn';
 
 interface CompanyEditorProps {
   companies: TopBarCompany[];
@@ -22,6 +24,7 @@ export function CompanyEditor({
   onSave,
   onCreate,
   onDelete,
+  onReorder,
 }: CompanyEditorProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newCompany, setNewCompany] = useState({
@@ -29,6 +32,12 @@ export function CompanyEditor({
     url: '',
     logoUrl: '',
     isCurrent: false,
+  });
+
+  const { getDragProps, getHandleProps, isDragging, isDragOver } = useDragAndDrop({
+    items: companies,
+    getId: (company) => company.id,
+    onReorder,
   });
 
   const handleAdd = async () => {
@@ -140,9 +149,17 @@ export function CompanyEditor({
         {companies.map((company) => (
           <div
             key={company.id}
-            className="flex items-center gap-3 p-3 border rounded-lg bg-white dark:bg-gray-900"
+            {...getDragProps(company.id)}
+            className={cn(
+              "flex items-center gap-3 p-3 border rounded-lg transition-all duration-150",
+              "bg-white dark:bg-gray-900",
+              isDragging(company.id) && "opacity-50 border-dashed border-gray-400",
+              isDragOver(company.id) && "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+            )}
           >
-            <GripVertical className="w-4 h-4 text-gray-400 cursor-grab" />
+            <div {...getHandleProps(company.id)}>
+              <GripVertical className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+            </div>
             
             <div className="flex-1 grid grid-cols-3 gap-3">
               <Input
