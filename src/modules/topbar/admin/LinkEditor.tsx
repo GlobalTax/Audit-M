@@ -6,6 +6,8 @@ import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { Switch } from '../ui/Switch';
 import { TopBarLink } from '../types';
+import { useDragAndDrop } from '../hooks/useDragAndDrop';
+import { cn } from '../utils/cn';
 
 interface LinkEditorProps {
   links: TopBarLink[];
@@ -22,12 +24,19 @@ export function LinkEditor({
   onSave,
   onCreate,
   onDelete,
+  onReorder,
 }: LinkEditorProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newLink, setNewLink] = useState({
     label: '',
     href: '',
     isExternal: false,
+  });
+
+  const { getDragProps, getHandleProps, isDragging, isDragOver } = useDragAndDrop({
+    items: links,
+    getId: (link) => link.id,
+    onReorder,
   });
 
   const handleAdd = async () => {
@@ -129,9 +138,17 @@ export function LinkEditor({
         {links.map((link) => (
           <div
             key={link.id}
-            className="flex items-center gap-3 p-3 border rounded-lg bg-white dark:bg-gray-900"
+            {...getDragProps(link.id)}
+            className={cn(
+              "flex items-center gap-3 p-3 border rounded-lg transition-all duration-150",
+              "bg-white dark:bg-gray-900",
+              isDragging(link.id) && "opacity-50 border-dashed border-gray-400",
+              isDragOver(link.id) && "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+            )}
           >
-            <GripVertical className="w-4 h-4 text-gray-400 cursor-grab" />
+            <div {...getHandleProps(link.id)}>
+              <GripVertical className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+            </div>
             
             <div className="flex-1 grid grid-cols-2 gap-3">
               <Input
