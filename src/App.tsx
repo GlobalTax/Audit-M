@@ -64,6 +64,7 @@ import Testimonials from "./pages/Testimonials";
 import ThankYou from "./pages/ThankYou";
 import AdminABTests from "./pages/admin/AdminABTests";
 import AdminTopBar from "./pages/admin/AdminTopBar";
+import AdminCRM from "./pages/admin/AdminCRM";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +122,7 @@ const App = () => {
                   }
                 >
                   <Route index element={<AdminDashboard />} />
+                  <Route path="crm" element={<AdminCRM />} />
                   <Route path="settings" element={<AdminSettings />} />
                   <Route path="topbar" element={<AdminTopBar />} />
                   <Route path="content" element={<AdminContent />} />
