@@ -1,125 +1,172 @@
 
-# Plan: Implementar Drag-and-Drop para Reordenar Empresas y Links
+
+# Plan: CRM Completo para Admin
 
 ## Resumen
 
-Implementar funcionalidad de arrastrar y soltar (drag-and-drop) nativa en los editores de empresas y links del panel de administración del TopBar, manteniendo la independencia del módulo sin añadir librerías externas.
+Crear un modulo CRM independiente dentro del panel de administracion con gestion de clientes, pipeline visual Kanban, historial de interacciones, datos fiscales/contratos y reportes.
 
-## Estrategia
+## Base de Datos
 
-Usar la **API nativa de HTML5 Drag and Drop** que está disponible en todos los navegadores modernos. Esto mantiene el módulo 100% independiente sin necesidad de añadir librerías como `react-beautiful-dnd` o `@dnd-kit`.
+### Nuevas Tablas
 
-## Archivos a Crear
+**1. `crm_clients`** - Tabla principal de clientes
 
-### 1. Hook reutilizable de Drag-and-Drop
+| Columna | Tipo | Descripcion |
+|---------|------|-------------|
+| id | uuid PK | Identificador |
+| name | text | Nombre o razon social |
+| email | text | Email principal |
+| phone | text | Telefono |
+| nif_cif | text | NIF/CIF fiscal |
+| fiscal_address | text | Direccion fiscal |
+| city | text | Ciudad |
+| postal_code | text | Codigo postal |
+| country | text | Pais |
+| website | text | Sitio web |
+| sector | text | Sector/industria |
+| status | enum | prospecto, activo, inactivo, perdido |
+| pipeline_stage | enum | nuevo, contactado, propuesta, negociacion, cerrado_ganado, cerrado_perdido |
+| assigned_to | text | Responsable asignado |
+| notes | text | Notas generales |
+| source | text | Origen (web, referido, evento, etc.) |
+| source_site | site_source | Filtro multi-sitio |
+| created_at | timestamptz | Fecha creacion |
+| updated_at | timestamptz | Fecha actualizacion |
 
-**Archivo:** `src/modules/topbar/hooks/useDragAndDrop.ts`
+**2. `crm_interactions`** - Historial de interacciones
 
-```typescript
-// Hook genérico para manejar drag-and-drop en listas
-interface UseDragAndDropOptions<T> {
-  items: T[];
-  onReorder: (items: T[]) => void;
-  getId: (item: T) => string;
-}
+| Columna | Tipo | Descripcion |
+|---------|------|-------------|
+| id | uuid PK | Identificador |
+| client_id | uuid FK | Referencia al cliente |
+| type | enum | llamada, email, reunion, nota, tarea |
+| subject | text | Asunto |
+| description | text | Detalle |
+| date | timestamptz | Fecha de la interaccion |
+| created_by | text | Quien registro |
+| created_at | timestamptz | Fecha registro |
 
-export function useDragAndDrop<T>({ items, onReorder, getId }: UseDragAndDropOptions<T>) {
-  const [draggedId, setDraggedId] = useState<string | null>(null);
-  const [dragOverId, setDragOverId] = useState<string | null>(null);
-  
-  // Handlers para: onDragStart, onDragEnd, onDragOver, onDragEnter, onDrop
-  // Retorna: handlers para cada item + estados visuales
-}
-```
+**3. `crm_contracts`** - Contratos y servicios
 
-## Archivos a Modificar
+| Columna | Tipo | Descripcion |
+|---------|------|-------------|
+| id | uuid PK | Identificador |
+| client_id | uuid FK | Referencia al cliente |
+| service_name | text | Servicio contratado |
+| status | enum | activo, pausado, finalizado, renovacion_pendiente |
+| start_date | date | Inicio |
+| end_date | date | Fin/renovacion |
+| amount | numeric | Importe |
+| billing_frequency | text | mensual, trimestral, anual |
+| notes | text | Notas |
+| created_at | timestamptz | Fecha creacion |
 
-### 2. CompanyEditor.tsx
+### RLS Policies
 
-- Importar el nuevo hook `useDragAndDrop`
-- Aplicar handlers de drag a cada fila de empresa
-- Añadir estilos visuales durante el drag:
-  - Elemento arrastrado: opacidad reducida
-  - Zona de destino: borde resaltado
-- Llamar a `onReorder` cuando se suelta el elemento
+- Lectura y escritura restringida a usuarios autenticados
+- Uso de `has_role(auth.uid(), 'admin')` para todas las operaciones
 
-### 3. LinkEditor.tsx
-
-- Mismos cambios que CompanyEditor
-- Reutilizar el hook `useDragAndDrop`
-
-## Flujo de Funcionamiento
-
-```text
-Usuario agarra (GripVertical)
-        |
-        v
-  onDragStart
-  - Guarda ID del elemento
-  - Aplica estilo "dragging"
-        |
-        v
-  Usuario arrastra sobre otros elementos
-        |
-        v
-  onDragOver / onDragEnter
-  - Previene default (permite drop)
-  - Muestra indicador visual
-        |
-        v
-  onDrop
-  - Calcula nueva posición
-  - Reordena array localmente
-  - Llama onReorder(orderedIds)
-        |
-        v
-  onDragEnd
-  - Limpia estilos y estados
-```
-
-## Detalles Técnicos
-
-### Hook useDragAndDrop
-
-El hook manejará:
-
-1. **Estado interno:**
-   - `draggedId`: ID del elemento siendo arrastrado
-   - `dragOverId`: ID del elemento sobre el que se está arrastrando
-
-2. **Handlers retornados:**
-   - `getDragProps(id)`: Retorna props para aplicar al contenedor draggable
-   - `getHandleProps(id)`: Retorna props para el handle (GripVertical)
-   - `isDragging(id)`: Si este elemento está siendo arrastrado
-   - `isDragOver(id)`: Si se está arrastrando sobre este elemento
-
-3. **Lógica de reordenamiento:**
-   - Al soltar, calcula la nueva posición
-   - Crea un nuevo array ordenado
-   - Llama al callback con los IDs ordenados
-
-### Estilos visuales
+## Estructura de Archivos
 
 ```text
-Elemento normal:     bg-white border
-Arrastrando:         opacity-50 border-dashed
-Destino (dragover):  border-blue-500 bg-blue-50
+src/
+  pages/admin/
+    AdminCRM.tsx                    -- Pagina principal con tabs
+  components/admin/crm/
+    CRMDashboard.tsx                -- Dashboard con metricas y KPIs
+    CRMPipeline.tsx                 -- Vista Kanban del pipeline
+    CRMPipelineColumn.tsx           -- Columna individual del Kanban
+    CRMPipelineCard.tsx             -- Tarjeta de cliente en Kanban
+    CRMClientList.tsx               -- Vista de tabla de clientes
+    CRMClientForm.tsx               -- Formulario crear/editar cliente
+    CRMClientDetail.tsx             -- Modal detalle del cliente
+    CRMInteractionForm.tsx          -- Formulario nueva interaccion
+    CRMInteractionTimeline.tsx      -- Timeline de interacciones
+    CRMContractList.tsx             -- Lista de contratos del cliente
+    CRMContractForm.tsx             -- Formulario crear/editar contrato
+    CRMFilters.tsx                  -- Filtros de busqueda
+  hooks/
+    useCRMClients.ts                -- CRUD de clientes
+    useCRMInteractions.ts           -- CRUD de interacciones
+    useCRMContracts.ts              -- CRUD de contratos
+    useCRMStats.ts                  -- Estadisticas y metricas
 ```
 
-### Accesibilidad
+## Componentes Principales
 
-- El `GripVertical` mantiene `cursor-grab` / `cursor-grabbing`
-- Los elementos tienen `draggable="true"` solo en el handle
-- Se puede mejorar con keyboard navigation en el futuro
+### 1. AdminCRM.tsx - Pagina principal
 
-## Resumen de Cambios
+Pagina con sistema de tabs:
+- **Dashboard**: KPIs, graficos de conversion, facturacion
+- **Pipeline**: Vista Kanban arrastrando clientes entre etapas
+- **Clientes**: Tabla completa con filtros y busqueda
+- **Contratos**: Vista de contratos con alertas de renovacion
 
-| Archivo | Acción | Descripción |
-|---------|--------|-------------|
-| `hooks/useDragAndDrop.ts` | Crear | Hook reutilizable para DnD |
-| `admin/CompanyEditor.tsx` | Modificar | Integrar DnD en lista de empresas |
-| `admin/LinkEditor.tsx` | Modificar | Integrar DnD en lista de links |
+### 2. CRMPipeline.tsx - Vista Kanban
 
-## Dependencias
+```text
++-------------+-------------+--------------+---------------+------------------+
+|   Nuevo     | Contactado  |  Propuesta   |  Negociacion  |  Cerrado Ganado  |
++-------------+-------------+--------------+---------------+------------------+
+| [Card]      | [Card]      | [Card]       | [Card]        | [Card]           |
+| [Card]      | [Card]      |              |               |                  |
+|             |             |              |               |                  |
++-------------+-------------+--------------+---------------+------------------+
+```
 
-Ninguna nueva. Se usa la API nativa de HTML5 Drag and Drop.
+- Drag-and-drop nativo (reutilizando patron del TopBar)
+- Al mover una tarjeta se actualiza `pipeline_stage` en la BD
+- Cada tarjeta muestra: nombre, sector, valor estimado, dias en etapa
+
+### 3. CRMClientDetail.tsx - Detalle de cliente
+
+Modal/pagina con:
+- Datos generales y fiscales
+- Timeline de interacciones (llamadas, emails, reuniones)
+- Lista de contratos activos
+- Boton para registrar nueva interaccion
+- Historial de cambios de pipeline
+
+### 4. CRMDashboard.tsx - Metricas
+
+- Total clientes por estado (activo, prospecto, perdido)
+- Funnel de conversion del pipeline
+- Facturacion mensual por contratos
+- Contratos proximos a vencer (30 dias)
+- Actividad reciente (ultimas interacciones)
+
+## Integracion con Admin
+
+### Sidebar
+
+Anadir entrada nueva en `AdminSidebar.tsx`:
+```text
+{ path: '/admin/crm', icon: Briefcase, label: 'CRM' }
+```
+
+### Rutas
+
+Anadir ruta en el router principal:
+```text
+/admin/crm -> AdminCRM.tsx
+```
+
+## Flujo de Uso
+
+1. El admin accede a `/admin/crm`
+2. Ve el dashboard con KPIs generales
+3. Cambia a la vista Pipeline para ver el Kanban
+4. Arrastra un cliente de "Nuevo" a "Contactado"
+5. Hace clic en la tarjeta para ver el detalle
+6. Registra una interaccion (llamada, email, reunion)
+7. Crea un contrato cuando se cierra la venta
+8. En la tab Contratos ve alertas de renovacion
+
+## Consideraciones
+
+- Se reutiliza el patron de `source_site` para compatibilidad multi-sitio
+- El drag-and-drop usa la API nativa HTML5, reutilizando el hook creado para el TopBar
+- Los datos fiscales (NIF/CIF) se almacenan como texto plano, sin validacion de formato ya que pueden ser de distintos paises
+- Exportacion a CSV/Excel reutilizando las utilidades existentes en `src/lib/exportContactLeads.ts`
+
