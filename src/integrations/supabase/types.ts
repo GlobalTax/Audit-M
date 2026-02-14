@@ -225,11 +225,9 @@ export type Database = {
           author_name: string | null
           author_specialization: string | null
           category: string | null
-          content_ca: string | null
           content_en: string | null
           content_es: string | null
           created_at: string | null
-          excerpt_ca: string | null
           excerpt_en: string | null
           excerpt_es: string | null
           featured_image: string | null
@@ -240,20 +238,16 @@ export type Database = {
           quality_score: number | null
           read_time: number | null
           scheduled_at: string | null
-          seo_description_ca: string | null
           seo_description_en: string | null
           seo_description_es: string | null
-          seo_title_ca: string | null
           seo_title_en: string | null
           seo_title_es: string | null
           shared_sites: string[] | null
-          slug_ca: string | null
           slug_en: string | null
           slug_es: string
           source_site: Database["public"]["Enums"]["site_source"] | null
           status: string
           tags: string[] | null
-          title_ca: string | null
           title_en: string | null
           title_es: string
           updated_at: string | null
@@ -264,11 +258,9 @@ export type Database = {
           author_name?: string | null
           author_specialization?: string | null
           category?: string | null
-          content_ca?: string | null
           content_en?: string | null
           content_es?: string | null
           created_at?: string | null
-          excerpt_ca?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
           featured_image?: string | null
@@ -279,20 +271,16 @@ export type Database = {
           quality_score?: number | null
           read_time?: number | null
           scheduled_at?: string | null
-          seo_description_ca?: string | null
           seo_description_en?: string | null
           seo_description_es?: string | null
-          seo_title_ca?: string | null
           seo_title_en?: string | null
           seo_title_es?: string | null
           shared_sites?: string[] | null
-          slug_ca?: string | null
           slug_en?: string | null
           slug_es: string
           source_site?: Database["public"]["Enums"]["site_source"] | null
           status?: string
           tags?: string[] | null
-          title_ca?: string | null
           title_en?: string | null
           title_es: string
           updated_at?: string | null
@@ -303,11 +291,9 @@ export type Database = {
           author_name?: string | null
           author_specialization?: string | null
           category?: string | null
-          content_ca?: string | null
           content_en?: string | null
           content_es?: string | null
           created_at?: string | null
-          excerpt_ca?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
           featured_image?: string | null
@@ -318,54 +304,20 @@ export type Database = {
           quality_score?: number | null
           read_time?: number | null
           scheduled_at?: string | null
-          seo_description_ca?: string | null
           seo_description_en?: string | null
           seo_description_es?: string | null
-          seo_title_ca?: string | null
           seo_title_en?: string | null
           seo_title_es?: string | null
           shared_sites?: string[] | null
-          slug_ca?: string | null
           slug_en?: string | null
           slug_es?: string
           source_site?: Database["public"]["Enums"]["site_source"] | null
           status?: string
           tags?: string[] | null
-          title_ca?: string | null
           title_en?: string | null
           title_es?: string
           updated_at?: string | null
           view_count?: number | null
-        }
-        Relationships: []
-      }
-      blog_categories: {
-        Row: {
-          id: string
-          name: string
-          slug: string
-          description: string | null
-          display_order: number | null
-          is_active: boolean | null
-          created_at: string | null
-        }
-        Insert: {
-          id?: string
-          name: string
-          slug: string
-          description?: string | null
-          display_order?: number | null
-          is_active?: boolean | null
-          created_at?: string | null
-        }
-        Update: {
-          id?: string
-          name?: string
-          slug?: string
-          description?: string | null
-          display_order?: number | null
-          is_active?: boolean | null
-          created_at?: string | null
         }
         Relationships: []
       }
@@ -1405,6 +1357,72 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "crm_clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_invoices: {
+        Row: {
+          amount: number
+          client_id: string
+          contract_id: string | null
+          created_at: string
+          due_date: string | null
+          id: string
+          invoice_number: string
+          issue_date: string
+          notes: string | null
+          service_description: string
+          status: Database["public"]["Enums"]["crm_invoice_status"]
+          tax_amount: number
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          client_id: string
+          contract_id?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          issue_date?: string
+          notes?: string | null
+          service_description?: string
+          status?: Database["public"]["Enums"]["crm_invoice_status"]
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          client_id?: string
+          contract_id?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          issue_date?: string
+          notes?: string | null
+          service_description?: string
+          status?: Database["public"]["Enums"]["crm_invoice_status"]
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_invoices_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "crm_clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_invoices_contract_id_fkey"
+            columns: ["contract_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contracts"
             referencedColumns: ["id"]
           },
         ]
@@ -5016,6 +5034,12 @@ export type Database = {
         | "finalizado"
         | "renovacion_pendiente"
       crm_interaction_type: "llamada" | "email" | "reunion" | "nota" | "tarea"
+      crm_invoice_status:
+        | "borrador"
+        | "emitida"
+        | "pagada"
+        | "vencida"
+        | "anulada"
       crm_pipeline_stage:
         | "nuevo"
         | "contactado"
@@ -5242,6 +5266,13 @@ export const Constants = {
         "renovacion_pendiente",
       ],
       crm_interaction_type: ["llamada", "email", "reunion", "nota", "tarea"],
+      crm_invoice_status: [
+        "borrador",
+        "emitida",
+        "pagada",
+        "vencida",
+        "anulada",
+      ],
       crm_pipeline_stage: [
         "nuevo",
         "contactado",

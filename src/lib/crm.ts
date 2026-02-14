@@ -60,6 +60,26 @@ export const CONTRACT_STATUS_LABELS: Record<CRMContractStatus, string> = {
 
 // --- Interaction constants ---
 
+// --- Invoice constants ---
+
+export type CRMInvoiceStatusKey = 'borrador' | 'emitida' | 'pagada' | 'vencida' | 'anulada';
+
+export const INVOICE_STATUS_LABELS: Record<CRMInvoiceStatusKey, string> = {
+  borrador: 'Borrador',
+  emitida: 'Emitida',
+  pagada: 'Pagada',
+  vencida: 'Vencida',
+  anulada: 'Anulada',
+};
+
+export const INVOICE_STATUS_COLORS: Record<CRMInvoiceStatusKey, string> = {
+  borrador: 'bg-slate-100 text-slate-600',
+  emitida: 'bg-blue-100 text-blue-700',
+  pagada: 'bg-emerald-100 text-emerald-700',
+  vencida: 'bg-red-100 text-red-700',
+  anulada: 'bg-slate-100 text-slate-400',
+};
+
 export const INTERACTION_TYPE_LABELS: Record<CRMInteractionType, string> = {
   llamada: 'Llamada',
   email: 'Email',
