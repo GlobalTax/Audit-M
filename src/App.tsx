@@ -144,6 +144,7 @@ const App = () => {
                 >
                   <Route index element={<Suspense fallback={<AdminSpinner />}><AdminDashboard /></Suspense>} />
                   <Route path="crm" element={<Suspense fallback={<AdminSpinner />}><AdminCRM /></Suspense>} />
+                  <Route path="crm/:section" element={<Suspense fallback={<AdminSpinner />}><AdminCRM /></Suspense>} />
                   <Route path="crm/clients/:clientId" element={<Suspense fallback={<AdminSpinner />}><AdminCRMClientDetail /></Suspense>} />
                   <Route path="settings" element={<Suspense fallback={<AdminSpinner />}><AdminSettings /></Suspense>} />
                   <Route path="topbar" element={<Suspense fallback={<AdminSpinner />}><AdminTopBar /></Suspense>} />

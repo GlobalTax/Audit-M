@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
+import { useCRMStats } from '@/hooks/useCRMStats';
 import {
   LayoutDashboard,
   Users,
@@ -23,6 +24,12 @@ import {
   ChevronDown,
   ChevronRight as ChevronRightIcon,
   Search,
+  Building2,
+  Kanban,
+  BarChart3,
+  Mail,
+  Phone,
+  CalendarDays,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -89,8 +96,11 @@ export const AdminSidebar = () => {
   const location = useLocation();
   const { adminUser, canManageUsers } = useAdminAuth();
   const unreadLeads = useUnreadContactLeads();
+  const { data: crmStats } = useCRMStats();
   const [collapsed, setCollapsed] = useState(false);
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
+
+  const isCRMRoute = location.pathname.startsWith('/admin/crm');
 
   const isActive = (path: string) => {
     if (path === '/admin') return location.pathname === path;
@@ -198,19 +208,24 @@ export const AdminSidebar = () => {
                   {!isSectionCollapsed && (
                     <div className="space-y-0.5">
                       {section.items.map((item) => (
-                        <SidebarItem
-                          key={item.path}
-                          path={item.path}
-                          icon={item.icon}
-                          label={item.label}
-                          isActive={isActive(item.path)}
-                          collapsed={collapsed}
-                          badge={
-                            item.path === '/admin/contact-leads' && unreadLeads > 0
-                              ? unreadLeads
-                              : undefined
-                          }
-                        />
+                        <div key={item.path}>
+                          <SidebarItem
+                            path={item.path}
+                            icon={item.icon}
+                            label={item.label}
+                            isActive={isActive(item.path)}
+                            collapsed={collapsed}
+                            badge={
+                              item.path === '/admin/contact-leads' && unreadLeads > 0
+                                ? unreadLeads
+                                : undefined
+                            }
+                          />
+                          {/* CRM sub-items */}
+                          {item.path === '/admin/crm' && isCRMRoute && !collapsed && (
+                            <CRMSubNav currentPath={location.pathname} crmStats={crmStats} />
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}
@@ -327,4 +342,74 @@ function SidebarItem({
   }
 
   return content;
+}
+
+interface CRMSubNavProps {
+  currentPath: string;
+  crmStats?: { totalClients: number; activeContracts: number } | null;
+}
+
+const crmSubSections = [
+  {
+    label: 'PROSPECTAR',
+    items: [
+      { path: '/admin/crm/personas', label: 'Personas', icon: Users },
+      { path: '/admin/crm/empresas', label: 'Empresas', icon: Building2 },
+    ],
+  },
+  {
+    label: 'GANAR TRATOS',
+    items: [
+      { path: '/admin/crm/pipeline', label: 'Pipeline', icon: Kanban },
+      { path: '/admin/crm/tratos', label: 'Contratos', icon: FileText },
+    ],
+  },
+  {
+    label: 'HERRAMIENTAS',
+    items: [
+      { path: '/admin/crm/analitica', label: 'Analítica', icon: BarChart3 },
+    ],
+  },
+];
+
+function CRMSubNav({ currentPath, crmStats }: CRMSubNavProps) {
+  return (
+    <div className="ml-4 mt-0.5 mb-1 border-l border-slate-200 pl-2 space-y-2">
+      {crmSubSections.map((section) => (
+        <div key={section.label}>
+          <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-slate-400 px-2">
+            {section.label}
+          </span>
+          <div className="mt-0.5 space-y-0.5">
+            {section.items.map((item) => {
+              const active = currentPath === item.path;
+              const count =
+                item.path === '/admin/crm/personas' ? crmStats?.totalClients :
+                item.path === '/admin/crm/tratos' ? crmStats?.activeContracts :
+                undefined;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center justify-between px-2 py-1 rounded-md text-[12px] transition-colors ${
+                    active
+                      ? 'bg-blue-50 text-blue-600 font-medium'
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <item.icon className="h-3.5 w-3.5" />
+                    <span>{item.label}</span>
+                  </span>
+                  {count !== undefined && (
+                    <span className="text-[10px] font-mono text-slate-400">{count}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
