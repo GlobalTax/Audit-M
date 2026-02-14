@@ -1,1 +1,4 @@
 project_id = "zntotcpagkunvkwpubqu"
+
+[functions.import-billing-data]
+verify_jwt = false

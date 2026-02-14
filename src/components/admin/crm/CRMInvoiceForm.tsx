@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCRMClients } from '@/hooks/useCRMClients';
 import { useCRMContracts } from '@/hooks/useCRMContracts';
 import { useNextInvoiceNumber, useCreateCRMInvoice, type CRMInvoiceStatus } from '@/hooks/useCRMInvoices';
+import { AUDIT_SERVICE_TYPES } from '@/lib/crm';
 
 interface CRMInvoiceFormProps {
   open: boolean;
@@ -35,6 +36,8 @@ export function CRMInvoiceForm({ open, onOpenChange }: CRMInvoiceFormProps) {
   const [amount, setAmount] = useState('');
   const [taxRate, setTaxRate] = useState('21');
   const [description, setDescription] = useState('');
+  const [serviceType, setServiceType] = useState('');
+  const [serviceTypeCustom, setServiceTypeCustom] = useState('');
   const [status, setStatus] = useState<CRMInvoiceStatus>('borrador');
   const [notes, setNotes] = useState('');
 
@@ -45,6 +48,8 @@ export function CRMInvoiceForm({ open, onOpenChange }: CRMInvoiceFormProps) {
   const numAmount = parseFloat(amount) || 0;
   const numTax = numAmount * (parseFloat(taxRate) / 100);
   const total = numAmount + numTax;
+
+  const finalServiceType = serviceType === 'Otro' ? serviceTypeCustom : serviceType;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,6 +67,7 @@ export function CRMInvoiceForm({ open, onOpenChange }: CRMInvoiceFormProps) {
         total_amount: total,
         status,
         service_description: description,
+        service_type: finalServiceType || null,
         notes: notes || null,
       },
       {
@@ -79,6 +85,8 @@ export function CRMInvoiceForm({ open, onOpenChange }: CRMInvoiceFormProps) {
     setAmount('');
     setTaxRate('21');
     setDescription('');
+    setServiceType('');
+    setServiceTypeCustom('');
     setStatus('borrador');
     setNotes('');
     setDueDate('');
@@ -134,6 +142,25 @@ export function CRMInvoiceForm({ open, onOpenChange }: CRMInvoiceFormProps) {
                 </SelectContent>
               </Select>
             </div>
+
+            <div className="col-span-2">
+              <Label className="text-xs text-slate-500">Tipo de servicio</Label>
+              <Select value={serviceType} onValueChange={setServiceType}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar tipo" /></SelectTrigger>
+                <SelectContent>
+                  {AUDIT_SERVICE_TYPES.map((t) => (
+                    <SelectItem key={t} value={t}>{t}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {serviceType === 'Otro' && (
+              <div className="col-span-2">
+                <Label className="text-xs text-slate-500">Especificar servicio</Label>
+                <Input value={serviceTypeCustom} onChange={(e) => setServiceTypeCustom(e.target.value)} placeholder="Nombre del servicio" />
+              </div>
+            )}
 
             <div>
               <Label className="text-xs text-slate-500">Fecha emisión *</Label>
