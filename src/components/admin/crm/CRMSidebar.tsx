@@ -93,16 +93,16 @@ export const CRMSidebar = ({
   ];
 
   return (
-    <div className="flex flex-col h-full bg-slate-900 text-slate-300 w-full">
+    <div className="flex flex-col h-full bg-white text-slate-700 border-r border-slate-200 w-full">
       {/* Search */}
       <div className="p-3">
         <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500" />
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
           <Input
             placeholder="Buscar..."
             value={searchValue}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-8 h-8 text-xs bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-500 focus-visible:ring-indigo-500/40"
+            className="pl-8 h-8 text-xs bg-slate-50 border-slate-200 text-slate-800 placeholder:text-slate-400 focus-visible:ring-blue-500/40"
           />
         </div>
       </div>
@@ -113,7 +113,7 @@ export const CRMSidebar = ({
           <div key={section.key} className="mb-1">
             <button
               onClick={() => toggleSection(section.key)}
-              className="flex items-center justify-between w-full px-2 py-1.5 text-[10px] font-mono font-light uppercase tracking-widest text-slate-500 hover:text-slate-300 transition-colors"
+              className="flex items-center justify-between w-full px-2 py-1.5 text-[10px] font-mono font-light uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-colors"
             >
               <span>{section.label}</span>
               {openSections[section.key] ? (
@@ -133,10 +133,10 @@ export const CRMSidebar = ({
                     className={cn(
                       'flex items-center justify-between w-full px-3 py-1.5 rounded-md text-sm transition-colors',
                       activeView === item.id
-                        ? 'bg-indigo-600/20 text-indigo-300'
+                        ? 'bg-blue-50 text-blue-600 font-medium'
                         : item.disabled
-                          ? 'text-slate-600 cursor-not-allowed'
-                          : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200',
+                          ? 'text-slate-300 cursor-not-allowed'
+                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900',
                     )}
                   >
                     <span className="flex items-center gap-2.5">
@@ -144,10 +144,10 @@ export const CRMSidebar = ({
                       <span>{item.label}</span>
                     </span>
                     {item.count !== undefined && (
-                      <span className="text-[10px] font-mono text-slate-500">{item.count}</span>
+                      <span className="text-[10px] font-mono text-slate-400">{item.count}</span>
                     )}
                     {item.disabled && (
-                      <span className="text-[9px] font-mono uppercase text-slate-600">Pronto</span>
+                      <span className="text-[9px] font-mono uppercase text-slate-400">Pronto</span>
                     )}
                   </button>
                 ))}
