@@ -14,7 +14,11 @@ import { es } from 'date-fns/locale';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { CLIENT_STATUS_COLORS, CLIENT_STATUS_LABELS, PIPELINE_LABELS, formatCurrency, getRiskLevel, RISK_LABELS } from '@/lib/crm';
 
-export const CRMClientList = () => {
+interface CRMClientListProps {
+  globalSearch?: string;
+}
+
+export const CRMClientList = ({ globalSearch = '' }: CRMClientListProps) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -23,9 +27,10 @@ export const CRMClientList = () => {
   const [editingClient, setEditingClient] = useState<CRMClient | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(search), 300);
+    const combined = globalSearch || search;
+    const timer = setTimeout(() => setDebouncedSearch(combined), 300);
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [search, globalSearch]);
 
   const { data: clients = [], isLoading } = useCRMClients({
     search: debouncedSearch || undefined,
