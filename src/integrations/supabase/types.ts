@@ -225,9 +225,11 @@ export type Database = {
           author_name: string | null
           author_specialization: string | null
           category: string | null
+          content_ca: string | null
           content_en: string | null
           content_es: string | null
           created_at: string | null
+          excerpt_ca: string | null
           excerpt_en: string | null
           excerpt_es: string | null
           featured_image: string | null
@@ -238,16 +240,20 @@ export type Database = {
           quality_score: number | null
           read_time: number | null
           scheduled_at: string | null
+          seo_description_ca: string | null
           seo_description_en: string | null
           seo_description_es: string | null
+          seo_title_ca: string | null
           seo_title_en: string | null
           seo_title_es: string | null
           shared_sites: string[] | null
+          slug_ca: string | null
           slug_en: string | null
           slug_es: string
           source_site: Database["public"]["Enums"]["site_source"] | null
           status: string
           tags: string[] | null
+          title_ca: string | null
           title_en: string | null
           title_es: string
           updated_at: string | null
@@ -258,9 +264,11 @@ export type Database = {
           author_name?: string | null
           author_specialization?: string | null
           category?: string | null
+          content_ca?: string | null
           content_en?: string | null
           content_es?: string | null
           created_at?: string | null
+          excerpt_ca?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
           featured_image?: string | null
@@ -271,16 +279,20 @@ export type Database = {
           quality_score?: number | null
           read_time?: number | null
           scheduled_at?: string | null
+          seo_description_ca?: string | null
           seo_description_en?: string | null
           seo_description_es?: string | null
+          seo_title_ca?: string | null
           seo_title_en?: string | null
           seo_title_es?: string | null
           shared_sites?: string[] | null
+          slug_ca?: string | null
           slug_en?: string | null
           slug_es: string
           source_site?: Database["public"]["Enums"]["site_source"] | null
           status?: string
           tags?: string[] | null
+          title_ca?: string | null
           title_en?: string | null
           title_es: string
           updated_at?: string | null
@@ -291,9 +303,11 @@ export type Database = {
           author_name?: string | null
           author_specialization?: string | null
           category?: string | null
+          content_ca?: string | null
           content_en?: string | null
           content_es?: string | null
           created_at?: string | null
+          excerpt_ca?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
           featured_image?: string | null
@@ -304,20 +318,54 @@ export type Database = {
           quality_score?: number | null
           read_time?: number | null
           scheduled_at?: string | null
+          seo_description_ca?: string | null
           seo_description_en?: string | null
           seo_description_es?: string | null
+          seo_title_ca?: string | null
           seo_title_en?: string | null
           seo_title_es?: string | null
           shared_sites?: string[] | null
+          slug_ca?: string | null
           slug_en?: string | null
           slug_es?: string
           source_site?: Database["public"]["Enums"]["site_source"] | null
           status?: string
           tags?: string[] | null
+          title_ca?: string | null
           title_en?: string | null
           title_es?: string
           updated_at?: string | null
           view_count?: number | null
+        }
+        Relationships: []
+      }
+      blog_categories: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          description: string | null
+          display_order: number | null
+          is_active: boolean | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          description?: string | null
+          display_order?: number | null
+          is_active?: boolean | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          description?: string | null
+          display_order?: number | null
+          is_active?: boolean | null
+          created_at?: string | null
         }
         Relationships: []
       }
