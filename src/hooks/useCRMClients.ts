@@ -1,6 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { sanitizeSearchTerm } from '@/lib/crm';
+import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
 export type CRMClientStatus = 'prospecto' | 'activo' | 'inactivo' | 'perdido';
 export type CRMPipelineStage = 'nuevo' | 'contactado' | 'propuesta' | 'negociacion' | 'cerrado_ganado' | 'cerrado_perdido';
@@ -22,7 +24,7 @@ export interface CRMClient {
   assigned_to: string | null;
   notes: string | null;
   source: string | null;
-  estimated_value: number;
+  estimated_value: number | null;
   source_site: string | null;
   created_at: string;
   updated_at: string;
@@ -43,7 +45,8 @@ export const useCRMClients = (filters?: { status?: CRMClientStatus; search?: str
         query = query.eq('status', filters.status);
       }
       if (filters?.search) {
-        query = query.or(`name.ilike.%${filters.search}%,email.ilike.%${filters.search}%,nif_cif.ilike.%${filters.search}%`);
+        const term = sanitizeSearchTerm(filters.search);
+        query = query.or(`name.ilike.%${term}%,email.ilike.%${term}%,nif_cif.ilike.%${term}%`);
       }
 
       const { data, error } = await query;
@@ -76,7 +79,7 @@ export const useCreateCRMClient = () => {
     mutationFn: async (client: Partial<CRMClientInsert>) => {
       const { data, error } = await supabase
         .from('crm_clients')
-        .insert(client as any)
+        .insert(client as TablesInsert<'crm_clients'>)
         .select()
         .single();
       if (error) throw error;
@@ -99,7 +102,7 @@ export const useUpdateCRMClient = () => {
     mutationFn: async ({ id, ...updates }: Partial<CRMClient> & { id: string }) => {
       const { data, error } = await supabase
         .from('crm_clients')
-        .update(updates as any)
+        .update(updates as TablesUpdate<'crm_clients'>)
         .eq('id', id)
         .select()
         .single();

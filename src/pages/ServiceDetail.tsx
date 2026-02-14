@@ -90,7 +90,7 @@ const ServiceDetail = () => {
     if (service) {
       trackPageView("servicio_detalle");
     }
-  }, [service, slug]);
+  }, [service, slug, trackPageView]);
 
   if (isLoading) {
     return (

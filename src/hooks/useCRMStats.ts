@@ -19,9 +19,9 @@ export const useCRMStats = () => {
     queryKey: ['crm-stats'],
     queryFn: async () => {
       const [clientsRes, contractsRes, interactionsRes] = await Promise.all([
-        supabase.from('crm_clients').select('*'),
-        supabase.from('crm_contracts').select('*'),
-        supabase.from('crm_interactions').select('*').order('date', { ascending: false }).limit(10),
+        supabase.from('crm_clients').select('id, status, pipeline_stage'),
+        supabase.from('crm_contracts').select('id, status, amount, end_date'),
+        supabase.from('crm_interactions').select('id, client_id, type, subject, description, date, created_by, created_at').order('date', { ascending: false }).limit(10),
       ]);
 
       if (clientsRes.error) throw clientsRes.error;
@@ -43,14 +43,22 @@ export const useCRMStats = () => {
       const now = new Date();
       const in30Days = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-      const activeContracts = contracts.filter((c) => c.status === 'activo').length;
-      const expiringContracts = contracts.filter(
-        (c) => c.status === 'activo' && c.end_date && new Date(c.end_date) <= in30Days
-      ).length;
+      let activeContracts = 0;
+      let expiringContracts = 0;
+      let totalContractValue = 0;
 
-      const totalContractValue = contracts
-        .filter((c) => c.status === 'activo')
-        .reduce((sum, c) => sum + (c.amount || 0), 0);
+      for (const c of contracts) {
+        if (c.status === 'activo') {
+          activeContracts++;
+          totalContractValue += c.amount || 0;
+          if (c.end_date) {
+            const endDate = new Date(c.end_date);
+            if (endDate >= now && endDate <= in30Days) {
+              expiringContracts++;
+            }
+          }
+        }
+      }
 
       return {
         totalClients: clients.length,

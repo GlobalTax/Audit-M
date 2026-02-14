@@ -42,13 +42,13 @@ export const AdminLayout = () => {
   return (
     <div className="flex min-h-screen admin-international">
       <AdminSidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader />
-        <main className="flex-1 bg-slate-100 p-6">
+        <main className="flex-1 bg-slate-50/80 p-6 lg:p-8">
           {showBanner && (
-            <Alert className="mb-4 border-amber-500/30 bg-amber-50">
-              <Bell className="h-4 w-4 text-amber-600" />
-              <AlertTitle className="flex items-center justify-between text-amber-900">
+            <Alert className="mb-6 border-primary/20 bg-primary/5 rounded-xl">
+              <Bell className="h-4 w-4 text-primary" />
+              <AlertTitle className="flex items-center justify-between text-slate-900">
                 <span>Enable push notifications</span>
                 <Button
                   variant="ghost"

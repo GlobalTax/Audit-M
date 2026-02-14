@@ -32,7 +32,7 @@ export default function Contact() {
   // Track page view
   useEffect(() => {
     trackPageView("contacto");
-  }, []);
+  }, [trackPageView]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

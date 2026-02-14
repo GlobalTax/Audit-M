@@ -6,6 +6,16 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Escape HTML to prevent injection in email templates
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 interface NotificationRequest {
   leadId: string;
   sendConfirmation?: boolean;
@@ -42,7 +52,7 @@ async function sendConfirmationEmail(
             <head><meta charset="utf-8"></head>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
               <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #1a1a1a; margin-bottom: 20px;">Thank you for contacting us, ${name}</h1>
+                <h1 style="color: #1a1a1a; margin-bottom: 20px;">Thank you for contacting us, ${escapeHtml(name)}</h1>
                 <p>We have received your message and will get back to you as soon as possible.</p>
                 <p>Our team will review your inquiry and respond within 24-48 business hours.</p>
                 <div style="margin: 30px 0; padding: 20px; background-color: #f5f5f5; border-radius: 8px;">
@@ -64,7 +74,7 @@ async function sendConfirmationEmail(
             <head><meta charset="utf-8"></head>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
               <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #1a1a1a; margin-bottom: 20px;">Gracias por contactarnos, ${name}</h1>
+                <h1 style="color: #1a1a1a; margin-bottom: 20px;">Gracias por contactarnos, ${escapeHtml(name)}</h1>
                 <p>Hemos recibido tu mensaje y nos pondremos en contacto contigo lo antes posible.</p>
                 <p>Nuestro equipo revisará tu consulta y te responderemos en un plazo máximo de 24-48 horas laborables.</p>
                 <div style="margin: 30px 0; padding: 20px; background-color: #f5f5f5; border-radius: 8px;">
@@ -115,7 +125,7 @@ async function sendNotificationEmail(
       body: JSON.stringify({
         from: 'NRRO Sistema <info@nrro.es>',
         to: ['info@nrro.es'],
-        subject: `${isInternational ? '[INT]' : '[ES]'} Nuevo contacto: ${contactData.name} (${contactData.lead_source || 'manual'})`,
+        subject: `${isInternational ? '[INT]' : '[ES]'} Nuevo contacto: ${escapeHtml(contactData.name)} (${escapeHtml(contactData.lead_source || 'manual')})`,
         html: `
           <!DOCTYPE html>
           <html>
@@ -127,17 +137,17 @@ async function sendNotificationEmail(
                   <strong>Sitio:</strong> ${isInternational ? '🌍 Internacional (global.nrro.es)' : '🇪🇸 España (nrro.es)'}
                 </div>
                 <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                  <p><strong>Nombre:</strong> ${contactData.name}</p>
-                  <p><strong>Email:</strong> <a href="mailto:${contactData.email}">${contactData.email}</a></p>
-                  ${contactData.phone ? `<p><strong>Teléfono:</strong> ${contactData.phone}</p>` : ''}
-                  ${contactData.company ? `<p><strong>Empresa:</strong> ${contactData.company}</p>` : ''}
-                  <p><strong>Asunto:</strong> ${contactData.subject}</p>
-                  <p><strong>Tipo de servicio:</strong> ${contactData.service_type || 'No especificado'}</p>
-                  <p><strong>Origen:</strong> ${contactData.lead_source || 'web'}</p>
+                  <p><strong>Nombre:</strong> ${escapeHtml(contactData.name)}</p>
+                  <p><strong>Email:</strong> <a href="mailto:${escapeHtml(contactData.email)}">${escapeHtml(contactData.email)}</a></p>
+                  ${contactData.phone ? `<p><strong>Teléfono:</strong> ${escapeHtml(contactData.phone)}</p>` : ''}
+                  ${contactData.company ? `<p><strong>Empresa:</strong> ${escapeHtml(contactData.company)}</p>` : ''}
+                  <p><strong>Asunto:</strong> ${escapeHtml(contactData.subject)}</p>
+                  <p><strong>Tipo de servicio:</strong> ${escapeHtml(contactData.service_type || 'No especificado')}</p>
+                  <p><strong>Origen:</strong> ${escapeHtml(contactData.lead_source || 'web')}</p>
                 </div>
                 <div style="background-color: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
                   <h3 style="margin-top: 0;">Mensaje:</h3>
-                  <p style="white-space: pre-wrap;">${contactData.message}</p>
+                  <p style="white-space: pre-wrap;">${escapeHtml(contactData.message)}</p>
                 </div>
                 <p style="color: #666; font-size: 14px; margin-top: 20px;">
                   <strong>Fecha:</strong> ${new Date().toLocaleString('es-ES')}
@@ -173,6 +183,27 @@ serve(async (req: Request) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
     const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Verify caller is authenticated
+    const authHeader = req.headers.get('authorization');
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser(
+      authHeader.replace('Bearer ', '')
+    );
+
+    if (userError || !user) {
+      console.error('[NOTIFICATION] Invalid session');
+      return new Response(
+        JSON.stringify({ error: 'Invalid or expired session' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     if (!resendApiKey) {
       console.error('[NOTIFICATION] RESEND_API_KEY not configured');

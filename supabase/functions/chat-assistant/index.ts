@@ -391,8 +391,44 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    const { messages } = body;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+
+    // Validate messages array
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Messages must be a non-empty array" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Limit message count to prevent token abuse
+    const MAX_MESSAGES = 50;
+    if (messages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({ error: `Too many messages. Maximum is ${MAX_MESSAGES}.` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate each message has required fields and reasonable content length
+    const MAX_CONTENT_LENGTH = 4000;
+    const validRoles = ["user", "assistant"];
+    for (const msg of messages) {
+      if (!msg || typeof msg.content !== "string" || !validRoles.includes(msg.role)) {
+        return new Response(
+          JSON.stringify({ error: "Each message must have a valid 'role' (user/assistant) and 'content' string" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      if (msg.content.length > MAX_CONTENT_LENGTH) {
+        return new Response(
+          JSON.stringify({ error: `Message content too long. Maximum is ${MAX_CONTENT_LENGTH} characters.` }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+    }
 
     if (!LOVABLE_API_KEY) {
       console.error("LOVABLE_API_KEY is not configured");

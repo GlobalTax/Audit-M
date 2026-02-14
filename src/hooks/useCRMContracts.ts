@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import type { TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
 export type CRMContractStatus = 'activo' | 'pausado' | 'finalizado' | 'renovacion_pendiente';
 
@@ -11,7 +12,7 @@ export interface CRMContract {
   status: CRMContractStatus;
   start_date: string | null;
   end_date: string | null;
-  amount: number;
+  amount: number | null;
   billing_frequency: string | null;
   notes: string | null;
   created_at: string;
@@ -39,7 +40,7 @@ export const useCreateCRMContract = () => {
     mutationFn: async (contract: Omit<CRMContract, 'id' | 'created_at' | 'updated_at'>) => {
       const { data, error } = await supabase
         .from('crm_contracts')
-        .insert(contract as any)
+        .insert(contract as TablesInsert<'crm_contracts'>)
         .select()
         .single();
       if (error) throw error;
@@ -62,7 +63,7 @@ export const useUpdateCRMContract = () => {
     mutationFn: async ({ id, ...updates }: Partial<CRMContract> & { id: string }) => {
       const { data, error } = await supabase
         .from('crm_contracts')
-        .update(updates as any)
+        .update(updates as TablesUpdate<'crm_contracts'>)
         .eq('id', id)
         .select()
         .single();

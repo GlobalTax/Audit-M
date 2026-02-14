@@ -1,25 +1,12 @@
 import { useState } from 'react';
-import { useCRMContracts, type CRMContract, type CRMContractStatus } from '@/hooks/useCRMContracts';
+import { useCRMContracts, type CRMContract } from '@/hooks/useCRMContracts';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Plus } from 'lucide-react';
 import { CRMContractForm } from './CRMContractForm';
 import { format, differenceInDays } from 'date-fns';
 import { es } from 'date-fns/locale';
-
-const STATUS_COLORS: Record<CRMContractStatus, string> = {
-  activo: 'bg-green-100 text-green-800',
-  pausado: 'bg-yellow-100 text-yellow-800',
-  finalizado: 'bg-gray-100 text-gray-800',
-  renovacion_pendiente: 'bg-orange-100 text-orange-800',
-};
-
-const STATUS_LABELS: Record<CRMContractStatus, string> = {
-  activo: 'Activo',
-  pausado: 'Pausado',
-  finalizado: 'Finalizado',
-  renovacion_pendiente: 'Renovación Pendiente',
-};
+import { CONTRACT_STATUS_COLORS, CONTRACT_STATUS_LABELS, formatCurrency } from '@/lib/crm';
 
 interface Props {
   clientId: string;
@@ -47,7 +34,7 @@ export const CRMContractList = ({ clientId }: Props) => {
           const daysUntilEnd = contract.end_date
             ? differenceInDays(new Date(contract.end_date), new Date())
             : null;
-          const isExpiringSoon = daysUntilEnd !== null && daysUntilEnd <= 30 && daysUntilEnd > 0;
+          const isExpiringSoon = daysUntilEnd !== null && daysUntilEnd <= 30 && daysUntilEnd >= 0;
 
           return (
             <div
@@ -62,8 +49,8 @@ export const CRMContractList = ({ clientId }: Props) => {
                 </div>
                 <div className="flex items-center gap-2">
                   {isExpiringSoon && <Badge variant="destructive" className="text-[10px]">Vence en {daysUntilEnd}d</Badge>}
-                  <Badge className={STATUS_COLORS[contract.status]} variant="secondary">
-                    {STATUS_LABELS[contract.status]}
+                  <Badge className={CONTRACT_STATUS_COLORS[contract.status]} variant="secondary">
+                    {CONTRACT_STATUS_LABELS[contract.status]}
                   </Badge>
                 </div>
               </div>
@@ -72,7 +59,7 @@ export const CRMContractList = ({ clientId }: Props) => {
                   {contract.start_date && format(new Date(contract.start_date), 'd MMM yyyy', { locale: es })}
                   {contract.end_date && ` → ${format(new Date(contract.end_date), 'd MMM yyyy', { locale: es })}`}
                 </span>
-                <span className="font-medium text-foreground">{contract.amount?.toLocaleString('es-ES')} €</span>
+                <span className="font-medium text-foreground">{formatCurrency(contract.amount)} €</span>
               </div>
             </div>
           );

@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCreateCRMInteraction, type CRMInteractionType } from '@/hooks/useCRMInteractions';
+import { useAuth } from '@/contexts/AuthContext';
+import { getLocalDateTimeString } from '@/lib/crm';
 
 interface CRMInteractionFormProps {
   clientId: string;
@@ -23,11 +25,12 @@ const TYPES: { value: CRMInteractionType; label: string }[] = [
 
 export const CRMInteractionForm = ({ clientId, open, onClose }: CRMInteractionFormProps) => {
   const createInteraction = useCreateCRMInteraction();
+  const { user } = useAuth();
   const [form, setForm] = useState({
     type: 'nota' as CRMInteractionType,
     subject: '',
     description: '',
-    date: new Date().toISOString().slice(0, 16),
+    date: getLocalDateTimeString(),
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,7 +42,7 @@ export const CRMInteractionForm = ({ clientId, open, onClose }: CRMInteractionFo
       subject: form.subject,
       description: form.description || null,
       date: new Date(form.date).toISOString(),
-      created_by: null,
+      created_by: user?.id ?? null,
     });
     onClose();
   };

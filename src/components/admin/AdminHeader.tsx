@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,126 +9,183 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User, Bell, BellOff } from 'lucide-react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { LogOut, Bell, BellOff, ChevronRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useUnreadContactLeads } from '@/hooks/useUnreadContactLeads';
 import { useBrowserNotifications } from '@/hooks/useBrowserNotifications';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { toast as sonnerToast } from 'sonner';
+import { Fragment, useMemo } from 'react';
+
+const ROUTE_LABELS: Record<string, string> = {
+  admin: 'Panel',
+  crm: 'CRM',
+  blog: 'Blog',
+  services: 'Servicios',
+  'case-studies': 'Casos de Éxito',
+  'contact-leads': 'Leads',
+  team: 'Equipo',
+  testimonials: 'Testimonios',
+  awards: 'Premios',
+  settings: 'Ajustes',
+  topbar: 'TopBar',
+  content: 'Contenido',
+  sitemap: 'Sitemap',
+  technology: 'Tecnología',
+  users: 'Usuarios',
+  'proposal-generator': 'Propuestas',
+  'deck-studio': 'Deck Studio',
+  'corporate-presentation': 'Presentación',
+  landings: 'Landings',
+  'landing-dashboard': 'Landing Dashboard',
+};
 
 export const AdminHeader = () => {
   const { adminUser, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const unreadLeads = useUnreadContactLeads();
-  const { 
-    isEnabled, 
-    isSupported, 
-    permission, 
-    toggleNotifications 
+  const {
+    isEnabled,
+    isSupported,
+    permission,
+    toggleNotifications,
   } = useBrowserNotifications();
+
+  const breadcrumbs = useMemo(() => {
+    const segments = location.pathname.split('/').filter(Boolean);
+    return segments.map((segment, index) => ({
+      label: ROUTE_LABELS[segment] || segment,
+      path: '/' + segments.slice(0, index + 1).join('/'),
+      isLast: index === segments.length - 1,
+    }));
+  }, [location.pathname]);
 
   const handleSignOut = async () => {
     try {
       await signOut();
-      toast({
-        title: 'Signed out',
-        description: 'You have been signed out successfully',
-      });
+      toast({ title: 'Sesión cerrada', description: 'Has cerrado sesión correctamente' });
       navigate('/admin/login');
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to sign out',
-        variant: 'destructive',
-      });
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Error al cerrar sesión';
+      toast({ title: 'Error', description: message, variant: 'destructive' });
     }
   };
 
-  return (
-    <header className="bg-slate-50 border-b border-slate-200 px-6 py-4">
-      {/* Subtle accent line at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
-      <div className="flex items-center justify-between relative">
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-light text-slate-500 tracking-wide">
-              Intranet
-            </span>
-            <span className="text-xs text-slate-400">•</span>
-            <span className="text-xs font-mono font-light text-primary">
-              audit.es
-            </span>
-          </div>
-        </div>
+  const userInitials = adminUser?.full_name
+    ?.split(' ')
+    .map((n: string) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase() || 'A';
 
-        <div className="flex items-center gap-4">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="relative hover:bg-slate-200/50"
+  return (
+    <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/60 px-6 py-3 sticky top-0 z-30">
+      <div className="flex items-center justify-between">
+        {/* Breadcrumbs */}
+        <Breadcrumb>
+          <BreadcrumbList>
+            {breadcrumbs.map((crumb, index) => (
+              <Fragment key={crumb.path}>
+                {index > 0 && (
+                  <BreadcrumbSeparator>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </BreadcrumbSeparator>
+                )}
+                <BreadcrumbItem>
+                  {crumb.isLast ? (
+                    <BreadcrumbPage className="font-medium text-slate-900">
+                      {crumb.label}
+                    </BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink
+                      href={crumb.path}
+                      className="text-slate-500 hover:text-slate-700"
+                    >
+                      {crumb.label}
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              </Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        {/* Right side actions */}
+        <div className="flex items-center gap-2">
+          {/* Notification bell */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative h-9 w-9 rounded-full hover:bg-slate-100"
             onClick={() => navigate('/admin/contact-leads')}
           >
-            <Bell className="h-5 w-5 text-slate-600" />
+            <Bell className="h-4 w-4 text-slate-500" />
             {unreadLeads > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-white">
                 {unreadLeads > 9 ? '9+' : unreadLeads}
               </span>
             )}
           </Button>
 
+          {/* User menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="gap-2 hover:bg-slate-200/50">
-                <User className="h-4 w-4 text-slate-600" />
-                <span className="text-slate-700">{adminUser?.full_name}</span>
+              <Button variant="ghost" className="gap-2.5 h-9 pl-2 pr-3 rounded-full hover:bg-slate-100">
+                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-[11px] font-semibold text-primary">{userInitials}</span>
+                </div>
+                <span className="text-sm text-slate-700 hidden sm:inline">{adminUser?.full_name}</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
-                <div>
-                  <p className="font-medium">{adminUser?.full_name}</p>
-                  <p className="text-xs text-muted-foreground">{adminUser?.email}</p>
-                </div>
+                <p className="font-medium">{adminUser?.full_name}</p>
+                <p className="text-xs text-muted-foreground font-normal">{adminUser?.email}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild className="cursor-pointer">
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-2">
-                    {isEnabled ? (
-                      <Bell className="h-4 w-4" />
-                    ) : (
-                      <BellOff className="h-4 w-4" />
-                    )}
-                    <Label htmlFor="browser-notifications" className="cursor-pointer">
-                      Push Notifications
-                    </Label>
-                  </div>
-                  <Switch
-                    id="browser-notifications"
-                    checked={isEnabled}
-                    onCheckedChange={async () => {
-                      const result = await toggleNotifications();
-                      if (result) {
-                        sonnerToast.success('Notifications enabled', {
-                          description: 'You will receive alerts even when the panel is closed',
-                        });
-                      } else if (permission === 'denied') {
-                        sonnerToast.error('Permission denied', {
-                          description: 'Enable notifications in your browser settings',
-                        });
-                      }
-                    }}
-                    disabled={!isSupported}
-                  />
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleSignOut}>
+              {isSupported && (
+                <>
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center gap-2">
+                        {isEnabled ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
+                        <Label htmlFor="browser-notifications" className="cursor-pointer text-sm">
+                          Notificaciones
+                        </Label>
+                      </div>
+                      <Switch
+                        id="browser-notifications"
+                        checked={isEnabled}
+                        onCheckedChange={async () => {
+                          const result = await toggleNotifications();
+                          if (result) {
+                            sonnerToast.success('Notificaciones activadas');
+                          } else if (permission === 'denied') {
+                            sonnerToast.error('Permiso denegado', {
+                              description: 'Actívalo en la configuración del navegador',
+                            });
+                          }
+                        }}
+                      />
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </>
+              )}
+              <DropdownMenuItem onClick={handleSignOut} className="text-red-600 focus:text-red-600">
                 <LogOut className="mr-2 h-4 w-4" />
-                Sign Out
+                Cerrar sesión
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

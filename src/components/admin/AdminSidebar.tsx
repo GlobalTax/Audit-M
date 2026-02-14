@@ -19,141 +19,295 @@ import {
   ClipboardList,
   UsersRound,
   PanelTop,
+  ChevronLeft,
+  Search,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useState } from 'react';
 
-const navItems = [
-  { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-  { path: '/admin/crm', icon: Briefcase, label: 'CRM' },
-  { path: '/admin/settings', icon: Settings, label: 'Site Settings' },
-  { path: '/admin/topbar', icon: PanelTop, label: 'TopBar' },
-  { path: '/admin/content', icon: FileText, label: 'Content Management' },
-  { path: '/admin/services', icon: ClipboardList, label: 'Services' },
-  { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
-  { path: '/admin/case-studies', icon: Briefcase, label: 'Case Studies' },
-  { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
-  { path: '/admin/awards', icon: Trophy, label: 'Awards' },
-  { path: '/admin/team', icon: UsersRound, label: 'Team' },
-  { path: '/admin/contact-leads', icon: Users, label: 'Contact Leads' },
-  { path: '/admin/proposal-generator', icon: FileOutput, label: 'Proposal Generator' },
-  { path: '/admin/corporate-presentation', icon: Presentation, label: 'Corporate Presentation' },
-  { path: '/admin/deck-studio', icon: Presentation, label: 'Deck Studio' },
-  { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
-  { path: '/admin/technology', icon: Monitor, label: 'Technology' },
+interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+interface NavItem {
+  path: string;
+  icon: React.ElementType;
+  label: string;
+}
+
+const navSections: NavSection[] = [
+  {
+    title: 'Contenido',
+    items: [
+      { path: '/admin/blog', icon: Newspaper, label: 'Blog' },
+      { path: '/admin/services', icon: ClipboardList, label: 'Servicios' },
+      { path: '/admin/case-studies', icon: Briefcase, label: 'Casos de Éxito' },
+      { path: '/admin/content', icon: FileText, label: 'Contenido Web' },
+    ],
+  },
+  {
+    title: 'Gestión',
+    items: [
+      { path: '/admin/crm', icon: Briefcase, label: 'CRM' },
+      { path: '/admin/contact-leads', icon: Users, label: 'Leads' },
+      { path: '/admin/team', icon: UsersRound, label: 'Equipo' },
+    ],
+  },
+  {
+    title: 'Comunicación',
+    items: [
+      { path: '/admin/testimonials', icon: MessageSquareQuote, label: 'Testimonios' },
+      { path: '/admin/awards', icon: Trophy, label: 'Premios' },
+    ],
+  },
+  {
+    title: 'Herramientas',
+    items: [
+      { path: '/admin/proposal-generator', icon: FileOutput, label: 'Propuestas' },
+      { path: '/admin/deck-studio', icon: Presentation, label: 'Deck Studio' },
+      { path: '/admin/corporate-presentation', icon: Presentation, label: 'Presentación Corp.' },
+    ],
+  },
+  {
+    title: 'Configuración',
+    items: [
+      { path: '/admin/settings', icon: Settings, label: 'Ajustes' },
+      { path: '/admin/topbar', icon: PanelTop, label: 'TopBar' },
+      { path: '/admin/sitemap', icon: Map, label: 'Sitemap' },
+      { path: '/admin/technology', icon: Monitor, label: 'Tecnología' },
+    ],
+  },
 ];
 
 export const AdminSidebar = () => {
   const location = useLocation();
   const { adminUser, canManageUsers } = useAdminAuth();
   const unreadLeads = useUnreadContactLeads();
+  const [collapsed, setCollapsed] = useState(false);
 
   const isActive = (path: string) => {
-    if (path === '/admin') {
-      return location.pathname === path;
-    }
+    if (path === '/admin') return location.pathname === path;
     return location.pathname.startsWith(path);
   };
 
+  const userInitials = adminUser?.full_name
+    ?.split(' ')
+    .map((n: string) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase() || 'A';
+
   return (
-    <aside className="w-64 bg-slate-950 text-white min-h-screen flex flex-col">
-      {/* Header with Audit Branding */}
-      <div className="p-6 border-b border-primary/20">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="p-2 bg-primary/10 rounded-lg">
-            <ClipboardList className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <span className="font-display text-xl font-normal text-white lowercase">audit</span>
-          </div>
-        </div>
-        <p className="text-[10px] text-primary/80 tracking-[0.2em] uppercase font-normal">
-          Admin Portal
-        </p>
-        {adminUser && (
-          <div className="mt-3">
-            <Badge 
-              variant="outline" 
-              className="text-[10px] border-primary/30 text-primary bg-primary/10"
-            >
-              {adminUser.role.replace('_', ' ').toUpperCase()}
-            </Badge>
-          </div>
-        )}
-      </div>
-
-      {/* Decorative line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        <Link to="/">
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-slate-400 hover:text-white hover:bg-slate-800/50"
-          >
-            <Home className="mr-3 h-4 w-4" />
-            Back to Site
-          </Button>
-        </Link>
-
-        <Separator className="bg-slate-800 my-3" />
-
-        {navItems.map((item) => (
-          <Link 
-            key={item.path} 
-            to={item.path}
-          >
+    <TooltipProvider delayDuration={0}>
+      <aside
+        className={`${
+          collapsed ? 'w-[68px]' : 'w-64'
+        } bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white min-h-screen flex flex-col transition-all duration-300 relative`}
+      >
+        {/* Brand header */}
+        <div className={`p-4 ${collapsed ? 'px-3' : 'px-5'} border-b border-white/5`}>
+          <div className="flex items-center justify-between">
+            <Link to="/admin" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <ClipboardList className="h-4 w-4 text-primary" />
+              </div>
+              {!collapsed && (
+                <div>
+                  <span className="font-display text-lg font-semibold text-white tracking-tight">
+                    audit
+                  </span>
+                  <span className="text-primary text-lg">.</span>
+                </div>
+              )}
+            </Link>
             <Button
               variant="ghost"
-              className={`w-full justify-start gap-2 transition-all ${
-                isActive(item.path)
-                  ? 'bg-slate-800 text-white border-l-2 border-primary rounded-l-none'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              size="icon"
+              className={`h-7 w-7 text-slate-500 hover:text-white hover:bg-white/5 transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`}
+              onClick={() => setCollapsed(!collapsed)}
             >
-              <item.icon className={`h-4 w-4 ${isActive(item.path) ? 'text-primary' : ''}`} />
-              <span className="flex-1 text-left text-sm">{item.label}</span>
-              {item.path === '/admin/contact-leads' && unreadLeads > 0 && (
-                <Badge 
-                  className="h-5 min-w-[20px] rounded-full px-1.5 text-xs bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  {unreadLeads > 99 ? '99+' : unreadLeads}
-                </Badge>
-              )}
+              <ChevronLeft className="h-4 w-4" />
             </Button>
-          </Link>
-        ))}
-
-        {canManageUsers() && (
-          <>
-            <Separator className="bg-slate-800 my-3" />
-            <Link to="/admin/users">
-              <Button
-                variant="ghost"
-                className={`w-full justify-start ${
-                  isActive('/admin/users')
-                    ? 'bg-slate-800 text-white border-l-2 border-primary rounded-l-none'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-                }`}
-              >
-                <UserCog className={`mr-3 h-4 w-4 ${isActive('/admin/users') ? 'text-primary' : ''}`} />
-                Admin Users
-              </Button>
-            </Link>
-          </>
-        )}
-      </nav>
-
-      {/* User info footer */}
-      <div className="p-4 border-t border-slate-800">
-        {adminUser && (
-          <div className="text-sm">
-            <p className="truncate text-slate-300 font-normal">{adminUser.full_name}</p>
-            <p className="text-xs truncate text-slate-500">{adminUser.email}</p>
           </div>
-        )}
-      </div>
-    </aside>
+        </div>
+
+        <ScrollArea className="flex-1">
+          <nav className={`py-3 ${collapsed ? 'px-2' : 'px-3'} space-y-1`}>
+            {/* Back to site */}
+            <SidebarItem
+              path="/"
+              icon={Home}
+              label="Ir al sitio"
+              isActive={false}
+              collapsed={collapsed}
+              variant="muted"
+            />
+
+            {/* Dashboard */}
+            <SidebarItem
+              path="/admin"
+              icon={LayoutDashboard}
+              label="Dashboard"
+              isActive={isActive('/admin') && location.pathname === '/admin'}
+              collapsed={collapsed}
+            />
+
+            {/* Search shortcut */}
+            {!collapsed && (
+              <div className="pt-1 pb-2">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-slate-500 text-sm cursor-default">
+                  <Search className="h-3.5 w-3.5" />
+                  <span className="flex-1">Buscar...</span>
+                  <kbd className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded font-mono">⌘K</kbd>
+                </div>
+              </div>
+            )}
+
+            {/* Nav sections */}
+            {navSections.map((section) => (
+              <div key={section.title} className="pt-3 first:pt-1">
+                {!collapsed && (
+                  <div className="px-3 mb-1.5">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-600">
+                      {section.title}
+                    </span>
+                  </div>
+                )}
+                {collapsed && <div className="border-t border-white/5 mb-2 mx-1" />}
+                <div className="space-y-0.5">
+                  {section.items.map((item) => (
+                    <SidebarItem
+                      key={item.path}
+                      path={item.path}
+                      icon={item.icon}
+                      label={item.label}
+                      isActive={isActive(item.path)}
+                      collapsed={collapsed}
+                      badge={
+                        item.path === '/admin/contact-leads' && unreadLeads > 0
+                          ? unreadLeads
+                          : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Super admin section */}
+            {canManageUsers() && (
+              <div className="pt-3">
+                {!collapsed && (
+                  <div className="px-3 mb-1.5">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-600">
+                      Administración
+                    </span>
+                  </div>
+                )}
+                {collapsed && <div className="border-t border-white/5 mb-2 mx-1" />}
+                <SidebarItem
+                  path="/admin/users"
+                  icon={UserCog}
+                  label="Usuarios Admin"
+                  isActive={isActive('/admin/users')}
+                  collapsed={collapsed}
+                />
+              </div>
+            )}
+          </nav>
+        </ScrollArea>
+
+        {/* User footer */}
+        <div className={`border-t border-white/5 ${collapsed ? 'p-2' : 'p-3 px-4'}`}>
+          {adminUser && (
+            <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
+              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <span className="text-xs font-semibold text-primary">{userInitials}</span>
+              </div>
+              {!collapsed && (
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-slate-200 truncate">
+                    {adminUser.full_name}
+                  </p>
+                  <p className="text-[11px] text-slate-500 truncate">{adminUser.email}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </aside>
+    </TooltipProvider>
   );
 };
+
+function SidebarItem({
+  path,
+  icon: Icon,
+  label,
+  isActive,
+  collapsed,
+  badge,
+  variant,
+}: {
+  path: string;
+  icon: React.ElementType;
+  label: string;
+  isActive: boolean;
+  collapsed: boolean;
+  badge?: number;
+  variant?: 'muted';
+}) {
+  const content = (
+    <Link to={path}>
+      <Button
+        variant="ghost"
+        className={`w-full ${collapsed ? 'justify-center px-0' : 'justify-start'} gap-2.5 h-9 transition-all duration-150 ${
+          isActive
+            ? 'bg-primary/15 text-white hover:bg-primary/20'
+            : variant === 'muted'
+            ? 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+            : 'text-slate-400 hover:text-white hover:bg-white/5'
+        }`}
+      >
+        <div className="relative">
+          <Icon className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-primary' : ''}`} />
+          {isActive && !collapsed && (
+            <div className="absolute -left-[11px] top-1/2 -translate-y-1/2 w-0.5 h-4 bg-primary rounded-r" />
+          )}
+        </div>
+        {!collapsed && (
+          <>
+            <span className="flex-1 text-left text-[13px]">{label}</span>
+            {badge !== undefined && badge > 0 && (
+              <Badge className="h-5 min-w-[20px] rounded-full px-1.5 text-[10px] bg-primary/90 text-white border-0 hover:bg-primary/90">
+                {badge > 99 ? '99+' : badge}
+              </Badge>
+            )}
+          </>
+        )}
+      </Button>
+    </Link>
+  );
+
+  if (collapsed) {
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{content}</TooltipTrigger>
+        <TooltipContent side="right" className="flex items-center gap-2">
+          {label}
+          {badge !== undefined && badge > 0 && (
+            <Badge className="h-4 min-w-[16px] rounded-full px-1 text-[10px] bg-primary/90 text-white border-0">
+              {badge > 99 ? '99+' : badge}
+            </Badge>
+          )}
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
+
+  return content;
+}

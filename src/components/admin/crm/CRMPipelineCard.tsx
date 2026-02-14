@@ -1,8 +1,7 @@
 import { type CRMClient } from '@/hooks/useCRMClients';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building2, DollarSign } from 'lucide-react';
-import { differenceInDays } from 'date-fns';
+import { Building2, Clock } from 'lucide-react';
+import { formatCurrency, getDaysInStage, getRiskLevel, RISK_LABELS } from '@/lib/crm';
 
 interface CRMPipelineCardProps {
   client: CRMClient;
@@ -10,38 +9,57 @@ interface CRMPipelineCardProps {
 }
 
 export const CRMPipelineCard = ({ client, onClick }: CRMPipelineCardProps) => {
-  const daysInStage = differenceInDays(new Date(), new Date(client.updated_at));
+  const daysInStage = getDaysInStage(client.updated_at);
+  const risk = getRiskLevel(client.estimated_value);
+  const riskInfo = RISK_LABELS[risk];
+
+  const initials = client.name
+    .split(' ')
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
 
   return (
-    <Card
+    <div
       draggable
       onDragStart={(e) => {
         e.dataTransfer.setData('text/plain', client.id);
         e.dataTransfer.effectAllowed = 'move';
       }}
       onClick={() => onClick(client)}
-      className="p-3 cursor-pointer hover:shadow-md transition-shadow border border-border"
+      className="p-3 rounded-lg cursor-pointer bg-white border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group"
     >
-      <div className="space-y-2">
-        <p className="font-medium text-sm truncate">{client.name}</p>
-        {client.sector && (
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Building2 className="h-3 w-3" />
-            <span className="truncate">{client.sector}</span>
-          </div>
-        )}
-        <div className="flex items-center justify-between">
-          {client.estimated_value > 0 && (
-            <div className="flex items-center gap-1 text-xs font-medium text-primary">
-              <DollarSign className="h-3 w-3" />
-              {client.estimated_value.toLocaleString('es-ES')} €
+      <div className="flex items-start gap-2.5">
+        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+          <span className="text-[10px] font-semibold text-slate-500">{initials}</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-slate-800 truncate group-hover:text-slate-900">
+            {client.name}
+          </p>
+          {client.sector && (
+            <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5">
+              <Building2 className="h-3 w-3" />
+              <span className="truncate">{client.sector}</span>
             </div>
           )}
-          <Badge variant="outline" className="text-[10px]">
-            {daysInStage}d
-          </Badge>
         </div>
       </div>
-    </Card>
+
+      <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-50">
+        {(client.estimated_value ?? 0) > 0 ? (
+          <Badge variant="secondary" className={`text-[10px] ${riskInfo.color}`}>
+            {formatCurrency(client.estimated_value)} €
+          </Badge>
+        ) : (
+          <span />
+        )}
+        <div className="flex items-center gap-1 text-[10px] text-slate-400">
+          <Clock className="h-3 w-3" />
+          {daysInStage}d
+        </div>
+      </div>
+    </div>
   );
 };
