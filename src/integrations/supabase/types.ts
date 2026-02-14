@@ -1373,6 +1373,7 @@ export type Database = {
           issue_date: string
           notes: string | null
           service_description: string
+          service_type: string | null
           status: Database["public"]["Enums"]["crm_invoice_status"]
           tax_amount: number
           total_amount: number
@@ -1389,6 +1390,7 @@ export type Database = {
           issue_date?: string
           notes?: string | null
           service_description?: string
+          service_type?: string | null
           status?: Database["public"]["Enums"]["crm_invoice_status"]
           tax_amount?: number
           total_amount?: number
@@ -1405,6 +1407,7 @@ export type Database = {
           issue_date?: string
           notes?: string | null
           service_description?: string
+          service_type?: string | null
           status?: Database["public"]["Enums"]["crm_invoice_status"]
           tax_amount?: number
           total_amount?: number

@@ -16,6 +16,7 @@ export interface CRMInvoice {
   total_amount: number;
   status: CRMInvoiceStatus;
   service_description: string;
+  service_type: string | null;
   notes: string | null;
   created_at: string;
   updated_at: string;
