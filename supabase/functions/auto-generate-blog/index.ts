@@ -117,7 +117,8 @@ Include real examples and data points to build credibility.`,
         const slug_es = generateSlug(articleData.title_es);
         const slug_en = generateSlug(articleData.title_en || articleData.title_es);
 
-        const sourceSite = topic.target_site === "international" ? "international" : "domestic";
+        // Map target_site to valid site_source enum values: 'es', 'int', 'audit'
+        const sourceSite = topic.target_site === "domestic" ? "es" : "int";
 
         const { data: newPost, error: insertError } = await supabase
           .from("blog_posts")
@@ -144,7 +145,7 @@ Include real examples and data points to build credibility.`,
             status: settings.auto_publish ? "published" : "draft",
             published_at: settings.auto_publish ? new Date().toISOString() : null,
             source_site: sourceSite,
-            shared_sites: topic.target_site === "both" ? ["domestic", "international"] : null,
+            shared_sites: topic.target_site === "both" ? ["es", "int"] : null,
           })
           .select()
           .single();

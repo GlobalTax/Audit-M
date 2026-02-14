@@ -51,6 +51,10 @@ const blogFormSchema = z.object({
   slug_en: z.string().optional(),
   excerpt_en: z.string().optional(),
   content_en: z.string().optional(),
+  title_ca: z.string().optional(),
+  slug_ca: z.string().optional(),
+  excerpt_ca: z.string().optional(),
+  content_ca: z.string().optional(),
   category: z.string().optional(),
   tags: z.string().optional(),
   featured_image: z.string().optional(),
@@ -61,6 +65,8 @@ const blogFormSchema = z.object({
   seo_description_es: z.string().optional(),
   seo_title_en: z.string().optional(),
   seo_description_en: z.string().optional(),
+  seo_title_ca: z.string().optional(),
+  seo_description_ca: z.string().optional(),
   author_id: z.string().optional(),
 });
 
@@ -94,6 +100,10 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
       slug_en: "",
       excerpt_en: "",
       content_en: "",
+      title_ca: "",
+      slug_ca: "",
+      excerpt_ca: "",
+      content_ca: "",
       category: "",
       tags: "",
       featured_image: "",
@@ -104,6 +114,8 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
       seo_description_es: "",
       seo_title_en: "",
       seo_description_en: "",
+      seo_title_ca: "",
+      seo_description_ca: "",
       author_id: "",
     },
   });
@@ -119,6 +131,10 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
         slug_en: post.slug_en || "",
         excerpt_en: post.excerpt_en || "",
         content_en: post.content_en || "",
+        title_ca: post.title_ca || "",
+        slug_ca: post.slug_ca || "",
+        excerpt_ca: post.excerpt_ca || "",
+        content_ca: post.content_ca || "",
         category: post.category || "",
         tags: post.tags?.join(", ") || "",
         featured_image: post.featured_image || "",
@@ -129,6 +145,8 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
         seo_description_es: post.seo_description_es || "",
         seo_title_en: post.seo_title_en || "",
         seo_description_en: post.seo_description_en || "",
+        seo_title_ca: post.seo_title_ca || "",
+        seo_description_ca: post.seo_description_ca || "",
         author_id: post.author_id || "",
       });
       setIsAIGenerated(false);
@@ -182,6 +200,10 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
         slug_en: values.slug_en || null,
         excerpt_en: values.excerpt_en || null,
         content_en: values.content_en || null,
+        title_ca: values.title_ca || null,
+        slug_ca: values.slug_ca || null,
+        excerpt_ca: values.excerpt_ca || null,
+        content_ca: values.content_ca || null,
         category: values.category || null,
         tags: tagsArray,
         featured_image: featuredImageUrl || null,
@@ -193,6 +215,8 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
         seo_description_es: values.seo_description_es || null,
         seo_title_en: values.seo_title_en || null,
         seo_description_en: values.seo_description_en || null,
+        seo_title_ca: values.seo_title_ca || null,
+        seo_description_ca: values.seo_description_ca || null,
         author_id: values.author_id || null,
         author_name: selectedMember?.name || null,
         author_specialization: selectedMember?.specialization || null,
@@ -368,10 +392,11 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <Tabs defaultValue="es">
-                <TabsList className="grid w-full grid-cols-3">
+                <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="es">Español</TabsTrigger>
                   <TabsTrigger value="en">English</TabsTrigger>
-                  <TabsTrigger value="meta">Metadata & SEO</TabsTrigger>
+                  <TabsTrigger value="ca">Català</TabsTrigger>
+                  <TabsTrigger value="meta">Meta & SEO</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="es" className="space-y-4">
@@ -546,6 +571,111 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
                       </FormItem>
                     )}
                   />
+                </TabsContent>
+
+                <TabsContent value="ca" className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="title_ca"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Títol (CA)</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder="Títol de l'article"
+                            onBlur={(e) => {
+                              field.onBlur();
+                              if (!form.getValues("slug_ca") && e.target.value) {
+                                form.setValue("slug_ca", generateSlug(e.target.value));
+                              }
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="slug_ca"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Slug (CA)</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="slug-de-larticle" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="excerpt_ca"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Extracte (CA)</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            placeholder="Resum breu de l'article"
+                            rows={3}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="content_ca"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <BlogEditor
+                            value={field.value || ""}
+                            onChange={field.onChange}
+                            label="Contingut (CA)"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="space-y-4 pt-4 border-t">
+                    <h3 className="font-semibold">SEO Català</h3>
+                    <FormField
+                      control={form.control}
+                      name="seo_title_ca"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>SEO Title (CA)</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder="Títol per SEO (màx 60 caràcters)" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="seo_description_ca"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>SEO Description (CA)</FormLabel>
+                          <FormControl>
+                            <Textarea {...field} placeholder="Descripció per SEO (màx 160 caràcters)" rows={2} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </TabsContent>
 
                 <TabsContent value="meta" className="space-y-4">
