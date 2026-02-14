@@ -36,8 +36,8 @@ const Blog = () => {
   // Track page view
   useEffect(() => {
     trackPageView("blog");
-  }, []);
-  
+  }, [trackPageView]);
+
   // Track search (debounced)
   useEffect(() => {
     if (searchQuery) {
@@ -46,7 +46,7 @@ const Blog = () => {
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [searchQuery]);
+  }, [searchQuery, trackEvent]);
 
   const { data, isLoading } = useBlogSearch({
     searchQuery: searchQuery || undefined,

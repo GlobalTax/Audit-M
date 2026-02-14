@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,10 +10,11 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
+
+// Public pages - static imports (critical path)
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Services from "./pages/Services";
 import AuditHub from "./pages/AuditHub";
 import SubsidyAuditHub from "./pages/SubsidyAuditHub";
 import ServiceDetail from "./pages/ServiceDetail";
@@ -21,6 +23,7 @@ import Team from "./pages/Team";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -30,43 +33,58 @@ import Terms from "./pages/Terms";
 import Strategy from "./pages/Strategy";
 import Sectors from "./pages/Sectors";
 import Resources from "./pages/Resources";
-import { AdminLogin } from "./pages/admin/AdminLogin";
-import { AdminDashboard } from "./pages/admin/AdminDashboard";
-import { AdminCaseStudies } from "./pages/admin/AdminCaseStudies";
-import AdminServices from "./pages/admin/AdminServices";
-import { AdminBlog } from "./pages/admin/AdminBlog";
-import BlogDetail from "./pages/BlogDetail";
-import { AdminTeam } from "./pages/admin/AdminTeam";
-import { AdminUsers } from "./pages/admin/AdminUsers";
-import AdminContent from "./pages/admin/AdminContent";
-import { AdminSettings } from "./pages/admin/AdminSettings";
-import AdminCandidatos from "./pages/admin/AdminCandidatos";
-import AdminJobPositions from "./pages/admin/AdminJobPositions";
-import AdminContactLeads from "./pages/admin/AdminContactLeads";
-import AdminLandings from "./pages/admin/AdminLandings";
-import LandingDetailPage from "./pages/admin/LandingDetailPage";
-import LandingDashboard from "./pages/admin/LandingDashboard";
-import { AdminAnalyticsDashboard } from "./pages/admin/AdminAnalyticsDashboard";
-import DeckStudioList from "./pages/admin/deck-studio/DeckStudioList";
-import DeckStudioContent from "./pages/admin/deck-studio/DeckStudioContent";
-import DeckStudioBrand from "./pages/admin/deck-studio/DeckStudioBrand";
-import AdminTechnology from "./pages/admin/AdminTechnology";
-import AdminSitemap from "./pages/admin/AdminSitemap";
 import { DynamicLandingPage } from "./pages/DynamicLandingPage";
 import SitemapXML from "./pages/SitemapXML";
 import CookiePolicyEN from "./pages/CookiePolicyEN";
-import AdminTestimonials from "./pages/admin/AdminTestimonials";
-import AdminAwards from "./pages/admin/AdminAwards";
-import AdminProposalGenerator from "./pages/admin/AdminProposalGenerator";
-import AdminCorporatePresentation from "./pages/admin/AdminCorporatePresentation";
 import LeaveReview from "./pages/LeaveReview";
 import Testimonials from "./pages/Testimonials";
 import ThankYou from "./pages/ThankYou";
-import AdminABTests from "./pages/admin/AdminABTests";
-import AdminTopBar from "./pages/admin/AdminTopBar";
-import AdminCRM from "./pages/admin/AdminCRM";
 
-const queryClient = new QueryClient();
+// Admin pages - lazy loaded (only downloaded when admin navigates)
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin").then(m => ({ default: m.AdminLogin })));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
+const AdminCaseStudies = lazy(() => import("./pages/admin/AdminCaseStudies").then(m => ({ default: m.AdminCaseStudies })));
+const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
+const AdminBlog = lazy(() => import("./pages/admin/AdminBlog").then(m => ({ default: m.AdminBlog })));
+const AdminTeam = lazy(() => import("./pages/admin/AdminTeam").then(m => ({ default: m.AdminTeam })));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers").then(m => ({ default: m.AdminUsers })));
+const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings").then(m => ({ default: m.AdminSettings })));
+const AdminCandidatos = lazy(() => import("./pages/admin/AdminCandidatos"));
+const AdminJobPositions = lazy(() => import("./pages/admin/AdminJobPositions"));
+const AdminContactLeads = lazy(() => import("./pages/admin/AdminContactLeads"));
+const AdminLandings = lazy(() => import("./pages/admin/AdminLandings"));
+const LandingDetailPage = lazy(() => import("./pages/admin/LandingDetailPage"));
+const LandingDashboard = lazy(() => import("./pages/admin/LandingDashboard"));
+const AdminAnalyticsDashboard = lazy(() => import("./pages/admin/AdminAnalyticsDashboard").then(m => ({ default: m.AdminAnalyticsDashboard })));
+const DeckStudioList = lazy(() => import("./pages/admin/deck-studio/DeckStudioList"));
+const DeckStudioContent = lazy(() => import("./pages/admin/deck-studio/DeckStudioContent"));
+const DeckStudioBrand = lazy(() => import("./pages/admin/deck-studio/DeckStudioBrand"));
+const AdminTechnology = lazy(() => import("./pages/admin/AdminTechnology"));
+const AdminSitemap = lazy(() => import("./pages/admin/AdminSitemap"));
+const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
+const AdminAwards = lazy(() => import("./pages/admin/AdminAwards"));
+const AdminProposalGenerator = lazy(() => import("./pages/admin/AdminProposalGenerator"));
+const AdminCorporatePresentation = lazy(() => import("./pages/admin/AdminCorporatePresentation"));
+const AdminABTests = lazy(() => import("./pages/admin/AdminABTests"));
+const AdminTopBar = lazy(() => import("./pages/admin/AdminTopBar"));
+const AdminCRM = lazy(() => import("./pages/admin/AdminCRM"));
+
+const AdminSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   return (
@@ -111,47 +129,49 @@ const App = () => {
                 <Route path="/testimonials" element={<Layout><Testimonials /></Layout>} />
                 <Route path="/thank-you/:variant" element={<Layout><ThankYou /></Layout>} />
 
-                {/* Admin routes */}
-                <Route path="/admin/login" element={<AdminLogin />} />
+                {/* Admin routes - lazy loaded with Suspense */}
+                <Route path="/admin/login" element={<Suspense fallback={<AdminSpinner />}><AdminLogin /></Suspense>} />
                 <Route
                   path="/admin"
                   element={
                     <ProtectedRoute>
-                      <AdminLayout />
+                      <Suspense fallback={<AdminSpinner />}>
+                        <AdminLayout />
+                      </Suspense>
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<AdminDashboard />} />
-                  <Route path="crm" element={<AdminCRM />} />
-                  <Route path="settings" element={<AdminSettings />} />
-                  <Route path="topbar" element={<AdminTopBar />} />
-                  <Route path="content" element={<AdminContent />} />
-                  <Route path="landing-dashboard" element={<LandingDashboard />} />
-                  <Route path="landings" element={<AdminLandings />} />
-                  <Route path="landings/:id" element={<LandingDetailPage />} />
-                  <Route path="case-studies" element={<AdminCaseStudies />} />
-                  <Route path="services" element={<AdminServices />} />
-                  <Route path="blog" element={<AdminBlog />} />
-                  <Route path="testimonials" element={<AdminTestimonials />} />
-                  <Route path="awards" element={<AdminAwards />} />
-                  <Route path="team" element={<AdminTeam />} />
-                  <Route path="job-positions" element={<AdminJobPositions />} />
-                  <Route path="candidatos" element={<AdminCandidatos />} />
-                  <Route path="contact-leads" element={<AdminContactLeads />} />
-                  <Route path="proposal-generator" element={<AdminProposalGenerator />} />
-                  <Route path="corporate-presentation" element={<AdminCorporatePresentation />} />
-                  <Route path="deck-studio" element={<DeckStudioList />} />
-                  <Route path="deck-studio/content" element={<DeckStudioContent />} />
-                  <Route path="deck-studio/brand" element={<DeckStudioBrand />} />
-                  <Route path="technology" element={<AdminTechnology />} />
-                  <Route path="sitemap" element={<AdminSitemap />} />
-                  <Route path="ab-tests" element={<AdminABTests />} />
-                  <Route path="analytics" element={<AdminAnalyticsDashboard />} />
+                  <Route index element={<Suspense fallback={<AdminSpinner />}><AdminDashboard /></Suspense>} />
+                  <Route path="crm" element={<Suspense fallback={<AdminSpinner />}><AdminCRM /></Suspense>} />
+                  <Route path="settings" element={<Suspense fallback={<AdminSpinner />}><AdminSettings /></Suspense>} />
+                  <Route path="topbar" element={<Suspense fallback={<AdminSpinner />}><AdminTopBar /></Suspense>} />
+                  <Route path="content" element={<Suspense fallback={<AdminSpinner />}><AdminContent /></Suspense>} />
+                  <Route path="landing-dashboard" element={<Suspense fallback={<AdminSpinner />}><LandingDashboard /></Suspense>} />
+                  <Route path="landings" element={<Suspense fallback={<AdminSpinner />}><AdminLandings /></Suspense>} />
+                  <Route path="landings/:id" element={<Suspense fallback={<AdminSpinner />}><LandingDetailPage /></Suspense>} />
+                  <Route path="case-studies" element={<Suspense fallback={<AdminSpinner />}><AdminCaseStudies /></Suspense>} />
+                  <Route path="services" element={<Suspense fallback={<AdminSpinner />}><AdminServices /></Suspense>} />
+                  <Route path="blog" element={<Suspense fallback={<AdminSpinner />}><AdminBlog /></Suspense>} />
+                  <Route path="testimonials" element={<Suspense fallback={<AdminSpinner />}><AdminTestimonials /></Suspense>} />
+                  <Route path="awards" element={<Suspense fallback={<AdminSpinner />}><AdminAwards /></Suspense>} />
+                  <Route path="team" element={<Suspense fallback={<AdminSpinner />}><AdminTeam /></Suspense>} />
+                  <Route path="job-positions" element={<Suspense fallback={<AdminSpinner />}><AdminJobPositions /></Suspense>} />
+                  <Route path="candidatos" element={<Suspense fallback={<AdminSpinner />}><AdminCandidatos /></Suspense>} />
+                  <Route path="contact-leads" element={<Suspense fallback={<AdminSpinner />}><AdminContactLeads /></Suspense>} />
+                  <Route path="proposal-generator" element={<Suspense fallback={<AdminSpinner />}><AdminProposalGenerator /></Suspense>} />
+                  <Route path="corporate-presentation" element={<Suspense fallback={<AdminSpinner />}><AdminCorporatePresentation /></Suspense>} />
+                  <Route path="deck-studio" element={<Suspense fallback={<AdminSpinner />}><DeckStudioList /></Suspense>} />
+                  <Route path="deck-studio/content" element={<Suspense fallback={<AdminSpinner />}><DeckStudioContent /></Suspense>} />
+                  <Route path="deck-studio/brand" element={<Suspense fallback={<AdminSpinner />}><DeckStudioBrand /></Suspense>} />
+                  <Route path="technology" element={<Suspense fallback={<AdminSpinner />}><AdminTechnology /></Suspense>} />
+                  <Route path="sitemap" element={<Suspense fallback={<AdminSpinner />}><AdminSitemap /></Suspense>} />
+                  <Route path="ab-tests" element={<Suspense fallback={<AdminSpinner />}><AdminABTests /></Suspense>} />
+                  <Route path="analytics" element={<Suspense fallback={<AdminSpinner />}><AdminAnalyticsDashboard /></Suspense>} />
                   <Route
                     path="users"
                     element={
                       <ProtectedRoute requiredRole="super_admin">
-                        <AdminUsers />
+                        <Suspense fallback={<AdminSpinner />}><AdminUsers /></Suspense>
                       </ProtectedRoute>
                     }
                   />

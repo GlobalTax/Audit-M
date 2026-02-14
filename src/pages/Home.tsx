@@ -43,7 +43,7 @@ const Home = () => {
   // Track page view
   useEffect(() => {
     trackPageView("home");
-  }, []);
+  }, [trackPageView]);
   
   // Fetch dynamic content from DB
   const { data: heroData } = usePageContent('home', 'hero', language);

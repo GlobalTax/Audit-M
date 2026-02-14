@@ -1,10 +1,7 @@
 /* Playfair Display - now unused, using General Sans for all headings */
 /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap'); */
 
-/* Plus Jakarta Sans Font Family for service descriptions */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
-/* Roboto Mono already imported in index.html for monospace code/data display */
+/* Plus Jakarta Sans & Roboto Mono already imported in index.html via <link> tags */
 
 /* Leaflet CSS for OpenStreetMap */
 @import 'leaflet/dist/leaflet.css';

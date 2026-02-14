@@ -53,12 +53,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         if (profileError) throw profileError;
 
+        // Determine the highest-priority role
+        const roleHierarchy: AdminRole[] = ['super_admin', 'admin', 'editor', 'hr_viewer', 'viewer'];
+        const resolvedRole = roleHierarchy.find(r => roles.includes(r)) || 'editor';
+
         const adminUserData: AdminUser = {
           id: profile.id,
           user_id: profile.id,
           email: profile.email || '',
-          full_name: profile.email || '',
-          role: roles.includes('admin') ? 'admin' : 'editor',
+          full_name: profile.full_name || profile.email || '',
+          role: resolvedRole,
           is_active: true,
         };
         setAdminUser(adminUserData);
