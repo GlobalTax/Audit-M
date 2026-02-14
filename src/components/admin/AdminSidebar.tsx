@@ -30,6 +30,7 @@ import {
   Mail,
   Phone,
   CalendarDays,
+  Euro,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -368,6 +369,8 @@ const crmSubSections = [
     label: 'HERRAMIENTAS',
     items: [
       { path: '/admin/crm/analitica', label: 'Analítica', icon: BarChart3 },
+      { path: '/admin/crm/facturacion', label: 'Facturación', icon: Euro },
+      { path: '/admin/crm/propuestas', label: 'Propuestas', icon: FileOutput },
     ],
   },
 ];
