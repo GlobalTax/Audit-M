@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
-type AdminRole = 'super_admin' | 'admin' | 'editor' | 'viewer' | 'hr_viewer';
+type AdminRole = 'admin' | 'editor' | 'hr_manager' | 'hr_viewer' | 'marketing' | 'viewer';
 
 interface AdminUser {
   id: string;
@@ -54,14 +54,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (profileError) throw profileError;
 
         // Determine the highest-priority role
-        const roleHierarchy: AdminRole[] = ['super_admin', 'admin', 'editor', 'hr_viewer', 'viewer'];
+        const roleHierarchy: AdminRole[] = ['admin', 'editor', 'hr_manager', 'hr_viewer', 'marketing', 'viewer'];
         const resolvedRole = roleHierarchy.find(r => roles.includes(r)) || 'editor';
 
         const adminUserData: AdminUser = {
           id: profile.id,
           user_id: profile.id,
           email: profile.email || '',
-          full_name: profile.full_name || profile.email || '',
+          full_name: profile.email || '',
           role: resolvedRole,
           is_active: true,
         };

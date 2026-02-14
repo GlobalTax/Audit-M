@@ -170,7 +170,7 @@ const App = () => {
                   <Route
                     path="users"
                     element={
-                      <ProtectedRoute requiredRole="super_admin">
+                      <ProtectedRoute requiredRole="admin">
                         <Suspense fallback={<AdminSpinner />}><AdminUsers /></Suspense>
                       </ProtectedRoute>
                     }
