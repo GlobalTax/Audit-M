@@ -1,172 +1,48 @@
 
 
-# Plan: CRM Completo para Admin
+# Plan: Corregir errores de build + Actualizar README
 
-## Resumen
+## 1. Corregir errores en AuthContext.tsx
 
-Crear un modulo CRM independiente dentro del panel de administracion con gestion de clientes, pipeline visual Kanban, historial de interacciones, datos fiscales/contratos y reportes.
+Hay dos errores de tipos TypeScript:
 
-## Base de Datos
+### Error 1: `super_admin` no existe en el enum de BD
+El enum `app_role` en la BD tiene: `admin`, `editor`, `user`, `hr_viewer`, `marketing`. Pero `AuthContext.tsx` define `AdminRole` con `super_admin` que no existe.
 
-### Nuevas Tablas
-
-**1. `crm_clients`** - Tabla principal de clientes
-
-| Columna | Tipo | Descripcion |
-|---------|------|-------------|
-| id | uuid PK | Identificador |
-| name | text | Nombre o razon social |
-| email | text | Email principal |
-| phone | text | Telefono |
-| nif_cif | text | NIF/CIF fiscal |
-| fiscal_address | text | Direccion fiscal |
-| city | text | Ciudad |
-| postal_code | text | Codigo postal |
-| country | text | Pais |
-| website | text | Sitio web |
-| sector | text | Sector/industria |
-| status | enum | prospecto, activo, inactivo, perdido |
-| pipeline_stage | enum | nuevo, contactado, propuesta, negociacion, cerrado_ganado, cerrado_perdido |
-| assigned_to | text | Responsable asignado |
-| notes | text | Notas generales |
-| source | text | Origen (web, referido, evento, etc.) |
-| source_site | site_source | Filtro multi-sitio |
-| created_at | timestamptz | Fecha creacion |
-| updated_at | timestamptz | Fecha actualizacion |
-
-**2. `crm_interactions`** - Historial de interacciones
-
-| Columna | Tipo | Descripcion |
-|---------|------|-------------|
-| id | uuid PK | Identificador |
-| client_id | uuid FK | Referencia al cliente |
-| type | enum | llamada, email, reunion, nota, tarea |
-| subject | text | Asunto |
-| description | text | Detalle |
-| date | timestamptz | Fecha de la interaccion |
-| created_by | text | Quien registro |
-| created_at | timestamptz | Fecha registro |
-
-**3. `crm_contracts`** - Contratos y servicios
-
-| Columna | Tipo | Descripcion |
-|---------|------|-------------|
-| id | uuid PK | Identificador |
-| client_id | uuid FK | Referencia al cliente |
-| service_name | text | Servicio contratado |
-| status | enum | activo, pausado, finalizado, renovacion_pendiente |
-| start_date | date | Inicio |
-| end_date | date | Fin/renovacion |
-| amount | numeric | Importe |
-| billing_frequency | text | mensual, trimestral, anual |
-| notes | text | Notas |
-| created_at | timestamptz | Fecha creacion |
-
-### RLS Policies
-
-- Lectura y escritura restringida a usuarios autenticados
-- Uso de `has_role(auth.uid(), 'admin')` para todas las operaciones
-
-## Estructura de Archivos
-
-```text
-src/
-  pages/admin/
-    AdminCRM.tsx                    -- Pagina principal con tabs
-  components/admin/crm/
-    CRMDashboard.tsx                -- Dashboard con metricas y KPIs
-    CRMPipeline.tsx                 -- Vista Kanban del pipeline
-    CRMPipelineColumn.tsx           -- Columna individual del Kanban
-    CRMPipelineCard.tsx             -- Tarjeta de cliente en Kanban
-    CRMClientList.tsx               -- Vista de tabla de clientes
-    CRMClientForm.tsx               -- Formulario crear/editar cliente
-    CRMClientDetail.tsx             -- Modal detalle del cliente
-    CRMInteractionForm.tsx          -- Formulario nueva interaccion
-    CRMInteractionTimeline.tsx      -- Timeline de interacciones
-    CRMContractList.tsx             -- Lista de contratos del cliente
-    CRMContractForm.tsx             -- Formulario crear/editar contrato
-    CRMFilters.tsx                  -- Filtros de busqueda
-  hooks/
-    useCRMClients.ts                -- CRUD de clientes
-    useCRMInteractions.ts           -- CRUD de interacciones
-    useCRMContracts.ts              -- CRUD de contratos
-    useCRMStats.ts                  -- Estadisticas y metricas
+**Fix (linea 5):** Cambiar el tipo `AdminRole` para que coincida con el enum real:
+```typescript
+type AdminRole = 'admin' | 'editor' | 'user' | 'hr_viewer' | 'marketing';
 ```
 
-## Componentes Principales
-
-### 1. AdminCRM.tsx - Pagina principal
-
-Pagina con sistema de tabs:
-- **Dashboard**: KPIs, graficos de conversion, facturacion
-- **Pipeline**: Vista Kanban arrastrando clientes entre etapas
-- **Clientes**: Tabla completa con filtros y busqueda
-- **Contratos**: Vista de contratos con alertas de renovacion
-
-### 2. CRMPipeline.tsx - Vista Kanban
-
-```text
-+-------------+-------------+--------------+---------------+------------------+
-|   Nuevo     | Contactado  |  Propuesta   |  Negociacion  |  Cerrado Ganado  |
-+-------------+-------------+--------------+---------------+------------------+
-| [Card]      | [Card]      | [Card]       | [Card]        | [Card]           |
-| [Card]      | [Card]      |              |               |                  |
-|             |             |              |               |                  |
-+-------------+-------------+--------------+---------------+------------------+
+**Fix (linea 57):** Actualizar la jerarquia de roles:
+```typescript
+const roleHierarchy: AdminRole[] = ['admin', 'editor', 'hr_viewer', 'marketing', 'user'];
 ```
 
-- Drag-and-drop nativo (reutilizando patron del TopBar)
-- Al mover una tarjeta se actualiza `pipeline_stage` en la BD
-- Cada tarjeta muestra: nombre, sector, valor estimado, dias en etapa
+### Error 2: `full_name` no existe en la tabla `profiles`
+La tabla `profiles` solo tiene columnas: `id`, `email`, `created_at`. No tiene `full_name`.
 
-### 3. CRMClientDetail.tsx - Detalle de cliente
-
-Modal/pagina con:
-- Datos generales y fiscales
-- Timeline de interacciones (llamadas, emails, reuniones)
-- Lista de contratos activos
-- Boton para registrar nueva interaccion
-- Historial de cambios de pipeline
-
-### 4. CRMDashboard.tsx - Metricas
-
-- Total clientes por estado (activo, prospecto, perdido)
-- Funnel de conversion del pipeline
-- Facturacion mensual por contratos
-- Contratos proximos a vencer (30 dias)
-- Actividad reciente (ultimas interacciones)
-
-## Integracion con Admin
-
-### Sidebar
-
-Anadir entrada nueva en `AdminSidebar.tsx`:
-```text
-{ path: '/admin/crm', icon: Briefcase, label: 'CRM' }
+**Fix (linea 64):** Usar solo `email`:
+```typescript
+full_name: profile.email || '',
 ```
 
-### Rutas
+### Impacto en useAdminAuth.ts
+Tambien se necesita actualizar `useAdminAuth.ts` para eliminar referencias a `super_admin` y usar los roles reales del enum. Los metodos `requireSuperAdmin` y `canManageUsers` pasaran a verificar el rol `admin` directamente.
 
-Anadir ruta en el router principal:
-```text
-/admin/crm -> AdminCRM.tsx
-```
+---
 
-## Flujo de Uso
+## 2. Actualizar README.md
 
-1. El admin accede a `/admin/crm`
-2. Ve el dashboard con KPIs generales
-3. Cambia a la vista Pipeline para ver el Kanban
-4. Arrastra un cliente de "Nuevo" a "Contactado"
-5. Hace clic en la tarjeta para ver el detalle
-6. Registra una interaccion (llamada, email, reunion)
-7. Crea un contrato cuando se cierra la venta
-8. En la tab Contratos ve alertas de renovacion
+Reemplazar el contenido actual del README con el texto proporcionado por el usuario. Es una actualizacion directa del contenido del archivo.
 
-## Consideraciones
+---
 
-- Se reutiliza el patron de `source_site` para compatibilidad multi-sitio
-- El drag-and-drop usa la API nativa HTML5, reutilizando el hook creado para el TopBar
-- Los datos fiscales (NIF/CIF) se almacenan como texto plano, sin validacion de formato ya que pueden ser de distintos paises
-- Exportacion a CSV/Excel reutilizando las utilidades existentes en `src/lib/exportContactLeads.ts`
+## Resumen de cambios
+
+| Archivo | Cambio |
+|---------|--------|
+| `src/contexts/AuthContext.tsx` | Corregir tipo AdminRole y eliminar referencia a full_name |
+| `src/hooks/useAdminAuth.ts` | Actualizar roles para coincidir con enum real |
+| `README.md` | Reemplazar con el contenido proporcionado |
 
