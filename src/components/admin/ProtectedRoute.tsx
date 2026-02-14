@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRole?: 'super_admin' | 'admin' | 'editor' | 'hr_viewer';
+  requiredRole?: 'admin' | 'editor' | 'viewer' | 'hr_viewer' | 'hr_manager' | 'marketing';
 }
 
 export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {

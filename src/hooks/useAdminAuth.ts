@@ -22,25 +22,14 @@ export const useAdminAuth = () => {
     enabled: !!adminUser?.user_id,
   });
 
-  const hasRole = (requiredRole: 'super_admin' | 'admin' | 'editor' | 'viewer' | 'hr_viewer') => {
+  const hasRole = (requiredRole: 'admin' | 'editor' | 'viewer' | 'hr_viewer' | 'hr_manager' | 'marketing') => {
     if (!adminUser || !userRoles) return false;
-    
-    // Map old role names to new enum values
-    const roleMapping: Record<string, string> = {
-      super_admin: 'admin',
-      admin: 'admin',
-      editor: 'editor',
-      viewer: 'user',
-      hr_viewer: 'hr_viewer',
-    };
-
-    const mappedRole = roleMapping[requiredRole];
     
     // Admin has all permissions
     if (userRoles.includes('admin')) return true;
     
     // Check if user has the required role
-    if (userRoles.includes(mappedRole as any)) return true;
+    if (userRoles.includes(requiredRole as any)) return true;
     
     return false;
   };
@@ -66,7 +55,7 @@ export const useAdminAuth = () => {
   };
 
   const canManageUsers = () => {
-    return isAdmin && hasRole('super_admin');
+    return isAdmin && hasRole('admin');
   };
 
   const requireAdmin = () => {
@@ -76,8 +65,8 @@ export const useAdminAuth = () => {
   };
 
   const requireSuperAdmin = () => {
-    if (!hasRole('super_admin')) {
-      throw new Error('Super admin access required');
+    if (!hasRole('admin')) {
+      throw new Error('Admin access required');
     }
   };
 
