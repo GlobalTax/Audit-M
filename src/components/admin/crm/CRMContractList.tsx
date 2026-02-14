@@ -22,7 +22,7 @@ export const CRMContractList = ({ clientId }: Props) => {
   return (
     <div className="space-y-3">
       <div className="flex justify-end">
-        <Button size="sm" onClick={() => { setEditingContract(null); setShowForm(true); }}>
+        <Button size="sm" onClick={() => { setEditingContract(null); setShowForm(true); }} className="bg-indigo-600 hover:bg-indigo-700">
           <Plus className="h-4 w-4 mr-1" /> Nuevo Contrato
         </Button>
       </div>

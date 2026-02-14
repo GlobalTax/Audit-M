@@ -23,8 +23,8 @@ export const CRMPipelineColumn = ({ stage, label, clients, onDrop, onClientClick
 
   return (
     <div
-      className={`flex flex-col min-w-[240px] w-[240px] rounded-xl transition-all duration-200 ${
-        isDragOver ? 'ring-2 ring-primary/30 bg-primary/5' : 'bg-white border border-slate-200/60'
+      className={`flex flex-col min-w-[260px] w-[260px] rounded-xl transition-all duration-200 ${
+        isDragOver ? 'ring-2 ring-indigo-400/40 bg-indigo-50/30' : 'bg-gray-50/50 border border-gray-200/60'
       }`}
       onDragOver={(e) => {
         e.preventDefault();
@@ -39,19 +39,19 @@ export const CRMPipelineColumn = ({ stage, label, clients, onDrop, onClientClick
         if (clientId) onDrop(clientId, stage);
       }}
     >
-      {/* Column header with color accent */}
-      <div className="p-3 border-b border-slate-100">
+      {/* Top color bar */}
+      <div className="h-1 rounded-t-xl" style={{ backgroundColor: stageColors.accent }} />
+
+      {/* Column header */}
+      <div className="p-3 border-b border-gray-100">
         <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: stageColors.accent }} />
-            <h3 className="text-sm font-semibold text-slate-800">{label}</h3>
-          </div>
+          <h3 className="text-sm font-semibold text-gray-800">{label}</h3>
           <Badge variant="secondary" className={`text-[10px] ${stageColors.bg} ${stageColors.text}`}>
             {clients.length}
           </Badge>
         </div>
         {totalValue > 0 && (
-          <p className="text-xs text-slate-400 ml-4">
+          <p className="text-xs text-gray-400">
             {formatCurrency(totalValue)} €
           </p>
         )}
@@ -63,7 +63,7 @@ export const CRMPipelineColumn = ({ stage, label, clients, onDrop, onClientClick
           <CRMPipelineCard key={client.id} client={client} onClick={onClientClick} />
         ))}
         {clients.length === 0 && (
-          <div className="flex items-center justify-center py-8 text-xs text-slate-400">
+          <div className="flex items-center justify-center py-8 text-xs text-gray-400">
             Arrastra clientes aquí
           </div>
         )}

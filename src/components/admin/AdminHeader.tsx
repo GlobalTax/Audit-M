@@ -29,6 +29,7 @@ import { Fragment, useMemo } from 'react';
 const ROUTE_LABELS: Record<string, string> = {
   admin: 'Panel',
   crm: 'CRM',
+  clients: 'Clientes',
   blog: 'Blog',
   services: 'Servicios',
   'case-studies': 'Casos de Éxito',
@@ -90,7 +91,7 @@ export const AdminHeader = () => {
     .toUpperCase() || 'A';
 
   return (
-    <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/60 px-6 py-3 sticky top-0 z-30">
+    <header className="bg-white border-b border-gray-200 px-6 py-3 sticky top-0 z-30">
       <div className="flex items-center justify-between">
         {/* Breadcrumbs */}
         <Breadcrumb>
@@ -130,9 +131,9 @@ export const AdminHeader = () => {
             className="relative h-9 w-9 rounded-full hover:bg-slate-100"
             onClick={() => navigate('/admin/contact-leads')}
           >
-            <Bell className="h-4 w-4 text-slate-500" />
+            <Bell className="h-4 w-4 text-gray-500" />
             {unreadLeads > 0 && (
-              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-white">
+              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 text-[9px] font-bold text-white">
                 {unreadLeads > 9 ? '9+' : unreadLeads}
               </span>
             )}
@@ -142,8 +143,8 @@ export const AdminHeader = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="gap-2.5 h-9 pl-2 pr-3 rounded-full hover:bg-slate-100">
-                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="text-[11px] font-semibold text-primary">{userInitials}</span>
+                <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center">
+                  <span className="text-[11px] font-semibold text-indigo-600">{userInitials}</span>
                 </div>
                 <span className="text-sm text-slate-700 hidden sm:inline">{adminUser?.full_name}</span>
               </Button>

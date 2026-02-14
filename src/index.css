@@ -723,15 +723,33 @@ h1 {
 }
 
 /* ============================================
-   Admin International Theme
-   Premium styling for int.nrro.es admin panel
+   Admin International Theme — Apollo.io Style
+   Dark navy sidebar, indigo primary, amber accent
    ============================================ */
 .admin-international {
-  --admin-primary: 213 47% 25%; /* Deep Ocean Blue */
-  --admin-accent: 43 64% 58%; /* Gold/Amber #D4A853 */
-  --admin-sidebar: 222 47% 11%; /* Dark slate */
-  --admin-sidebar-active: 213 47% 25%;
-  --admin-gold: 43 64% 58%;
-  --admin-gold-light: 43 64% 70%;
-  --admin-gold-dark: 43 64% 45%;
+  /* Apollo.io Dark Navy Sidebar */
+  --admin-sidebar: 228 33% 17%;          /* #1B1F3D */
+  --admin-sidebar-hover: 228 30% 22%;    /* lighter navy for hover */
+  --admin-sidebar-active: 226 70% 55%;   /* indigo for active */
+  --admin-sidebar-text: 226 20% 65%;     /* muted blue-gray #8B92B0 */
+  --admin-sidebar-section: 226 15% 50%;  /* section headers #6B7194 */
+
+  /* Blue/Indigo Primary */
+  --admin-primary: 226 70% 55%;          /* #4F6AE8 */
+  --admin-primary-hover: 226 70% 48%;
+
+  /* Amber/Gold Accent */
+  --admin-accent: 38 92% 50%;            /* #F5A623 */
+  --admin-gold: 38 92% 50%;
+  --admin-gold-light: 38 92% 65%;
+  --admin-gold-dark: 38 92% 42%;
+
+  /* Override shadcn sidebar CSS variables */
+  --sidebar-background: 228 33% 17%;
+  --sidebar-foreground: 0 0% 90%;
+  --sidebar-primary: 226 70% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 228 30% 22%;
+  --sidebar-accent-foreground: 0 0% 95%;
+  --sidebar-border: 228 25% 25%;
 }

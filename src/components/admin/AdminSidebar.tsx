@@ -20,6 +20,8 @@ import {
   UsersRound,
   PanelTop,
   ChevronLeft,
+  ChevronDown,
+  ChevronRight as ChevronRightIcon,
   Search,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -88,10 +90,15 @@ export const AdminSidebar = () => {
   const { adminUser, canManageUsers } = useAdminAuth();
   const unreadLeads = useUnreadContactLeads();
   const [collapsed, setCollapsed] = useState(false);
+  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
 
   const isActive = (path: string) => {
     if (path === '/admin') return location.pathname === path;
     return location.pathname.startsWith(path);
+  };
+
+  const toggleSection = (title: string) => {
+    setCollapsedSections((prev) => ({ ...prev, [title]: !prev[title] }));
   };
 
   const userInitials = adminUser?.full_name
@@ -106,28 +113,28 @@ export const AdminSidebar = () => {
       <aside
         className={`${
           collapsed ? 'w-[68px]' : 'w-64'
-        } bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white min-h-screen flex flex-col transition-all duration-300 relative`}
+        } bg-[#1B1F3D] text-white min-h-screen flex flex-col transition-all duration-300 relative`}
       >
         {/* Brand header */}
-        <div className={`p-4 ${collapsed ? 'px-3' : 'px-5'} border-b border-white/5`}>
+        <div className={`p-4 ${collapsed ? 'px-3' : 'px-5'} border-b border-white/[0.06]`}>
           <div className="flex items-center justify-between">
             <Link to="/admin" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
-                <ClipboardList className="h-4 w-4 text-primary" />
+              <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                <ClipboardList className="h-4 w-4 text-indigo-400" />
               </div>
               {!collapsed && (
                 <div>
                   <span className="font-display text-lg font-semibold text-white tracking-tight">
                     audit
                   </span>
-                  <span className="text-primary text-lg">.</span>
+                  <span className="text-indigo-400 text-lg">.</span>
                 </div>
               )}
             </Link>
             <Button
               variant="ghost"
               size="icon"
-              className={`h-7 w-7 text-slate-500 hover:text-white hover:bg-white/5 transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`}
+              className={`h-7 w-7 text-[#6B7194] hover:text-white hover:bg-white/[0.06] transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`}
               onClick={() => setCollapsed(!collapsed)}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -159,56 +166,69 @@ export const AdminSidebar = () => {
             {/* Search shortcut */}
             {!collapsed && (
               <div className="pt-1 pb-2">
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-slate-500 text-sm cursor-default">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.06] text-[#6B7194] text-sm cursor-default">
                   <Search className="h-3.5 w-3.5" />
                   <span className="flex-1">Buscar...</span>
-                  <kbd className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded font-mono">⌘K</kbd>
+                  <kbd className="text-[10px] bg-white/[0.06] px-1.5 py-0.5 rounded font-mono text-[#6B7194]">⌘K</kbd>
                 </div>
               </div>
             )}
 
             {/* Nav sections */}
-            {navSections.map((section) => (
-              <div key={section.title} className="pt-3 first:pt-1">
-                {!collapsed && (
-                  <div className="px-3 mb-1.5">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-600">
-                      {section.title}
-                    </span>
-                  </div>
-                )}
-                {collapsed && <div className="border-t border-white/5 mb-2 mx-1" />}
-                <div className="space-y-0.5">
-                  {section.items.map((item) => (
-                    <SidebarItem
-                      key={item.path}
-                      path={item.path}
-                      icon={item.icon}
-                      label={item.label}
-                      isActive={isActive(item.path)}
-                      collapsed={collapsed}
-                      badge={
-                        item.path === '/admin/contact-leads' && unreadLeads > 0
-                          ? unreadLeads
-                          : undefined
-                      }
-                    />
-                  ))}
+            {navSections.map((section) => {
+              const isSectionCollapsed = collapsedSections[section.title];
+              return (
+                <div key={section.title} className="pt-3 first:pt-1">
+                  {!collapsed && (
+                    <button
+                      onClick={() => toggleSection(section.title)}
+                      className="flex items-center justify-between w-full px-3 mb-1.5 group"
+                    >
+                      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#6B7194] group-hover:text-[#8B92B0] transition-colors">
+                        {section.title}
+                      </span>
+                      {isSectionCollapsed ? (
+                        <ChevronRightIcon className="h-3 w-3 text-[#6B7194]" />
+                      ) : (
+                        <ChevronDown className="h-3 w-3 text-[#6B7194]" />
+                      )}
+                    </button>
+                  )}
+                  {collapsed && <div className="border-t border-white/[0.06] mb-2 mx-1" />}
+                  {!isSectionCollapsed && (
+                    <div className="space-y-0.5">
+                      {section.items.map((item) => (
+                        <SidebarItem
+                          key={item.path}
+                          path={item.path}
+                          icon={item.icon}
+                          label={item.label}
+                          isActive={isActive(item.path)}
+                          collapsed={collapsed}
+                          badge={
+                            item.path === '/admin/contact-leads' && unreadLeads > 0
+                              ? unreadLeads
+                              : undefined
+                          }
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {/* Super admin section */}
             {canManageUsers() && (
               <div className="pt-3">
                 {!collapsed && (
                   <div className="px-3 mb-1.5">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-600">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#6B7194]">
                       Administración
                     </span>
                   </div>
                 )}
-                {collapsed && <div className="border-t border-white/5 mb-2 mx-1" />}
+                {collapsed && <div className="border-t border-white/[0.06] mb-2 mx-1" />}
                 <SidebarItem
                   path="/admin/users"
                   icon={UserCog}
@@ -222,18 +242,18 @@ export const AdminSidebar = () => {
         </ScrollArea>
 
         {/* User footer */}
-        <div className={`border-t border-white/5 ${collapsed ? 'p-2' : 'p-3 px-4'}`}>
+        <div className={`border-t border-white/[0.06] ${collapsed ? 'p-2' : 'p-3 px-4'}`}>
           {adminUser && (
             <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
-              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-semibold text-primary">{userInitials}</span>
+              <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                <span className="text-xs font-semibold text-indigo-400">{userInitials}</span>
               </div>
               {!collapsed && (
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-slate-200 truncate">
                     {adminUser.full_name}
                   </p>
-                  <p className="text-[11px] text-slate-500 truncate">{adminUser.email}</p>
+                  <p className="text-[11px] text-[#6B7194] truncate">{adminUser.email}</p>
                 </div>
               )}
             </div>
@@ -267,23 +287,20 @@ function SidebarItem({
         variant="ghost"
         className={`w-full ${collapsed ? 'justify-center px-0' : 'justify-start'} gap-2.5 h-9 transition-all duration-150 ${
           isActive
-            ? 'bg-primary/15 text-white hover:bg-primary/20'
+            ? 'bg-indigo-500/15 text-white hover:bg-indigo-500/20 border-l-2 border-indigo-400'
             : variant === 'muted'
-            ? 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
-            : 'text-slate-400 hover:text-white hover:bg-white/5'
+            ? 'text-[#6B7194] hover:text-[#B0B5CC] hover:bg-white/[0.04]'
+            : 'text-[#8B92B0] hover:text-white hover:bg-white/[0.06]'
         }`}
       >
         <div className="relative">
-          <Icon className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-primary' : ''}`} />
-          {isActive && !collapsed && (
-            <div className="absolute -left-[11px] top-1/2 -translate-y-1/2 w-0.5 h-4 bg-primary rounded-r" />
-          )}
+          <Icon className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-indigo-400' : ''}`} />
         </div>
         {!collapsed && (
           <>
             <span className="flex-1 text-left text-[13px]">{label}</span>
             {badge !== undefined && badge > 0 && (
-              <Badge className="h-5 min-w-[20px] rounded-full px-1.5 text-[10px] bg-primary/90 text-white border-0 hover:bg-primary/90">
+              <Badge className="h-5 min-w-[20px] rounded-full px-1.5 text-[10px] bg-indigo-500 text-white border-0 hover:bg-indigo-500">
                 {badge > 99 ? '99+' : badge}
               </Badge>
             )}
@@ -300,7 +317,7 @@ function SidebarItem({
         <TooltipContent side="right" className="flex items-center gap-2">
           {label}
           {badge !== undefined && badge > 0 && (
-            <Badge className="h-4 min-w-[16px] rounded-full px-1 text-[10px] bg-primary/90 text-white border-0">
+            <Badge className="h-4 min-w-[16px] rounded-full px-1 text-[10px] bg-indigo-500 text-white border-0">
               {badge > 99 ? '99+' : badge}
             </Badge>
           )}

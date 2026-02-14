@@ -28,18 +28,18 @@ export const CRMPipelineCard = ({ client, onClick }: CRMPipelineCardProps) => {
         e.dataTransfer.effectAllowed = 'move';
       }}
       onClick={() => onClick(client)}
-      className="p-3 rounded-lg cursor-pointer bg-white border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group"
+      className="p-3 rounded-lg cursor-pointer bg-white shadow-sm hover:shadow-md transition-all group border-0"
     >
       <div className="flex items-start gap-2.5">
-        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
-          <span className="text-[10px] font-semibold text-slate-500">{initials}</span>
+        <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+          <span className="text-[10px] font-semibold text-indigo-700">{initials}</span>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-slate-800 truncate group-hover:text-slate-900">
+          <p className="text-sm font-medium text-gray-800 truncate group-hover:text-indigo-600 transition-colors">
             {client.name}
           </p>
           {client.sector && (
-            <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5">
+            <div className="flex items-center gap-1 text-[11px] text-gray-400 mt-0.5">
               <Building2 className="h-3 w-3" />
               <span className="truncate">{client.sector}</span>
             </div>
@@ -47,7 +47,7 @@ export const CRMPipelineCard = ({ client, onClick }: CRMPipelineCardProps) => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-50">
+      <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-gray-50">
         {(client.estimated_value ?? 0) > 0 ? (
           <Badge variant="secondary" className={`text-[10px] ${riskInfo.color}`}>
             {formatCurrency(client.estimated_value)} €
@@ -55,7 +55,7 @@ export const CRMPipelineCard = ({ client, onClick }: CRMPipelineCardProps) => {
         ) : (
           <span />
         )}
-        <div className="flex items-center gap-1 text-[10px] text-slate-400">
+        <div className="flex items-center gap-1 text-[10px] text-gray-400">
           <Clock className="h-3 w-3" />
           {daysInStage}d
         </div>

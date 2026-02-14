@@ -79,7 +79,7 @@ export const CRMInteractionForm = ({ clientId, open, onClose }: CRMInteractionFo
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>
-            <Button type="submit" disabled={createInteraction.isPending}>Registrar</Button>
+            <Button type="submit" disabled={createInteraction.isPending} className="bg-indigo-600 hover:bg-indigo-700">Registrar</Button>
           </div>
         </form>
       </DialogContent>

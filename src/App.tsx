@@ -69,6 +69,7 @@ const AdminCorporatePresentation = lazy(() => import("./pages/admin/AdminCorpora
 const AdminABTests = lazy(() => import("./pages/admin/AdminABTests"));
 const AdminTopBar = lazy(() => import("./pages/admin/AdminTopBar"));
 const AdminCRM = lazy(() => import("./pages/admin/AdminCRM"));
+const AdminCRMClientDetail = lazy(() => import("./pages/admin/AdminCRMClientDetail"));
 
 const AdminSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -143,6 +144,7 @@ const App = () => {
                 >
                   <Route index element={<Suspense fallback={<AdminSpinner />}><AdminDashboard /></Suspense>} />
                   <Route path="crm" element={<Suspense fallback={<AdminSpinner />}><AdminCRM /></Suspense>} />
+                  <Route path="crm/clients/:clientId" element={<Suspense fallback={<AdminSpinner />}><AdminCRMClientDetail /></Suspense>} />
                   <Route path="settings" element={<Suspense fallback={<AdminSpinner />}><AdminSettings /></Suspense>} />
                   <Route path="topbar" element={<Suspense fallback={<AdminSpinner />}><AdminTopBar /></Suspense>} />
                   <Route path="content" element={<Suspense fallback={<AdminSpinner />}><AdminContent /></Suspense>} />

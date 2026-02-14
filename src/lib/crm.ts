@@ -5,8 +5,8 @@ import type { CRMInteractionType } from '@/hooks/useCRMInteractions';
 // --- Client constants ---
 
 export const CLIENT_STATUS_COLORS: Record<CRMClientStatus, string> = {
-  prospecto: 'bg-sky-100 text-sky-800',
-  activo: 'bg-emerald-100 text-emerald-800',
+  prospecto: 'bg-amber-100 text-amber-800',
+  activo: 'bg-indigo-100 text-indigo-800',
   inactivo: 'bg-slate-100 text-slate-600',
   perdido: 'bg-red-100 text-red-700',
 };
@@ -31,7 +31,7 @@ export const PIPELINE_LABELS: Record<CRMPipelineStage, string> = {
 
 export const PIPELINE_STAGE_COLORS: Record<CRMPipelineStage, { bg: string; text: string; accent: string }> = {
   nuevo: { bg: 'bg-sky-50', text: 'text-sky-700', accent: '#0ea5e9' },
-  contactado: { bg: 'bg-blue-50', text: 'text-blue-700', accent: '#3b82f6' },
+  contactado: { bg: 'bg-indigo-50', text: 'text-indigo-700', accent: '#6366f1' },
   propuesta: { bg: 'bg-violet-50', text: 'text-violet-700', accent: '#8b5cf6' },
   negociacion: { bg: 'bg-amber-50', text: 'text-amber-700', accent: '#f59e0b' },
   cerrado_ganado: { bg: 'bg-emerald-50', text: 'text-emerald-700', accent: '#10b981' },
@@ -149,7 +149,7 @@ export function getRiskLevel(estimatedValue: number | null): 'high' | 'medium' |
 }
 
 export const RISK_LABELS = {
-  high: { label: 'Alto valor', color: 'bg-rose-100 text-rose-700' },
+  high: { label: 'Alto valor', color: 'bg-indigo-100 text-indigo-700' },
   medium: { label: 'Valor medio', color: 'bg-amber-100 text-amber-700' },
   low: { label: 'Valor base', color: 'bg-slate-100 text-slate-600' },
 };
