@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Building2, DollarSign } from 'lucide-react';
 import { differenceInDays } from 'date-fns';
+import { formatCurrency } from '@/lib/crm';
 
 interface CRMPipelineCardProps {
   client: CRMClient;
@@ -31,10 +32,10 @@ export const CRMPipelineCard = ({ client, onClick }: CRMPipelineCardProps) => {
           </div>
         )}
         <div className="flex items-center justify-between">
-          {client.estimated_value > 0 && (
+          {(client.estimated_value ?? 0) > 0 && (
             <div className="flex items-center gap-1 text-xs font-medium text-primary">
               <DollarSign className="h-3 w-3" />
-              {client.estimated_value.toLocaleString('es-ES')} €
+              {formatCurrency(client.estimated_value)} €
             </div>
           )}
           <Badge variant="outline" className="text-[10px]">

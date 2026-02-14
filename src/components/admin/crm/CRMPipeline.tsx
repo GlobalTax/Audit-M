@@ -18,6 +18,8 @@ export const CRMPipeline = () => {
   const [selectedClient, setSelectedClient] = useState<CRMClient | null>(null);
 
   const handleDrop = (clientId: string, newStage: CRMPipelineStage) => {
+    const client = clients.find((c) => c.id === clientId);
+    if (!client || client.pipeline_stage === newStage) return;
     updateClient.mutate({ id: clientId, pipeline_stage: newStage });
   };
 

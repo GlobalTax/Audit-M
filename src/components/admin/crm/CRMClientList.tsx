@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCRMClients, useDeleteCRMClient, type CRMClient, type CRMClientStatus } from '@/hooks/useCRMClients';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,30 +11,23 @@ import { CRMClientDetail } from './CRMClientDetail';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-
-const STATUS_COLORS: Record<CRMClientStatus, string> = {
-  prospecto: 'bg-blue-100 text-blue-800',
-  activo: 'bg-green-100 text-green-800',
-  inactivo: 'bg-gray-100 text-gray-800',
-  perdido: 'bg-red-100 text-red-800',
-};
-
-const STATUS_LABELS: Record<CRMClientStatus, string> = {
-  prospecto: 'Prospecto',
-  activo: 'Activo',
-  inactivo: 'Inactivo',
-  perdido: 'Perdido',
-};
+import { CLIENT_STATUS_COLORS, CLIENT_STATUS_LABELS, formatCurrency } from '@/lib/crm';
 
 export const CRMClientList = () => {
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<CRMClientStatus | 'all'>('all');
   const [showForm, setShowForm] = useState(false);
   const [editingClient, setEditingClient] = useState<CRMClient | null>(null);
   const [viewingClientId, setViewingClientId] = useState<string | null>(null);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search), 300);
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const { data: clients = [], isLoading } = useCRMClients({
-    search: search || undefined,
+    search: debouncedSearch || undefined,
     status: statusFilter === 'all' ? undefined : statusFilter,
   });
   const deleteClient = useDeleteCRMClient();
@@ -52,7 +45,7 @@ export const CRMClientList = () => {
               className="pl-9"
             />
           </div>
-          <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as any)}>
+          <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as CRMClientStatus | 'all')}>
             <SelectTrigger className="w-[140px]">
               <SelectValue placeholder="Estado" />
             </SelectTrigger>
@@ -95,11 +88,11 @@ export const CRMClientList = () => {
                   <TableCell className="text-muted-foreground">{client.email || '-'}</TableCell>
                   <TableCell className="text-muted-foreground">{client.sector || '-'}</TableCell>
                   <TableCell>
-                    <Badge className={STATUS_COLORS[client.status]} variant="secondary">
-                      {STATUS_LABELS[client.status]}
+                    <Badge className={CLIENT_STATUS_COLORS[client.status]} variant="secondary">
+                      {CLIENT_STATUS_LABELS[client.status]}
                     </Badge>
                   </TableCell>
-                  <TableCell>{client.estimated_value > 0 ? `${client.estimated_value.toLocaleString('es-ES')} €` : '-'}</TableCell>
+                  <TableCell>{(client.estimated_value ?? 0) > 0 ? `${formatCurrency(client.estimated_value)} €` : '-'}</TableCell>
                   <TableCell className="text-muted-foreground text-sm">
                     {format(new Date(client.created_at), 'd MMM yyyy', { locale: es })}
                   </TableCell>

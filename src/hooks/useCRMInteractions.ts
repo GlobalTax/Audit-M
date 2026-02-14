@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import type { TablesInsert } from '@/integrations/supabase/types';
 
 export type CRMInteractionType = 'llamada' | 'email' | 'reunion' | 'nota' | 'tarea';
 
@@ -38,7 +39,7 @@ export const useCreateCRMInteraction = () => {
     mutationFn: async (interaction: Omit<CRMInteraction, 'id' | 'created_at'>) => {
       const { data, error } = await supabase
         .from('crm_interactions')
-        .insert(interaction as any)
+        .insert(interaction as TablesInsert<'crm_interactions'>)
         .select()
         .single();
       if (error) throw error;

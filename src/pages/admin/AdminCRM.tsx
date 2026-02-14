@@ -9,13 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { format, differenceInDays } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useCRMClients } from '@/hooks/useCRMClients';
-
-const CONTRACT_STATUS_COLORS: Record<string, string> = {
-  activo: 'bg-green-100 text-green-800',
-  pausado: 'bg-yellow-100 text-yellow-800',
-  finalizado: 'bg-gray-100 text-gray-800',
-  renovacion_pendiente: 'bg-orange-100 text-orange-800',
-};
+import { CONTRACT_STATUS_COLORS, CONTRACT_STATUS_LABELS, formatCurrency } from '@/lib/crm';
 
 const ContractsOverview = () => {
   const { data: contracts = [], isLoading } = useCRMContracts();
@@ -46,17 +40,17 @@ const ContractsOverview = () => {
           ) : (
             contracts.map((contract) => {
               const daysUntilEnd = contract.end_date ? differenceInDays(new Date(contract.end_date), new Date()) : null;
-              const isExpiring = daysUntilEnd !== null && daysUntilEnd <= 30 && daysUntilEnd > 0;
+              const isExpiring = daysUntilEnd !== null && daysUntilEnd <= 30 && daysUntilEnd >= 0;
               return (
                 <TableRow key={contract.id}>
                   <TableCell className="font-medium">{contract.service_name}</TableCell>
                   <TableCell className="text-muted-foreground">{getClientName(contract.client_id)}</TableCell>
                   <TableCell>
-                    <Badge className={CONTRACT_STATUS_COLORS[contract.status] || ''} variant="secondary">
-                      {contract.status.replace('_', ' ')}
+                    <Badge className={CONTRACT_STATUS_COLORS[contract.status as keyof typeof CONTRACT_STATUS_COLORS] || ''} variant="secondary">
+                      {CONTRACT_STATUS_LABELS[contract.status as keyof typeof CONTRACT_STATUS_LABELS] || contract.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{contract.amount?.toLocaleString('es-ES')} €</TableCell>
+                  <TableCell>{formatCurrency(contract.amount)} €</TableCell>
                   <TableCell className="capitalize text-muted-foreground">{contract.billing_frequency}</TableCell>
                   <TableCell>
                     {contract.end_date ? (

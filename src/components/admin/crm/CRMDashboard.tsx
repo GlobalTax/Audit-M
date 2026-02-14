@@ -1,28 +1,12 @@
-import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useCRMStats } from '@/hooks/useCRMStats';
-import { Users, FileText, DollarSign, AlertTriangle, Phone, Mail, Calendar, StickyNote, ListTodo } from 'lucide-react';
+import { Users, FileText, DollarSign, AlertTriangle, Phone, Mail, Calendar, StickyNote, ListTodo, type LucideIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { PIPELINE_LABELS, PIPELINE_STAGES, CLIENT_STATUS_LABELS, formatCurrency } from '@/lib/crm';
 
-const PIPELINE_LABELS: Record<string, string> = {
-  nuevo: 'Nuevo',
-  contactado: 'Contactado',
-  propuesta: 'Propuesta',
-  negociacion: 'Negociación',
-  cerrado_ganado: 'Cerrado Ganado',
-  cerrado_perdido: 'Cerrado Perdido',
-};
-
-const STATUS_LABELS: Record<string, string> = {
-  prospecto: 'Prospecto',
-  activo: 'Activo',
-  inactivo: 'Inactivo',
-  perdido: 'Perdido',
-};
-
-const INTERACTION_ICONS: Record<string, any> = {
+const INTERACTION_ICONS: Record<string, LucideIcon> = {
   llamada: Phone,
   email: Mail,
   reunion: Calendar,
@@ -37,9 +21,9 @@ export const CRMDashboard = () => {
     return <div className="flex items-center justify-center py-12 text-muted-foreground">Cargando métricas...</div>;
   }
 
-  if (!stats) return null;
-
-  const pipelineStages = ['nuevo', 'contactado', 'propuesta', 'negociacion', 'cerrado_ganado', 'cerrado_perdido'];
+  if (!stats) {
+    return <div className="flex items-center justify-center py-12 text-muted-foreground">No hay datos disponibles</div>;
+  }
 
   return (
     <div className="space-y-6">
@@ -69,7 +53,7 @@ export const CRMDashboard = () => {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalContractValue.toLocaleString('es-ES')} €</div>
+            <div className="text-2xl font-bold">{formatCurrency(stats.totalContractValue)} €</div>
           </CardContent>
         </Card>
         <Card>
@@ -91,9 +75,10 @@ export const CRMDashboard = () => {
             <CardTitle className="text-base">Funnel del Pipeline</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {pipelineStages.map((stage) => {
+            {PIPELINE_STAGES.map((stage) => {
               const count = stats.byPipeline[stage] || 0;
-              const maxCount = Math.max(...Object.values(stats.byPipeline), 1);
+              const pipelineValues = Object.values(stats.byPipeline);
+              const maxCount = pipelineValues.length > 0 ? Math.max(...pipelineValues, 1) : 1;
               const width = Math.max((count / maxCount) * 100, 8);
               return (
                 <div key={stage} className="flex items-center gap-3">
@@ -119,7 +104,7 @@ export const CRMDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              {Object.entries(STATUS_LABELS).map(([key, label]) => (
+              {Object.entries(CLIENT_STATUS_LABELS).map(([key, label]) => (
                 <div key={key} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                   <span className="text-sm">{label}</span>
                   <Badge variant="secondary" className="text-sm">

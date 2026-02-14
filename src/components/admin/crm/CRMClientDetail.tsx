@@ -9,21 +9,13 @@ import { CRMInteractionForm } from './CRMInteractionForm';
 import { CRMContractList } from './CRMContractList';
 import { CRMClientForm } from './CRMClientForm';
 import { Plus, Pencil, Building2, Mail, Phone, Globe, MapPin, Hash } from 'lucide-react';
+import { PIPELINE_LABELS, formatCurrency } from '@/lib/crm';
 
 interface CRMClientDetailProps {
   clientId: string;
   open: boolean;
   onClose: () => void;
 }
-
-const PIPELINE_LABELS: Record<string, string> = {
-  nuevo: 'Nuevo',
-  contactado: 'Contactado',
-  propuesta: 'Propuesta',
-  negociacion: 'Negociación',
-  cerrado_ganado: 'Cerrado Ganado',
-  cerrado_perdido: 'Cerrado Perdido',
-};
 
 export const CRMClientDetail = ({ clientId, open, onClose }: CRMClientDetailProps) => {
   const { data: client, isLoading } = useCRMClient(clientId);
@@ -85,7 +77,7 @@ export const CRMClientDetail = ({ clientId, open, onClose }: CRMClientDetailProp
                     {client.website && (
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Globe className="h-3.5 w-3.5" />
-                        <a href={client.website} target="_blank" rel="noopener" className="text-primary underline truncate">{client.website}</a>
+                        <a href={client.website} target="_blank" rel="noopener noreferrer" className="text-primary underline truncate">{client.website}</a>
                       </div>
                     )}
                     {client.sector && (
@@ -127,7 +119,7 @@ export const CRMClientDetail = ({ clientId, open, onClose }: CRMClientDetailProp
                       <span className="text-muted-foreground">Responsable:</span> {client.assigned_to || '-'}
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Valor est.:</span> {client.estimated_value?.toLocaleString('es-ES')} €
+                      <span className="text-muted-foreground">Valor est.:</span> {formatCurrency(client.estimated_value)} €
                     </div>
                   </div>
                 </div>

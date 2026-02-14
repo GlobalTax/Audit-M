@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCreateCRMContract, useUpdateCRMContract, type CRMContract, type CRMContractStatus } from '@/hooks/useCRMContracts';
+import { toast } from 'sonner';
 
 interface CRMContractFormProps {
   clientId: string;
@@ -40,10 +41,23 @@ export const CRMContractForm = ({ clientId, open, onClose, contract }: CRMContra
     e.preventDefault();
     if (!form.service_name.trim()) return;
 
+    if (form.start_date && form.end_date && form.end_date < form.start_date) {
+      toast.error('La fecha de fin no puede ser anterior a la de inicio');
+      return;
+    }
+
+    const payload = {
+      ...form,
+      amount: Math.max(0, form.amount),
+      start_date: form.start_date || null,
+      end_date: form.end_date || null,
+      notes: form.notes || null,
+    };
+
     if (isEditing && contract) {
-      await updateContract.mutateAsync({ id: contract.id, ...form });
+      await updateContract.mutateAsync({ id: contract.id, ...payload });
     } else {
-      await createContract.mutateAsync({ client_id: clientId, ...form });
+      await createContract.mutateAsync({ client_id: clientId, ...payload });
     }
     onClose();
   };
@@ -91,7 +105,7 @@ export const CRMContractForm = ({ clientId, open, onClose, contract }: CRMContra
           </div>
           <div className="space-y-2">
             <Label>Importe (€)</Label>
-            <Input type="number" value={form.amount} onChange={(e) => setForm((p) => ({ ...p, amount: parseFloat(e.target.value) || 0 }))} />
+            <Input type="number" min="0" value={form.amount} onChange={(e) => setForm((p) => ({ ...p, amount: parseFloat(e.target.value) || 0 }))} />
           </div>
           <div className="space-y-2">
             <Label>Notas</Label>

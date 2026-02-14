@@ -1,7 +1,8 @@
 import { type CRMClient, type CRMPipelineStage } from '@/hooks/useCRMClients';
 import { CRMPipelineCard } from './CRMPipelineCard';
 import { Badge } from '@/components/ui/badge';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { formatCurrency } from '@/lib/crm';
 
 interface CRMPipelineColumnProps {
   stage: CRMPipelineStage;
@@ -14,7 +15,10 @@ interface CRMPipelineColumnProps {
 export const CRMPipelineColumn = ({ stage, label, clients, onDrop, onClientClick }: CRMPipelineColumnProps) => {
   const [isDragOver, setIsDragOver] = useState(false);
 
-  const totalValue = clients.reduce((sum, c) => sum + (c.estimated_value || 0), 0);
+  const totalValue = useMemo(
+    () => clients.reduce((sum, c) => sum + (c.estimated_value || 0), 0),
+    [clients]
+  );
 
   return (
     <div
@@ -41,7 +45,7 @@ export const CRMPipelineColumn = ({ stage, label, clients, onDrop, onClientClick
         </div>
         {totalValue > 0 && (
           <p className="text-xs text-muted-foreground mt-1">
-            {totalValue.toLocaleString('es-ES')} €
+            {formatCurrency(totalValue)} €
           </p>
         )}
       </div>

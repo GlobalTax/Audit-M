@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCreateCRMClient, useUpdateCRMClient, type CRMClient, type CRMClientStatus, type CRMPipelineStage } from '@/hooks/useCRMClients';
+import { toast } from 'sonner';
 
 interface CRMClientFormProps {
   open: boolean;
@@ -61,10 +62,31 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
     e.preventDefault();
     if (!form.name.trim()) return;
 
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      toast.error('El email no es válido');
+      return;
+    }
+
+    const payload = {
+      ...form,
+      email: form.email || null,
+      phone: form.phone || null,
+      nif_cif: form.nif_cif || null,
+      fiscal_address: form.fiscal_address || null,
+      city: form.city || null,
+      postal_code: form.postal_code || null,
+      website: form.website || null,
+      sector: form.sector || null,
+      assigned_to: form.assigned_to || null,
+      source: form.source || null,
+      notes: form.notes || null,
+      estimated_value: Math.max(0, form.estimated_value),
+    };
+
     if (isEditing && client) {
-      await updateClient.mutateAsync({ id: client.id, ...form });
+      await updateClient.mutateAsync({ id: client.id, ...payload });
     } else {
-      await createClient.mutateAsync(form);
+      await createClient.mutateAsync(payload);
     }
     onClose();
   };
@@ -113,7 +135,7 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
             </div>
             <div className="space-y-2">
               <Label>Valor Estimado (€)</Label>
-              <Input type="number" value={form.estimated_value} onChange={(e) => handleChange('estimated_value', parseFloat(e.target.value) || 0)} />
+              <Input type="number" min="0" value={form.estimated_value} onChange={(e) => handleChange('estimated_value', parseFloat(e.target.value) || 0)} />
             </div>
             <div className="space-y-2">
               <Label>Origen</Label>
