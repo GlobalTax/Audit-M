@@ -44,31 +44,31 @@ export const AdminLayout = () => {
       <AdminSidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader />
-        <main className="flex-1 bg-slate-50/80 p-6 lg:p-8">
+        <main className="flex-1 bg-[#F8F9FC] p-6 lg:p-8">
           {showBanner && (
-            <Alert className="mb-6 border-primary/20 bg-primary/5 rounded-xl">
-              <Bell className="h-4 w-4 text-primary" />
+            <Alert className="mb-6 border-indigo-200 bg-indigo-50 rounded-xl">
+              <Bell className="h-4 w-4 text-indigo-600" />
               <AlertTitle className="flex items-center justify-between text-slate-900">
-                <span>Enable push notifications</span>
+                <span>Activar notificaciones push</span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleDismiss}
-                  className="h-6 w-6 p-0 hover:bg-amber-100"
+                  className="h-6 w-6 p-0 hover:bg-indigo-100"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </AlertTitle>
-              <AlertDescription className="flex items-center justify-between text-amber-800">
+              <AlertDescription className="flex items-center justify-between text-indigo-700">
                 <span>
-                  Receive alerts for new contacts even when the panel is closed
+                  Recibe alertas de nuevos contactos aunque tengas el panel cerrado
                 </span>
-                <Button 
-                  onClick={handleEnable} 
-                  size="sm" 
-                  className="ml-4 bg-amber-500 hover:bg-amber-600 text-slate-950"
+                <Button
+                  onClick={handleEnable}
+                  size="sm"
+                  className="ml-4 bg-indigo-600 hover:bg-indigo-700 text-white"
                 >
-                  Enable
+                  Activar
                 </Button>
               </AlertDescription>
             </Alert>

@@ -208,7 +208,7 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
 
           <div className="flex justify-end gap-2 pt-2 border-t">
             <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>
-            <Button type="submit" disabled={createClient.isPending || updateClient.isPending}>
+            <Button type="submit" disabled={createClient.isPending || updateClient.isPending} className="bg-indigo-600 hover:bg-indigo-700">
               {isEditing ? 'Guardar cambios' : 'Crear cliente'}
             </Button>
           </div>
