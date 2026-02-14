@@ -1,16 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useCRMClients, useUpdateCRMClient, type CRMClient, type CRMPipelineStage } from '@/hooks/useCRMClients';
 import { CRMPipelineColumn } from './CRMPipelineColumn';
 import { CRMClientDetail } from './CRMClientDetail';
-
-const PIPELINE_STAGES: { stage: CRMPipelineStage; label: string }[] = [
-  { stage: 'nuevo', label: 'Nuevo' },
-  { stage: 'contactado', label: 'Contactado' },
-  { stage: 'propuesta', label: 'Propuesta' },
-  { stage: 'negociacion', label: 'Negociación' },
-  { stage: 'cerrado_ganado', label: 'Cerrado ✓' },
-  { stage: 'cerrado_perdido', label: 'Perdido ✗' },
-];
+import { PIPELINE_LABELS, PIPELINE_STAGES, formatCurrency } from '@/lib/crm';
 
 export const CRMPipeline = () => {
   const { data: clients = [], isLoading } = useCRMClients();
@@ -23,18 +15,38 @@ export const CRMPipeline = () => {
     updateClient.mutate({ id: clientId, pipeline_stage: newStage });
   };
 
+  const totalPipelineValue = useMemo(() => {
+    return clients
+      .filter((c) => c.pipeline_stage !== 'cerrado_perdido' && c.pipeline_stage !== 'cerrado_ganado')
+      .reduce((sum, c) => sum + (c.estimated_value || 0), 0);
+  }, [clients]);
+
+  const activeDeals = useMemo(() => {
+    return clients.filter((c) => c.pipeline_stage !== 'cerrado_perdido' && c.pipeline_stage !== 'cerrado_ganado').length;
+  }, [clients]);
+
   if (isLoading) {
     return <div className="flex items-center justify-center py-12 text-muted-foreground">Cargando pipeline...</div>;
   }
 
   return (
     <>
+      {/* Pipeline summary bar */}
+      <div className="flex items-center gap-6 mb-4 px-1">
+        <div className="text-sm text-slate-500">
+          <span className="font-semibold text-slate-900">{activeDeals}</span> oportunidades abiertas
+        </div>
+        <div className="text-sm text-slate-500">
+          Valor total: <span className="font-semibold text-slate-900">{formatCurrency(totalPipelineValue)} €</span>
+        </div>
+      </div>
+
       <div className="flex gap-3 overflow-x-auto pb-4">
-        {PIPELINE_STAGES.map(({ stage, label }) => (
+        {PIPELINE_STAGES.map((stage) => (
           <CRMPipelineColumn
             key={stage}
             stage={stage}
-            label={label}
+            label={PIPELINE_LABELS[stage]}
             clients={clients.filter((c) => c.pipeline_stage === stage)}
             onDrop={handleDrop}
             onClientClick={setSelectedClient}
