@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { getSourceFilter } from "@/config/site";
 
 export interface Award {
   id: string;
@@ -19,15 +20,17 @@ export interface Award {
 export type AwardInsert = Omit<Award, 'id' | 'created_at' | 'updated_at'>;
 export type AwardUpdate = Partial<AwardInsert>;
 
-// Fetch active awards for frontend display
+// Fetch active awards for frontend display (filtered by source_site)
 export function useAwards() {
+  const sourceFilter = getSourceFilter();
   return useQuery({
-    queryKey: ["awards"],
+    queryKey: ["awards", sourceFilter],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("awards")
         .select("*")
         .eq("is_active", true)
+        .eq("source_site", sourceFilter)
         .order("display_order", { ascending: true });
 
       if (error) throw error;
