@@ -77,6 +77,7 @@ const navSections: NavSection[] = [
   {
     title: 'Herramientas',
     items: [
+      { path: '/admin/projects', icon: Kanban, label: 'Proyectos' },
       { path: '/admin/proposal-generator', icon: FileOutput, label: 'Propuestas' },
       { path: '/admin/deck-studio', icon: Presentation, label: 'Deck Studio' },
       { path: '/admin/corporate-presentation', icon: Presentation, label: 'Presentación Corp.' },
