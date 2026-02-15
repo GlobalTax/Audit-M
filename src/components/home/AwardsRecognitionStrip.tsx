@@ -15,9 +15,9 @@ export const AwardsRecognitionStrip = () => {
             <Skeleton className="h-4 w-32 mx-auto mb-3" />
             <Skeleton className="h-8 w-64 mx-auto" />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
-            {[...Array(7)].map((_, i) => (
-              <Skeleton key={i} className="h-32 rounded-sm" />
+          <div className="flex flex-wrap justify-center gap-4 md:gap-5">
+            {[...Array(3)].map((_, i) => (
+              <Skeleton key={i} className="h-32 w-48 rounded-sm" />
             ))}
           </div>
         </div>
@@ -28,6 +28,13 @@ export const AwardsRecognitionStrip = () => {
   if (!awards || awards.length === 0) {
     return null;
   }
+
+  const count = awards.length;
+  const gridClass = count <= 2
+    ? "flex flex-wrap justify-center gap-4 md:gap-5"
+    : count <= 4
+      ? "grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-4xl mx-auto"
+      : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5";
 
   return (
     <section 
@@ -47,27 +54,28 @@ export const AwardsRecognitionStrip = () => {
 
         {/* Awards Grid */}
         <TooltipProvider>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
+          <div className={gridClass}>
             {awards.map((award) => (
               <Tooltip key={award.id}>
                 <TooltipTrigger asChild>
                   <div 
-                    className="
-                      bg-neutral-50 
+                    className={`
+                      bg-muted/30
                       border border-border/50
-                      border-t-4 border-t-[#C9A227]
+                      border-t-4 border-t-accent
                       rounded-sm
                       p-4
                       text-center
                       transition-all duration-200
-                      hover:shadow-md hover:shadow-[#C9A227]/10
+                      hover:shadow-md hover:shadow-accent/10
                       hover:-translate-y-0.5
                       cursor-default
                       group
-                    "
+                      ${count <= 2 ? 'w-48 md:w-56' : ''}
+                    `}
                   >
                     {/* Category */}
-                    <span className="text-[10px] text-[#C9A227] font-medium tracking-widest uppercase">
+                    <span className="text-[10px] text-accent font-medium tracking-widest uppercase">
                       {award.category}
                     </span>
                     
