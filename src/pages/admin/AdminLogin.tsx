@@ -10,8 +10,8 @@ import { AlertTriangle, Clock, ClipboardList } from 'lucide-react';
 import { z } from 'zod';
 
 const loginSchema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().email('Email no válido'),
+  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
 });
 
 export const AdminLogin = () => {
@@ -71,8 +71,8 @@ export const AdminLogin = () => {
     try {
       await signIn(email, password);
       toast({
-        title: 'Access granted',
-        description: 'Welcome to the administration portal',
+        title: 'Acceso concedido',
+        description: 'Bienvenido al portal de administración',
       });
       navigate('/admin');
     } catch (error: any) {
@@ -87,18 +87,18 @@ export const AdminLogin = () => {
         setLockoutUntil(error.lockoutUntil);
       }
 
-      let errorMessage = 'Invalid credentials';
+      let errorMessage = 'Credenciales no válidas';
       
       if (error.message?.includes('Too many')) {
-        errorMessage = 'Too many failed attempts. Please try again later.';
+        errorMessage = 'Demasiados intentos fallidos. Por favor, inténtalo más tarde.';
       } else if (error.message?.includes('Access denied')) {
-        errorMessage = 'Access denied: You are not an administrator.';
+        errorMessage = 'Acceso denegado: no eres administrador.';
       } else if (error.message?.includes('Account disabled')) {
-        errorMessage = 'Your account has been disabled. Contact an administrator.';
+        errorMessage = 'Tu cuenta ha sido desactivada. Contacta con un administrador.';
       }
       
       toast({
-        title: 'Authentication error',
+        title: 'Error de autenticación',
         description: errorMessage,
         variant: 'destructive',
       });
@@ -126,7 +126,7 @@ export const AdminLogin = () => {
             audit
           </h1>
           <p className="text-sm text-white/50">
-            Administration Portal
+            Portal de Administración
           </p>
         </div>
 
@@ -135,7 +135,7 @@ export const AdminLogin = () => {
           <Alert className="mb-6 bg-white/5 border-white/10 text-white">
             <Clock className="h-4 w-4 text-white/70" />
             <AlertDescription className="text-white/70">
-              Too many failed attempts. Please wait {lockoutMinutes} minutes before trying again.
+              Demasiados intentos fallidos. Espera {lockoutMinutes} minutos antes de intentarlo de nuevo.
             </AlertDescription>
           </Alert>
         )}
@@ -144,7 +144,7 @@ export const AdminLogin = () => {
           <Alert className="mb-6 bg-amber-500/10 border-amber-500/20">
             <AlertTriangle className="h-4 w-4 text-amber-500" />
             <AlertDescription className="text-amber-400">
-              You have {remainingAttempts} attempts remaining before your account is temporarily locked.
+              Te quedan {remainingAttempts} intentos antes de que tu cuenta sea bloqueada temporalmente.
             </AlertDescription>
           </Alert>
         )}
@@ -175,7 +175,7 @@ export const AdminLogin = () => {
           
           <div className="space-y-2">
             <Label htmlFor="password" className="text-white/70 font-normal">
-              Password
+              Contraseña
             </Label>
             <Input
               id="password"
@@ -199,7 +199,7 @@ export const AdminLogin = () => {
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-normal" 
             disabled={isLoading || isLockedOut}
           >
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? 'Accediendo...' : 'Iniciar Sesión'}
           </Button>
         </form>
       </div>

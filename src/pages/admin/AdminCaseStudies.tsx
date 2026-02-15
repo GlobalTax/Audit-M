@@ -72,10 +72,10 @@ export function AdminCaseStudies() {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Status updated successfully');
+      toast.success('Estado actualizado');
       queryClient.invalidateQueries({ queryKey: ['admin-case-studies'] });
     } catch (error) {
-      toast.error('Error updating status');
+      toast.error('Error al actualizar el estado');
     }
   };
 
@@ -87,11 +87,11 @@ export function AdminCaseStudies() {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Case study deleted successfully');
+      toast.success('Caso de éxito eliminado');
       queryClient.invalidateQueries({ queryKey: ['admin-case-studies'] });
       setCaseStudyToDelete(null);
     } catch (error) {
-      toast.error('Error deleting case study');
+      toast.error('Error al eliminar el caso de éxito');
     }
   };
 
@@ -121,34 +121,34 @@ export function AdminCaseStudies() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-normal">Case Studies</h1>
+          <h1 className="text-3xl font-normal">Casos de Éxito</h1>
           <p className="text-foreground/70 mt-2">
-            Manage client success stories
+            Gestiona los casos de éxito de clientes
           </p>
         </div>
         <Button onClick={handleAddNew}>
           <Plus className="h-4 w-4 mr-2" />
-          Add Case Study
+          Añadir Caso de Éxito
         </Button>
       </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <TranslateCaseStudiesToCatalan />
-          <TranslateCaseStudiesToEnglish />
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <TranslateCaseStudiesToCatalan />
+        <TranslateCaseStudiesToEnglish />
+      </div>
 
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/50" />
           <Input
-            placeholder="Search case studies..."
+            placeholder="Buscar casos de éxito..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -160,14 +160,14 @@ export function AdminCaseStudies() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Client</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Industry</TableHead>
-              <TableHead>Service</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Featured</TableHead>
-              <TableHead>Views</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead>Cliente</TableHead>
+              <TableHead>Título</TableHead>
+              <TableHead>Sector</TableHead>
+              <TableHead>Servicio</TableHead>
+              <TableHead>Estado</TableHead>
+              <TableHead>Destacado</TableHead>
+              <TableHead>Visitas</TableHead>
+              <TableHead className="text-right">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -177,11 +177,7 @@ export function AdminCaseStudies() {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       {caseStudy.client_logo_url && (
-                        <img
-                          src={caseStudy.client_logo_url}
-                          alt={caseStudy.client_name}
-                          className="h-8 w-8 object-contain"
-                        />
+                        <img src={caseStudy.client_logo_url} alt={caseStudy.client_name} className="h-8 w-8 object-contain" />
                       )}
                       <span className="font-medium">{caseStudy.client_name}</span>
                     </div>
@@ -199,25 +195,13 @@ export function AdminCaseStudies() {
                   <TableCell>{caseStudy.view_count}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleEdit(caseStudy)}
-                      >
+                      <Button variant="ghost" size="icon" onClick={() => handleEdit(caseStudy)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handlePreview(caseStudy)}
-                      >
+                      <Button variant="ghost" size="icon" onClick={() => handlePreview(caseStudy)}>
                         <Eye className="h-4 w-4" />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setCaseStudyToDelete(caseStudy.id)}
-                      >
+                      <Button variant="ghost" size="icon" onClick={() => setCaseStudyToDelete(caseStudy.id)}>
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -227,7 +211,7 @@ export function AdminCaseStudies() {
             ) : (
               <TableRow>
                 <TableCell colSpan={8} className="text-center py-8 text-foreground/60">
-                  No case studies found
+                  No se encontraron casos de éxito
                 </TableCell>
               </TableRow>
             )}
@@ -237,37 +221,31 @@ export function AdminCaseStudies() {
 
       <CaseStudyFormDialog
         open={isFormOpen}
-        onClose={() => {
-          setIsFormOpen(false);
-          setSelectedCaseStudy(null);
-        }}
+        onClose={() => { setIsFormOpen(false); setSelectedCaseStudy(null); }}
         caseStudy={selectedCaseStudy}
       />
 
       <CaseStudyPreviewModal
         open={isPreviewOpen}
-        onClose={() => {
-          setIsPreviewOpen(false);
-          setSelectedCaseStudy(null);
-        }}
+        onClose={() => { setIsPreviewOpen(false); setSelectedCaseStudy(null); }}
         caseStudy={selectedCaseStudy}
       />
 
       <AlertDialog open={!!caseStudyToDelete} onOpenChange={() => setCaseStudyToDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the case study.
+              Esta acción no se puede deshacer. Se eliminará permanentemente el caso de éxito.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => caseStudyToDelete && handleDelete(caseStudyToDelete)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              Eliminar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

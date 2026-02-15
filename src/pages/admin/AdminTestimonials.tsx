@@ -1,4 +1,3 @@
-// Admin Testimonials Management Page
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -36,9 +35,9 @@ export default function AdminTestimonials() {
         id: testimonial.id,
         is_active: !testimonial.is_active,
       });
-      toast.success(`Testimonial ${testimonial.is_active ? 'deactivated' : 'activated'}`);
+      toast.success(`Testimonio ${testimonial.is_active ? 'desactivado' : 'activado'}`);
     } catch {
-      toast.error('Failed to update testimonial');
+      toast.error('Error al actualizar el testimonio');
     }
   };
 
@@ -46,10 +45,10 @@ export default function AdminTestimonials() {
     if (!deleteId) return;
     try {
       await deleteMutation.mutateAsync(deleteId);
-      toast.success('Testimonial deleted');
+      toast.success('Testimonio eliminado');
       setDeleteId(null);
     } catch {
-      toast.error('Failed to delete testimonial');
+      toast.error('Error al eliminar el testimonio');
     }
   };
 
@@ -72,12 +71,12 @@ export default function AdminTestimonials() {
     <div className="p-8 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-normal">Testimonials</h1>
-          <p className="text-muted-foreground">Manage client testimonials for the homepage</p>
+          <h1 className="text-2xl font-normal">Testimonios</h1>
+          <p className="text-muted-foreground">Gestiona los testimonios de clientes para la página principal</p>
         </div>
         <Button onClick={handleAdd}>
           <Plus className="h-4 w-4 mr-2" />
-          Add Testimonial
+          Añadir Testimonio
         </Button>
       </div>
 
@@ -86,12 +85,12 @@ export default function AdminTestimonials() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[50px]">#</TableHead>
-              <TableHead>Author</TableHead>
-              <TableHead>Quote</TableHead>
-              <TableHead>Company</TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead className="w-[80px]">Active</TableHead>
-              <TableHead className="w-[100px]">Actions</TableHead>
+              <TableHead>Autor</TableHead>
+              <TableHead>Cita</TableHead>
+              <TableHead>Empresa</TableHead>
+              <TableHead>Ubicación</TableHead>
+              <TableHead className="w-[80px]">Activo</TableHead>
+              <TableHead className="w-[100px]">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -142,18 +141,10 @@ export default function AdminTestimonials() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleEdit(testimonial)}
-                    >
+                    <Button variant="ghost" size="icon" onClick={() => handleEdit(testimonial)}>
                       <Pencil className="h-4 w-4" />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setDeleteId(testimonial.id)}
-                    >
+                    <Button variant="ghost" size="icon" onClick={() => setDeleteId(testimonial.id)}>
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
                   </div>
@@ -163,7 +154,7 @@ export default function AdminTestimonials() {
             {testimonials?.length === 0 && (
               <TableRow>
                 <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                  No testimonials yet. Add your first one!
+                  Aún no hay testimonios. ¡Añade el primero!
                 </TableCell>
               </TableRow>
             )}
@@ -180,15 +171,15 @@ export default function AdminTestimonials() {
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Testimonial</AlertDialogTitle>
+            <AlertDialogTitle>Eliminar Testimonio</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this testimonial? This action cannot be undone.
+              ¿Estás seguro de que quieres eliminar este testimonio? Esta acción no se puede deshacer.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground">
-              Delete
+              Eliminar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

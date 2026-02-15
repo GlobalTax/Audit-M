@@ -103,7 +103,7 @@ export default function AdminAwards() {
           <div className="flex items-center gap-3">
             <Trophy className="h-6 w-6 text-[#C9A227]" />
             <div>
-              <h1 className="text-2xl font-normal">Awards & Accolades</h1>
+              <h1 className="text-2xl font-normal">Premios y Reconocimientos</h1>
               <p className="text-sm text-muted-foreground">
                 Gestiona los premios y reconocimientos mostrados en la web
               </p>
@@ -111,7 +111,7 @@ export default function AdminAwards() {
           </div>
           <Button onClick={handleAdd}>
             <Plus className="h-4 w-4 mr-2" />
-            Añadir Award
+            Añadir Premio
           </Button>
         </div>
 
@@ -119,7 +119,7 @@ export default function AdminAwards() {
         <div className="flex gap-4">
           <div className="bg-muted/50 rounded-lg px-4 py-3">
             <p className="text-2xl font-medium">{awards?.length || 0}</p>
-            <p className="text-sm text-muted-foreground">Total Awards</p>
+            <p className="text-sm text-muted-foreground">Total Premios</p>
           </div>
           <div className="bg-muted/50 rounded-lg px-4 py-3">
             <p className="text-2xl font-medium">
@@ -147,7 +147,7 @@ export default function AdminAwards() {
               {awards?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                    No hay awards configurados
+                    No hay premios configurados
                   </TableCell>
                 </TableRow>
               ) : (
@@ -235,9 +235,9 @@ export default function AdminAwards() {
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Eliminar este award?</AlertDialogTitle>
+            <AlertDialogTitle>¿Eliminar este premio?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción no se puede deshacer. El award será eliminado permanentemente.
+              Esta acción no se puede deshacer. El premio será eliminado permanentemente.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

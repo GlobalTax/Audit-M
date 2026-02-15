@@ -28,7 +28,6 @@ const AdminServices = () => {
 
   const queryClient = useQueryClient();
 
-  // Fetch services
   const { data: services, isLoading } = useQuery({
     queryKey: ['admin-services', searchQuery, areaFilter],
     queryFn: async () => {
@@ -49,7 +48,6 @@ const AdminServices = () => {
       const { data, error } = await query;
       if (error) throw error;
       
-      // Map to Service interface with language fields
       return (data || []).map((service: any) => ({
         ...service,
         name: service.name_es,
@@ -60,7 +58,6 @@ const AdminServices = () => {
     },
   });
 
-  // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase.from('services').delete().eq('id', id);
@@ -68,15 +65,14 @@ const AdminServices = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-services'] });
-      toast.success('Service deleted successfully');
+      toast.success('Servicio eliminado correctamente');
       setDeleteId(null);
     },
     onError: (error: Error) => {
-      toast.error(`Failed to delete service: ${error.message}`);
+      toast.error(`Error al eliminar servicio: ${error.message}`);
     },
   });
 
-  // Toggle active mutation
   const toggleActiveMutation = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
       const { error } = await supabase
@@ -87,10 +83,10 @@ const AdminServices = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-services'] });
-      toast.success('Service status updated');
+      toast.success('Estado del servicio actualizado');
     },
     onError: (error: Error) => {
-      toast.error(`Failed to update status: ${error.message}`);
+      toast.error(`Error al actualizar estado: ${error.message}`);
     },
   });
 
@@ -129,14 +125,14 @@ const AdminServices = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-normal">Services</h1>
+          <h1 className="text-3xl font-normal">Servicios</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your services and their content
+            Gestiona tus servicios y su contenido
           </p>
         </div>
         <Button onClick={handleAddNew}>
           <Plus className="h-4 w-4 mr-2" />
-          Add Service
+          Añadir Servicio
         </Button>
       </div>
 
@@ -150,17 +146,17 @@ const AdminServices = () => {
         <div className="flex gap-4">
           <div className="flex-1">
             <Input
-              placeholder="Search by name or description..."
+              placeholder="Buscar por nombre o descripción..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <Select value={areaFilter} onValueChange={setAreaFilter}>
             <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="All Areas" />
+              <SelectValue placeholder="Todas las Áreas" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Areas</SelectItem>
+              <SelectItem value="all">Todas las Áreas</SelectItem>
               <SelectItem value="Fiscal">Fiscal</SelectItem>
               <SelectItem value="Contable">Contable</SelectItem>
               <SelectItem value="Legal">Legal</SelectItem>
@@ -173,22 +169,22 @@ const AdminServices = () => {
       {/* Table */}
       <Card className="p-6">
         {isLoading ? (
-          <div className="text-center py-8">Loading services...</div>
+          <div className="text-center py-8">Cargando servicios...</div>
         ) : !services || services.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
-            No services found. Create your first service to get started.
+            No se encontraron servicios. Crea tu primer servicio para empezar.
           </div>
         ) : (
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-12">Icon</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Area</TableHead>
+                <TableHead className="w-12">Icono</TableHead>
+                <TableHead>Nombre</TableHead>
+                <TableHead>Área</TableHead>
                 <TableHead>Slug</TableHead>
-                <TableHead className="text-center">Active</TableHead>
-                <TableHead className="text-center">Order</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead className="text-center">Activo</TableHead>
+                <TableHead className="text-center">Orden</TableHead>
+                <TableHead className="text-right">Acciones</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -197,46 +193,25 @@ const AdminServices = () => {
                   <TableCell>{getIconComponent(service.icon_name)}</TableCell>
                   <TableCell className="font-medium">{service.name}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className={getAreaColor(service.area)}>
-                      {service.area}
-                    </Badge>
+                    <Badge variant="outline" className={getAreaColor(service.area)}>{service.area}</Badge>
                   </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {service.slug}
-                  </TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{service.slug}</TableCell>
                   <TableCell className="text-center">
                     <Switch
                       checked={service.is_active}
-                      onCheckedChange={(checked) =>
-                        toggleActiveMutation.mutate({
-                          id: service.id,
-                          is_active: checked,
-                        })
-                      }
+                      onCheckedChange={(checked) => toggleActiveMutation.mutate({ id: service.id, is_active: checked })}
                     />
                   </TableCell>
                   <TableCell className="text-center">{service.display_order}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handlePreview(service)}
-                      >
+                      <Button variant="ghost" size="sm" onClick={() => handlePreview(service)}>
                         <Eye className="h-4 w-4" />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleEdit(service)}
-                      >
+                      <Button variant="ghost" size="sm" onClick={() => handleEdit(service)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setDeleteId(service.id)}
-                      >
+                      <Button variant="ghost" size="sm" onClick={() => setDeleteId(service.id)}>
                         <Trash2 className="h-4 w-4 text-destructive" />
                       </Button>
                     </div>
@@ -272,18 +247,18 @@ const AdminServices = () => {
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the service.
+              Esta acción no se puede deshacer. Se eliminará permanentemente el servicio.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteId && deleteMutation.mutate(deleteId)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              Eliminar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
