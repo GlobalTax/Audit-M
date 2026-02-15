@@ -1,68 +1,92 @@
 
 
-# Generar tareas con IA en proyectos
+# Adaptar el Generador de Propuestas para Audit
 
-## Que se hara
+## Problemas detectados
 
-Anadir un boton "Generar con IA" en la vista de tareas de un proyecto. Al pulsarlo se abre un textarea donde el usuario pega o escribe una descripcion (por ejemplo: "Plan de marketing digital: SEO, Google Ads, contenidos...") y la IA devuelve un listado estructurado de tareas con titulo, prioridad y orden. Las tareas se insertan automaticamente en el tablero.
+El generador de propuestas actual esta construido para "NRRO International" (Navarro Global, asesoria fiscal/legal). No encaja con este proyecto (Audit / M AUDIT, S.L.P.) en ningun aspecto:
 
-## Flujo de uso
+### Marca
+- PDF muestra "NRRO INTERNATIONAL" en la cabecera
+- Textos "About NRRO", "Why NRRO", contacto global.nrro.es
+- Nombre de archivo PDF: "NRRO_Proposal_..."
+- Numero de propuesta: "NRRO-2026-XXXX"
 
-1. El usuario entra en un proyecto y pulsa el boton "Generar con IA" (icono Sparkles)
-2. Se abre un dialogo con un textarea grande
-3. El usuario pega texto libre (un plan, unas notas, un briefing...)
-4. Pulsa "Generar tareas"
-5. La IA devuelve un JSON estructurado con las tareas
-6. Se muestra una preview de las tareas generadas con opcion de editar/eliminar antes de confirmar
-7. Al confirmar, se insertan todas las tareas de golpe en el tablero
+### Servicios
+- Los servicios disponibles son de asesoria general: Fiscal, Contabilidad, Laboral, Legal Corporativo, Fiscalidad Internacional, Movilidad Global
+- Deberian ser los 21 servicios de auditoria que ya existen en la base de datos (Auditoria de Cuentas Anuales, Due Diligence Financiera, Auditoria de Subvenciones, etc.)
 
-## Seccion tecnica
+### Idioma
+- La interfaz del formulario esta en ingles (labels, placeholders, botones)
+- El idioma por defecto es ingles
+- Deberia estar todo en espanol (el idioma principal de Audit)
+- El selector de idioma incluye ingles, que no es necesario para Audit
 
-### 1. Nueva edge function: `generate-project-tasks`
+### Contenido del PDF
+- La seccion "Sobre" habla de asesoria multidisciplinar, 50 paises, redes internacionales
+- Las credenciales son genericas (500 clientes, equipo multilingue)
+- Deberian reflejar la identidad de M AUDIT: inscripcion ROAC/ICAC, +30 anos de experiencia en auditoria, independencia
+- El contacto muestra Via Augusta (oficina NRRO Global), deberia ser Ausias March (oficina Audit)
 
-**Archivo**: `supabase/functions/generate-project-tasks/index.ts`
+### Error TypeScript
+- Hay un error de tipos en ProposalForm.tsx linea 73: comparacion de tipos incompatible por el selector de idioma
 
-- Recibe: `{ prompt: string }` (el texto libre del usuario)
-- Usa Lovable AI Gateway con tool calling para extraer tareas estructuradas
-- Tool schema devuelve un array de objetos: `{ title, priority, description }`
-- No usa streaming (respuesta completa, no necesita tokens en tiempo real)
-- Maneja errores 429/402 con mensajes claros
+## Cambios a realizar
 
-**Prompt del sistema**: Instruir al modelo para que analice el texto y genere entre 5-30 tareas accionables, asignando prioridad (urgente/alta/media/baja) segun el contexto.
+### 1. `src/types/proposal.ts`
+- Eliminar los 6 servicios hardcodeados de asesoria (fiscal, accounting, labor, etc.)
+- Cargar los servicios dinamicamente desde la tabla `services` de Supabase (filtrando por `source_site = 'audit'`)
+- Simplificar la interfaz: eliminar campo `language` (siempre sera 'es'), eliminar campo `industry`
+- Renombrar numero de propuesta: "AUDIT-2026-XXXX"
 
-### 2. Nuevo componente: `AITaskGenerator.tsx`
+### 2. `src/lib/proposalTemplates.ts`
+- Reescribir completamente para Audit:
+  - Titulo: "Propuesta de Servicios de Auditoria"
+  - Sobre Audit: firma de auditoria inscrita en el ROAC, miembro del ICAC, independencia, +30 anos
+  - Credenciales: Inscripcion ROAC, Registro ICAC, Independencia, NIA-ES
+  - Why Audit: Independencia, Rigor tecnico, Experiencia sectorial, Trato personalizado
+  - Contacto: Ausias March 36, audit.nrro.es, email de auditoria
+  - Eliminar version en ingles (solo espanol)
+- Cabecera del PDF: "AUDIT" en lugar de "NRRO INTERNATIONAL"
 
-**Archivo**: `src/components/admin/projects/AITaskGenerator.tsx`
+### 3. `src/lib/proposalPdfGenerator.ts`
+- Cabecera: cambiar "NRRO" + "INTERNATIONAL" por "AUDIT"
+- Nombre de archivo: "AUDIT_Propuesta_..."
+- Eliminar logica bilingue (todo en espanol)
+- Ajustar contacto y footer
 
-- Dialog con textarea para el input
-- Estado de carga con spinner mientras la IA responde
-- Vista previa de tareas generadas con checkboxes para seleccionar cuales insertar
-- Boton de confirmar que llama a `useCreateProjectTask` en bucle (o un batch insert)
+### 4. `src/components/admin/proposal/ProposalForm.tsx`
+- Poner toda la interfaz en espanol (labels, placeholders, mensajes de error)
+- Eliminar selector de idioma (siempre ES)
+- Cargar servicios desde Supabase en vez de la constante AVAILABLE_SERVICES
+- Eliminar campo "Industry"
+- Corregir el error TypeScript de la linea 73
+- Cambiar placeholder de empresa: "Acme Corporation" -> ejemplo espanol
+- Boton: "Generar Propuesta PDF" en vez de "Generate PDF Proposal"
 
-### 3. Modificaciones existentes
+### 5. `src/pages/admin/AdminProposalGenerator.tsx`
+- Textos ya estan en espanol (OK), pero referencian `siteConfig.name` que devuelve "Audit" (correcto)
+- Ajustar si hay alguna referencia a NRRO
 
-| Archivo | Cambio |
-|---------|--------|
-| `ProjectTaskTable.tsx` | Anadir boton "Generar con IA" junto al boton "Anadir tarea" |
-| `supabase/config.toml` | Registrar la nueva edge function con `verify_jwt = false` |
+### Archivos modificados (resumen)
 
-### 4. Modelo y tool calling
+| Archivo | Cambio principal |
+|---------|-----------------|
+| `src/types/proposal.ts` | Eliminar servicios hardcodeados, simplificar interfaz (sin language/industry) |
+| `src/lib/proposalTemplates.ts` | Reescribir contenido completo para marca Audit con datos ROAC/ICAC |
+| `src/lib/proposalPdfGenerator.ts` | Cabecera "AUDIT", archivo "AUDIT_Propuesta_", sin logica bilingue |
+| `src/components/admin/proposal/ProposalForm.tsx` | UI en espanol, servicios desde DB, sin selector idioma, fix TS error |
 
-Se usa `google/gemini-3-flash-preview` (modelo por defecto) con tool calling para obtener respuesta estructurada:
+### Servicios que se cargaran desde la DB (21 servicios de auditoria)
 
-```
-Tool: generate_tasks
-Parameters:
-  tasks: array of {
-    title: string (titulo corto y accionable)
-    priority: enum [baja, media, alta, urgente]
-    description: string (nota opcional breve)
-  }
-```
+Los servicios se obtendran dinamicamente con una query a Supabase (`services WHERE source_site = 'audit' AND is_active = true`), incluyendo:
+- Auditoria de Cuentas Anuales
+- Auditoria de Cuentas Consolidadas
+- Auditoria de Subvenciones Publicas
+- Due Diligence Financiera / Fiscal / Operativa / Vendor
+- Verificacion CSRD/ESRS
+- Auditoria de Huella de Carbono
+- Y los demas servicios activos en la base de datos
 
-Esto garantiza que la respuesta siempre viene como JSON valido sin necesidad de parsear texto libre.
-
-### 5. Insercion batch
-
-Las tareas generadas se insertan con `sort_order` secuencial empezando desde el maximo actual del tablero + 1, para que se anadan al final sin conflictos.
+Esto garantiza que si se anaden nuevos servicios a la web, aparecen automaticamente en el generador de propuestas.
 
