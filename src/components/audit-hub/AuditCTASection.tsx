@@ -7,16 +7,8 @@ export const AuditCTASection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary to-accent/80 relative overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-          backgroundSize: '32px 32px'
-        }} />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-black">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-normal text-white mb-4">
             {t('auditHub.cta.title')}
@@ -28,7 +20,7 @@ export const AuditCTASection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button 
               size="lg" 
-              variant="secondary"
+              variant="hero"
               asChild
               className="min-w-[200px]"
             >

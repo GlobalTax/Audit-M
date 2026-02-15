@@ -37,14 +37,14 @@ export function HowItWorksSection() {
                 className="relative"
               >
                 <div className="flex flex-col items-center text-center">
-                  {/* Step number - accent color */}
-                  <span className="font-mono text-3xl font-bold text-accent/30 mb-3">
+                  {/* Step number */}
+                  <span className="font-mono text-xs text-foreground/40 mb-4">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   
-                  {/* Icon - accent background */}
-                  <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 shadow-sm">
-                    <Icon className="h-7 w-7 text-accent" />
+                  {/* Icon */}
+                  <div className="w-16 h-16 rounded-2xl bg-white border border-border flex items-center justify-center mb-6 shadow-sm">
+                    <Icon className="h-7 w-7 text-foreground" />
                   </div>
                   
                   {/* Content */}
@@ -56,9 +56,9 @@ export function HowItWorksSection() {
                   </p>
                 </div>
 
-                {/* Connector line with accent color */}
+                {/* Connector line (hidden on last item and mobile) */}
                 {index < stepKeys.length - 1 && (
-                  <div className="hidden md:block absolute top-[88px] left-[calc(50%+48px)] right-[-48px] h-[2px] bg-gradient-to-r from-accent/30 to-accent/10" />
+                  <div className="hidden md:block absolute top-[72px] left-[calc(50%+48px)] right-[-48px] h-[1px] bg-border" />
                 )}
               </motion.div>
             );

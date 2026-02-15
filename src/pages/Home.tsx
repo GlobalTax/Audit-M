@@ -128,21 +128,12 @@ const Home = () => {
 
       <div className="min-h-screen">
       {/* Hero Section */}
-      <section data-dark="true" className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48 overflow-hidden">
+      <section data-dark="true" className="relative bg-black text-white pt-40 pb-32 md:pt-48 md:pb-40 lg:pt-56 lg:pb-48">
           {/* Background extension to cover navbar area */}
           <div 
             className="absolute inset-x-0 bg-black pointer-events-none" 
             style={{ top: '-120px', height: '120px' }} 
           />
-          {/* Background image */}
-          <img 
-            src="/assets/office-hero.jpg" 
-            alt="" 
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
-            style={{ top: '-120px', height: 'calc(100% + 120px)' }}
-          />
-          {/* Gradient overlay for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" style={{ top: '-120px', height: 'calc(100% + 120px)' }} />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl text-left">
               <div className="mb-6">
@@ -205,15 +196,15 @@ const Home = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-3 gap-4 text-center text-white">
               <div>
-                <span className="text-2xl md:text-3xl font-bold text-accent">21</span>
+                <span className="text-2xl md:text-3xl font-bold">21</span>
                 <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.services")}</p>
               </div>
               <div className="border-x border-white/10">
-                <span className="text-2xl md:text-3xl font-bold text-accent">ROAC</span>
+                <span className="text-2xl md:text-3xl font-bold">ROAC</span>
                 <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.registered")}</p>
               </div>
               <div>
-                <span className="text-2xl md:text-3xl font-bold text-accent">25+</span>
+                <span className="text-2xl md:text-3xl font-bold">25+</span>
                 <p className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider mt-1">{t("home.auditBar.experience")}</p>
               </div>
             </div>
@@ -223,56 +214,54 @@ const Home = () => {
         {/* About Section */}
         <section className="bg-background py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Left column - Text content */}
-              <div>
-                <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3 mb-6 border-b border-border">
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              {/* Columna 1: Overline con línea */}
+              <div className="relative">
+                <h3 className="font-mono font-light text-sm md:text-base tracking-tight text-foreground/70 pb-3">
                   {aboutContent?.overline || t("home.about.overline")}
                 </h3>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-6">
+                {/* Línea horizontal debajo del texto */}
+                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border"></div>
+              </div>
+              
+              {/* Columna 2: Título principal */}
+              <div>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
                   {aboutContent?.title || t("home.about.title")}
                 </h2>
-                <div className="space-y-6">
-                  {aboutContent?.paragraphs?.map((paragraph, index) => (
-                    <p 
-                      key={index} 
-                      className={index === 0 ? "text-lg font-medium text-foreground leading-relaxed" : "text-body leading-relaxed"}
-                    >
-                      {paragraph}
-                    </p>
-                  )) || (
-                    <>
-                      <p className="text-lg font-medium text-foreground leading-relaxed">
-                        {t("home.about.paragraph1")}
-                      </p>
-                      <p className="text-body leading-relaxed">
-                        {t("home.about.paragraph2")}
-                      </p>
-                    </>
-                  )}
-                  
-                  {aboutContent?.cta && (
-                    <div className="pt-4">
-                      <Link 
-                        to={aboutContent.cta.link} 
-                        className="inline-flex items-center text-foreground font-medium hover:text-accent transition-colors group border-b border-foreground hover:border-accent"
-                      >
-                        {aboutContent.cta.text}
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
-                  )}
-                </div>
               </div>
-
-              {/* Right column - Image */}
-              <div className="relative hidden lg:block">
-                <img 
-                  src="/assets/services-hero.jpg" 
-                  alt="Equipo de auditoría" 
-                  className="rounded-2xl object-cover w-full h-[480px] shadow-lg"
-                />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10" />
+              
+              {/* Columna 3: Contenido */}
+              <div className="space-y-6">
+                {aboutContent?.paragraphs?.map((paragraph, index) => (
+                  <p 
+                    key={index} 
+                    className={index === 0 ? "text-lg font-medium text-foreground leading-relaxed" : "text-body leading-relaxed"}
+                  >
+                    {paragraph}
+                  </p>
+                )) || (
+                  <>
+                    <p className="text-lg font-medium text-foreground leading-relaxed">
+                      {t("home.about.paragraph1")}
+                    </p>
+                    <p className="text-body leading-relaxed">
+                      {t("home.about.paragraph2")}
+                    </p>
+                  </>
+                )}
+                
+                {aboutContent?.cta && (
+                  <div className="pt-4">
+                    <Link 
+                      to={aboutContent.cta.link} 
+                      className="inline-flex items-center text-foreground font-medium hover:text-accent transition-colors group border-b border-foreground hover:border-accent"
+                    >
+                      {aboutContent.cta.text}
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
