@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Plus, Trash2, GripVertical } from 'lucide-react';
+import { AITaskGenerator } from './AITaskGenerator';
 import { InlineTextEdit, InlineDateEdit, InlineSelectEdit } from './InlineEditCell';
 import { TaskStatusBadge } from './TaskStatusBadge';
 import { TaskPriorityBadge } from './TaskPriorityBadge';
@@ -80,9 +81,12 @@ export const ProjectTaskTable = ({ boardId, boardName, onBack }: Props) => {
           </Button>
           <h2 className="text-lg font-semibold text-slate-900">{boardName}</h2>
         </div>
-        <Button size="sm" onClick={handleAddTask} disabled={createTask.isPending}>
-          <Plus className="h-4 w-4 mr-1" /> Añadir tarea
-        </Button>
+        <div className="flex items-center gap-2">
+          <AITaskGenerator boardId={boardId} currentTaskCount={tasks.length} />
+          <Button size="sm" onClick={handleAddTask} disabled={createTask.isPending}>
+            <Plus className="h-4 w-4 mr-1" /> Añadir tarea
+          </Button>
+        </div>
       </div>
 
       {/* Progress */}
