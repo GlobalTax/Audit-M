@@ -2,7 +2,7 @@
  * URL utilities for consistent domain handling
  */
 
-export const BASE_DOMAIN = 'https://audit.es';
+export const BASE_DOMAIN = 'https://audit.nrro.es';
 
 /**
  * Normalizes a URL to ensure it has the correct domain.

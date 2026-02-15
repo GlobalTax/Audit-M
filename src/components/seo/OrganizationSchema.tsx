@@ -10,9 +10,9 @@ export const OrganizationSchema = () => {
       "@type": "Organization",
       "name": "Audit",
       "alternateName": "Audit Global",
-      "url": "https://audit.es",
-      "logo": "https://audit.es/logo.svg",
-      "image": "https://audit.es/logo.svg",
+      "url": "https://audit.nrro.es",
+      "logo": "https://audit.nrro.es/logo.svg",
+      "image": "https://audit.nrro.es/logo.svg",
       "description": "Firma de auditoría especializada en auditoría de cuentas anuales, due diligence, auditoría interna y auditoría ESG/Sostenibilidad.",
       "address": {
         "@type": "PostalAddress",
@@ -26,7 +26,7 @@ export const OrganizationSchema = () => {
         "@type": "ContactPoint",
         "telephone": settings.contact_phone || "+34934593600",
         "contactType": "customer service",
-        "email": settings.contact_email || "info@audit.es",
+        "email": settings.contact_email || "info@audit.nrro.es",
         "areaServed": "ES",
         "availableLanguage": ["Spanish", "Catalan", "English"]
       },
