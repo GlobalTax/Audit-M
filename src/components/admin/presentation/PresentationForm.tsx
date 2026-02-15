@@ -17,7 +17,8 @@ interface PresentationFormProps {
 
 export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormProps) => {
   const siteConfig = getCurrentSiteConfig();
-  const defaultLang = (siteConfig.defaultLanguage === 'ca' ? 'ca' : siteConfig.defaultLanguage === 'en' ? 'en' : 'es') as 'en' | 'es' | 'ca';
+  const lang = siteConfig.defaultLanguage as string;
+  const defaultLang = (lang === 'ca' ? 'ca' : lang === 'en' ? 'en' : 'es') as 'en' | 'es' | 'ca';
 
   const [recipientName, setRecipientName] = useState('');
   const [recipientCompany, setRecipientCompany] = useState('');
