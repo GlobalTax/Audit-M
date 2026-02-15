@@ -35,8 +35,8 @@ export const AdminNews = () => {
       if (error) throw error;
 
       toast({
-        title: 'Status updated',
-        description: `Article ${!currentStatus ? 'published' : 'unpublished'} successfully`,
+        title: 'Estado actualizado',
+        description: `Artículo ${!currentStatus ? 'publicado' : 'despublicado'} correctamente`,
       });
       
       refetch();
@@ -60,7 +60,7 @@ export const AdminNews = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-normal">News Articles</h1>
+        <h1 className="text-3xl font-normal">Artículos de Noticias</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -72,10 +72,10 @@ export const AdminNews = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Published Date</TableHead>
-              <TableHead>Published</TableHead>
+              <TableHead>Título</TableHead>
+              <TableHead>Categoría</TableHead>
+              <TableHead>Fecha de Publicación</TableHead>
+              <TableHead>Publicado</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -87,8 +87,8 @@ export const AdminNews = () => {
                 </TableCell>
                 <TableCell>
                   {article.published_at 
-                    ? format(new Date(article.published_at), 'MMM dd, yyyy')
-                    : 'Not set'}
+                    ? format(new Date(article.published_at), 'dd/MM/yyyy')
+                    : 'Sin definir'}
                 </TableCell>
                 <TableCell>
                   <Switch

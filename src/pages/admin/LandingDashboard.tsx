@@ -12,36 +12,17 @@ import { es } from 'date-fns/locale';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const CATEGORY_COLORS: Record<string, string> = {
-  'Tax': '#0D3B66',
-  'Legal': '#166534',
-  'M&A': '#EA580C',
-  'Corporate': '#1F2937',
-  'Payroll': '#7C3AED',
-  'International': '#0891B2',
-  'Family Business': '#DC2626',
-  'Contact': '#059669',
-  'Other': '#6B7280',
+  'Tax': '#0D3B66', 'Legal': '#166534', 'M&A': '#EA580C', 'Corporate': '#1F2937',
+  'Payroll': '#7C3AED', 'International': '#0891B2', 'Family Business': '#DC2626',
+  'Contact': '#059669', 'Other': '#6B7280',
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  'published': '#059669',
-  'draft': '#6B7280',
-  'needs_review': '#EA580C',
-  'archived': '#DC2626',
+  'published': '#059669', 'draft': '#6B7280', 'needs_review': '#EA580C', 'archived': '#DC2626',
 };
 
-const MetricCard = ({ 
-  icon: Icon, 
-  label, 
-  value, 
-  description, 
-  color = 'bg-primary/10 text-primary' 
-}: {
-  icon: any;
-  label: string;
-  value: number;
-  description: string;
-  color?: string;
+const MetricCard = ({ icon: Icon, label, value, description, color = 'bg-primary/10 text-primary' }: {
+  icon: any; label: string; value: number; description: string; color?: string;
 }) => (
   <Card className="bg-white shadow-sm border-gray-100 hover:shadow-md transition-shadow">
     <CardContent className="p-6">
@@ -61,24 +42,16 @@ const MetricCard = ({
 
 export const LandingDashboard = () => {
   const { data: stats, isLoading: statsLoading } = useLandingStats();
-  const { data: recentLandings, isLoading: landingsLoading } = useLandingPages({
-    status: '',
-    search: '',
-    category: '',
-  });
+  const { data: recentLandings, isLoading: landingsLoading } = useLandingPages({ status: '', search: '', category: '' });
 
-  // Preparar datos para gráficos
   const categoryData = stats?.byCategory 
-    ? Object.entries(stats.byCategory)
-        .map(([name, value]) => ({ name, value, fill: CATEGORY_COLORS[name] || '#6B7280' }))
-        .sort((a, b) => b.value - a.value)
+    ? Object.entries(stats.byCategory).map(([name, value]) => ({ name, value, fill: CATEGORY_COLORS[name] || '#6B7280' })).sort((a, b) => b.value - a.value)
     : [];
 
   const statusData = stats?.byStatus
     ? Object.entries(stats.byStatus).map(([name, value]) => ({
-        name: name === 'published' ? 'Active' : name === 'draft' ? 'Draft' : name === 'needs_review' ? 'Needs Review' : 'Archived',
-        value,
-        fill: STATUS_COLORS[name] || '#6B7280',
+        name: name === 'published' ? 'Activas' : name === 'draft' ? 'Borrador' : name === 'needs_review' ? 'En Revisión' : 'Archivadas',
+        value, fill: STATUS_COLORS[name] || '#6B7280',
       }))
     : [];
 
@@ -94,10 +67,9 @@ export const LandingDashboard = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-normal text-foreground">Landing Dashboard</h1>
+          <h1 className="text-3xl font-normal text-foreground">Panel de Landings</h1>
           <p className="text-muted-foreground mt-1">Resumen y métricas de todas las landing pages</p>
         </div>
         <Button asChild>
@@ -108,41 +80,14 @@ export const LandingDashboard = () => {
         </Button>
       </div>
 
-      {/* Metrics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <MetricCard
-          icon={LayoutGrid}
-          label="Total Landings"
-          value={stats?.total || 0}
-          description="páginas creadas"
-          color="bg-blue-50 text-blue-600"
-        />
-        <MetricCard
-          icon={CheckCircle2}
-          label="Activas"
-          value={stats?.active || 0}
-          description="publicadas y activas"
-          color="bg-green-50 text-green-600"
-        />
-        <MetricCard
-          icon={Tag}
-          label="Categorías"
-          value={stats?.uniqueCategories || 0}
-          description="categorías diferentes"
-          color="bg-orange-50 text-orange-600"
-        />
-        <MetricCard
-          icon={Calendar}
-          label="Este Mes"
-          value={stats?.thisMonth || 0}
-          description="creadas este mes"
-          color="bg-cyan-50 text-cyan-600"
-        />
+        <MetricCard icon={LayoutGrid} label="Total Landings" value={stats?.total || 0} description="páginas creadas" color="bg-blue-50 text-blue-600" />
+        <MetricCard icon={CheckCircle2} label="Activas" value={stats?.active || 0} description="publicadas y activas" color="bg-green-50 text-green-600" />
+        <MetricCard icon={Tag} label="Categorías" value={stats?.uniqueCategories || 0} description="categorías diferentes" color="bg-orange-50 text-orange-600" />
+        <MetricCard icon={Calendar} label="Este Mes" value={stats?.thisMonth || 0} description="creadas este mes" color="bg-cyan-50 text-cyan-600" />
       </div>
 
-      {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Category Chart */}
         <Card className="bg-white shadow-sm border-gray-100">
           <CardHeader>
             <CardTitle className="text-xl font-normal">Distribución por Categoría</CardTitle>
@@ -160,7 +105,6 @@ export const LandingDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Status Chart */}
         <Card className="bg-white shadow-sm border-gray-100">
           <CardHeader>
             <CardTitle className="text-xl font-normal">Por Estado</CardTitle>
@@ -168,16 +112,7 @@ export const LandingDashboard = () => {
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie
-                  data={statusData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={2}
-                  dataKey="value"
-                  label={({ name, value }) => `${name}: ${value}`}
-                >
+                <Pie data={statusData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} dataKey="value" label={({ name, value }) => `${name}: ${value}`}>
                   {statusData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
@@ -193,7 +128,6 @@ export const LandingDashboard = () => {
         </Card>
       </div>
 
-      {/* Latest Landings Table */}
       <Card className="bg-white shadow-sm border-gray-100">
         <CardHeader>
           <CardTitle className="text-xl font-normal">Últimas 10 Landing Pages</CardTitle>
@@ -213,19 +147,10 @@ export const LandingDashboard = () => {
               {recentLandings?.slice(0, 10).map((landing) => (
                 <TableRow key={landing.id}>
                   <TableCell className="font-normal">{landing.title}</TableCell>
-                  <TableCell>
-                    <LandingCategoryBadge category={landing.category || 'Other'} />
-                  </TableCell>
-                  <TableCell>
-                    <LandingStatusBadge status={landing.status || 'draft'} />
-                  </TableCell>
+                  <TableCell><LandingCategoryBadge category={landing.category || 'Other'} /></TableCell>
+                  <TableCell><LandingStatusBadge status={landing.status || 'draft'} /></TableCell>
                   <TableCell className="text-muted-foreground">
-                    {landing.created_at
-                      ? formatDistanceToNow(new Date(landing.created_at), {
-                          addSuffix: true,
-                          locale: es,
-                        })
-                      : '-'}
+                    {landing.created_at ? formatDistanceToNow(new Date(landing.created_at), { addSuffix: true, locale: es }) : '-'}
                   </TableCell>
                   <TableCell className="text-right">
                     <Button asChild variant="ghost" size="sm">

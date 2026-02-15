@@ -54,7 +54,6 @@ export const AdminUsers = () => {
   const { data: adminUsers, isLoading } = useQuery({
     queryKey: ['admin-users'],
     queryFn: async () => {
-      // First get all profiles
       const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
         .select('*')
@@ -62,7 +61,6 @@ export const AdminUsers = () => {
       
       if (profilesError) throw profilesError;
 
-      // Then get roles for each user
       const usersWithRoles = await Promise.all(
         (profiles || []).map(async (profile) => {
           const { data: roles, error: rolesError } = await supabase
@@ -72,7 +70,6 @@ export const AdminUsers = () => {
 
           if (rolesError) throw rolesError;
 
-          // Map database role to UI role
           const roleValue = roles?.[0]?.role as string;
           const role = roleValue === 'admin' ? 'admin' :
                       roleValue === 'editor' ? 'editor' :
@@ -82,7 +79,7 @@ export const AdminUsers = () => {
             id: profile.id,
             user_id: profile.id,
             email: profile.email || '',
-            full_name: profile.email?.split('@')[0] || 'Unknown',
+            full_name: profile.email?.split('@')[0] || 'Desconocido',
             role: role as AdminRole,
             is_active: true,
             last_login: null,
@@ -98,7 +95,6 @@ export const AdminUsers = () => {
   // Create admin user mutation - Uses edge function for proper auth.users creation
   const createAdminMutation = useMutation({
     mutationFn: async (userData: { email: string; full_name: string; role: AdminRole }) => {
-      // Map UI role to database app_role enum values
       const roleMapping: Record<AdminRole, string> = {
         super_admin: 'admin',
         admin: 'admin',
@@ -117,7 +113,6 @@ export const AdminUsers = () => {
 
       if (error) throw new Error(error.message || 'Error al crear usuario');
       if (data?.error) throw new Error(data.error);
-
       return data.user;
     },
     onSuccess: (data) => {
@@ -144,7 +139,6 @@ export const AdminUsers = () => {
   // Update role mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ userId, newRole }: { userId: string; newRole: AdminRole }) => {
-      // Map UI role to database app_role enum
       const roleMapping: Record<AdminRole, string> = {
         super_admin: 'admin',
         admin: 'admin',
@@ -154,7 +148,6 @@ export const AdminUsers = () => {
 
       const mappedRole = roleMapping[newRole];
 
-      // First, delete existing roles for this user
       const { error: deleteError } = await supabase
         .from('user_roles')
         .delete()
@@ -162,7 +155,6 @@ export const AdminUsers = () => {
 
       if (deleteError) throw deleteError;
 
-      // Then insert the new role
       const { error: insertError } = await supabase
         .from('user_roles')
         .insert({ user_id: userId, role: mappedRole as any });
@@ -189,8 +181,8 @@ export const AdminUsers = () => {
   const deactivateUserMutation = useMutation({
     mutationFn: async (userId: string) => {
       toast({
-        title: 'Feature not implemented',
-        description: 'User deactivation requires Supabase Auth changes',
+        title: 'Funcionalidad no implementada',
+        description: 'La desactivación de usuarios requiere cambios en Supabase Auth',
         variant: 'destructive',
       });
       throw new Error('Not implemented');
@@ -203,11 +195,7 @@ export const AdminUsers = () => {
       });
     },
     onError: (error: any) => {
-      toast({
-        title: 'Error',
-        description: error.message,
-        variant: 'destructive',
-      });
+      // Already handled above
     },
   });
 
@@ -263,29 +251,16 @@ export const AdminUsers = () => {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="usuario@example.com"
-                  value={newUserEmail}
-                  onChange={(e) => setNewUserEmail(e.target.value)}
-                />
+                <Input id="email" type="email" placeholder="usuario@example.com" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
               </div>
               <div>
                 <Label htmlFor="name">Nombre Completo</Label>
-                <Input
-                  id="name"
-                  placeholder="Juan Pérez"
-                  value={newUserName}
-                  onChange={(e) => setNewUserName(e.target.value)}
-                />
+                <Input id="name" placeholder="Juan Pérez" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
               </div>
               <div>
                 <Label htmlFor="role">Rol</Label>
                 <Select value={newUserRole} onValueChange={(value) => setNewUserRole(value as AdminRole)}>
-                  <SelectTrigger id="role">
-                    <SelectValue />
-                  </SelectTrigger>
+                  <SelectTrigger id="role"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="viewer">Viewer (Solo lectura)</SelectItem>
                     <SelectItem value="editor">Editor (Crear/Editar)</SelectItem>
@@ -294,11 +269,7 @@ export const AdminUsers = () => {
                   </SelectContent>
                 </Select>
               </div>
-              <Button 
-                className="w-full" 
-                onClick={handleCreateUser}
-                disabled={createAdminMutation.isPending}
-              >
+              <Button className="w-full" onClick={handleCreateUser} disabled={createAdminMutation.isPending}>
                 {createAdminMutation.isPending ? 'Creando...' : 'Crear Usuario'}
               </Button>
             </div>
@@ -365,15 +336,10 @@ export const AdminUsers = () => {
                         <div className="flex gap-2">
                           <Select
                             value={user.role}
-                            onValueChange={(value) => updateRoleMutation.mutate({
-                              userId: user.user_id,
-                              newRole: value as AdminRole
-                            })}
+                            onValueChange={(value) => updateRoleMutation.mutate({ userId: user.user_id, newRole: value as AdminRole })}
                             disabled={!user.is_active}
                           >
-                            <SelectTrigger className="w-[140px]">
-                              <SelectValue />
-                            </SelectTrigger>
+                            <SelectTrigger className="w-[140px]"><SelectValue /></SelectTrigger>
                             <SelectContent>
                               <SelectItem value="viewer">Viewer</SelectItem>
                               <SelectItem value="editor">Editor</SelectItem>
@@ -382,12 +348,7 @@ export const AdminUsers = () => {
                             </SelectContent>
                           </Select>
                           {user.is_active && (
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => deactivateUserMutation.mutate(user.user_id)}
-                              disabled={deactivateUserMutation.isPending}
-                            >
+                            <Button variant="destructive" size="sm" onClick={() => deactivateUserMutation.mutate(user.user_id)} disabled={deactivateUserMutation.isPending}>
                               <Ban className="h-4 w-4" />
                             </Button>
                           )}

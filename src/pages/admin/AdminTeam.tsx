@@ -51,11 +51,10 @@ export const AdminTeam = () => {
       
       if (error) throw error;
       
-      // Map data to include all language fields for admin
       return data?.map((member: any) => ({
         id: member.id,
         name: member.name,
-        position: member.position_es || member.position_ca || member.position_en, // Display field (fallback)
+        position: member.position_es || member.position_ca || member.position_en,
         position_es: member.position_es,
         position_ca: member.position_ca,
         position_en: member.position_en,
@@ -86,8 +85,8 @@ export const AdminTeam = () => {
       if (error) throw error;
 
       toast({
-        title: 'Status updated',
-        description: `Team member ${!currentStatus ? 'activated' : 'deactivated'} successfully`,
+        title: 'Estado actualizado',
+        description: `Miembro ${!currentStatus ? 'activado' : 'desactivado'} correctamente`,
       });
       
       refetch();
@@ -114,13 +113,11 @@ export const AdminTeam = () => {
     if (!memberToDelete) return;
 
     try {
-      // Delete avatar from storage if exists
       if (memberToDelete.avatar_url) {
         const path = memberToDelete.avatar_url.split('/').slice(-2).join('/');
         await supabase.storage.from('media-library').remove([path]);
       }
 
-      // Delete member from database
       const { error } = await supabase
         .from('team_members')
         .delete()
@@ -129,8 +126,8 @@ export const AdminTeam = () => {
       if (error) throw error;
 
       toast({
-        title: 'Team member deleted',
-        description: 'Member removed successfully',
+        title: 'Miembro eliminado',
+        description: 'El miembro del equipo ha sido eliminado correctamente',
       });
 
       refetch();
@@ -156,10 +153,10 @@ export const AdminTeam = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-normal">Team Members</h1>
+        <h1 className="text-3xl font-normal">Equipo</h1>
         <Button onClick={() => { setSelectedMember(null); setDialogOpen(true); }}>
           <Plus className="mr-2 h-4 w-4" />
-          Add Team Member
+          Añadir Miembro
         </Button>
       </div>
 
@@ -168,12 +165,12 @@ export const AdminTeam = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Avatar</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Position</TableHead>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Cargo</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Order</TableHead>
-              <TableHead>Active</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead>Orden</TableHead>
+              <TableHead>Activo</TableHead>
+              <TableHead className="text-right">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -189,7 +186,7 @@ export const AdminTeam = () => {
                 <TableCell>
                   <Badge variant="outline">{member.position}</Badge>
                 </TableCell>
-                <TableCell>{member.email || 'N/A'}</TableCell>
+                <TableCell>{member.email || 'N/D'}</TableCell>
                 <TableCell>{member.order_index}</TableCell>
                 <TableCell>
                   <Switch
@@ -199,18 +196,10 @@ export const AdminTeam = () => {
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleEdit(member)}
-                    >
+                    <Button variant="ghost" size="sm" onClick={() => handleEdit(member)}>
                       <Pencil className="h-4 w-4" />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDeleteClick(member)}
-                    >
+                    <Button variant="ghost" size="sm" onClick={() => handleDeleteClick(member)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -223,10 +212,7 @@ export const AdminTeam = () => {
 
       <TeamMemberFormDialog
         open={dialogOpen}
-        onClose={() => {
-          setDialogOpen(false);
-          setSelectedMember(null);
-        }}
+        onClose={() => { setDialogOpen(false); setSelectedMember(null); }}
         member={selectedMember}
         onSuccess={refetch}
       />
@@ -234,15 +220,15 @@ export const AdminTeam = () => {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete {memberToDelete?.name} from the team.
-              This action cannot be undone.
+              Se eliminará permanentemente a {memberToDelete?.name} del equipo.
+              Esta acción no se puede deshacer.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete}>Eliminar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,43 +7,42 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { FlaskConical, TrendingUp, Users, Target, RefreshCw } from "lucide-react";
-import { format, subDays } from "date-fns";
+import { subDays } from "date-fns";
 
-// Predefined A/B tests configuration
 const AB_TEST_CONFIG = {
   hero_cta_text: {
-    name: "Hero CTA Text",
-    description: "Testing different CTA button text on the homepage hero",
+    name: "Texto CTA Hero",
+    description: "Probando diferentes textos del botón CTA en el hero de la página principal",
     variants: {
-      A: "Request Consultation",
-      B: "Start Your Spain Journey"
+      A: "Solicitar Consulta",
+      B: "Comienza tu Proyecto en España"
     },
     page: "/"
   },
   contact_form_layout: {
-    name: "Contact Form Layout", 
-    description: "Testing single column vs two column form layout",
+    name: "Diseño Formulario Contacto",
+    description: "Probando formulario de una columna vs dos columnas",
     variants: {
-      A: "Single Column",
-      B: "Two Column"
+      A: "Una Columna",
+      B: "Dos Columnas"
     },
     page: "/contact"
   },
   playbook_cta_position: {
-    name: "Playbook CTA Position",
-    description: "Testing CTA button position on playbook page",
+    name: "Posición CTA Playbook",
+    description: "Probando la posición del botón CTA en la página del playbook",
     variants: {
-      A: "Above Form",
-      B: "Below Benefits"
+      A: "Encima del Formulario",
+      B: "Debajo de Beneficios"
     },
     page: "/spain-company-setup-playbook"
   },
   calculator_results_style: {
-    name: "Calculator Results Style",
-    description: "Testing expanded vs compact results display",
+    name: "Estilo Resultados Calculadora",
+    description: "Probando visualización expandida vs compacta de resultados",
     variants: {
-      A: "Expanded Cards",
-      B: "Compact Table"
+      A: "Tarjetas Expandidas",
+      B: "Tabla Compacta"
     },
     page: "/spain-setup-calculator"
   }
@@ -67,12 +65,9 @@ export default function AdminABTests() {
   const { data: testData, isLoading, refetch } = useQuery({
     queryKey: ["ab-test-results", dateRange],
     queryFn: async () => {
-      // This would typically query from an analytics database
-      // For now, we'll simulate data based on what would be tracked
       const days = dateRange === "7d" ? 7 : dateRange === "30d" ? 30 : 90;
       const startDate = subDays(new Date(), days);
       
-      // Simulated data structure - in production, this would come from GA4 or a dedicated analytics table
       const mockData: Record<TestName, ABTestData[]> = {
         hero_cta_text: [
           { test_name: "hero_cta_text", variant: "A", impressions: 1250, conversions: 45, conversion_rate: 3.6 },
@@ -104,16 +99,14 @@ export default function AdminABTests() {
     const variantA = currentTestData.find(d => d.variant === "A");
     const variantB = currentTestData.find(d => d.variant === "B");
     if (!variantA || !variantB) return null;
-    
-    const lift = ((variantB.conversion_rate - variantA.conversion_rate) / variantA.conversion_rate) * 100;
-    return lift;
+    return ((variantB.conversion_rate - variantA.conversion_rate) / variantA.conversion_rate) * 100;
   };
 
   const lift = calculateLift();
   const winner = lift !== null ? (lift > 0 ? "B" : "A") : null;
 
   const chartData = currentTestData.map(d => ({
-    name: `Variant ${d.variant}`,
+    name: `Variante ${d.variant}`,
     variant: d.variant,
     impressions: d.impressions,
     conversions: d.conversions,
@@ -124,8 +117,8 @@ export default function AdminABTests() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-normal mb-2">A/B Test Results</h1>
-          <p className="text-muted-foreground">Monitor and analyze conversion experiments</p>
+          <h1 className="text-3xl font-normal mb-2">Resultados Tests A/B</h1>
+          <p className="text-muted-foreground">Monitoriza y analiza experimentos de conversión</p>
         </div>
         <div className="flex items-center gap-4">
           <Select value={dateRange} onValueChange={(v: "7d" | "30d" | "90d") => setDateRange(v)}>
@@ -133,9 +126,9 @@ export default function AdminABTests() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7d">Last 7 days</SelectItem>
-              <SelectItem value="30d">Last 30 days</SelectItem>
-              <SelectItem value="90d">Last 90 days</SelectItem>
+              <SelectItem value="7d">Últimos 7 días</SelectItem>
+              <SelectItem value="30d">Últimos 30 días</SelectItem>
+              <SelectItem value="90d">Últimos 90 días</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" size="icon" onClick={() => refetch()}>
@@ -144,7 +137,6 @@ export default function AdminABTests() {
         </div>
       </div>
 
-      {/* Test Selector */}
       <Tabs value={selectedTest} onValueChange={(v) => setSelectedTest(v as TestName)} className="mb-8">
         <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full">
           {Object.entries(AB_TEST_CONFIG).map(([key, config]) => (
@@ -155,7 +147,6 @@ export default function AdminABTests() {
         </TabsList>
       </Tabs>
 
-      {/* Test Details */}
       <div className="grid gap-6 mb-8">
         <Card>
           <CardHeader>
@@ -165,9 +156,7 @@ export default function AdminABTests() {
                   <FlaskConical className="h-5 w-5" />
                   {testConfig.name}
                 </CardTitle>
-                <CardDescription className="mt-1">
-                  {testConfig.description}
-                </CardDescription>
+                <CardDescription className="mt-1">{testConfig.description}</CardDescription>
               </div>
               <Badge variant="secondary">{testConfig.page}</Badge>
             </div>
@@ -175,11 +164,11 @@ export default function AdminABTests() {
           <CardContent>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="p-4 rounded-lg bg-muted/50 border">
-                <p className="text-sm text-muted-foreground mb-1">Variant A (Control)</p>
+                <p className="text-sm text-muted-foreground mb-1">Variante A (Control)</p>
                 <p className="font-medium">{testConfig.variants.A}</p>
               </div>
               <div className="p-4 rounded-lg bg-muted/50 border">
-                <p className="text-sm text-muted-foreground mb-1">Variant B (Treatment)</p>
+                <p className="text-sm text-muted-foreground mb-1">Variante B (Tratamiento)</p>
                 <p className="font-medium">{testConfig.variants.B}</p>
               </div>
             </div>
@@ -187,7 +176,6 @@ export default function AdminABTests() {
         </Card>
       </div>
 
-      {/* Metrics Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <Card>
           <CardContent className="pt-6">
@@ -196,7 +184,7 @@ export default function AdminABTests() {
                 <Users className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Impressions</p>
+                <p className="text-sm text-muted-foreground">Impresiones Totales</p>
                 <p className="text-2xl font-bold">
                   {currentTestData.reduce((sum, d) => sum + d.impressions, 0).toLocaleString()}
                 </p>
@@ -212,7 +200,7 @@ export default function AdminABTests() {
                 <Target className="h-5 w-5 text-green-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Conversions</p>
+                <p className="text-sm text-muted-foreground">Conversiones Totales</p>
                 <p className="text-2xl font-bold">
                   {currentTestData.reduce((sum, d) => sum + d.conversions, 0).toLocaleString()}
                 </p>
@@ -228,9 +216,9 @@ export default function AdminABTests() {
                 <TrendingUp className="h-5 w-5 text-blue-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Lift (B vs A)</p>
+                <p className="text-sm text-muted-foreground">Mejora (B vs A)</p>
                 <p className={`text-2xl font-bold ${lift !== null && lift > 0 ? 'text-green-600' : lift !== null && lift < 0 ? 'text-red-600' : ''}`}>
-                  {lift !== null ? `${lift > 0 ? '+' : ''}${lift.toFixed(1)}%` : 'N/A'}
+                  {lift !== null ? `${lift > 0 ? '+' : ''}${lift.toFixed(1)}%` : 'N/D'}
                 </p>
               </div>
             </div>
@@ -244,9 +232,9 @@ export default function AdminABTests() {
                 <FlaskConical className="h-5 w-5 text-amber-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Current Winner</p>
+                <p className="text-sm text-muted-foreground">Ganador Actual</p>
                 <p className="text-2xl font-bold">
-                  {winner ? `Variant ${winner}` : 'Inconclusive'}
+                  {winner ? `Variante ${winner}` : 'No concluyente'}
                 </p>
               </div>
             </div>
@@ -254,11 +242,10 @@ export default function AdminABTests() {
         </Card>
       </div>
 
-      {/* Charts */}
       <div className="grid lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg font-medium">Conversion Rate by Variant</CardTitle>
+            <CardTitle className="text-lg font-medium">Tasa de Conversión por Variante</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -266,16 +253,11 @@ export default function AdminABTests() {
                 <BarChart data={chartData} layout="vertical">
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                   <XAxis type="number" domain={[0, 'dataMax']} unit="%" />
-                  <YAxis type="category" dataKey="name" width={80} />
-                  <Tooltip 
-                    formatter={(value: number) => [`${value.toFixed(2)}%`, 'Conversion Rate']}
-                  />
+                  <YAxis type="category" dataKey="name" width={100} />
+                  <Tooltip formatter={(value: number) => [`${value.toFixed(2)}%`, 'Tasa de Conversión']} />
                   <Bar dataKey="rate" radius={[0, 4, 4, 0]}>
                     {chartData.map((entry, index) => (
-                      <Cell 
-                        key={`cell-${index}`} 
-                        fill={entry.variant === winner ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'} 
-                      />
+                      <Cell key={`cell-${index}`} fill={entry.variant === winner ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -286,7 +268,7 @@ export default function AdminABTests() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg font-medium">Impressions vs Conversions</CardTitle>
+            <CardTitle className="text-lg font-medium">Impresiones vs Conversiones</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -296,8 +278,8 @@ export default function AdminABTests() {
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="impressions" fill="hsl(var(--muted-foreground))" name="Impressions" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="conversions" fill="hsl(var(--primary))" name="Conversions" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="impressions" fill="hsl(var(--muted-foreground))" name="Impresiones" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="conversions" fill="hsl(var(--primary))" name="Conversiones" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -305,22 +287,21 @@ export default function AdminABTests() {
         </Card>
       </div>
 
-      {/* Variant Details Table */}
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle className="text-lg font-medium">Variant Performance Details</CardTitle>
+          <CardTitle className="text-lg font-medium">Detalle de Rendimiento por Variante</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-medium">Variant</th>
-                  <th className="text-left py-3 px-4 font-medium">Description</th>
-                  <th className="text-right py-3 px-4 font-medium">Impressions</th>
-                  <th className="text-right py-3 px-4 font-medium">Conversions</th>
-                  <th className="text-right py-3 px-4 font-medium">Conv. Rate</th>
-                  <th className="text-center py-3 px-4 font-medium">Status</th>
+                  <th className="text-left py-3 px-4 font-medium">Variante</th>
+                  <th className="text-left py-3 px-4 font-medium">Descripción</th>
+                  <th className="text-right py-3 px-4 font-medium">Impresiones</th>
+                  <th className="text-right py-3 px-4 font-medium">Conversiones</th>
+                  <th className="text-right py-3 px-4 font-medium">Tasa Conv.</th>
+                  <th className="text-center py-3 px-4 font-medium">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -328,7 +309,7 @@ export default function AdminABTests() {
                   <tr key={row.variant} className="border-b last:border-0">
                     <td className="py-3 px-4">
                       <Badge variant={row.variant === "A" ? "secondary" : "default"}>
-                        Variant {row.variant}
+                        Variante {row.variant}
                       </Badge>
                     </td>
                     <td className="py-3 px-4 text-muted-foreground">
@@ -340,7 +321,7 @@ export default function AdminABTests() {
                     <td className="py-3 px-4 text-center">
                       {winner === row.variant ? (
                         <Badge className="bg-green-500/10 text-green-600 hover:bg-green-500/20">
-                          Winner
+                          Ganador
                         </Badge>
                       ) : (
                         <Badge variant="outline">Control</Badge>
