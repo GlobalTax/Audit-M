@@ -40,7 +40,7 @@ export const SITE_CONFIG = {
   },
   audit: {
     name: 'Audit',
-    domain: 'audit.es',
+    domain: 'audit.nrro.es',
     defaultLanguage: 'es',
     sourceFilter: 'audit', // Unified with source_site in DB
     footer: {

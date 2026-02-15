@@ -158,7 +158,7 @@ export const AdminLogin = () => {
             <Input
               id="email"
               type="email"
-              placeholder="admin@audit.es"
+              placeholder="admin@audit.nrro.es"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
