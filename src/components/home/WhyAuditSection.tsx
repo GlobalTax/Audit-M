@@ -14,7 +14,7 @@ export function WhyAuditSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="bg-white py-20 md:py-28 border-t border-border">
+    <section className="bg-muted/30 py-20 md:py-28 border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left column - Title */}
@@ -43,8 +43,8 @@ export function WhyAuditSection() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center">
-                    <Icon className="h-5 w-5 text-foreground" />
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Icon className="h-5 w-5 text-accent" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">

@@ -9,8 +9,8 @@ interface StatProps {
 
 const Stat = ({ icon: Icon, value, label }: StatProps) => (
   <div className="flex items-center gap-3 justify-center">
-    <div className="p-2 rounded-lg bg-primary/10">
-      <Icon className="h-5 w-5 text-primary" />
+    <div className="p-2 rounded-lg bg-accent/10">
+      <Icon className="h-5 w-5 text-accent" />
     </div>
     <div className="text-left">
       <p className="text-lg font-normal text-foreground">{value}</p>
