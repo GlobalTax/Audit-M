@@ -1,165 +1,77 @@
 
-# Mejora integral del Blog, BlogDetail e Intranet (Admin)
 
-## Problemas criticos detectados
+# Rediseno visual de la landing page de Audit
 
-### 1. BUG BLOQUEANTE: Los posts del blog NO se muestran en el site audit
+## Diagnostico actual
 
-**Causa raiz**: En `useBlogSearch.ts` (y 10+ hooks mas), el tipo se castea como `'es' | 'int'`, excluyendo `'audit'`:
-```typescript
-const sourceFilter = getSourceFilter() as 'es' | 'int'; // ignora 'audit'
-```
-Esto hace que la query `.eq("source_site", sourceFilter)` falle silenciosamente ya que TypeScript no lo bloquea pero Supabase no encuentra coincidencias con el tipo incorrecto.
+La pagina tiene una estructura de contenido correcta pero carece de elementos visuales que generen confianza y diferencien la firma:
 
-**Solucion**: Cambiar todos los casts a `'es' | 'int' | 'audit'` en los 10 archivos afectados:
-- `useBlogSearch.ts` (3 ocurrencias)
-- `useContactLeads.ts` (3)
-- `useJobPositions.ts` (3)
-- `usePageContent.ts` (2)
-- `useSitePages.ts` (2)
-- `useCandidatos.ts` (2)
-- `useNewsSearch.ts` (1)
-- `useTechnology.ts` (2)
-- `useSiteSettings.ts` (1)
-- `useLandingPages.ts` (2)
+- Hero: fondo oscuro solido sin imagen
+- Secciones con mucho espacio vacio y sin fotografias
+- Alternancia monotona negro/blanco sin variacion
+- Sin acentos de color significativos (el verde teal apenas aparece)
+- Sin imagenes de equipo, oficinas o elementos que humanicen la marca
 
-### 2. BlogDetail: idioma incorrecto en site audit
+## Cambios propuestos
 
-En `BlogDetail.tsx` linea 75, los campos se resuelven asi:
-```typescript
-title: post.title_en || post.title_es,
-```
-Esto prioriza ingles sobre espanol, pero el site audit es `defaultLanguage: 'es'`. Deberia usar el idioma activo del contexto.
+### 1. Hero con imagen de fondo
 
-**Solucion**: Usar `language` del `useLanguage()` para resolver los campos dinamicamente:
-```typescript
-title: post[`title_${language}`] || post.title_es,
-```
+Usar `office-hero.jpg` (ya existe en assets) como fondo del hero con overlay oscuro semitransparente. Esto anade profundidad visual manteniendo la legibilidad del texto.
 
-### 3. BlogPostCard: slug prioriza ingles incorrectamente
+- Imagen a pantalla completa con `object-cover`
+- Overlay con gradiente oscuro (de izquierda a derecha) para que el texto quede legible
+- Mantener el texto y CTAs actuales
 
-Linea 37 de `BlogPostCard.tsx`:
-```typescript
-const blogPath = `/blog/${slug_en || slug_es || slug}`;
-```
-En el site audit (espanol), deberia priorizar `slug_es`.
+### 2. Seccion "Sobre Audit" con imagen
 
-**Solucion**: Usar el idioma del contexto para determinar el slug prioritario.
+Convertir la seccion "Sobre Audit" en un layout de 2 columnas:
+- Columna izquierda: texto actual + valores
+- Columna derecha: imagen de oficina o equipo (usar `services-hero.jpg`)
+- Esto rompe la monotonia de bloques de texto centrado
 
-### 4. PopularArticles: hardcodeado a `source_site = 'int'`
+### 3. Seccion de metodologia con acentos de color
 
-El hook `usePopularArticles.ts` tiene hardcodeado:
-```typescript
-.eq('source_site', 'int')
-.not('title_en', 'is', null)
-```
-Solo muestra articulos del site internacional, nunca del audit.
+- Anadir linea de progreso verde teal conectando los 4 pasos (Planificacion, Trabajo de Campo, Emision, Seguimiento)
+- Los iconos pasan de gris a tener fondo con el color accent
+- Anadir numeros grandes (01, 02, 03, 04) con color accent como elemento grafico
 
-**Solucion**: Usar `getSourceFilter()` y seleccionar campos segun el idioma del site.
+### 4. Seccion "Por que elegirnos" con fondo suave
 
-### 5. useRelatedBlogPosts: no filtra por source_site
+- Cambiar el fondo blanco puro por un fondo con gradiente muy suave (muted/cream)
+- Iconos con fondo circular accent en lugar de solo borde
+- Anadir una imagen lateral (edificio/oficina) para romper la monotonia
 
-El hook `useRelatedBlogPosts.ts` busca posts relacionados sin filtrar por `source_site`, mostrando potencialmente articulos de otros sites.
+### 5. Barra de contacto con mas presencia
 
-**Solucion**: Anadir `.eq('source_site', sourceFilter)` a las queries.
+- Hacer la barra de contacto pre-footer mas prominente con gradiente accent
+- Boton CTA mas visible
 
-### 6. Blog: sin filtros por categoria/tags
+### 6. Seccion de estadisticas con color
 
-La pagina `/blog` solo tiene busqueda de texto. No tiene filtros por categoria ni tags, aunque los datos existen y hay un hook `useBlogFilterOptions` disponible.
+- La barra "21 servicios / ROAC / 25+ anos" actualmente es oscura con texto gris
+- Cambiar los numeros a color accent (verde teal) para que destaquen
+- Anadir un sutil borde superior/inferior con gradiente
 
-**Solucion**: Anadir filtros de categoria como chips/badges clickables encima del grid de posts.
+## Seccion tecnica
 
-### 7. BlogPostCard: sin imagen destacada
-
-Las tarjetas no muestran `featured_image` aunque el campo existe en la BD. Esto hace que todas las tarjetas se vean iguales (solo texto).
-
-**Solucion**: Anadir la imagen destacada en la parte superior de la tarjeta cuando exista.
-
-### 8. Textos hardcodeados en ingles
-
-- `PopularArticles.tsx`: "Most Popular" hardcodeado
-- `BlogDetail.tsx`: fecha formateada con locale "en-US" en lugar del idioma activo
-- `ReadingProgressBar`: posicion `top-20` que puede solaparse con la barra de navegacion
-
----
-
-## Plan de implementacion
-
-### Fase 1: Correccion critica - Mostrar posts (prioridad maxima)
-
-**Archivos**: Todos los hooks con `as 'es' | 'int'`
-
-Cambiar el cast en los 10 archivos a:
-```typescript
-const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
-```
-
-### Fase 2: Correccion de idioma en BlogDetail y BlogPostCard
-
-**Archivo**: `src/pages/BlogDetail.tsx`
-- Usar `language` del contexto para resolver titulo, excerpt, content, slug, seo_title, seo_description
-- Cambiar locale de fecha de "en-US" al idioma activo
-- Corregir la URL de og:image que aun referencia `nrro.es`
-
-**Archivo**: `src/components/blog/BlogPostCard.tsx`
-- Usar `useLanguage()` para determinar que slug priorizar (`slug_es` en site audit, `slug_en` en site int)
-
-### Fase 3: Correccion de PopularArticles y RelatedPosts
-
-**Archivo**: `src/hooks/usePopularArticles.ts`
-- Usar `getSourceFilter()` en lugar de hardcodear `'int'`
-- Seleccionar campos de titulo/slug segun el idioma del site
-
-**Archivo**: `src/hooks/useRelatedBlogPosts.ts`
-- Anadir filtro `.eq('source_site', sourceFilter)` a las 3 queries (categoryPosts, tagPosts, recentPosts)
-
-**Archivo**: `src/components/blog/PopularArticles.tsx`
-- Internacionalizar "Most Popular" usando `t()`
-
-### Fase 4: Filtros de categoria en el Blog
-
-**Archivo**: `src/pages/Blog.tsx`
-- Importar `useBlogFilterOptions` 
-- Mostrar categorias como badges/chips clickables debajo del buscador
-- Al hacer click en una categoria, filtrar los posts
-- Anadir un chip "Todos" para resetear el filtro
-
-### Fase 5: Imagen destacada en BlogPostCard
-
-**Archivo**: `src/components/blog/BlogPostCard.tsx`
-- Anadir prop `featuredImage?: string`
-- Mostrar la imagen en la parte superior de la tarjeta con aspect ratio 16:9
-- Si no hay imagen, mantener el diseno actual (solo texto)
-
-**Archivo**: `src/pages/Blog.tsx` y `src/components/blog/RelatedBlogPosts.tsx`
-- Pasar `featuredImage` al componente `BlogPostCard`
-
-### Fase 6: Mejoras menores en la Intranet (Admin Blog)
-
-**Archivo**: `src/pages/admin/AdminBlog.tsx`
-- El formulario de creacion (`BlogFormDialog`) no asigna `source_site` al crear un post nuevo. Anadir `source_site: getSourceFilter()` al objeto `postData` para que los nuevos posts se creen con el site correcto.
-
----
-
-## Seccion tecnica - Resumen de archivos
+### Archivos a modificar
 
 | Archivo | Cambio |
 |---------|--------|
-| `src/hooks/useBlogSearch.ts` | Corregir cast de sourceFilter |
-| `src/hooks/useContactLeads.ts` | Corregir cast |
-| `src/hooks/useJobPositions.ts` | Corregir cast |
-| `src/hooks/usePageContent.ts` | Corregir cast |
-| `src/hooks/useSitePages.ts` | Corregir cast |
-| `src/hooks/useCandidatos.ts` | Corregir cast |
-| `src/hooks/useNewsSearch.ts` | Corregir cast |
-| `src/hooks/useTechnology.ts` | Corregir cast |
-| `src/hooks/useSiteSettings.ts` | Corregir cast |
-| `src/hooks/useLandingPages.ts` | Corregir cast |
-| `src/pages/BlogDetail.tsx` | Idioma dinamico, og:image URL, fecha locale |
-| `src/components/blog/BlogPostCard.tsx` | Slug por idioma, imagen destacada |
-| `src/hooks/usePopularArticles.ts` | sourceFilter dinamico |
-| `src/hooks/useRelatedBlogPosts.ts` | Filtro por source_site |
-| `src/components/blog/PopularArticles.tsx` | Internacionalizar textos |
-| `src/pages/Blog.tsx` | Filtros de categoria, pasar featuredImage |
-| `src/components/blog/RelatedBlogPosts.tsx` | Pasar featuredImage |
-| `src/components/admin/blog/BlogFormDialog.tsx` | Anadir source_site al crear post |
+| Componente hero del landing audit | Anadir imagen de fondo con overlay gradient |
+| Componente "Sobre Audit" | Layout 2 columnas con imagen |
+| Componente metodologia | Numeros con color accent, linea de progreso |
+| Componente "Por que elegirnos" | Fondo suave, iconos con color |
+| Componente stats bar | Numeros en color accent |
+| Componente contacto pre-footer | Gradiente accent mas prominente |
+
+Para identificar los archivos exactos necesitare explorar la estructura de componentes del landing audit durante la implementacion, ya que la home usa componentes modulares importados dinamicamente.
+
+### Consideraciones
+
+- No se anaden dependencias nuevas, solo se modifican clases CSS y estructura JSX
+- Las imagenes existentes (`office-hero.jpg`, `services-hero.jpg`) se reutilizan
+- Se podrian buscar 1-2 imagenes stock de alta calidad adicionales si las existentes no son suficientes
+- Se mantiene la paleta de colores actual (dark primary + teal accent) pero se usa el accent de forma mas visible
+- Los cambios son puramente visuales, no afectan funcionalidad ni SEO
+
