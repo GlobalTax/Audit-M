@@ -1205,6 +1205,7 @@ export type Database = {
         Row: {
           assigned_to: string | null
           city: string | null
+          client_type: string
           country: string | null
           created_at: string
           email: string | null
@@ -1227,6 +1228,7 @@ export type Database = {
         Insert: {
           assigned_to?: string | null
           city?: string | null
+          client_type?: string
           country?: string | null
           created_at?: string
           email?: string | null
@@ -1249,6 +1251,7 @@ export type Database = {
         Update: {
           assigned_to?: string | null
           city?: string | null
+          client_type?: string
           country?: string | null
           created_at?: string
           email?: string | null

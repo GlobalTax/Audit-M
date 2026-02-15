@@ -20,8 +20,9 @@ const AdminCRM = () => {
   const renderContent = () => {
     switch (section as CRMSection) {
       case 'personas':
+        return <CRMClientList globalSearch="" clientType="persona" />;
       case 'empresas':
-        return <CRMClientList globalSearch="" />;
+        return <CRMClientList globalSearch="" clientType="empresa" />;
       case 'pipeline':
         return <CRMPipeline />;
       case 'tratos':

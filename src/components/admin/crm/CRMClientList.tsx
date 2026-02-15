@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCRMClients, useDeleteCRMClient, type CRMClient, type CRMClientStatus } from '@/hooks/useCRMClients';
+import { useCRMClients, useDeleteCRMClient, type CRMClient, type CRMClientStatus, type CRMClientType } from '@/hooks/useCRMClients';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -16,9 +16,10 @@ import { CLIENT_STATUS_COLORS, CLIENT_STATUS_LABELS, PIPELINE_LABELS, formatCurr
 
 interface CRMClientListProps {
   globalSearch?: string;
+  clientType?: CRMClientType;
 }
 
-export const CRMClientList = ({ globalSearch = '' }: CRMClientListProps) => {
+export const CRMClientList = ({ globalSearch = '', clientType }: CRMClientListProps) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -35,6 +36,7 @@ export const CRMClientList = ({ globalSearch = '' }: CRMClientListProps) => {
   const { data: clients = [], isLoading } = useCRMClients({
     search: debouncedSearch || undefined,
     status: statusFilter === 'all' ? undefined : statusFilter,
+    client_type: clientType,
   });
   const deleteClient = useDeleteCRMClient();
 
@@ -66,7 +68,7 @@ export const CRMClientList = ({ globalSearch = '' }: CRMClientListProps) => {
           </Select>
         </div>
         <Button onClick={() => { setEditingClient(null); setShowForm(true); }} className="gap-1.5 bg-indigo-600 hover:bg-indigo-700">
-          <Plus className="h-4 w-4" /> Nuevo Cliente
+          <Plus className="h-4 w-4" /> {clientType === 'persona' ? 'Nueva Persona' : clientType === 'empresa' ? 'Nueva Empresa' : 'Nuevo Cliente'}
         </Button>
       </div>
 
@@ -181,6 +183,7 @@ export const CRMClientList = ({ globalSearch = '' }: CRMClientListProps) => {
           open={showForm}
           onClose={() => { setShowForm(false); setEditingClient(null); }}
           client={editingClient}
+          defaultClientType={clientType}
         />
       )}
     </div>
