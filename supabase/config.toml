@@ -2,3 +2,6 @@ project_id = "zntotcpagkunvkwpubqu"
 
 [functions.import-billing-data]
 verify_jwt = false
+
+[functions.firecrawl-enrich-company]
+verify_jwt = false

@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCRMClient } from '@/hooks/useCRMClients';
+import { useCRMClient, useUpdateCRMClient } from '@/hooks/useCRMClients';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { enrichCompanyFromWeb, type EnrichmentData } from '@/lib/api/firecrawl';
+import { CRMEnrichDialog } from '@/components/admin/crm/CRMEnrichDialog';
+import { toast } from 'sonner';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,6 +30,7 @@ import {
   Clock,
   Plus,
   Trash2,
+  Sparkles,
 } from 'lucide-react';
 import { CRMInteractionTimeline } from '@/components/admin/crm/CRMInteractionTimeline';
 import { CRMInteractionForm } from '@/components/admin/crm/CRMInteractionForm';
@@ -62,8 +66,12 @@ const AdminCRMClientDetail = () => {
   const navigate = useNavigate();
   const { data: client, isLoading } = useCRMClient(clientId!);
   const deleteClient = useDeleteCRMClient();
+  const updateClient = useUpdateCRMClient();
   const [showInteractionForm, setShowInteractionForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
+  const [isEnriching, setIsEnriching] = useState(false);
+  const [enrichedData, setEnrichedData] = useState<EnrichmentData | null>(null);
+  const [showEnrichDialog, setShowEnrichDialog] = useState(false);
 
   if (isLoading || !client) {
     return (
@@ -88,6 +96,45 @@ const AdminCRMClientDetail = () => {
   const handleDelete = async () => {
     await deleteClient.mutateAsync(client.id);
     navigate('/admin/crm');
+  };
+
+  const handleEnrich = async () => {
+    if (!client.website) return;
+    setIsEnriching(true);
+    try {
+      const result = await enrichCompanyFromWeb(client.website);
+      if (result.success && result.data) {
+        setEnrichedData(result.data);
+        setShowEnrichDialog(true);
+      } else {
+        toast.error(result.error || 'No se pudieron extraer datos de la web');
+      }
+    } catch (err) {
+      toast.error('Error al conectar con Firecrawl');
+    } finally {
+      setIsEnriching(false);
+    }
+  };
+
+  const handleApplyEnrichment = async (fields: Partial<EnrichmentData>) => {
+    const updateData: Record<string, string> = {};
+    if (fields.description) updateData.notes = fields.description;
+    if (fields.sector) updateData.sector = fields.sector;
+    if (fields.phone) updateData.phone = fields.phone;
+    if (fields.email) updateData.email = fields.email;
+    if (fields.address) updateData.fiscal_address = fields.address;
+    if (fields.city) updateData.city = fields.city;
+    if (fields.postal_code) updateData.postal_code = fields.postal_code;
+    if (fields.country) updateData.country = fields.country;
+
+    try {
+      await updateClient.mutateAsync({ id: client.id, ...updateData });
+      toast.success('Datos actualizados correctamente');
+      setShowEnrichDialog(false);
+      setEnrichedData(null);
+    } catch {
+      toast.error('Error al guardar los datos');
+    }
   };
 
   return (
@@ -176,6 +223,18 @@ const AdminCRMClientDetail = () => {
               <ListTodo className="h-3.5 w-3.5" />
               Tarea
             </Button>
+            {client.website && client.client_type === 'empresa' && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1.5"
+                onClick={handleEnrich}
+                disabled={isEnriching}
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                {isEnriching ? 'Enriqueciendo...' : 'Enriquecer'}
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
@@ -445,6 +504,25 @@ const AdminCRMClientDetail = () => {
           open={showEditForm}
           onClose={() => setShowEditForm(false)}
           client={client}
+        />
+      )}
+      {showEnrichDialog && enrichedData && (
+        <CRMEnrichDialog
+          open={showEnrichDialog}
+          onClose={() => { setShowEnrichDialog(false); setEnrichedData(null); }}
+          enrichedData={enrichedData}
+          currentData={{
+            notes: client.notes,
+            sector: client.sector,
+            phone: client.phone,
+            email: client.email,
+            fiscal_address: client.fiscal_address,
+            city: client.city,
+            postal_code: client.postal_code,
+            country: client.country,
+          }}
+          onApply={handleApplyEnrichment}
+          isApplying={updateClient.isPending}
         />
       )}
     </div>
