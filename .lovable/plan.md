@@ -1,57 +1,69 @@
 
 
-# Plan: Diferenciar Personas y Empresas en el CRM
+# Plan: Enriquecer datos de empresas con Firecrawl
 
-## Problema
+## Objetivo
 
-Todos los registros importados (ACCESFLUID, ARMAKIT S.L., BIGAS GRUP, etc.) son empresas, pero aparecen tanto en la vista "Personas" como en "Empresas" porque no existe ningún campo que los distinga.
-
-## Solución
-
-Añadir un campo `client_type` a la tabla `crm_clients` para clasificar cada registro como **persona** o **empresa**, y filtrar las vistas correspondientes.
+Añadir un boton "Enriquecer datos" en la ficha de cada empresa que use Firecrawl para scrappear su web y rellenar automaticamente campos como sector, direccion, telefono, email, y notas con la informacion extraida.
 
 ---
 
-## 1. Base de datos
+## 1. Edge Function `firecrawl-enrich-company`
 
-- Añadir columna `client_type` (text, default `'empresa'`) a `crm_clients`
-- Actualizar todos los registros existentes a `client_type = 'empresa'` (ya que todos son empresas)
+Crear `supabase/functions/firecrawl-enrich-company/index.ts`:
 
-## 2. Hook `useCRMClients.ts`
+- Recibe `{ url, clientId }` por POST
+- Usa la API de Firecrawl con `FIRECRAWL_API_KEY` para scrappear la URL con formato `json` y un schema estructurado que extraiga:
+  - Descripcion de la empresa
+  - Sector / industria
+  - Telefono de contacto
+  - Email de contacto
+  - Direccion fisica
+  - Ciudad
+  - Codigo postal
+  - Pais
+- Devuelve los datos estructurados al frontend
+- Registrar en `supabase/config.toml` con `verify_jwt = false`
 
-- Añadir `client_type` al tipo `CRMClient`
-- Añadir filtro opcional `client_type` en el query
+## 2. API client en frontend
 
-## 3. Vista `AdminCRM.tsx`
+Crear `src/lib/api/firecrawl.ts` con una funcion `enrichCompany(url, clientId)` que invoque la edge function via `supabase.functions.invoke`.
 
-- La ruta `personas` pasa `clientType="persona"` a `CRMClientList`
-- La ruta `empresas` pasa `clientType="empresa"` a `CRMClientList`
+## 3. Boton "Enriquecer con web" en la ficha de empresa
 
-## 4. Componente `CRMClientList.tsx`
+En `src/pages/admin/AdminCRMClientDetail.tsx`:
 
-- Aceptar prop `clientType` y filtrar automáticamente por ese tipo
-- Cambiar el texto del botón: "Nueva Persona" o "Nueva Empresa" segun la vista
-- Pasar `clientType` al formulario para preseleccionar el tipo
+- Añadir un boton con icono Globe junto al dropdown de acciones
+- Solo visible si el cliente tiene campo `website` rellenado
+- Al hacer clic: llama a la edge function, muestra loading, y presenta un dialogo de confirmacion con los datos encontrados antes de guardar
+- Al confirmar: actualiza los campos del cliente via `useUpdateCRMClient` (solo los campos vacios o que el usuario seleccione)
 
-## 5. Formulario `CRMClientForm.tsx`
+## 4. Dialogo de revision de datos
 
-- Añadir selector de tipo: Persona / Empresa
-- Preseleccionar segun la vista desde la que se abre
+Crear `src/components/admin/crm/CRMEnrichDialog.tsx`:
 
-## 6. Tipos Supabase
-
-- Actualizar `types.ts` para incluir `client_type`
+- Muestra los datos extraidos junto a los datos actuales
+- Checkboxes para seleccionar que campos sobreescribir
+- Los campos vacios se preseleccionan automaticamente
+- Boton "Aplicar cambios" que ejecuta el update
 
 ---
 
-## Archivos a modificar
+## Archivos a crear/modificar
 
-| Archivo | Cambio |
+| Archivo | Accion |
 |---------|--------|
-| Migración SQL | Añadir columna `client_type`, actualizar registros existentes |
-| `src/integrations/supabase/types.ts` | Añadir campo |
-| `src/hooks/useCRMClients.ts` | Filtro por `client_type` |
-| `src/pages/admin/AdminCRM.tsx` | Pasar prop `clientType` a cada vista |
-| `src/components/admin/crm/CRMClientList.tsx` | Recibir y aplicar filtro `clientType` |
-| `src/components/admin/crm/CRMClientForm.tsx` | Campo tipo persona/empresa |
+| `supabase/functions/firecrawl-enrich-company/index.ts` | Crear - edge function de scraping |
+| `supabase/config.toml` | Editar - registrar nueva funcion |
+| `src/lib/api/firecrawl.ts` | Crear - client API |
+| `src/components/admin/crm/CRMEnrichDialog.tsx` | Crear - dialogo de revision |
+| `src/pages/admin/AdminCRMClientDetail.tsx` | Editar - boton enriquecer |
+
+## Flujo del usuario
+
+1. Abre la ficha de una empresa que tiene web
+2. Pulsa "Enriquecer con web"
+3. Se scrappea la pagina y se muestran los datos encontrados
+4. Selecciona que campos quiere actualizar
+5. Confirma y se guardan los datos en el CRM
 
