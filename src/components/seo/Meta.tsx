@@ -43,6 +43,7 @@ export const Meta = ({
 
     // Update meta tags
     const metaTags = [
+      { name: "robots", content: "index, follow" },
       { name: "description", content: description },
       { property: "og:title", content: `${title} | Audit | m` },
       { property: "og:description", content: description },

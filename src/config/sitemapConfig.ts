@@ -1,3 +1,5 @@
+import { getCurrentSiteConfig } from '@/config/site';
+
 export interface SitemapEntry {
   url: string;
   priority: number;
@@ -6,12 +8,12 @@ export interface SitemapEntry {
   lastmod?: string;
 }
 
-export const SITEMAP_DOMAIN = 'https://global.audit.es';
+export const SITEMAP_DOMAIN = `https://${getCurrentSiteConfig().domain}`;
 
 export const sitemapEntries: SitemapEntry[] = [
   // === PÁGINAS PRINCIPALES ===
   { url: '/', priority: 1.0, changefreq: 'weekly', category: 'Páginas Principales' },
-  { url: '/services', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
+  { url: '/servicios', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/case-studies', priority: 0.9, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/blog', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
   { url: '/resources', priority: 0.8, changefreq: 'weekly', category: 'Páginas Principales' },
@@ -21,12 +23,10 @@ export const sitemapEntries: SitemapEntry[] = [
   { url: '/contact', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/testimonials', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
   { url: '/careers', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
+  { url: '/sectors', priority: 0.7, changefreq: 'monthly', category: 'Páginas Principales' },
 
-  // === SERVICIOS DE AUDITORÍA ===
-  { url: '/auditoria-cuentas-anuales', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
-  { url: '/due-diligence', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
-  { url: '/auditoria-interna', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
-  { url: '/auditoria-esg', priority: 0.9, changefreq: 'weekly', category: 'Servicios de Auditoría' },
+  // === SERVICIOS ESPECIALIZADOS ===
+  { url: '/servicios/subvenciones', priority: 0.8, changefreq: 'weekly', category: 'Servicios' },
 
   // === LEGAL PAGES ===
   { url: '/privacy', priority: 0.3, changefreq: 'yearly', category: 'Legal Pages' },
