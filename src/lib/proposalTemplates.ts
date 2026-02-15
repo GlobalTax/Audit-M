@@ -1,26 +1,32 @@
+import { getCurrentSiteConfig } from '@/config/site';
+
+const siteConfig = getCurrentSiteConfig();
+const contact = siteConfig.footer;
+
 export const proposalContent = {
   en: {
-    title: 'Professional Services Proposal',
-    subtitle: 'Tailored Solutions for Your Business',
-    
-    aboutTitle: 'About NRRO',
-    aboutText: `NRRO is a leading multidisciplinary advisory firm headquartered in Barcelona, providing comprehensive legal, tax, accounting, and labour solutions to businesses operating in Spain and internationally.
+    companyName: contact.brandName,
+    title: 'Professional Audit Services Proposal',
+    subtitle: 'Independent Assurance for Your Business',
 
-With over 30 years of experience, we serve 500+ clients across 50+ countries, combining local expertise with global reach through our membership in international networks including MSI Global Alliance, IAPA, and AUREN International.
+    aboutTitle: `About ${contact.brandName}`,
+    aboutText: `${contact.brandName} is an independent audit firm registered with the ROAC (Official Registry of Auditors), providing rigorous and transparent audit services to companies of all sizes throughout Spain.
 
-Our team of 40+ professionals delivers seamless, integrated advisory services designed to support your business growth and ensure full regulatory compliance.`,
+With a team of experienced auditors and a commitment to the highest professional standards, we deliver independent assurance that helps our clients build trust with stakeholders, comply with regulatory requirements, and strengthen their internal controls.
+
+Our approach combines deep industry knowledge with the latest audit methodologies, ensuring thorough and efficient engagements tailored to each client's specific needs.`,
 
     credentialsTitle: 'Our Credentials',
     credentials: [
-      '30+ Years of Excellence',
-      '500+ Active Clients',
-      'Presence in 50+ Countries',
-      'Member of 3 Global Networks',
-      'Multilingual Team (EN, ES, FR, DE)',
+      'Registered with ROAC (Official Registry of Auditors)',
+      'Member of ICJCE (Institute of Chartered Auditors)',
+      'Compliance with ISA & NIA-ES Standards',
+      'Experienced Multidisciplinary Team',
+      'Presence in Barcelona, Madrid, and Girona',
     ],
 
     servicesTitle: 'Proposed Services',
-    
+
     economicProposalTitle: 'Economic Proposal',
     tableHeaders: {
       service: 'Service',
@@ -28,75 +34,77 @@ Our team of 40+ professionals delivers seamless, integrated advisory services de
       monthlyFee: 'Monthly Fee',
       annualFee: 'Annual Fee',
     },
-    
-    whyNrroTitle: 'Why NRRO',
-    whyNrro: [
+
+    whyUsTitle: `Why ${contact.brandName}`,
+    whyUs: [
       {
-        title: 'Integrated Approach',
-        description: 'One team handling all your legal, tax, accounting, and labour needs—no fragmented advice.',
+        title: 'Independence & Rigour',
+        description: 'We maintain strict independence in every engagement, ensuring objective and reliable conclusions.',
       },
       {
-        title: 'International Expertise',
-        description: 'Specialists in cross-border operations with deep knowledge of international tax structures.',
+        title: 'Industry Specialisation',
+        description: 'Deep knowledge of key sectors including real estate, technology, non-profits, and family businesses.',
       },
       {
-        title: 'Responsive Service',
-        description: 'Direct partner access with guaranteed response times and proactive communication.',
+        title: 'Partner-Led Service',
+        description: 'Direct access to audit partners throughout the engagement, with guaranteed response times.',
       },
       {
-        title: 'Fixed Pricing',
-        description: 'Transparent, predictable fees with no hidden costs—budget with confidence.',
+        title: 'Clear & Fixed Pricing',
+        description: 'Transparent fees agreed upfront with no hidden costs. Budget with confidence.',
       },
     ],
 
     nextStepsTitle: 'Next Steps',
     nextSteps: [
       'Review and approve this proposal',
-      'Sign the engagement letter',
-      'Complete the onboarding documentation',
-      'Kick-off meeting with your dedicated team',
+      'Sign the engagement letter (carta de encargo)',
+      'Provide access to financial documentation',
+      'Kick-off meeting and audit planning',
     ],
 
     contactTitle: 'Contact',
     contactInfo: {
-      address: 'Via Augusta, 15-25 · 08006 Barcelona',
-      phone: '+34 934 593 600',
-      email: 'international@nrro.es',
-      web: 'global.nrro.es',
+      address: contact.headOfficeAddress.replace('\n', ' · '),
+      phone: '+34 933 000 000',
+      email: `info@${siteConfig.domain}`,
+      web: siteConfig.domain,
     },
 
     validityNote: 'This proposal is valid until',
     termsTitle: 'Terms & Conditions',
     defaultTerms: `• Fees are exclusive of VAT (21%)
-• Invoiced monthly in advance
-• Payment due within 15 days of invoice
-• Initial commitment period: 12 months
-• Scope changes may require fee adjustment`,
+• Invoiced upon completion of each audit phase
+• Payment due within 30 days of invoice
+• Engagement subject to independence verification
+• Scope changes may require fee adjustment
+• Audit report issuance subject to receipt of all required documentation`,
 
     footer: 'Confidential - For intended recipient only',
   },
   es: {
-    title: 'Propuesta de Servicios Profesionales',
-    subtitle: 'Soluciones a Medida para Tu Negocio',
-    
-    aboutTitle: 'Sobre NRRO',
-    aboutText: `NRRO es una firma de asesoramiento multidisciplinar líder con sede en Barcelona, que ofrece soluciones integrales en materia legal, fiscal, contable y laboral a empresas que operan en España e internacionalmente.
+    companyName: contact.brandName,
+    title: 'Propuesta de Servicios de Auditoría',
+    subtitle: 'Aseguramiento Independiente para Tu Negocio',
 
-Con más de 30 años de experiencia, atendemos a más de 500 clientes en más de 50 países, combinando expertise local con alcance global a través de nuestra pertenencia a redes internacionales como MSI Global Alliance, IAPA y AUREN International.
+    aboutTitle: `Sobre ${contact.brandName}`,
+    aboutText: `${contact.brandName} es una firma de auditoría independiente inscrita en el ROAC (Registro Oficial de Auditores de Cuentas), que ofrece servicios de auditoría rigurosos y transparentes a empresas de todos los tamaños en España.
 
-Nuestro equipo de más de 40 profesionales ofrece servicios de asesoramiento integrados y sin fisuras, diseñados para apoyar el crecimiento de tu negocio y garantizar el pleno cumplimiento normativo.`,
+Con un equipo de auditores experimentados y un compromiso con los más altos estándares profesionales, proporcionamos aseguramiento independiente que ayuda a nuestros clientes a generar confianza con sus grupos de interés, cumplir con los requisitos regulatorios y fortalecer sus controles internos.
+
+Nuestro enfoque combina un profundo conocimiento sectorial con las últimas metodologías de auditoría, garantizando encargos exhaustivos y eficientes adaptados a las necesidades específicas de cada cliente.`,
 
     credentialsTitle: 'Nuestras Credenciales',
     credentials: [
-      '+30 Años de Excelencia',
-      '+500 Clientes Activos',
-      'Presencia en +50 Países',
-      'Miembro de 3 Redes Globales',
-      'Equipo Multilingüe (ES, EN, FR, DE)',
+      'Inscritos en el ROAC (Registro Oficial de Auditores de Cuentas)',
+      'Miembros del ICJCE (Instituto de Censores Jurados)',
+      'Cumplimiento con NIA-ES y normativa ISA',
+      'Equipo Multidisciplinar Experimentado',
+      'Presencia en Barcelona, Madrid y Girona',
     ],
 
     servicesTitle: 'Servicios Propuestos',
-    
+
     economicProposalTitle: 'Propuesta Económica',
     tableHeaders: {
       service: 'Servicio',
@@ -104,24 +112,24 @@ Nuestro equipo de más de 40 profesionales ofrece servicios de asesoramiento int
       monthlyFee: 'Honorario Mensual',
       annualFee: 'Honorario Anual',
     },
-    
-    whyNrroTitle: 'Por Qué NRRO',
-    whyNrro: [
+
+    whyUsTitle: `Por Qué ${contact.brandName}`,
+    whyUs: [
       {
-        title: 'Enfoque Integrado',
-        description: 'Un solo equipo gestionando todas tus necesidades legales, fiscales, contables y laborales.',
+        title: 'Independencia y Rigor',
+        description: 'Mantenemos estricta independencia en cada encargo, garantizando conclusiones objetivas y fiables.',
       },
       {
-        title: 'Expertise Internacional',
-        description: 'Especialistas en operaciones transfronterizas con profundo conocimiento de estructuras fiscales internacionales.',
+        title: 'Especialización Sectorial',
+        description: 'Profundo conocimiento de sectores clave incluyendo inmobiliario, tecnología, fundaciones y empresa familiar.',
       },
       {
-        title: 'Servicio Responsivo',
-        description: 'Acceso directo a socios con tiempos de respuesta garantizados y comunicación proactiva.',
+        title: 'Servicio Directo con Socios',
+        description: 'Acceso directo a los socios de auditoría durante todo el encargo, con tiempos de respuesta garantizados.',
       },
       {
-        title: 'Precios Fijos',
-        description: 'Honorarios transparentes y predecibles sin costes ocultos.',
+        title: 'Precios Claros y Fijos',
+        description: 'Honorarios transparentes acordados por anticipado sin costes ocultos.',
       },
     ],
 
@@ -129,26 +137,105 @@ Nuestro equipo de más de 40 profesionales ofrece servicios de asesoramiento int
     nextSteps: [
       'Revisar y aprobar esta propuesta',
       'Firmar la carta de encargo',
-      'Completar la documentación de onboarding',
-      'Reunión de kick-off con tu equipo dedicado',
+      'Facilitar acceso a la documentación financiera',
+      'Reunión de arranque y planificación de la auditoría',
     ],
 
     contactTitle: 'Contacto',
     contactInfo: {
-      address: 'Via Augusta, 15-25 · 08006 Barcelona',
-      phone: '+34 934 593 600',
-      email: 'international@nrro.es',
-      web: 'global.nrro.es',
+      address: contact.headOfficeAddress.replace('\n', ' · '),
+      phone: '+34 933 000 000',
+      email: `info@${siteConfig.domain}`,
+      web: siteConfig.domain,
     },
 
     validityNote: 'Esta propuesta es válida hasta',
     termsTitle: 'Términos y Condiciones',
     defaultTerms: `• Los honorarios no incluyen IVA (21%)
-• Facturación mensual anticipada
-• Pago a 15 días desde la emisión de la factura
-• Período de compromiso inicial: 12 meses
-• Los cambios de alcance pueden requerir ajuste de honorarios`,
+• Facturación por fases de trabajo completadas
+• Pago a 30 días desde la emisión de la factura
+• El encargo está sujeto a verificación de independencia
+• Los cambios de alcance pueden requerir ajuste de honorarios
+• La emisión del informe está sujeta a la recepción de toda la documentación requerida`,
 
     footer: 'Confidencial - Solo para el destinatario previsto',
+  },
+  ca: {
+    companyName: contact.brandName,
+    title: 'Proposta de Serveis d\'Auditoria',
+    subtitle: 'Assegurament Independent per al Teu Negoci',
+
+    aboutTitle: `Sobre ${contact.brandName}`,
+    aboutText: `${contact.brandName} és una firma d'auditoria independent inscrita al ROAC (Registre Oficial d'Auditors de Comptes), que ofereix serveis d'auditoria rigorosos i transparents a empreses de totes les mides a Espanya.
+
+Amb un equip d'auditors experimentats i un compromís amb els més alts estàndards professionals, proporcionem assegurament independent que ajuda els nostres clients a generar confiança amb els seus grups d'interès, complir amb els requisits regulatoris i enfortir els seus controls interns.
+
+El nostre enfocament combina un profund coneixement sectorial amb les últimes metodologies d'auditoria, garantint encàrrecs exhaustius i eficients adaptats a les necessitats específiques de cada client.`,
+
+    credentialsTitle: 'Les Nostres Credencials',
+    credentials: [
+      'Inscrits al ROAC (Registre Oficial d\'Auditors de Comptes)',
+      'Membres de l\'ICJCE (Institut de Censors Jurats)',
+      'Compliment amb NIA-ES i normativa ISA',
+      'Equip Multidisciplinari Experimentat',
+      'Presència a Barcelona, Madrid i Girona',
+    ],
+
+    servicesTitle: 'Serveis Proposats',
+
+    economicProposalTitle: 'Proposta Econòmica',
+    tableHeaders: {
+      service: 'Servei',
+      description: 'Abast',
+      monthlyFee: 'Honorari Mensual',
+      annualFee: 'Honorari Anual',
+    },
+
+    whyUsTitle: `Per Què ${contact.brandName}`,
+    whyUs: [
+      {
+        title: 'Independència i Rigor',
+        description: 'Mantenim estricta independència en cada encàrrec, garantint conclusions objectives i fiables.',
+      },
+      {
+        title: 'Especialització Sectorial',
+        description: 'Profund coneixement de sectors clau incloent immobiliari, tecnologia, fundacions i empresa familiar.',
+      },
+      {
+        title: 'Servei Directe amb Socis',
+        description: 'Accés directe als socis d\'auditoria durant tot l\'encàrrec, amb temps de resposta garantits.',
+      },
+      {
+        title: 'Preus Clars i Fixos',
+        description: 'Honoraris transparents acordats per avançat sense costos ocults.',
+      },
+    ],
+
+    nextStepsTitle: 'Propers Passos',
+    nextSteps: [
+      'Revisar i aprovar aquesta proposta',
+      'Signar la carta d\'encàrrec',
+      'Facilitar accés a la documentació financera',
+      'Reunió d\'arrencada i planificació de l\'auditoria',
+    ],
+
+    contactTitle: 'Contacte',
+    contactInfo: {
+      address: contact.headOfficeAddress.replace('\n', ' · '),
+      phone: '+34 933 000 000',
+      email: `info@${siteConfig.domain}`,
+      web: siteConfig.domain,
+    },
+
+    validityNote: 'Aquesta proposta és vàlida fins al',
+    termsTitle: 'Termes i Condicions',
+    defaultTerms: `• Els honoraris no inclouen IVA (21%)
+• Facturació per fases de treball completades
+• Pagament a 30 dies des de l'emissió de la factura
+• L'encàrrec està subjecte a verificació d'independència
+• Els canvis d'abast poden requerir ajust d'honoraris
+• L'emissió de l'informe està subjecta a la recepció de tota la documentació requerida`,
+
+    footer: 'Confidencial - Només per al destinatari previst',
   },
 };

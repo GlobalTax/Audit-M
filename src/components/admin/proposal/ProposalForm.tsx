@@ -25,6 +25,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ProposalData, ProposalService, AVAILABLE_SERVICES } from '@/types/proposal';
+import { getCurrentSiteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
 const proposalSchema = z.object({
@@ -37,7 +38,7 @@ const proposalSchema = z.object({
   validUntil: z.date(),
   additionalNotes: z.string().optional(),
   paymentTerms: z.string().optional(),
-  language: z.enum(['en', 'es']),
+  language: z.enum(['en', 'es', 'ca']),
 });
 
 type ProposalFormData = z.infer<typeof proposalSchema>;
@@ -49,10 +50,13 @@ interface ProposalFormProps {
 export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
   const [selectedServices, setSelectedServices] = useState<ProposalService[]>([]);
   
+  const siteConfig = getCurrentSiteConfig();
+
   const generateProposalNumber = () => {
     const year = new Date().getFullYear();
     const random = Math.floor(Math.random() * 9000) + 1000;
-    return `NRRO-${year}-${random}`;
+    const prefix = siteConfig.name.toUpperCase().substring(0, 3);
+    return `${prefix}-${year}-${random}`;
   };
 
   const {
@@ -66,7 +70,7 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
     defaultValues: {
       proposalDate: new Date(),
       validUntil: addDays(new Date(), 30),
-      language: 'en',
+      language: siteConfig.defaultLanguage === 'en' ? 'en' : 'es',
     },
   });
 
@@ -87,8 +91,10 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
         id: service.id,
         name: service.name,
         nameEs: service.nameEs,
+        nameCa: service.nameCa,
         description: service.description,
         descriptionEs: service.descriptionEs,
+        descriptionCa: service.descriptionCa,
         monthlyFee: 0,
       }];
     });
@@ -211,14 +217,15 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
               <Label>Language</Label>
               <Select
                 value={language}
-                onValueChange={(value: 'en' | 'es') => setValue('language', value)}
+                onValueChange={(value: 'en' | 'es' | 'ca') => setValue('language', value)}
               >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
                   <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="ca">Català</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -308,9 +315,9 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
                   <div className="flex items-start gap-2">
                     <Checkbox checked={isSelected} />
                     <div>
-                      <p className="font-medium text-sm">{language === 'en' ? service.name : service.nameEs}</p>
+                      <p className="font-medium text-sm">{language === 'en' ? service.name : language === 'ca' ? service.nameCa : service.nameEs}</p>
                       <p className="text-xs text-muted-foreground line-clamp-2">
-                        {language === 'en' ? service.description : service.descriptionEs}
+                        {language === 'en' ? service.description : language === 'ca' ? service.descriptionCa : service.descriptionEs}
                       </p>
                     </div>
                   </div>
@@ -328,7 +335,7 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
                   <div key={service.id} className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
                     <div className="flex-1">
                       <p className="font-medium text-sm">
-                        {language === 'en' ? service.name : service.nameEs}
+                        {language === 'en' ? service.name : language === 'ca' ? service.nameCa : service.nameEs}
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
