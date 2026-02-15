@@ -70,7 +70,7 @@ export const ProposalForm = ({ onGenerate }: ProposalFormProps) => {
     defaultValues: {
       proposalDate: new Date(),
       validUntil: addDays(new Date(), 30),
-      language: siteConfig.defaultLanguage === 'en' ? 'en' : 'es',
+      language: (siteConfig.defaultLanguage as string) === 'en' ? 'en' : 'es',
     },
   });
 
