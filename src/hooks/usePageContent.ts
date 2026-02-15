@@ -4,7 +4,7 @@ import { PageContent, PageContentInsert, PageContentUpdate } from '@/types/pageC
 import { SITE_SOURCE, getSourceFilter } from '@/config/site';
 
 export const usePageContent = (pageKey?: string, sectionKey?: string, language: string = 'es') => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ['page-content', pageKey, sectionKey, language, SITE_SOURCE],
@@ -34,7 +34,7 @@ export const usePageContent = (pageKey?: string, sectionKey?: string, language: 
 };
 
 export const useAllPageContent = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ['page-content', 'all', SITE_SOURCE],

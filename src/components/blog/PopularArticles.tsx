@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Eye } from 'lucide-react';
 import { usePopularArticles } from '@/hooks/usePopularArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 
@@ -19,6 +20,7 @@ const formatViewCount = (count: number): string => {
 export const PopularArticles = ({ currentPostId }: PopularArticlesProps) => {
   const { data: articles, isLoading } = usePopularArticles(currentPostId, 5);
   const { trackEvent } = useAnalytics();
+  const { t } = useLanguage();
 
   const handleArticleClick = (articleId: string, articleTitle: string, position: number) => {
     trackEvent('popular_article_click_global_nrro', {
@@ -32,7 +34,7 @@ export const PopularArticles = ({ currentPostId }: PopularArticlesProps) => {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <h3 className="text-lg font-normal text-foreground mb-4">Most Popular</h3>
+        <h3 className="text-lg font-normal text-foreground mb-4">{t('blog.popularArticles.title') || 'Más populares'}</h3>
         {[...Array(5)].map((_, i) => (
           <div key={i} className="flex gap-3">
             <Skeleton className="h-6 w-6 rounded-full flex-shrink-0" />
@@ -52,7 +54,7 @@ export const PopularArticles = ({ currentPostId }: PopularArticlesProps) => {
 
   return (
     <div>
-      <h3 className="text-lg font-normal text-foreground mb-4">Most Popular</h3>
+      <h3 className="text-lg font-normal text-foreground mb-4">{t('blog.popularArticles.title') || 'Más populares'}</h3>
       <div className="space-y-4">
         {articles.map((article, index) => (
           <Link

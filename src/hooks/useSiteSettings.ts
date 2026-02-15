@@ -23,7 +23,7 @@ export function useSiteSettings(category?: string) {
       let query = supabase
         .from('site_settings')
         .select('*')
-        .eq('source_site', sourceFilter as 'es' | 'int')
+        .eq('source_site', sourceFilter as 'es' | 'int' | 'audit')
         .order('key');
 
       if (category) {

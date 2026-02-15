@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { getSourceFilter } from "@/config/site";
 import {
   Dialog,
   DialogContent,
@@ -229,7 +230,8 @@ export const BlogFormDialog = ({ open, onOpenChange, post }: BlogFormDialogProps
           .eq("id", post.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("blog_posts").insert([postData]);
+        const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
+        const { error } = await supabase.from("blog_posts").insert([{ ...postData, source_site: sourceFilter }]);
         if (error) throw error;
       }
     },

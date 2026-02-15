@@ -73,6 +73,7 @@ export const RelatedBlogPosts = ({
                 authorName={post.author_name}
                 publishedAt={post.published_at}
                 readTime={post.read_time}
+                featuredImage={post.featured_image}
               />
             </div>
           ))}

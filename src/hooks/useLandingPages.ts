@@ -63,7 +63,7 @@ interface LandingFilters {
 }
 
 export const useLandingPages = (filters: LandingFilters = {}) => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ['landing-pages', filters, SITE_SOURCE],
@@ -112,7 +112,7 @@ export const useLandingPageBySlug = (slug: string) => {
 
 export const useCreateLandingPage = () => {
   const queryClient = useQueryClient();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useMutation({
     mutationFn: async (landing: Partial<LandingPage>) => {

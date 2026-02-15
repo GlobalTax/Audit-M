@@ -25,7 +25,7 @@ export const useCandidatos = (filters?: {
   departamento?: string;
   search?: string;
 }) => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["candidatos", filters, SITE_SOURCE],
@@ -108,7 +108,7 @@ export const useDeleteCandidato = () => {
 };
 
 export const useCandidatoStats = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["candidatos-stats", SITE_SOURCE],

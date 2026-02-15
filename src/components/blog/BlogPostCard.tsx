@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import { format } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BlogPostCardProps {
   slug: string;
@@ -17,6 +18,7 @@ interface BlogPostCardProps {
   authorAvatarUrl?: string;
   publishedAt?: string;
   readTime?: number;
+  featuredImage?: string;
   className?: string;
 }
 
@@ -31,10 +33,16 @@ export const BlogPostCard = memo(({
   authorAvatarUrl,
   publishedAt,
   readTime,
+  featuredImage,
   className = "",
 }: BlogPostCardProps) => {
-  // Use English slug if available, fallback to Spanish, then generic slug
-  const blogPath = `/blog/${slug_en || slug_es || slug}`;
+  const { language } = useLanguage();
+  
+  // Prioritize slug based on active language
+  const resolvedSlug = language === 'en' 
+    ? (slug_en || slug_es || slug) 
+    : (slug_es || slug_en || slug);
+  const blogPath = `/blog/${resolvedSlug}`;
 
   const initials = authorName
     ? authorName
@@ -47,7 +55,19 @@ export const BlogPostCard = memo(({
   
   return (
     <Link to={blogPath}>
-      <Card className={`h-full hover-lift transition-smooth group ${className}`}>
+      <Card className={`h-full hover-lift transition-smooth group overflow-hidden ${className}`}>
+        {/* Featured Image */}
+        {featuredImage && (
+          <div className="aspect-video overflow-hidden">
+            <img 
+              src={featuredImage} 
+              alt={title} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+        )}
+        
         <CardContent className="p-6 flex flex-col h-full">
           {/* Category Badge */}
           {category && (
@@ -105,5 +125,6 @@ export const BlogPostCard = memo(({
 }, (prevProps, nextProps) => {
   return prevProps.slug === nextProps.slug && 
          prevProps.title === nextProps.title &&
-         prevProps.publishedAt === nextProps.publishedAt;
+         prevProps.publishedAt === nextProps.publishedAt &&
+         prevProps.featuredImage === nextProps.featuredImage;
 });

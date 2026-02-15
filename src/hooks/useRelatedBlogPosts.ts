@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { getSourceFilter, SITE_SOURCE } from '@/config/site';
 
 interface RelatedPostsParams {
   currentPostId: string;
@@ -9,8 +10,10 @@ interface RelatedPostsParams {
 }
 
 export function useRelatedBlogPosts({ currentPostId, category, tags, language = 'es' }: RelatedPostsParams) {
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
+
   return useQuery({
-    queryKey: ['related-blog-posts', currentPostId, category, tags, language],
+    queryKey: ['related-blog-posts', currentPostId, category, tags, language, SITE_SOURCE],
     queryFn: async () => {
       // Get posts from same category (excluding current)
       const { data: categoryPosts, error: categoryError } = await supabase
@@ -18,6 +21,7 @@ export function useRelatedBlogPosts({ currentPostId, category, tags, language = 
         .select('*')
         .eq('status', 'published')
         .eq('category', category)
+        .eq('source_site', sourceFilter)
         .neq('id', currentPostId)
         .order('published_at', { ascending: false })
         .limit(5);
@@ -29,6 +33,7 @@ export function useRelatedBlogPosts({ currentPostId, category, tags, language = 
         .from('blog_posts')
         .select('*')
         .eq('status', 'published')
+        .eq('source_site', sourceFilter)
         .neq('id', currentPostId)
         .order('published_at', { ascending: false })
         .limit(10);
@@ -67,13 +72,13 @@ export function useRelatedBlogPosts({ currentPostId, category, tags, language = 
           .from('blog_posts')
           .select('*')
           .eq('status', 'published')
+          .eq('source_site', sourceFilter)
           .neq('id', currentPostId)
           .order('published_at', { ascending: false })
           .limit(3);
 
         if (recentError) throw recentError;
 
-        // Add recent posts that aren't already in relatedPosts
         const existingIds = new Set(relatedPosts.map(p => p.id));
         recentPosts?.forEach(post => {
           if (!existingIds.has(post.id) && relatedPosts.length < 3) {
@@ -82,7 +87,6 @@ export function useRelatedBlogPosts({ currentPostId, category, tags, language = 
         });
       }
 
-      // Return posts with all language fields preserved
       return relatedPosts.map((post: any) => ({
         ...post,
         title_es: post.title_es,

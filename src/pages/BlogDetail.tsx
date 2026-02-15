@@ -72,15 +72,15 @@ const BlogDetail = () => {
       const post: any = response.data;
       return {
         ...post,
-        title: post.title_en || post.title_es,
-        slug: post.slug_en || post.slug_es,
-        excerpt: post.excerpt_en || post.excerpt_es,
-        content: post.content_en || post.content_es,
-        seo_title: post.seo_title_en || post.seo_title_es,
-        seo_description: post.seo_description_en || post.seo_description_es,
+        title: post[`title_${language}`] || post.title_es,
+        slug: post[`slug_${language}`] || post.slug_es,
+        excerpt: post[`excerpt_${language}`] || post.excerpt_es,
+        content: post[`content_${language}`] || post.content_es,
+        seo_title: post[`seo_title_${language}`] || post.seo_title_es,
+        seo_description: post[`seo_description_${language}`] || post.seo_description_es,
       } as any;
     },
-    enabled: !previewToken && !!slug,
+    enabled: !previewToken && !!slug && !!language,
   });
 
   const incrementViewMutation = useMutation({
@@ -149,7 +149,7 @@ const BlogDetail = () => {
     );
   }
 
-  const ogImageUrl = post ? `https://zntotcpagkunvkwpubqu.supabase.co/functions/v1/generate-og-image?type=blog&title=${encodeURIComponent(post.title)}&description=${encodeURIComponent((post.excerpt || '').substring(0, 150))}` : "https://nrro.es/og-image.png";
+  const ogImageUrl = post ? `https://zntotcpagkunvkwpubqu.supabase.co/functions/v1/generate-og-image?type=blog&title=${encodeURIComponent(post.title)}&description=${encodeURIComponent((post.excerpt || '').substring(0, 150))}` : "https://audit.nrro.es/og-image.png";
 
   return (
     <>
@@ -177,7 +177,7 @@ const BlogDetail = () => {
                   {post.category && <Overline className="mb-4">{post.category}</Overline>}
                   <h1 className="text-3xl md:text-4xl font-normal leading-tight mb-6">{post.title}</h1>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <time dateTime={post.published_at}>{new Date(post.published_at || post.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+                    <time dateTime={post.published_at}>{new Date(post.published_at || post.created_at).toLocaleDateString(language === 'es' ? 'es-ES' : language === 'ca' ? 'ca-ES' : 'en-US', { year: "numeric", month: "long", day: "numeric" })}</time>
                     {post.read_time && <><span>•</span><span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" />{post.read_time} min</span></>}
                   </div>
                 </header>
