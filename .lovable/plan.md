@@ -1,51 +1,38 @@
 
+# Plan: Crear edge function `create-admin-user`
 
-# Plan: Enriquecer datos de empresas con Firecrawl
+## Problema
 
-## Objetivo
+La pagina de usuarios (`/admin/users`) llama a `supabase.functions.invoke('create-admin-user')` pero esa edge function no existe, lo que provoca un error al intentar crear usuarios.
 
-Añadir un boton "Enriquecer datos" en la ficha de cada empresa que use Firecrawl para scrappear su web y rellenar automaticamente campos como sector, direccion, telefono, email, y notas con la informacion extraida.
+## Solucion
+
+Crear la edge function `create-admin-user` que use el `SUPABASE_SERVICE_ROLE_KEY` para crear usuarios en `auth.users` y asignarles un rol.
 
 ---
 
-## 1. Edge Function `firecrawl-enrich-company`
+## 1. Crear `supabase/functions/create-admin-user/index.ts`
 
-Crear `supabase/functions/firecrawl-enrich-company/index.ts`:
+La funcion:
 
-- Recibe `{ url, clientId }` por POST
-- Usa la API de Firecrawl con `FIRECRAWL_API_KEY` para scrappear la URL con formato `json` y un schema estructurado que extraiga:
-  - Descripcion de la empresa
-  - Sector / industria
-  - Telefono de contacto
-  - Email de contacto
-  - Direccion fisica
-  - Ciudad
-  - Codigo postal
-  - Pais
-- Devuelve los datos estructurados al frontend
-- Registrar en `supabase/config.toml` con `verify_jwt = false`
+- Valida que el usuario que llama sea admin (extrae token del header Authorization, verifica rol en `user_roles`)
+- Recibe `{ email, full_name, role, send_invite }` por POST
+- Usa `supabase.auth.admin.createUser()` con el service role key para crear el usuario en `auth.users` con una contrasena temporal
+- Inserta el rol correspondiente en `user_roles` (valores validos del enum: `admin`, `editor`, `viewer`, `marketing`, `hr_manager`, `hr_viewer`)
+- Devuelve los datos del usuario creado
 
-## 2. API client en frontend
+## 2. Registrar en `supabase/config.toml`
 
-Crear `src/lib/api/firecrawl.ts` con una funcion `enrichCompany(url, clientId)` que invoque la edge function via `supabase.functions.invoke`.
+Añadir:
 
-## 3. Boton "Enriquecer con web" en la ficha de empresa
+```text
+[functions.create-admin-user]
+verify_jwt = false
+```
 
-En `src/pages/admin/AdminCRMClientDetail.tsx`:
+## 3. Tambien registrar funciones existentes sin config
 
-- Añadir un boton con icono Globe junto al dropdown de acciones
-- Solo visible si el cliente tiene campo `website` rellenado
-- Al hacer clic: llama a la edge function, muestra loading, y presenta un dialogo de confirmacion con los datos encontrados antes de guardar
-- Al confirmar: actualiza los campos del cliente via `useUpdateCRMClient` (solo los campos vacios o que el usuario seleccione)
-
-## 4. Dialogo de revision de datos
-
-Crear `src/components/admin/crm/CRMEnrichDialog.tsx`:
-
-- Muestra los datos extraidos junto a los datos actuales
-- Checkboxes para seleccionar que campos sobreescribir
-- Los campos vacios se preseleccionan automaticamente
-- Boton "Aplicar cambios" que ejecuta el update
+Las funciones `admin-auth` y `verify-admin-session` existen pero no estan en config.toml. Se añadiran tambien para consistencia.
 
 ---
 
@@ -53,17 +40,5 @@ Crear `src/components/admin/crm/CRMEnrichDialog.tsx`:
 
 | Archivo | Accion |
 |---------|--------|
-| `supabase/functions/firecrawl-enrich-company/index.ts` | Crear - edge function de scraping |
-| `supabase/config.toml` | Editar - registrar nueva funcion |
-| `src/lib/api/firecrawl.ts` | Crear - client API |
-| `src/components/admin/crm/CRMEnrichDialog.tsx` | Crear - dialogo de revision |
-| `src/pages/admin/AdminCRMClientDetail.tsx` | Editar - boton enriquecer |
-
-## Flujo del usuario
-
-1. Abre la ficha de una empresa que tiene web
-2. Pulsa "Enriquecer con web"
-3. Se scrappea la pagina y se muestran los datos encontrados
-4. Selecciona que campos quiere actualizar
-5. Confirma y se guardan los datos en el CRM
-
+| `supabase/functions/create-admin-user/index.ts` | Crear |
+| `supabase/config.toml` | Editar - registrar la nueva funcion y las existentes |
