@@ -1,31 +1,70 @@
 
-# Mejorar la seccion de Premios y Reconocimientos
+# Corregir indexacion de paginas
 
 ## Problemas detectados
 
-1. **No filtra por site**: El hook `useAwards` no filtra por `source_site`, asi que muestra premios de todos los sitios (audit + int) mezclados
-2. **Grid de 7 columnas para pocos premios**: Con solo 2-4 premios el layout queda muy vacio y desproporcionado
+1. **`BASE_DOMAIN` apunta a `nrro.es`** en lugar de `audit.es` - todos los canonical URLs estan mal
+2. **Sitemap estatico (`public/sitemap.xml`)** con URLs de `nrro.es` - Google no encuentra las paginas reales
+3. **`sitemapConfig.ts`** usa `global.audit.es` como dominio
+4. **`robots.txt`** referencia `global.audit.es/sitemap.xml`
+5. **No se inyecta `<meta name="robots" content="index, follow">`** en las paginas
+6. **Meta tags se inyectan via JavaScript** (useEffect) - los crawlers basicos no los ven
 
-## Cambios
+## Cambios propuestos
 
-### 1. Filtrar premios por `source_site` en `useAwards`
+### 1. Corregir `BASE_DOMAIN` en `src/lib/seoUtils.ts`
 
-**Archivo**: `src/hooks/useAwards.ts`
+Cambiar para que use el dominio del site activo en lugar de hardcodear `nrro.es`:
 
-- Importar `getSourceFilter` desde `src/config/site.ts`
-- Añadir `.eq('source_site', sourceFilter)` a la query de `useAwards()` (la del frontend)
-- La query de admin (`useAdminAwards`) se deja sin filtro para ver todos
+```
+import { getCurrentSiteConfig } from '@/config/site';
+export const BASE_DOMAIN = `https://${getCurrentSiteConfig().domain}`;
+```
 
-### 2. Grid adaptativo en `AwardsRecognitionStrip`
+Resultado: todos los canonical URLs y og:urls apuntaran a `https://audit.es` automaticamente.
 
-**Archivo**: `src/components/home/AwardsRecognitionStrip.tsx`
+### 2. Actualizar `sitemapConfig.ts`
 
-- Cambiar el grid de `lg:grid-cols-7` a un layout que se adapte al numero de premios:
-  - 1-2 premios: centrados en una fila con `max-w-md` por tarjeta
-  - 3-4 premios: `grid-cols-2 md:grid-cols-4` centrado con `max-w-4xl`
-  - 5+: mantener grid responsivo pero sin forzar 7 columnas (`lg:grid-cols-5` como maximo)
-- Tambien ajustar el skeleton loader para que coincida
+Cambiar `SITEMAP_DOMAIN` para que tambien use el dominio dinamico del site activo, y actualizar las rutas a las que realmente existen en el router (ej: `/services` en vez de `/auditoria-cuentas-anuales` si no existe esa ruta).
 
-### Resultado esperado
+### 3. Regenerar `public/sitemap.xml`
 
-Con `SITE_SOURCE = 'audit'`, solo se mostraran los 2 premios de audit, centrados y bien distribuidos en la seccion, sin espacios vacios.
+Actualizar con las URLs correctas de `audit.es` y las rutas reales del router:
+- `https://audit.es/`
+- `https://audit.es/services`
+- `https://audit.es/case-studies`
+- `https://audit.es/blog`
+- `https://audit.es/about`
+- `https://audit.es/team`
+- `https://audit.es/contact`
+- etc.
+
+### 4. Corregir `robots.txt`
+
+Cambiar la referencia del sitemap a `https://audit.es/sitemap.xml`.
+
+### 5. Añadir meta `robots` en `Meta.tsx`
+
+Inyectar `<meta name="robots" content="index, follow">` junto con los demas meta tags para indicar explicitamente a los buscadores que indexen las paginas.
+
+### 6. Corregir `index.html`
+
+Actualizar los meta tags estaticos (og:url, og:image, twitter:image) para que apunten a `audit.es` consistentemente.
+
+## Archivos a modificar
+
+| Archivo | Cambio |
+|---------|--------|
+| `src/lib/seoUtils.ts` | BASE_DOMAIN dinamico desde site config |
+| `src/config/sitemapConfig.ts` | SITEMAP_DOMAIN dinamico + rutas corregidas |
+| `public/sitemap.xml` | URLs de audit.es con rutas reales |
+| `public/robots.txt` | Sitemap URL corregida |
+| `src/components/seo/Meta.tsx` | Añadir meta robots index,follow |
+| `index.html` | Corregir og:url y dominios estaticos |
+
+## Resultado esperado
+
+- Google vera canonical URLs consistentes apuntando a `audit.es`
+- El sitemap tendra URLs correctas y accesibles
+- `robots.txt` dirigira a los crawlers al sitemap correcto
+- Cada pagina tendra la directiva `index, follow` explicita
