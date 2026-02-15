@@ -16,10 +16,10 @@ const Reason = ({ icon: Icon, title, description, index }: ReasonProps) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="flex gap-4"
+    className="flex gap-4 p-6 rounded-xl bg-card border border-border/50 hover:border-accent/30 hover:shadow-sm transition-all duration-300"
   >
-    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-      <Icon className="h-6 w-6 text-primary" />
+    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+      <Icon className="h-6 w-6 text-accent" />
     </div>
     <div>
       <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
@@ -65,7 +65,7 @@ export const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -78,7 +78,7 @@ export const WhyChooseUsSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {reasons.map((reason, index) => (
               <Reason
                 key={index}
