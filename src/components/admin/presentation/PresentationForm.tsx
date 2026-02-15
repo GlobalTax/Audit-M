@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { PresentationData, DEFAULT_SECTIONS, SECTION_LABELS } from '@/types/corporatePresentation';
+import { getCurrentSiteConfig } from '@/config/site';
 import { FileDown, Monitor, FileText, Globe } from 'lucide-react';
 
 interface PresentationFormProps {
@@ -15,10 +16,13 @@ interface PresentationFormProps {
 }
 
 export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormProps) => {
+  const siteConfig = getCurrentSiteConfig();
+  const defaultLang = (siteConfig.defaultLanguage === 'ca' ? 'ca' : siteConfig.defaultLanguage === 'en' ? 'en' : 'es') as 'en' | 'es' | 'ca';
+
   const [recipientName, setRecipientName] = useState('');
   const [recipientCompany, setRecipientCompany] = useState('');
   const [format, setFormat] = useState<'landscape' | 'portrait'>('landscape');
-  const [language, setLanguage] = useState<'en' | 'es'>('en');
+  const [language, setLanguage] = useState<'en' | 'es' | 'ca'>(defaultLang);
   const [presentationDate, setPresentationDate] = useState(
     new Date().toISOString().split('T')[0]
   );
@@ -47,13 +51,13 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
       {/* Format & Language */}
       <Card>
         <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-normal">Format & Language</CardTitle>
-          <CardDescription>Choose the presentation format and language</CardDescription>
+          <CardTitle className="text-lg font-normal">Formato e Idioma</CardTitle>
+          <CardDescription>Elige el formato de presentación y el idioma</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Format */}
           <div className="space-y-3">
-            <Label className="font-medium">Format</Label>
+            <Label className="font-medium">Formato</Label>
             <RadioGroup
               value={format}
               onValueChange={(val) => setFormat(val as 'landscape' | 'portrait')}
@@ -70,8 +74,8 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
                   className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   <Monitor className="h-8 w-8 mb-2" />
-                  <span className="text-sm font-medium">Landscape</span>
-                  <span className="text-xs text-muted-foreground">Slide deck style</span>
+                  <span className="text-sm font-medium">Horizontal</span>
+                  <span className="text-xs text-muted-foreground">Estilo presentación</span>
                 </Label>
               </div>
               <div className="relative">
@@ -85,8 +89,8 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
                   className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   <FileText className="h-8 w-8 mb-2" />
-                  <span className="text-sm font-medium">Portrait</span>
-                  <span className="text-xs text-muted-foreground">Document style</span>
+                  <span className="text-sm font-medium">Vertical</span>
+                  <span className="text-xs text-muted-foreground">Estilo documento</span>
                 </Label>
               </div>
             </RadioGroup>
@@ -94,12 +98,22 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
 
           {/* Language */}
           <div className="space-y-3">
-            <Label className="font-medium">Language</Label>
+            <Label className="font-medium">Idioma</Label>
             <RadioGroup
               value={language}
-              onValueChange={(val) => setLanguage(val as 'en' | 'es')}
-              className="grid grid-cols-2 gap-4"
+              onValueChange={(val) => setLanguage(val as 'en' | 'es' | 'ca')}
+              className="grid grid-cols-3 gap-4"
             >
+              <div className="relative">
+                <RadioGroupItem value="es" id="lang-es" className="peer sr-only" />
+                <Label
+                  htmlFor="lang-es"
+                  className="flex items-center justify-center gap-2 rounded-lg border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                >
+                  <Globe className="h-4 w-4" />
+                  <span className="font-medium">Español</span>
+                </Label>
+              </div>
               <div className="relative">
                 <RadioGroupItem value="en" id="lang-en" className="peer sr-only" />
                 <Label
@@ -111,13 +125,13 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
                 </Label>
               </div>
               <div className="relative">
-                <RadioGroupItem value="es" id="lang-es" className="peer sr-only" />
+                <RadioGroupItem value="ca" id="lang-ca" className="peer sr-only" />
                 <Label
-                  htmlFor="lang-es"
+                  htmlFor="lang-ca"
                   className="flex items-center justify-center gap-2 rounded-lg border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   <Globe className="h-4 w-4" />
-                  <span className="font-medium">Español</span>
+                  <span className="font-medium">Català</span>
                 </Label>
               </div>
             </RadioGroup>
@@ -128,30 +142,30 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
       {/* Recipient (Optional) */}
       <Card>
         <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-normal">Recipient (Optional)</CardTitle>
-          <CardDescription>Personalize the presentation for a specific recipient</CardDescription>
+          <CardTitle className="text-lg font-normal">Destinatario (Opcional)</CardTitle>
+          <CardDescription>Personaliza la presentación para un destinatario específico</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="font-medium">Company Name</Label>
+              <Label className="font-medium">Nombre de Empresa</Label>
               <Input
-                placeholder="Acme Corporation"
+                placeholder="Empresa S.L."
                 value={recipientCompany}
                 onChange={(e) => setRecipientCompany(e.target.value)}
               />
             </div>
             <div className="space-y-2">
-              <Label className="font-medium">Contact Name</Label>
+              <Label className="font-medium">Persona de Contacto</Label>
               <Input
-                placeholder="John Smith"
+                placeholder="Juan García"
                 value={recipientName}
                 onChange={(e) => setRecipientName(e.target.value)}
               />
             </div>
           </div>
           <div className="space-y-2">
-            <Label className="font-medium">Presentation Date</Label>
+            <Label className="font-medium">Fecha de Presentación</Label>
             <Input
               type="date"
               value={presentationDate}
@@ -164,8 +178,8 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
       {/* Sections */}
       <Card>
         <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-normal">Sections to Include</CardTitle>
-          <CardDescription>Toggle sections on/off to customize the presentation</CardDescription>
+          <CardTitle className="text-lg font-normal">Secciones a Incluir</CardTitle>
+          <CardDescription>Activa o desactiva secciones para personalizar la presentación</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           {(Object.keys(sections) as Array<keyof typeof sections>).map((key) => (
@@ -192,11 +206,11 @@ export const PresentationForm = ({ onGenerate, isGenerating }: PresentationFormP
       <Button
         onClick={handleGenerate}
         disabled={isGenerating}
-        className="w-full h-12 text-base bg-amber-500 hover:bg-amber-600 text-black"
+        className="w-full h-12 text-base"
         size="lg"
       >
         <FileDown className="mr-2 h-5 w-5" />
-        {isGenerating ? 'Generating...' : 'Generate & Download PDF'}
+        {isGenerating ? 'Generando...' : 'Generar y Descargar PDF'}
       </Button>
     </div>
   );
