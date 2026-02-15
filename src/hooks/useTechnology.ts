@@ -19,7 +19,7 @@ interface TechnologyContent {
 }
 
 export const useTechnology = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ['technology-content', SITE_SOURCE],
@@ -45,7 +45,7 @@ export const useTechnology = () => {
 
 export const useUpdateTechnology = () => {
   const queryClient = useQueryClient();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useMutation({
     mutationFn: async (technologies: TechItem[]) => {

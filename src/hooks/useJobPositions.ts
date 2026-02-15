@@ -8,7 +8,7 @@ export const useJobPositions = (filters?: {
   status?: 'draft' | 'published' | 'closed';
   department?: string;
 }, language: string = 'es') => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["job-positions", filters, language, SITE_SOURCE],
@@ -87,7 +87,7 @@ export const useJobPosition = (slug: string, language: string = 'es') => {
 
 export const useCreateJobPosition = () => {
   const queryClient = useQueryClient();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
 
   return useMutation({
     mutationFn: async (jobPosition: any) => {
@@ -164,7 +164,7 @@ export const useDeleteJobPosition = () => {
 };
 
 export const useJobPositionStats = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["job-position-stats", SITE_SOURCE],

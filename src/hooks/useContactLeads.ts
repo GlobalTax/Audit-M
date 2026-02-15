@@ -33,7 +33,7 @@ export interface ContactLeadFilters {
 }
 
 export const useContactLeads = (filters?: ContactLeadFilters) => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["contact-leads", filters, SITE_SOURCE],
@@ -132,7 +132,7 @@ export const useUpdateContactLeadSourceSite = () => {
       source_site 
     }: { 
       id: string; 
-      source_site: 'es' | 'int';
+      source_site: 'es' | 'int' | 'audit';
     }) => {
       const { error } = await supabase
         .from("contact_leads")
@@ -194,7 +194,7 @@ export interface CreateContactLeadInput {
 
 export const useCreateContactLead = () => {
   const queryClient = useQueryClient();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
 
   return useMutation({
     mutationFn: async (lead: CreateContactLeadInput) => {
@@ -266,7 +266,7 @@ export const useSendLeadNotification = () => {
 
 export const useBulkCreateContactLeads = () => {
   const queryClient = useQueryClient();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
 
   return useMutation({
     mutationFn: async (leads: CreateContactLeadInput[]) => {

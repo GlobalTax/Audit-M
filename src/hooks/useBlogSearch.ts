@@ -12,7 +12,7 @@ interface BlogSearchParams {
 }
 
 export const useBlogSearch = (params: BlogSearchParams, language: string = 'es') => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["blog-search", params, language, SITE_SOURCE, sourceFilter],
@@ -74,7 +74,7 @@ export const useBlogSearch = (params: BlogSearchParams, language: string = 'es')
 };
 
 export const useBlogFilterOptions = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["blog-filter-options", SITE_SOURCE, sourceFilter],
@@ -97,7 +97,7 @@ export const useBlogFilterOptions = () => {
 };
 
 export const useBlogStats = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["blog-stats", SITE_SOURCE, sourceFilter],

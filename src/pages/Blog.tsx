@@ -19,9 +19,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CustomPagination } from "@/components/ui/custom-pagination";
-import { useBlogSearch } from "@/hooks/useBlogSearch";
+import { useBlogSearch, useBlogFilterOptions } from "@/hooks/useBlogSearch";
 import { BadgeHero } from "@/components/ui/badge-hero";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
+import { Badge } from "@/components/ui/badge";
 
 
 const ITEMS_PER_PAGE = 9;
@@ -32,6 +33,9 @@ const Blog = () => {
   useScrollDepth();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  
+  const { data: filterOptions } = useBlogFilterOptions();
   
   // Track page view
   useEffect(() => {
@@ -50,6 +54,7 @@ const Blog = () => {
 
   const { data, isLoading } = useBlogSearch({
     searchQuery: searchQuery || undefined,
+    category: selectedCategory || undefined,
     status: "published",
     limit: ITEMS_PER_PAGE,
     offset: (currentPage - 1) * ITEMS_PER_PAGE,
@@ -116,7 +121,7 @@ const Blog = () => {
       <div className="min-h-screen py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="mb-12 max-w-xl">
+          <div className="mb-8 max-w-xl">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
@@ -131,6 +136,29 @@ const Blog = () => {
               />
             </div>
           </div>
+
+          {/* Category Filters */}
+          {filterOptions?.categories && filterOptions.categories.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-10">
+              <Badge
+                variant={selectedCategory === null ? "default" : "outline"}
+                className="cursor-pointer"
+                onClick={() => { setSelectedCategory(null); setCurrentPage(1); }}
+              >
+                {t('blog.filters.all') || 'Todos'}
+              </Badge>
+              {filterOptions.categories.map((cat) => (
+                <Badge
+                  key={cat}
+                  variant={selectedCategory === cat ? "default" : "outline"}
+                  className="cursor-pointer"
+                  onClick={() => { setSelectedCategory(cat); setCurrentPage(1); }}
+                >
+                  {cat}
+                </Badge>
+              ))}
+            </div>
+          )}
 
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -157,17 +185,18 @@ const Blog = () => {
                      })}
                    >
                      <BlogPostCard
-                       slug={post.slug}
-                       slug_es={post.slug_es}
-                       slug_en={post.slug_en}
-                       category={post.category}
-                       title={post.title}
-                       excerpt={post.excerpt}
-                       authorName={post.author_name}
-                       authorAvatarUrl={post.author_avatar_url}
-                       publishedAt={post.published_at}
-                       readTime={post.read_time}
-                     />
+                        slug={post.slug}
+                        slug_es={post.slug_es}
+                        slug_en={post.slug_en}
+                        category={post.category}
+                        title={post.title}
+                        excerpt={post.excerpt}
+                        authorName={post.author_name}
+                        authorAvatarUrl={post.author_avatar_url}
+                        publishedAt={post.published_at}
+                        readTime={post.read_time}
+                        featuredImage={post.featured_image}
+                      />
                    </div>
                  ))}
               </div>

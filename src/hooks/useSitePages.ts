@@ -40,7 +40,7 @@ export interface SitePageFilters {
 }
 
 export const useSitePages = (filters?: SitePageFilters) => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["site-pages", filters, SITE_SOURCE],
@@ -182,7 +182,7 @@ export const useCreateSitePage = () => {
 };
 
 export const useSitePageStats = () => {
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["site-pages-stats", SITE_SOURCE],

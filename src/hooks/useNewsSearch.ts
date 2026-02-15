@@ -29,7 +29,7 @@ interface NewsArticle {
 
 export const useNewsSearch = (params: NewsSearchParams) => {
   const { language } = useLanguage();
-  const sourceFilter = getSourceFilter() as 'es' | 'int';
+  const sourceFilter = getSourceFilter() as 'es' | 'int' | 'audit';
   
   return useQuery({
     queryKey: ["news-search", params, language, SITE_SOURCE],
