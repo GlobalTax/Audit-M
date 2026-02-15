@@ -1,44 +1,31 @@
 
-# Plan: Crear edge function `create-admin-user`
+# Mejorar la seccion de Premios y Reconocimientos
 
-## Problema
+## Problemas detectados
 
-La pagina de usuarios (`/admin/users`) llama a `supabase.functions.invoke('create-admin-user')` pero esa edge function no existe, lo que provoca un error al intentar crear usuarios.
+1. **No filtra por site**: El hook `useAwards` no filtra por `source_site`, asi que muestra premios de todos los sitios (audit + int) mezclados
+2. **Grid de 7 columnas para pocos premios**: Con solo 2-4 premios el layout queda muy vacio y desproporcionado
 
-## Solucion
+## Cambios
 
-Crear la edge function `create-admin-user` que use el `SUPABASE_SERVICE_ROLE_KEY` para crear usuarios en `auth.users` y asignarles un rol.
+### 1. Filtrar premios por `source_site` en `useAwards`
 
----
+**Archivo**: `src/hooks/useAwards.ts`
 
-## 1. Crear `supabase/functions/create-admin-user/index.ts`
+- Importar `getSourceFilter` desde `src/config/site.ts`
+- Añadir `.eq('source_site', sourceFilter)` a la query de `useAwards()` (la del frontend)
+- La query de admin (`useAdminAwards`) se deja sin filtro para ver todos
 
-La funcion:
+### 2. Grid adaptativo en `AwardsRecognitionStrip`
 
-- Valida que el usuario que llama sea admin (extrae token del header Authorization, verifica rol en `user_roles`)
-- Recibe `{ email, full_name, role, send_invite }` por POST
-- Usa `supabase.auth.admin.createUser()` con el service role key para crear el usuario en `auth.users` con una contrasena temporal
-- Inserta el rol correspondiente en `user_roles` (valores validos del enum: `admin`, `editor`, `viewer`, `marketing`, `hr_manager`, `hr_viewer`)
-- Devuelve los datos del usuario creado
+**Archivo**: `src/components/home/AwardsRecognitionStrip.tsx`
 
-## 2. Registrar en `supabase/config.toml`
+- Cambiar el grid de `lg:grid-cols-7` a un layout que se adapte al numero de premios:
+  - 1-2 premios: centrados en una fila con `max-w-md` por tarjeta
+  - 3-4 premios: `grid-cols-2 md:grid-cols-4` centrado con `max-w-4xl`
+  - 5+: mantener grid responsivo pero sin forzar 7 columnas (`lg:grid-cols-5` como maximo)
+- Tambien ajustar el skeleton loader para que coincida
 
-Añadir:
+### Resultado esperado
 
-```text
-[functions.create-admin-user]
-verify_jwt = false
-```
-
-## 3. Tambien registrar funciones existentes sin config
-
-Las funciones `admin-auth` y `verify-admin-session` existen pero no estan en config.toml. Se añadiran tambien para consistencia.
-
----
-
-## Archivos a crear/modificar
-
-| Archivo | Accion |
-|---------|--------|
-| `supabase/functions/create-admin-user/index.ts` | Crear |
-| `supabase/config.toml` | Editar - registrar la nueva funcion y las existentes |
+Con `SITE_SOURCE = 'audit'`, solo se mostraran los 2 premios de audit, centrados y bien distribuidos en la seccion, sin espacios vacios.
