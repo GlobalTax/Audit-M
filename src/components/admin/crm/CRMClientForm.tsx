@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCreateCRMClient, useUpdateCRMClient, type CRMClient, type CRMClientStatus, type CRMPipelineStage } from '@/hooks/useCRMClients';
+import { useCreateCRMClient, useUpdateCRMClient, type CRMClient, type CRMClientStatus, type CRMPipelineStage, type CRMClientType } from '@/hooks/useCRMClients';
 import { toast } from 'sonner';
 import { AUDIT_SECTORS, CLIENT_SOURCES } from '@/lib/crm';
 
@@ -13,6 +13,7 @@ interface CRMClientFormProps {
   open: boolean;
   onClose: () => void;
   client?: CRMClient | null;
+  defaultClientType?: CRMClientType;
 }
 
 const STATUSES: { value: CRMClientStatus; label: string }[] = [
@@ -31,7 +32,7 @@ const STAGES: { value: CRMPipelineStage; label: string }[] = [
   { value: 'cerrado_perdido', label: 'Descartado' },
 ];
 
-export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => {
+export const CRMClientForm = ({ open, onClose, client, defaultClientType }: CRMClientFormProps) => {
   const createClient = useCreateCRMClient();
   const updateClient = useUpdateCRMClient();
   const isEditing = !!client;
@@ -53,6 +54,7 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
     source: client?.source || '',
     estimated_value: client?.estimated_value || 0,
     notes: client?.notes || '',
+    client_type: client?.client_type || defaultClientType || 'empresa' as CRMClientType,
   });
 
   const handleChange = (field: string, value: string | number) => {
@@ -96,7 +98,9 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
     <Dialog open={open} onOpenChange={() => onClose()}>
       <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-lg">{isEditing ? 'Editar cliente' : 'Nuevo cliente'}</DialogTitle>
+          <DialogTitle className="text-lg">
+            {isEditing ? 'Editar cliente' : defaultClientType === 'persona' ? 'Nueva Persona' : defaultClientType === 'empresa' ? 'Nueva Empresa' : 'Nuevo cliente'}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Basic info */}
@@ -104,7 +108,17 @@ export const CRMClientForm = ({ open, onClose, client }: CRMClientFormProps) => 
             <p className="text-xs font-medium uppercase tracking-wider text-slate-400 mb-3">Información básica</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label className="text-xs">Nombre / Razón Social *</Label>
+                <Label className="text-xs">Tipo</Label>
+                <Select value={form.client_type} onValueChange={(v) => handleChange('client_type', v)}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="persona">Persona</SelectItem>
+                    <SelectItem value="empresa">Empresa</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs">{form.client_type === 'persona' ? 'Nombre completo' : 'Razón Social'} *</Label>
                 <Input value={form.name} onChange={(e) => handleChange('name', e.target.value)} required />
               </div>
               <div className="space-y-1.5">

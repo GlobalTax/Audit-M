@@ -7,6 +7,8 @@ import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase
 export type CRMClientStatus = 'prospecto' | 'activo' | 'inactivo' | 'perdido';
 export type CRMPipelineStage = 'nuevo' | 'contactado' | 'propuesta' | 'negociacion' | 'cerrado_ganado' | 'cerrado_perdido';
 
+export type CRMClientType = 'persona' | 'empresa';
+
 export interface CRMClient {
   id: string;
   name: string;
@@ -26,13 +28,14 @@ export interface CRMClient {
   source: string | null;
   estimated_value: number | null;
   source_site: string | null;
+  client_type: CRMClientType;
   created_at: string;
   updated_at: string;
 }
 
 export type CRMClientInsert = Omit<CRMClient, 'id' | 'created_at' | 'updated_at'>;
 
-export const useCRMClients = (filters?: { status?: CRMClientStatus; search?: string }) => {
+export const useCRMClients = (filters?: { status?: CRMClientStatus; search?: string; client_type?: CRMClientType }) => {
   return useQuery({
     queryKey: ['crm-clients', filters],
     queryFn: async () => {
@@ -43,6 +46,9 @@ export const useCRMClients = (filters?: { status?: CRMClientStatus; search?: str
 
       if (filters?.status) {
         query = query.eq('status', filters.status);
+      }
+      if (filters?.client_type) {
+        query = query.eq('client_type', filters.client_type);
       }
       if (filters?.search) {
         const term = sanitizeSearchTerm(filters.search);
