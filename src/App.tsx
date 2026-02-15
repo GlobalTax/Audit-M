@@ -70,6 +70,7 @@ const AdminABTests = lazy(() => import("./pages/admin/AdminABTests"));
 const AdminTopBar = lazy(() => import("./pages/admin/AdminTopBar"));
 const AdminCRM = lazy(() => import("./pages/admin/AdminCRM"));
 const AdminCRMClientDetail = lazy(() => import("./pages/admin/AdminCRMClientDetail"));
+const AdminProjects = lazy(() => import("./pages/admin/AdminProjects"));
 
 const AdminSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -169,6 +170,7 @@ const App = () => {
                   <Route path="technology" element={<Suspense fallback={<AdminSpinner />}><AdminTechnology /></Suspense>} />
                   <Route path="sitemap" element={<Suspense fallback={<AdminSpinner />}><AdminSitemap /></Suspense>} />
                   <Route path="ab-tests" element={<Suspense fallback={<AdminSpinner />}><AdminABTests /></Suspense>} />
+                  <Route path="projects" element={<Suspense fallback={<AdminSpinner />}><AdminProjects /></Suspense>} />
                   <Route path="analytics" element={<Suspense fallback={<AdminSpinner />}><AdminAnalyticsDashboard /></Suspense>} />
                   <Route
                     path="users"
