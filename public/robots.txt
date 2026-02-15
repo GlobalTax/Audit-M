@@ -14,4 +14,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://global.audit.es/sitemap.xml
+Sitemap: https://audit.es/sitemap.xml

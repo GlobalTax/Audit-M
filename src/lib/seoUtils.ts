@@ -1,5 +1,7 @@
-// Base domain for all SEO purposes
-export const BASE_DOMAIN = "https://nrro.es";
+import { getCurrentSiteConfig } from '@/config/site';
+
+// Base domain for all SEO purposes - dynamic based on active site
+export const BASE_DOMAIN = `https://${getCurrentSiteConfig().domain}`;
 
 export const getBaseUrl = () => BASE_DOMAIN;
 
