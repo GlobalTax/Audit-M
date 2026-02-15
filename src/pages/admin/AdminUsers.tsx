@@ -72,10 +72,11 @@ export const AdminUsers = () => {
 
           if (rolesError) throw rolesError;
 
-          // Map the first role to the old format for compatibility
+          // Map database role to UI role
           const roleValue = roles?.[0]?.role as string;
-          const role = roleValue === 'admin' ? 'admin' : 
-                      roleValue === 'moderator' ? 'editor' : 'viewer';
+          const role = roleValue === 'admin' ? 'admin' :
+                      roleValue === 'editor' ? 'editor' :
+                      roleValue === 'marketing' ? 'editor' : 'viewer';
 
           return {
             id: profile.id,
@@ -94,50 +95,30 @@ export const AdminUsers = () => {
     },
   });
 
-  // Create admin user mutation - Simplified version
+  // Create admin user mutation - Uses edge function for proper auth.users creation
   const createAdminMutation = useMutation({
     mutationFn: async (userData: { email: string; full_name: string; role: AdminRole }) => {
-      // Generate unique ID for new user
-      const newUserId = crypto.randomUUID();
-      
-      // 1. Insert into profiles
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          id: newUserId,
-          email: userData.email,
-          created_at: new Date().toISOString(),
-        });
-
-      if (profileError) throw new Error('Error al crear perfil: ' + profileError.message);
-
-      // 2. Map role to database enum
+      // Map UI role to database app_role enum values
       const roleMapping: Record<AdminRole, string> = {
         super_admin: 'admin',
         admin: 'admin',
-        editor: 'moderator',
-        viewer: 'user',
+        editor: 'editor',
+        viewer: 'viewer',
       };
 
-      // 3. Insert role
-      const { error: roleError } = await supabase
-        .from('user_roles')
-        .insert({
-          user_id: newUserId,
-          role: roleMapping[userData.role] as any,
-        });
+      const { data, error } = await supabase.functions.invoke('create-admin-user', {
+        body: {
+          email: userData.email,
+          full_name: userData.full_name,
+          role: roleMapping[userData.role],
+          send_invite: false,
+        },
+      });
 
-      if (roleError) {
-        // Rollback: delete profile if role assignment fails
-        await supabase.from('profiles').delete().eq('id', newUserId);
-        throw new Error('Error al asignar rol: ' + roleError.message);
-      }
+      if (error) throw new Error(error.message || 'Error al crear usuario');
+      if (data?.error) throw new Error(data.error);
 
-      return { 
-        user_id: newUserId, 
-        email: userData.email,
-        full_name: userData.full_name 
-      };
+      return data.user;
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] });
@@ -163,12 +144,12 @@ export const AdminUsers = () => {
   // Update role mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ userId, newRole }: { userId: string; newRole: AdminRole }) => {
-      // Map old role to new enum
+      // Map UI role to database app_role enum
       const roleMapping: Record<AdminRole, string> = {
         super_admin: 'admin',
         admin: 'admin',
-        editor: 'moderator',
-        viewer: 'user',
+        editor: 'editor',
+        viewer: 'viewer',
       };
 
       const mappedRole = roleMapping[newRole];

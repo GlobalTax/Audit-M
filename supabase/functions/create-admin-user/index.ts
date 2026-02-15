@@ -70,8 +70,8 @@ serve(async (req: Request) => {
       );
     }
 
-    // Validate role
-    const validRoles = ['admin', 'editor', 'marketing', 'user'];
+    // Validate role against app_role enum
+    const validRoles = ['admin', 'editor', 'marketing', 'viewer', 'hr_manager', 'hr_viewer'];
     if (!validRoles.includes(role)) {
       return new Response(
         JSON.stringify({ error: 'Invalid role' }),
@@ -118,6 +118,19 @@ serve(async (req: Request) => {
     }
 
     try {
+      // Insert profile record (handle_new_user trigger may not be bound)
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: newUser.user.id,
+          email: email,
+        });
+
+      if (profileError) {
+        console.warn('[CREATE_ADMIN] Profile creation error (may already exist):', profileError.message);
+        // Not fatal - profile might already exist from trigger
+      }
+
       // Insert role into user_roles table
       const { error: roleError } = await supabase
         .from('user_roles')
@@ -128,10 +141,11 @@ serve(async (req: Request) => {
 
       if (roleError) {
         console.error('[CREATE_ADMIN] Error creating user role:', roleError);
-        
-        // Rollback: Delete the user from auth
+
+        // Rollback: Delete profile and auth user
+        await supabase.from('profiles').delete().eq('id', newUser.user.id);
         await supabase.auth.admin.deleteUser(newUser.user.id);
-        
+
         return new Response(
           JSON.stringify({ error: 'Failed to assign user role' }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -140,14 +154,15 @@ serve(async (req: Request) => {
 
       console.log('[CREATE_ADMIN] User created successfully:', newUser.user.id);
 
-      // Log the event
+      // Log the event (use ADMIN_ACTION which exists in security_event_type enum)
       await supabase.from('security_events').insert({
-        event_type: 'USER_CREATED',
+        event_type: 'ADMIN_ACTION',
         severity: 'info',
         user_id: newUser.user.id,
         table_name: 'user_roles',
         operation: 'INSERT',
         details: {
+          action: 'USER_CREATED',
           email,
           role,
           created_by: user.id,
