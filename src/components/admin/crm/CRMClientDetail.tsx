@@ -8,7 +8,7 @@ import { CRMInteractionTimeline } from './CRMInteractionTimeline';
 import { CRMInteractionForm } from './CRMInteractionForm';
 import { CRMContractList } from './CRMContractList';
 import { CRMClientForm } from './CRMClientForm';
-import { Plus, Pencil, Building2, Mail, Phone, Globe, MapPin, Hash, User, Calendar, TrendingUp } from 'lucide-react';
+import { Plus, Pencil, Building2, Mail, Phone, Globe, MapPin, Hash, User, Calendar, TrendingUp, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { PIPELINE_LABELS, PIPELINE_STAGE_COLORS, CLIENT_STATUS_COLORS, CLIENT_STATUS_LABELS, formatCurrency, getDaysInStage, getRiskLevel, RISK_LABELS } from '@/lib/crm';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -159,6 +159,45 @@ export const CRMClientDetail = ({ clientId, open, onClose }: CRMClientDetailProp
                       )}
                     </div>
                   </div>
+                )}
+
+                {/* Audit Obligation */}
+                {client.client_type === 'empresa' && (
+                  (() => {
+                    const thresholds = [
+                      { label: 'Cifra neta de negocios', value: client.total_facturacion, limit: 5700000, unit: '€' },
+                      { label: 'Nº empleados', value: client.num_empleados, limit: 50, unit: '' },
+                      { label: 'Total activo', value: client.total_activo, limit: 2850000, unit: '€' },
+                    ];
+                    const exceeded = thresholds.filter(t => t.value != null && t.value > t.limit).length;
+                    const obligado = exceeded >= 2;
+                    return (
+                      <div className="pt-4 border-t">
+                        <div className="flex items-center gap-2 mb-3">
+                          <h4 className="text-xs font-medium uppercase tracking-wider text-slate-400">Obligación de auditoría</h4>
+                          {thresholds.some(t => t.value != null) && (
+                            <Badge variant="secondary" className={obligado ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'}>
+                              {obligado ? <><ShieldAlert className="h-3 w-3 mr-1" /> Obligado ({exceeded}/3)</> : <><ShieldCheck className="h-3 w-3 mr-1" /> No obligado ({exceeded}/3)</>}
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          {thresholds.map(t => {
+                            const exceeds = t.value != null && t.value > t.limit;
+                            return (
+                              <div key={t.label} className={`p-3 rounded-lg border ${exceeds ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-100'}`}>
+                                <p className="text-[11px] text-slate-400">{t.label}</p>
+                                <p className={`text-sm font-medium mt-0.5 ${exceeds ? 'text-amber-800' : 'text-slate-700'}`}>
+                                  {t.value != null ? `${formatCurrency(t.value)}${t.unit ? ' €' : ''}` : '—'}
+                                </p>
+                                <p className="text-[10px] text-slate-400 mt-0.5">Umbral: {formatCurrency(t.limit)}{t.unit ? ' €' : ''}</p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })()
                 )}
 
                 {/* Commercial info */}
