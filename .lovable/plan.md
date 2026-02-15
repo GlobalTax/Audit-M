@@ -1,92 +1,154 @@
 
 
-# Adaptar el Generador de Propuestas para Audit
+# Traducir toda la intranet a castellano
 
-## Problemas detectados
+## Resumen
 
-El generador de propuestas actual esta construido para "NRRO International" (Navarro Global, asesoria fiscal/legal). No encaja con este proyecto (Audit / M AUDIT, S.L.P.) en ningun aspecto:
+La intranet tiene muchas paginas con texto en ingles que deben traducirse a castellano. El dashboard, sidebar y header ya estan mayormente en espanol, pero hay muchas paginas individuales que mantienen etiquetas, botones, toasts y mensajes en ingles.
 
-### Marca
-- PDF muestra "NRRO INTERNATIONAL" en la cabecera
-- Textos "About NRRO", "Why NRRO", contacto global.nrro.es
-- Nombre de archivo PDF: "NRRO_Proposal_..."
-- Numero de propuesta: "NRRO-2026-XXXX"
+## Paginas a traducir
 
-### Servicios
-- Los servicios disponibles son de asesoria general: Fiscal, Contabilidad, Laboral, Legal Corporativo, Fiscalidad Internacional, Movilidad Global
-- Deberian ser los 21 servicios de auditoria que ya existen en la base de datos (Auditoria de Cuentas Anuales, Due Diligence Financiera, Auditoria de Subvenciones, etc.)
+### 1. `AdminLogin.tsx` — Login
+- "Administration Portal" -> "Portal de Administracion"
+- "Access granted" / "Welcome to the administration portal" -> "Acceso concedido" / "Bienvenido al portal de administracion"
+- "Invalid email" -> "Email no valido"
+- "Password must be at least 6 characters" -> "La contrasena debe tener al menos 6 caracteres"
+- "Too many failed attempts..." -> "Demasiados intentos fallidos..."
+- "Access denied..." -> "Acceso denegado..."
+- "Account disabled..." -> "Tu cuenta ha sido desactivada..."
+- "Authentication error" -> "Error de autenticacion"
+- "Email" / "Password" -> "Email" / "Contrasena"
+- "Signing in..." / "Sign In" -> "Accediendo..." / "Iniciar Sesion"
+- "You have X attempts remaining..." -> "Te quedan X intentos..."
 
-### Idioma
-- La interfaz del formulario esta en ingles (labels, placeholders, botones)
-- El idioma por defecto es ingles
-- Deberia estar todo en espanol (el idioma principal de Audit)
-- El selector de idioma incluye ingles, que no es necesario para Audit
+### 2. `AdminNews.tsx` — Noticias
+- "News Articles" -> "Articulos de Noticias"
+- "Title" / "Category" / "Published Date" / "Published" -> "Titulo" / "Categoria" / "Fecha de Publicacion" / "Publicado"
+- "Status updated" / "Article published/unpublished successfully" -> "Estado actualizado" / "Articulo publicado/despublicado correctamente"
+- "Not set" -> "Sin definir"
 
-### Contenido del PDF
-- La seccion "Sobre" habla de asesoria multidisciplinar, 50 paises, redes internacionales
-- Las credenciales son genericas (500 clientes, equipo multilingue)
-- Deberian reflejar la identidad de M AUDIT: inscripcion ROAC/ICAC, +30 anos de experiencia en auditoria, independencia
-- El contacto muestra Via Augusta (oficina NRRO Global), deberia ser Ausias March (oficina Audit)
+### 3. `AdminTeam.tsx` — Equipo
+- "Team Members" -> "Equipo"
+- "Add Team Member" -> "Anadir Miembro"
+- "Avatar" / "Name" / "Position" / "Email" / "Order" / "Active" / "Actions" -> "Avatar" / "Nombre" / "Cargo" / "Email" / "Orden" / "Activo" / "Acciones"
+- "Status updated" / "Team member activated/deactivated successfully" -> "Estado actualizado" / "Miembro activado/desactivado"
+- "Team member deleted" / "Member removed successfully" -> "Miembro eliminado"
+- "Are you sure?" / "This will permanently delete..." / "Cancel" / "Delete" -> "¿Estas seguro?" / "Se eliminara permanentemente..." / "Cancelar" / "Eliminar"
+- "N/A" -> "N/D"
 
-### Error TypeScript
-- Hay un error de tipos en ProposalForm.tsx linea 73: comparacion de tipos incompatible por el selector de idioma
+### 4. `AdminCaseStudies.tsx` — Casos de exito
+- "Case Studies" -> "Casos de Exito"
+- "Manage client success stories" -> "Gestiona los casos de exito de clientes"
+- "Add Case Study" -> "Anadir Caso de Exito"
+- "Search case studies..." -> "Buscar casos de exito..."
+- "Client" / "Title" / "Industry" / "Service" / "Status" / "Featured" / "Views" / "Actions" -> "Cliente" / "Titulo" / "Sector" / "Servicio" / "Estado" / "Destacado" / "Visitas" / "Acciones"
+- "Status updated successfully" -> "Estado actualizado"
+- "Case study deleted successfully" -> "Caso de exito eliminado"
+- "No case studies found" -> "No se encontraron casos de exito"
+- "Loading..." -> "Cargando..."
+- Dialogo de eliminacion: todo a castellano
 
-## Cambios a realizar
+### 5. `AdminTestimonials.tsx` — Testimonios
+- "Testimonials" -> "Testimonios"
+- "Manage client testimonials for the homepage" -> "Gestiona los testimonios de clientes para la pagina principal"
+- "Add Testimonial" -> "Anadir Testimonio"
+- "Author" / "Quote" / "Company" / "Location" / "Active" / "Actions" -> "Autor" / "Cita" / "Empresa" / "Ubicacion" / "Activo" / "Acciones"
+- "Testimonial activated/deactivated" -> "Testimonio activado/desactivado"
+- "Failed to update/delete testimonial" -> "Error al actualizar/eliminar testimonio"
+- "Testimonial deleted" -> "Testimonio eliminado"
+- "No testimonials yet. Add your first one!" -> "Aun no hay testimonios. Anade el primero."
+- Dialogo de eliminacion: todo a castellano
 
-### 1. `src/types/proposal.ts`
-- Eliminar los 6 servicios hardcodeados de asesoria (fiscal, accounting, labor, etc.)
-- Cargar los servicios dinamicamente desde la tabla `services` de Supabase (filtrando por `source_site = 'audit'`)
-- Simplificar la interfaz: eliminar campo `language` (siempre sera 'es'), eliminar campo `industry`
-- Renombrar numero de propuesta: "AUDIT-2026-XXXX"
+### 6. `AdminAwards.tsx` — Premios
+- "Awards & Accolades" -> "Premios y Reconocimientos"
+- "Anadir Award" -> "Anadir Premio" (ya mezcla idiomas)
+- "Total Awards" -> "Total Premios"
 
-### 2. `src/lib/proposalTemplates.ts`
-- Reescribir completamente para Audit:
-  - Titulo: "Propuesta de Servicios de Auditoria"
-  - Sobre Audit: firma de auditoria inscrita en el ROAC, miembro del ICAC, independencia, +30 anos
-  - Credenciales: Inscripcion ROAC, Registro ICAC, Independencia, NIA-ES
-  - Why Audit: Independencia, Rigor tecnico, Experiencia sectorial, Trato personalizado
-  - Contacto: Ausias March 36, audit.nrro.es, email de auditoria
-  - Eliminar version en ingles (solo espanol)
-- Cabecera del PDF: "AUDIT" en lugar de "NRRO INTERNATIONAL"
+### 7. `AdminServices.tsx` — Servicios
+- "Services" -> "Servicios"
+- "Manage your services and their content" -> "Gestiona tus servicios y su contenido"
+- "Add Service" -> "Anadir Servicio"
+- "Search by name or description..." -> "Buscar por nombre o descripcion..."
+- "All Areas" -> "Todas las Areas"
+- "Icon" / "Name" / "Area" / "Slug" / "Active" / "Order" / "Actions" -> "Icono" / "Nombre" / "Area" / "Slug" / "Activo" / "Orden" / "Acciones"
+- "Service deleted successfully" -> "Servicio eliminado"
+- "Loading services..." -> "Cargando servicios..."
+- "No services found..." -> "No se encontraron servicios..."
+- Dialogo de eliminacion: todo a castellano
 
-### 3. `src/lib/proposalPdfGenerator.ts`
-- Cabecera: cambiar "NRRO" + "INTERNATIONAL" por "AUDIT"
-- Nombre de archivo: "AUDIT_Propuesta_..."
-- Eliminar logica bilingue (todo en espanol)
-- Ajustar contacto y footer
+### 8. `AdminContent.tsx` — Contenido Web
+- "Content Management" -> "Gestion de Contenido"
+- "Edit the content of all website pages" -> "Edita el contenido de todas las paginas"
+- "New Section" -> "Nueva Seccion"
+- Pestanas: "Home" / "About" / "Methodology" / "Strategy" -> "Inicio" / "Sobre Nosotros" / "Metodologia" / "Estrategia"
+- "Clients" / "Technology" / "Networks" -> "Clientes" / "Tecnologia" / "Redes"
+- "Client Logos" / "Technology Logos" / "International Networks" -> titulos en castellano
+- "Active" / "Inactive" -> "Activo" / "Inactivo"
+- "No sections created" / "Create First Section" -> en castellano
+- "Loading content..." / "No title" -> en castellano
+- "Are you sure you want to delete..." -> en castellano
+- Labels de badges: "3 languages" / "ES only" / "No ES" -> en castellano
 
-### 4. `src/components/admin/proposal/ProposalForm.tsx`
-- Poner toda la interfaz en espanol (labels, placeholders, mensajes de error)
-- Eliminar selector de idioma (siempre ES)
-- Cargar servicios desde Supabase en vez de la constante AVAILABLE_SERVICES
-- Eliminar campo "Industry"
-- Corregir el error TypeScript de la linea 73
-- Cambiar placeholder de empresa: "Acme Corporation" -> ejemplo espanol
-- Boton: "Generar Propuesta PDF" en vez de "Generate PDF Proposal"
+### 9. `AdminABTests.tsx` — Tests A/B
+- "A/B Test Results" -> "Resultados Tests A/B"
+- "Monitor and analyze conversion experiments" -> "Monitoriza y analiza experimentos de conversion"
+- "Last 7/30/90 days" -> "Ultimos 7/30/90 dias"
+- "Total Impressions" / "Total Conversions" / "Lift" / "Current Winner" -> "Impresiones Totales" / "Conversiones Totales" / "Mejora" / "Ganador Actual"
+- "Variant A (Control)" / "Variant B (Treatment)" -> "Variante A (Control)" / "Variante B (Tratamiento)"
+- "Conversion Rate by Variant" / "Impressions vs Conversions" -> en castellano
+- "Variant Performance Details" / tabla de detalle -> en castellano
+- Nombres de tests y descripciones -> en castellano
+- "Winner" / "Control" / "Inconclusive" -> "Ganador" / "Control" / "No concluyente"
 
-### 5. `src/pages/admin/AdminProposalGenerator.tsx`
-- Textos ya estan en espanol (OK), pero referencian `siteConfig.name` que devuelve "Audit" (correcto)
-- Ajustar si hay alguna referencia a NRRO
+### 10. `AdminUsers.tsx` — Usuarios
+- "Viewer (Solo lectura)" -> ya esta bien
+- "Feature not implemented" -> "Funcionalidad no implementada"
+- "User deactivation requires..." -> "La desactivacion de usuarios requiere..."
+- roleLabels: "Super Admin" / "Admin" / "Editor" / "Viewer" -> mantener (son roles tecnicos)
 
-### Archivos modificados (resumen)
+### 11. `LandingDashboard.tsx` — Dashboard Landings
+- "Landing Dashboard" -> "Panel de Landings"
+- "Total Landings" -> "Total Landings" (ya esta bien, es el termino usado)
+- Status labels en charts: "Active" / "Draft" / "Needs Review" / "Archived" -> "Activas" / "Borrador" / "En Revision" / "Archivadas"
 
-| Archivo | Cambio principal |
-|---------|-----------------|
-| `src/types/proposal.ts` | Eliminar servicios hardcodeados, simplificar interfaz (sin language/industry) |
-| `src/lib/proposalTemplates.ts` | Reescribir contenido completo para marca Audit con datos ROAC/ICAC |
-| `src/lib/proposalPdfGenerator.ts` | Cabecera "AUDIT", archivo "AUDIT_Propuesta_", sin logica bilingue |
-| `src/components/admin/proposal/ProposalForm.tsx` | UI en espanol, servicios desde DB, sin selector idioma, fix TS error |
+### 12. Deck Studio (`DeckStudioBrand.tsx` + `DeckStudioContent.tsx`)
+- "Brand Kit" -> "Kit de Marca"
+- "Customize design tokens..." -> "Personaliza los tokens de diseno..."
+- "Reset to Default" / "Save Changes" -> "Restablecer" / "Guardar Cambios"
+- "Colors" / "Typography" / "Layout" -> "Colores" / "Tipografia" / "Diseno"
+- Labels de colores/fuentes (Background, Surface, Text, etc.) -> en castellano
+- "Content Library" -> "Biblioteca de Contenido"
+- "Manage content blocks..." -> "Gestiona bloques de contenido..."
+- "Add Content" -> "Anadir Contenido"
+- "All sections" -> "Todas las secciones"
+- "No content blocks yet" -> "Aun no hay bloques de contenido"
+- Dialog: "Edit/Add Content Block" / "Title" / "Section" / "Source URL" / "Content" / "Tags" / "Cancel" / "Create" / "Update" -> todo en castellano
 
-### Servicios que se cargaran desde la DB (21 servicios de auditoria)
+### 13. Toast messages sueltos en varios archivos
+- Todos los `toast.success('Status updated successfully')` y similares en ingles -> traducir
 
-Los servicios se obtendran dinamicamente con una query a Supabase (`services WHERE source_site = 'audit' AND is_active = true`), incluyendo:
-- Auditoria de Cuentas Anuales
-- Auditoria de Cuentas Consolidadas
-- Auditoria de Subvenciones Publicas
-- Due Diligence Financiera / Fiscal / Operativa / Vendor
-- Verificacion CSRD/ESRS
-- Auditoria de Huella de Carbono
-- Y los demas servicios activos en la base de datos
+## Seccion tecnica
 
-Esto garantiza que si se anaden nuevos servicios a la web, aparecen automaticamente en el generador de propuestas.
+### Archivos a modificar (17 archivos)
+
+| Archivo | Tipo de cambio |
+|---------|---------------|
+| `src/pages/admin/AdminLogin.tsx` | Textos UI, validacion, toasts, mensajes error |
+| `src/pages/admin/AdminNews.tsx` | Titulo, cabeceras tabla, toasts |
+| `src/pages/admin/AdminTeam.tsx` | Titulo, boton, cabeceras tabla, toasts, dialogo |
+| `src/pages/admin/AdminCaseStudies.tsx` | Titulo, subtitulo, boton, cabeceras, toasts, dialogo, placeholder, loading |
+| `src/pages/admin/AdminTestimonials.tsx` | Titulo, subtitulo, boton, cabeceras, toasts, dialogo, empty state |
+| `src/pages/admin/AdminAwards.tsx` | Titulo, estadisticas, boton |
+| `src/pages/admin/AdminServices.tsx` | Titulo, subtitulo, boton, cabeceras, filtros, toasts, dialogo, loading, empty |
+| `src/pages/admin/AdminContent.tsx` | Titulo, subtitulo, boton, pestanas, subtabs logos, badges, empty states, confirm |
+| `src/pages/admin/AdminABTests.tsx` | Titulo, subtitulo, selectores, KPIs, nombres tests, tablas, graficos |
+| `src/pages/admin/AdminUsers.tsx` | Toast "Feature not implemented" |
+| `src/pages/admin/LandingDashboard.tsx` | Titulo, labels status en charts |
+| `src/pages/admin/deck-studio/DeckStudioBrand.tsx` | Titulo, subtitulo, botones, pestanas, labels |
+| `src/pages/admin/deck-studio/DeckStudioContent.tsx` | Titulo, subtitulo, boton, filtros, empty state, dialogo |
+
+### Metodo
+- Reemplazo directo de strings hardcoded en cada archivo
+- No se usa i18n para la intranet (es solo para la web publica), asi que se cambian los strings directamente
+- Se mantienen terminos tecnicos universales donde aplique (e.g. "Blog", "CRM", "Pipeline", "Slug", "SEO")
 
