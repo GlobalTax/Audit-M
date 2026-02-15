@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Plus, Search, Trash2, Pencil } from 'lucide-react';
+import { Plus, Search, Trash2, Pencil, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { CRMClientForm } from './CRMClientForm';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -94,7 +94,7 @@ export const CRMClientList = ({ globalSearch = '', clientType }: CRMClientListPr
               <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Estado</TableHead>
               <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Etapa</TableHead>
               <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Valor</TableHead>
-              <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Origen</TableHead>
+              <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Auditoría</TableHead>
               <TableHead className="text-xs uppercase tracking-wider text-gray-500 font-medium">Alta</TableHead>
               <TableHead className="text-right text-xs uppercase tracking-wider text-gray-500 font-medium">Acciones</TableHead>
             </TableRow>
@@ -108,6 +108,13 @@ export const CRMClientList = ({ globalSearch = '', clientType }: CRMClientListPr
               clients.map((client) => {
                 const risk = getRiskLevel(client.estimated_value);
                 const riskInfo = RISK_LABELS[risk];
+                // Audit obligation calc
+                const auditExceeded = [
+                  client.total_facturacion != null && client.total_facturacion > 5700000,
+                  client.num_empleados != null && client.num_empleados > 50,
+                  client.total_activo != null && client.total_activo > 2850000,
+                ].filter(Boolean).length;
+                const hasAuditData = client.total_facturacion != null || client.num_empleados != null || client.total_activo != null;
                 return (
                   <TableRow key={client.id} className="hover:bg-indigo-50/30 group cursor-pointer" onClick={() => navigate(`/admin/crm/clients/${client.id}`)}>
                     <TableCell onClick={(e) => e.stopPropagation()}>
@@ -138,7 +145,21 @@ export const CRMClientList = ({ globalSearch = '', clientType }: CRMClientListPr
                         <span className="text-gray-400">-</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-xs text-gray-500">{client.source || '-'}</TableCell>
+                    <TableCell>
+                      {hasAuditData ? (
+                        auditExceeded >= 2 ? (
+                          <Badge variant="secondary" className="text-[11px] bg-amber-100 text-amber-800 border-amber-200 gap-1">
+                            <ShieldAlert className="h-3 w-3" /> {auditExceeded}/3
+                          </Badge>
+                        ) : (
+                          <Badge variant="secondary" className="text-[11px] bg-emerald-100 text-emerald-800 border-emerald-200 gap-1">
+                            <ShieldCheck className="h-3 w-3" /> {auditExceeded}/3
+                          </Badge>
+                        )
+                      ) : (
+                        <span className="text-gray-400 text-xs">—</span>
+                      )}
+                    </TableCell>
                     <TableCell className="text-xs text-gray-400">
                       {format(new Date(client.created_at), 'd MMM yy', { locale: es })}
                     </TableCell>

@@ -55,6 +55,9 @@ export const CRMClientForm = ({ open, onClose, client, defaultClientType }: CRMC
     estimated_value: client?.estimated_value || 0,
     notes: client?.notes || '',
     client_type: client?.client_type || defaultClientType || 'empresa' as CRMClientType,
+    total_facturacion: client?.total_facturacion ?? '',
+    num_empleados: client?.num_empleados ?? '',
+    total_activo: client?.total_activo ?? '',
   });
 
   const handleChange = (field: string, value: string | number) => {
@@ -84,6 +87,9 @@ export const CRMClientForm = ({ open, onClose, client, defaultClientType }: CRMC
       source: form.source || null,
       notes: form.notes || null,
       estimated_value: Math.max(0, form.estimated_value),
+      total_facturacion: form.total_facturacion !== '' ? Number(form.total_facturacion) : null,
+      num_empleados: form.num_empleados !== '' ? Number(form.num_empleados) : null,
+      total_activo: form.total_activo !== '' ? Number(form.total_activo) : null,
     };
 
     if (isEditing && client) {
@@ -213,6 +219,58 @@ export const CRMClientForm = ({ open, onClose, client, defaultClientType }: CRMC
               </div>
             </div>
           </div>
+
+          {/* Audit Obligation Thresholds */}
+          {form.client_type === 'empresa' && (
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-400 mb-1">Umbrales de auditoría obligatoria</p>
+              <p className="text-[11px] text-slate-400 mb-3">Art. 263 TRLSC — Obligación si cumple 2 de 3 criterios durante 2 ejercicios consecutivos</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Cifra neta de negocios (€)</Label>
+                  <Input 
+                    type="number" 
+                    min="0" 
+                    step="0.01"
+                    value={form.total_facturacion} 
+                    onChange={(e) => handleChange('total_facturacion', e.target.value === '' ? '' : parseFloat(e.target.value))} 
+                    placeholder="Umbral: 5.700.000 €"
+                  />
+                  {form.total_facturacion !== '' && Number(form.total_facturacion) > 5700000 && (
+                    <p className="text-[11px] text-amber-600 font-medium">⚠ Supera umbral (5,7M€)</p>
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Nº medio de trabajadores</Label>
+                  <Input 
+                    type="number" 
+                    min="0" 
+                    step="1"
+                    value={form.num_empleados} 
+                    onChange={(e) => handleChange('num_empleados', e.target.value === '' ? '' : parseInt(e.target.value))} 
+                    placeholder="Umbral: 50"
+                  />
+                  {form.num_empleados !== '' && Number(form.num_empleados) > 50 && (
+                    <p className="text-[11px] text-amber-600 font-medium">⚠ Supera umbral (50)</p>
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Total activo (€)</Label>
+                  <Input 
+                    type="number" 
+                    min="0" 
+                    step="0.01"
+                    value={form.total_activo} 
+                    onChange={(e) => handleChange('total_activo', e.target.value === '' ? '' : parseFloat(e.target.value))} 
+                    placeholder="Umbral: 2.850.000 €"
+                  />
+                  {form.total_activo !== '' && Number(form.total_activo) > 2850000 && (
+                    <p className="text-[11px] text-amber-600 font-medium">⚠ Supera umbral (2,85M€)</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Notes */}
           <div className="space-y-1.5">

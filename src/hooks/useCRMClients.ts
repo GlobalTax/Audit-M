@@ -29,6 +29,9 @@ export interface CRMClient {
   estimated_value: number | null;
   source_site: string | null;
   client_type: CRMClientType;
+  total_facturacion: number | null;
+  num_empleados: number | null;
+  total_activo: number | null;
   created_at: string;
   updated_at: string;
 }
