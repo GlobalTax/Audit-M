@@ -1,5 +1,8 @@
 project_id = "zntotcpagkunvkwpubqu"
 
+[functions.import-crm-clients]
+verify_jwt = false
+
 [functions.import-billing-data]
 verify_jwt = false
 
