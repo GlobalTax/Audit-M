@@ -8,7 +8,6 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    // CSP headers defined in index.html only (single source of truth)
     proxy: {
       '/sitemap.xml': {
         target: 'https://zntotcpagkunvkwpubqu.supabase.co/storage/v1/object/public/public-files/sitemap.xml',
@@ -22,5 +21,8 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  optimizeDeps: {
+    force: true,
   },
 }));
