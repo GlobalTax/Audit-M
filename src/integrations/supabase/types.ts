@@ -1204,12 +1204,20 @@ export type Database = {
       crm_clients: {
         Row: {
           assigned_to: string | null
+          caja: number | null
           city: string | null
           client_type: string
+          comentarios: string | null
+          contact_email: string | null
+          contact_linkedin: string | null
+          contact_person: string | null
+          contact_position: string | null
           country: string | null
           created_at: string
+          deuda: number | null
           email: string | null
           estimated_value: number | null
+          financial_data: Json | null
           fiscal_address: string | null
           id: string
           name: string
@@ -1219,6 +1227,7 @@ export type Database = {
           phone: string | null
           pipeline_stage: Database["public"]["Enums"]["crm_pipeline_stage"]
           postal_code: string | null
+          ranking_position: number | null
           sector: string | null
           source: string | null
           source_site: Database["public"]["Enums"]["site_source"] | null
@@ -1230,12 +1239,20 @@ export type Database = {
         }
         Insert: {
           assigned_to?: string | null
+          caja?: number | null
           city?: string | null
           client_type?: string
+          comentarios?: string | null
+          contact_email?: string | null
+          contact_linkedin?: string | null
+          contact_person?: string | null
+          contact_position?: string | null
           country?: string | null
           created_at?: string
+          deuda?: number | null
           email?: string | null
           estimated_value?: number | null
+          financial_data?: Json | null
           fiscal_address?: string | null
           id?: string
           name: string
@@ -1245,6 +1262,7 @@ export type Database = {
           phone?: string | null
           pipeline_stage?: Database["public"]["Enums"]["crm_pipeline_stage"]
           postal_code?: string | null
+          ranking_position?: number | null
           sector?: string | null
           source?: string | null
           source_site?: Database["public"]["Enums"]["site_source"] | null
@@ -1256,12 +1274,20 @@ export type Database = {
         }
         Update: {
           assigned_to?: string | null
+          caja?: number | null
           city?: string | null
           client_type?: string
+          comentarios?: string | null
+          contact_email?: string | null
+          contact_linkedin?: string | null
+          contact_person?: string | null
+          contact_position?: string | null
           country?: string | null
           created_at?: string
+          deuda?: number | null
           email?: string | null
           estimated_value?: number | null
+          financial_data?: Json | null
           fiscal_address?: string | null
           id?: string
           name?: string
@@ -1271,6 +1297,7 @@ export type Database = {
           phone?: string | null
           pipeline_stage?: Database["public"]["Enums"]["crm_pipeline_stage"]
           postal_code?: string | null
+          ranking_position?: number | null
           sector?: string | null
           source?: string | null
           source_site?: Database["public"]["Enums"]["site_source"] | null
