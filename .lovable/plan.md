@@ -1,31 +1,28 @@
 
 
-# Corregir error de build en PresentationForm.tsx
+# Corregir error de loop infinito en @radix-ui/react-select
 
 ## Problema
 
-El archivo `src/components/admin/presentation/PresentationForm.tsx` tiene un error TypeScript en la linea 20. La propiedad `siteConfig.defaultLanguage` esta tipada como el literal `'es'` (porque la configuracion activa de Audit la define asi), lo que hace que TypeScript rechace las comparaciones con `'ca'` y `'en'` ya que nunca pueden ser verdaderas.
-
-Esto causa un error de build que impide que la aplicacion cargue, provocando el "Maximum update depth exceeded" como efecto secundario del fallo de compilacion.
+La version `2.1.2` de `@radix-ui/react-select` (pinned sin `^`) tiene un bug conocido que causa un loop infinito (`Maximum update depth exceeded`) en su funcion interna `setRef`. El stack trace lo confirma: el error se origina directamente en `@radix-ui_react-select.js` linea 128.
 
 ## Solucion
 
-Castear `siteConfig.defaultLanguage` a `string` antes de las comparaciones, igual que ya se hizo en `ProposalForm.tsx`.
+Actualizar la dependencia en `package.json` de `"2.1.2"` (version exacta, pinned) a `"^2.1.6"` que incluye los parches de estabilidad.
 
 ## Cambio tecnico
 
-**Archivo**: `src/components/admin/presentation/PresentationForm.tsx`, linea 20
+**Archivo**: `package.json`
 
 Cambiar:
-```ts
-const defaultLang = (siteConfig.defaultLanguage === 'ca' ? 'ca' : siteConfig.defaultLanguage === 'en' ? 'en' : 'es') as 'en' | 'es' | 'ca';
+```json
+"@radix-ui/react-select": "2.1.2",
 ```
 
 Por:
-```ts
-const lang = siteConfig.defaultLanguage as string;
-const defaultLang = (lang === 'ca' ? 'ca' : lang === 'en' ? 'en' : 'es') as 'en' | 'es' | 'ca';
+```json
+"@radix-ui/react-select": "^2.1.6",
 ```
 
-Un solo archivo, una sola linea. Corrige el error de build y la app volvera a funcionar.
+Un solo cambio en una linea. Resuelve el loop infinito.
 
